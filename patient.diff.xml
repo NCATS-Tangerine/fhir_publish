@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<difference>
+   <type name="Patient" status="changed">
+      <element default="removed" old-default="&#34;true&#34;" path="Patient.active"/>
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               path="Patient.contact.relationship">
+         <old-binding reference="http://terminology.hl7.org/ValueSet/v2-0131"
+                      strength="extensible"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/patient-contactrelationship"
+                      strength="extensible"/>
+      </element>
+      <element binding-status="removed" path="Patient.communication.language">
+         <old-binding reference="http://hl7.org/fhir/ValueSet/languages"
+                      strength="extensible"/>
+      </element>
+      <element path="Patient.generalPractitioner">
+         <removed-type name="Reference(Organization|Practitioner)"/>
+         <added-type name="Reference(Organization|Practitioner|PractitionerRole)"/>
+      </element>
+      <element path="Patient.animal" status="deleted"/>
+   </type>
+</difference>

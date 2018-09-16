@@ -1,0 +1,89 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://hl7.org/fhir/ProcessResponse/SR2499> a fhir:ProcessResponse;
+  fhir:nodeRole fhir:treeRoot;
+  fhir:Resource.id [ fhir:value "SR2499"];
+  fhir:DomainResource.text [
+     fhir:Narrative.status [ fhir:value "generated" ];
+     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\">A ProcessResponse indicating pended status with a request for additional information.</div>"
+  ];
+  fhir:DomainResource.contained [
+     a fhir:CommunicationRequest;
+     fhir:index 0;
+     fhir:Resource.id [ fhir:value "comreq-1" ];
+     fhir:CommunicationRequest.identifier [
+       fhir:index 0;
+       fhir:Identifier.system [ fhir:value "http://www.jurisdiction.com/insurer/123456" ];
+       fhir:Identifier.value [ fhir:value "ABC123" ]
+     ];
+     fhir:CommunicationRequest.status [ fhir:value "active" ];
+     fhir:CommunicationRequest.category [
+       fhir:index 0;
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.system [ fhir:value "http://acme.org/messagetypes" ];
+         fhir:Coding.code [ fhir:value "SolicitedAttachmentRequest" ]
+       ]
+     ];
+     fhir:CommunicationRequest.payload [
+       fhir:index 0;
+       fhir:CommunicationRequest.payload.contentString [ fhir:value "Please provide the accident report and any associated pictures to support your Claim#      DEF5647." ]
+     ];
+     fhir:CommunicationRequest.authoredOn [ fhir:value "2016-06-10T11:01:10-08:00"^^xsd:dateTime ];
+     fhir:CommunicationRequest.recipient [
+       fhir:index 0;
+       fhir:Reference.identifier [
+         fhir:Identifier.system [ fhir:value "http://www.jurisdiction.com/provideroffices" ];
+         fhir:Identifier.value [ fhir:value "3456" ]
+       ]
+     ];
+     fhir:CommunicationRequest.sender [
+       fhir:Reference.identifier [
+         fhir:Identifier.system [ fhir:value "http://www.jurisdiction.com/insurer" ];
+         fhir:Identifier.value [ fhir:value "123456" ]
+       ]
+     ]
+  ];
+  fhir:ProcessResponse.identifier [
+     fhir:index 0;
+     fhir:Identifier.system [ fhir:value "http://www.BenefitsInc.com/fhir/processresponse" ];
+     fhir:Identifier.value [ fhir:value "881222" ]
+  ];
+  fhir:ProcessResponse.status [ fhir:value "active"];
+  fhir:ProcessResponse.created [ fhir:value "2014-08-16"^^xsd:date];
+  fhir:ProcessResponse.organization [
+     fhir:link <http://hl7.org/fhir/Organization/2>;
+     fhir:Reference.reference [ fhir:value "Organization/2" ]
+  ];
+  fhir:ProcessResponse.request [
+     fhir:link <http://happyvalley.com/fhir/claim/12345>;
+     fhir:Reference.reference [ fhir:value "http://happyvalley.com/fhir/claim/12345" ]
+  ];
+  fhir:ProcessResponse.outcome [ fhir:value "pended"];
+  fhir:ProcessResponse.disposition [ fhir:value "Additional information required."];
+  fhir:ProcessResponse.requestProvider [
+     fhir:link <http://hl7.org/fhir/Organization/1>;
+     fhir:Reference.reference [ fhir:value "Organization/1" ]
+  ];
+  fhir:ProcessResponse.communicationRequest [
+     fhir:index 0;
+     fhir:Reference.reference [ fhir:value "#comreq-1" ]
+  ] .
+
+<http://hl7.org/fhir/Organization/2> a fhir:Organization .
+
+<http://hl7.org/fhir/Organization/1> a fhir:Organization .
+
+# - ontology header ------------------------------------------------------------
+
+<http://hl7.org/fhir/ProcessResponse/SR2499.ttl> a owl:Ontology;
+  owl:imports fhir:fhir.ttl;
+  owl:versionIRI <http://build.fhir.org/ProcessResponse/SR2499.ttl> .
+
+# -------------------------------------------------------------------------------------
+

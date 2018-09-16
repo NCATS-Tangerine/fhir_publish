@@ -1,0 +1,696 @@
+# FHIR GraphQL Schema. Version 3.5.0-14906
+
+type TestScript {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  url: uri  _url: ElementBase
+  identifier: Identifier
+  version: String  _version: ElementBase
+  name: String  _name: ElementBase
+  title: String  _title: ElementBase
+  status: code  _status: ElementBase
+  experimental: Boolean  _experimental: ElementBase
+  date: dateTime  _date: ElementBase
+  publisher: String  _publisher: ElementBase
+  contact: [ContactDetail]
+  description: markdown  _description: ElementBase
+  useContext: [UsageContext]
+  jurisdiction: [CodeableConcept]
+  purpose: markdown  _purpose: ElementBase
+  copyright: markdown  _copyright: ElementBase
+  origin: [TestScriptOrigin]
+  destination: [TestScriptDestination]
+  metadata: TestScriptMetadata
+  fixture: [TestScriptFixture]
+  profile: [Reference]
+  variable: [TestScriptVariable]
+  rule: [TestScriptRule]
+  ruleset: [TestScriptRuleset]
+  setup: TestScriptSetup
+  test: [TestScriptTest]
+  teardown: TestScriptTeardown
+}
+
+type TestScriptOrigin {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  index: Int  _index: ElementBase
+  profile: Coding!
+}
+
+type TestScriptDestination {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  index: Int  _index: ElementBase
+  profile: Coding!
+}
+
+type TestScriptMetadata {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  link: [TestScriptMetadataLink]
+  capability: [TestScriptMetadataCapability]!
+}
+
+type TestScriptMetadataLink {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  url: uri  _url: ElementBase
+  description: String  _description: ElementBase
+}
+
+type TestScriptMetadataCapability {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  required: Boolean  _required: ElementBase
+  validated: Boolean  _validated: ElementBase
+  description: String  _description: ElementBase
+  origin: Int  _origin: [ElementBase]
+  destination: Int  _destination: ElementBase
+  link: uri  _link: [ElementBase]
+  capabilities: canonical  _capabilities: ElementBase
+}
+
+type TestScriptFixture {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  autocreate: Boolean  _autocreate: ElementBase
+  autodelete: Boolean  _autodelete: ElementBase
+  resource: Reference
+}
+
+type TestScriptVariable {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  defaultValue: String  _defaultValue: ElementBase
+  description: String  _description: ElementBase
+  expression: String  _expression: ElementBase
+  headerField: String  _headerField: ElementBase
+  hint: String  _hint: ElementBase
+  path: String  _path: ElementBase
+  sourceId: ID  _sourceId: ElementBase
+}
+
+type TestScriptRule {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  resource: Reference!
+  param: [TestScriptRuleParam]
+}
+
+type TestScriptRuleParam {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  value: String  _value: ElementBase
+}
+
+type TestScriptRuleset {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  resource: Reference!
+  rule: [TestScriptRulesetRule]!
+}
+
+type TestScriptRulesetRule {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  ruleId: ID  _ruleId: ElementBase
+  param: [TestScriptRulesetRuleParam]
+}
+
+type TestScriptRulesetRuleParam {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  value: String  _value: ElementBase
+}
+
+type TestScriptSetup {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  action: [TestScriptSetupAction]!
+}
+
+type TestScriptSetupAction {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  operation: TestScriptSetupActionOperation
+  assert: TestScriptSetupActionAssert
+}
+
+type TestScriptSetupActionOperation {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: Coding
+  resource: code  _resource: ElementBase
+  label: String  _label: ElementBase
+  description: String  _description: ElementBase
+  accept: code  _accept: ElementBase
+  contentType: code  _contentType: ElementBase
+  destination: Int  _destination: ElementBase
+  encodeRequestUrl: Boolean  _encodeRequestUrl: ElementBase
+  origin: Int  _origin: ElementBase
+  params: String  _params: ElementBase
+  requestHeader: [TestScriptSetupActionOperationRequestHeader]
+  requestId: ID  _requestId: ElementBase
+  responseId: ID  _responseId: ElementBase
+  sourceId: ID  _sourceId: ElementBase
+  targetId: ID  _targetId: ElementBase
+  url: String  _url: ElementBase
+}
+
+type TestScriptSetupActionOperationRequestHeader {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  field: String  _field: ElementBase
+  value: String  _value: ElementBase
+}
+
+type TestScriptSetupActionAssert {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  label: String  _label: ElementBase
+  description: String  _description: ElementBase
+  direction: code  _direction: ElementBase
+  compareToSourceId: String  _compareToSourceId: ElementBase
+  compareToSourceExpression: String  _compareToSourceExpression: ElementBase
+  compareToSourcePath: String  _compareToSourcePath: ElementBase
+  contentType: code  _contentType: ElementBase
+  expression: String  _expression: ElementBase
+  headerField: String  _headerField: ElementBase
+  minimumId: String  _minimumId: ElementBase
+  navigationLinks: Boolean  _navigationLinks: ElementBase
+  operator: code  _operator: ElementBase
+  path: String  _path: ElementBase
+  requestMethod: code  _requestMethod: ElementBase
+  requestURL: String  _requestURL: ElementBase
+  resource: code  _resource: ElementBase
+  response: code  _response: ElementBase
+  responseCode: String  _responseCode: ElementBase
+  rule: TestScriptSetupActionAssertRule
+  ruleset: TestScriptSetupActionAssertRuleset
+  sourceId: ID  _sourceId: ElementBase
+  validateProfileId: ID  _validateProfileId: ElementBase
+  value: String  _value: ElementBase
+  warningOnly: Boolean  _warningOnly: ElementBase
+}
+
+type TestScriptSetupActionAssertRule {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  ruleId: ID  _ruleId: ElementBase
+  param: [TestScriptSetupActionAssertRuleParam]
+}
+
+type TestScriptSetupActionAssertRuleParam {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  value: String  _value: ElementBase
+}
+
+type TestScriptSetupActionAssertRuleset {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  rulesetId: ID  _rulesetId: ElementBase
+  rule: [TestScriptSetupActionAssertRulesetRule]
+}
+
+type TestScriptSetupActionAssertRulesetRule {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  ruleId: ID  _ruleId: ElementBase
+  param: [TestScriptSetupActionAssertRulesetRuleParam]
+}
+
+type TestScriptSetupActionAssertRulesetRuleParam {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  value: String  _value: ElementBase
+}
+
+type TestScriptTest {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  description: String  _description: ElementBase
+  action: [TestScriptTestAction]!
+}
+
+type TestScriptTestAction {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  operation: TestScriptSetupActionOperation
+  assert: TestScriptSetupActionAssert
+}
+
+type TestScriptTeardown {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  action: [TestScriptTeardownAction]!
+}
+
+type TestScriptTeardownAction {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  operation: TestScriptSetupActionOperation!
+}
+
+input TestScript {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  url: uri  _url: ElementBase
+  identifier: Identifier
+  version: String  _version: ElementBase
+  name: String  _name: ElementBase
+  title: String  _title: ElementBase
+  status: code  _status: ElementBase
+  experimental: Boolean  _experimental: ElementBase
+  date: dateTime  _date: ElementBase
+  publisher: String  _publisher: ElementBase
+  contact: [ContactDetail]
+  description: markdown  _description: ElementBase
+  useContext: [UsageContext]
+  jurisdiction: [CodeableConcept]
+  purpose: markdown  _purpose: ElementBase
+  copyright: markdown  _copyright: ElementBase
+  origin: [TestScriptOrigin]
+  destination: [TestScriptDestination]
+  metadata: TestScriptMetadata
+  fixture: [TestScriptFixture]
+  profile: [Reference]
+  variable: [TestScriptVariable]
+  rule: [TestScriptRule]
+  ruleset: [TestScriptRuleset]
+  setup: TestScriptSetup
+  test: [TestScriptTest]
+  teardown: TestScriptTeardown
+}
+
+input TestScriptOrigin {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  index: Int  _index: ElementBase
+  profile: Coding!
+}
+
+input TestScriptDestination {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  index: Int  _index: ElementBase
+  profile: Coding!
+}
+
+input TestScriptMetadata {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  link: [TestScriptMetadataLink]
+  capability: [TestScriptMetadataCapability]!
+}
+
+input TestScriptMetadataLink {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  url: uri  _url: ElementBase
+  description: String  _description: ElementBase
+}
+
+input TestScriptMetadataCapability {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  required: Boolean  _required: ElementBase
+  validated: Boolean  _validated: ElementBase
+  description: String  _description: ElementBase
+  origin: Int  _origin: [ElementBase]
+  destination: Int  _destination: ElementBase
+  link: uri  _link: [ElementBase]
+  capabilities: canonical  _capabilities: ElementBase
+}
+
+input TestScriptFixture {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  autocreate: Boolean  _autocreate: ElementBase
+  autodelete: Boolean  _autodelete: ElementBase
+  resource: Reference
+}
+
+input TestScriptVariable {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  defaultValue: String  _defaultValue: ElementBase
+  description: String  _description: ElementBase
+  expression: String  _expression: ElementBase
+  headerField: String  _headerField: ElementBase
+  hint: String  _hint: ElementBase
+  path: String  _path: ElementBase
+  sourceId: ID  _sourceId: ElementBase
+}
+
+input TestScriptRule {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  resource: Reference!
+  param: [TestScriptRuleParam]
+}
+
+input TestScriptRuleParam {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  value: String  _value: ElementBase
+}
+
+input TestScriptRuleset {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  resource: Reference!
+  rule: [TestScriptRulesetRule]!
+}
+
+input TestScriptRulesetRule {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  ruleId: ID  _ruleId: ElementBase
+  param: [TestScriptRulesetRuleParam]
+}
+
+input TestScriptRulesetRuleParam {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  value: String  _value: ElementBase
+}
+
+input TestScriptSetup {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  action: [TestScriptSetupAction]!
+}
+
+input TestScriptSetupAction {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  operation: TestScriptSetupActionOperation
+  assert: TestScriptSetupActionAssert
+}
+
+input TestScriptSetupActionOperation {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: Coding
+  resource: code  _resource: ElementBase
+  label: String  _label: ElementBase
+  description: String  _description: ElementBase
+  accept: code  _accept: ElementBase
+  contentType: code  _contentType: ElementBase
+  destination: Int  _destination: ElementBase
+  encodeRequestUrl: Boolean  _encodeRequestUrl: ElementBase
+  origin: Int  _origin: ElementBase
+  params: String  _params: ElementBase
+  requestHeader: [TestScriptSetupActionOperationRequestHeader]
+  requestId: ID  _requestId: ElementBase
+  responseId: ID  _responseId: ElementBase
+  sourceId: ID  _sourceId: ElementBase
+  targetId: ID  _targetId: ElementBase
+  url: String  _url: ElementBase
+}
+
+input TestScriptSetupActionOperationRequestHeader {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  field: String  _field: ElementBase
+  value: String  _value: ElementBase
+}
+
+input TestScriptSetupActionAssert {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  label: String  _label: ElementBase
+  description: String  _description: ElementBase
+  direction: code  _direction: ElementBase
+  compareToSourceId: String  _compareToSourceId: ElementBase
+  compareToSourceExpression: String  _compareToSourceExpression: ElementBase
+  compareToSourcePath: String  _compareToSourcePath: ElementBase
+  contentType: code  _contentType: ElementBase
+  expression: String  _expression: ElementBase
+  headerField: String  _headerField: ElementBase
+  minimumId: String  _minimumId: ElementBase
+  navigationLinks: Boolean  _navigationLinks: ElementBase
+  operator: code  _operator: ElementBase
+  path: String  _path: ElementBase
+  requestMethod: code  _requestMethod: ElementBase
+  requestURL: String  _requestURL: ElementBase
+  resource: code  _resource: ElementBase
+  response: code  _response: ElementBase
+  responseCode: String  _responseCode: ElementBase
+  rule: TestScriptSetupActionAssertRule
+  ruleset: TestScriptSetupActionAssertRuleset
+  sourceId: ID  _sourceId: ElementBase
+  validateProfileId: ID  _validateProfileId: ElementBase
+  value: String  _value: ElementBase
+  warningOnly: Boolean  _warningOnly: ElementBase
+}
+
+input TestScriptSetupActionAssertRule {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  ruleId: ID  _ruleId: ElementBase
+  param: [TestScriptSetupActionAssertRuleParam]
+}
+
+input TestScriptSetupActionAssertRuleParam {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  value: String  _value: ElementBase
+}
+
+input TestScriptSetupActionAssertRuleset {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  rulesetId: ID  _rulesetId: ElementBase
+  rule: [TestScriptSetupActionAssertRulesetRule]
+}
+
+input TestScriptSetupActionAssertRulesetRule {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  ruleId: ID  _ruleId: ElementBase
+  param: [TestScriptSetupActionAssertRulesetRuleParam]
+}
+
+input TestScriptSetupActionAssertRulesetRuleParam {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  value: String  _value: ElementBase
+}
+
+input TestScriptTest {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  description: String  _description: ElementBase
+  action: [TestScriptTestAction]!
+}
+
+input TestScriptTestAction {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  operation: TestScriptSetupActionOperation
+  assert: TestScriptSetupActionAssert
+}
+
+input TestScriptTeardown {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  action: [TestScriptTeardownAction]!
+}
+
+input TestScriptTeardownAction {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  operation: TestScriptSetupActionOperation!
+}
+
+type TestScriptReadType {
+  TestScript(id : ID!) : TestScript
+}
+
+type TestScriptListType {
+  TestScriptList(_filter : String
+    context : [token]
+    context_quantity : [quantity]
+    context_type : [token]
+    context_type_quantity : [composite]
+    context_type_value : [composite]
+    date : [date]
+    description : [String]
+    identifier : [token]
+    jurisdiction : [token]
+    name : [String]
+    publisher : [String]
+    status : [token]
+    testscript_capability : [String]
+    title : [String]
+    url : [uri]
+    version : [token]
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : [TestScript]
+}
+
+type TestScriptConnectionType {
+  TestScriptConection(_filter : String
+    context : [token]
+    context_quantity : [quantity]
+    context_type : [token]
+    context_type_quantity : [composite]
+    context_type_value : [composite]
+    date : [date]
+    description : [String]
+    identifier : [token]
+    jurisdiction : [token]
+    name : [String]
+    publisher : [String]
+    status : [token]
+    testscript_capability : [String]
+    title : [String]
+    url : [uri]
+    version : [token]
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : TestScriptConnection
+}
+
+type TestScriptConnection {
+  count : Int
+  offset : Int
+  pagesize : Int
+  first : ID
+  previous : ID
+  next : ID
+  last : ID
+  edges : [TestScriptEdge]
+}
+
+type TestScriptEdge {
+  mode : String
+  score : Float
+  resource : TestScript
+}
+
+type TestScriptCreateType {
+  TestScriptCreate(resource : TestScript) : TestScriptCreation
+}
+
+type TestScriptCreation {
+  location : String
+  resource : TestScript
+  information : OperationOutcome
+}
+
+type TestScriptUpdateType {
+  TestScriptUpdate(id : IDresource : TestScript) : TestScriptUpdate
+}
+
+type TestScriptUpdate {
+  resource : TestScript
+  information : OperationOutcome
+}
+
+type TestScriptDeleteType {
+  TestScriptDelete(id : ID) : TestScriptDelete
+}
+
+type TestScriptDelete {
+  information : OperationOutcome
+}
+

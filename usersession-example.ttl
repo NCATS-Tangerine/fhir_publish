@@ -1,0 +1,54 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://hl7.org/fhir/UserSession/example> a fhir:UserSession;
+  fhir:nodeRole fhir:treeRoot;
+  fhir:Resource.id [ fhir:value "example"];
+  fhir:DomainResource.text [
+     fhir:Narrative.status [ fhir:value "generated" ];
+     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\">Example UserSession.</div>"
+  ];
+  fhir:UserSession.identifier [
+     fhir:Identifier.value [ fhir:value "usersession-1" ]
+  ];
+  fhir:UserSession.user [
+     fhir:link <http://hl7.org/fhir/Practitioner/1>;
+     fhir:Reference.reference [ fhir:value "Practitioner/1" ]
+  ];
+  fhir:UserSession.status [
+     fhir:UserSession.status.code [ fhir:value "active" ];
+     fhir:UserSession.status.source [ fhir:value "system" ]
+  ];
+  fhir:UserSession.workstation [
+     fhir:Identifier.value [ fhir:value "computer-name" ]
+  ];
+  fhir:UserSession.focus [
+     fhir:index 0;
+     fhir:link <http://hl7.org/fhir/Patient/example>;
+     fhir:Reference.reference [ fhir:value "Patient/example" ]
+  ];
+  fhir:UserSession.created [ fhir:value "2017-11-15T17:31:00Z"^^xsd:dateTime];
+  fhir:UserSession.context [
+     fhir:index 0;
+     fhir:UserSession.context.type [ fhir:value "task" ];
+     fhir:UserSession.context.valueCodeableConcept [
+       fhir:CodeableConcept.text [ fhir:value "context-value" ]
+     ]
+  ] .
+
+<http://hl7.org/fhir/Practitioner/1> a fhir:Practitioner .
+
+<http://hl7.org/fhir/Patient/example> a fhir:Patient .
+
+# - ontology header ------------------------------------------------------------
+
+<http://hl7.org/fhir/UserSession/example.ttl> a owl:Ontology;
+  owl:imports fhir:fhir.ttl;
+  owl:versionIRI <http://build.fhir.org/UserSession/example.ttl> .
+
+# -------------------------------------------------------------------------------------
+

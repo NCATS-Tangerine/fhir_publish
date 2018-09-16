@@ -1,0 +1,334 @@
+# FHIR GraphQL Schema. Version 3.5.0-14906
+
+type SubstanceSpecification {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  comment: String  _comment: ElementBase
+  stoichiometric: Boolean  _stoichiometric: ElementBase
+  identifier: Identifier
+  type: CodeableConcept
+  referenceSource: String  _referenceSource: [ElementBase]
+  moiety: [SubstanceSpecificationMoiety]
+  property: [SubstanceSpecificationProperty]
+  referenceInformation: Reference
+  structure: SubstanceSpecificationStructure
+  substanceCode: [SubstanceSpecificationSubstanceCode]
+  substanceName: [SubstanceSpecificationSubstanceName]
+  molecularWeight: [SubstanceSpecificationStructureIsotopeMolecularWeight]
+  polymer: Reference
+}
+
+type SubstanceSpecificationMoiety {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  role: CodeableConcept
+  identifier: Identifier
+  name: String  _name: ElementBase
+  stereochemistry: CodeableConcept
+  opticalActivity: CodeableConcept
+  molecularFormula: String  _molecularFormula: ElementBase
+  amount: String  _amount: ElementBase
+}
+
+type SubstanceSpecificationProperty {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: CodeableConcept
+  name: CodeableConcept
+  parameters: String  _parameters: ElementBase
+  substanceId: Identifier
+  substanceName: String  _substanceName: ElementBase
+  amount: String  _amount: ElementBase
+}
+
+type SubstanceSpecificationStructure {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  stereochemistry: CodeableConcept
+  opticalActivity: CodeableConcept
+  molecularFormula: String  _molecularFormula: ElementBase
+  molecularFormulaByMoiety: String  _molecularFormulaByMoiety: ElementBase
+  isotope: [SubstanceSpecificationStructureIsotope]
+  molecularWeight: SubstanceSpecificationStructureIsotopeMolecularWeight
+  referenceSource: [Reference]
+  structuralRepresentation: [SubstanceSpecificationStructureStructuralRepresentation]
+}
+
+type SubstanceSpecificationStructureIsotope {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  nuclideId: Identifier
+  nuclideName: CodeableConcept
+  substitutionType: CodeableConcept
+  nuclideHalfLife: Quantity
+  amount: String  _amount: ElementBase
+  molecularWeight: SubstanceSpecificationStructureIsotopeMolecularWeight
+}
+
+type SubstanceSpecificationStructureIsotopeMolecularWeight {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  method: CodeableConcept
+  type: CodeableConcept
+  amount: String  _amount: ElementBase
+}
+
+type SubstanceSpecificationStructureStructuralRepresentation {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: CodeableConcept
+  representation: String  _representation: ElementBase
+  attachment: Attachment
+}
+
+type SubstanceSpecificationSubstanceCode {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept
+  status: CodeableConcept
+  statusDate: dateTime  _statusDate: ElementBase
+  comment: String  _comment: ElementBase
+  referenceSource: String  _referenceSource: [ElementBase]
+}
+
+type SubstanceSpecificationSubstanceName {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  type: CodeableConcept
+  language: [CodeableConcept]
+  domain: [CodeableConcept]
+  jurisdiction: [CodeableConcept]
+  officialName: [SubstanceSpecificationSubstanceNameOfficialName]
+  referenceSource: String  _referenceSource: [ElementBase]
+}
+
+type SubstanceSpecificationSubstanceNameOfficialName {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  authority: CodeableConcept
+  status: CodeableConcept
+  date: dateTime  _date: ElementBase
+}
+
+input SubstanceSpecification {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  comment: String  _comment: ElementBase
+  stoichiometric: Boolean  _stoichiometric: ElementBase
+  identifier: Identifier
+  type: CodeableConcept
+  referenceSource: String  _referenceSource: [ElementBase]
+  moiety: [SubstanceSpecificationMoiety]
+  property: [SubstanceSpecificationProperty]
+  referenceInformation: Reference
+  structure: SubstanceSpecificationStructure
+  substanceCode: [SubstanceSpecificationSubstanceCode]
+  substanceName: [SubstanceSpecificationSubstanceName]
+  molecularWeight: [SubstanceSpecificationStructureIsotopeMolecularWeight]
+  polymer: Reference
+}
+
+input SubstanceSpecificationMoiety {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  role: CodeableConcept
+  identifier: Identifier
+  name: String  _name: ElementBase
+  stereochemistry: CodeableConcept
+  opticalActivity: CodeableConcept
+  molecularFormula: String  _molecularFormula: ElementBase
+  amount: String  _amount: ElementBase
+}
+
+input SubstanceSpecificationProperty {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: CodeableConcept
+  name: CodeableConcept
+  parameters: String  _parameters: ElementBase
+  substanceId: Identifier
+  substanceName: String  _substanceName: ElementBase
+  amount: String  _amount: ElementBase
+}
+
+input SubstanceSpecificationStructure {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  stereochemistry: CodeableConcept
+  opticalActivity: CodeableConcept
+  molecularFormula: String  _molecularFormula: ElementBase
+  molecularFormulaByMoiety: String  _molecularFormulaByMoiety: ElementBase
+  isotope: [SubstanceSpecificationStructureIsotope]
+  molecularWeight: SubstanceSpecificationStructureIsotopeMolecularWeight
+  referenceSource: [Reference]
+  structuralRepresentation: [SubstanceSpecificationStructureStructuralRepresentation]
+}
+
+input SubstanceSpecificationStructureIsotope {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  nuclideId: Identifier
+  nuclideName: CodeableConcept
+  substitutionType: CodeableConcept
+  nuclideHalfLife: Quantity
+  amount: String  _amount: ElementBase
+  molecularWeight: SubstanceSpecificationStructureIsotopeMolecularWeight
+}
+
+input SubstanceSpecificationStructureIsotopeMolecularWeight {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  method: CodeableConcept
+  type: CodeableConcept
+  amount: String  _amount: ElementBase
+}
+
+input SubstanceSpecificationStructureStructuralRepresentation {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: CodeableConcept
+  representation: String  _representation: ElementBase
+  attachment: Attachment
+}
+
+input SubstanceSpecificationSubstanceCode {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept
+  status: CodeableConcept
+  statusDate: dateTime  _statusDate: ElementBase
+  comment: String  _comment: ElementBase
+  referenceSource: String  _referenceSource: [ElementBase]
+}
+
+input SubstanceSpecificationSubstanceName {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  name: String  _name: ElementBase
+  type: CodeableConcept
+  language: [CodeableConcept]
+  domain: [CodeableConcept]
+  jurisdiction: [CodeableConcept]
+  officialName: [SubstanceSpecificationSubstanceNameOfficialName]
+  referenceSource: String  _referenceSource: [ElementBase]
+}
+
+input SubstanceSpecificationSubstanceNameOfficialName {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  authority: CodeableConcept
+  status: CodeableConcept
+  date: dateTime  _date: ElementBase
+}
+
+type SubstanceSpecificationReadType {
+  SubstanceSpecification(id : ID!) : SubstanceSpecification
+}
+
+type SubstanceSpecificationListType {
+  SubstanceSpecificationList(_filter : String
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : [SubstanceSpecification]
+}
+
+type SubstanceSpecificationConnectionType {
+  SubstanceSpecificationConection(_filter : String
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : SubstanceSpecificationConnection
+}
+
+type SubstanceSpecificationConnection {
+  count : Int
+  offset : Int
+  pagesize : Int
+  first : ID
+  previous : ID
+  next : ID
+  last : ID
+  edges : [SubstanceSpecificationEdge]
+}
+
+type SubstanceSpecificationEdge {
+  mode : String
+  score : Float
+  resource : SubstanceSpecification
+}
+
+type SubstanceSpecificationCreateType {
+  SubstanceSpecificationCreate(resource : SubstanceSpecification) : SubstanceSpecificationCreation
+}
+
+type SubstanceSpecificationCreation {
+  location : String
+  resource : SubstanceSpecification
+  information : OperationOutcome
+}
+
+type SubstanceSpecificationUpdateType {
+  SubstanceSpecificationUpdate(id : IDresource : SubstanceSpecification) : SubstanceSpecificationUpdate
+}
+
+type SubstanceSpecificationUpdate {
+  resource : SubstanceSpecification
+  information : OperationOutcome
+}
+
+type SubstanceSpecificationDeleteType {
+  SubstanceSpecificationDelete(id : ID) : SubstanceSpecificationDelete
+}
+
+type SubstanceSpecificationDelete {
+  information : OperationOutcome
+}
+

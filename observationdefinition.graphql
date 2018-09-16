@@ -1,0 +1,176 @@
+# FHIR GraphQL Schema. Version 3.5.0-14906
+
+type ObservationDefinition {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  category: CodeableConcept
+  code: CodeableConcept!
+  identifier: [Identifier]
+  permittedDataType: [Coding]
+  multipleResultsAllowed: Boolean  _multipleResultsAllowed: ElementBase
+  method: CodeableConcept
+  preferredReportName: String  _preferredReportName: ElementBase
+  quantitativeDetails: ObservationDefinitionQuantitativeDetails
+  qualifiedInterval: [ObservationDefinitionQualifiedInterval]
+  validCodedValueSet: uri  _validCodedValueSet: ElementBase
+  normalCodedValueSet: uri  _normalCodedValueSet: ElementBase
+  abnormalCodedValueSet: uri  _abnormalCodedValueSet: ElementBase
+  criticalCodedValueSet: uri  _criticalCodedValueSet: ElementBase
+}
+
+type ObservationDefinitionQuantitativeDetails {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  customaryUnit: Coding
+  unit: Coding
+  conversionFactor: decimal  _conversionFactor: ElementBase
+  decimalPrecision: Int  _decimalPrecision: ElementBase
+}
+
+type ObservationDefinitionQualifiedInterval {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  category: CodeableConcept
+  range: Range
+  type: CodeableConcept
+  appliesTo: [CodeableConcept]
+  age: Range
+  gestationalAge: Range
+  condition: String  _condition: ElementBase
+}
+
+input ObservationDefinition {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  category: CodeableConcept
+  code: CodeableConcept!
+  identifier: [Identifier]
+  permittedDataType: [Coding]
+  multipleResultsAllowed: Boolean  _multipleResultsAllowed: ElementBase
+  method: CodeableConcept
+  preferredReportName: String  _preferredReportName: ElementBase
+  quantitativeDetails: ObservationDefinitionQuantitativeDetails
+  qualifiedInterval: [ObservationDefinitionQualifiedInterval]
+  validCodedValueSet: uri  _validCodedValueSet: ElementBase
+  normalCodedValueSet: uri  _normalCodedValueSet: ElementBase
+  abnormalCodedValueSet: uri  _abnormalCodedValueSet: ElementBase
+  criticalCodedValueSet: uri  _criticalCodedValueSet: ElementBase
+}
+
+input ObservationDefinitionQuantitativeDetails {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  customaryUnit: Coding
+  unit: Coding
+  conversionFactor: decimal  _conversionFactor: ElementBase
+  decimalPrecision: Int  _decimalPrecision: ElementBase
+}
+
+input ObservationDefinitionQualifiedInterval {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  category: CodeableConcept
+  range: Range
+  type: CodeableConcept
+  appliesTo: [CodeableConcept]
+  age: Range
+  gestationalAge: Range
+  condition: String  _condition: ElementBase
+}
+
+type ObservationDefinitionReadType {
+  ObservationDefinition(id : ID!) : ObservationDefinition
+}
+
+type ObservationDefinitionListType {
+  ObservationDefinitionList(_filter : String
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : [ObservationDefinition]
+}
+
+type ObservationDefinitionConnectionType {
+  ObservationDefinitionConection(_filter : String
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : ObservationDefinitionConnection
+}
+
+type ObservationDefinitionConnection {
+  count : Int
+  offset : Int
+  pagesize : Int
+  first : ID
+  previous : ID
+  next : ID
+  last : ID
+  edges : [ObservationDefinitionEdge]
+}
+
+type ObservationDefinitionEdge {
+  mode : String
+  score : Float
+  resource : ObservationDefinition
+}
+
+type ObservationDefinitionCreateType {
+  ObservationDefinitionCreate(resource : ObservationDefinition) : ObservationDefinitionCreation
+}
+
+type ObservationDefinitionCreation {
+  location : String
+  resource : ObservationDefinition
+  information : OperationOutcome
+}
+
+type ObservationDefinitionUpdateType {
+  ObservationDefinitionUpdate(id : IDresource : ObservationDefinition) : ObservationDefinitionUpdate
+}
+
+type ObservationDefinitionUpdate {
+  resource : ObservationDefinition
+  information : OperationOutcome
+}
+
+type ObservationDefinitionDeleteType {
+  ObservationDefinitionDelete(id : ID) : ObservationDefinitionDelete
+}
+
+type ObservationDefinitionDelete {
+  information : OperationOutcome
+}
+

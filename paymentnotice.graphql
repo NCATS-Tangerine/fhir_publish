@@ -1,0 +1,138 @@
+# FHIR GraphQL Schema. Version 3.5.0-14906
+
+type PaymentNotice {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: [Identifier]
+  status: code  _status: ElementBase
+  request: Reference
+  response: Reference
+  statusDate: date  _statusDate: ElementBase
+  created: dateTime  _created: ElementBase
+  target: Reference
+  provider: Reference
+  paymentStatus: CodeableConcept
+}
+
+input PaymentNotice {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: [Identifier]
+  status: code  _status: ElementBase
+  request: Reference
+  response: Reference
+  statusDate: date  _statusDate: ElementBase
+  created: dateTime  _created: ElementBase
+  target: Reference
+  provider: Reference
+  paymentStatus: CodeableConcept
+}
+
+type PaymentNoticeReadType {
+  PaymentNotice(id : ID!) : PaymentNotice
+}
+
+type PaymentNoticeListType {
+  PaymentNoticeList(_filter : String
+    created : [date]
+    identifier : [token]
+    payment_status : [token]
+    provider : [reference]
+    request : [reference]
+    response : [reference]
+    status : [token]
+    statusdate : [date]
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : [PaymentNotice]
+}
+
+type PaymentNoticeConnectionType {
+  PaymentNoticeConection(_filter : String
+    created : [date]
+    identifier : [token]
+    payment_status : [token]
+    provider : [reference]
+    request : [reference]
+    response : [reference]
+    status : [token]
+    statusdate : [date]
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : PaymentNoticeConnection
+}
+
+type PaymentNoticeConnection {
+  count : Int
+  offset : Int
+  pagesize : Int
+  first : ID
+  previous : ID
+  next : ID
+  last : ID
+  edges : [PaymentNoticeEdge]
+}
+
+type PaymentNoticeEdge {
+  mode : String
+  score : Float
+  resource : PaymentNotice
+}
+
+type PaymentNoticeCreateType {
+  PaymentNoticeCreate(resource : PaymentNotice) : PaymentNoticeCreation
+}
+
+type PaymentNoticeCreation {
+  location : String
+  resource : PaymentNotice
+  information : OperationOutcome
+}
+
+type PaymentNoticeUpdateType {
+  PaymentNoticeUpdate(id : IDresource : PaymentNotice) : PaymentNoticeUpdate
+}
+
+type PaymentNoticeUpdate {
+  resource : PaymentNotice
+  information : OperationOutcome
+}
+
+type PaymentNoticeDeleteType {
+  PaymentNoticeDelete(id : ID) : PaymentNoticeDelete
+}
+
+type PaymentNoticeDelete {
+  information : OperationOutcome
+}
+

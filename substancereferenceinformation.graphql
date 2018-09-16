@@ -1,0 +1,238 @@
+# FHIR GraphQL Schema. Version 3.5.0-14906
+
+type SubstanceReferenceInformation {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  comment: String  _comment: ElementBase
+  gene: [SubstanceReferenceInformationGene]
+  geneElement: [SubstanceReferenceInformationGeneElement]
+  classification: [SubstanceReferenceInformationClassification]
+  relationship: [SubstanceReferenceInformationRelationship]
+  target: [SubstanceReferenceInformationTarget]
+}
+
+type SubstanceReferenceInformationGene {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  geneSequenceOrigin: CodeableConcept
+  gene: CodeableConcept
+  source: [Reference]
+}
+
+type SubstanceReferenceInformationGeneElement {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: CodeableConcept
+  element: Identifier
+  source: [Reference]
+}
+
+type SubstanceReferenceInformationClassification {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  domain: CodeableConcept
+  classification: CodeableConcept
+  subtype: [CodeableConcept]
+  source: [Reference]
+}
+
+type SubstanceReferenceInformationRelationship {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  substanceReference: Reference
+  substanceCodeableConcept: CodeableConcept
+  relationship: CodeableConcept
+  interaction: CodeableConcept
+  isDefining: Boolean  _isDefining: ElementBase
+  amountQuantity: Quantity
+  amountRange: Range
+  amountString: String  _amountString: ElementBase
+  amountType: CodeableConcept
+  amountText: String  _amountText: ElementBase
+  source: [Reference]
+}
+
+type SubstanceReferenceInformationTarget {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  target: Identifier
+  type: CodeableConcept
+  interaction: CodeableConcept
+  organism: CodeableConcept
+  organismType: CodeableConcept
+  source: [Reference]
+  amountQuantity: Quantity
+  amountRange: Range
+  amountString: String  _amountString: ElementBase
+  amountType: CodeableConcept
+}
+
+input SubstanceReferenceInformation {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  comment: String  _comment: ElementBase
+  gene: [SubstanceReferenceInformationGene]
+  geneElement: [SubstanceReferenceInformationGeneElement]
+  classification: [SubstanceReferenceInformationClassification]
+  relationship: [SubstanceReferenceInformationRelationship]
+  target: [SubstanceReferenceInformationTarget]
+}
+
+input SubstanceReferenceInformationGene {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  geneSequenceOrigin: CodeableConcept
+  gene: CodeableConcept
+  source: [Reference]
+}
+
+input SubstanceReferenceInformationGeneElement {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: CodeableConcept
+  element: Identifier
+  source: [Reference]
+}
+
+input SubstanceReferenceInformationClassification {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  domain: CodeableConcept
+  classification: CodeableConcept
+  subtype: [CodeableConcept]
+  source: [Reference]
+}
+
+input SubstanceReferenceInformationRelationship {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  substanceReference: Reference
+  substanceCodeableConcept: CodeableConcept
+  relationship: CodeableConcept
+  interaction: CodeableConcept
+  isDefining: Boolean  _isDefining: ElementBase
+  amountQuantity: Quantity
+  amountRange: Range
+  amountString: String  _amountString: ElementBase
+  amountType: CodeableConcept
+  amountText: String  _amountText: ElementBase
+  source: [Reference]
+}
+
+input SubstanceReferenceInformationTarget {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  target: Identifier
+  type: CodeableConcept
+  interaction: CodeableConcept
+  organism: CodeableConcept
+  organismType: CodeableConcept
+  source: [Reference]
+  amountQuantity: Quantity
+  amountRange: Range
+  amountString: String  _amountString: ElementBase
+  amountType: CodeableConcept
+}
+
+type SubstanceReferenceInformationReadType {
+  SubstanceReferenceInformation(id : ID!) : SubstanceReferenceInformation
+}
+
+type SubstanceReferenceInformationListType {
+  SubstanceReferenceInformationList(_filter : String
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : [SubstanceReferenceInformation]
+}
+
+type SubstanceReferenceInformationConnectionType {
+  SubstanceReferenceInformationConection(_filter : String
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : SubstanceReferenceInformationConnection
+}
+
+type SubstanceReferenceInformationConnection {
+  count : Int
+  offset : Int
+  pagesize : Int
+  first : ID
+  previous : ID
+  next : ID
+  last : ID
+  edges : [SubstanceReferenceInformationEdge]
+}
+
+type SubstanceReferenceInformationEdge {
+  mode : String
+  score : Float
+  resource : SubstanceReferenceInformation
+}
+
+type SubstanceReferenceInformationCreateType {
+  SubstanceReferenceInformationCreate(resource : SubstanceReferenceInformation) : SubstanceReferenceInformationCreation
+}
+
+type SubstanceReferenceInformationCreation {
+  location : String
+  resource : SubstanceReferenceInformation
+  information : OperationOutcome
+}
+
+type SubstanceReferenceInformationUpdateType {
+  SubstanceReferenceInformationUpdate(id : IDresource : SubstanceReferenceInformation) : SubstanceReferenceInformationUpdate
+}
+
+type SubstanceReferenceInformationUpdate {
+  resource : SubstanceReferenceInformation
+  information : OperationOutcome
+}
+
+type SubstanceReferenceInformationDeleteType {
+  SubstanceReferenceInformationDelete(id : ID) : SubstanceReferenceInformationDelete
+}
+
+type SubstanceReferenceInformationDelete {
+  information : OperationOutcome
+}
+

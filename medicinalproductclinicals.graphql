@@ -1,0 +1,248 @@
+# FHIR GraphQL Schema. Version 3.5.0-14906
+
+type MedicinalProductClinicals {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  undesirableEffects: [MedicinalProductClinicalsUndesirableEffects]
+  therapeuticIndication: [MedicinalProductClinicalsTherapeuticIndication]!
+  contraindication: [MedicinalProductClinicalsContraindication]
+  interactions: [MedicinalProductClinicalsInteractions]
+}
+
+type MedicinalProductClinicalsUndesirableEffects {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  symptomConditionEffect: CodeableConcept
+  classification: CodeableConcept
+  frequencyOfOccurrence: CodeableConcept
+  population: [MedicinalProductClinicalsUndesirableEffectsPopulation]
+}
+
+type MedicinalProductClinicalsUndesirableEffectsPopulation {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  ageRange: Range
+  ageCodeableConcept: CodeableConcept
+  gender: CodeableConcept
+  race: CodeableConcept
+  physiologicalCondition: CodeableConcept
+}
+
+type MedicinalProductClinicalsTherapeuticIndication {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  diseaseSymptomProcedure: CodeableConcept
+  diseaseStatus: CodeableConcept
+  comorbidity: [CodeableConcept]
+  intendedEffect: CodeableConcept
+  duration: Quantity
+  undesirableEffects: [MedicinalProductClinicalsUndesirableEffects]
+  otherTherapy: [MedicinalProductClinicalsTherapeuticIndicationOtherTherapy]
+  population: [MedicinalProductClinicalsUndesirableEffectsPopulation]
+}
+
+type MedicinalProductClinicalsTherapeuticIndicationOtherTherapy {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  therapyRelationshipType: CodeableConcept!
+  medicationCodeableConcept: CodeableConcept
+  medicationReference: Reference
+}
+
+type MedicinalProductClinicalsContraindication {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  disease: CodeableConcept
+  diseaseStatus: CodeableConcept
+  comorbidity: [CodeableConcept]
+  therapeuticIndication: [MedicinalProductClinicalsTherapeuticIndication]
+  otherTherapy: [MedicinalProductClinicalsTherapeuticIndicationOtherTherapy]
+  population: [MedicinalProductClinicalsUndesirableEffectsPopulation]
+}
+
+type MedicinalProductClinicalsInteractions {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  interaction: String  _interaction: ElementBase
+  interactant: [CodeableConcept]
+  type: CodeableConcept
+  effect: CodeableConcept
+  incidence: CodeableConcept
+  management: CodeableConcept
+}
+
+input MedicinalProductClinicals {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  undesirableEffects: [MedicinalProductClinicalsUndesirableEffects]
+  therapeuticIndication: [MedicinalProductClinicalsTherapeuticIndication]!
+  contraindication: [MedicinalProductClinicalsContraindication]
+  interactions: [MedicinalProductClinicalsInteractions]
+}
+
+input MedicinalProductClinicalsUndesirableEffects {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  symptomConditionEffect: CodeableConcept
+  classification: CodeableConcept
+  frequencyOfOccurrence: CodeableConcept
+  population: [MedicinalProductClinicalsUndesirableEffectsPopulation]
+}
+
+input MedicinalProductClinicalsUndesirableEffectsPopulation {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  ageRange: Range
+  ageCodeableConcept: CodeableConcept
+  gender: CodeableConcept
+  race: CodeableConcept
+  physiologicalCondition: CodeableConcept
+}
+
+input MedicinalProductClinicalsTherapeuticIndication {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  diseaseSymptomProcedure: CodeableConcept
+  diseaseStatus: CodeableConcept
+  comorbidity: [CodeableConcept]
+  intendedEffect: CodeableConcept
+  duration: Quantity
+  undesirableEffects: [MedicinalProductClinicalsUndesirableEffects]
+  otherTherapy: [MedicinalProductClinicalsTherapeuticIndicationOtherTherapy]
+  population: [MedicinalProductClinicalsUndesirableEffectsPopulation]
+}
+
+input MedicinalProductClinicalsTherapeuticIndicationOtherTherapy {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  therapyRelationshipType: CodeableConcept!
+  medicationCodeableConcept: CodeableConcept
+  medicationReference: Reference
+}
+
+input MedicinalProductClinicalsContraindication {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  disease: CodeableConcept
+  diseaseStatus: CodeableConcept
+  comorbidity: [CodeableConcept]
+  therapeuticIndication: [MedicinalProductClinicalsTherapeuticIndication]
+  otherTherapy: [MedicinalProductClinicalsTherapeuticIndicationOtherTherapy]
+  population: [MedicinalProductClinicalsUndesirableEffectsPopulation]
+}
+
+input MedicinalProductClinicalsInteractions {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  interaction: String  _interaction: ElementBase
+  interactant: [CodeableConcept]
+  type: CodeableConcept
+  effect: CodeableConcept
+  incidence: CodeableConcept
+  management: CodeableConcept
+}
+
+type MedicinalProductClinicalsReadType {
+  MedicinalProductClinicals(id : ID!) : MedicinalProductClinicals
+}
+
+type MedicinalProductClinicalsListType {
+  MedicinalProductClinicalsList(_filter : String
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : [MedicinalProductClinicals]
+}
+
+type MedicinalProductClinicalsConnectionType {
+  MedicinalProductClinicalsConection(_filter : String
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : MedicinalProductClinicalsConnection
+}
+
+type MedicinalProductClinicalsConnection {
+  count : Int
+  offset : Int
+  pagesize : Int
+  first : ID
+  previous : ID
+  next : ID
+  last : ID
+  edges : [MedicinalProductClinicalsEdge]
+}
+
+type MedicinalProductClinicalsEdge {
+  mode : String
+  score : Float
+  resource : MedicinalProductClinicals
+}
+
+type MedicinalProductClinicalsCreateType {
+  MedicinalProductClinicalsCreate(resource : MedicinalProductClinicals) : MedicinalProductClinicalsCreation
+}
+
+type MedicinalProductClinicalsCreation {
+  location : String
+  resource : MedicinalProductClinicals
+  information : OperationOutcome
+}
+
+type MedicinalProductClinicalsUpdateType {
+  MedicinalProductClinicalsUpdate(id : IDresource : MedicinalProductClinicals) : MedicinalProductClinicalsUpdate
+}
+
+type MedicinalProductClinicalsUpdate {
+  resource : MedicinalProductClinicals
+  information : OperationOutcome
+}
+
+type MedicinalProductClinicalsDeleteType {
+  MedicinalProductClinicalsDelete(id : ID) : MedicinalProductClinicalsDelete
+}
+
+type MedicinalProductClinicalsDelete {
+  information : OperationOutcome
+}
+

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<difference>
+   <type name="Provenance" status="changed">
+      <element path="Provenance.occurred[x]" status="new"/>
+      <element path="Provenance.reason">
+         <removed-type name="Coding"/>
+         <added-type name="CodeableConcept"/>
+      </element>
+      <element path="Provenance.activity">
+         <removed-type name="Coding"/>
+         <added-type name="CodeableConcept"/>
+      </element>
+      <element path="Provenance.agent.type" status="new"/>
+      <element binding-status="removed" path="Provenance.agent.role">
+         <old-binding reference="http://hl7.org/fhir/ValueSet/security-role-type"
+                      strength="extensible"/>
+      </element>
+      <element old-name="who[x]" path="Provenance.agent.who">
+         <removed-type name="uri"/>
+         <removed-type name="Reference(Practitioner|RelatedPerson|Patient|Device|Organization)"/>
+         <added-type name="Reference(Practitioner|PractitionerRole|RelatedPerson|Patient|Device|Organization)"/>
+      </element>
+      <element old-name="onBehalfOf[x]" path="Provenance.agent.onBehalfOf">
+         <removed-type name="uri"/>
+         <removed-type name="Reference(Practitioner|RelatedPerson|Patient|Device|Organization)"/>
+         <added-type name="Reference(Practitioner|PractitionerRole|RelatedPerson|Patient|Device|Organization)"/>
+      </element>
+      <element old-name="what[x]" path="Provenance.entity.what">
+         <removed-type name="uri"/>
+         <removed-type name="Reference(Resource)"/>
+         <removed-type name="Identifier"/>
+         <added-type name="Reference(Resource)"/>
+      </element>
+      <element path="Provenance.period" status="deleted"/>
+      <element path="Provenance.agent.relatedAgentType" status="deleted"/>
+   </type>
+</difference>

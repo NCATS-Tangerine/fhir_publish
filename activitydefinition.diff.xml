@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<difference>
+   <type name="ActivityDefinition" status="changed">
+      <element path="ActivityDefinition.subtitle" status="new"/>
+      <element modifier="removed" path="ActivityDefinition.experimental"/>
+      <element path="ActivityDefinition.subject[x]" status="new"/>
+      <element path="ActivityDefinition.author" status="new"/>
+      <element path="ActivityDefinition.editor" status="new"/>
+      <element path="ActivityDefinition.reviewer" status="new"/>
+      <element path="ActivityDefinition.endorser" status="new"/>
+      <element path="ActivityDefinition.library">
+         <removed-type name="Reference(Library)"/>
+         <added-type name="canonical"/>
+      </element>
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               path="ActivityDefinition.kind">
+         <old-binding reference="http://hl7.org/fhir/ValueSet/resource-types"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/request-resource-types"
+                      strength="required"/>
+      </element>
+      <element path="ActivityDefinition.profile" status="new"/>
+      <element path="ActivityDefinition.intent" status="new"/>
+      <element path="ActivityDefinition.priority" status="new"/>
+      <element path="ActivityDefinition.doNotPerform" status="new"/>
+      <element path="ActivityDefinition.timing[x]">
+         <added-type name="Age"/>
+         <added-type name="Duration"/>
+      </element>
+      <element path="ActivityDefinition.product[x]">
+         <removed-type name="Reference(Medication|Substance)"/>
+         <added-type name="Reference(Medication|Substance)"/>
+      </element>
+      <element path="ActivityDefinition.specimenRequirement" status="new"/>
+      <element path="ActivityDefinition.observationRequirement" status="new"/>
+      <element path="ActivityDefinition.observationResultRequirement" status="new"/>
+      <element path="ActivityDefinition.transform">
+         <removed-type name="Reference(StructureMap)"/>
+         <added-type name="canonical"/>
+      </element>
+      <element new-min="1" old-min="0" path="ActivityDefinition.dynamicValue.path"/>
+      <element new-min="1"
+               old-min="0"
+               path="ActivityDefinition.dynamicValue.expression">
+         <removed-type name="string"/>
+         <added-type name="Expression"/>
+      </element>
+      <element path="ActivityDefinition.contributor" status="deleted"/>
+      <element path="ActivityDefinition.dynamicValue.description" status="deleted"/>
+      <element path="ActivityDefinition.dynamicValue.language" status="deleted"/>
+   </type>
+</difference>

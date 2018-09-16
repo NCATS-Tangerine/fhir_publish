@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<difference>
+   <type name="CarePlan" status="changed">
+      <element path="CarePlan.instantiatesCanonical" status="new"/>
+      <element path="CarePlan.instantiatesUri" status="new"/>
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               path="CarePlan.status">
+         <old-binding reference="http://hl7.org/fhir/ValueSet/care-plan-status"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/request-status"
+                      strength="required"/>
+      </element>
+      <element path="CarePlan.created" status="new"/>
+      <element new-max="1" old-max="*" path="CarePlan.author">
+         <removed-type name="Reference(Patient|Practitioner|RelatedPerson|Organization|CareTeam)"/>
+         <added-type name="Reference(Patient|Practitioner|PractitionerRole|Device|RelatedPerson|Organization|CareTeam)"/>
+      </element>
+      <element path="CarePlan.contributor" status="new"/>
+      <element path="CarePlan.activity.reference">
+         <removed-type name="Reference(Appointment|CommunicationRequest|DeviceRequest|MedicationRequest|NutritionOrder|Task|ProcedureRequest|ReferralRequest|VisionPrescription|RequestGroup)"/>
+         <added-type name="Reference(Appointment|CommunicationRequest|DeviceRequest|MedicationRequest|NutritionOrder|Task|ServiceRequest|VisionPrescription|RequestGroup)"/>
+      </element>
+      <element path="CarePlan.activity.detail.kind" status="new"/>
+      <element path="CarePlan.activity.detail.instantiatesCanonical" status="new"/>
+      <element path="CarePlan.activity.detail.instantiatesUri" status="new"/>
+      <element path="CarePlan.activity.detail.reasonReference">
+         <removed-type name="Reference(Condition)"/>
+         <added-type name="Reference(Condition|Observation|DiagnosticReport|DocumentReference)"/>
+      </element>
+      <element path="CarePlan.activity.detail.statusReason">
+         <removed-type name="string"/>
+         <added-type name="CodeableConcept"/>
+      </element>
+      <element path="CarePlan.activity.detail.doNotPerform" status="new"/>
+      <element path="CarePlan.activity.detail.performer">
+         <removed-type name="Reference(Practitioner|Organization|RelatedPerson|Patient|CareTeam)"/>
+         <added-type name="Reference(Practitioner|PractitionerRole|Organization|RelatedPerson|Patient|CareTeam|HealthcareService|Device)"/>
+      </element>
+      <element path="CarePlan.activity.detail.product[x]">
+         <removed-type name="Reference(Medication|Substance)"/>
+         <added-type name="Reference(Medication|Substance)"/>
+      </element>
+      <element path="CarePlan.definition" status="deleted"/>
+      <element path="CarePlan.activity.detail.category" status="deleted"/>
+      <element path="CarePlan.activity.detail.definition" status="deleted"/>
+      <element path="CarePlan.activity.detail.prohibited" status="deleted"/>
+   </type>
+</difference>

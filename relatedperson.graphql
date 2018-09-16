@@ -1,0 +1,160 @@
+# FHIR GraphQL Schema. Version 3.5.0-14906
+
+type RelatedPerson {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: [Identifier]
+  active: Boolean  _active: ElementBase
+  patient: Reference!
+  relationship: [CodeableConcept]
+  name: [HumanName]
+  telecom: [ContactPoint]
+  gender: code  _gender: ElementBase
+  birthDate: date  _birthDate: ElementBase
+  address: [Address]
+  photo: [Attachment]
+  period: Period
+}
+
+input RelatedPerson {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: [Identifier]
+  active: Boolean  _active: ElementBase
+  patient: Reference!
+  relationship: [CodeableConcept]
+  name: [HumanName]
+  telecom: [ContactPoint]
+  gender: code  _gender: ElementBase
+  birthDate: date  _birthDate: ElementBase
+  address: [Address]
+  photo: [Attachment]
+  period: Period
+}
+
+type RelatedPersonReadType {
+  RelatedPerson(id : ID!) : RelatedPerson
+}
+
+type RelatedPersonListType {
+  RelatedPersonList(_filter : String
+    active : [token]
+    address : [String]
+    address_city : [String]
+    address_country : [String]
+    address_postalcode : [String]
+    address_state : [String]
+    address_use : [token]
+    birthdate : [date]
+    email : [token]
+    gender : [token]
+    identifier : [token]
+    name : [String]
+    patient : [reference]
+    phone : [token]
+    phonetic : [String]
+    relationship : [token]
+    telecom : [token]
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : [RelatedPerson]
+}
+
+type RelatedPersonConnectionType {
+  RelatedPersonConection(_filter : String
+    active : [token]
+    address : [String]
+    address_city : [String]
+    address_country : [String]
+    address_postalcode : [String]
+    address_state : [String]
+    address_use : [token]
+    birthdate : [date]
+    email : [token]
+    gender : [token]
+    identifier : [token]
+    name : [String]
+    patient : [reference]
+    phone : [token]
+    phonetic : [String]
+    relationship : [token]
+    telecom : [token]
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : RelatedPersonConnection
+}
+
+type RelatedPersonConnection {
+  count : Int
+  offset : Int
+  pagesize : Int
+  first : ID
+  previous : ID
+  next : ID
+  last : ID
+  edges : [RelatedPersonEdge]
+}
+
+type RelatedPersonEdge {
+  mode : String
+  score : Float
+  resource : RelatedPerson
+}
+
+type RelatedPersonCreateType {
+  RelatedPersonCreate(resource : RelatedPerson) : RelatedPersonCreation
+}
+
+type RelatedPersonCreation {
+  location : String
+  resource : RelatedPerson
+  information : OperationOutcome
+}
+
+type RelatedPersonUpdateType {
+  RelatedPersonUpdate(id : IDresource : RelatedPerson) : RelatedPersonUpdate
+}
+
+type RelatedPersonUpdate {
+  resource : RelatedPerson
+  information : OperationOutcome
+}
+
+type RelatedPersonDeleteType {
+  RelatedPersonDelete(id : ID) : RelatedPersonDelete
+}
+
+type RelatedPersonDelete {
+  information : OperationOutcome
+}
+

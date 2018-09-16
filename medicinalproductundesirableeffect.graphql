@@ -1,0 +1,138 @@
+# FHIR GraphQL Schema. Version 3.5.0-14906
+
+type MedicinalProductUndesirableEffect {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  subject: [Reference]
+  symptomConditionEffect: CodeableConcept
+  classification: CodeableConcept
+  frequencyOfOccurrence: CodeableConcept
+  population: [MedicinalProductUndesirableEffectPopulation]
+}
+
+type MedicinalProductUndesirableEffectPopulation {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  ageRange: Range
+  ageCodeableConcept: CodeableConcept
+  gender: CodeableConcept
+  race: CodeableConcept
+  physiologicalCondition: CodeableConcept
+}
+
+input MedicinalProductUndesirableEffect {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  subject: [Reference]
+  symptomConditionEffect: CodeableConcept
+  classification: CodeableConcept
+  frequencyOfOccurrence: CodeableConcept
+  population: [MedicinalProductUndesirableEffectPopulation]
+}
+
+input MedicinalProductUndesirableEffectPopulation {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  ageRange: Range
+  ageCodeableConcept: CodeableConcept
+  gender: CodeableConcept
+  race: CodeableConcept
+  physiologicalCondition: CodeableConcept
+}
+
+type MedicinalProductUndesirableEffectReadType {
+  MedicinalProductUndesirableEffect(id : ID!) : MedicinalProductUndesirableEffect
+}
+
+type MedicinalProductUndesirableEffectListType {
+  MedicinalProductUndesirableEffectList(_filter : String
+    subject : [reference]
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : [MedicinalProductUndesirableEffect]
+}
+
+type MedicinalProductUndesirableEffectConnectionType {
+  MedicinalProductUndesirableEffectConection(_filter : String
+    subject : [reference]
+    _text : [String]
+    _content : [String]
+    _id : [token]
+    _lastUpdated : [date]
+    _profile : [reference]
+    _query : [token]
+    _security : [token]
+    _source : [uri]
+    _tag : [token]
+    _sort : String
+    _count : Int
+    _cursor : String) : MedicinalProductUndesirableEffectConnection
+}
+
+type MedicinalProductUndesirableEffectConnection {
+  count : Int
+  offset : Int
+  pagesize : Int
+  first : ID
+  previous : ID
+  next : ID
+  last : ID
+  edges : [MedicinalProductUndesirableEffectEdge]
+}
+
+type MedicinalProductUndesirableEffectEdge {
+  mode : String
+  score : Float
+  resource : MedicinalProductUndesirableEffect
+}
+
+type MedicinalProductUndesirableEffectCreateType {
+  MedicinalProductUndesirableEffectCreate(resource : MedicinalProductUndesirableEffect) : MedicinalProductUndesirableEffectCreation
+}
+
+type MedicinalProductUndesirableEffectCreation {
+  location : String
+  resource : MedicinalProductUndesirableEffect
+  information : OperationOutcome
+}
+
+type MedicinalProductUndesirableEffectUpdateType {
+  MedicinalProductUndesirableEffectUpdate(id : IDresource : MedicinalProductUndesirableEffect) : MedicinalProductUndesirableEffectUpdate
+}
+
+type MedicinalProductUndesirableEffectUpdate {
+  resource : MedicinalProductUndesirableEffect
+  information : OperationOutcome
+}
+
+type MedicinalProductUndesirableEffectDeleteType {
+  MedicinalProductUndesirableEffectDelete(id : ID) : MedicinalProductUndesirableEffectDelete
+}
+
+type MedicinalProductUndesirableEffectDelete {
+  information : OperationOutcome
+}
+
