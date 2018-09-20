@@ -248,6 +248,13 @@ This is a representation of the json schema for ClinicalProfile, which is just a
             "$ref": "#/definitions/ClinicalProfile_Procedure"
           },
           "type": "array"
+        },
+        "hpo": {
+          "description": "Procedure profile entry.",
+          "items": {
+            "$ref": "#/definitions/ClinicalProfile_Hpo"
+          },
+          "type": "array"
         }
       },
       "additionalProperties": false,
@@ -954,6 +961,135 @@ This is a representation of the json schema for ClinicalProfile, which is just a
       "required": [
         "code"
       ]
+    },
+    "ClinicalProfile_Hpo": {
+      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
+      "properties": {
+        "id": {
+          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+          "$ref": "string.schema.json#/definitions/string"
+        },
+        "extension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+          "items": {
+            "$ref": "Extension.schema.json#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "modifierExtension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+          "items": {
+            "$ref": "Extension.schema.json#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "code": {
+          "description": "HPO code.",
+          "items": {
+            "$ref": "CodeableConcept.schema.json#/definitions/CodeableConcept"
+          },
+          "type": "array"
+        },
+        "fractionOfSubjects": {
+          "description": "Fraction of patients with this procedure per year.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_fractionOfSubjects": {
+          "description": "Extensions for fractionOfSubjects",
+          "$ref": "Element.schema.json#/definitions/Element"
+        },
+        "correlatedPhenotypes": {
+          "description": "The to N most closely correlated HPO codes.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedPhenotypes"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "code"
+      ]
+    },
+    "ClinicalProfile_CorrelatedPhenotypes": {
+      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
+      "properties": {
+        "id": {
+          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+          "$ref": "string.schema.json#/definitions/string"
+        },
+        "extension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+          "items": {
+            "$ref": "Extension.schema.json#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "modifierExtension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+          "items": {
+            "$ref": "Extension.schema.json#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "topn": {
+          "description": "Number of phenotypes cutoff (e.g. top 10).",
+          "$ref": "#/definitions/integer"
+        },
+        "_topn": {
+          "description": "Extensions for topn",
+          "$ref": "Element.schema.json#/definitions/Element"
+        },
+        "abscorrelation": {
+          "description": "Minimum absolute value of correlation coefficient.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_abscorrelation": {
+          "description": "Extensions for abscorrelation",
+          "$ref": "Element.schema.json#/definitions/Element"
+        },
+        "entry": {
+          "description": "Correlation entry.",
+          "$ref": "#/definitions/ClinicalProfile_Entry3"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ClinicalProfile_Entry3": {
+      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
+      "properties": {
+        "id": {
+          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+          "$ref": "string.schema.json#/definitions/string"
+        },
+        "extension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+          "items": {
+            "$ref": "Extension.schema.json#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "modifierExtension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+          "items": {
+            "$ref": "Extension.schema.json#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "code": {
+          "description": "Phenotype codes.",
+          "$ref": "CodeableConcept.schema.json#/definitions/CodeableConcept"
+        },
+        "coefficient": {
+          "description": "Correlation coefficient.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_coefficient": {
+          "description": "Extensions for coefficient",
+          "$ref": "Element.schema.json#/definitions/Element"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "code"
+      ]
     }
   }
 }
@@ -974,7 +1110,7 @@ This is a representation of the json schema for ClinicalProfile, which is just a
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Mon, Sep 17, 2018 07:52-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Thu, Sep 20, 2018 08:58-0700. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
