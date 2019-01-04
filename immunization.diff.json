@@ -4,11 +4,46 @@
   ],
   "Immunization": {
     "elements": {
+      "Immunization.status": {
+        "binding-codes-changed": true,
+        "removed-codes": [
+          "completed",
+          "entered-in-error"
+        ],
+        "added-codes": [
+          "completed",
+          "entered-in-error",
+          "not-done"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/immunization-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/immunization-status",
+          "strength": "required"
+        }
+      },
       "Immunization.statusReason": {
-        "status": "new"
+        "old-name": "notGiven",
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "boolean"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "modifier": "removed"
       },
       "Immunization.occurrence[x]": {
-        "status": "new"
+        "old-name": "date",
+        "old-min": 0,
+        "new-min": 1,
+        "added-types": [
+          "string"
+        ]
       },
       "Immunization.recorded": {
         "status": "new"
@@ -18,16 +53,31 @@
         "new-min": 0
       },
       "Immunization.performer": {
-        "status": "new"
+        "old-name": "practitioner"
       },
       "Immunization.performer.function": {
-        "status": "new"
+        "old-name": "role",
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/immunization-role",
+          "strength": "extensible"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/immunization-function",
+          "strength": "extensible"
+        }
       },
       "Immunization.performer.actor": {
-        "status": "new"
+        "removed-types": [
+          "Reference(Practitioner)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization)"
+        ]
       },
       "Immunization.reasonCode": {
-        "status": "new"
+        "old-name": "reason"
       },
       "Immunization.reasonReference": {
         "status": "new"
@@ -60,36 +110,36 @@
         "status": "new"
       },
       "Immunization.protocolApplied": {
-        "status": "new"
-      },
-      "Immunization.protocolApplied.series": {
-        "status": "new"
-      },
-      "Immunization.protocolApplied.authority": {
-        "status": "new"
+        "old-name": "vaccinationProtocol"
       },
       "Immunization.protocolApplied.targetDisease": {
-        "status": "new"
+        "old-min": 1,
+        "new-min": 0
       },
       "Immunization.protocolApplied.doseNumber[x]": {
-        "status": "new"
+        "old-name": "doseSequence",
+        "old-min": 0,
+        "new-min": 1,
+        "added-types": [
+          "string"
+        ]
       },
-      "Immunization.notGiven": {
-        "status": "deleted"
-      },
-      "Immunization.date": {
-        "status": "deleted"
-      },
-      "Immunization.practitioner": {
-        "status": "deleted"
+      "Immunization.protocolApplied.seriesDoses[x]": {
+        "old-name": "seriesDoses",
+        "added-types": [
+          "string"
+        ]
       },
       "Immunization.explanation": {
         "status": "deleted"
       },
-      "Immunization.reaction": {
+      "Immunization.vaccinationProtocol.description": {
         "status": "deleted"
       },
-      "Immunization.vaccinationProtocol": {
+      "Immunization.vaccinationProtocol.doseStatus": {
+        "status": "deleted"
+      },
+      "Immunization.vaccinationProtocol.doseStatusReason": {
         "status": "deleted"
       }
     },

@@ -7,7 +7,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type string
 <string> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string MAXLENGTH 1048576?;  # Primitive value for string
     fhir:index xsd:integer?                 # Relative position in a list
@@ -61,13 +61,13 @@ BASE <http://hl7.org/fhir/shape/>
         fhir:Extension.valueSampledData @<SampledData>  |
         fhir:Extension.valueSignature @<Signature>  |
         fhir:Extension.valueTiming @<Timing>  |
-        fhir:Extension.valueParameterDefinition @<ParameterDefinition>  |
-        fhir:Extension.valueDataRequirement @<DataRequirement>  |
-        fhir:Extension.valueRelatedArtifact @<RelatedArtifact>  |
         fhir:Extension.valueContactDetail @<ContactDetail>  |
         fhir:Extension.valueContributor @<Contributor>  |
-        fhir:Extension.valueTriggerDefinition @<TriggerDefinition>  |
+        fhir:Extension.valueDataRequirement @<DataRequirement>  |
         fhir:Extension.valueExpression @<Expression>  |
+        fhir:Extension.valueParameterDefinition @<ParameterDefinition>  |
+        fhir:Extension.valueRelatedArtifact @<RelatedArtifact>  |
+        fhir:Extension.valueTriggerDefinition @<TriggerDefinition>  |
         fhir:Extension.valueUsageContext @<UsageContext>  |
         fhir:Extension.valueDosage @<Dosage> 
     )?;
@@ -77,7 +77,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type date
 <date> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:gYear OR xsd:gYearMonth OR xsd:date?;  # Primitive value for date
     fhir:index xsd:integer?                 # Relative position in a list
@@ -85,7 +85,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # An address expressed using postal conventions (as opposed to GPS or other location definition formats)
 <Address> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Address.use @<code> AND
@@ -110,7 +111,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Content in a format defined elsewhere
 <Attachment> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Attachment.contentType @<code> AND
@@ -132,15 +134,16 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type integer
 <integer> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
-    fhir:value xsd:integer MININCLUSIVE "-2147483648"^^xsd:integer MAXINCLUSIVE "2147483647"^^xsd:integer?;  # Primitive value for integer
+    fhir:value xsd:integer MININCLUSIVE -2147483648 MAXINCLUSIVE 2147483647?;  # Primitive value for integer
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # A measured or measurable amount
 <Count> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -156,7 +159,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Describes a required data item
 <DataRequirement> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:DataRequirement.type @<code> AND
@@ -180,11 +184,12 @@ BASE <http://hl7.org/fhir/shape/>
 
 # How the medication is/was taken or should be taken
 <Dosage> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     fhir:Dosage.sequence @<integer>?;       # The order of the dosage 
                                             # instructions 
     fhir:Dosage.text @<string>?;            # Free text dosage instructions e.g. 
@@ -218,7 +223,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type uuid
 <uuid> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for uuid
     fhir:index xsd:integer?                 # Relative position in a list
@@ -226,7 +231,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # An identifier intended for computation
 <Identifier> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Identifier.use @<code> AND
@@ -246,7 +252,8 @@ BASE <http://hl7.org/fhir/shape/>
 # A reference to a code defined by a terminology system
 <Coding> CLOSED {
     a NONLITERAL?;
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Coding.system @<uri>?;             # Identity of the terminology system
@@ -262,7 +269,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # A series of measurements taken by a device
 <SampledData> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:SampledData.origin @<SimpleQuantity>;  # Zero value and units
@@ -282,7 +290,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type id
 <id> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for id
     fhir:index xsd:integer?                 # Relative position in a list
@@ -291,7 +299,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type positiveInt
 <positiveInt> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:positiveInteger?;        # Primitive value for positiveInt
     fhir:index xsd:integer?                 # Relative position in a list
@@ -299,7 +307,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # A length - a value with a unit that is a physical distance
 <Distance> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -315,7 +324,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Time range defined by start and end date/time
 <Period> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Period.start @<dateTime>?;         # Starting time with inclusive 
@@ -327,7 +337,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # A length of time
 <Duration> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -344,7 +355,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type canonical
 <canonical> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for canonical
     fhir:index xsd:integer?                 # Relative position in a list
@@ -352,7 +363,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Set of values bounded by low and high
 <Range> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Range.low @<SimpleQuantity>?;      # Low limit
@@ -362,7 +374,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Related artifacts for a knowledge resource
 <RelatedArtifact> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:RelatedArtifact.type @<code> AND
@@ -370,9 +383,10 @@ BASE <http://hl7.org/fhir/shape/>
                                             # citation | predecessor | successor 
                                             # | derived-from | depends-on | 
                                             # composed-of 
+    fhir:RelatedArtifact.label @<string>?;  # Short label
     fhir:RelatedArtifact.display @<string>?;  # Brief description of the related 
                                             # artifact 
-    fhir:RelatedArtifact.citation @<string>?;  # Bibliographic citation for the 
+    fhir:RelatedArtifact.citation @<markdown>?;  # Bibliographic citation for the 
                                             # artifact 
     fhir:RelatedArtifact.url @<url>?;       # Where the artifact can be accessed
     fhir:RelatedArtifact.document @<Attachment>?;  # What document is being referenced
@@ -383,7 +397,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type base64Binary
 <base64Binary> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:base64Binary?;           # Primitive value for base64Binary
     fhir:index xsd:integer?                 # Relative position in a list
@@ -391,25 +405,28 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Describes the context of use for a conformance or knowledge resource
 <UsageContext> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:UsageContext.code @<Coding>;       # Type of context being specified
     (                                       # Value that defines the context
         fhir:UsageContext.valueCodeableConcept @<CodeableConcept>  |
         fhir:UsageContext.valueQuantity @<Quantity>  |
-        fhir:UsageContext.valueRange @<Range> 
+        fhir:UsageContext.valueRange @<Range>  |
+        fhir:UsageContext.valueReference @<Reference> 
     );
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # A timing schedule that specifies an event that may occur multiple times
 <Timing> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     fhir:Timing.event @<dateTime>*;         # When the event occurs
     fhir:Timing.repeat @<Timing.repeat>?;   # When the event is to occur
     fhir:Timing.code @<CodeableConcept>?;   # BID | TID | QID | AM | PM | QD | 
@@ -420,7 +437,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type decimal
 <decimal> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:decimal OR xsd:double?;  # Primitive value for decimal
     fhir:index xsd:integer?                 # Relative position in a list
@@ -429,7 +446,8 @@ BASE <http://hl7.org/fhir/shape/>
 # Concept - reference to a terminology or just  text
 <CodeableConcept> CLOSED {
     a NONLITERAL*;
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:CodeableConcept.coding @<Coding>*;  # Code defined by a terminology 
@@ -441,7 +459,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Definition of a parameter to a module
 <ParameterDefinition> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:ParameterDefinition.name @<code>?;  # Name used to access the parameter 
@@ -462,7 +481,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type dateTime
 <dateTime> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:gYear OR xsd:gYearMonth OR xsd:date OR xsd:dateTime?;  # Primitive value for dateTime
     fhir:index xsd:integer?                 # Relative position in a list
@@ -471,7 +490,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type code
 <code> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for code
     fhir:index xsd:integer?                 # Relative position in a list
@@ -479,7 +498,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Contributor information
 <Contributor> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Contributor.type @<code> AND
@@ -493,7 +513,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type oid
 <oid> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for oid
     fhir:index xsd:integer?                 # Relative position in a list
@@ -502,7 +522,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type instant
 <instant> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:dateTime?;               # Primitive value for instant
     fhir:index xsd:integer?                 # Relative position in a list
@@ -510,7 +530,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Details of a Technology mediated contact point (phone, fax, email, etc.)
 <ContactPoint> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:ContactPoint.system @<code> AND
@@ -529,7 +550,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Name of a human - parts and usage
 <HumanName> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:HumanName.use @<code> AND
@@ -549,7 +571,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # An amount of economic utility in some recognized currency
 <Money> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Money.value @<decimal>?;           # Numerical value (with implicit 
@@ -562,7 +585,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type markdown
 <markdown> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for markdown
     fhir:index xsd:integer?                 # Relative position in a list
@@ -570,7 +593,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # A ratio of two Quantity values - a numerator and a denominator
 <Ratio> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Ratio.numerator @<Quantity>?;      # Numerator value
@@ -580,7 +604,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # A duration of time during which an organism (or a process) has existed
 <Age> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -597,7 +622,8 @@ BASE <http://hl7.org/fhir/shape/>
 # A reference from one resource to another
 <Reference> CLOSED {
     fhir:link IRI?;
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Reference.reference @<string>?;    # Literal reference, Relative, 
@@ -612,7 +638,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Defines an expected trigger for a module
 <TriggerDefinition> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:TriggerDefinition.type @<code> AND
@@ -628,7 +655,8 @@ BASE <http://hl7.org/fhir/shape/>
         fhir:TriggerDefinition.timingDate @<date>  |
         fhir:TriggerDefinition.timingDateTime @<dateTime> 
     )?;
-    fhir:TriggerDefinition.data @<DataRequirement>?;  # Triggering data of the event
+    fhir:TriggerDefinition.data @<DataRequirement>*;  # Triggering data of the event 
+                                            # (multiple = 'and') 
     fhir:TriggerDefinition.condition @<Expression>?;  # Whether the event triggers 
                                             # (boolean expression) 
     fhir:index xsd:integer?                 # Relative position in a list
@@ -636,7 +664,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # A measured or measurable amount
 <Quantity> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -653,7 +682,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type uri
 <uri> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for uri
     fhir:index xsd:integer?                 # Relative position in a list
@@ -662,7 +691,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type url
 <url> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for url
     fhir:index xsd:integer?                 # Relative position in a list
@@ -670,7 +699,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Text node with attribution
 <Annotation> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     (                                       # Individual responsible for the 
@@ -686,7 +716,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Contact information
 <ContactDetail> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:ContactDetail.name @<string>?;     # Name of an individual to contact
@@ -698,7 +729,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type boolean
 <boolean> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:boolean?;                # Primitive value for boolean
     fhir:index xsd:integer?                 # Relative position in a list
@@ -706,7 +737,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # An expression that can be used to generate a value
 <Expression> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Expression.description @<string>?;  # Natural language description of 
@@ -722,7 +754,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # A Signature - XML DigSig, JWS, Graphical image of signature, etc.
 <Signature> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Signature.type @<Coding>+;         # Indication of the reason the 
@@ -744,7 +777,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type unsignedInt
 <unsignedInt> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:nonNegativeInteger?;     # Primitive value for unsignedInt
     fhir:index xsd:integer?                 # Relative position in a list
@@ -753,7 +786,7 @@ BASE <http://hl7.org/fhir/shape/>
 # Primitive Type time
 <time> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:time?;                   # Primitive value for time
     fhir:index xsd:integer?                 # Relative position in a list
@@ -761,7 +794,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # A fixed quantity (no comparator)
 <SimpleQuantity> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -774,7 +808,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # What codes are expected
 <DataRequirement.codeFilter> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
@@ -788,7 +823,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # What dates/date ranges are expected
 <DataRequirement.dateFilter> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:DataRequirement.dateFilter.path @<string>?;  # A date-valued attribute to filter 
@@ -807,7 +843,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # When the event is to occur
 <Timing.repeat> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     (                                       # Length/Range of lengths, or (Start 
@@ -846,7 +883,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Order of the results
 <DataRequirement.sort> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
@@ -858,10 +896,11 @@ BASE <http://hl7.org/fhir/shape/>
 
 # Amount of medication administered
 <Dosage.doseAndRate> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
-    fhir:Dosage.doseAndRate.type @<CodeableConcept>;  # The kind of dose or rate specified
+    fhir:Dosage.doseAndRate.type @<CodeableConcept>?;  # The kind of dose or rate specified
     (                                       # Amount of medication per dose
         fhir:Dosage.doseAndRate.doseRange @<Range>  |
         fhir:Dosage.doseAndRate.doseQuantity @<SimpleQuantity> 
@@ -879,35 +918,8 @@ BASE <http://hl7.org/fhir/shape/>
 
 #---------------------- Value Sets ------------------------
 
-# Whether an operation parameter is an input or an output parameter.
-fhirvs:operation-parameter-use ["in" "out"]
-
-# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
-fhirvs:mimetypes EXTERNAL
-
-# Real world event relating to the schedule.
-fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
-
-# The type of contributor.
-fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
-
-# The use of an address.
-fhirvs:address-use ["home" "work" "temp" "old" "billing"]
-
-# A unit of time (units from UCUM).
-fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
-
-# How the Quantity should be understood and represented.
-fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
-
-# Use of contact point.
-fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
-
-# The days of the week.
-fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
-
-# Telecommunications form for contact point.
-fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
+# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
+fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "ItemInstance" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
 
 # The possible sort directions, ascending or descending.
 fhirvs:sort-direction ["ascending" "descending"]
@@ -915,20 +927,47 @@ fhirvs:sort-direction ["ascending" "descending"]
 # The type of an address (physical / postal).
 fhirvs:address-type ["postal" "physical" "both"]
 
+# A unit of time (units from UCUM).
+fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
+
+# The type of trigger.
+fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
+
 # The type of relationship to the related artifact.
 fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
 
-# The use of a human name.
-fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
+# The days of the week.
+fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
 
-# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
-fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "BAM" "BBD" "BDT" "BGN" "BHD" "BIF" "BMD" "BND" "BOB" "BOV" "BRL" "BSD" "BTN" "BWP" "BYN" "BZD" "CAD" "CDF" "CHE" "CHF" "CHW" "CLF" "CLP" "CNY" "COP" "COU" "CRC" "CUC" "CUP" "CVE" "CZK" "DJF" "DKK" "DOP" "DZD" "EGP" "ERN" "ETB" "EUR" "FJD" "FKP" "GBP" "GEL" "GHS" "GIP" "GMD" "GNF" "GTQ" "GYD" "HKD" "HNL" "HRK" "HTG" "HUF" "IDR" "ILS" "INR" "IQD" "IRR" "ISK" "JMD" "JOD" "JPY" "KES" "KGS" "KHR" "KMF" "KPW" "KRW" "KWD" "KYD" "KZT" "LAK" "LBP" "LKR" "LRD" "LSL" "LYD" "MAD" "MDL" "MGA" "MKD" "MMK" "MNT" "MOP" "MRU" "MUR" "MVR" "MWK" "MXN" "MXV" "MYR" "MZN" "NAD" "NGN" "NIO" "NOK" "NPR" "NZD" "OMR" "PAB" "PEN" "PGK" "PHP" "PKR" "PLN" "PYG" "QAR" "RON" "RSD" "RUB" "RWF" "SAR" "SBD" "SCR" "SDG" "SEK" "SGD" "SHP" "SLL" "SOS" "SRD" "SSP" "STN" "SVC" "SYP" "SZL" "THB" "TJS" "TMT" "TND" "TOP" "TRY" "TTD" "TWD" "TZS" "UAH" "UGX" "USD" "USN" "UYI" "UYU" "UZS" "VEF" "VND" "VUV" "WST" "XAF" "XAG" "XAU" "XBA" "XBB" "XBC" "XBD" "XCD" "XDR" "XOF" "XPD" "XPF" "XPT" "XSU" "XTS" "XUA" "XXX" "YER" "ZAR" "ZMW" "ZWL"]
+# Whether an operation parameter is an input or an output parameter.
+fhirvs:operation-parameter-use ["in" "out"]
 
-# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
-fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "SubstanceMoiety" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EntryDefinition" "EpisodeOfCare" "EventDefinition" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "ItemInstance" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductClinicals" "MedicinalProductContraindication" "MedicinalProductDeviceSpec" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "ProcessRequest" "ProcessResponse" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "Schedule" "SearchParameter" "Sequence" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstancePolymer" "SubstanceReferenceInformation" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "UserSession" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
+# Telecommunications form for contact point.
+fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
+
+# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
+fhirvs:mimetypes EXTERNAL
 
 # Identifies the purpose for this identifier, if known .
 fhirvs:identifier-use ["usual" "official" "temp" "secondary" "old"]
 
-# The type of trigger.
-fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
+# How the Quantity should be understood and represented.
+fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
+
+# Real world event relating to the schedule.
+fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
+
+# Use of contact point.
+fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
+
+# The use of a human name.
+fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
+
+# The type of contributor.
+fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
+
+# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
+fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "BAM" "BBD" "BDT" "BGN" "BHD" "BIF" "BMD" "BND" "BOB" "BOV" "BRL" "BSD" "BTN" "BWP" "BYN" "BZD" "CAD" "CDF" "CHE" "CHF" "CHW" "CLF" "CLP" "CNY" "COP" "COU" "CRC" "CUC" "CUP" "CVE" "CZK" "DJF" "DKK" "DOP" "DZD" "EGP" "ERN" "ETB" "EUR" "FJD" "FKP" "GBP" "GEL" "GGP" "GHS" "GIP" "GMD" "GNF" "GTQ" "GYD" "HKD" "HNL" "HRK" "HTG" "HUF" "IDR" "ILS" "IMP" "INR" "IQD" "IRR" "ISK" "JEP" "JMD" "JOD" "JPY" "KES" "KGS" "KHR" "KMF" "KPW" "KRW" "KWD" "KYD" "KZT" "LAK" "LBP" "LKR" "LRD" "LSL" "LYD" "MAD" "MDL" "MGA" "MKD" "MMK" "MNT" "MOP" "MRU" "MUR" "MVR" "MWK" "MXN" "MXV" "MYR" "MZN" "NAD" "NGN" "NIO" "NOK" "NPR" "NZD" "OMR" "PAB" "PEN" "PGK" "PHP" "PKR" "PLN" "PYG" "QAR" "RON" "RSD" "RUB" "RWF" "SAR" "SBD" "SCR" "SDG" "SEK" "SGD" "SHP" "SLL" "SOS" "SRD" "SSP" "STN" "SVC" "SYP" "SZL" "THB" "TJS" "TMT" "TND" "TOP" "TRY" "TTD" "TVD" "TWD" "TZS" "UAH" "UGX" "USD" "USN" "UYI" "UYU" "UZS" "VEF" "VND" "VUV" "WST" "XAF" "XAG" "XAU" "XBA" "XBB" "XBC" "XBD" "XCD" "XDR" "XOF" "XPD" "XPF" "XPT" "XSU" "XTS" "XUA" "XXX" "YER" "ZAR" "ZMW" "ZWL"]
+
+# The use of an address.
+fhirvs:address-use ["home" "work" "temp" "old" "billing"]

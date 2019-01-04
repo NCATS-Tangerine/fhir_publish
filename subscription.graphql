@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type Subscription {
   id: ID
@@ -16,7 +16,6 @@ type Subscription {
   criteria: String  _criteria: ElementBase
   error: String  _error: ElementBase
   channel: SubscriptionChannel!
-  tag: [Coding]
 }
 
 type SubscriptionChannel {
@@ -25,7 +24,7 @@ type SubscriptionChannel {
   modifierExtension: [Extension]
   type: code  _type: ElementBase
   endpoint: url  _endpoint: ElementBase
-  payload: String  _payload: ElementBase
+  payload: code  _payload: ElementBase
   header: String  _header: [ElementBase]
 }
 
@@ -45,7 +44,6 @@ input Subscription {
   criteria: String  _criteria: ElementBase
   error: String  _error: ElementBase
   channel: SubscriptionChannel!
-  tag: [Coding]
 }
 
 input SubscriptionChannel {
@@ -54,7 +52,7 @@ input SubscriptionChannel {
   modifierExtension: [Extension]
   type: code  _type: ElementBase
   endpoint: url  _endpoint: ElementBase
-  payload: String  _payload: ElementBase
+  payload: code  _payload: ElementBase
   header: String  _header: [ElementBase]
 }
 
@@ -67,7 +65,7 @@ type SubscriptionListType {
     add_tag : [token]
     contact : [token]
     criteria : [String]
-    payload : [String]
+    payload : [token]
     status : [token]
     type : [token]
     url : [uri]
@@ -90,7 +88,7 @@ type SubscriptionConnectionType {
     add_tag : [token]
     contact : [token]
     criteria : [String]
-    payload : [String]
+    payload : [token]
     status : [token]
     type : [token]
     url : [uri]

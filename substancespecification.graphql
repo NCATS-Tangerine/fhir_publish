@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type SubstanceSpecification {
   id: ID
@@ -9,19 +9,25 @@ type SubstanceSpecification {
   contained: [Resource]
   extension: [Extension]
   modifierExtension: [Extension]
-  comment: String  _comment: ElementBase
-  stoichiometric: Boolean  _stoichiometric: ElementBase
   identifier: Identifier
   type: CodeableConcept
-  referenceSource: String  _referenceSource: [ElementBase]
+  status: CodeableConcept
+  domain: CodeableConcept
+  description: String  _description: ElementBase
+  source: [Reference]
+  comment: String  _comment: ElementBase
   moiety: [SubstanceSpecificationMoiety]
   property: [SubstanceSpecificationProperty]
   referenceInformation: Reference
   structure: SubstanceSpecificationStructure
-  substanceCode: [SubstanceSpecificationSubstanceCode]
-  substanceName: [SubstanceSpecificationSubstanceName]
+  code: [SubstanceSpecificationCode]
+  name: [SubstanceSpecificationName]
   molecularWeight: [SubstanceSpecificationStructureIsotopeMolecularWeight]
+  relationship: [SubstanceSpecificationRelationship]
+  nucleicAcid: Reference
   polymer: Reference
+  protein: Reference
+  sourceMaterial: Reference
 }
 
 type SubstanceSpecificationMoiety {
@@ -34,19 +40,21 @@ type SubstanceSpecificationMoiety {
   stereochemistry: CodeableConcept
   opticalActivity: CodeableConcept
   molecularFormula: String  _molecularFormula: ElementBase
-  amount: String  _amount: ElementBase
+  amountQuantity: Quantity
+  amountString: String  _amountString: ElementBase
 }
 
 type SubstanceSpecificationProperty {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  type: CodeableConcept
-  name: CodeableConcept
+  category: CodeableConcept
+  code: CodeableConcept
   parameters: String  _parameters: ElementBase
-  substanceId: Identifier
-  substanceName: String  _substanceName: ElementBase
-  amount: String  _amount: ElementBase
+  definingSubstanceReference: Reference
+  definingSubstanceCodeableConcept: CodeableConcept
+  amountQuantity: Quantity
+  amountString: String  _amountString: ElementBase
 }
 
 type SubstanceSpecificationStructure {
@@ -59,19 +67,18 @@ type SubstanceSpecificationStructure {
   molecularFormulaByMoiety: String  _molecularFormulaByMoiety: ElementBase
   isotope: [SubstanceSpecificationStructureIsotope]
   molecularWeight: SubstanceSpecificationStructureIsotopeMolecularWeight
-  referenceSource: [Reference]
-  structuralRepresentation: [SubstanceSpecificationStructureStructuralRepresentation]
+  source: [Reference]
+  representation: [SubstanceSpecificationStructureRepresentation]
 }
 
 type SubstanceSpecificationStructureIsotope {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  nuclideId: Identifier
-  nuclideName: CodeableConcept
-  substitutionType: CodeableConcept
-  nuclideHalfLife: Quantity
-  amount: String  _amount: ElementBase
+  identifier: Identifier
+  name: CodeableConcept
+  substitution: CodeableConcept
+  halfLife: Quantity
   molecularWeight: SubstanceSpecificationStructureIsotopeMolecularWeight
 }
 
@@ -81,10 +88,10 @@ type SubstanceSpecificationStructureIsotopeMolecularWeight {
   modifierExtension: [Extension]
   method: CodeableConcept
   type: CodeableConcept
-  amount: String  _amount: ElementBase
+  amount: Quantity
 }
 
-type SubstanceSpecificationStructureStructuralRepresentation {
+type SubstanceSpecificationStructureRepresentation {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -93,7 +100,7 @@ type SubstanceSpecificationStructureStructuralRepresentation {
   attachment: Attachment
 }
 
-type SubstanceSpecificationSubstanceCode {
+type SubstanceSpecificationCode {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -101,29 +108,50 @@ type SubstanceSpecificationSubstanceCode {
   status: CodeableConcept
   statusDate: dateTime  _statusDate: ElementBase
   comment: String  _comment: ElementBase
-  referenceSource: String  _referenceSource: [ElementBase]
+  source: [Reference]
 }
 
-type SubstanceSpecificationSubstanceName {
+type SubstanceSpecificationName {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
   name: String  _name: ElementBase
   type: CodeableConcept
+  status: CodeableConcept
+  preferred: Boolean  _preferred: ElementBase
   language: [CodeableConcept]
   domain: [CodeableConcept]
   jurisdiction: [CodeableConcept]
-  officialName: [SubstanceSpecificationSubstanceNameOfficialName]
-  referenceSource: String  _referenceSource: [ElementBase]
+  synonym: [SubstanceSpecificationName]
+  translation: [SubstanceSpecificationName]
+  official: [SubstanceSpecificationNameOfficial]
+  source: [Reference]
 }
 
-type SubstanceSpecificationSubstanceNameOfficialName {
+type SubstanceSpecificationNameOfficial {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
   authority: CodeableConcept
   status: CodeableConcept
   date: dateTime  _date: ElementBase
+}
+
+type SubstanceSpecificationRelationship {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  substanceReference: Reference
+  substanceCodeableConcept: CodeableConcept
+  relationship: CodeableConcept
+  isDefining: Boolean  _isDefining: ElementBase
+  amountQuantity: Quantity
+  amountRange: Range
+  amountRatio: Ratio
+  amountString: String  _amountString: ElementBase
+  amountRatioLowLimit: Ratio
+  amountType: CodeableConcept
+  source: [Reference]
 }
 
 input SubstanceSpecification {
@@ -135,19 +163,25 @@ input SubstanceSpecification {
   contained: [Resource]
   extension: [Extension]
   modifierExtension: [Extension]
-  comment: String  _comment: ElementBase
-  stoichiometric: Boolean  _stoichiometric: ElementBase
   identifier: Identifier
   type: CodeableConcept
-  referenceSource: String  _referenceSource: [ElementBase]
+  status: CodeableConcept
+  domain: CodeableConcept
+  description: String  _description: ElementBase
+  source: [Reference]
+  comment: String  _comment: ElementBase
   moiety: [SubstanceSpecificationMoiety]
   property: [SubstanceSpecificationProperty]
   referenceInformation: Reference
   structure: SubstanceSpecificationStructure
-  substanceCode: [SubstanceSpecificationSubstanceCode]
-  substanceName: [SubstanceSpecificationSubstanceName]
+  code: [SubstanceSpecificationCode]
+  name: [SubstanceSpecificationName]
   molecularWeight: [SubstanceSpecificationStructureIsotopeMolecularWeight]
+  relationship: [SubstanceSpecificationRelationship]
+  nucleicAcid: Reference
   polymer: Reference
+  protein: Reference
+  sourceMaterial: Reference
 }
 
 input SubstanceSpecificationMoiety {
@@ -160,19 +194,21 @@ input SubstanceSpecificationMoiety {
   stereochemistry: CodeableConcept
   opticalActivity: CodeableConcept
   molecularFormula: String  _molecularFormula: ElementBase
-  amount: String  _amount: ElementBase
+  amountQuantity: Quantity
+  amountString: String  _amountString: ElementBase
 }
 
 input SubstanceSpecificationProperty {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  type: CodeableConcept
-  name: CodeableConcept
+  category: CodeableConcept
+  code: CodeableConcept
   parameters: String  _parameters: ElementBase
-  substanceId: Identifier
-  substanceName: String  _substanceName: ElementBase
-  amount: String  _amount: ElementBase
+  definingSubstanceReference: Reference
+  definingSubstanceCodeableConcept: CodeableConcept
+  amountQuantity: Quantity
+  amountString: String  _amountString: ElementBase
 }
 
 input SubstanceSpecificationStructure {
@@ -185,19 +221,18 @@ input SubstanceSpecificationStructure {
   molecularFormulaByMoiety: String  _molecularFormulaByMoiety: ElementBase
   isotope: [SubstanceSpecificationStructureIsotope]
   molecularWeight: SubstanceSpecificationStructureIsotopeMolecularWeight
-  referenceSource: [Reference]
-  structuralRepresentation: [SubstanceSpecificationStructureStructuralRepresentation]
+  source: [Reference]
+  representation: [SubstanceSpecificationStructureRepresentation]
 }
 
 input SubstanceSpecificationStructureIsotope {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  nuclideId: Identifier
-  nuclideName: CodeableConcept
-  substitutionType: CodeableConcept
-  nuclideHalfLife: Quantity
-  amount: String  _amount: ElementBase
+  identifier: Identifier
+  name: CodeableConcept
+  substitution: CodeableConcept
+  halfLife: Quantity
   molecularWeight: SubstanceSpecificationStructureIsotopeMolecularWeight
 }
 
@@ -207,10 +242,10 @@ input SubstanceSpecificationStructureIsotopeMolecularWeight {
   modifierExtension: [Extension]
   method: CodeableConcept
   type: CodeableConcept
-  amount: String  _amount: ElementBase
+  amount: Quantity
 }
 
-input SubstanceSpecificationStructureStructuralRepresentation {
+input SubstanceSpecificationStructureRepresentation {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -219,7 +254,7 @@ input SubstanceSpecificationStructureStructuralRepresentation {
   attachment: Attachment
 }
 
-input SubstanceSpecificationSubstanceCode {
+input SubstanceSpecificationCode {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -227,23 +262,27 @@ input SubstanceSpecificationSubstanceCode {
   status: CodeableConcept
   statusDate: dateTime  _statusDate: ElementBase
   comment: String  _comment: ElementBase
-  referenceSource: String  _referenceSource: [ElementBase]
+  source: [Reference]
 }
 
-input SubstanceSpecificationSubstanceName {
+input SubstanceSpecificationName {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
   name: String  _name: ElementBase
   type: CodeableConcept
+  status: CodeableConcept
+  preferred: Boolean  _preferred: ElementBase
   language: [CodeableConcept]
   domain: [CodeableConcept]
   jurisdiction: [CodeableConcept]
-  officialName: [SubstanceSpecificationSubstanceNameOfficialName]
-  referenceSource: String  _referenceSource: [ElementBase]
+  synonym: [SubstanceSpecificationName]
+  translation: [SubstanceSpecificationName]
+  official: [SubstanceSpecificationNameOfficial]
+  source: [Reference]
 }
 
-input SubstanceSpecificationSubstanceNameOfficialName {
+input SubstanceSpecificationNameOfficial {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -252,12 +291,30 @@ input SubstanceSpecificationSubstanceNameOfficialName {
   date: dateTime  _date: ElementBase
 }
 
+input SubstanceSpecificationRelationship {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  substanceReference: Reference
+  substanceCodeableConcept: CodeableConcept
+  relationship: CodeableConcept
+  isDefining: Boolean  _isDefining: ElementBase
+  amountQuantity: Quantity
+  amountRange: Range
+  amountRatio: Ratio
+  amountString: String  _amountString: ElementBase
+  amountRatioLowLimit: Ratio
+  amountType: CodeableConcept
+  source: [Reference]
+}
+
 type SubstanceSpecificationReadType {
   SubstanceSpecification(id : ID!) : SubstanceSpecification
 }
 
 type SubstanceSpecificationListType {
   SubstanceSpecificationList(_filter : String
+    code : [token]
     _text : [String]
     _content : [String]
     _id : [token]
@@ -274,6 +331,7 @@ type SubstanceSpecificationListType {
 
 type SubstanceSpecificationConnectionType {
   SubstanceSpecificationConection(_filter : String
+    code : [token]
     _text : [String]
     _content : [String]
     _id : [token]

@@ -13,22 +13,12 @@
      fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\">A human-readable rendering of the Vision Claim for Glasses</div>"
   ];
   fhir:DomainResource.contained [
-     a fhir:ClaimResponse;
-     fhir:index 0;
-     fhir:Resource.id [ fhir:value "claimresponse-1" ];
-     fhir:ClaimResponse.identifier [
-       fhir:index 0;
-       fhir:Identifier.system [ fhir:value "http://thebenefircompany.com/claimresponse" ];
-       fhir:Identifier.value [ fhir:value "CR6532875367" ]
-     ];
-     fhir:ClaimResponse.use [ fhir:value "claim" ]
-  ], [
      a fhir:Device;
-     fhir:index 1;
+     fhir:index 0;
      fhir:Resource.id [ fhir:value "device-frame" ]
   ], [
      a fhir:Device;
-     fhir:index 2;
+     fhir:index 1;
      fhir:Resource.id [ fhir:value "device-lens" ]
   ];
   fhir:Claim.identifier [
@@ -107,7 +97,8 @@
        fhir:index 0
      ];
      fhir:Claim.insurance.claimResponse [
-       fhir:Reference.reference [ fhir:value "#claimresponse-1" ]
+       fhir:link <http://hl7.org/fhir/ClaimResponse/R3500>;
+       fhir:Reference.reference [ fhir:value "ClaimResponse/R3500" ]
      ]
   ], [
      fhir:index 1;
@@ -145,7 +136,7 @@
          fhir:Coding.display [ fhir:value "Vision Coverage" ]
        ]
      ];
-     fhir:Claim.item.billcode [
+     fhir:Claim.item.productOrService [
        fhir:CodeableConcept.coding [
          fhir:index 0;
          fhir:Coding.system [ fhir:value "http://example.org/fhir/CodeSystem/ex-visionservice" ];
@@ -196,7 +187,7 @@
            fhir:Coding.display [ fhir:value "Vision Coverage" ]
          ]
        ];
-       fhir:Claim.item.detail.billcode [
+       fhir:Claim.item.detail.productOrService [
          fhir:CodeableConcept.coding [
            fhir:index 0;
            fhir:Coding.system [ fhir:value "http://example.org/fhir/CodeSystem/ex-visionservice" ];
@@ -243,7 +234,7 @@
            fhir:Coding.display [ fhir:value "Vision Coverage" ]
          ]
        ];
-       fhir:Claim.item.detail.billcode [
+       fhir:Claim.item.detail.productOrService [
          fhir:CodeableConcept.coding [
            fhir:index 0;
            fhir:Coding.system [ fhir:value "http://example.org/fhir/CodeSystem/ex-visionservice" ];
@@ -288,7 +279,7 @@
              fhir:Coding.display [ fhir:value "Vision Coverage" ]
            ]
          ];
-         fhir:Claim.item.detail.subDetail.billcode [
+         fhir:Claim.item.detail.subDetail.productOrService [
            fhir:CodeableConcept.coding [
              fhir:index 0;
              fhir:Coding.system [ fhir:value "http://example.org/fhir/CodeSystem/ex-visionservice" ];
@@ -346,7 +337,7 @@
              fhir:Coding.display [ fhir:value "Vision Coverage" ]
            ]
          ];
-         fhir:Claim.item.detail.subDetail.billcode [
+         fhir:Claim.item.detail.subDetail.productOrService [
            fhir:CodeableConcept.coding [
              fhir:index 0;
              fhir:Coding.system [ fhir:value "http://example.org/fhir/CodeSystem/ex-visionservice" ];
@@ -392,7 +383,7 @@
              fhir:Coding.display [ fhir:value "Vision Coverage" ]
            ]
          ];
-         fhir:Claim.item.detail.subDetail.billcode [
+         fhir:Claim.item.detail.subDetail.productOrService [
            fhir:CodeableConcept.coding [
              fhir:index 0;
              fhir:Coding.system [ fhir:value "http://example.org/fhir/CodeSystem/ex-visionservice" ];
@@ -439,7 +430,7 @@
            fhir:Coding.display [ fhir:value "Vision Coverage" ]
          ]
        ];
-       fhir:Claim.item.detail.billcode [
+       fhir:Claim.item.detail.productOrService [
          fhir:CodeableConcept.coding [
            fhir:index 0;
            fhir:Coding.system [ fhir:value "http://example.org/fhir/CodeSystem/ex-visionservice" ];
@@ -467,6 +458,8 @@
 <http://hl7.org/fhir/Practitioner/example> a fhir:Practitioner .
 
 <http://hl7.org/fhir/Coverage/9876B1> a fhir:Coverage .
+
+<http://hl7.org/fhir/ClaimResponse/R3500> a fhir:ClaimResponse .
 
 # - ontology header ------------------------------------------------------------
 

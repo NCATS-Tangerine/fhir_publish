@@ -4,8 +4,9 @@
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
+  "version" : "3.6.0",
   "status" : "draft",
-  "date" : "2018-09-14T07:16:19-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "Health Level Seven International (Financial Management)",
   "item" : [{
     "linkId" : "PaymentReconciliation",
@@ -24,7 +25,7 @@
           }]
         }
       }],
-      "text" : "This resource provides payment details and claim references supporting a bulk payment.",
+      "text" : "This resource provides the details including amount of a payment and allocates the payment items being paid.",
       "type" : "display"
     },
     {
@@ -205,7 +206,7 @@
     },
     {
       "linkId" : "PaymentReconciliation.extension",
-      "text" : "Additional Content defined by implementations",
+      "text" : "Additional content defined by implementations",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -241,7 +242,7 @@
             }]
           }
         }],
-        "text" : "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "text" : "May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
         "type" : "display"
       }]
     },
@@ -251,7 +252,7 @@
         "valueString" : "Identifier"
       }],
       "linkId" : "PaymentReconciliation.identifier",
-      "text" : "Business Identifier",
+      "text" : "Business Identifier for a payment reconciliation",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -266,7 +267,7 @@
             }]
           }
         }],
-        "text" : "The Response business identifier.",
+        "text" : "A unique identifier assigned to this payment reconciliation.",
         "type" : "display"
       },
       {
@@ -293,6 +294,10 @@
     },
     {
       "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+        "valueInteger" : 1
+      },
+      {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
         "valueInteger" : 1
       },
@@ -302,7 +307,7 @@
       }],
       "linkId" : "PaymentReconciliation.status",
       "type" : "group",
-      "required" : false,
+      "required" : true,
       "repeats" : true,
       "item" : [{
         "extension" : [{
@@ -371,6 +376,10 @@
     },
     {
       "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+        "valueInteger" : 1
+      },
+      {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
         "valueInteger" : 1
       },
@@ -380,7 +389,7 @@
       }],
       "linkId" : "PaymentReconciliation.created",
       "type" : "group",
-      "required" : false,
+      "required" : true,
       "repeats" : true,
       "item" : [{
         "extension" : [{
@@ -413,7 +422,7 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "Reference"
       }],
-      "linkId" : "PaymentReconciliation.organization",
+      "linkId" : "PaymentReconciliation.paymentIssuer",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -428,7 +437,7 @@
             }]
           }
         }],
-        "text" : "The Insurer who produced this adjudicated response.",
+        "text" : "The party who generated the payment. This party is also responsible for the reconciliation.",
         "type" : "display"
       },
       {
@@ -440,8 +449,8 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
-        "linkId" : "PaymentReconciliation.organization.value",
-        "text" : "Insurer",
+        "linkId" : "PaymentReconciliation.paymentIssuer.value",
+        "text" : "Party generating payment",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -477,14 +486,57 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "ProcessRequest"
+          "valueCode" : "Task"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
         "linkId" : "PaymentReconciliation.request.value",
-        "text" : "Claim reference",
+        "text" : "Reference to requesting resource",
+        "type" : "reference",
+        "required" : false,
+        "repeats" : false
+      }]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "Reference"
+      }],
+      "linkId" : "PaymentReconciliation.requestor",
+      "type" : "group",
+      "required" : false,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "The practitioner who is responsible for the services rendered to the patient.",
+        "type" : "display"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
+          "valueCode" : "Practitioner, PractitionerRole, Organization"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
+          "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
+        }],
+        "linkId" : "PaymentReconciliation.requestor.value",
+        "text" : "Responsible practitioner",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -514,7 +566,7 @@
             }]
           }
         }],
-        "text" : "Transaction status: error, complete.",
+        "text" : "The outcome of a request for a reconciliation. The resource may be used to indicate that: the request has been held (queued) for processing; that it has been processed and errors found (error); that no errors were found and that some of the adjudication has been undertaken (partial) or that all of the adjudication has been undertaken (complete).",
         "type" : "display"
       },
       {
@@ -549,12 +601,119 @@
             }]
           }
         }],
-        "text" : "A description of the status of the adjudication.",
+        "text" : "A human readable description of the status of the request for the reconciliation.",
         "type" : "display"
       },
       {
         "linkId" : "PaymentReconciliation.disposition.value",
-        "text" : "Disposition Message",
+        "text" : "Disposition message",
+        "type" : "string",
+        "required" : false,
+        "repeats" : false
+      }]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "datetime"
+      }],
+      "linkId" : "PaymentReconciliation.paymentDate",
+      "type" : "group",
+      "required" : true,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "The date of payment as indicated on the financial instrument.",
+        "type" : "display"
+      },
+      {
+        "linkId" : "PaymentReconciliation.paymentDate.value",
+        "text" : "When payment issued",
+        "type" : "dateTime",
+        "required" : false,
+        "repeats" : false
+      }]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "Quantity"
+      }],
+      "linkId" : "PaymentReconciliation.paymentAmount",
+      "text" : "Total amount of Payment",
+      "type" : "group",
+      "required" : true,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "Total payment amount as indicated on the financial instrument.",
+        "type" : "display"
+      },
+      {
+        "linkId" : "PaymentReconciliation.paymentAmount.comparator",
+        "text" : "comp:",
+        "type" : "choice",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "PaymentReconciliation.paymentAmount.value",
+        "text" : "value:",
+        "type" : "decimal",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "PaymentReconciliation.paymentAmount.units",
+        "text" : "units:",
+        "type" : "string",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "PaymentReconciliation.paymentAmount.code",
+        "text" : "coded units:",
+        "type" : "string",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "PaymentReconciliation.paymentAmount.system",
+        "text" : "units system:",
         "type" : "string",
         "required" : false,
         "repeats" : false
@@ -567,9 +726,10 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "Reference"
+        "valueString" : "Identifier"
       }],
-      "linkId" : "PaymentReconciliation.requestProvider",
+      "linkId" : "PaymentReconciliation.paymentIdentifier",
+      "text" : "Business identifier for the payment",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -584,28 +744,34 @@
             }]
           }
         }],
-        "text" : "The practitioner who is responsible for the services rendered to the patient.",
+        "text" : "Issuer's unique identifier for the payment instrument. For example: EFT number or check number.",
         "type" : "display"
       },
       {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "Practitioner, PractitionerRole, Organization"
-        },
-        {
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
-          "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
-        }],
-        "linkId" : "PaymentReconciliation.requestProvider.value",
-        "text" : "Responsible practitioner",
-        "type" : "reference",
+        "linkId" : "PaymentReconciliation.paymentIdentifier.label",
+        "text" : "label:",
+        "type" : "string",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "PaymentReconciliation.paymentIdentifier.system",
+        "text" : "system:",
+        "type" : "string",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "PaymentReconciliation.paymentIdentifier.value",
+        "text" : "value:",
+        "type" : "string",
         "required" : false,
         "repeats" : false
       }]
     },
     {
       "linkId" : "PaymentReconciliation.detail",
-      "text" : "List of settlements",
+      "text" : "Settlement particulars",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -620,7 +786,7 @@
             }]
           }
         }],
-        "text" : "List of individual settlement amounts and the corresponding transaction.",
+        "text" : "Distribution of the payment amount for a previously acknowledged payable.",
         "type" : "display"
       },
       {
@@ -652,7 +818,7 @@
         },
         {
           "linkId" : "PaymentReconciliation.detail.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -681,7 +847,7 @@
       },
       {
         "linkId" : "PaymentReconciliation.detail.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -696,8 +862,108 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
+        }]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+          "valueInteger" : 1
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+          "valueString" : "Identifier"
+        }],
+        "linkId" : "PaymentReconciliation.detail.identifier",
+        "text" : "Business identifier of the payment detail",
+        "type" : "group",
+        "required" : false,
+        "repeats" : true,
+        "item" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+            "valueCodeableConcept" : {
+              "coding" : [{
+                "system" : "http://hl7.org/fhir/questionnaire-item-control",
+                "code" : "flyover",
+                "display" : "Fly-over"
+              }]
+            }
+          }],
+          "text" : "Unique identifier for the current payment item for the referenced payable.",
+          "type" : "display"
+        },
+        {
+          "linkId" : "PaymentReconciliation.detail.identifier.label",
+          "text" : "label:",
+          "type" : "string",
+          "required" : false,
+          "repeats" : false
+        },
+        {
+          "linkId" : "PaymentReconciliation.detail.identifier.system",
+          "text" : "system:",
+          "type" : "string",
+          "required" : false,
+          "repeats" : false
+        },
+        {
+          "linkId" : "PaymentReconciliation.detail.identifier.value",
+          "text" : "value:",
+          "type" : "string",
+          "required" : false,
+          "repeats" : false
+        }]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+          "valueInteger" : 1
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+          "valueString" : "Identifier"
+        }],
+        "linkId" : "PaymentReconciliation.detail.predecessor",
+        "text" : "Business identifier of the prior payment detail",
+        "type" : "group",
+        "required" : false,
+        "repeats" : true,
+        "item" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+            "valueCodeableConcept" : {
+              "coding" : [{
+                "system" : "http://hl7.org/fhir/questionnaire-item-control",
+                "code" : "flyover",
+                "display" : "Fly-over"
+              }]
+            }
+          }],
+          "text" : "Unique identifier for the prior payment item for the referenced payable.",
+          "type" : "display"
+        },
+        {
+          "linkId" : "PaymentReconciliation.detail.predecessor.label",
+          "text" : "label:",
+          "type" : "string",
+          "required" : false,
+          "repeats" : false
+        },
+        {
+          "linkId" : "PaymentReconciliation.detail.predecessor.system",
+          "text" : "system:",
+          "type" : "string",
+          "required" : false,
+          "repeats" : false
+        },
+        {
+          "linkId" : "PaymentReconciliation.detail.predecessor.value",
+          "text" : "value:",
+          "type" : "string",
+          "required" : false,
+          "repeats" : false
         }]
       },
       {
@@ -714,7 +980,7 @@
           "valueString" : "CodeableConcept"
         }],
         "linkId" : "PaymentReconciliation.detail.type",
-        "text" : "Type code",
+        "text" : "Category of payment",
         "type" : "group",
         "required" : true,
         "repeats" : true,
@@ -729,7 +995,7 @@
               }]
             }
           }],
-          "text" : "Code to indicate the nature of the payment, adjustment, funds advance, etc.",
+          "text" : "Code to indicate the nature of the payment. For example: payment, adjustment, funds advance, etc.",
           "type" : "display"
         },
         {
@@ -771,7 +1037,7 @@
               }]
             }
           }],
-          "text" : "The claim or financial resource.",
+          "text" : "A resource, such as a Claim, the evaluation of which could lead to payment.",
           "type" : "display"
         },
         {
@@ -784,50 +1050,7 @@
             "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
           }],
           "linkId" : "PaymentReconciliation.detail.request.value",
-          "text" : "Claim",
-          "type" : "reference",
-          "required" : false,
-          "repeats" : false
-        }]
-      },
-      {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
-          "valueInteger" : 1
-        },
-        {
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-          "valueString" : "Reference"
-        }],
-        "linkId" : "PaymentReconciliation.detail.response",
-        "type" : "group",
-        "required" : false,
-        "repeats" : true,
-        "item" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-            "valueCodeableConcept" : {
-              "coding" : [{
-                "system" : "http://hl7.org/fhir/questionnaire-item-control",
-                "code" : "flyover",
-                "display" : "Fly-over"
-              }]
-            }
-          }],
-          "text" : "The claim response resource.",
-          "type" : "display"
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-            "valueCode" : "Resource"
-          },
-          {
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
-            "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
-          }],
-          "linkId" : "PaymentReconciliation.detail.response.value",
-          "text" : "Claim Response",
+          "text" : "Request giving rise to the payment",
           "type" : "reference",
           "required" : false,
           "repeats" : false
@@ -857,20 +1080,20 @@
               }]
             }
           }],
-          "text" : "The Organization which submitted the claim or financial transaction.",
+          "text" : "The party which submitted the claim or financial transaction.",
           "type" : "display"
         },
         {
           "extension" : [{
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-            "valueCode" : "Organization"
+            "valueCode" : "Practitioner, PractitionerRole, Organization"
           },
           {
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
             "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
           }],
           "linkId" : "PaymentReconciliation.detail.submitter.value",
-          "text" : "Organization which submitted the claim",
+          "text" : "Submitter of the request",
           "type" : "reference",
           "required" : false,
           "repeats" : false
@@ -885,7 +1108,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "Reference"
         }],
-        "linkId" : "PaymentReconciliation.detail.payee",
+        "linkId" : "PaymentReconciliation.detail.response",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -900,20 +1123,20 @@
               }]
             }
           }],
-          "text" : "The organization which is receiving the payment.",
+          "text" : "A resource, such as a ClaimResponse, which contains a commitment to payment.",
           "type" : "display"
         },
         {
           "extension" : [{
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-            "valueCode" : "Organization"
+            "valueCode" : "Resource"
           },
           {
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
             "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
           }],
-          "linkId" : "PaymentReconciliation.detail.payee.value",
-          "text" : "Organization which is receiving the payment",
+          "linkId" : "PaymentReconciliation.detail.response.value",
+          "text" : "Response committing to a payment",
           "type" : "reference",
           "required" : false,
           "repeats" : false
@@ -943,12 +1166,12 @@
               }]
             }
           }],
-          "text" : "The date of the invoice or financial resource.",
+          "text" : "The date from the response resource containing a commitment to pay.",
           "type" : "display"
         },
         {
           "linkId" : "PaymentReconciliation.detail.date.value",
-          "text" : "Invoice date",
+          "text" : "Date of commitment to pay",
           "type" : "dateTime",
           "required" : false,
           "repeats" : false
@@ -961,10 +1184,9 @@
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-          "valueString" : "Quantity"
+          "valueString" : "Reference"
         }],
-        "linkId" : "PaymentReconciliation.detail.amount",
-        "text" : "Amount being paid",
+        "linkId" : "PaymentReconciliation.detail.responsible",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -979,7 +1201,94 @@
               }]
             }
           }],
-          "text" : "Amount paid for this detail.",
+          "text" : "A reference to the individual who is responsible for inquiries regarding the response and its payment.",
+          "type" : "display"
+        },
+        {
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
+            "valueCode" : "PractitionerRole"
+          },
+          {
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
+            "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
+          }],
+          "linkId" : "PaymentReconciliation.detail.responsible.value",
+          "text" : "Contact for the response",
+          "type" : "reference",
+          "required" : false,
+          "repeats" : false
+        }]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+          "valueInteger" : 1
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+          "valueString" : "Reference"
+        }],
+        "linkId" : "PaymentReconciliation.detail.payee",
+        "type" : "group",
+        "required" : false,
+        "repeats" : true,
+        "item" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+            "valueCodeableConcept" : {
+              "coding" : [{
+                "system" : "http://hl7.org/fhir/questionnaire-item-control",
+                "code" : "flyover",
+                "display" : "Fly-over"
+              }]
+            }
+          }],
+          "text" : "The party which is receiving the payment.",
+          "type" : "display"
+        },
+        {
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
+            "valueCode" : "Practitioner, PractitionerRole, Organization"
+          },
+          {
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
+            "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
+          }],
+          "linkId" : "PaymentReconciliation.detail.payee.value",
+          "text" : "Recipient of the payment",
+          "type" : "reference",
+          "required" : false,
+          "repeats" : false
+        }]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+          "valueInteger" : 1
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+          "valueString" : "Quantity"
+        }],
+        "linkId" : "PaymentReconciliation.detail.amount",
+        "text" : "Amount allocated to this payable",
+        "type" : "group",
+        "required" : false,
+        "repeats" : true,
+        "item" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+            "valueCodeableConcept" : {
+              "coding" : [{
+                "system" : "http://hl7.org/fhir/questionnaire-item-control",
+                "code" : "flyover",
+                "display" : "Fly-over"
+              }]
+            }
+          }],
+          "text" : "The monetary amount allocated from the total payment to the payable.",
           "type" : "display"
         },
         {
@@ -1028,8 +1337,8 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "CodeableConcept"
       }],
-      "linkId" : "PaymentReconciliation.form",
-      "text" : "Printed Form Identifier",
+      "linkId" : "PaymentReconciliation.formCode",
+      "text" : "Printed form identifier",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -1044,18 +1353,18 @@
             }]
           }
         }],
-        "text" : "The form to be used for printing the content.",
+        "text" : "A code for the form to be used for printing the content. May be needed to identify specific jurisdictional forms.",
         "type" : "display"
       },
       {
-        "linkId" : "PaymentReconciliation.form.coding",
+        "linkId" : "PaymentReconciliation.formCode.coding",
         "text" : "code:",
         "type" : "open-choice",
         "required" : false,
         "repeats" : false
       },
       {
-        "linkId" : "PaymentReconciliation.form.text",
+        "linkId" : "PaymentReconciliation.formCode.text",
         "text" : "text:",
         "type" : "string",
         "required" : false,
@@ -1063,72 +1372,8 @@
       }]
     },
     {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
-        "valueInteger" : 1
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "Quantity"
-      }],
-      "linkId" : "PaymentReconciliation.total",
-      "text" : "Total amount of Payment",
-      "type" : "group",
-      "required" : false,
-      "repeats" : true,
-      "item" : [{
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-          "valueCodeableConcept" : {
-            "coding" : [{
-              "system" : "http://hl7.org/fhir/questionnaire-item-control",
-              "code" : "flyover",
-              "display" : "Fly-over"
-            }]
-          }
-        }],
-        "text" : "Total payment amount.",
-        "type" : "display"
-      },
-      {
-        "linkId" : "PaymentReconciliation.total.comparator",
-        "text" : "comp:",
-        "type" : "choice",
-        "required" : false,
-        "repeats" : false
-      },
-      {
-        "linkId" : "PaymentReconciliation.total.value",
-        "text" : "value:",
-        "type" : "decimal",
-        "required" : false,
-        "repeats" : false
-      },
-      {
-        "linkId" : "PaymentReconciliation.total.units",
-        "text" : "units:",
-        "type" : "string",
-        "required" : false,
-        "repeats" : false
-      },
-      {
-        "linkId" : "PaymentReconciliation.total.code",
-        "text" : "coded units:",
-        "type" : "string",
-        "required" : false,
-        "repeats" : false
-      },
-      {
-        "linkId" : "PaymentReconciliation.total.system",
-        "text" : "units system:",
-        "type" : "string",
-        "required" : false,
-        "repeats" : false
-      }]
-    },
-    {
       "linkId" : "PaymentReconciliation.processNote",
-      "text" : "Processing comments",
+      "text" : "Note concerning processing",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -1143,7 +1388,7 @@
             }]
           }
         }],
-        "text" : "Suite of notes.",
+        "text" : "A note that describes or explains the processing in a human readable form.",
         "type" : "display"
       },
       {
@@ -1175,7 +1420,7 @@
         },
         {
           "linkId" : "PaymentReconciliation.processNote.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -1204,7 +1449,7 @@
       },
       {
         "linkId" : "PaymentReconciliation.processNote.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1219,7 +1464,7 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
@@ -1247,7 +1492,7 @@
               }]
             }
           }],
-          "text" : "The note purpose: Print/Display.",
+          "text" : "The business purpose of the note text.",
           "type" : "display"
         },
         {
@@ -1282,12 +1527,12 @@
               }]
             }
           }],
-          "text" : "The note text.",
+          "text" : "The explanation or description associated with the processing.",
           "type" : "display"
         },
         {
           "linkId" : "PaymentReconciliation.processNote.text.value",
-          "text" : "Comment on the processing",
+          "text" : "Note explanatory text",
           "type" : "string",
           "required" : false,
           "repeats" : false

@@ -6,10 +6,10 @@
     "elements": {
       "Observation.basedOn": {
         "removed-types": [
-          "Reference(CarePlan|DeviceRequest|ImmunizationRecommendation|MedicationRequest|NutritionOrder|ProcedureRequest|ReferralRequest)"
+          "Reference(CarePlan | DeviceRequest | ImmunizationRecommendation | MedicationRequest | NutritionOrder | ProcedureRequest | ReferralRequest)"
         ],
         "added-types": [
-          "Reference(CarePlan|DeviceRequest|ImmunizationRecommendation|MedicationRequest|NutritionOrder|ServiceRequest)"
+          "Reference(CarePlan | DeviceRequest | ImmunizationRecommendation | MedicationRequest | NutritionOrder | ServiceRequest)"
         ]
       },
       "Observation.partOf": {
@@ -19,7 +19,13 @@
         "status": "new"
       },
       "Observation.encounter": {
-        "status": "new"
+        "old-name": "context",
+        "removed-types": [
+          "Reference(Encounter | EpisodeOfCare)"
+        ],
+        "added-types": [
+          "Reference(Encounter)"
+        ]
       },
       "Observation.effective[x]": {
         "added-types": [
@@ -29,10 +35,10 @@
       },
       "Observation.performer": {
         "removed-types": [
-          "Reference(Practitioner|Organization|Patient|RelatedPerson)"
+          "Reference(Practitioner | Organization | Patient | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|CareTeam|Patient|RelatedPerson)"
+          "Reference(Practitioner | PractitionerRole | Organization | CareTeam | Patient | RelatedPerson)"
         ]
       },
       "Observation.value[x]": {
@@ -58,6 +64,17 @@
       "Observation.interpretation": {
         "old-max": "1",
         "new-max": "*"
+      },
+      "Observation.note": {
+        "old-name": "comment",
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Annotation"
+        ]
       },
       "Observation.referenceRange.type": {
         "binding-status": "removed",
@@ -96,9 +113,6 @@
       "Observation.component.interpretation": {
         "old-max": "1",
         "new-max": "*"
-      },
-      "Observation.context": {
-        "status": "deleted"
       },
       "Observation.related": {
         "status": "deleted"

@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type DocumentReference {
   id: ID
@@ -17,7 +17,7 @@ type DocumentReference {
   category: [CodeableConcept]
   subject: Reference
   date: instant  _date: ElementBase
-  agent: [DocumentReferenceAgent]
+  author: [Reference]
   authenticator: Reference
   custodian: Reference
   relatesTo: [DocumentReferenceRelatesTo]
@@ -25,14 +25,6 @@ type DocumentReference {
   securityLabel: [CodeableConcept]
   content: [DocumentReferenceContent]!
   context: DocumentReferenceContext
-}
-
-type DocumentReferenceAgent {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  type: CodeableConcept
-  who: Reference!
 }
 
 type DocumentReferenceRelatesTo {
@@ -81,7 +73,7 @@ input DocumentReference {
   category: [CodeableConcept]
   subject: Reference
   date: instant  _date: ElementBase
-  agent: [DocumentReferenceAgent]
+  author: [Reference]
   authenticator: Reference
   custodian: Reference
   relatesTo: [DocumentReferenceRelatesTo]
@@ -89,14 +81,6 @@ input DocumentReference {
   securityLabel: [CodeableConcept]
   content: [DocumentReferenceContent]!
   context: DocumentReferenceContext
-}
-
-input DocumentReferenceAgent {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  type: CodeableConcept
-  who: Reference!
 }
 
 input DocumentReferenceRelatesTo {
@@ -134,8 +118,8 @@ type DocumentReferenceReadType {
 
 type DocumentReferenceListType {
   DocumentReferenceList(_filter : String
-    agent : [reference]
     authenticator : [reference]
+    author : [reference]
     category : [token]
     contenttype : [token]
     custodian : [reference]
@@ -175,8 +159,8 @@ type DocumentReferenceListType {
 
 type DocumentReferenceConnectionType {
   DocumentReferenceConection(_filter : String
-    agent : [reference]
     authenticator : [reference]
+    author : [reference]
     category : [token]
     contenttype : [token]
     custodian : [reference]

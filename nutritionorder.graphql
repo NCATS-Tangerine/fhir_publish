@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type NutritionOrder {
   id: ID
@@ -16,7 +16,7 @@ type NutritionOrder {
   status: code  _status: ElementBase
   intent: code  _intent: ElementBase
   patient: Reference!
-  context: Reference
+  encounter: Reference
   dateTime: dateTime  _dateTime: ElementBase
   orderer: Reference
   allergyIntolerance: [Reference]
@@ -108,7 +108,7 @@ input NutritionOrder {
   status: code  _status: ElementBase
   intent: code  _intent: ElementBase
   patient: Reference!
-  context: Reference
+  encounter: Reference
   dateTime: dateTime  _dateTime: ElementBase
   orderer: Reference
   allergyIntolerance: [Reference]
@@ -191,8 +191,8 @@ type NutritionOrderReadType {
 type NutritionOrderListType {
   NutritionOrderList(_filter : String
     additive : [token]
-    context : [reference]
     datetime : [date]
+    encounter : [reference]
     formula : [token]
     identifier : [token]
     instantiates_canonical : [reference]
@@ -219,8 +219,8 @@ type NutritionOrderListType {
 type NutritionOrderConnectionType {
   NutritionOrderConection(_filter : String
     additive : [token]
-    context : [reference]
     datetime : [date]
+    encounter : [reference]
     formula : [token]
     identifier : [token]
     instantiates_canonical : [reference]

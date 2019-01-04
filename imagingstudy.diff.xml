@@ -2,11 +2,23 @@
 <difference>
    <type name="ImagingStudy" status="changed">
       <element path="ImagingStudy.status" status="new"/>
-      <element path="ImagingStudy.modality" status="new"/>
-      <element path="ImagingStudy.subject" status="new"/>
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               old-name="modalityList"
+               path="ImagingStudy.modality">
+         <old-binding reference="http://hl7.org/fhir/ValueSet/dicom-cid29"
+                      strength="extensible"/>
+         <new-binding reference="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_29.html"
+                      strength="extensible"/>
+      </element>
+      <element old-name="patient" path="ImagingStudy.subject">
+         <removed-type name="Reference(Patient)"/>
+         <added-type name="Reference(Patient | Device | Group)"/>
+      </element>
+      <element path="ImagingStudy.encounter" status="new"/>
       <element path="ImagingStudy.basedOn">
-         <removed-type name="Reference(ReferralRequest|CarePlan|ProcedureRequest)"/>
-         <added-type name="Reference(CarePlan|ServiceRequest|Appointment|AppointmentResponse|Task)"/>
+         <removed-type name="Reference(ReferralRequest | CarePlan | ProcedureRequest)"/>
+         <added-type name="Reference(CarePlan | ServiceRequest | Appointment | AppointmentResponse | Task)"/>
       </element>
       <element new-max="1" old-max="*" path="ImagingStudy.procedureReference"/>
       <element binding-status="added" path="ImagingStudy.procedureCode">
@@ -17,7 +29,10 @@
       <element path="ImagingStudy.reasonCode" status="new"/>
       <element path="ImagingStudy.reasonReference" status="new"/>
       <element path="ImagingStudy.note" status="new"/>
-      <element path="ImagingStudy.series.identifier" status="new"/>
+      <element path="ImagingStudy.series.uid">
+         <removed-type name="oid"/>
+         <added-type name="id"/>
+      </element>
       <element binding-status="changed"
                binding-valueset-changed="true"
                path="ImagingStudy.series.modality">
@@ -33,7 +48,10 @@
       </element>
       <element path="ImagingStudy.series.performer.function" status="new"/>
       <element path="ImagingStudy.series.performer.actor" status="new"/>
-      <element path="ImagingStudy.series.instance.identifier" status="new"/>
+      <element path="ImagingStudy.series.instance.uid">
+         <removed-type name="oid"/>
+         <added-type name="id"/>
+      </element>
       <element binding-status="added" path="ImagingStudy.series.instance.sopClass">
          <removed-type name="oid"/>
          <added-type name="Coding"/>
@@ -43,11 +61,8 @@
       <element path="ImagingStudy.uid" status="deleted"/>
       <element path="ImagingStudy.accession" status="deleted"/>
       <element path="ImagingStudy.availability" status="deleted"/>
-      <element path="ImagingStudy.modalityList" status="deleted"/>
-      <element path="ImagingStudy.patient" status="deleted"/>
+      <element path="ImagingStudy.context" status="deleted"/>
       <element path="ImagingStudy.reason" status="deleted"/>
-      <element path="ImagingStudy.series.uid" status="deleted"/>
       <element path="ImagingStudy.series.availability" status="deleted"/>
-      <element path="ImagingStudy.series.instance.uid" status="deleted"/>
    </type>
 </difference>

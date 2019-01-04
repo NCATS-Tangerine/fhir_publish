@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -51,7 +51,7 @@
         <xs:sequence>
           <xs:element name="identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Identifier assigned by the dispensing facility - this is an identifier assigned outside FHIR.</xs:documentation>
+              <xs:documentation xml:lang="en">Identifiers associated with this Medication Dispense that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate. They are business identifiers assigned to this resource by the performer or other systems and remain constant as the resource is updated and propagates from server to server.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="partOf" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -59,11 +59,18 @@
               <xs:documentation xml:lang="en">The procedure that trigger the dispense.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="1" maxOccurs="1" type="MedicationDispenseStatus">
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="code">
             <xs:annotation>
               <xs:documentation xml:lang="en">A code specifying the state of the set of dispense events.</xs:documentation>
            </xs:annotation>
           </xs:element>
+          <xs:choice minOccurs="0" maxOccurs="1" >
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Indicates the reason why a dispense was not performed.</xs:documentation>
+            </xs:annotation>
+            <xs:element name="statusReasonCodeableConcept" type="CodeableConcept"/>
+            <xs:element name="statusReasonReference" type="Reference"/>
+          </xs:choice>
           <xs:element name="category" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)).</xs:documentation>
@@ -161,13 +168,6 @@
               <xs:documentation xml:lang="en">Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. drug-drug interaction, duplicate therapy, dosage alert etc.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:choice minOccurs="0" maxOccurs="1" >
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Indicates the reason why a dispense was not performed.</xs:documentation>
-            </xs:annotation>
-            <xs:element name="statusReasonCodeableConcept" type="CodeableConcept"/>
-            <xs:element name="statusReasonReference" type="Reference"/>
-          </xs:choice>
           <xs:element name="eventHistory" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">A summary of the events of interest that have occurred, such as when the dispense was verified.</xs:documentation>
@@ -226,61 +226,6 @@
            </xs:annotation>
           </xs:element>
         </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:simpleType name="MedicationDispenseStatus-list">
-    <xs:restriction base="code-primitive">
-      <xs:enumeration value="preparation">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Preparation</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="in-progress">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">In Progress</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="cancelled">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Cancelled</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="on-hold">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">On Hold</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="completed">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Completed</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="entered-in-error">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Entered in-Error</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="stopped">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Stopped</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="unknown">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Unknown</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="MedicationDispenseStatus">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A coded concept specifying the state of the dispense event.</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="Element">
-        <xs:attribute name="value" type="MedicationDispenseStatus-list" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

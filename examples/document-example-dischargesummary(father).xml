@@ -367,9 +367,8 @@
         </text>
       <!--     The patient details will generally be in the Document resource in the Document bundle, but could just as easily
         point to a patient resource on a server    -->
-       <status value="unknown"/>
-        <intent value="order">
-        </intent>
+        <status value="unknown"/>
+        <intent value="order"/>
         <medicationCodeableConcept>
           <coding>
             <system value="http://snomed.info/sct"/>
@@ -447,7 +446,7 @@
         </text>
       <!--     The patient details will generally be in the Document resource in the Document bundle, but could just as easily
         point to a patient resource on a server    -->
-		<status value="completed"/>
+        <status value="active"/>
 	<!--     a reference to the medication being prescribed. As described earlier, this could be contained (as is the example here), separately
         within the document bundle or simply a reference to a remote server. See comment in the contained resource    -->
         <statusReason>
@@ -481,8 +480,21 @@
           <div xmlns="http://www.w3.org/1999/xhtml">Sensitivity to Doxycycline :
                         Hives</div>
         </text>
-        <clinicalStatus value="active"/>
-		<verificationStatus value="confirmed"/>
+        <clinicalStatus>
+			<coding>
+			  <system value="http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical"/>
+			  <code value="active"/>
+			  <display value="Active"/>
+			</coding>
+	    </clinicalStatus>
+
+	    <verificationStatus>
+			<coding>
+			  <system value="http://terminology.hl7.org/CodeSystem/allergyintolerance-verification"/>
+			  <code value="confirmed"/>
+			  <display value="Confirmed"/>
+			</coding>
+	    </verificationStatus>
         <type value="allergy"/>
         <criticality value="high"/>
         <code>

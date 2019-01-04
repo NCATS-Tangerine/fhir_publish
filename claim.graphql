@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type Claim {
   id: ID
@@ -11,16 +11,16 @@ type Claim {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
-  type: CodeableConcept
+  type: CodeableConcept!
   subType: CodeableConcept
   use: code  _use: ElementBase
-  patient: Reference
+  patient: Reference!
   billablePeriod: Period
   created: dateTime  _created: ElementBase
   enterer: Reference
   insurer: Reference
-  provider: Reference
-  priority: CodeableConcept
+  provider: Reference!
+  priority: CodeableConcept!
   fundsReserve: CodeableConcept
   related: [ClaimRelated]
   prescription: Reference
@@ -29,10 +29,10 @@ type Claim {
   referral: Reference
   facility: Reference
   careTeam: [ClaimCareTeam]
-  information: [ClaimInformation]
+  supportingInfo: [ClaimSupportingInfo]
   diagnosis: [ClaimDiagnosis]
   procedure: [ClaimProcedure]
-  insurance: [ClaimInsurance]
+  insurance: [ClaimInsurance]!
   accident: ClaimAccident
   item: [ClaimItem]
   total: Money
@@ -52,7 +52,6 @@ type ClaimPayee {
   extension: [Extension]
   modifierExtension: [Extension]
   type: CodeableConcept!
-  resource: Coding
   party: Reference
 }
 
@@ -67,7 +66,7 @@ type ClaimCareTeam {
   qualification: CodeableConcept
 }
 
-type ClaimInformation {
+type ClaimSupportingInfo {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -101,9 +100,11 @@ type ClaimProcedure {
   extension: [Extension]
   modifierExtension: [Extension]
   sequence: positiveInt  _sequence: ElementBase
+  type: [CodeableConcept]
   date: dateTime  _date: ElementBase
   procedureCodeableConcept: CodeableConcept
   procedureReference: Reference
+  udi: [Reference]
 }
 
 type ClaimInsurance {
@@ -140,7 +141,7 @@ type ClaimItem {
   informationSequence: positiveInt  _informationSequence: [ElementBase]
   revenue: CodeableConcept
   category: CodeableConcept
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   programCode: [CodeableConcept]
   servicedDate: date  _servicedDate: ElementBase
@@ -166,7 +167,7 @@ type ClaimItemDetail {
   sequence: positiveInt  _sequence: ElementBase
   revenue: CodeableConcept
   category: CodeableConcept
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   programCode: [CodeableConcept]
   quantity: Quantity
@@ -184,7 +185,7 @@ type ClaimItemDetailSubDetail {
   sequence: positiveInt  _sequence: ElementBase
   revenue: CodeableConcept
   category: CodeableConcept
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   programCode: [CodeableConcept]
   quantity: Quantity
@@ -205,16 +206,16 @@ input Claim {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
-  type: CodeableConcept
+  type: CodeableConcept!
   subType: CodeableConcept
   use: code  _use: ElementBase
-  patient: Reference
+  patient: Reference!
   billablePeriod: Period
   created: dateTime  _created: ElementBase
   enterer: Reference
   insurer: Reference
-  provider: Reference
-  priority: CodeableConcept
+  provider: Reference!
+  priority: CodeableConcept!
   fundsReserve: CodeableConcept
   related: [ClaimRelated]
   prescription: Reference
@@ -223,10 +224,10 @@ input Claim {
   referral: Reference
   facility: Reference
   careTeam: [ClaimCareTeam]
-  information: [ClaimInformation]
+  supportingInfo: [ClaimSupportingInfo]
   diagnosis: [ClaimDiagnosis]
   procedure: [ClaimProcedure]
-  insurance: [ClaimInsurance]
+  insurance: [ClaimInsurance]!
   accident: ClaimAccident
   item: [ClaimItem]
   total: Money
@@ -246,7 +247,6 @@ input ClaimPayee {
   extension: [Extension]
   modifierExtension: [Extension]
   type: CodeableConcept!
-  resource: Coding
   party: Reference
 }
 
@@ -261,7 +261,7 @@ input ClaimCareTeam {
   qualification: CodeableConcept
 }
 
-input ClaimInformation {
+input ClaimSupportingInfo {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -295,9 +295,11 @@ input ClaimProcedure {
   extension: [Extension]
   modifierExtension: [Extension]
   sequence: positiveInt  _sequence: ElementBase
+  type: [CodeableConcept]
   date: dateTime  _date: ElementBase
   procedureCodeableConcept: CodeableConcept
   procedureReference: Reference
+  udi: [Reference]
 }
 
 input ClaimInsurance {
@@ -334,7 +336,7 @@ input ClaimItem {
   informationSequence: positiveInt  _informationSequence: [ElementBase]
   revenue: CodeableConcept
   category: CodeableConcept
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   programCode: [CodeableConcept]
   servicedDate: date  _servicedDate: ElementBase
@@ -360,7 +362,7 @@ input ClaimItemDetail {
   sequence: positiveInt  _sequence: ElementBase
   revenue: CodeableConcept
   category: CodeableConcept
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   programCode: [CodeableConcept]
   quantity: Quantity
@@ -378,7 +380,7 @@ input ClaimItemDetailSubDetail {
   sequence: positiveInt  _sequence: ElementBase
   revenue: CodeableConcept
   category: CodeableConcept
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   programCode: [CodeableConcept]
   quantity: Quantity
@@ -396,16 +398,20 @@ type ClaimListType {
   ClaimList(_filter : String
     care_team : [reference]
     created : [date]
+    detail_udi : [reference]
     encounter : [reference]
     enterer : [reference]
     facility : [reference]
     identifier : [token]
     insurer : [reference]
+    item_udi : [reference]
     patient : [reference]
     payee : [reference]
     priority : [token]
+    procedure_udi : [reference]
     provider : [reference]
     status : [token]
+    subdetail_udi : [reference]
     use : [token]
     _text : [String]
     _content : [String]
@@ -425,16 +431,20 @@ type ClaimConnectionType {
   ClaimConection(_filter : String
     care_team : [reference]
     created : [date]
+    detail_udi : [reference]
     encounter : [reference]
     enterer : [reference]
     facility : [reference]
     identifier : [token]
     insurer : [reference]
+    item_udi : [reference]
     patient : [reference]
     payee : [reference]
     priority : [token]
+    procedure_udi : [reference]
     provider : [reference]
     status : [token]
+    subdetail_udi : [reference]
     use : [token]
     _text : [String]
     _content : [String]

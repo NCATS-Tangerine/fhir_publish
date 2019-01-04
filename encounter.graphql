@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type Encounter {
   id: ID
@@ -21,10 +21,11 @@ type Encounter {
   episodeOfCare: [Reference]
   basedOn: [Reference]
   participant: [EncounterParticipant]
-  appointment: Reference
+  appointment: [Reference]
   period: Period
   length: Duration
-  reason: [CodeableConcept]
+  reasonCode: [CodeableConcept]
+  reasonReference: [Reference]
   diagnosis: [EncounterDiagnosis]
   account: [Reference]
   hospitalization: EncounterHospitalization
@@ -63,7 +64,7 @@ type EncounterDiagnosis {
   extension: [Extension]
   modifierExtension: [Extension]
   condition: Reference!
-  role: CodeableConcept
+  use: CodeableConcept
   rank: positiveInt  _rank: ElementBase
 }
 
@@ -88,6 +89,7 @@ type EncounterLocation {
   modifierExtension: [Extension]
   location: Reference!
   status: code  _status: ElementBase
+  physicalType: CodeableConcept
   period: Period
 }
 
@@ -112,10 +114,11 @@ input Encounter {
   episodeOfCare: [Reference]
   basedOn: [Reference]
   participant: [EncounterParticipant]
-  appointment: Reference
+  appointment: [Reference]
   period: Period
   length: Duration
-  reason: [CodeableConcept]
+  reasonCode: [CodeableConcept]
+  reasonReference: [Reference]
   diagnosis: [EncounterDiagnosis]
   account: [Reference]
   hospitalization: EncounterHospitalization
@@ -154,7 +157,7 @@ input EncounterDiagnosis {
   extension: [Extension]
   modifierExtension: [Extension]
   condition: Reference!
-  role: CodeableConcept
+  use: CodeableConcept
   rank: positiveInt  _rank: ElementBase
 }
 
@@ -179,6 +182,7 @@ input EncounterLocation {
   modifierExtension: [Extension]
   location: Reference!
   status: code  _status: ElementBase
+  physicalType: CodeableConcept
   period: Period
 }
 
@@ -204,7 +208,8 @@ type EncounterListType {
     participant_type : [token]
     patient : [reference]
     practitioner : [reference]
-    reason : [token]
+    reason_code : [token]
+    reason_reference : [reference]
     service_provider : [reference]
     special_arrangement : [token]
     status : [token]
@@ -242,7 +247,8 @@ type EncounterConnectionType {
     participant_type : [token]
     patient : [reference]
     practitioner : [reference]
-    reason : [token]
+    reason_code : [token]
+    reason_reference : [reference]
     service_provider : [reference]
     special_arrangement : [token]
     status : [token]

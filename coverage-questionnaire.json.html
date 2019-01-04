@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Coverage-questionnaire.json - FHIR v3.5.0</title>
+  <title>Coverage-questionnaire.json - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>Coverage-questionnaire.json</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fm/index.cfm">Financial Management</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: <a href="compartmentdefinition-patient.html">Patient</a>, <a href="compartmentdefinition-relatedperson.html">RelatedPerson</a></td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fm/index.cfm">Financial Management</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: <a href="compartmentdefinition-patient.html">Patient</a>, <a href="compartmentdefinition-relatedperson.html">RelatedPerson</a></td></tr></table>
 
 <p>
 <a href="coverage-questionnaire.json">Raw JSON</a> (<a href="coverage-questionnaire.canonical.json">canonical form</a> + also see <a href="json.html">JSON Format Specification</a>)
@@ -119,11 +119,33 @@
 {
   &quot;resourceType&quot; : &quot;Questionnaire&quot;,
   &quot;id&quot; : &quot;qs1&quot;,
+  &quot;contained&quot; : [{
+    &quot;resourceType&quot; : &quot;ValueSet&quot;,
+    &quot;id&quot; : &quot;vs2&quot;,
+    &quot;name&quot; : &quot;Type options for Coverage.costToBeneficiary.value[x]&quot;,
+    &quot;status&quot; : &quot;active&quot;,
+    &quot;description&quot; : &quot;Type options for Coverage.costToBeneficiary.value[x]&quot;,
+    &quot;expansion&quot; : {
+      &quot;identifier&quot; : &quot;urn:uuid:cdbf61fd-54d0-487b-b4af-eb6f91591f91&quot;,
+      &quot;timestamp&quot; : &quot;2018-12-13T14:26:35-06:00&quot;,
+      &quot;contains&quot; : [{
+        &quot;system&quot; : &quot;http://hl7.org/fhir/resource-types&quot;,
+        &quot;code&quot; : &quot;http://hl7.org/fhir/StructureDefinition/SimpleQuantity&quot;,
+        &quot;display&quot; : &quot;Quantity&quot;
+      },
+      {
+        &quot;system&quot; : &quot;http://hl7.org/fhir/data-types&quot;,
+        &quot;code&quot; : &quot;Money&quot;,
+        &quot;display&quot; : &quot;Money&quot;
+      }]
+    }
+  }],
   &quot;identifier&quot; : [{
     &quot;system&quot; : &quot;urn:ietf:rfc:3986&quot;
   }],
+  &quot;version&quot; : &quot;3.6.0&quot;,
   &quot;status&quot; : &quot;draft&quot;,
-  &quot;date&quot; : &quot;2018-09-14T07:16:19-05:00&quot;,
+  &quot;date&quot; : &quot;2018-12-13T14:23:07-06:00&quot;,
   &quot;publisher&quot; : &quot;Health Level Seven International (Financial Management)&quot;,
   &quot;item&quot; : [{
     &quot;linkId&quot; : &quot;Coverage&quot;,
@@ -132,6 +154,10 @@
     &quot;required&quot; : false,
     &quot;repeats&quot; : true,
     &quot;item&quot; : [{
+      &quot;text&quot; : &quot;The Coverage resource contains the insurance card level information, which is customary to provide on claims and other communications between providers and insurers.&quot;,
+      &quot;type&quot; : &quot;display&quot;
+    },
+    {
       &quot;extension&quot; : [{
         &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl&quot;,
         &quot;valueCodeableConcept&quot; : {
@@ -142,7 +168,7 @@
           }]
         }
       }],
-      &quot;text&quot; : &quot;Financial instrument which may be used to reimburse or pay for health care products and services.&quot;,
+      &quot;text&quot; : &quot;Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment.&quot;,
       &quot;type&quot; : &quot;display&quot;
     },
     {
@@ -323,7 +349,7 @@
     },
     {
       &quot;linkId&quot; : &quot;Coverage.extension&quot;,
-      &quot;text&quot; : &quot;Additional Content defined by implementations&quot;,
+      &quot;text&quot; : &quot;Additional content defined by implementations&quot;,
       &quot;type&quot; : &quot;group&quot;,
       &quot;required&quot; : false,
       &quot;repeats&quot; : true,
@@ -359,7 +385,7 @@
             }]
           }
         }],
-        &quot;text&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+        &quot;text&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
         &quot;type&quot; : &quot;display&quot;
       }]
     },
@@ -369,7 +395,7 @@
         &quot;valueString&quot; : &quot;Identifier&quot;
       }],
       &quot;linkId&quot; : &quot;Coverage.identifier&quot;,
-      &quot;text&quot; : &quot;The primary coverage ID&quot;,
+      &quot;text&quot; : &quot;Business Identifier for the coverage&quot;,
       &quot;type&quot; : &quot;group&quot;,
       &quot;required&quot; : false,
       &quot;repeats&quot; : true,
@@ -384,7 +410,7 @@
             }]
           }
         }],
-        &quot;text&quot; : &quot;The main (and possibly only) identifier for the coverage - often referred to as a Member Id, Certificate number, Personal Health Number or Case ID. May be constructed as the concatenation of the Coverage.SubscriberID and the Coverage.dependant.&quot;,
+        &quot;text&quot; : &quot;A unique identifier assigned to this coverage. The main (and possibly only) identifier for the coverage - often referred to as a Member Id, Certificate number, Personal Health Number or Case ID. May be constructed as the concatenation of the Coverage.SubscriberID and the Coverage.dependant.&quot;,
         &quot;type&quot; : &quot;display&quot;
       },
       {
@@ -411,6 +437,10 @@
     },
     {
       &quot;extension&quot; : [{
+        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs&quot;,
+        &quot;valueInteger&quot; : 1
+      },
+      {
         &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs&quot;,
         &quot;valueInteger&quot; : 1
       },
@@ -420,7 +450,7 @@
       }],
       &quot;linkId&quot; : &quot;Coverage.status&quot;,
       &quot;type&quot; : &quot;group&quot;,
-      &quot;required&quot; : false,
+      &quot;required&quot; : true,
       &quot;repeats&quot; : true,
       &quot;item&quot; : [{
         &quot;extension&quot; : [{
@@ -454,7 +484,7 @@
         &quot;valueString&quot; : &quot;CodeableConcept&quot;
       }],
       &quot;linkId&quot; : &quot;Coverage.type&quot;,
-      &quot;text&quot; : &quot;Type of coverage such as medical or accident&quot;,
+      &quot;text&quot; : &quot;Coverage category such as medical or accident&quot;,
       &quot;type&quot; : &quot;group&quot;,
       &quot;required&quot; : false,
       &quot;repeats&quot; : true,
@@ -511,7 +541,7 @@
             }]
           }
         }],
-        &quot;text&quot; : &quot;The party who 'owns' the insurance policy,  may be an individual, corporation or the subscriber's employer.&quot;,
+        &quot;text&quot; : &quot;The party who 'owns' the insurance policy. For example: may be an individual, corporation or the subscriber's employer.&quot;,
         &quot;type&quot; : &quot;display&quot;
       },
       {
@@ -554,7 +584,7 @@
             }]
           }
         }],
-        &quot;text&quot; : &quot;The party who has signed-up for or 'owns' the contractual relationship to the policy or to whom the benefit of the policy for services rendered to them or their family is due.&quot;,
+        &quot;text&quot; : &quot;The party who has signed-up for or 'owns' the contractual relationship to the policy or to whom the benefit of the policy for services rendered to them or their family is due. May be self or a parent in the case of dependants.&quot;,
         &quot;type&quot; : &quot;display&quot;
       },
       {
@@ -602,7 +632,7 @@
       },
       {
         &quot;linkId&quot; : &quot;Coverage.subscriberId.value&quot;,
-        &quot;text&quot; : &quot;ID assigned to the Subscriber&quot;,
+        &quot;text&quot; : &quot;ID assigned to the subscriber&quot;,
         &quot;type&quot; : &quot;string&quot;,
         &quot;required&quot; : false,
         &quot;repeats&quot; : false
@@ -610,6 +640,10 @@
     },
     {
       &quot;extension&quot; : [{
+        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs&quot;,
+        &quot;valueInteger&quot; : 1
+      },
+      {
         &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs&quot;,
         &quot;valueInteger&quot; : 1
       },
@@ -619,7 +653,7 @@
       }],
       &quot;linkId&quot; : &quot;Coverage.beneficiary&quot;,
       &quot;type&quot; : &quot;group&quot;,
-      &quot;required&quot; : false,
+      &quot;required&quot; : true,
       &quot;repeats&quot; : true,
       &quot;item&quot; : [{
         &quot;extension&quot; : [{
@@ -632,7 +666,7 @@
             }]
           }
         }],
-        &quot;text&quot; : &quot;The party who benefits from the insurance coverage; the patient when services are provided.&quot;,
+        &quot;text&quot; : &quot;The party who benefits from the insurance coverage; the patient when products and/or services are provided.&quot;,
         &quot;type&quot; : &quot;display&quot;
       },
       {
@@ -645,7 +679,7 @@
           &quot;valueString&quot; : &quot;subject=$subj&amp;patient=$subj&amp;encounter=$encounter&quot;
         }],
         &quot;linkId&quot; : &quot;Coverage.beneficiary.value&quot;,
-        &quot;text&quot; : &quot;Plan Beneficiary&quot;,
+        &quot;text&quot; : &quot;Plan beneficiary&quot;,
         &quot;type&quot; : &quot;reference&quot;,
         &quot;required&quot; : false,
         &quot;repeats&quot; : false
@@ -675,7 +709,7 @@
             }]
           }
         }],
-        &quot;text&quot; : &quot;A unique identifier for a dependent under the coverage.&quot;,
+        &quot;text&quot; : &quot;A unique identifier for a dependent under the coverage. Periodically the member number is constructed from the subscriberId and the dependant number.&quot;,
         &quot;type&quot; : &quot;display&quot;
       },
       {
@@ -696,7 +730,7 @@
         &quot;valueString&quot; : &quot;CodeableConcept&quot;
       }],
       &quot;linkId&quot; : &quot;Coverage.relationship&quot;,
-      &quot;text&quot; : &quot;Beneficiary relationship to the Subscriber&quot;,
+      &quot;text&quot; : &quot;Beneficiary relationship to the subscriber&quot;,
       &quot;type&quot; : &quot;group&quot;,
       &quot;required&quot; : false,
       &quot;repeats&quot; : true,
@@ -711,7 +745,7 @@
             }]
           }
         }],
-        &quot;text&quot; : &quot;The relationship of beneficiary (patient) to the subscriber.&quot;,
+        &quot;text&quot; : &quot;The relationship of beneficiary (patient) to the subscriber. Typically, an individual uses policies which are theirs (relationship='self') before policies owned by others.&quot;,
         &quot;type&quot; : &quot;display&quot;
       },
       {
@@ -774,12 +808,16 @@
     },
     {
       &quot;extension&quot; : [{
+        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs&quot;,
+        &quot;valueInteger&quot; : 1
+      },
+      {
         &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
         &quot;valueString&quot; : &quot;Reference&quot;
       }],
       &quot;linkId&quot; : &quot;Coverage.payor&quot;,
       &quot;type&quot; : &quot;group&quot;,
-      &quot;required&quot; : false,
+      &quot;required&quot; : true,
       &quot;repeats&quot; : true,
       &quot;item&quot; : [{
         &quot;extension&quot; : [{
@@ -792,7 +830,7 @@
             }]
           }
         }],
-        &quot;text&quot; : &quot;The program or plan underwriter or payor including both insurance and non-insurance agreements, such as patient-pay agreements. May provide multiple identifiers such as insurance company identifier or business identifier (BIN number).&quot;,
+        &quot;text&quot; : &quot;The program or plan underwriter or payor including both insurance and non-insurance agreements, such as patient-pay agreements. May provide multiple identifiers such as insurance company identifier or business identifier (BIN number).\nFor selfpay it may provide multiple paying persons and/or organizations.&quot;,
         &quot;type&quot; : &quot;display&quot;
       },
       {
@@ -805,7 +843,7 @@
           &quot;valueString&quot; : &quot;subject=$subj&amp;patient=$subj&amp;encounter=$encounter&quot;
         }],
         &quot;linkId&quot; : &quot;Coverage.payor.value&quot;,
-        &quot;text&quot; : &quot;Identifier for the plan or agreement issuer&quot;,
+        &quot;text&quot; : &quot;Issuer of the policy&quot;,
         &quot;type&quot; : &quot;reference&quot;,
         &quot;required&quot; : false,
         &quot;repeats&quot; : false
@@ -818,6 +856,10 @@
       &quot;required&quot; : false,
       &quot;repeats&quot; : true,
       &quot;item&quot; : [{
+        &quot;text&quot; : &quot;For example may be used to identify a class of coverage or employer group, Policy, Plan.&quot;,
+        &quot;type&quot; : &quot;display&quot;
+      },
+      {
         &quot;extension&quot; : [{
           &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl&quot;,
           &quot;valueCodeableConcept&quot; : {
@@ -828,7 +870,7 @@
             }]
           }
         }],
-        &quot;text&quot; : &quot;A suite of underwrite specific classifiers, for example may be used to identify a class of coverage or employer group, Policy, Plan.&quot;,
+        &quot;text&quot; : &quot;A suite of underwriter specific classifiers.&quot;,
         &quot;type&quot; : &quot;display&quot;
       },
       {
@@ -860,7 +902,7 @@
         },
         {
           &quot;linkId&quot; : &quot;Coverage.class.id.value&quot;,
-          &quot;text&quot; : &quot;xml:id (or equivalent in JSON)&quot;,
+          &quot;text&quot; : &quot;Unique id for inter-element referencing&quot;,
           &quot;type&quot; : &quot;string&quot;,
           &quot;required&quot; : false,
           &quot;repeats&quot; : false
@@ -889,7 +931,7 @@
       },
       {
         &quot;linkId&quot; : &quot;Coverage.class.modifierExtension&quot;,
-        &quot;text&quot; : &quot;Extensions that cannot be ignored if unrecognized&quot;,
+        &quot;text&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
         &quot;type&quot; : &quot;group&quot;,
         &quot;required&quot; : false,
         &quot;repeats&quot; : true,
@@ -904,7 +946,7 @@
               }]
             }
           }],
-          &quot;text&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+          &quot;text&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
           &quot;type&quot; : &quot;display&quot;
         }]
       },
@@ -919,9 +961,10 @@
         },
         {
           &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
-          &quot;valueString&quot; : &quot;Coding&quot;
+          &quot;valueString&quot; : &quot;CodeableConcept&quot;
         }],
         &quot;linkId&quot; : &quot;Coverage.class.type&quot;,
+        &quot;text&quot; : &quot;Type of class such as 'group' or 'plan'&quot;,
         &quot;type&quot; : &quot;group&quot;,
         &quot;required&quot; : true,
         &quot;repeats&quot; : true,
@@ -936,13 +979,20 @@
               }]
             }
           }],
-          &quot;text&quot; : &quot;The type of classification for which an insurer-specific class tag or number and optional name is provided, for example may be used to identify a class of coverage or employer group, Policy, Plan.&quot;,
+          &quot;text&quot; : &quot;The type of classification for which an insurer-specific class label or number and optional name is provided, for example may be used to identify a class of coverage or employer group, Policy, Plan.&quot;,
           &quot;type&quot; : &quot;display&quot;
         },
         {
-          &quot;linkId&quot; : &quot;Coverage.class.type.value&quot;,
-          &quot;text&quot; : &quot;Type of class such as 'group' or 'plan'&quot;,
+          &quot;linkId&quot; : &quot;Coverage.class.type.coding&quot;,
+          &quot;text&quot; : &quot;code:&quot;,
           &quot;type&quot; : &quot;open-choice&quot;,
+          &quot;required&quot; : false,
+          &quot;repeats&quot; : false
+        },
+        {
+          &quot;linkId&quot; : &quot;Coverage.class.type.text&quot;,
+          &quot;text&quot; : &quot;text:&quot;,
+          &quot;type&quot; : &quot;string&quot;,
           &quot;required&quot; : false,
           &quot;repeats&quot; : false
         }]
@@ -975,12 +1025,12 @@
               }]
             }
           }],
-          &quot;text&quot; : &quot;For example, the Group or Plan number.&quot;,
+          &quot;text&quot; : &quot;The alphanumeric string value associated with the insurer issued label. For example, the Group or Plan number.&quot;,
           &quot;type&quot; : &quot;display&quot;
         },
         {
           &quot;linkId&quot; : &quot;Coverage.class.value.value&quot;,
-          &quot;text&quot; : &quot;The tag or value under the classification&quot;,
+          &quot;text&quot; : &quot;Value associated with the type&quot;,
           &quot;type&quot; : &quot;string&quot;,
           &quot;required&quot; : false,
           &quot;repeats&quot; : false
@@ -1015,7 +1065,7 @@
         },
         {
           &quot;linkId&quot; : &quot;Coverage.class.name.value&quot;,
-          &quot;text&quot; : &quot;Display text for an identifier for the group&quot;,
+          &quot;text&quot; : &quot;Human readable description of the type and value&quot;,
           &quot;type&quot; : &quot;string&quot;,
           &quot;required&quot; : false,
           &quot;repeats&quot; : false
@@ -1093,12 +1143,16 @@
       }]
     },
     {
-      &quot;linkId&quot; : &quot;Coverage.copay&quot;,
+      &quot;linkId&quot; : &quot;Coverage.costToBeneficiary&quot;,
       &quot;text&quot; : &quot;Patient payments for services/products&quot;,
       &quot;type&quot; : &quot;group&quot;,
       &quot;required&quot; : false,
       &quot;repeats&quot; : true,
       &quot;item&quot; : [{
+        &quot;text&quot; : &quot;For example by knowing the patient visit co-pay, the provider can collect the amount prior to undertaking treatment.&quot;,
+        &quot;type&quot; : &quot;display&quot;
+      },
+      {
         &quot;extension&quot; : [{
           &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl&quot;,
           &quot;valueCodeableConcept&quot; : {
@@ -1109,7 +1163,7 @@
             }]
           }
         }],
-        &quot;text&quot; : &quot;A suite of underwrite specific classifiers, for example may be used to identify a class of coverage or employer group, Policy, Plan.&quot;,
+        &quot;text&quot; : &quot;A suite of codes indicating the cost category and associated amount which have been detailed in the policy and may have been  included on the health card.&quot;,
         &quot;type&quot; : &quot;display&quot;
       },
       {
@@ -1121,7 +1175,7 @@
           &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
           &quot;valueString&quot; : &quot;string&quot;
         }],
-        &quot;linkId&quot; : &quot;Coverage.copay.id&quot;,
+        &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.id&quot;,
         &quot;type&quot; : &quot;group&quot;,
         &quot;required&quot; : false,
         &quot;repeats&quot; : true,
@@ -1140,15 +1194,15 @@
           &quot;type&quot; : &quot;display&quot;
         },
         {
-          &quot;linkId&quot; : &quot;Coverage.copay.id.value&quot;,
-          &quot;text&quot; : &quot;xml:id (or equivalent in JSON)&quot;,
+          &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.id.value&quot;,
+          &quot;text&quot; : &quot;Unique id for inter-element referencing&quot;,
           &quot;type&quot; : &quot;string&quot;,
           &quot;required&quot; : false,
           &quot;repeats&quot; : false
         }]
       },
       {
-        &quot;linkId&quot; : &quot;Coverage.copay.extension&quot;,
+        &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.extension&quot;,
         &quot;text&quot; : &quot;Additional content defined by implementations&quot;,
         &quot;type&quot; : &quot;group&quot;,
         &quot;required&quot; : false,
@@ -1169,8 +1223,8 @@
         }]
       },
       {
-        &quot;linkId&quot; : &quot;Coverage.copay.modifierExtension&quot;,
-        &quot;text&quot; : &quot;Extensions that cannot be ignored if unrecognized&quot;,
+        &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.modifierExtension&quot;,
+        &quot;text&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
         &quot;type&quot; : &quot;group&quot;,
         &quot;required&quot; : false,
         &quot;repeats&quot; : true,
@@ -1185,7 +1239,7 @@
               }]
             }
           }],
-          &quot;text&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+          &quot;text&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
           &quot;type&quot; : &quot;display&quot;
         }]
       },
@@ -1196,9 +1250,10 @@
         },
         {
           &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
-          &quot;valueString&quot; : &quot;Coding&quot;
+          &quot;valueString&quot; : &quot;CodeableConcept&quot;
         }],
-        &quot;linkId&quot; : &quot;Coverage.copay.type&quot;,
+        &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.type&quot;,
+        &quot;text&quot; : &quot;Cost category&quot;,
         &quot;type&quot; : &quot;group&quot;,
         &quot;required&quot; : false,
         &quot;repeats&quot; : true,
@@ -1213,13 +1268,20 @@
               }]
             }
           }],
-          &quot;text&quot; : &quot;Types of products or services such as visit, specialist visits, emergency, inpatient care, etc.&quot;,
+          &quot;text&quot; : &quot;The category of patient centric costs associated with treatment. For example visit, specialist visits, emergency, inpatient care, etc.&quot;,
           &quot;type&quot; : &quot;display&quot;
         },
         {
-          &quot;linkId&quot; : &quot;Coverage.copay.type.value&quot;,
-          &quot;text&quot; : &quot;The type of service or product&quot;,
+          &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.type.coding&quot;,
+          &quot;text&quot; : &quot;code:&quot;,
           &quot;type&quot; : &quot;open-choice&quot;,
+          &quot;required&quot; : false,
+          &quot;repeats&quot; : false
+        },
+        {
+          &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.type.text&quot;,
+          &quot;text&quot; : &quot;text:&quot;,
+          &quot;type&quot; : &quot;string&quot;,
           &quot;required&quot; : false,
           &quot;repeats&quot; : false
         }]
@@ -1232,13 +1294,9 @@
         {
           &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs&quot;,
           &quot;valueInteger&quot; : 1
-        },
-        {
-          &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
-          &quot;valueString&quot; : &quot;Quantity&quot;
         }],
-        &quot;linkId&quot; : &quot;Coverage.copay.value&quot;,
-        &quot;text&quot; : &quot;The amount or percentage of the copayment&quot;,
+        &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]&quot;,
+        &quot;text&quot; : &quot;The amount or percentage due from the beneficiary&quot;,
         &quot;type&quot; : &quot;group&quot;,
         &quot;required&quot; : true,
         &quot;repeats&quot; : true,
@@ -1253,44 +1311,326 @@
               }]
             }
           }],
-          &quot;text&quot; : &quot;The amount of patient payments for various types of services/products, expressed as a percentage of the service/product cost or a fixed amount of currency.&quot;,
+          &quot;text&quot; : &quot;The amount due from the patient for the cost category. Amount may be expressed as a percentage of the service/product cost or a fixed amount of currency.&quot;,
           &quot;type&quot; : &quot;display&quot;
         },
         {
-          &quot;linkId&quot; : &quot;Coverage.copay.value.comparator&quot;,
-          &quot;text&quot; : &quot;comp:&quot;,
+          &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._type&quot;,
+          &quot;text&quot; : &quot;type&quot;,
           &quot;type&quot; : &quot;choice&quot;,
           &quot;required&quot; : false,
-          &quot;repeats&quot; : false
-        },
-        {
-          &quot;linkId&quot; : &quot;Coverage.copay.value.value&quot;,
-          &quot;text&quot; : &quot;value:&quot;,
-          &quot;type&quot; : &quot;decimal&quot;,
-          &quot;required&quot; : false,
-          &quot;repeats&quot; : false
-        },
-        {
-          &quot;linkId&quot; : &quot;Coverage.copay.value.units&quot;,
-          &quot;text&quot; : &quot;units:&quot;,
-          &quot;type&quot; : &quot;string&quot;,
-          &quot;required&quot; : false,
-          &quot;repeats&quot; : false
-        },
-        {
-          &quot;linkId&quot; : &quot;Coverage.copay.value.code&quot;,
-          &quot;text&quot; : &quot;coded units:&quot;,
-          &quot;type&quot; : &quot;string&quot;,
-          &quot;required&quot; : false,
-          &quot;repeats&quot; : false
-        },
-        {
-          &quot;linkId&quot; : &quot;Coverage.copay.value.system&quot;,
-          &quot;text&quot; : &quot;units system:&quot;,
-          &quot;type&quot; : &quot;string&quot;,
-          &quot;required&quot; : false,
-          &quot;repeats&quot; : false
+          &quot;repeats&quot; : false,
+          &quot;answerValueSet&quot; : &quot;#vs2&quot;,
+          &quot;item&quot; : [{
+            &quot;extension&quot; : [{
+              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
+              &quot;valueString&quot; : &quot;Quantity&quot;
+            }],
+            &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null&quot;,
+            &quot;type&quot; : &quot;group&quot;,
+            &quot;item&quot; : [{
+              &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null.comparator&quot;,
+              &quot;text&quot; : &quot;comp:&quot;,
+              &quot;type&quot; : &quot;choice&quot;,
+              &quot;required&quot; : false,
+              &quot;repeats&quot; : false
+            },
+            {
+              &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null.value&quot;,
+              &quot;text&quot; : &quot;value:&quot;,
+              &quot;type&quot; : &quot;decimal&quot;,
+              &quot;required&quot; : false,
+              &quot;repeats&quot; : false
+            },
+            {
+              &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null.units&quot;,
+              &quot;text&quot; : &quot;units:&quot;,
+              &quot;type&quot; : &quot;string&quot;,
+              &quot;required&quot; : false,
+              &quot;repeats&quot; : false
+            },
+            {
+              &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null.code&quot;,
+              &quot;text&quot; : &quot;coded units:&quot;,
+              &quot;type&quot; : &quot;string&quot;,
+              &quot;required&quot; : false,
+              &quot;repeats&quot; : false
+            },
+            {
+              &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null.system&quot;,
+              &quot;text&quot; : &quot;units system:&quot;,
+              &quot;type&quot; : &quot;string&quot;,
+              &quot;required&quot; : false,
+              &quot;repeats&quot; : false
+            }]
+          },
+          {
+            &quot;extension&quot; : [{
+              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
+              &quot;valueString&quot; : &quot;Quantity&quot;
+            }],
+            &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null&quot;,
+            &quot;type&quot; : &quot;group&quot;,
+            &quot;item&quot; : [{
+              &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null.comparator&quot;,
+              &quot;text&quot; : &quot;comp:&quot;,
+              &quot;type&quot; : &quot;choice&quot;,
+              &quot;required&quot; : false,
+              &quot;repeats&quot; : false
+            },
+            {
+              &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null.value&quot;,
+              &quot;text&quot; : &quot;value:&quot;,
+              &quot;type&quot; : &quot;decimal&quot;,
+              &quot;required&quot; : false,
+              &quot;repeats&quot; : false
+            },
+            {
+              &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null.units&quot;,
+              &quot;text&quot; : &quot;units:&quot;,
+              &quot;type&quot; : &quot;string&quot;,
+              &quot;required&quot; : false,
+              &quot;repeats&quot; : false
+            },
+            {
+              &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null.code&quot;,
+              &quot;text&quot; : &quot;coded units:&quot;,
+              &quot;type&quot; : &quot;string&quot;,
+              &quot;required&quot; : false,
+              &quot;repeats&quot; : false
+            },
+            {
+              &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.value[x]._null.system&quot;,
+              &quot;text&quot; : &quot;units system:&quot;,
+              &quot;type&quot; : &quot;string&quot;,
+              &quot;required&quot; : false,
+              &quot;repeats&quot; : false
+            }]
+          }]
         }]
+      },
+      {
+        &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception&quot;,
+        &quot;text&quot; : &quot;Exceptions for patient payments&quot;,
+        &quot;type&quot; : &quot;group&quot;,
+        &quot;required&quot; : false,
+        &quot;repeats&quot; : true,
+        &quot;item&quot; : [{
+          &quot;extension&quot; : [{
+            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl&quot;,
+            &quot;valueCodeableConcept&quot; : {
+              &quot;coding&quot; : [{
+                &quot;system&quot; : &quot;http://hl7.org/fhir/questionnaire-item-control&quot;,
+                &quot;code&quot; : &quot;flyover&quot;,
+                &quot;display&quot; : &quot;Fly-over&quot;
+              }]
+            }
+          }],
+          &quot;text&quot; : &quot;A suite of codes indicating exceptions or reductions to patient costs and their effective periods.&quot;,
+          &quot;type&quot; : &quot;display&quot;
+        },
+        {
+          &quot;extension&quot; : [{
+            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs&quot;,
+            &quot;valueInteger&quot; : 1
+          },
+          {
+            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
+            &quot;valueString&quot; : &quot;string&quot;
+          }],
+          &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception.id&quot;,
+          &quot;type&quot; : &quot;group&quot;,
+          &quot;required&quot; : false,
+          &quot;repeats&quot; : true,
+          &quot;item&quot; : [{
+            &quot;extension&quot; : [{
+              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl&quot;,
+              &quot;valueCodeableConcept&quot; : {
+                &quot;coding&quot; : [{
+                  &quot;system&quot; : &quot;http://hl7.org/fhir/questionnaire-item-control&quot;,
+                  &quot;code&quot; : &quot;flyover&quot;,
+                  &quot;display&quot; : &quot;Fly-over&quot;
+                }]
+              }
+            }],
+            &quot;text&quot; : &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+            &quot;type&quot; : &quot;display&quot;
+          },
+          {
+            &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception.id.value&quot;,
+            &quot;text&quot; : &quot;Unique id for inter-element referencing&quot;,
+            &quot;type&quot; : &quot;string&quot;,
+            &quot;required&quot; : false,
+            &quot;repeats&quot; : false
+          }]
+        },
+        {
+          &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception.extension&quot;,
+          &quot;text&quot; : &quot;Additional content defined by implementations&quot;,
+          &quot;type&quot; : &quot;group&quot;,
+          &quot;required&quot; : false,
+          &quot;repeats&quot; : true,
+          &quot;item&quot; : [{
+            &quot;extension&quot; : [{
+              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl&quot;,
+              &quot;valueCodeableConcept&quot; : {
+                &quot;coding&quot; : [{
+                  &quot;system&quot; : &quot;http://hl7.org/fhir/questionnaire-item-control&quot;,
+                  &quot;code&quot; : &quot;flyover&quot;,
+                  &quot;display&quot; : &quot;Fly-over&quot;
+                }]
+              }
+            }],
+            &quot;text&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+            &quot;type&quot; : &quot;display&quot;
+          }]
+        },
+        {
+          &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception.modifierExtension&quot;,
+          &quot;text&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
+          &quot;type&quot; : &quot;group&quot;,
+          &quot;required&quot; : false,
+          &quot;repeats&quot; : true,
+          &quot;item&quot; : [{
+            &quot;extension&quot; : [{
+              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl&quot;,
+              &quot;valueCodeableConcept&quot; : {
+                &quot;coding&quot; : [{
+                  &quot;system&quot; : &quot;http://hl7.org/fhir/questionnaire-item-control&quot;,
+                  &quot;code&quot; : &quot;flyover&quot;,
+                  &quot;display&quot; : &quot;Fly-over&quot;
+                }]
+              }
+            }],
+            &quot;text&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+            &quot;type&quot; : &quot;display&quot;
+          }]
+        },
+        {
+          &quot;extension&quot; : [{
+            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs&quot;,
+            &quot;valueInteger&quot; : 1
+          },
+          {
+            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs&quot;,
+            &quot;valueInteger&quot; : 1
+          },
+          {
+            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
+            &quot;valueString&quot; : &quot;CodeableConcept&quot;
+          }],
+          &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception.type&quot;,
+          &quot;text&quot; : &quot;Exception category&quot;,
+          &quot;type&quot; : &quot;group&quot;,
+          &quot;required&quot; : true,
+          &quot;repeats&quot; : true,
+          &quot;item&quot; : [{
+            &quot;extension&quot; : [{
+              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl&quot;,
+              &quot;valueCodeableConcept&quot; : {
+                &quot;coding&quot; : [{
+                  &quot;system&quot; : &quot;http://hl7.org/fhir/questionnaire-item-control&quot;,
+                  &quot;code&quot; : &quot;flyover&quot;,
+                  &quot;display&quot; : &quot;Fly-over&quot;
+                }]
+              }
+            }],
+            &quot;text&quot; : &quot;The code for the specific exception.&quot;,
+            &quot;type&quot; : &quot;display&quot;
+          },
+          {
+            &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception.type.coding&quot;,
+            &quot;text&quot; : &quot;code:&quot;,
+            &quot;type&quot; : &quot;open-choice&quot;,
+            &quot;required&quot; : false,
+            &quot;repeats&quot; : false
+          },
+          {
+            &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception.type.text&quot;,
+            &quot;text&quot; : &quot;text:&quot;,
+            &quot;type&quot; : &quot;string&quot;,
+            &quot;required&quot; : false,
+            &quot;repeats&quot; : false
+          }]
+        },
+        {
+          &quot;extension&quot; : [{
+            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs&quot;,
+            &quot;valueInteger&quot; : 1
+          },
+          {
+            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
+            &quot;valueString&quot; : &quot;Period&quot;
+          }],
+          &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception.period&quot;,
+          &quot;text&quot; : &quot;The effective period of the exception&quot;,
+          &quot;type&quot; : &quot;group&quot;,
+          &quot;required&quot; : false,
+          &quot;repeats&quot; : true,
+          &quot;item&quot; : [{
+            &quot;extension&quot; : [{
+              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl&quot;,
+              &quot;valueCodeableConcept&quot; : {
+                &quot;coding&quot; : [{
+                  &quot;system&quot; : &quot;http://hl7.org/fhir/questionnaire-item-control&quot;,
+                  &quot;code&quot; : &quot;flyover&quot;,
+                  &quot;display&quot; : &quot;Fly-over&quot;
+                }]
+              }
+            }],
+            &quot;text&quot; : &quot;The timeframe during when the exception is in force.&quot;,
+            &quot;type&quot; : &quot;display&quot;
+          },
+          {
+            &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception.period.low&quot;,
+            &quot;text&quot; : &quot;start:&quot;,
+            &quot;type&quot; : &quot;dateTime&quot;,
+            &quot;required&quot; : false,
+            &quot;repeats&quot; : false
+          },
+          {
+            &quot;linkId&quot; : &quot;Coverage.costToBeneficiary.exception.period.end&quot;,
+            &quot;text&quot; : &quot;end:&quot;,
+            &quot;type&quot; : &quot;dateTime&quot;,
+            &quot;required&quot; : false,
+            &quot;repeats&quot; : false
+          }]
+        }]
+      }]
+    },
+    {
+      &quot;extension&quot; : [{
+        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs&quot;,
+        &quot;valueInteger&quot; : 1
+      },
+      {
+        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;,
+        &quot;valueString&quot; : &quot;boolean&quot;
+      }],
+      &quot;linkId&quot; : &quot;Coverage.subrogation&quot;,
+      &quot;type&quot; : &quot;group&quot;,
+      &quot;required&quot; : false,
+      &quot;repeats&quot; : true,
+      &quot;item&quot; : [{
+        &quot;extension&quot; : [{
+          &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl&quot;,
+          &quot;valueCodeableConcept&quot; : {
+            &quot;coding&quot; : [{
+              &quot;system&quot; : &quot;http://hl7.org/fhir/questionnaire-item-control&quot;,
+              &quot;code&quot; : &quot;flyover&quot;,
+              &quot;display&quot; : &quot;Fly-over&quot;
+            }]
+          }
+        }],
+        &quot;text&quot; : &quot;When 'subrogation=true' this insurance instance has been included not for adjudication but to provide insurers with the details to recover costs. Typically, automotive and worker's compensation policies would be flagged with 'subrogation=true' to enable healthcare payors to collect against accident claims.&quot;,
+        &quot;type&quot; : &quot;display&quot;
+      },
+      {
+        &quot;linkId&quot; : &quot;Coverage.subrogation.value&quot;,
+        &quot;text&quot; : &quot;Reimbursement to insurer&quot;,
+        &quot;type&quot; : &quot;boolean&quot;,
+        &quot;required&quot; : false,
+        &quot;repeats&quot; : false
       }]
     },
     {
@@ -1358,7 +1698,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:25-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:26-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -1368,7 +1708,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fcoverage-questionnaire.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fcoverage-questionnaire.json.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fcoverage-questionnaire.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fcoverage-questionnaire.json.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

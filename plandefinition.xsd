@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -123,7 +123,7 @@
           </xs:element>
           <xs:element name="useContext" minOccurs="0" maxOccurs="unbounded" type="UsageContext">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate plan definition instances.</xs:documentation>
+              <xs:documentation xml:lang="en">The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate plan definition instances.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="jurisdiction" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
@@ -337,6 +337,13 @@
               <xs:documentation xml:lang="en">Identifies goals that this action supports. The reference must be to a goal element defined within this plan definition.</xs:documentation>
            </xs:annotation>
           </xs:element>
+          <xs:choice minOccurs="0" maxOccurs="1" >
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A code or group definition that describes the intended subject of the action and its children, if any.</xs:documentation>
+            </xs:annotation>
+            <xs:element name="subjectCodeableConcept" type="CodeableConcept"/>
+            <xs:element name="subjectReference" type="Reference"/>
+          </xs:choice>
           <xs:element name="trigger" minOccurs="0" maxOccurs="unbounded" type="TriggerDefinition">
             <xs:annotation>
               <xs:documentation xml:lang="en">A description of when the action should be triggered.</xs:documentation>
@@ -408,11 +415,13 @@
               <xs:documentation xml:lang="en">Defines whether the action can be selected multiple times.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="definition" minOccurs="0" maxOccurs="1" type="canonical">
+          <xs:choice minOccurs="0" maxOccurs="1" >
             <xs:annotation>
               <xs:documentation xml:lang="en">A reference to an ActivityDefinition that describes the action to be taken in detail, or a PlanDefinition that describes a series of actions to be taken.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
+            </xs:annotation>
+            <xs:element name="definitionCanonical" type="canonical"/>
+            <xs:element name="definitionUri" type="uri"/>
+          </xs:choice>
           <xs:element name="transform" minOccurs="0" maxOccurs="1" type="canonical">
             <xs:annotation>
               <xs:documentation xml:lang="en">A reference to a StructureMap resource that defines a transform that can be executed to produce the intent resource using the ActivityDefinition instance as the input.</xs:documentation>
@@ -511,7 +520,7 @@
         <xs:sequence>
           <xs:element name="path" minOccurs="0" maxOccurs="1" type="string">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The path to the element to be customized. This is the path on the resource that will hold the result of the calculation defined by the expression.</xs:documentation>
+              <xs:documentation xml:lang="en">The path to the element to be customized. This is the path on the resource that will hold the result of the calculation defined by the expression. The specified path SHALL be a FHIRPath resolveable on the specified target type of the ActivityDefinition, and SHALL consist only of identifiers, constant indexers, and a restricted subset of functions. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements (see the [Simple FHIRPath Profile](fhirpath.html#simple) for full details).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="expression" minOccurs="0" maxOccurs="1" type="Expression">
@@ -544,7 +553,7 @@
   </xs:simpleType>
   <xs:complexType name="ActionRequiredBehavior">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Defines requiredness behavior for selecting an action or an action group.</xs:documentation>
+      <xs:documentation xml:lang="en">Defines expectations around whether an action or action group is required.</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>

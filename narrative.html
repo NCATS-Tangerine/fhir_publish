@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Narrative - FHIR v3.5.0</title>
+  <title>Narrative - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -38,7 +38,7 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -114,16 +114,12 @@
 <a name="narrative"></a>
 <a name="xhtml"></a>
 <h2 class="self-link-parent"><span class="sectioncount">2.4.0<a name="2.4.0"> </a></span> Narrative <a href="narrative.html#2.4.0" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h2>
-<table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: 5</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
-<p style="border: 1px black solid; background-color: #e6ffe6; padding: 5px">
-Normative Candidate Note: This page is candidate normative content for R4 in the <a href="ballot-intro.html#infrastructure">Infrastructure Package</a>.
-Once normative, it will lose it's Maturity Level, and <a href="versions.html#change">breaking changes</a> will no longer be made.
-</p>
+<table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: Normative</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
 
 
 <p>
-Any resource that is a <a href="domainresource.html">DomainResource</a> (almost all types
-of resource) may include a human-readable narrative that contains a summary of the resource,
+Any resource that is a <a href="domainresource.html">DomainResource</a> (all resources except <a href="bundle.html">Bundle</a>, <a href="parameters.html">Parameters</a> and <a href="binary.html">Binary</a>) 
+may include a human-readable narrative that contains a summary of the resource
 and may be used to represent the content of the resource to a human.
 </p>
 <p>
@@ -143,12 +139,13 @@ when describing references. Narrative for a resource SHOULD include summary info
 about any referenced resources that would be required for a consumer of the resource to
 be able to understand the key, essential information about a resource without retrieving
 any additional resources. If the <code>Narrative.status</code> = extensions, the narrative 
-SHALL reflect the impact of all modifier extensions. Narrative MAY <a href="references.html#rendering">include generated 
+SHALL reflect the impact of all modifier extensions that extend elements that are themselves 
+described by the narrative. Narrative MAY <a href="references.html#rendering">include generated 
 content</a> from other resources and still be considered generated.
 </p>
 <p>
 For example, the narrative for a MedicationRequest might include brief summary information
-about the referenced patient, prescriber and medication.  Some resources (e.g. List, Composition)
+about the referenced patient, prescriber and medication.  Some resources (e.g. List)
 can provide specific rules about what content must (or must not) be included in the resource narrative.
 Consideration would be given to the fact that referenced resources may be updated without updating
 referencing resources, so the proportion of content of a referenced resource included
@@ -160,9 +157,9 @@ perform, but SHALL NOT assume that the resource is rendered in any particular co
 when generating narrative, since resources will be used in multiple contexts.
 </p>
 <p>
-Resources SHOULD always contain narrative to support human-consumption
-as a fallback.  Structured data SHOULD NOT generally contain information of
-importance to human readers that is omitted from the narrative. Creators of FHIR
+Resource instances that permit narrative SHOULD always contain narrative to support 
+human-consumption as a fallback. Structured data SHOULD NOT generally contain information 
+of importance to human readers that is omitted from the narrative. Creators of FHIR
 resources should not assume that systems will render (or that humans will see)
 data that is not in the narrative. However, in strictly managed trading systems
 where all systems share a common data model and additional text is unnecessary or
@@ -181,10 +178,6 @@ legacy systems where information is captured as a "text blob" or where text is a
 entered raw or narrated and encoded information is added later.
 </p>
 <p>
-Note that <a href="references.html#contained">contained</a> Resources SHALL NOT have a narrative
-of their own.
-</p>
-<p>
 The narrative is an XHTML fragment with a flag to indicate its relationship to the data:
 </p>
 <div id="tabs-Narrative">
@@ -194,14 +187,14 @@ The narrative is an XHTML fragment with a flag to indicate its relationship to t
   <li><a href="#tabs-Narrative-xml">XML</a></li>
   <li><a href="#tabs-Narrative-json">JSON</a></li>
   <li><a href="#tabs-Narrative-ttl">Turtle</a></li>
-  <li><a href="#tabs-Narrative-diff">R2 Diff</a></li>
+  <li><a href="#tabs-Narrative-diff">R3 Diff</a></li>
   <li><a href="#tabs-Narrative-all">All</a></li>
  </ul>
  <div id="tabs-Narrative-struc">
   <div id="tbl">
    <p><b>Structure</b></p>
    <div id="tbl-inner">
-    <table border="0" cellpadding="0" cellspacing="0" style="border: 0px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;"><tr style="border: 1px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;"><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="The logical name of the element">Name</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Information about the use of the element">Flags</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Minimum and Maximum # of times the the element can appear in the instance">Card.</a></th><th style="width: 100px" class="hierarchy"><a href="formats.html#table" title="Reference to the type of the element">Type</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Additional information about the element">Description &amp; Constraints</a><span style="float: right"><a href="formats.html#table" title="Legend for this format"><img src="help16.png" alt="doco" style="background-color: inherit"/></a></span></th></tr><tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white;"><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck1.png)" class="hierarchy"><img src="tbl_spacer.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="icon_element.gif" alt="." style="background-color: white; background-color: inherit" title="Element" class="hierarchy"/> <a href="narrative-definitions.html#Narrative" title="Narrative : A human-readable formatted text, including images.">Narrative</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #e6ffe6" href="versions.html#std-process" title="Ballot Status = Normative">N</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="element.html">Element</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">A human-readable formatted text, including images<br/>Elements defined in Ancestors: <a href="element.html#Element" title="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.">id</a>, <a href="element.html#Element" title="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.">extension</a></td></tr>
+    <table border="0" cellpadding="0" cellspacing="0" style="border: 0px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;"><tr style="border: 1px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;"><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="The logical name of the element">Name</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Information about the use of the element">Flags</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Minimum and Maximum # of times the the element can appear in the instance">Card.</a></th><th style="width: 100px" class="hierarchy"><a href="formats.html#table" title="Reference to the type of the element">Type</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Additional information about the element">Description &amp; Constraints</a><span style="float: right"><a href="formats.html#table" title="Legend for this format"><img src="help16.png" alt="doco" style="background-color: inherit"/></a></span></th></tr><tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white;"><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck1.png)" class="hierarchy"><img src="tbl_spacer.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="icon_element.gif" alt="." style="background-color: white; background-color: inherit" title="Element" class="hierarchy"/> <a href="narrative-definitions.html#Narrative" title="Narrative : A human-readable summary of the resource conveying the essential clinical and business information for the resource.">Narrative</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #e6ffe6" href="versions.html#std-process" title="Standards Status = Normative">N</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="element.html">Element</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">Human-readable summary of the resource (essential clinical and business information)<br/>Elements defined in Ancestors: <a href="element.html#Element" title="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.">id</a>, <a href="element.html#Element" title="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.">extension</a></td></tr>
 <tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white;"><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)" class="hierarchy"><img src="tbl_spacer.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="tbl_vjoin.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="icon_primitive.png" alt="." style="background-color: white; background-color: inherit" title="Primitive Data Type" class="hierarchy"/> <a href="narrative-definitions.html#Narrative.status" title="Narrative.status : The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data.">status</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">1..1</td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="datatypes.html#code">code</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">generated | extensions | additional | empty<br/><a href="valueset-narrative-status.html" title="The status of a resource narrative.">NarrativeStatus</a> (<a href="terminologies.html#required" title="To be conformant, the concept in this element SHALL be from the specified value set.">Required</a>)</td></tr>
 <tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white;"><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck00.png)" class="hierarchy"><img src="tbl_spacer.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="tbl_vjoin_end.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="icon_datatype.gif" alt="." style="background-color: white; background-color: inherit" title="Data Type" class="hierarchy"/> <a href="narrative-definitions.html#Narrative.div" title="Narrative.div : The actual narrative content, a stripped down version of XHTML.">div</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a style="padding-left: 3px; padding-right: 3px; color: black; background-color: white" href="conformance-rules.html#constraints" title="This element has or is affected by some invariants">I</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">1..1</td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="narrative.html#xhtml">xhtml</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">Limited xhtml content<br/><span style="font-style: italic" title="txt-1">+ Rule: The narrative SHALL contain only the basic html formatting elements and attributes described in chapters 7-11 (except section 4 of chapter 9) and 15 of the HTML 4.0 standard, &lt;a&gt; elements (either name or href), images and internally contained style attributes</span><br/><span style="font-style: italic" title="txt-2">+ Rule: The narrative SHALL have some non-whitespace content</span></td></tr>
 <tr><td colspan="5" class="hierarchy"><br/><a href="formats.html#table" title="Legend for this format"><img src="help16.png" alt="doco" style="background-color: inherit"/> Documentation for this format</a></td></tr></table>
@@ -220,7 +213,7 @@ The narrative is an XHTML fragment with a flag to indicate its relationship to t
       <feGaussianBlur result="blurOut" stdDeviation="2" in="matrixOut"></feGaussianBlur>
       <feBlend mode="normal" in="SourceGraphic" in2="blurOut"></feBlend>
     </filter>
-  </defs><g id="n10"><rect filter="url(#shadow1)" rx="4" ry="4" x="70.0" width="114.4" y="0.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n11" height="46.0"></rect><text x="127.2" y="20.0" id="n12" fill="black" class="diagram-class-title">Element</text><line y1="28.0" x1="70.0" y2="28.0" x2="184.4" style="stroke:dimgrey;stroke-width:1" id="n13"></line><text x="76.0" y="42.0" fill="black" class="diagram-class-detail"><a id="n14" xlink:href="extensibility.html"><title id="n15">Extensions - as described for all elements: additional information that is not part of the basic definition of the resource / type</title>extension</a> : <a id="n16" xlink:href="extensibility.html">Extension</a> 0..*</text></g><g id="n17"><rect filter="url(#shadow1)" rx="4" ry="4" x="0.0" width="176.0" y="50.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n18" height="64.0"></rect><line y1="78.0" x1="0.0" y2="78.0" x2="176.0" style="stroke:dimgrey;stroke-width:1" id="n19"></line><text x="88.0" y="70.0" id="n20" fill="black" class="diagram-class-title"><a id="n21" xlink:href="narrative.html#Narrative">Narrative</a></text><text x="6.0" y="92.0" id="n22" fill="black" class="diagram-class-detail"><a id="n23" xlink:href="narrative-definitions.html#Narrative.status"><title>The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data</title>status</a> : <a id="n24" xlink:href="#code">code</a> [1..1] « <a id="n25" xlink:href="valueset-narrative-status.html"><title id="n26">The status of a resource narrative. (Strength=Required)</title>NarrativeStatus</a>! »</text><text x="6.0" y="106.0" id="n32" fill="black" class="diagram-class-detail"><a id="n33" xlink:href="narrative-definitions.html#Narrative.div"><title>The actual narrative content, a stripped down version of XHTML</title>div</a> : <a id="n34" xlink:href="narrative.html#xhtml">xhtml</a> [1..1]</text></g><line y1="46.0" x1="111.9186440677966" y2="50.0" x2="109.26101694915253" style="stroke:navy;stroke-width:1" id="n38"></line><polygon transform="rotate(123.60033262752032 111.9186440677966 46.0)" style="fill:white;stroke:navy;stroke-width:1" id="n39" points="111.9186440677966,46.0 119.9186440677966,52.0 119.9186440677966,40.0 111.9186440677966,46.0"></polygon></svg>
+  </defs><g id="n10"><rect filter="url(#shadow1)" rx="4" ry="4" x="70.0" width="114.4" y="0.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n11" height="46.0"></rect><text x="127.2" y="20.0" id="n12" fill="black" class="diagram-class-title"><a id="n13" xlink:href="element.html#Element">Element</a></text><line y1="28.0" x1="70.0" y2="28.0" x2="184.4" style="stroke:dimgrey;stroke-width:1" id="n14"></line><text x="76.0" y="42.0" fill="black" class="diagram-class-detail"><a id="n15" xlink:href="extensibility.html"><title id="n16">Extensions - as described for all elements: additional information that is not part of the basic definition of the resource / type</title>extension</a> : <a id="n17" xlink:href="extensibility.html">Extension</a> 0..*</text></g><g id="n18"><rect filter="url(#shadow1)" rx="4" ry="4" x="0.0" width="176.0" y="50.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n19" height="64.0"></rect><line y1="78.0" x1="0.0" y2="78.0" x2="176.0" style="stroke:dimgrey;stroke-width:1" id="n20"></line><text x="88.0" y="70.0" id="n21" fill="black" class="diagram-class-title"><a id="n22" xlink:href="narrative.html#Narrative">Narrative</a></text><text x="6.0" y="92.0" id="n23" fill="black" class="diagram-class-detail"><a id="n24" xlink:href="narrative-definitions.html#Narrative.status"><title>The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data</title>status</a> : <a id="n25" xlink:href="#code">code</a> [1..1] « <a id="n26" xlink:href="valueset-narrative-status.html"><title id="n27">The status of a resource narrative. (Strength=Required)</title>NarrativeStatus</a>! »</text><text x="6.0" y="106.0" id="n33" fill="black" class="diagram-class-detail"><a id="n34" xlink:href="narrative-definitions.html#Narrative.div"><title>The actual narrative content, a stripped down version of XHTML</title>div</a> : <a id="n35" xlink:href="narrative.html#xhtml">xhtml</a> [1..1]</text></g><line y1="46.0" x1="111.9186440677966" y2="50.0" x2="109.26101694915253" style="stroke:navy;stroke-width:1" id="n39"></line><polygon transform="rotate(123.60033262752032 111.9186440677966 46.0)" style="fill:white;stroke:navy;stroke-width:1" id="n40" points="111.9186440677966,46.0 119.9186440677966,52.0 119.9186440677966,40.0 111.9186440677966,46.0"></polygon></svg>
    </div>
   </div>
  </div>
@@ -230,7 +223,7 @@ The narrative is an XHTML fragment with a flag to indicate its relationship to t
    <p><b>XML Template</b></p>
    <div id="xml-inner">
     <pre class="spec">
-&lt;<a href="narrative-definitions.html#Narrative" title="A human-readable formatted text, including images." class="dict"><b>[name]</b></a> xmlns="http://hl7.org/fhir"&gt;
+&lt;<a href="narrative-definitions.html#Narrative" title="A human-readable summary of the resource conveying the essential clinical and business information for the resource." class="dict"><b>[name]</b></a> xmlns="http://hl7.org/fhir"&gt;
  &lt;!-- from Element: <a href="extensibility.html">extension</a> --&gt;
  &lt;<a href="narrative-definitions.html#Narrative.status" title="The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data." class="dict"><b>status</b></a> value="[<span style="color: darkgreen"><a href="datatypes.html#code">code</a></span>]"/&gt;<span style="color: Gray">&lt;!--</span> <span style="color: brown"><b>1..1</b></span> <span style="color: navy"><a style="color: navy" href="valueset-narrative-status.html">generated | extensions | additional | empty</a></span><span style="color: Gray"> --&gt;</span>
  &lt;<a href="narrative-definitions.html#Narrative.div" title="The actual narrative content, a stripped down version of XHTML." class="dict"><b title="The actual narrative content, a stripped down version of XHTML.">div</b></a> xmlns="http://www.w3.org/1999/xhtml"&gt; <span style="color: Gray">&lt;!--</span> <span style="color: navy">Limited xhtml content</span><span style="color: Gray">&lt; --&gt;</span> &lt;/div&gt;
@@ -260,7 +253,7 @@ The narrative is an XHTML fragment with a flag to indicate its relationship to t
  </div>
 
  <div id="tabs-Narrative-ttl">
-  <div id="json">
+  <div id="ttl">
    <p><b>Turtle Template</b></p>
    <div id="ttl-inner">
     <pre class="spec">
@@ -287,10 +280,11 @@ The narrative is an XHTML fragment with a flag to indicate its relationship to t
     <td class="diff-left">
       <a href="narrative.html#Narrative">Narrative</a>
     </td>
-    <td class="diff-right"></td>
-    <ul>
-      <li>No Changes</li>
-    </ul>
+    <td class="diff-right">
+      <ul>
+        <li>No Changes</li>
+      </ul>
+    </td>
   </tr>
 </table>
 
@@ -305,7 +299,7 @@ The narrative is an XHTML fragment with a flag to indicate its relationship to t
    <a name="tbl-Narrative"> </a>
    <p><b>Structure</b></p>
    <div id="tbl-inner">
-    <table border="0" cellpadding="0" cellspacing="0" style="border: 0px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;"><tr style="border: 1px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;"><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="The logical name of the element">Name</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Information about the use of the element">Flags</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Minimum and Maximum # of times the the element can appear in the instance">Card.</a></th><th style="width: 100px" class="hierarchy"><a href="formats.html#table" title="Reference to the type of the element">Type</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Additional information about the element">Description &amp; Constraints</a><span style="float: right"><a href="formats.html#table" title="Legend for this format"><img src="help16.png" alt="doco" style="background-color: inherit"/></a></span></th></tr><tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white;"><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck1.png)" class="hierarchy"><img src="tbl_spacer.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="icon_element.gif" alt="." style="background-color: white; background-color: inherit" title="Element" class="hierarchy"/> <a href="narrative-definitions.html#Narrative" title="Narrative : A human-readable formatted text, including images.">Narrative</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #e6ffe6" href="versions.html#std-process" title="Ballot Status = Normative">N</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="element.html">Element</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">A human-readable formatted text, including images<br/>Elements defined in Ancestors: <a href="element.html#Element" title="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.">id</a>, <a href="element.html#Element" title="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.">extension</a></td></tr>
+    <table border="0" cellpadding="0" cellspacing="0" style="border: 0px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;"><tr style="border: 1px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;"><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="The logical name of the element">Name</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Information about the use of the element">Flags</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Minimum and Maximum # of times the the element can appear in the instance">Card.</a></th><th style="width: 100px" class="hierarchy"><a href="formats.html#table" title="Reference to the type of the element">Type</a></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="formats.html#table" title="Additional information about the element">Description &amp; Constraints</a><span style="float: right"><a href="formats.html#table" title="Legend for this format"><img src="help16.png" alt="doco" style="background-color: inherit"/></a></span></th></tr><tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white;"><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck1.png)" class="hierarchy"><img src="tbl_spacer.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="icon_element.gif" alt="." style="background-color: white; background-color: inherit" title="Element" class="hierarchy"/> <a href="narrative-definitions.html#Narrative" title="Narrative : A human-readable summary of the resource conveying the essential clinical and business information for the resource.">Narrative</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #e6ffe6" href="versions.html#std-process" title="Standards Status = Normative">N</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="element.html">Element</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">Human-readable summary of the resource (essential clinical and business information)<br/>Elements defined in Ancestors: <a href="element.html#Element" title="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.">id</a>, <a href="element.html#Element" title="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.">extension</a></td></tr>
 <tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white;"><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)" class="hierarchy"><img src="tbl_spacer.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="tbl_vjoin.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="icon_primitive.png" alt="." style="background-color: white; background-color: inherit" title="Primitive Data Type" class="hierarchy"/> <a href="narrative-definitions.html#Narrative.status" title="Narrative.status : The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data.">status</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">1..1</td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="datatypes.html#code">code</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">generated | extensions | additional | empty<br/><a href="valueset-narrative-status.html" title="The status of a resource narrative.">NarrativeStatus</a> (<a href="terminologies.html#required" title="To be conformant, the concept in this element SHALL be from the specified value set.">Required</a>)</td></tr>
 <tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white;"><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck00.png)" class="hierarchy"><img src="tbl_spacer.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="tbl_vjoin_end.png" alt="." style="background-color: inherit" class="hierarchy"/><img src="icon_datatype.gif" alt="." style="background-color: white; background-color: inherit" title="Data Type" class="hierarchy"/> <a href="narrative-definitions.html#Narrative.div" title="Narrative.div : The actual narrative content, a stripped down version of XHTML.">div</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a style="padding-left: 3px; padding-right: 3px; color: black; background-color: white" href="conformance-rules.html#constraints" title="This element has or is affected by some invariants">I</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">1..1</td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><a href="narrative.html#xhtml">xhtml</a></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">Limited xhtml content<br/><span style="font-style: italic" title="txt-1">+ Rule: The narrative SHALL contain only the basic html formatting elements and attributes described in chapters 7-11 (except section 4 of chapter 9) and 15 of the HTML 4.0 standard, &lt;a&gt; elements (either name or href), images and internally contained style attributes</span><br/><span style="font-style: italic" title="txt-2">+ Rule: The narrative SHALL have some non-whitespace content</span></td></tr>
 <tr><td colspan="5" class="hierarchy"><br/><a href="formats.html#table" title="Legend for this format"><img src="help16.png" alt="doco" style="background-color: inherit"/> Documentation for this format</a></td></tr></table>
@@ -323,7 +317,7 @@ The narrative is an XHTML fragment with a flag to indicate its relationship to t
       <feGaussianBlur result="blurOut" stdDeviation="2" in="matrixOut"></feGaussianBlur>
       <feBlend mode="normal" in="SourceGraphic" in2="blurOut"></feBlend>
     </filter>
-  </defs><g id="n10"><rect filter="url(#shadow1b)" rx="4" ry="4" x="70.0" width="114.4" y="0.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n11" height="46.0"></rect><text x="127.2" y="20.0" id="n12" fill="black" class="diagram-class-title">Element</text><line y1="28.0" x1="70.0" y2="28.0" x2="184.4" style="stroke:dimgrey;stroke-width:1" id="n13"></line><text x="76.0" y="42.0" fill="black" class="diagram-class-detail"><a id="n14" xlink:href="extensibility.html"><title id="n15">Extensions - as described for all elements: additional information that is not part of the basic definition of the resource / type</title>extension</a> : <a id="n16" xlink:href="extensibility.html">Extension</a> 0..*</text></g><g id="n17"><rect filter="url(#shadow1b)" rx="4" ry="4" x="0.0" width="176.0" y="50.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n18" height="64.0"></rect><line y1="78.0" x1="0.0" y2="78.0" x2="176.0" style="stroke:dimgrey;stroke-width:1" id="n19"></line><text x="88.0" y="70.0" id="n20" fill="black" class="diagram-class-title"><a id="n21" xlink:href="narrative.html#Narrative">Narrative</a></text><text x="6.0" y="92.0" id="n22" fill="black" class="diagram-class-detail"><a id="n23" xlink:href="narrative-definitions.html#Narrative.status"><title>The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data</title>status</a> : <a id="n24" xlink:href="#code">code</a> [1..1] « <a id="n25" xlink:href="valueset-narrative-status.html"><title id="n26">The status of a resource narrative. (Strength=Required)</title>NarrativeStatus</a>! »</text><text x="6.0" y="106.0" id="n32" fill="black" class="diagram-class-detail"><a id="n33" xlink:href="narrative-definitions.html#Narrative.div"><title>The actual narrative content, a stripped down version of XHTML</title>div</a> : <a id="n34" xlink:href="narrative.html#xhtml">xhtml</a> [1..1]</text></g><line y1="46.0" x1="111.9186440677966" y2="50.0" x2="109.26101694915253" style="stroke:navy;stroke-width:1" id="n38"></line><polygon transform="rotate(123.60033262752032 111.9186440677966 46.0)" style="fill:white;stroke:navy;stroke-width:1" id="n39" points="111.9186440677966,46.0 119.9186440677966,52.0 119.9186440677966,40.0 111.9186440677966,46.0"></polygon></svg>
+  </defs><g id="n10"><rect filter="url(#shadow1b)" rx="4" ry="4" x="70.0" width="114.4" y="0.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n11" height="46.0"></rect><text x="127.2" y="20.0" id="n12" fill="black" class="diagram-class-title"><a id="n13" xlink:href="element.html#Element">Element</a></text><line y1="28.0" x1="70.0" y2="28.0" x2="184.4" style="stroke:dimgrey;stroke-width:1" id="n14"></line><text x="76.0" y="42.0" fill="black" class="diagram-class-detail"><a id="n15" xlink:href="extensibility.html"><title id="n16">Extensions - as described for all elements: additional information that is not part of the basic definition of the resource / type</title>extension</a> : <a id="n17" xlink:href="extensibility.html">Extension</a> 0..*</text></g><g id="n18"><rect filter="url(#shadow1b)" rx="4" ry="4" x="0.0" width="176.0" y="50.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n19" height="64.0"></rect><line y1="78.0" x1="0.0" y2="78.0" x2="176.0" style="stroke:dimgrey;stroke-width:1" id="n20"></line><text x="88.0" y="70.0" id="n21" fill="black" class="diagram-class-title"><a id="n22" xlink:href="narrative.html#Narrative">Narrative</a></text><text x="6.0" y="92.0" id="n23" fill="black" class="diagram-class-detail"><a id="n24" xlink:href="narrative-definitions.html#Narrative.status"><title>The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data</title>status</a> : <a id="n25" xlink:href="#code">code</a> [1..1] « <a id="n26" xlink:href="valueset-narrative-status.html"><title id="n27">The status of a resource narrative. (Strength=Required)</title>NarrativeStatus</a>! »</text><text x="6.0" y="106.0" id="n33" fill="black" class="diagram-class-detail"><a id="n34" xlink:href="narrative-definitions.html#Narrative.div"><title>The actual narrative content, a stripped down version of XHTML</title>div</a> : <a id="n35" xlink:href="narrative.html#xhtml">xhtml</a> [1..1]</text></g><line y1="46.0" x1="111.9186440677966" y2="50.0" x2="109.26101694915253" style="stroke:navy;stroke-width:1" id="n39"></line><polygon transform="rotate(123.60033262752032 111.9186440677966 46.0)" style="fill:white;stroke:navy;stroke-width:1" id="n40" points="111.9186440677966,46.0 119.9186440677966,52.0 119.9186440677966,40.0 111.9186440677966,46.0"></polygon></svg>
    </div>
   </div>
 
@@ -332,7 +326,7 @@ The narrative is an XHTML fragment with a flag to indicate its relationship to t
    <p><b>XML Template</b></p>
    <div id="xml-inner">
      <pre class="spec">
-&lt;<a href="narrative-definitions.html#Narrative" title="A human-readable formatted text, including images." class="dict"><b>[name]</b></a> xmlns="http://hl7.org/fhir"&gt;
+&lt;<a href="narrative-definitions.html#Narrative" title="A human-readable summary of the resource conveying the essential clinical and business information for the resource." class="dict"><b>[name]</b></a> xmlns="http://hl7.org/fhir"&gt;
  &lt;!-- from Element: <a href="extensibility.html">extension</a> --&gt;
  &lt;<a href="narrative-definitions.html#Narrative.status" title="The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data." class="dict"><b>status</b></a> value="[<span style="color: darkgreen"><a href="datatypes.html#code">code</a></span>]"/&gt;<span style="color: Gray">&lt;!--</span> <span style="color: brown"><b>1..1</b></span> <span style="color: navy"><a style="color: navy" href="valueset-narrative-status.html">generated | extensions | additional | empty</a></span><span style="color: Gray"> --&gt;</span>
  &lt;<a href="narrative-definitions.html#Narrative.div" title="The actual narrative content, a stripped down version of XHTML." class="dict"><b title="The actual narrative content, a stripped down version of XHTML.">div</b></a> xmlns="http://www.w3.org/1999/xhtml"&gt; <span style="color: Gray">&lt;!--</span> <span style="color: navy">Limited xhtml content</span><span style="color: Gray">&lt; --&gt;</span> &lt;/div&gt;
@@ -384,10 +378,11 @@ The narrative is an XHTML fragment with a flag to indicate its relationship to t
     <td class="diff-left">
       <a href="narrative.html#Narrative">Narrative</a>
     </td>
-    <td class="diff-right"></td>
-    <ul>
-      <li>No Changes</li>
-    </ul>
+    <td class="diff-right">
+      <ul>
+        <li>No Changes</li>
+      </ul>
+    </td>
   </tr>
 </table>
 
@@ -451,9 +446,9 @@ like <code>&amp;nbsp;</code> or <code>&amp;copy;</code> etc. Unicode characters 
 <code>&amp;#160;</code> substitutes for <code>&amp;nbsp;</code>.
 </p>
 <p>
-The narrative content SHOULD be in the <a href="resource-definitions.html#Resource.language">language of the resource</a>, but
-there is no reason to expect that HTML type tooling would understand the resource <a href="resource.html#content">language</a> element. For this reason,
-a <code>lang</code> attribute on the <code>&lt;div&gt;</code> SHOULD also be used (see
+The narrative content SHOULD be in the <a href="resource.html#language">language of the resource</a>, but
+there is no reason to expect that HTML enabled tooling would understand the resource <a href="resource-definitions.html#Resource.language">language</a> element. For this reason,
+a <code>lang</code> attribute on the <code>&lt;div&gt;</code> SHOULD also be used if language is declared on the resource (see
 <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#the-lang-and-xml:lang-attributes">the note in the HTML 5 specification about use of language <img src="external.png" style="text-align: baseline"/></a>).
 </p>
 
@@ -467,7 +462,7 @@ speaking multiple languages. Some resources - specially standing documentation s
 preparation notes - will contain the same documentation in several different languages.
 </p>
 <p>
-Resources containing the same information in multiple different langauges should 
+Resources containing the same information in multiple different languages should 
 use a <code>div</code> element with an XHTML lang attribute in the root div. 
 By default, all languages will be displayed to a user, but multi-language 
 aware applications can filter the content by language and only display the 
@@ -539,14 +534,15 @@ and <i>id</i> attributes on the XHTML elements and internal styles are applied u
 a <i>style</i> attribute on the XHTML elements directly.
 </p>
 <p>
-In order to minimize manageability and security issues, authoring systems cannot
-specify the CSS stylesheet to use directly. Instead, the application that displays
+In order to minimize manageability and security issues, authoring systems cannot 
+specify the CSS stylesheet to use directly, unless the stylesheet is included in a FHIR Document. 
+Instead, the application that displays
 the resource provides the stylesheets. This means that the rendering system
 chooses what styles can be used, but the authoring system must use them in advance.
 Authoring systems can use these classes, which SHALL be supported by all rendering systems:
 </p>
 <table>
- <tr> <td>bold</td> <td>Bold</td> <td>{ font-weight: bold }</td> </tr>
+ <tr> <td>bold</td> <td>Bold Text</td> <td>{ font-weight: bold }</td> </tr>
  <tr> <td>italics</td> <td>Italics Text</td> <td>{ font-style: italic }</td> </tr>
  <tr> <td>underline</td> <td>Underlined Text</td> <td>{ text-decoration: underline }</td> </tr>
  <tr> <td>strikethrough</td> <td>Strikethrough Text</td> <td>{ text-decoration: line-through }</td> </tr>
@@ -569,7 +565,7 @@ Authoring systems can use these classes, which SHALL be supported by all renderi
  <tr> <td>unlist</td> <td>List with no bullets</td> <td>{ list-style-type: none }</td> </tr>
 </table>
 <p>
-Note: for testing purposes, there is an <a href="basic-example-narrative.xml.html">example resource</a> that includes
+Note: for testing purposes, there is an <a href="basic-example-narrative.html">example resource</a> that includes
 all of these styles. It is also available <a href="narrative-example.html">as XHTML</a> and a
 <a href="fhir-runtime.css">standard stylesheet</a> that includes all of these styles.  Use of styles
 not on this list will require an arrangement between producing and consuming systems.
@@ -658,9 +654,9 @@ and the composition that represents it:
     &lt;Composition&gt;
       &lt;id value="c1"/&gt;
       &lt;text&gt;
-        &lt;div xmlns=\"http://www.w3.org/1999/xhtml\"&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
           ...
-          &lt;p&gt;There is a history of &lt;span id=\"a1\"&gt;Asthma&lt;/span&gt;&lt;/p&gt;
+          &lt;p&gt;There is a history of &lt;span id="a1"&gt;Asthma&lt;/span&gt;&lt;/p&gt;
           ...
         &lt;/div&gt;
       &lt;/text&gt;
@@ -689,8 +685,8 @@ and the composition that represents it:
 <h3 class="self-link-parent"><span class="sectioncount">2.4.0.6</span> Clinical Safety Concerns <a href="narrative.html#safety" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 <p>
 Health care records are often associated with legislative and business requirements for very long retention
-times (up to a century), and extreme risk aversion with regards to inconsistent display across
-a variety of devices. Although the narrative is allowed to use the standard XHTML and CSS
+times (up to a century) and extreme risk aversion with regards to inconsistent display across
+a variety of devices, rendering engines, and display constraints. Although the narrative is allowed to use the standard XHTML and CSS
 features as described above, implementations are encouraged to show restraint when using the
 features available. Even when trading partner arrangements limit the current requirements
 made on a system, experience shows that these trading arrangements will likely broaden
@@ -724,7 +720,7 @@ difficult, and implementations SHOULD avoid these</li>
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -734,7 +730,7 @@ difficult, and implementations SHOULD avoid these</li>
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fnarrative.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fnarrative.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fnarrative.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fnarrative.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

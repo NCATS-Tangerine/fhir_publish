@@ -2,9 +2,15 @@
 <difference>
    <type name="Consent" status="changed">
       <element new-max="*" old-max="1" path="Consent.identifier"/>
-      <element binding-status="changed"
+      <element binding-codes-changed="true"
+               binding-status="changed"
                binding-valueset-changed="true"
                path="Consent.status">
+         <removed-code code="suspended"/>
+         <removed-code code="aborted"/>
+         <added-code code="not-done"/>
+         <added-code code="on-hold"/>
+         <added-code code="stopped"/>
          <old-binding reference="http://hl7.org/fhir/ValueSet/consent-state-codes"
                       strength="required"/>
          <new-binding reference="http://hl7.org/fhir/ValueSet/event-status"
@@ -21,8 +27,7 @@
       <element new-min="0" old-min="1" path="Consent.patient"/>
       <element path="Consent.performer" status="new"/>
       <element path="Consent.source[x]">
-         <removed-type name="Reference(Consent|DocumentReference|Contract|QuestionnaireResponse)"/>
-         <added-type name="Reference(Consent|DocumentReference|Contract|QuestionnaireResponse)"/>
+         <removed-type name="Identifier"/>
       </element>
       <element binding-status="added" path="Consent.policyRule">
          <removed-type name="uri"/>

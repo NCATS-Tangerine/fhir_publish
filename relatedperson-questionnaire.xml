@@ -5,8 +5,9 @@
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
+  <version value="3.6.0"/>
   <status value="draft"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="Health Level Seven International (Patient Administration)"/>
   <item>
     <linkId value="RelatedPerson"/>
@@ -191,7 +192,7 @@
     </item>
     <item>
       <linkId value="RelatedPerson.extension"/>
-      <text value="Additional Content defined by implementations"/>
+      <text value="Additional content defined by implementations"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -225,7 +226,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+        <text value="May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
         <type value="display"/>
       </item>
     </item>
@@ -668,6 +669,177 @@
         <type value="dateTime"/>
         <required value="false"/>
         <repeats value="false"/>
+      </item>
+    </item>
+    <item>
+      <linkId value="RelatedPerson.communication"/>
+      <text value="A language which may be used to communicate with about the patient&#39;s health"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <text value="If no language is specified, this *implies* that the default local language is spoken.  If you need to convey proficiency for multiple modes, then you need multiple RelatedPerson.Communication associations.   If the RelatedPerson does not speak the default local language, then the Interpreter Required Standard can be used to explicitly declare that an interpreter is required."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="A language which may be used to communicate with about the patient&#39;s health."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="string"/>
+        </extension>
+        <linkId value="RelatedPerson.communication.id"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="RelatedPerson.communication.id.value"/>
+          <text value="Unique id for inter-element referencing"/>
+          <type value="string"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
+        <linkId value="RelatedPerson.communication.extension"/>
+        <text value="Additional content defined by implementations"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <type value="display"/>
+        </item>
+      </item>
+      <item>
+        <linkId value="RelatedPerson.communication.modifierExtension"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <type value="display"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="CodeableConcept"/>
+        </extension>
+        <linkId value="RelatedPerson.communication.language"/>
+        <text value="The language which can be used to communicate with the patient about his or her health"/>
+        <type value="group"/>
+        <required value="true"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. &quot;en&quot; for English, or &quot;en-US&quot; for American English versus &quot;en-EN&quot; for England English. The structure aa-BB with this exact casing is one the most widely used notations for locale. However not all systems actually code this but instead have it as free text. Hence CodeableConcept instead of code as the data type."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="RelatedPerson.communication.language.coding"/>
+          <text value="code:"/>
+          <type value="open-choice"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+        <item>
+          <linkId value="RelatedPerson.communication.language.text"/>
+          <text value="text:"/>
+          <type value="string"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="boolean"/>
+        </extension>
+        <linkId value="RelatedPerson.communication.preferred"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Indicates whether or not the patient prefers this language (over other languages he masters up a certain level). This language is specifically identified for communicating healthcare information."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="RelatedPerson.communication.preferred.value"/>
+          <text value="Language preference indicator"/>
+          <type value="boolean"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
       </item>
     </item>
   </item>

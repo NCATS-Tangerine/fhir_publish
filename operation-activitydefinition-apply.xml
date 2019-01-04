@@ -54,8 +54,8 @@
         </tr>
         <tr>
           <td>IN</td>
-          <td>patient</td>
-          <td>1..1</td>
+          <td>subject</td>
+          <td>1..*</td>
           <td>
             <a href="datatypes.html#string">string</a>
             <br/>(
@@ -64,7 +64,7 @@
           <td/>
           <td>
             <div>
-              <p>The patient that is the target of the activity to be applied</p>
+              <p>The subject(s) that is/are the target of the activity definition to be applied. The subject may be a Patient, Practitioner, Organization, Location, Device, or Group. Subjects provided in this parameter will be resolved as the subject of the PlanDefinition based on the type of the subject. If multiple subjects of the same type are provided, the behavior is implementation-defined</p>
 
             </div>
           </td>
@@ -210,7 +210,7 @@
         </tr>
       </table>
       <div>
-        <p>The result of invoking this operation is a resource of the type specified by the activity definition, with all the definitions resolved as appropriate for the type of resource. Any dynamicValue elements will be evaluated (in the order in which they appear in the resource) and the results applied to the returned resource.  If the ActivityDefinition includes library references, those libraries will be available to the evaluated expressions. If those libraries have parameters, those parameters will be bound by name to the parameters given to the operation. For a more detailed description, refer to the ActivityDefinition resource</p>
+        <p>The result of invoking this operation is a resource of the type specified by the activity definition, with all the definitions resolved as appropriate for the type of resource. Any dynamicValue elements will be evaluated (in the order in which they appear in the resource) and the results applied to the returned resource.  If the ActivityDefinition includes library references, those libraries will be available to the evaluated expressions. If those libraries have parameters, those parameters will be bound by name to the parameters given to the operation. In addition, parameters to the $apply operation are available within dynamicValue expressions as context variables, accessible by the name of the parameter, prefixed with a percent (%) symbol. For a more detailed description, refer to the ActivityDefinition resource</p>
 
       </div>
     </div>
@@ -219,13 +219,14 @@
     <valueInteger value="2"/>
   </extension>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-    <valueString value="Trial Use"/>
+    <valueCode value="trial-use"/>
   </extension>
   <url value="http://hl7.org/fhir/OperationDefinition/ActivityDefinition-apply"/>
+  <version value="3.6.0"/>
   <name value="Apply"/>
   <status value="draft"/>
   <kind value="operation"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="HL7 (FHIR Project)"/>
   <contact>
     <telecom>
@@ -239,7 +240,7 @@
   </contact>
   <description value="The apply operation applies a definition in a specific context"/>
   <code value="apply"/>
-  <comment value="The result of invoking this operation is a resource of the type specified by the activity definition, with all the definitions resolved as appropriate for the type of resource. Any dynamicValue elements will be evaluated (in the order in which they appear in the resource) and the results applied to the returned resource.  If the ActivityDefinition includes library references, those libraries will be available to the evaluated expressions. If those libraries have parameters, those parameters will be bound by name to the parameters given to the operation. For a more detailed description, refer to the ActivityDefinition resource"/>
+  <comment value="The result of invoking this operation is a resource of the type specified by the activity definition, with all the definitions resolved as appropriate for the type of resource. Any dynamicValue elements will be evaluated (in the order in which they appear in the resource) and the results applied to the returned resource.  If the ActivityDefinition includes library references, those libraries will be available to the evaluated expressions. If those libraries have parameters, those parameters will be bound by name to the parameters given to the operation. In addition, parameters to the $apply operation are available within dynamicValue expressions as context variables, accessible by the name of the parameter, prefixed with a percent (%) symbol. For a more detailed description, refer to the ActivityDefinition resource"/>
   <resource value="ActivityDefinition"/>
   <system value="false"/>
   <type value="true"/>
@@ -253,11 +254,11 @@
     <type value="ActivityDefinition"/>
   </parameter>
   <parameter>
-    <name value="patient"/>
+    <name value="subject"/>
     <use value="in"/>
     <min value="1"/>
-    <max value="1"/>
-    <documentation value="The patient that is the target of the activity to be applied"/>
+    <max value="*"/>
+    <documentation value="The subject(s) that is/are the target of the activity definition to be applied. The subject may be a Patient, Practitioner, Organization, Location, Device, or Group. Subjects provided in this parameter will be resolved as the subject of the PlanDefinition based on the type of the subject. If multiple subjects of the same type are provided, the behavior is implementation-defined"/>
     <type value="string"/>
     <searchType value="reference"/>
   </parameter>

@@ -2,10 +2,15 @@
 <difference>
    <type name="ValueSet" status="changed">
       <element modifier="removed" path="ValueSet.experimental"/>
-      <element binding-status="removed"
+      <element binding-status="changed"
+               binding-strength-changed="true"
                path="ValueSet.compose.include.concept.designation.language">
-         <old-binding reference="http://hl7.org/fhir/ValueSet/languages"
+         <old-binding max="http://hl7.org/fhir/ValueSet/all-languages"
+                      reference="http://hl7.org/fhir/ValueSet/languages"
                       strength="extensible"/>
+         <new-binding max="http://hl7.org/fhir/ValueSet/all-languages"
+                      reference="http://hl7.org/fhir/ValueSet/languages"
+                      strength="preferred"/>
       </element>
       <element modifier="removed" path="ValueSet.compose.include.filter"/>
       <element path="ValueSet.compose.include.filter.value">
@@ -14,7 +19,7 @@
       </element>
       <element path="ValueSet.compose.include.valueSet">
          <removed-type name="uri"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(ValueSet)"/>
       </element>
       <element new-min="0" old-min="1" path="ValueSet.expansion.identifier"/>
       <element path="ValueSet.expansion.parameter.value[x]">

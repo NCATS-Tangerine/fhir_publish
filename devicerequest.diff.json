@@ -10,6 +10,26 @@
       "DeviceRequest.instantiatesUri": {
         "status": "new"
       },
+      "DeviceRequest.status": {
+        "binding-codes-changed": true,
+        "removed-codes": [
+          "suspended",
+          "cancelled"
+        ],
+        "added-codes": [
+          "on-hold",
+          "revoked"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-status",
+          "strength": "required"
+        }
+      },
       "DeviceRequest.intent": {
         "removed-types": [
           "CodeableConcept"
@@ -18,6 +38,10 @@
           "code"
         ],
         "binding-valueset-changed": true,
+        "binding-codes-changed": true,
+        "added-codes": [
+          "directive"
+        ],
         "binding-status": "changed",
         "old-binding": {
           "reference": "http://build.fhir.org/valueset-request-intent.html",
@@ -32,14 +56,6 @@
         "default": "removed",
         "old-default": "\"If missing, normal priority\""
       },
-      "DeviceRequest.code[x]": {
-        "removed-types": [
-          "Reference(Device)"
-        ],
-        "added-types": [
-          "Reference(Device)"
-        ]
-      },
       "DeviceRequest.parameter": {
         "status": "new"
       },
@@ -49,20 +65,23 @@
       "DeviceRequest.parameter.value[x]": {
         "status": "new"
       },
+      "DeviceRequest.encounter": {
+        "status": "new"
+      },
       "DeviceRequest.requester": {
         "removed-types": [
           "BackboneElement"
         ],
         "added-types": [
-          "Reference(Device|Practitioner|PractitionerRole|Organization)"
+          "Reference(Device | Practitioner | PractitionerRole | Organization)"
         ]
       },
       "DeviceRequest.performer": {
         "removed-types": [
-          "Reference(Practitioner|Organization|Patient|Device|RelatedPerson|HealthcareService)"
+          "Reference(Practitioner | Organization | Patient | Device | RelatedPerson | HealthcareService)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|CareTeam|HealthcareService|Patient|Device|RelatedPerson)"
+          "Reference(Practitioner | PractitionerRole | Organization | CareTeam | HealthcareService | Patient | Device | RelatedPerson)"
         ]
       },
       "DeviceRequest.reasonReference": {
@@ -70,13 +89,16 @@
           "Reference(Resource)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|DiagnosticReport|DocumentReference)"
+          "Reference(Condition | Observation | DiagnosticReport | DocumentReference)"
         ]
       },
       "DeviceRequest.insurance": {
         "status": "new"
       },
       "DeviceRequest.definition": {
+        "status": "deleted"
+      },
+      "DeviceRequest.context": {
         "status": "deleted"
       },
       "DeviceRequest.requester.agent": {

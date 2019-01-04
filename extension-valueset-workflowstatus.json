@@ -10,12 +10,13 @@
     "valueInteger" : 1
   }],
   "url" : "http://hl7.org/fhir/StructureDefinition/valueset-workflowStatus",
+  "version" : "3.6.0",
   "name" : "workflowStatus",
   "status" : "draft",
-  "date" : "2018-09-15T09:06:56-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "HL7",
-  "description" : "Workflow Status is used to represent details of the value set development process while the value set has an Activity Status of Preliminary. The development of a value set often follows a formal workflow process from initiation to completion, and this element carries the state variable for this state machine. The assumption is that when first created a value set would have a workflow state of Draft. Additional workflow states may be used.",
-  "fhirVersion" : "3.5.0",
+  "description" : "Workflow Status is used to represent details of the value set development process while in a single Activity Status.",
+  "fhirVersion" : "3.6.0",
   "mapping" : [{
     "identity" : "rim",
     "uri" : "http://hl7.org/v3",
@@ -33,10 +34,18 @@
   "snapshot" : {
     "element" : [{
       "id" : "Extension",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+        "valueCode" : "normative"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
+        "valueCode" : "4.0.0"
+      }],
       "path" : "Extension",
       "short" : "Indicates the state of development of the value set",
-      "definition" : "Workflow Status is used to represent details of the value set development process while the value set has an Activity Status of Preliminary. The development of a value set often follows a formal workflow process from initiation to completion, and this element carries the state variable for this state machine. The assumption is that when first created a value set would have a workflow state of Draft. Additional workflow states may be used.",
-      "comment" : "The values that this element may assume include phrases that capture various stages in review and approval. In addition to the minimum of Draft,  these include Proposed, Approved, and Ready to Publish.  There may be additional states defined by different developers. This is an optional element because the use of Activity Status Preliminary may be sufficient for some implementations.",
+      "definition" : "Workflow Status is used to represent details of the value set development process while in a single Activity Status.",
+      "comment" : "The values that are traditionally used for this element while the Value Set Definition has an Activity Status of Preliminary are assumed to include phrases that capture various stages in review and approval. It is expected that this would be used to manage maintenance activities, but that a terminology service would not be expected to expose this information. Different services might adopt different workflow status values reflecting their local practices.",
       "min" : 0,
       "max" : "1",
       "base" : {
@@ -67,7 +76,7 @@
       "id" : "Extension.id",
       "path" : "Extension.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -141,7 +150,7 @@
       "id" : "Extension.valueString",
       "path" : "Extension.valueString",
       "short" : "Value of extension",
-      "definition" : "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).",
+      "definition" : "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
       "min" : 0,
       "max" : "1",
       "base" : {
@@ -165,8 +174,8 @@
       "id" : "Extension",
       "path" : "Extension",
       "short" : "Indicates the state of development of the value set",
-      "definition" : "Workflow Status is used to represent details of the value set development process while the value set has an Activity Status of Preliminary. The development of a value set often follows a formal workflow process from initiation to completion, and this element carries the state variable for this state machine. The assumption is that when first created a value set would have a workflow state of Draft. Additional workflow states may be used.",
-      "comment" : "The values that this element may assume include phrases that capture various stages in review and approval. In addition to the minimum of Draft,  these include Proposed, Approved, and Ready to Publish.  There may be additional states defined by different developers. This is an optional element because the use of Activity Status Preliminary may be sufficient for some implementations.",
+      "definition" : "Workflow Status is used to represent details of the value set development process while in a single Activity Status.",
+      "comment" : "The values that are traditionally used for this element while the Value Set Definition has an Activity Status of Preliminary are assumed to include phrases that capture various stages in review and approval. It is expected that this would be used to manage maintenance activities, but that a terminology service would not be expected to expose this information. Different services might adopt different workflow status values reflecting their local practices.",
       "min" : 0,
       "max" : "1",
       "isModifier" : false

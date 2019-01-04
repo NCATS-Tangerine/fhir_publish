@@ -208,7 +208,7 @@
     </div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-    <valueString value="External"/>
+    <valueCode value="external"/>
   </extension>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
     <valueInteger value="0"/>
@@ -242,6 +242,12 @@
     <description value="Indicates that the code is abstract - only intended to be used as a selector for other concepts"/>
     <type value="boolean"/>
   </property>
+  <property>
+    <code value="child"/>
+    <uri value="http://hl7.org/fhir/concept-properties#child"/>
+    <description value="The concept identified in this property is a child of the concept on which it is a property. The property type will be &#39;code&#39;. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute"/>
+    <type value="code"/>
+  </property>
   <concept>
     <code value="_ContextControlAdditive"/>
     <display value="ContextControlAdditive"/>
@@ -262,15 +268,16 @@
     </concept>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="AN"/>
-    </extension>
     <code value="_ContextControlNonPropagating"/>
     <display value="ContextControlNonPropagating"/>
     <definition value="The association applies only to the current Act and will not propagate to any child Acts that are related via a conducting ActRelationship (refer to contextConductionInd)."/>
     <property>
       <code value="notSelectable"/>
       <valueBoolean value="true"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="AN"/>
     </property>
     <concept>
       <code value="ON"/>
@@ -279,15 +286,16 @@
     </concept>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="ON"/>
-    </extension>
     <code value="_ContextControlOverriding"/>
     <display value="ContextControlOverriding"/>
     <definition value="The association adds to the existing context associated with the Act, but replaces associations propagated from ancestor Acts whose typeCodes are the same or more specific."/>
     <property>
       <code value="notSelectable"/>
       <valueBoolean value="true"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="ON"/>
     </property>
     <concept>
       <code value="OP"/>
@@ -296,18 +304,20 @@
     </concept>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="AP"/>
-    </extension>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="OP"/>
-    </extension>
     <code value="_ContextControlPropagating"/>
     <display value="ContextControlPropagating"/>
     <definition value="The association propagates to any child Acts that are related via a conducting ActRelationship (refer to contextConductionInd)."/>
     <property>
       <code value="notSelectable"/>
       <valueBoolean value="true"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="AP"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="OP"/>
     </property>
   </concept>
 </CodeSystem>

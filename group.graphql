@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type Group {
   id: ID
@@ -16,6 +16,7 @@ type Group {
   code: CodeableConcept
   name: String  _name: ElementBase
   quantity: unsignedInt  _quantity: ElementBase
+  managingEntity: Reference
   characteristic: [GroupCharacteristic]
   member: [GroupMember]
 }
@@ -29,6 +30,7 @@ type GroupCharacteristic {
   valueBoolean: Boolean  _valueBoolean: ElementBase
   valueQuantity: Quantity
   valueRange: Range
+  valueReference: Reference
   exclude: Boolean  _exclude: ElementBase
   period: Period
 }
@@ -58,6 +60,7 @@ input Group {
   code: CodeableConcept
   name: String  _name: ElementBase
   quantity: unsignedInt  _quantity: ElementBase
+  managingEntity: Reference
   characteristic: [GroupCharacteristic]
   member: [GroupMember]
 }
@@ -71,6 +74,7 @@ input GroupCharacteristic {
   valueBoolean: Boolean  _valueBoolean: ElementBase
   valueQuantity: Quantity
   valueRange: Range
+  valueReference: Reference
   exclude: Boolean  _exclude: ElementBase
   period: Period
 }
@@ -96,6 +100,7 @@ type GroupListType {
     code : [token]
     exclude : [token]
     identifier : [token]
+    managing_entity : [reference]
     member : [reference]
     type : [token]
     value : [token]
@@ -121,6 +126,7 @@ type GroupConnectionType {
     code : [token]
     exclude : [token]
     identifier : [token]
+    managing_entity : [reference]
     member : [reference]
     type : [token]
     value : [token]

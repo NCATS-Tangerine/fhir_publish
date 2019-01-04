@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
   <!-- template-version-maps.html --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>SubstanceSpecification - FHIR v3.5.0</title>
+  <title>SubstanceSpecification - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -38,7 +38,7 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <ul class="nav nav-tabs"><li><a href="substancespecification.html">Content</a></li><li><a href="substancespecification-examples.html">Examples</a></li><li><a href="substancespecification-definitions.html">Detailed Descriptions</a></li><li><a href="substancespecification-mappings.html">Mappings</a></li><li><a href="substancespecification-profiles.html">Profiles &amp; Extensions</a></li><li class="active"><a href="#">R3 Conversions</a></li></ul>
 
 <h2 class="self-link-parent"><span class="sectioncount">8.18.2<a name="8.18.2"> </a></span> Resource SubstanceSpecification - R3/R4 Conversions <a href="substancespecification-version-maps.html#8.18.2" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h2>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/rcrim/index.cfm">Biomedical Research and Regulation <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative  <!-- !ns! --></td><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/rcrim/index.cfm">Biomedical Research and Regulation <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative<td><a href="security.html#SecPrivConsiderations">Security Category</a>: Anonymous</td>  <!-- !ns! --></td><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
 
 <p>R3 : R4 Conversion maps for SubstanceSpecification.</p>
 
@@ -119,143 +119,101 @@
 <pre>
 map "http://hl7.org/fhir/StructureMap/SubstanceSpecification3to4" = "R3 to R4 Conversions for SubstanceSpecification"
 
-
 uses "http://hl7.org/fhir/3.0/StructureDefinition/SubstanceSpecification" alias SubstanceSpecificationR3 as source
 uses "http://hl7.org/fhir/StructureDefinition/SubstanceSpecification" alias SubstanceSpecification as target
 
 imports "http://hl7.org/fhir/StructureMap/*3to4"
 
+group SubstanceSpecification(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends DomainResource &lt;&lt;type+&gt;&gt; {
+  src.comment -&gt; tgt.comment;
+  src.stoichiometric -&gt; tgt.stoichiometric;
+  src.identifier -&gt; tgt.identifier;
+  src.type -&gt; tgt.type;
+  src.referenceSource -&gt; tgt.referenceSource;
+  src.moiety as s -&gt; tgt.moiety as t then SubstanceSpecificationMoiety(s, t);
+  src.property as s -&gt; tgt.property as t then SubstanceSpecificationProperty(s, t);
+  src.referenceInformation -&gt; tgt.referenceInformation;
+  src.structure as s -&gt; tgt.structure as t then SubstanceSpecificationStructure(s, t);
+  src.substanceCode as s -&gt; tgt.substanceCode as t then SubstanceSpecificationSubstanceCode(s, t);
+  src.substanceName as s -&gt; tgt.substanceName as t then SubstanceSpecificationSubstanceName(s, t);
+  src.molecularWeight -&gt; tgt.molecularWeight;
+  src.polymer -&gt; tgt.polymer;
+}
 
+group SubstanceSpecificationMoiety(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.role -&gt; tgt.role;
+  src.identifier -&gt; tgt.identifier;
+  src.name -&gt; tgt.name;
+  src.stereochemistry -&gt; tgt.stereochemistry;
+  src.opticalActivity -&gt; tgt.opticalActivity;
+  src.molecularFormula -&gt; tgt.molecularFormula;
+  src.amount -&gt; tgt.amount;
+}
 
-group SubstanceSpecification extends DomainResource
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
+group SubstanceSpecificationProperty(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.type -&gt; tgt.type;
+  src.name -&gt; tgt.name;
+  src.parameters -&gt; tgt.parameters;
+  src.substanceId -&gt; tgt.substanceId;
+  src.substanceName -&gt; tgt.substanceName;
+  src.amount -&gt; tgt.amount;
+}
 
-  "SubstanceSpecification.comment": for src.comment make tgt.comment
-  "SubstanceSpecification.stoichiometric": for src.stoichiometric make tgt.stoichiometric
-  "SubstanceSpecification.identifier": for src.identifier make tgt.identifier
-  "SubstanceSpecification.type": for src.type make tgt.type
-  "SubstanceSpecification.referenceSource": for src.referenceSource make tgt.referenceSource
-  "SubstanceSpecification.moiety": for src.moiety as s make tgt.moiety as t then SubstanceSpecificationMoiety(s,t)
-  "SubstanceSpecification.property": for src.property as s make tgt.property as t then SubstanceSpecificationProperty(s,t)
-  "SubstanceSpecification.referenceInformation": for src.referenceInformation make tgt.referenceInformation
-  "SubstanceSpecification.structure": for src.structure as s make tgt.structure as t then SubstanceSpecificationStructure(s,t)
-  "SubstanceSpecification.substanceCode": for src.substanceCode as s make tgt.substanceCode as t then SubstanceSpecificationSubstanceCode(s,t)
-  "SubstanceSpecification.substanceName": for src.substanceName as s make tgt.substanceName as t then SubstanceSpecificationSubstanceName(s,t)
-  "SubstanceSpecification.molecularWeight": for src.molecularWeight make tgt.molecularWeight
-  "SubstanceSpecification.polymer": for src.polymer make tgt.polymer
-endgroup
+group SubstanceSpecificationStructure(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.stereochemistry -&gt; tgt.stereochemistry;
+  src.opticalActivity -&gt; tgt.opticalActivity;
+  src.molecularFormula -&gt; tgt.molecularFormula;
+  src.molecularFormulaByMoiety -&gt; tgt.molecularFormulaByMoiety;
+  src.isotope as s -&gt; tgt.isotope as t then SubstanceSpecificationStructureIsotope(s, t);
+  src.molecularWeight -&gt; tgt.molecularWeight;
+  src.referenceSource -&gt; tgt.referenceSource;
+  src.structuralRepresentation as s -&gt; tgt.structuralRepresentation as t then SubstanceSpecificationStructureStructuralRepresentation(s, t);
+}
 
+group SubstanceSpecificationStructureIsotope(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.nuclideId -&gt; tgt.nuclideId;
+  src.nuclideName -&gt; tgt.nuclideName;
+  src.substitutionType -&gt; tgt.substitutionType;
+  src.nuclideHalfLife -&gt; tgt.nuclideHalfLife;
+  src.amount -&gt; tgt.amount;
+  src.molecularWeight as s -&gt; tgt.molecularWeight as t then SubstanceSpecificationStructureIsotopeMolecularWeight(s, t);
+}
 
-group SubstanceSpecificationMoiety extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
+group SubstanceSpecificationStructureIsotopeMolecularWeight(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.method -&gt; tgt.method;
+  src.type -&gt; tgt.type;
+  src.amount -&gt; tgt.amount;
+}
 
-  "SubstanceSpecification.moiety.role": for src.role make tgt.role
-  "SubstanceSpecification.moiety.identifier": for src.identifier make tgt.identifier
-  "SubstanceSpecification.moiety.name": for src.name make tgt.name
-  "SubstanceSpecification.moiety.stereochemistry": for src.stereochemistry make tgt.stereochemistry
-  "SubstanceSpecification.moiety.opticalActivity": for src.opticalActivity make tgt.opticalActivity
-  "SubstanceSpecification.moiety.molecularFormula": for src.molecularFormula make tgt.molecularFormula
-  "SubstanceSpecification.moiety.amount": for src.amount make tgt.amount
-endgroup
+group SubstanceSpecificationStructureStructuralRepresentation(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.type -&gt; tgt.type;
+  src.representation -&gt; tgt.representation;
+  src.attachment -&gt; tgt.attachment;
+}
 
+group SubstanceSpecificationSubstanceCode(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.code -&gt; tgt.code;
+  src.status -&gt; tgt.status;
+  src.statusDate -&gt; tgt.statusDate;
+  src.comment -&gt; tgt.comment;
+  src.referenceSource -&gt; tgt.referenceSource;
+}
 
-group SubstanceSpecificationProperty extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
+group SubstanceSpecificationSubstanceName(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.name -&gt; tgt.name;
+  src.type -&gt; tgt.type;
+  src.language -&gt; tgt.language;
+  src.domain -&gt; tgt.domain;
+  src.jurisdiction -&gt; tgt.jurisdiction;
+  src.officialName as s -&gt; tgt.officialName as t then SubstanceSpecificationSubstanceNameOfficialName(s, t);
+  src.referenceSource -&gt; tgt.referenceSource;
+}
 
-  "SubstanceSpecification.property.type": for src.type make tgt.type
-  "SubstanceSpecification.property.name": for src.name make tgt.name
-  "SubstanceSpecification.property.parameters": for src.parameters make tgt.parameters
-  "SubstanceSpecification.property.substanceId": for src.substanceId make tgt.substanceId
-  "SubstanceSpecification.property.substanceName": for src.substanceName make tgt.substanceName
-  "SubstanceSpecification.property.amount": for src.amount make tgt.amount
-endgroup
-
-
-group SubstanceSpecificationStructure extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.structure.stereochemistry": for src.stereochemistry make tgt.stereochemistry
-  "SubstanceSpecification.structure.opticalActivity": for src.opticalActivity make tgt.opticalActivity
-  "SubstanceSpecification.structure.molecularFormula": for src.molecularFormula make tgt.molecularFormula
-  "SubstanceSpecification.structure.molecularFormulaByMoiety": for src.molecularFormulaByMoiety make tgt.molecularFormulaByMoiety
-  "SubstanceSpecification.structure.isotope": for src.isotope as s make tgt.isotope as t then SubstanceSpecificationStructureIsotope(s,t)
-  "SubstanceSpecification.structure.molecularWeight": for src.molecularWeight make tgt.molecularWeight
-  "SubstanceSpecification.structure.referenceSource": for src.referenceSource make tgt.referenceSource
-  "SubstanceSpecification.structure.structuralRepresentation": for src.structuralRepresentation as s make tgt.structuralRepresentation as t then SubstanceSpecificationStructureStructuralRepresentation(s,t)
-endgroup
-
-
-group SubstanceSpecificationStructureIsotope extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.structure.isotope.nuclideId": for src.nuclideId make tgt.nuclideId
-  "SubstanceSpecification.structure.isotope.nuclideName": for src.nuclideName make tgt.nuclideName
-  "SubstanceSpecification.structure.isotope.substitutionType": for src.substitutionType make tgt.substitutionType
-  "SubstanceSpecification.structure.isotope.nuclideHalfLife": for src.nuclideHalfLife make tgt.nuclideHalfLife
-  "SubstanceSpecification.structure.isotope.amount": for src.amount make tgt.amount
-  "SubstanceSpecification.structure.isotope.molecularWeight": for src.molecularWeight as s make tgt.molecularWeight as t then SubstanceSpecificationStructureIsotopeMolecularWeight(s,t)
-endgroup
-
-
-group SubstanceSpecificationStructureIsotopeMolecularWeight extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.structure.isotope.molecularWeight.method": for src.method make tgt.method
-  "SubstanceSpecification.structure.isotope.molecularWeight.type": for src.type make tgt.type
-  "SubstanceSpecification.structure.isotope.molecularWeight.amount": for src.amount make tgt.amount
-endgroup
-
-
-group SubstanceSpecificationStructureStructuralRepresentation extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.structure.structuralRepresentation.type": for src.type make tgt.type
-  "SubstanceSpecification.structure.structuralRepresentation.representation": for src.representation make tgt.representation
-  "SubstanceSpecification.structure.structuralRepresentation.attachment": for src.attachment make tgt.attachment
-endgroup
-
-
-group SubstanceSpecificationSubstanceCode extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.substanceCode.code": for src.code make tgt.code
-  "SubstanceSpecification.substanceCode.status": for src.status make tgt.status
-  "SubstanceSpecification.substanceCode.statusDate": for src.statusDate make tgt.statusDate
-  "SubstanceSpecification.substanceCode.comment": for src.comment make tgt.comment
-  "SubstanceSpecification.substanceCode.referenceSource": for src.referenceSource make tgt.referenceSource
-endgroup
-
-
-group SubstanceSpecificationSubstanceName extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.substanceName.name": for src.name make tgt.name
-  "SubstanceSpecification.substanceName.type": for src.type make tgt.type
-  "SubstanceSpecification.substanceName.language": for src.language make tgt.language
-  "SubstanceSpecification.substanceName.domain": for src.domain make tgt.domain
-  "SubstanceSpecification.substanceName.jurisdiction": for src.jurisdiction make tgt.jurisdiction
-  "SubstanceSpecification.substanceName.officialName": for src.officialName as s make tgt.officialName as t then SubstanceSpecificationSubstanceNameOfficialName(s,t)
-  "SubstanceSpecification.substanceName.referenceSource": for src.referenceSource make tgt.referenceSource
-endgroup
-
-
-group SubstanceSpecificationSubstanceNameOfficialName extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.substanceName.officialName.authority": for src.authority make tgt.authority
-  "SubstanceSpecification.substanceName.officialName.status": for src.status make tgt.status
-  "SubstanceSpecification.substanceName.officialName.date": for src.date make tgt.date
-endgroup
+group SubstanceSpecificationSubstanceNameOfficialName(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.authority -&gt; tgt.authority;
+  src.status -&gt; tgt.status;
+  src.date -&gt; tgt.date;
+}
 
 
 </pre>
@@ -269,134 +227,102 @@ endgroup
 <pre>
 map "http://hl7.org/fhir/StructureMap/SubstanceSpecification4to3" = "R4 to R3 Conversion for SubstanceSpecification"
 
-
 uses "http://hl7.org/fhir/StructureDefinition/SubstanceSpecification" alias SubstanceSpecification as source
 uses "http://hl7.org/fhir/3.0/StructureDefinition/SubstanceSpecification" alias SubstanceSpecificationR3 as target
 
 imports "http://hl7.org/fhir/StructureMap/*4to3"
 
+group SubstanceSpecification(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends DomainResource &lt;&lt;type+&gt;&gt; {
+  src.comment -&gt; tgt.comment;
+  src.stoichiometric -&gt; tgt.stoichiometric;
+  src.identifier -&gt; tgt.identifier;
+  src.type -&gt; tgt.type;
+  src.referenceSource -&gt; tgt.referenceSource;
+  src.moiety as s -&gt; tgt.moiety as t then SubstanceSpecificationMoiety(s, t);
+  src.property as s -&gt; tgt.property as t then SubstanceSpecificationProperty(s, t);
+  src.referenceInformation -&gt; tgt.referenceInformation;
+  src.structure as s -&gt; tgt.structure as t then SubstanceSpecificationStructure(s, t);
+  src.substanceCode as s -&gt; tgt.substanceCode as t then SubstanceSpecificationSubstanceCode(s, t);
+  src.substanceName as s -&gt; tgt.substanceName as t then SubstanceSpecificationSubstanceName(s, t);
+  src.molecularWeight -&gt; tgt.molecularWeight;
+  src.polymer -&gt; tgt.polymer;
+}
 
+group SubstanceSpecificationMoiety(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.role -&gt; tgt.role;
+  src.identifier -&gt; tgt.identifier;
+  src.name -&gt; tgt.name;
+  src.stereochemistry -&gt; tgt.stereochemistry;
+  src.opticalActivity -&gt; tgt.opticalActivity;
+  src.molecularFormula -&gt; tgt.molecularFormula;
+  src.amount -&gt; tgt.amount;
+}
 
-group SubstanceSpecification extends DomainResource
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
+group SubstanceSpecificationProperty(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.type -&gt; tgt.type;
+  src.name -&gt; tgt.name;
+  src.parameters -&gt; tgt.parameters;
+  src.substanceId -&gt; tgt.substanceId;
+  src.substanceName -&gt; tgt.substanceName;
+  src.amount -&gt; tgt.amount;
+}
 
-  "SubstanceSpecification.comment": for src.comment make tgt.comment
-  "SubstanceSpecification.stoichiometric": for src.stoichiometric make tgt.stoichiometric
-  "SubstanceSpecification.identifier": for src.identifier make tgt.identifier
-  "SubstanceSpecification.type": for src.type make tgt.type
-  "SubstanceSpecification.referenceSource": for src.referenceSource make tgt.referenceSource
-  "SubstanceSpecification.moiety": for src.moiety as s make tgt.moiety as t then SubstanceSpecificationMoiety(s,t)
-  "SubstanceSpecification.property": for src.property as s make tgt.property as t then SubstanceSpecificationProperty(s,t)
-  "SubstanceSpecification.referenceInformation": for src.referenceInformation make tgt.referenceInformation
-  "SubstanceSpecification.structure": for src.structure as s make tgt.structure as t then SubstanceSpecificationStructure(s,t)
-  "SubstanceSpecification.substanceCode": for src.substanceCode as s make tgt.substanceCode as t then SubstanceSpecificationSubstanceCode(s,t)
-  "SubstanceSpecification.substanceName": for src.substanceName as s make tgt.substanceName as t then SubstanceSpecificationSubstanceName(s,t)
-  "SubstanceSpecification.molecularWeight": for src.molecularWeight make tgt.molecularWeight
-  "SubstanceSpecification.polymer": for src.polymer make tgt.polymer
-endgroup
+group SubstanceSpecificationStructure(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.stereochemistry -&gt; tgt.stereochemistry;
+  src.opticalActivity -&gt; tgt.opticalActivity;
+  src.molecularFormula -&gt; tgt.molecularFormula;
+  src.molecularFormulaByMoiety -&gt; tgt.molecularFormulaByMoiety;
+  src.isotope as s -&gt; tgt.isotope as t then SubstanceSpecificationStructureIsotope(s, t);
+  src.molecularWeight -&gt; tgt.molecularWeight;
+  src.referenceSource -&gt; tgt.referenceSource;
+  src.structuralRepresentation as s -&gt; tgt.structuralRepresentation as t then SubstanceSpecificationStructureStructuralRepresentation(s, t);
+}
 
-group SubstanceSpecificationMoiety extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
+group SubstanceSpecificationStructureIsotope(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.nuclideId -&gt; tgt.nuclideId;
+  src.nuclideName -&gt; tgt.nuclideName;
+  src.substitutionType -&gt; tgt.substitutionType;
+  src.nuclideHalfLife -&gt; tgt.nuclideHalfLife;
+  src.amount -&gt; tgt.amount;
+  src.molecularWeight as s -&gt; tgt.molecularWeight as t then SubstanceSpecificationStructureIsotopeMolecularWeight(s, t);
+}
 
-  "SubstanceSpecification.moiety.role": for src.role make tgt.role
-  "SubstanceSpecification.moiety.identifier": for src.identifier make tgt.identifier
-  "SubstanceSpecification.moiety.name": for src.name make tgt.name
-  "SubstanceSpecification.moiety.stereochemistry": for src.stereochemistry make tgt.stereochemistry
-  "SubstanceSpecification.moiety.opticalActivity": for src.opticalActivity make tgt.opticalActivity
-  "SubstanceSpecification.moiety.molecularFormula": for src.molecularFormula make tgt.molecularFormula
-  "SubstanceSpecification.moiety.amount": for src.amount make tgt.amount
-endgroup
+group SubstanceSpecificationStructureIsotopeMolecularWeight(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.method -&gt; tgt.method;
+  src.type -&gt; tgt.type;
+  src.amount -&gt; tgt.amount;
+}
 
-group SubstanceSpecificationProperty extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
+group SubstanceSpecificationStructureStructuralRepresentation(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.type -&gt; tgt.type;
+  src.representation -&gt; tgt.representation;
+  src.attachment -&gt; tgt.attachment;
+}
 
-  "SubstanceSpecification.property.type": for src.type make tgt.type
-  "SubstanceSpecification.property.name": for src.name make tgt.name
-  "SubstanceSpecification.property.parameters": for src.parameters make tgt.parameters
-  "SubstanceSpecification.property.substanceId": for src.substanceId make tgt.substanceId
-  "SubstanceSpecification.property.substanceName": for src.substanceName make tgt.substanceName
-  "SubstanceSpecification.property.amount": for src.amount make tgt.amount
-endgroup
+group SubstanceSpecificationSubstanceCode(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.code -&gt; tgt.code;
+  src.status -&gt; tgt.status;
+  src.statusDate -&gt; tgt.statusDate;
+  src.comment -&gt; tgt.comment;
+  src.referenceSource -&gt; tgt.referenceSource;
+}
 
-group SubstanceSpecificationStructure extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
+group SubstanceSpecificationSubstanceName(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.name -&gt; tgt.name;
+  src.type -&gt; tgt.type;
+  src.language -&gt; tgt.language;
+  src.domain -&gt; tgt.domain;
+  src.jurisdiction -&gt; tgt.jurisdiction;
+  src.officialName as s -&gt; tgt.officialName as t then SubstanceSpecificationSubstanceNameOfficialName(s, t);
+  src.referenceSource -&gt; tgt.referenceSource;
+}
 
-  "SubstanceSpecification.structure.stereochemistry": for src.stereochemistry make tgt.stereochemistry
-  "SubstanceSpecification.structure.opticalActivity": for src.opticalActivity make tgt.opticalActivity
-  "SubstanceSpecification.structure.molecularFormula": for src.molecularFormula make tgt.molecularFormula
-  "SubstanceSpecification.structure.molecularFormulaByMoiety": for src.molecularFormulaByMoiety make tgt.molecularFormulaByMoiety
-  "SubstanceSpecification.structure.isotope": for src.isotope as s make tgt.isotope as t then SubstanceSpecificationStructureIsotope(s,t)
-  "SubstanceSpecification.structure.molecularWeight": for src.molecularWeight make tgt.molecularWeight
-  "SubstanceSpecification.structure.referenceSource": for src.referenceSource make tgt.referenceSource
-  "SubstanceSpecification.structure.structuralRepresentation": for src.structuralRepresentation as s make tgt.structuralRepresentation as t then SubstanceSpecificationStructureStructuralRepresentation(s,t)
-endgroup
+group SubstanceSpecificationSubstanceNameOfficialName(source src : SubstanceSpecificationR3, target tgt : SubstanceSpecification) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.authority -&gt; tgt.authority;
+  src.status -&gt; tgt.status;
+  src.date -&gt; tgt.date;
+}
 
-group SubstanceSpecificationStructureIsotope extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.structure.isotope.nuclideId": for src.nuclideId make tgt.nuclideId
-  "SubstanceSpecification.structure.isotope.nuclideName": for src.nuclideName make tgt.nuclideName
-  "SubstanceSpecification.structure.isotope.substitutionType": for src.substitutionType make tgt.substitutionType
-  "SubstanceSpecification.structure.isotope.nuclideHalfLife": for src.nuclideHalfLife make tgt.nuclideHalfLife
-  "SubstanceSpecification.structure.isotope.amount": for src.amount make tgt.amount
-  "SubstanceSpecification.structure.isotope.molecularWeight": for src.molecularWeight as s make tgt.molecularWeight as t then SubstanceSpecificationStructureIsotopeMolecularWeight(s,t)
-endgroup
-
-group SubstanceSpecificationStructureIsotopeMolecularWeight extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.structure.isotope.molecularWeight.method": for src.method make tgt.method
-  "SubstanceSpecification.structure.isotope.molecularWeight.type": for src.type make tgt.type
-  "SubstanceSpecification.structure.isotope.molecularWeight.amount": for src.amount make tgt.amount
-endgroup
-
-group SubstanceSpecificationStructureStructuralRepresentation extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.structure.structuralRepresentation.type": for src.type make tgt.type
-  "SubstanceSpecification.structure.structuralRepresentation.representation": for src.representation make tgt.representation
-  "SubstanceSpecification.structure.structuralRepresentation.attachment": for src.attachment make tgt.attachment
-endgroup
-
-group SubstanceSpecificationSubstanceCode extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.substanceCode.code": for src.code make tgt.code
-  "SubstanceSpecification.substanceCode.status": for src.status make tgt.status
-  "SubstanceSpecification.substanceCode.statusDate": for src.statusDate make tgt.statusDate
-  "SubstanceSpecification.substanceCode.comment": for src.comment make tgt.comment
-  "SubstanceSpecification.substanceCode.referenceSource": for src.referenceSource make tgt.referenceSource
-endgroup
-
-group SubstanceSpecificationSubstanceName extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.substanceName.name": for src.name make tgt.name
-  "SubstanceSpecification.substanceName.type": for src.type make tgt.type
-  "SubstanceSpecification.substanceName.language": for src.language make tgt.language
-  "SubstanceSpecification.substanceName.domain": for src.domain make tgt.domain
-  "SubstanceSpecification.substanceName.jurisdiction": for src.jurisdiction make tgt.jurisdiction
-  "SubstanceSpecification.substanceName.officialName": for src.officialName as s make tgt.officialName as t then SubstanceSpecificationSubstanceNameOfficialName(s,t)
-  "SubstanceSpecification.substanceName.referenceSource": for src.referenceSource make tgt.referenceSource
-endgroup
-
-group SubstanceSpecificationSubstanceNameOfficialName extends BackboneElement
-  input src : SubstanceSpecificationR3 as source
-  input tgt : SubstanceSpecification as target
-
-  "SubstanceSpecification.substanceName.officialName.authority": for src.authority make tgt.authority
-  "SubstanceSpecification.substanceName.officialName.status": for src.status make tgt.status
-  "SubstanceSpecification.substanceName.officialName.date": for src.date make tgt.date
-endgroup
 
 </pre>
 </div>
@@ -405,7 +331,7 @@ endgroup
 
 <h3 class="self-link-parent"><span class="sectioncount">8.18.2.3<a name="8.18.2.3"> </a></span> R4 Validation Errors <a href="substancespecification-version-maps.html#8.18.2.3" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 
-<p>n/a</p>
+&lt;p&gt;n/a&lt;/p&gt;
 
 
 </div>
@@ -422,7 +348,7 @@ endgroup
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -432,7 +358,7 @@ endgroup
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fsubstancespecification-version-maps.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fsubstancespecification-version-maps.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fsubstancespecification-version-maps.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fsubstancespecification-version-maps.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

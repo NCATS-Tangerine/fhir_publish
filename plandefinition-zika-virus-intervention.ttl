@@ -1,6 +1,7 @@
 @prefix fhir: <http://hl7.org/fhir/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sct: <http://snomed.info/id/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # - resource -------------------------------------------------------------------
@@ -23,6 +24,34 @@
   fhir:PlanDefinition.status [ fhir:value "active"];
   fhir:PlanDefinition.date [ fhir:value "2017-01-12"^^xsd:date];
   fhir:PlanDefinition.description [ fhir:value "Zika Virus Management intervention describing the CDC Guidelines for Zika Virus Reporting and Management."];
+  fhir:PlanDefinition.useContext [
+     fhir:index 0;
+     fhir:UsageContext.code [
+       fhir:Coding.system [ fhir:value "http://terminology.hl7.org/CodeSystem/usage-context-type" ];
+       fhir:Coding.code [ fhir:value "age" ]
+     ];
+     fhir:UsageContext.valueRange [
+       fhir:Range.low [
+         fhir:Quantity.value [ fhir:value "12"^^xsd:decimal ];
+         fhir:Quantity.unit [ fhir:value "a" ]
+       ]
+     ]
+  ], [
+     fhir:index 1;
+     fhir:UsageContext.code [
+       fhir:Coding.system [ fhir:value "http://terminology.hl7.org/CodeSystem/usage-context-type" ];
+       fhir:Coding.code [ fhir:value "user" ]
+     ];
+     fhir:UsageContext.valueCodeableConcept [
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         a sct:309343006;
+         fhir:Coding.system [ fhir:value "http://snomed.info/sct" ];
+         fhir:Coding.code [ fhir:value "309343006" ];
+         fhir:Coding.display [ fhir:value "Physician" ]
+       ]
+     ]
+  ];
   fhir:PlanDefinition.topic [
      fhir:index 0;
      fhir:CodeableConcept.text [ fhir:value "Zika Virus Management" ]
@@ -70,7 +99,7 @@
            fhir:Expression.expression [ fhir:value "Should Administer Zika Virus Exposure Assessment" ]
          ]
        ];
-       fhir:PlanDefinition.action.definition [
+       fhir:PlanDefinition.action.definitionCanonical [
          fhir:value "ActivityDefinition/administer-zika-virus-exposure-assessment";
          fhir:link <http://hl7.org/fhir/ActivityDefinition/administer-zika-virus-exposure-assessment>
        ]
@@ -84,7 +113,7 @@
            fhir:Expression.expression [ fhir:value "Should Order Serum + Urine rRT-PCR Test" ]
          ]
        ];
-       fhir:PlanDefinition.action.definition [
+       fhir:PlanDefinition.action.definitionCanonical [
          fhir:value "ActivityDefinition/order-serum-urine-rrt-pcr-test";
          fhir:link <http://hl7.org/fhir/ActivityDefinition/order-serum-urine-rrt-pcr-test>
        ]
@@ -98,7 +127,7 @@
            fhir:Expression.expression [ fhir:value "Should Order Serum Zika Virus IgM + Dengue Virus IgM" ]
          ]
        ];
-       fhir:PlanDefinition.action.definition [
+       fhir:PlanDefinition.action.definitionCanonical [
          fhir:value "ActivityDefinition/order-serum-zika-dengue-virus-igm";
          fhir:link <http://hl7.org/fhir/ActivityDefinition/order-serum-zika-dengue-virus-igm>
        ]
@@ -112,7 +141,7 @@
            fhir:Expression.expression [ fhir:value "Should Consider IgM Antibody Testing" ]
          ]
        ];
-       fhir:PlanDefinition.action.definition [
+       fhir:PlanDefinition.action.definitionCanonical [
          fhir:value "ActivityDefinition/consider-igm-antibody-testing";
          fhir:link <http://hl7.org/fhir/ActivityDefinition/consider-igm-antibody-testing>
        ]
@@ -128,13 +157,13 @@
        ];
        fhir:PlanDefinition.action.action [
          fhir:index 0;
-         fhir:PlanDefinition.action.definition [
+         fhir:PlanDefinition.action.definitionCanonical [
            fhir:value "ActivityDefinition/provide-mosquito-prevention-advice";
            fhir:link <http://hl7.org/fhir/ActivityDefinition/provide-mosquito-prevention-advice>
          ]
        ], [
          fhir:index 1;
-         fhir:PlanDefinition.action.definition [
+         fhir:PlanDefinition.action.definitionCanonical [
            fhir:value "ActivityDefinition/provide-contraception-advice";
            fhir:link <http://hl7.org/fhir/ActivityDefinition/provide-contraception-advice>
          ]

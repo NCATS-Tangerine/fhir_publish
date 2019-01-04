@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <difference>
    <type name="CapabilityStatement" status="changed">
+      <element new-max="*"
+               new-min="0"
+               old-max="1"
+               old-min="1"
+               path="CapabilityStatement"/>
       <element modifier="removed" path="CapabilityStatement.experimental"/>
       <element path="CapabilityStatement.instantiates">
          <removed-type name="uri"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(CapabilityStatement)"/>
       </element>
       <element path="CapabilityStatement.imports" status="new"/>
       <element path="CapabilityStatement.implementation.url">
@@ -13,12 +18,14 @@
       </element>
       <element path="CapabilityStatement.implementation.custodian" status="new"/>
       <element binding-status="added" path="CapabilityStatement.fhirVersion">
-         <new-binding reference="http://hl7.org/fhir/ValueSet/fhir-versions"
+         <removed-type name="id"/>
+         <added-type name="code"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/FHIR-version"
                       strength="required"/>
       </element>
       <element path="CapabilityStatement.implementationGuide">
          <removed-type name="uri"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(ImplementationGuide)"/>
       </element>
       <element path="CapabilityStatement.rest.documentation">
          <removed-type name="string"/>
@@ -28,11 +35,80 @@
          <removed-type name="string"/>
          <added-type name="markdown"/>
       </element>
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               path="CapabilityStatement.rest.resource.type">
+         <removed-code code="BodySite"/>
+         <removed-code code="DataElement"/>
+         <removed-code code="DeviceComponent"/>
+         <removed-code code="EligibilityRequest"/>
+         <removed-code code="EligibilityResponse"/>
+         <removed-code code="ExpansionProfile"/>
+         <removed-code code="ImagingManifest"/>
+         <removed-code code="ProcedureRequest"/>
+         <removed-code code="ProcessRequest"/>
+         <removed-code code="ProcessResponse"/>
+         <removed-code code="ReferralRequest"/>
+         <removed-code code="Sequence"/>
+         <removed-code code="ServiceDefinition"/>
+         <added-code code="BiologicallyDerivedProduct"/>
+         <added-code code="BodyStructure"/>
+         <added-code code="CatalogEntry"/>
+         <added-code code="ChargeItemDefinition"/>
+         <added-code code="ClinicalProfile"/>
+         <added-code code="CoverageEligibilityRequest"/>
+         <added-code code="CoverageEligibilityResponse"/>
+         <added-code code="DeviceDefinition"/>
+         <added-code code="EffectEvidenceSynthesis"/>
+         <added-code code="EventDefinition"/>
+         <added-code code="Evidence"/>
+         <added-code code="EvidenceVariable"/>
+         <added-code code="ExampleScenario"/>
+         <added-code code="ImmunizationEvaluation"/>
+         <added-code code="InsurancePlan"/>
+         <added-code code="Invoice"/>
+         <added-code code="ItemInstance"/>
+         <added-code code="MedicationKnowledge"/>
+         <added-code code="MedicinalProduct"/>
+         <added-code code="MedicinalProductAuthorization"/>
+         <added-code code="MedicinalProductContraindication"/>
+         <added-code code="MedicinalProductIndication"/>
+         <added-code code="MedicinalProductIngredient"/>
+         <added-code code="MedicinalProductInteraction"/>
+         <added-code code="MedicinalProductManufactured"/>
+         <added-code code="MedicinalProductPackaged"/>
+         <added-code code="MedicinalProductPharmaceutical"/>
+         <added-code code="MedicinalProductUndesirableEffect"/>
+         <added-code code="MolecularSequence"/>
+         <added-code code="ObservationDefinition"/>
+         <added-code code="OrganizationAffiliation"/>
+         <added-code code="ResearchDefinition"/>
+         <added-code code="ResearchElementDefinition"/>
+         <added-code code="RiskEvidenceSynthesis"/>
+         <added-code code="ServiceRequest"/>
+         <added-code code="SpecimenDefinition"/>
+         <added-code code="SubstanceNucleicAcid"/>
+         <added-code code="SubstancePolymer"/>
+         <added-code code="SubstanceProtein"/>
+         <added-code code="SubstanceReferenceInformation"/>
+         <added-code code="SubstanceSourceMaterial"/>
+         <added-code code="SubstanceSpecification"/>
+         <added-code code="TerminologyCapabilities"/>
+         <added-code code="VerificationResult"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/resource-types"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/resource-types"
+                      strength="required"/>
+      </element>
       <element path="CapabilityStatement.rest.resource.profile">
          <removed-type name="Reference(StructureDefinition)"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(StructureDefinition)"/>
       </element>
-      <element path="CapabilityStatement.rest.resource.supportedProfile" status="new"/>
+      <element old-name="profile"
+               path="CapabilityStatement.rest.resource.supportedProfile">
+         <removed-type name="Reference(StructureDefinition)"/>
+         <added-type name="canonical(StructureDefinition)"/>
+      </element>
       <element new-min="0"
                old-min="1"
                path="CapabilityStatement.rest.resource.interaction"/>
@@ -42,7 +118,16 @@
       </element>
       <element path="CapabilityStatement.rest.resource.searchParam.definition">
          <removed-type name="uri"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(SearchParameter)"/>
+      </element>
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               path="CapabilityStatement.rest.resource.searchParam.type">
+         <added-code code="special"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/search-param-type"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/search-param-type"
+                      strength="required"/>
       </element>
       <element path="CapabilityStatement.rest.resource.searchParam.documentation">
          <removed-type name="string"/>
@@ -63,7 +148,7 @@
       </element>
       <element path="CapabilityStatement.rest.compartment">
          <removed-type name="uri"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(CompartmentDefinition)"/>
       </element>
       <element path="CapabilityStatement.messaging.endpoint.address">
          <removed-type name="uri"/>
@@ -75,7 +160,7 @@
       </element>
       <element path="CapabilityStatement.messaging.supportedMessage.definition">
          <removed-type name="Reference(MessageDefinition)"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(MessageDefinition)"/>
       </element>
       <element path="CapabilityStatement.document.documentation">
          <removed-type name="string"/>
@@ -83,10 +168,9 @@
       </element>
       <element path="CapabilityStatement.document.profile">
          <removed-type name="Reference(StructureDefinition)"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(StructureDefinition)"/>
       </element>
       <element path="CapabilityStatement.acceptUnknown" status="deleted"/>
-      <element path="CapabilityStatement.profile" status="deleted"/>
       <element path="CapabilityStatement.rest.security.certificate" status="deleted"/>
       <element path="CapabilityStatement.rest.operation.name" status="deleted"/>
       <element path="CapabilityStatement.rest.operation.definition" status="deleted"/>

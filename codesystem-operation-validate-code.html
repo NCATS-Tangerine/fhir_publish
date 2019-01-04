@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
   <!-- template-operations.html --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Codesystem-operation-validate-code - FHIR v3.5.0</title>
+  <title>Codesystem-operation-validate-code - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -38,7 +38,7 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -108,15 +108,12 @@
 
 <h3 class="self-link-parent"><span class="sectioncount">4.8.1.2<a name="4.8.1.2"> </a></span> Operation $validate-code on CodeSystem <a href="codesystem-operation-validate-code.html#4.8.1.2" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 
-<table class="colsn"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td>&nbsp;<a href="versions.html#maturity" title="Maturity Level">Maturity Level</a>: 5</td><td><a href="versions.html#std-process">Normative</a></td>  <!-- !ns! --><td><a href="compartmentdefinition.html">Compartments</a>: N/A</td></tr></table>
-
-<p style="border: 1px black solid; background-color: #e6ffe6; padding: 5px">
-Normative Candidate Note: This page is candidate normative content for R4 in the <a href="ballot-intro.html#conformance">Conformance Package</a>.
-Once normative, it will lose it's Maturity Level, and <a href="versions.html#change">breaking changes</a> will no longer be made.
-</p>
+<table class="colsn"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td>&nbsp;<a href="versions.html#maturity" title="Maturity Level">Maturity Level</a>: <a href="versions.html#std-process">N</a></td><td><a href="versions.html#std-process">Normative</a> (from v4.0.0)</td>  <!-- !ns! --><td><a href="compartmentdefinition.html">Compartments</a>: N/A</td></tr></table>
 
 
-<p>Validate that a coded value is in the code system. If the operation is not called at the instance level, one of the parameters "url" or "codeSystem" must be provided.  One (and only one) of the in parameters (code, coding, codeableConcept) must be provided.  The operation returns a result (true / false), an error message, and the recommended display for the code</p>
+
+<p>Validate that a coded value is in the code system. If the operation is not called at the instance level, one of the parameters "url" or "codeSystem" must be provided. The operation returns a result (true / false), an error message, and the recommended display for the code.</p>
+<p>When invoking this operation, a client SHALL provide one (and only one) of the parameters (code+system, coding, or codeableConcept). Other parameters (including version and display) are optional.</p>
 
 <p>The official URL for this operation definition is</p>
 <pre> http://hl7.org/fhir/OperationDefinition/CodeSystem-validate-code</pre>
@@ -134,8 +131,8 @@ Once normative, it will lose it's Maturity Level, and <a href="versions.html#cha
 </td></tr><tr><td>coding</td><td>0..1</td><td><a href="datatypes.html#Coding">Coding</a></td><td></td><td></td><td><p>A coding to validate. The system must match the specified code system</p>
 </td></tr><tr><td>codeableConcept</td><td>0..1</td><td><a href="datatypes.html#CodeableConcept">CodeableConcept</a></td><td></td><td></td><td><p>A full codeableConcept to validate. The server returns true if one of the coding values is in the code system, and may also validate that the codings are not in conflict with each other if more than one is present</p>
 </td></tr><tr><td>date</td><td>0..1</td><td><a href="datatypes.html#dateTime">dateTime</a></td><td></td><td></td><td><p>The date for which the validation should be checked. Normally, this is the current conditions (which is the default values) but under some circumstances, systems need to validate that a correct code was used at some point in the past. A typical example of this would be where code selection is constrained to the set of codes that were available when the patient was treated, not when the record is being edited. Note that which date is appropriate is a matter for implementation policy.</p>
-</td></tr><tr><td>abstract</td><td>0..1</td><td><a href="datatypes.html#boolean">boolean</a></td><td></td><td></td><td><p>If this parameter has a value of true, the client is stating that the validation is being performed in a context where a concept designated as 'abstract' is appropriate/allowed to be used, and the server should regard abstract codes as valid. If this parameter is fase, abstract codes are not considered to be valid.</p>
-<p>Note that. 'abstract' is a property defined by many HL7 code systems that indicates that the concept is a logical grouping concept that is not intended to be used asa 'concrete' concept to in a actual patient/care/process record. This language is borrowed from Object Orienated theory where 'asbtract' objects are never instantiated. However in the general record and terminology eco-system, there are many contexts where it is appropraite to use these codes e.g. as decision making criterion, or when editing value sets themselves. This parameter allows a client to indicate to the server that it is working in such a context.</p>
+</td></tr><tr><td>abstract</td><td>0..1</td><td><a href="datatypes.html#boolean">boolean</a></td><td></td><td></td><td><p>If this parameter has a value of true, the client is stating that the validation is being performed in a context where a concept designated as 'abstract' is appropriate/allowed to be used, and the server should regard abstract codes as valid. If this parameter is false, abstract codes are not considered to be valid.</p>
+<p>Note that. 'abstract' is a property defined by many HL7 code systems that indicates that the concept is a logical grouping concept that is not intended to be used asa 'concrete' concept to in an actual patient/care/process record. This language is borrowed from Object Orienated theory where 'asbtract' objects are never instantiated. However in the general record and terminology eco-system, there are many contexts where it is appropraite to use these codes e.g. as decision making criterion, or when editing value sets themselves. This parameter allows a client to indicate to the server that it is working in such a context.</p>
 </td></tr><tr><td>displayLanguage</td><td>0..1</td><td><a href="datatypes.html#code">code</a></td><td></td><td></td><td><p>Specifies the language to be used for description when validating the display property</p>
 </td></tr><tr><td colspan="6"><b>Out Parameters:</b></td></tr>
 <tr><td><b>Name</b></td><td><b>Cardinality</b></td><td><b>Type</b></td><td><b>Binding</b></td><td><b>Profile</b></td><td><b>Documentation</b></td></tr><tr><td>result</td><td>1..1</td><td><a href="datatypes.html#boolean">boolean</a></td><td></td><td></td><td><p>True if the concept details supplied are valid</p>
@@ -143,12 +140,15 @@ Once normative, it will lose it's Maturity Level, and <a href="versions.html#cha
 </td></tr><tr><td>display</td><td>0..1</td><td><a href="datatypes.html#string">string</a></td><td></td><td></td><td><p>A valid display for the concept if the system wishes to display this to a user</p>
 </td></tr></table>
 
-<h4 class="self-link-parent"><span class="sectioncount">4.8.1.2.1<a name="4.8.1.2.1"> </a></span> Examples <a href="codesystem-operation-validate-code.html#4.8.1.2.1" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
-<p>Simple validation of a code against a known code system (Request):</p>
+<a name="examples"> </a>
+<h4 class="self-link-parent"><span class="sectioncount">4.8.1.2.1</span> Examples <a href="codesystem-operation-validate-code.html#examples" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<p><p>Request: Simple validation of a code against a known code system</p>
+</p>
 <pre>
 GET [base]/CodeSystem/loinc/$validate-code?code=1963-8&amp;display=test
 </pre>
-<p>Validate a CodeableConcept against a client specified code system (Request):</p>
+<p><p>Request: Validate a CodeableConcept against a client specified code system</p>
+</p>
 <pre>
 POST [base]/CodeSystem/$validate-code
 [other headers]
@@ -157,7 +157,7 @@ POST [base]/CodeSystem/$validate-code
   "ResourceType" : "Parameters",
   "parameter" : [
     {
-    "name" : "coding",
+    "name" : "codeableConcept",
     "valueCodeableConcept" : {
       "coding" : {
         "system" : "http://example.org",
@@ -176,8 +176,11 @@ POST [base]/CodeSystem/$validate-code
   ]
 }
 </pre>
-<p>Response:</p>
+<hr/>
+<p><p>Response: When the request can be processed ok</p>
+</p>
 <pre>
+
 HTTP/1.1 200 OK
 [other headers]
 
@@ -196,6 +199,32 @@ HTTP/1.1 200 OK
     "name" : "display",
     "valueString" : "Bicarbonate [Moles/volume] in Serum"
   }
+  ]
+}
+</pre>
+<p><p>Response: When the validation cannot be performed. An error like this not returned if the code is not valid, but when the server is unable to determine whether the code is valid</p>
+</p>
+<pre>
+
+
+HTTP/1.1 400 Bad Request
+[other headers]
+
+{
+  "resourceType": "OperationOutcome",
+  "id": "exception",
+  "text": {
+    "status": "additional",
+    "div": "&lt;div xmlns=\"http://www.w3.org/1999/xhtml\"&gt;No system parameter provided in request&lt;/div&gt;"
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "required",
+      "details": {
+        "text": "No system parameter provided in request"
+      }
+    }
   ]
 }
 </pre>
@@ -219,7 +248,7 @@ For more information about operations, including how they are invoked, see <a hr
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:19-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:25-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -229,7 +258,7 @@ For more information about operations, including how they are invoked, see <a hr
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fsomething&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fsomething">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fsomething&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fsomething">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

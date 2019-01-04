@@ -4,8 +4,9 @@
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
+  "version" : "3.6.0",
   "status" : "draft",
-  "date" : "2018-09-14T07:16:19-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "Health Level Seven International (Orders and Observations)",
   "item" : [{
     "linkId" : "ObservationDefinition",
@@ -209,7 +210,7 @@
     },
     {
       "linkId" : "ObservationDefinition.extension",
-      "text" : "Additional Content defined by implementations",
+      "text" : "Additional content defined by implementations",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -245,16 +246,12 @@
             }]
           }
         }],
-        "text" : "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "text" : "May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
         "type" : "display"
       }]
     },
     {
       "extension" : [{
-        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
-        "valueInteger" : 1
-      },
-      {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "CodeableConcept"
       }],
@@ -274,7 +271,7 @@
             }]
           }
         }],
-        "text" : "A code that classifies the general type of observation. In addition to the required category valueset, this element allows various categorization schemes based on the owner’s definition of the category and effectively multiple categories can be used at once. The level of granularity is defined by the category concepts in the value set.",
+        "text" : "A code that classifies the general type of observation. This element allows various categorization schemes based on the owner’s definition of the category and effectively multiple categories can be used for one instance of ObservationDefinition. The level of granularity is defined by the category concepts in the value set.",
         "type" : "display"
       },
       {
@@ -345,7 +342,7 @@
         "valueString" : "Identifier"
       }],
       "linkId" : "ObservationDefinition.identifier",
-      "text" : "Unique identifier for this ObservationDefinition artifact",
+      "text" : "Business identifier for this ObservationDefinition instance",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -360,7 +357,7 @@
             }]
           }
         }],
-        "text" : "Unique identifier for this ObservationDefinition artifact.",
+        "text" : "A unique identifier assigned to this ObservationDefinition artifact.",
         "type" : "display"
       },
       {
@@ -388,7 +385,7 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "Coding"
+        "valueString" : "code"
       }],
       "linkId" : "ObservationDefinition.permittedDataType",
       "type" : "group",
@@ -405,13 +402,13 @@
             }]
           }
         }],
-        "text" : "Data type allowed for the result of the observation.",
+        "text" : "The data types allowed for the value element of the instance observations conforming to this ObservationDefinition.",
         "type" : "display"
       },
       {
         "linkId" : "ObservationDefinition.permittedDataType.value",
-        "text" : "Permitted data type for observation value",
-        "type" : "open-choice",
+        "text" : "permitted data type",
+        "type" : "choice",
         "required" : false,
         "repeats" : false
       }]
@@ -440,7 +437,7 @@
             }]
           }
         }],
-        "text" : "Multiple results allowed for this kind of observation.",
+        "text" : "Multiple results allowed for observations conforming to this ObservationDefinition. An example of observation allowing multiple results is \"bacteria identified by culture\". Conversely, the measurement of a potassium level allows a single result.",
         "type" : "display"
       },
       {
@@ -461,7 +458,7 @@
         "valueString" : "CodeableConcept"
       }],
       "linkId" : "ObservationDefinition.method",
-      "text" : "The method or technique used to perform the observation",
+      "text" : "Method used to produce the observation",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -518,7 +515,7 @@
             }]
           }
         }],
-        "text" : "The preferred name to be used when reporting the results of this observation.",
+        "text" : "The preferred name to be used when reporting the results of observations conforming to this ObservationDefinition.",
         "type" : "display"
       },
       {
@@ -582,7 +579,7 @@
         },
         {
           "linkId" : "ObservationDefinition.quantitativeDetails.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -611,7 +608,7 @@
       },
       {
         "linkId" : "ObservationDefinition.quantitativeDetails.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -626,7 +623,7 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
@@ -637,9 +634,10 @@
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-          "valueString" : "Coding"
+          "valueString" : "CodeableConcept"
         }],
         "linkId" : "ObservationDefinition.quantitativeDetails.customaryUnit",
+        "text" : "Customary unit for quantitative results",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -654,13 +652,20 @@
               }]
             }
           }],
-          "text" : "Customary unit used to report quantitative results of this observation.",
+          "text" : "Customary unit used to report quantitative results of observations conforming to this ObservationDefinition.",
           "type" : "display"
         },
         {
-          "linkId" : "ObservationDefinition.quantitativeDetails.customaryUnit.value",
-          "text" : "Customary unit for quantitative results",
+          "linkId" : "ObservationDefinition.quantitativeDetails.customaryUnit.coding",
+          "text" : "code:",
           "type" : "open-choice",
+          "required" : false,
+          "repeats" : false
+        },
+        {
+          "linkId" : "ObservationDefinition.quantitativeDetails.customaryUnit.text",
+          "text" : "text:",
+          "type" : "string",
           "required" : false,
           "repeats" : false
         }]
@@ -672,9 +677,10 @@
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-          "valueString" : "Coding"
+          "valueString" : "CodeableConcept"
         }],
         "linkId" : "ObservationDefinition.quantitativeDetails.unit",
+        "text" : "SI unit for quantitative results",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -689,13 +695,20 @@
               }]
             }
           }],
-          "text" : "SI unit used to report quantitative results of this observation.",
+          "text" : "SI unit used to report quantitative results of observations conforming to this ObservationDefinition.",
           "type" : "display"
         },
         {
-          "linkId" : "ObservationDefinition.quantitativeDetails.unit.value",
-          "text" : "SI unit for quantitative results",
+          "linkId" : "ObservationDefinition.quantitativeDetails.unit.coding",
+          "text" : "code:",
           "type" : "open-choice",
+          "required" : false,
+          "repeats" : false
+        },
+        {
+          "linkId" : "ObservationDefinition.quantitativeDetails.unit.text",
+          "text" : "text:",
+          "type" : "string",
           "required" : false,
           "repeats" : false
         }]
@@ -759,7 +772,7 @@
               }]
             }
           }],
-          "text" : "Number of digits after decimal separator when the results of this observation are of type Quantity.",
+          "text" : "Number of digits after decimal separator when the results of such observations are of type Quantity.",
           "type" : "display"
         },
         {
@@ -773,7 +786,7 @@
     },
     {
       "linkId" : "ObservationDefinition.qualifiedInterval",
-      "text" : "Reference range for observation result",
+      "text" : "Qualified range for continuous and ordinal observation results",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -788,7 +801,7 @@
             }]
           }
         }],
-        "text" : "Reference range for ordinal and continuous observations.",
+        "text" : "Multiple  ranges of results qualified by different contexts for ordinal or continuous observations conforming to this ObservationDefinition.",
         "type" : "display"
       },
       {
@@ -820,7 +833,7 @@
         },
         {
           "linkId" : "ObservationDefinition.qualifiedInterval.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -849,7 +862,7 @@
       },
       {
         "linkId" : "ObservationDefinition.qualifiedInterval.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -864,7 +877,7 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
@@ -875,10 +888,9 @@
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-          "valueString" : "CodeableConcept"
+          "valueString" : "code"
         }],
         "linkId" : "ObservationDefinition.qualifiedInterval.category",
-        "text" : "The category or type of interval",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -893,20 +905,13 @@
               }]
             }
           }],
-          "text" : "The category or type of interval.",
+          "text" : "The category of interval of values for continuous or ordinal observations conforming to this ObservationDefinition.",
           "type" : "display"
         },
         {
-          "linkId" : "ObservationDefinition.qualifiedInterval.category.coding",
-          "text" : "code:",
-          "type" : "open-choice",
-          "required" : false,
-          "repeats" : false
-        },
-        {
-          "linkId" : "ObservationDefinition.qualifiedInterval.category.text",
-          "text" : "text:",
-          "type" : "string",
+          "linkId" : "ObservationDefinition.qualifiedInterval.category.value",
+          "text" : "category",
+          "type" : "choice",
           "required" : false,
           "repeats" : false
         }]
@@ -921,7 +926,7 @@
           "valueString" : "Range"
         }],
         "linkId" : "ObservationDefinition.qualifiedInterval.range",
-        "text" : "The range of the interval",
+        "text" : "The interval itself, for continuous or ordinal observations",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -936,7 +941,7 @@
               }]
             }
           }],
-          "text" : "The range of the interval.",
+          "text" : "The low and high values determining the interval. There may be only one of the two.",
           "type" : "display"
         },
         {
@@ -970,8 +975,8 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "CodeableConcept"
         }],
-        "linkId" : "ObservationDefinition.qualifiedInterval.type",
-        "text" : "Reference range qualifier",
+        "linkId" : "ObservationDefinition.qualifiedInterval.context",
+        "text" : "Range context qualifier",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -986,18 +991,18 @@
               }]
             }
           }],
-          "text" : "Codes to indicate what part of the targeted reference population it applies to. For example, the normal or therapeutic range. normal range is the default.",
+          "text" : "Codes to indicate the health context the range applies to. For example, the normal or therapeutic range.",
           "type" : "display"
         },
         {
-          "linkId" : "ObservationDefinition.qualifiedInterval.type.coding",
+          "linkId" : "ObservationDefinition.qualifiedInterval.context.coding",
           "text" : "code:",
           "type" : "open-choice",
           "required" : false,
           "repeats" : false
         },
         {
-          "linkId" : "ObservationDefinition.qualifiedInterval.type.text",
+          "linkId" : "ObservationDefinition.qualifiedInterval.context.text",
           "text" : "text:",
           "type" : "string",
           "required" : false,
@@ -1010,7 +1015,7 @@
           "valueString" : "CodeableConcept"
         }],
         "linkId" : "ObservationDefinition.qualifiedInterval.appliesTo",
-        "text" : "Reference range population",
+        "text" : "Targetted population of the range",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1050,6 +1055,41 @@
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+          "valueString" : "code"
+        }],
+        "linkId" : "ObservationDefinition.qualifiedInterval.gender",
+        "type" : "group",
+        "required" : false,
+        "repeats" : true,
+        "item" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+            "valueCodeableConcept" : {
+              "coding" : [{
+                "system" : "http://hl7.org/fhir/questionnaire-item-control",
+                "code" : "flyover",
+                "display" : "Fly-over"
+              }]
+            }
+          }],
+          "text" : "Sex of the population the range applies to.",
+          "type" : "display"
+        },
+        {
+          "linkId" : "ObservationDefinition.qualifiedInterval.gender.value",
+          "text" : "gender",
+          "type" : "choice",
+          "required" : false,
+          "repeats" : false
+        }]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+          "valueInteger" : 1
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "Range"
         }],
         "linkId" : "ObservationDefinition.qualifiedInterval.age",
@@ -1068,7 +1108,7 @@
               }]
             }
           }],
-          "text" : "The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so.",
+          "text" : "The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so. Some analytes vary greatly over age.",
           "type" : "display"
         },
         {
@@ -1118,7 +1158,7 @@
               }]
             }
           }],
-          "text" : "The gestational age at which this reference range is applicable, in the context of pregnancy.",
+          "text" : "The gestational age to which this reference range is applicable, in the context of pregnancy.",
           "type" : "display"
         },
         {
@@ -1186,7 +1226,7 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "uri"
+        "valueString" : "Reference"
       }],
       "linkId" : "ObservationDefinition.validCodedValueSet",
       "type" : "group",
@@ -1203,13 +1243,21 @@
             }]
           }
         }],
-        "text" : "The set of valid coded results for the observation.",
+        "text" : "The set of valid coded results for the observations  conforming to this ObservationDefinition.",
         "type" : "display"
       },
       {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
+          "valueCode" : "ValueSet"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
+          "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
+        }],
         "linkId" : "ObservationDefinition.validCodedValueSet.value",
-        "text" : "Value set of valid coded values for the observation",
-        "type" : "string",
+        "text" : "Value set of valid coded values for the observations conforming to this ObservationDefinition",
+        "type" : "reference",
         "required" : false,
         "repeats" : false
       }]
@@ -1221,7 +1269,7 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "uri"
+        "valueString" : "Reference"
       }],
       "linkId" : "ObservationDefinition.normalCodedValueSet",
       "type" : "group",
@@ -1238,13 +1286,21 @@
             }]
           }
         }],
-        "text" : "The set of normal coded results for the observation.",
+        "text" : "The set of normal coded results for the observations conforming to this ObservationDefinition.",
         "type" : "display"
       },
       {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
+          "valueCode" : "ValueSet"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
+          "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
+        }],
         "linkId" : "ObservationDefinition.normalCodedValueSet.value",
-        "text" : "Value set of normal coded values for the observation",
-        "type" : "string",
+        "text" : "Value set of normal coded values for the observations conforming to this ObservationDefinition",
+        "type" : "reference",
         "required" : false,
         "repeats" : false
       }]
@@ -1256,7 +1312,7 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "uri"
+        "valueString" : "Reference"
       }],
       "linkId" : "ObservationDefinition.abnormalCodedValueSet",
       "type" : "group",
@@ -1273,13 +1329,21 @@
             }]
           }
         }],
-        "text" : "The set of abnormal coded results for the observation.",
+        "text" : "The set of abnormal coded results for the observation conforming to this ObservationDefinition.",
         "type" : "display"
       },
       {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
+          "valueCode" : "ValueSet"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
+          "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
+        }],
         "linkId" : "ObservationDefinition.abnormalCodedValueSet.value",
-        "text" : "Value set of abnormal coded values for the observation",
-        "type" : "string",
+        "text" : "Value set of abnormal coded values for the observations conforming to this ObservationDefinition",
+        "type" : "reference",
         "required" : false,
         "repeats" : false
       }]
@@ -1291,7 +1355,7 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "uri"
+        "valueString" : "Reference"
       }],
       "linkId" : "ObservationDefinition.criticalCodedValueSet",
       "type" : "group",
@@ -1308,13 +1372,21 @@
             }]
           }
         }],
-        "text" : "The set of critical coded results for the observation.",
+        "text" : "The set of critical coded results for the observation conforming to this ObservationDefinition.",
         "type" : "display"
       },
       {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
+          "valueCode" : "ValueSet"
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
+          "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
+        }],
         "linkId" : "ObservationDefinition.criticalCodedValueSet.value",
-        "text" : "Value set of critical coded values for the observation",
-        "type" : "string",
+        "text" : "Value set of critical coded values for the observations conforming to this ObservationDefinition",
+        "type" : "reference",
         "required" : false,
         "repeats" : false
       }]

@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type Immunization {
   id: ID
@@ -36,6 +36,7 @@ type Immunization {
   education: [ImmunizationEducation]
   programEligibility: [CodeableConcept]
   fundingSource: CodeableConcept
+  reaction: [ImmunizationReaction]
   protocolApplied: [ImmunizationProtocolApplied]
 }
 
@@ -57,15 +58,26 @@ type ImmunizationEducation {
   presentationDate: dateTime  _presentationDate: ElementBase
 }
 
+type ImmunizationReaction {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  date: dateTime  _date: ElementBase
+  detail: Reference
+  reported: Boolean  _reported: ElementBase
+}
+
 type ImmunizationProtocolApplied {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
   series: String  _series: ElementBase
   authority: Reference
-  targetDisease: CodeableConcept!
+  targetDisease: [CodeableConcept]
   doseNumberPositiveInt: positiveInt  _doseNumberPositiveInt: ElementBase
   doseNumberString: String  _doseNumberString: ElementBase
+  seriesDosesPositiveInt: positiveInt  _seriesDosesPositiveInt: ElementBase
+  seriesDosesString: String  _seriesDosesString: ElementBase
 }
 
 input Immunization {
@@ -104,6 +116,7 @@ input Immunization {
   education: [ImmunizationEducation]
   programEligibility: [CodeableConcept]
   fundingSource: CodeableConcept
+  reaction: [ImmunizationReaction]
   protocolApplied: [ImmunizationProtocolApplied]
 }
 
@@ -125,15 +138,26 @@ input ImmunizationEducation {
   presentationDate: dateTime  _presentationDate: ElementBase
 }
 
+input ImmunizationReaction {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  date: dateTime  _date: ElementBase
+  detail: Reference
+  reported: Boolean  _reported: ElementBase
+}
+
 input ImmunizationProtocolApplied {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
   series: String  _series: ElementBase
   authority: Reference
-  targetDisease: CodeableConcept!
+  targetDisease: [CodeableConcept]
   doseNumberPositiveInt: positiveInt  _doseNumberPositiveInt: ElementBase
   doseNumberString: String  _doseNumberString: ElementBase
+  seriesDosesPositiveInt: positiveInt  _seriesDosesPositiveInt: ElementBase
+  seriesDosesString: String  _seriesDosesString: ElementBase
 }
 
 type ImmunizationReadType {
@@ -149,6 +173,8 @@ type ImmunizationListType {
     manufacturer : [reference]
     patient : [reference]
     performer : [reference]
+    reaction : [reference]
+    reaction_date : [date]
     reason_code : [token]
     reason_reference : [reference]
     series : [String]
@@ -179,6 +205,8 @@ type ImmunizationConnectionType {
     manufacturer : [reference]
     patient : [reference]
     performer : [reference]
+    reaction : [reference]
+    reaction_date : [date]
     reason_code : [token]
     reason_reference : [reference]
     series : [String]

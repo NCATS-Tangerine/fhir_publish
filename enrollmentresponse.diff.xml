@@ -1,13 +1,20 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <difference>
    <type name="EnrollmentResponse" status="changed">
-      <element path="EnrollmentResponse.outcome">
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               path="EnrollmentResponse.outcome">
          <removed-type name="CodeableConcept"/>
          <added-type name="code"/>
+         <added-code code="queued"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/remittance-outcome"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/remittance-outcome"
+                      strength="required"/>
       </element>
       <element path="EnrollmentResponse.requestProvider">
          <removed-type name="Reference(Practitioner)"/>
-         <added-type name="Reference(Practitioner|PractitionerRole|Organization)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Organization)"/>
       </element>
       <element path="EnrollmentResponse.requestOrganization" status="deleted"/>
    </type>

@@ -1,27 +1,67 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <difference>
    <type name="Condition" status="changed">
-      <element path="Condition.clinicalStatus">
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               path="Condition.clinicalStatus">
          <removed-type name="code"/>
          <added-type name="CodeableConcept"/>
+         <removed-code code="active"/>
+         <removed-code code="recurrence"/>
+         <removed-code code="inactive"/>
+         <removed-code code="remission"/>
+         <removed-code code="resolved"/>
+         <added-code code="active"/>
+         <added-code code="recurrence"/>
+         <added-code code="relapse"/>
+         <added-code code="inactive"/>
+         <added-code code="remission"/>
+         <added-code code="resolved"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/condition-clinical"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/condition-clinical"
+                      strength="required"/>
       </element>
-      <element default="removed"
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               default="removed"
                old-default="&#34;unknown&#34;"
                path="Condition.verificationStatus">
          <removed-type name="code"/>
          <added-type name="CodeableConcept"/>
+         <removed-code code="provisional"/>
+         <removed-code code="differential"/>
+         <removed-code code="confirmed"/>
+         <removed-code code="refuted"/>
+         <removed-code code="entered-in-error"/>
+         <removed-code code="unknown"/>
+         <added-code code="unconfirmed"/>
+         <added-code code="provisional"/>
+         <added-code code="differential"/>
+         <added-code code="confirmed"/>
+         <added-code code="refuted"/>
+         <added-code code="entered-in-error"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/condition-ver-status"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/condition-ver-status"
+                      strength="required"/>
       </element>
+      <element binding-status="added" path="Condition.category">
+         <new-binding reference="http://hl7.org/fhir/ValueSet/condition-category"
+                      strength="extensible"/>
+      </element>
+      <element path="Condition.encounter" status="new"/>
       <element path="Condition.abatement[x]">
          <removed-type name="boolean"/>
       </element>
-      <element path="Condition.recordedDate" status="new"/>
+      <element old-name="assertedDate" path="Condition.recordedDate"/>
       <element path="Condition.recorder" status="new"/>
       <element path="Condition.asserter">
-         <removed-type name="Reference(Practitioner|Patient|RelatedPerson)"/>
-         <added-type name="Reference(Practitioner|PractitionerRole|Patient|RelatedPerson)"/>
+         <removed-type name="Reference(Practitioner | Patient | RelatedPerson)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Patient | RelatedPerson)"/>
       </element>
       <element new-max="*" old-max="1" path="Condition.stage"/>
       <element path="Condition.stage.type" status="new"/>
-      <element path="Condition.assertedDate" status="deleted"/>
+      <element path="Condition.context" status="deleted"/>
    </type>
 </difference>

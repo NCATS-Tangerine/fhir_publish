@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>V3-ObservationInterpretation.cs.json - FHIR v3.5.0</title>
+  <title>V3-ObservationInterpretation.cs.json - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="../.././assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>V3-ObservationInterpretation.cs.json</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
 
 <p>
 <a href="v3-ObservationInterpretation.cs.json">Raw JSON</a> (<a href="v3-ObservationInterpretation.cs.canonical.json">canonical form</a> + also see <a href="json.html">JSON Format Specification</a>)
@@ -128,7 +128,7 @@
   },
   &quot;extension&quot; : [{
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot;,
-    &quot;valueString&quot; : &quot;Normative&quot;
+    &quot;valueCode&quot; : &quot;normative&quot;
   },
   {
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm&quot;,
@@ -137,6 +137,10 @@
   {
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-wg&quot;,
     &quot;valueCode&quot; : &quot;oo&quot;
+  },
+  {
+    &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version&quot;,
+    &quot;valueCode&quot; : &quot;4.0.0&quot;
   }],
   &quot;url&quot; : &quot;http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation&quot;,
   &quot;identifier&quot; : [{
@@ -178,6 +182,12 @@
     &quot;uri&quot; : &quot;http://hl7.org/fhir/concept-properties#deprecationDate&quot;,
     &quot;description&quot; : &quot;The date at which a concept was deprecated. Concepts that are deprecated but not inactive can still be used, but their use is discouraged&quot;,
     &quot;type&quot; : &quot;dateTime&quot;
+  },
+  {
+    &quot;code&quot; : &quot;child&quot;,
+    &quot;uri&quot; : &quot;http://hl7.org/fhir/concept-properties#child&quot;,
+    &quot;description&quot; : &quot;The concept identified in this property is a child of the concept on which it is a property. The property type will be 'code'. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute&quot;,
+    &quot;type&quot; : &quot;code&quot;
   }],
   &quot;concept&quot; : [{
     &quot;code&quot; : &quot;_GeneticObservationInterpretation&quot;,
@@ -330,10 +340,6 @@
         &quot;display&quot; : &quot;High&quot;,
         &quot;definition&quot; : &quot;The result for a quantitative observation is above the upper limit of the reference range (as defined for the respective test procedure).\r\n\n                        Synonym: Above high normal&quot;,
         &quot;concept&quot; : [{
-          &quot;extension&quot; : [{
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;HH&quot;
-          }],
           &quot;code&quot; : &quot;H&gt;&quot;,
           &quot;display&quot; : &quot;Significantly high&quot;,
           &quot;definition&quot; : &quot;A test result that is significantly higher than the reference (normal) or therapeutic interval, but has not reached the critically high value and might need special attention, as defined by the laboratory or the clinician.[Note: This level is situated between 'H' and 'HH'.]\r\n\n                        \n                           Deprecation Comment: The code 'H&gt;' is being deprecated in order to align with the use of the code 'HU' for \&quot;Very high\&quot; in V2 Table 0078 \&quot;Interpretation Codes\&quot;.\r\n\n                        [Note: The use of code 'H&gt;' is non-preferred, as this code is deprecated and on track to be retired; use code 'HU' instead.&quot;,
@@ -344,16 +350,20 @@
           {
             &quot;code&quot; : &quot;deprecationDate&quot;,
             &quot;valueDateTime&quot; : &quot;2015-03-23&quot;
+          },
+          {
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;HH&quot;
           }]
         },
         {
-          &quot;extension&quot; : [{
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;HH&quot;
-          }],
           &quot;code&quot; : &quot;HU&quot;,
           &quot;display&quot; : &quot;Significantly high&quot;,
-          &quot;definition&quot; : &quot;A test result that is significantly higher than the reference (normal) or therapeutic interval, but has not reached the critically high value and might need special attention, as defined by the laboratory or the clinician.&quot;
+          &quot;definition&quot; : &quot;A test result that is significantly higher than the reference (normal) or therapeutic interval, but has not reached the critically high value and might need special attention, as defined by the laboratory or the clinician.&quot;,
+          &quot;property&quot; : [{
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;HH&quot;
+          }]
         }]
       },
       {
@@ -361,10 +371,6 @@
         &quot;display&quot; : &quot;Low&quot;,
         &quot;definition&quot; : &quot;The result for a quantitative observation is below the lower limit of the reference range (as defined for the respective test procedure).\r\n\n                        Synonym: Below low normal&quot;,
         &quot;concept&quot; : [{
-          &quot;extension&quot; : [{
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;LL&quot;
-          }],
           &quot;code&quot; : &quot;L&lt;&quot;,
           &quot;display&quot; : &quot;Significantly low&quot;,
           &quot;definition&quot; : &quot;A test result that is significantly lower than the reference (normal) or therapeutic interval, but has not reached the critically low value and might need special attention, as defined by the laboratory or the clinician.[Note: This level is situated between 'L' and 'LL'.]\r\n\n                        \n                           Deprecation Comment: The code 'L&lt;' is being deprecated in order to align with the use of the code 'LU' for \&quot;Very low\&quot; in V2 Table 0078 \&quot;Interpretation Codes\&quot;.\r\n\n                        [Note: The use of code 'L&lt;' is non-preferred, as this code is deprecated and on track to be retired; use code 'LU' instead.&quot;,
@@ -375,16 +381,20 @@
           {
             &quot;code&quot; : &quot;deprecationDate&quot;,
             &quot;valueDateTime&quot; : &quot;2015-03-23&quot;
+          },
+          {
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;LL&quot;
           }]
         },
         {
-          &quot;extension&quot; : [{
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;LL&quot;
-          }],
           &quot;code&quot; : &quot;LU&quot;,
           &quot;display&quot; : &quot;Significantly low&quot;,
-          &quot;definition&quot; : &quot;A test result that is significantly lower than the reference (normal) or therapeutic interval, but has not reached the critically low value and might need special attention, as defined by the laboratory or the clinician.&quot;
+          &quot;definition&quot; : &quot;A test result that is significantly lower than the reference (normal) or therapeutic interval, but has not reached the critically low value and might need special attention, as defined by the laboratory or the clinician.&quot;,
+          &quot;property&quot; : [{
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;LL&quot;
+          }]
         }]
       }]
     },
@@ -395,16 +405,16 @@
     }]
   },
   {
-    &quot;extension&quot; : [{
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;IE&quot;
-    }],
     &quot;code&quot; : &quot;_ObservationInterpretationSusceptibility&quot;,
     &quot;display&quot; : &quot;ObservationInterpretationSusceptibility&quot;,
     &quot;definition&quot; : &quot;Interpretations of anti-microbial susceptibility testing results (microbiology). At most one allowed.&quot;,
     &quot;property&quot; : [{
       &quot;code&quot; : &quot;notSelectable&quot;,
       &quot;valueBoolean&quot; : true
+    },
+    {
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;IE&quot;
     }],
     &quot;concept&quot; : [{
       &quot;code&quot; : &quot;I&quot;,
@@ -621,7 +631,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:30-0500. <a  style="color: #ffffff" href="../../qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:28-0600. <a  style="color: #ffffff" href="../../qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -631,7 +641,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fv3-ObservationInterpretation.cs.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fv3-ObservationInterpretation.cs.json.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fv3-ObservationInterpretation.cs.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fv3-ObservationInterpretation.cs.json.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="../../license.html"><img src="../../cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

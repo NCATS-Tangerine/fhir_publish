@@ -4,8 +4,9 @@
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
+  "version" : "3.6.0",
   "status" : "draft",
-  "date" : "2018-09-14T07:16:19-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "Health Level Seven International (Imaging Integration)",
   "item" : [{
     "linkId" : "ImagingStudy",
@@ -205,7 +206,7 @@
     },
     {
       "linkId" : "ImagingStudy.extension",
-      "text" : "Additional Content defined by implementations",
+      "text" : "Additional content defined by implementations",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -241,7 +242,7 @@
             }]
           }
         }],
-        "text" : "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "text" : "May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
         "type" : "display"
       }]
     },
@@ -266,7 +267,7 @@
             }]
           }
         }],
-        "text" : "DICOM Study Instance UID, and Accession Number.",
+        "text" : "Identifiers for the ImagingStudy such as DICOM Study Instance UID, and Accession Number. See discussion under [Imaging Study Implementation Notes](imagingstudy.html#notes) for encoding of DICOM Study Instance UID. Accession Number should use ACSN Identifier type.",
         "type" : "display"
       },
       {
@@ -417,7 +418,7 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "Reference"
       }],
-      "linkId" : "ImagingStudy.context",
+      "linkId" : "ImagingStudy.encounter",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -432,20 +433,20 @@
             }]
           }
         }],
-        "text" : "The encounter or episode at which the request is initiated.",
+        "text" : "The healthcare event (e.g. a patient and healthcare provider interaction) during which this ImagingStudy is made. This will typically be the encounter the event occurred within, but some events may be initiated prior to or after the official completion of an encounter but still be tied to the context of the encounter (e.g. pre-admission test).",
         "type" : "display"
       },
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "Encounter, EpisodeOfCare"
+          "valueCode" : "Encounter"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
-        "linkId" : "ImagingStudy.context.value",
-        "text" : "Originating context",
+        "linkId" : "ImagingStudy.encounter.value",
+        "text" : "Encounter with which this imaging study is associated",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -740,7 +741,7 @@
             }]
           }
         }],
-        "text" : "A reference to the performed Procedure.",
+        "text" : "The procedure which this ImagingStudy was part of.",
         "type" : "display"
       },
       {
@@ -1028,7 +1029,7 @@
         },
         {
           "linkId" : "ImagingStudy.series.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -1057,7 +1058,7 @@
       },
       {
         "linkId" : "ImagingStudy.series.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1072,7 +1073,7 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
@@ -1087,10 +1088,9 @@
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-          "valueString" : "Identifier"
+          "valueString" : "string"
         }],
-        "linkId" : "ImagingStudy.series.identifier",
-        "text" : "Formal DICOM identifier for this series",
+        "linkId" : "ImagingStudy.series.uid",
         "type" : "group",
         "required" : true,
         "repeats" : true,
@@ -1105,26 +1105,12 @@
               }]
             }
           }],
-          "text" : "Formal identifier for this series.",
+          "text" : "The DICOM Series Instance UID for the series. See [DICOM PS3.3 C.7.3](http://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.3.html).",
           "type" : "display"
         },
         {
-          "linkId" : "ImagingStudy.series.identifier.label",
-          "text" : "label:",
-          "type" : "string",
-          "required" : false,
-          "repeats" : false
-        },
-        {
-          "linkId" : "ImagingStudy.series.identifier.system",
-          "text" : "system:",
-          "type" : "string",
-          "required" : false,
-          "repeats" : false
-        },
-        {
-          "linkId" : "ImagingStudy.series.identifier.value",
-          "text" : "value:",
+          "linkId" : "ImagingStudy.series.uid.value",
+          "text" : "DICOM Series Instance UID for the series",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -1510,7 +1496,7 @@
           },
           {
             "linkId" : "ImagingStudy.series.performer.id.value",
-            "text" : "xml:id (or equivalent in JSON)",
+            "text" : "Unique id for inter-element referencing",
             "type" : "string",
             "required" : false,
             "repeats" : false
@@ -1539,7 +1525,7 @@
         },
         {
           "linkId" : "ImagingStudy.series.performer.modifierExtension",
-          "text" : "Extensions that cannot be ignored if unrecognized",
+          "text" : "Extensions that cannot be ignored even if unrecognized",
           "type" : "group",
           "required" : false,
           "repeats" : true,
@@ -1554,7 +1540,7 @@
                 }]
               }
             }],
-            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
             "type" : "display"
           }]
         },
@@ -1698,7 +1684,7 @@
           },
           {
             "linkId" : "ImagingStudy.series.instance.id.value",
-            "text" : "xml:id (or equivalent in JSON)",
+            "text" : "Unique id for inter-element referencing",
             "type" : "string",
             "required" : false,
             "repeats" : false
@@ -1727,7 +1713,7 @@
         },
         {
           "linkId" : "ImagingStudy.series.instance.modifierExtension",
-          "text" : "Extensions that cannot be ignored if unrecognized",
+          "text" : "Extensions that cannot be ignored even if unrecognized",
           "type" : "group",
           "required" : false,
           "repeats" : true,
@@ -1742,7 +1728,7 @@
                 }]
               }
             }],
-            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
             "type" : "display"
           }]
         },
@@ -1757,10 +1743,9 @@
           },
           {
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "Identifier"
+            "valueString" : "string"
           }],
-          "linkId" : "ImagingStudy.series.instance.identifier",
-          "text" : "Formal DICOM identifier for this instance",
+          "linkId" : "ImagingStudy.series.instance.uid",
           "type" : "group",
           "required" : true,
           "repeats" : true,
@@ -1775,62 +1760,13 @@
                 }]
               }
             }],
-            "text" : "Formal identifier for this image or other content.",
+            "text" : "The DICOM SOP Instance UID for this image or other DICOM content. See  [DICOM PS3.3 C.12.1](http://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.12.html#sect_C.12.1).",
             "type" : "display"
           },
           {
-            "linkId" : "ImagingStudy.series.instance.identifier.label",
-            "text" : "label:",
+            "linkId" : "ImagingStudy.series.instance.uid.value",
+            "text" : "DICOM SOP Instance UID",
             "type" : "string",
-            "required" : false,
-            "repeats" : false
-          },
-          {
-            "linkId" : "ImagingStudy.series.instance.identifier.system",
-            "text" : "system:",
-            "type" : "string",
-            "required" : false,
-            "repeats" : false
-          },
-          {
-            "linkId" : "ImagingStudy.series.instance.identifier.value",
-            "text" : "value:",
-            "type" : "string",
-            "required" : false,
-            "repeats" : false
-          }]
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
-            "valueInteger" : 1
-          },
-          {
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "integer"
-          }],
-          "linkId" : "ImagingStudy.series.instance.number",
-          "type" : "group",
-          "required" : false,
-          "repeats" : true,
-          "item" : [{
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-              "valueCodeableConcept" : {
-                "coding" : [{
-                  "system" : "http://hl7.org/fhir/questionnaire-item-control",
-                  "code" : "flyover",
-                  "display" : "Fly-over"
-                }]
-              }
-            }],
-            "text" : "The number of instance in the series.",
-            "type" : "display"
-          },
-          {
-            "linkId" : "ImagingStudy.series.instance.number.value",
-            "text" : "The number of this instance in the series",
-            "type" : "integer",
             "required" : false,
             "repeats" : false
           }]
@@ -1870,6 +1806,41 @@
             "linkId" : "ImagingStudy.series.instance.sopClass.value",
             "text" : "DICOM class type",
             "type" : "open-choice",
+            "required" : false,
+            "repeats" : false
+          }]
+        },
+        {
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+            "valueInteger" : 1
+          },
+          {
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+            "valueString" : "integer"
+          }],
+          "linkId" : "ImagingStudy.series.instance.number",
+          "type" : "group",
+          "required" : false,
+          "repeats" : true,
+          "item" : [{
+            "extension" : [{
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+              "valueCodeableConcept" : {
+                "coding" : [{
+                  "system" : "http://hl7.org/fhir/questionnaire-item-control",
+                  "code" : "flyover",
+                  "display" : "Fly-over"
+                }]
+              }
+            }],
+            "text" : "The number of instance in the series.",
+            "type" : "display"
+          },
+          {
+            "linkId" : "ImagingStudy.series.instance.number.value",
+            "text" : "The number of this instance in the series",
+            "type" : "integer",
             "required" : false,
             "repeats" : false
           }]

@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>V3-ActReason.cs.json - FHIR v3.5.0</title>
+  <title>V3-ActReason.cs.json - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="../.././assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>V3-ActReason.cs.json</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
 
 <p>
 <a href="v3-ActReason.cs.json">Raw JSON</a> (<a href="v3-ActReason.cs.canonical.json">canonical form</a> + also see <a href="json.html">JSON Format Specification</a>)
@@ -129,7 +129,7 @@ Example reasons that might qualify for being coded in this field might be: &quot
   },
   &quot;extension&quot; : [{
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot;,
-    &quot;valueString&quot; : &quot;Draft&quot;
+    &quot;valueCode&quot; : &quot;draft&quot;
   },
   {
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm&quot;,
@@ -167,6 +167,12 @@ Example reasons that might qualify for being coded in this field might be: &quot
     &quot;uri&quot; : &quot;http://hl7.org/fhir/concept-properties#notSelectable&quot;,
     &quot;description&quot; : &quot;Indicates that the code is abstract - only intended to be used as a selector for other concepts&quot;,
     &quot;type&quot; : &quot;boolean&quot;
+  },
+  {
+    &quot;code&quot; : &quot;child&quot;,
+    &quot;uri&quot; : &quot;http://hl7.org/fhir/concept-properties#child&quot;,
+    &quot;description&quot; : &quot;The concept identified in this property is a child of the concept on which it is a property. The property type will be 'code'. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute&quot;,
+    &quot;type&quot; : &quot;code&quot;
   },
   {
     &quot;code&quot; : &quot;status&quot;,
@@ -1043,13 +1049,13 @@ Example reasons that might qualify for being coded in this field might be: &quot
       &quot;definition&quot; : &quot;The record is already in the requested state.&quot;
     },
     {
-      &quot;extension&quot; : [{
-        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-        &quot;valueCode&quot; : &quot;NORECMTCH&quot;
-      }],
       &quot;code&quot; : &quot;NOMATCH&quot;,
       &quot;display&quot; : &quot;no match&quot;,
       &quot;definition&quot; : &quot;Description: There is no match.&quot;,
+      &quot;property&quot; : [{
+        &quot;code&quot; : &quot;child&quot;,
+        &quot;valueCode&quot; : &quot;NORECMTCH&quot;
+      }],
       &quot;concept&quot; : [{
         &quot;code&quot; : &quot;NOPRODMTCH&quot;,
         &quot;display&quot; : &quot;no product match&quot;,
@@ -1276,16 +1282,16 @@ Example reasons that might qualify for being coded in this field might be: &quot
       }]
     },
     {
-      &quot;extension&quot; : [{
-        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-        &quot;valueCode&quot; : &quot;DISCONT&quot;
-      }],
       &quot;code&quot; : &quot;_PharmacySupplyRequestRenewalRefusalReasonCode&quot;,
       &quot;display&quot; : &quot;pharmacy supply request renewal refusal reason&quot;,
       &quot;definition&quot; : &quot;Definition:A collection of concepts that identifies why a renewal prescription has been refused.&quot;,
       &quot;property&quot; : [{
         &quot;code&quot; : &quot;notSelectable&quot;,
         &quot;valueBoolean&quot; : true
+      },
+      {
+        &quot;code&quot; : &quot;child&quot;,
+        &quot;valueCode&quot; : &quot;DISCONT&quot;
       }],
       &quot;concept&quot; : [{
         &quot;code&quot; : &quot;ALREADYRX&quot;,
@@ -1403,16 +1409,16 @@ Example reasons that might qualify for being coded in this field might be: &quot
     }]
   },
   {
-    &quot;extension&quot; : [{
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;LEGAL&quot;
-    }],
     &quot;code&quot; : &quot;_PatientProfileQueryReasonCode&quot;,
     &quot;display&quot; : &quot;patient profile query reason&quot;,
     &quot;definition&quot; : &quot;Definition:A collection of concepts identifying why the patient's profile is being queried.&quot;,
     &quot;property&quot; : [{
       &quot;code&quot; : &quot;notSelectable&quot;,
       &quot;valueBoolean&quot; : true
+    },
+    {
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;LEGAL&quot;
     }],
     &quot;concept&quot; : [{
       &quot;code&quot; : &quot;ADMREV&quot;,
@@ -1451,13 +1457,13 @@ Example reasons that might qualify for being coded in this field might be: &quot
     }]
   },
   {
-    &quot;extension&quot; : [{
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;NOUSERPERM&quot;
-    }],
     &quot;code&quot; : &quot;_PharmacySupplyRequestFulfillerRevisionRefusalReasonCode&quot;,
     &quot;display&quot; : &quot;PharmacySupplyRequestFulfillerRevisionRefusalReasonCode&quot;,
     &quot;definition&quot; : &quot;Definition:Indicates why the request to transfer a prescription from one dispensing facility to another has been refused.&quot;,
+    &quot;property&quot; : [{
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;NOUSERPERM&quot;
+    }],
     &quot;concept&quot; : [{
       &quot;code&quot; : &quot;LOCKED&quot;,
       &quot;display&quot; : &quot;locked&quot;,
@@ -1470,33 +1476,33 @@ Example reasons that might qualify for being coded in this field might be: &quot
     }]
   },
   {
-    &quot;extension&quot; : [{
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;NOMATCH&quot;
-    },
-    {
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;NOPERM&quot;
-    }],
     &quot;code&quot; : &quot;_RefusalReasonCode&quot;,
     &quot;display&quot; : &quot;RefusalReasonCode&quot;,
     &quot;definition&quot; : &quot;Description: Identifies why a request to add (or activate) a record is being refused.  Examples include the receiving system not able to match the identifier and find that record in the receiving system, having no permission, or a detected issue exists which precludes the requested action.&quot;,
     &quot;property&quot; : [{
       &quot;code&quot; : &quot;notSelectable&quot;,
       &quot;valueBoolean&quot; : true
+    },
+    {
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;NOMATCH&quot;
+    },
+    {
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;NOPERM&quot;
     }]
   },
   {
-    &quot;extension&quot; : [{
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;PAT&quot;
-    }],
     &quot;code&quot; : &quot;_SchedulingActReason&quot;,
     &quot;display&quot; : &quot;SchedulingActReason&quot;,
     &quot;definition&quot; : &quot;Reasons for cancelling or rescheduling an Appointment&quot;,
     &quot;property&quot; : [{
       &quot;code&quot; : &quot;notSelectable&quot;,
       &quot;valueBoolean&quot; : true
+    },
+    {
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;PAT&quot;
     }],
     &quot;concept&quot; : [{
       &quot;code&quot; : &quot;BLK&quot;,
@@ -1530,21 +1536,21 @@ Example reasons that might qualify for being coded in this field might be: &quot
     }]
   },
   {
-    &quot;extension&quot; : [{
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;NORECMTCH&quot;
-    },
-    {
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;INRQSTATE&quot;
-    },
-    {
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;NOUSERPERM&quot;
-    }],
     &quot;code&quot; : &quot;_StatusRevisionRefusalReasonCode&quot;,
     &quot;display&quot; : &quot;StatusRevisionRefusalReasonCode&quot;,
     &quot;definition&quot; : &quot;Indicates why the act revision (status update) is being refused.&quot;,
+    &quot;property&quot; : [{
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;NORECMTCH&quot;
+    },
+    {
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;INRQSTATE&quot;
+    },
+    {
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;NOUSERPERM&quot;
+    }],
     &quot;concept&quot; : [{
       &quot;code&quot; : &quot;FILLED&quot;,
       &quot;display&quot; : &quot;fully filled&quot;,
@@ -1552,13 +1558,13 @@ Example reasons that might qualify for being coded in this field might be: &quot
     }]
   },
   {
-    &quot;extension&quot; : [{
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;NOUSERPERM&quot;
-    }],
     &quot;code&quot; : &quot;_SubstanceAdministrationPermissionRefusalReasonCode&quot;,
     &quot;display&quot; : &quot;SubstanceAdministrationPermissionRefusalReasonCode&quot;,
     &quot;definition&quot; : &quot;Definition:Indicates why the requested authorization to prescribe or dispense a medication has been refused.&quot;,
+    &quot;property&quot; : [{
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;NOUSERPERM&quot;
+    }],
     &quot;concept&quot; : [{
       &quot;code&quot; : &quot;PATINELIG&quot;,
       &quot;display&quot; : &quot;patient not eligible&quot;,
@@ -1576,16 +1582,16 @@ Example reasons that might qualify for being coded in this field might be: &quot
     }]
   },
   {
-    &quot;extension&quot; : [{
-      &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-      &quot;valueCode&quot; : &quot;PAT&quot;
-    }],
     &quot;code&quot; : &quot;_SubstanceAdminSubstitutionNotAllowedReason&quot;,
     &quot;display&quot; : &quot;SubstanceAdminSubstitutionNotAllowedReason&quot;,
     &quot;definition&quot; : &quot;Reasons why substitution of a substance administration request is not permitted.&quot;,
     &quot;property&quot; : [{
       &quot;code&quot; : &quot;notSelectable&quot;,
       &quot;valueBoolean&quot; : true
+    },
+    {
+      &quot;code&quot; : &quot;child&quot;,
+      &quot;valueCode&quot; : &quot;PAT&quot;
     }],
     &quot;concept&quot; : [{
       &quot;code&quot; : &quot;ALGINT&quot;,
@@ -1837,7 +1843,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:29-0500. <a  style="color: #ffffff" href="../../qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:28-0600. <a  style="color: #ffffff" href="../../qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -1847,7 +1853,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fv3-ActReason.cs.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fv3-ActReason.cs.json.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fv3-ActReason.cs.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fv3-ActReason.cs.json.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="../../license.html"><img src="../../cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

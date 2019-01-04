@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>References-definitions - FHIR v3.5.0</title>
+  <title>References-definitions - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -38,7 +38,7 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -109,19 +109,15 @@
 <ul class="nav nav-tabs"><li><a href="references.html">References</a></li><li class="active"><a href="#">Detailed Descriptions</a></li></ul>
 
 
-<table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: 5</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
-<p style="border: 1px black solid; background-color: #e6ffe6; padding: 5px">
-Normative Candidate Note: This page is candidate normative content for R4 in the <a href="ballot-intro.html#infrastructure">Infrastructure Package</a>.
-Once normative, it will lose it's Maturity Level, and <a href="versions.html#change">breaking changes</a> will no longer be made.
-</p>
-
+<table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: Normative</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
+null
 <table class="dict">
   <tr><td colspan="2" class="structure"><a name="Reference"> </a><b>Reference</b></td></tr>
-  <tr style="background-color: #e6ffe6"><td><a href="versions.html#std-process">Standards Status</a></td><td>This element has a standards status of "Normative" which is different from the status of the whole resource</td></tr>
+  <tr style="background-color: #e6ffe6"><td><a href="versions.html#std-process">Standards Status</a></td><td>This element has a standards status of "Normative"</td></tr>
   <tr><td>Element Id</td><td>Reference</td></tr>
   <tr><td>Definition</td><td><p>A reference from one resource to another.</p>
 </td></tr>
-  <tr><td><a href="conformance-rules.html#conformance">Control</a></td><td>1..1</td></tr>
+  <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..*</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="element.html">Element</a></td></tr>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
   <tr><td>Comments</td><td><p>References SHALL be a reference to an actual FHIR resource, and SHALL be resolveable (allowing for access control, temporary unavailability, etc.). Resolution can be either by retrieval from the URL, or, where applicable by resource type, by treating an absolute reference as a canonical URL and looking it up in a local registry/repository.</p>
@@ -134,7 +130,7 @@ Once normative, it will lose it's Maturity Level, and <a href="versions.html#cha
   <tr><td>Element Id</td><td>Reference.reference</td></tr>
   <tr><td>Definition</td><td><p>A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.</p>
 </td></tr>
-  <tr><td><a href="conformance-rules.html#conformance">Control</a></td><td>0..1</td></tr>
+  <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#string">string</a></td></tr>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
   <tr><td>Comments</td><td><p>Using absolute URLs provides a stable scalable approach suitable for a cloud/web context, while using relative/logical references provides a flexible approach suitable for use when trading across closed eco-system boundaries.   Absolute URLs do not need to point to a FHIR RESTful server, though this is the preferred approach. If the URL conforms to the structure "/[type]/[id]" then it should be assumed that the reference is to a FHIR RESTful server.</p>
@@ -148,7 +144,7 @@ Once normative, it will lose it's Maturity Level, and <a href="versions.html#cha
   <tr><td>Definition</td><td><p>The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.</p>
 <p>The type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. "Patient" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources).</p>
 </td></tr>
-  <tr><td><a href="conformance-rules.html#conformance">Control</a></td><td>0..1</td></tr>
+  <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
   <tr><td><a href="terminologies.html">Terminology Binding</a></td><td><a href="valueset-resource-types.html">ResourceType</a> (<a href="terminologies.html#extensible">Extensible</a>)</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#uri">uri</a></td></tr>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
@@ -158,8 +154,8 @@ Once normative, it will lose it's Maturity Level, and <a href="versions.html#cha
   <tr><td>Element Id</td><td>Reference.identifier</td></tr>
   <tr><td>Definition</td><td><p>An identifier for the target resource. This is used when there is no way to reference the other resource directly, either because the entity it represents is not available through a FHIR server, or because there is no way for the author of the resource to convert a known identifier to an actual location. There is no requirement that a Reference.identifier point to something that is actually exposed as a FHIR instance, but it SHALL point to a business concept that would be expected to be exposed as a FHIR instance, and that instance would need to be of a FHIR resource type allowed by the reference.</p>
 </td></tr>
-  <tr><td>Note</td><td>This is a business identifer, not a resource identifier (see <a href="resource.html#identifiers">discussion</a>)</td></tr>
-  <tr><td><a href="conformance-rules.html#conformance">Control</a></td><td>0..1</td></tr>
+  <tr><td>Note</td><td>This is a business identifier, not a resource identifier (see <a href="resource.html#identifiers">discussion</a>)</td></tr>
+  <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#Identifier">Identifier</a></td></tr>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
   <tr><td>Comments</td><td><p>When an identifier is provided in place of a reference, any system processing the reference will only be able to resolve the identifier to a reference if it understands the business context in which the identifier is used. Sometimes this is global (e.g. a national identifier) but often it is not. For this reason, none of the useful mechanisms described for working with references (e.g. chaining, includes) are possible, nor should servers be expected to be able resolve the reference. Servers may accept an identifier based reference untouched, resolve it, and/or reject it - see CapabilityStatement.rest.resource.referencePolicy.</p>
@@ -171,7 +167,7 @@ Once normative, it will lose it's Maturity Level, and <a href="versions.html#cha
   <tr><td>Element Id</td><td>Reference.display</td></tr>
   <tr><td>Definition</td><td><p>Plain text narrative that identifies the resource in addition to the resource reference.</p>
 </td></tr>
-  <tr><td><a href="conformance-rules.html#conformance">Control</a></td><td>0..1</td></tr>
+  <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#string">string</a></td></tr>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
   <tr><td>Comments</td><td><p>This is generally not the same as the Resource.text of the referenced resource.  The purpose is to identify what's being referenced, not to fully describe it.</p>
@@ -195,7 +191,7 @@ Once normative, it will lose it's Maturity Level, and <a href="versions.html#cha
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -205,7 +201,7 @@ Once normative, it will lose it's Maturity Level, and <a href="versions.html#cha
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Freferences-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Freferences-definitions.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Freferences-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Freferences-definitions.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

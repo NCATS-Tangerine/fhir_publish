@@ -2,11 +2,34 @@
 
 <Questionnaire xmlns="http://hl7.org/fhir">
   <id value="qs1"/>
+  <contained>
+    <ValueSet>
+      <id value="vs2"/>
+      <name value="Type options for Coverage.costToBeneficiary.value[x]"/>
+      <status value="active"/>
+      <description value="Type options for Coverage.costToBeneficiary.value[x]"/>
+      <expansion>
+        <identifier value="urn:uuid:cdbf61fd-54d0-487b-b4af-eb6f91591f91"/>
+        <timestamp value="2018-12-13T14:26:35-06:00"/>
+        <contains>
+          <system value="http://hl7.org/fhir/resource-types"/>
+          <code value="http://hl7.org/fhir/StructureDefinition/SimpleQuantity"/>
+          <display value="Quantity"/>
+        </contains>
+        <contains>
+          <system value="http://hl7.org/fhir/data-types"/>
+          <code value="Money"/>
+          <display value="Money"/>
+        </contains>
+      </expansion>
+    </ValueSet>
+  </contained>
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
+  <version value="3.6.0"/>
   <status value="draft"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="Health Level Seven International (Financial Management)"/>
   <item>
     <linkId value="Coverage"/>
@@ -14,6 +37,10 @@
     <type value="group"/>
     <required value="false"/>
     <repeats value="true"/>
+    <item>
+      <text value="The Coverage resource contains the insurance card level information, which is customary to provide on claims and other communications between providers and insurers."/>
+      <type value="display"/>
+    </item>
     <item>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
         <valueCodeableConcept>
@@ -24,7 +51,7 @@
           </coding>
         </valueCodeableConcept>
       </extension>
-      <text value="Financial instrument which may be used to reimburse or pay for health care products and services."/>
+      <text value="Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment."/>
       <type value="display"/>
     </item>
     <item>
@@ -191,7 +218,7 @@
     </item>
     <item>
       <linkId value="Coverage.extension"/>
-      <text value="Additional Content defined by implementations"/>
+      <text value="Additional content defined by implementations"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -225,7 +252,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+        <text value="May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
         <type value="display"/>
       </item>
     </item>
@@ -234,7 +261,7 @@
         <valueString value="Identifier"/>
       </extension>
       <linkId value="Coverage.identifier"/>
-      <text value="The primary coverage ID"/>
+      <text value="Business Identifier for the coverage"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -248,7 +275,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The main (and possibly only) identifier for the coverage - often referred to as a Member Id, Certificate number, Personal Health Number or Case ID. May be constructed as the concatenation of the Coverage.SubscriberID and the Coverage.dependant."/>
+        <text value="A unique identifier assigned to this coverage. The main (and possibly only) identifier for the coverage - often referred to as a Member Id, Certificate number, Personal Health Number or Case ID. May be constructed as the concatenation of the Coverage.SubscriberID and the Coverage.dependant."/>
         <type value="display"/>
       </item>
       <item>
@@ -274,6 +301,9 @@
       </item>
     </item>
     <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+        <valueInteger value="1"/>
+      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
         <valueInteger value="1"/>
       </extension>
@@ -282,7 +312,7 @@
       </extension>
       <linkId value="Coverage.status"/>
       <type value="group"/>
-      <required value="false"/>
+      <required value="true"/>
       <repeats value="true"/>
       <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
@@ -313,7 +343,7 @@
         <valueString value="CodeableConcept"/>
       </extension>
       <linkId value="Coverage.type"/>
-      <text value="Type of coverage such as medical or accident"/>
+      <text value="Coverage category such as medical or accident"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -366,7 +396,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The party who &#39;owns&#39; the insurance policy,  may be an individual, corporation or the subscriber&#39;s employer."/>
+        <text value="The party who &#39;owns&#39; the insurance policy. For example: may be an individual, corporation or the subscriber&#39;s employer."/>
         <type value="display"/>
       </item>
       <item>
@@ -404,7 +434,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The party who has signed-up for or &#39;owns&#39; the contractual relationship to the policy or to whom the benefit of the policy for services rendered to them or their family is due."/>
+        <text value="The party who has signed-up for or &#39;owns&#39; the contractual relationship to the policy or to whom the benefit of the policy for services rendered to them or their family is due. May be self or a parent in the case of dependants."/>
         <type value="display"/>
       </item>
       <item>
@@ -447,13 +477,16 @@
       </item>
       <item>
         <linkId value="Coverage.subscriberId.value"/>
-        <text value="ID assigned to the Subscriber"/>
+        <text value="ID assigned to the subscriber"/>
         <type value="string"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
     </item>
     <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+        <valueInteger value="1"/>
+      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
         <valueInteger value="1"/>
       </extension>
@@ -462,7 +495,7 @@
       </extension>
       <linkId value="Coverage.beneficiary"/>
       <type value="group"/>
-      <required value="false"/>
+      <required value="true"/>
       <repeats value="true"/>
       <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
@@ -474,7 +507,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The party who benefits from the insurance coverage; the patient when services are provided."/>
+        <text value="The party who benefits from the insurance coverage; the patient when products and/or services are provided."/>
         <type value="display"/>
       </item>
       <item>
@@ -485,7 +518,7 @@
           <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
         </extension>
         <linkId value="Coverage.beneficiary.value"/>
-        <text value="Plan Beneficiary"/>
+        <text value="Plan beneficiary"/>
         <type value="reference"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -512,7 +545,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="A unique identifier for a dependent under the coverage."/>
+        <text value="A unique identifier for a dependent under the coverage. Periodically the member number is constructed from the subscriberId and the dependant number."/>
         <type value="display"/>
       </item>
       <item>
@@ -531,7 +564,7 @@
         <valueString value="CodeableConcept"/>
       </extension>
       <linkId value="Coverage.relationship"/>
-      <text value="Beneficiary relationship to the Subscriber"/>
+      <text value="Beneficiary relationship to the subscriber"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -545,7 +578,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The relationship of beneficiary (patient) to the subscriber."/>
+        <text value="The relationship of beneficiary (patient) to the subscriber. Typically, an individual uses policies which are theirs (relationship=&#39;self&#39;) before policies owned by others."/>
         <type value="display"/>
       </item>
       <item>
@@ -604,12 +637,15 @@
       </item>
     </item>
     <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+        <valueInteger value="1"/>
+      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
         <valueString value="Reference"/>
       </extension>
       <linkId value="Coverage.payor"/>
       <type value="group"/>
-      <required value="false"/>
+      <required value="true"/>
       <repeats value="true"/>
       <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
@@ -621,7 +657,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The program or plan underwriter or payor including both insurance and non-insurance agreements, such as patient-pay agreements. May provide multiple identifiers such as insurance company identifier or business identifier (BIN number)."/>
+        <text value="The program or plan underwriter or payor including both insurance and non-insurance agreements, such as patient-pay agreements. May provide multiple identifiers such as insurance company identifier or business identifier (BIN number).&#xA;For selfpay it may provide multiple paying persons and/or organizations."/>
         <type value="display"/>
       </item>
       <item>
@@ -632,7 +668,7 @@
           <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
         </extension>
         <linkId value="Coverage.payor.value"/>
-        <text value="Identifier for the plan or agreement issuer"/>
+        <text value="Issuer of the policy"/>
         <type value="reference"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -645,6 +681,10 @@
       <required value="false"/>
       <repeats value="true"/>
       <item>
+        <text value="For example may be used to identify a class of coverage or employer group, Policy, Plan."/>
+        <type value="display"/>
+      </item>
+      <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
           <valueCodeableConcept>
             <coding>
@@ -654,7 +694,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="A suite of underwrite specific classifiers, for example may be used to identify a class of coverage or employer group, Policy, Plan."/>
+        <text value="A suite of underwriter specific classifiers."/>
         <type value="display"/>
       </item>
       <item>
@@ -683,7 +723,7 @@
         </item>
         <item>
           <linkId value="Coverage.class.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -711,7 +751,7 @@
       </item>
       <item>
         <linkId value="Coverage.class.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -725,7 +765,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>
@@ -737,9 +777,10 @@
           <valueInteger value="1"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="Coding"/>
+          <valueString value="CodeableConcept"/>
         </extension>
         <linkId value="Coverage.class.type"/>
+        <text value="Type of class such as &#39;group&#39; or &#39;plan&#39;"/>
         <type value="group"/>
         <required value="true"/>
         <repeats value="true"/>
@@ -753,13 +794,20 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The type of classification for which an insurer-specific class tag or number and optional name is provided, for example may be used to identify a class of coverage or employer group, Policy, Plan."/>
+          <text value="The type of classification for which an insurer-specific class label or number and optional name is provided, for example may be used to identify a class of coverage or employer group, Policy, Plan."/>
           <type value="display"/>
         </item>
         <item>
-          <linkId value="Coverage.class.type.value"/>
-          <text value="Type of class such as &#39;group&#39; or &#39;plan&#39;"/>
+          <linkId value="Coverage.class.type.coding"/>
+          <text value="code:"/>
           <type value="open-choice"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+        <item>
+          <linkId value="Coverage.class.type.text"/>
+          <text value="text:"/>
+          <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
         </item>
@@ -788,12 +836,12 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="For example, the Group or Plan number."/>
+          <text value="The alphanumeric string value associated with the insurer issued label. For example, the Group or Plan number."/>
           <type value="display"/>
         </item>
         <item>
           <linkId value="Coverage.class.value.value"/>
-          <text value="The tag or value under the classification"/>
+          <text value="Value associated with the type"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -825,7 +873,7 @@
         </item>
         <item>
           <linkId value="Coverage.class.name.value"/>
-          <text value="Display text for an identifier for the group"/>
+          <text value="Human readable description of the type and value"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -897,11 +945,15 @@
       </item>
     </item>
     <item>
-      <linkId value="Coverage.copay"/>
+      <linkId value="Coverage.costToBeneficiary"/>
       <text value="Patient payments for services/products"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
+      <item>
+        <text value="For example by knowing the patient visit co-pay, the provider can collect the amount prior to undertaking treatment."/>
+        <type value="display"/>
+      </item>
       <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
           <valueCodeableConcept>
@@ -912,7 +964,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="A suite of underwrite specific classifiers, for example may be used to identify a class of coverage or employer group, Policy, Plan."/>
+        <text value="A suite of codes indicating the cost category and associated amount which have been detailed in the policy and may have been  included on the health card."/>
         <type value="display"/>
       </item>
       <item>
@@ -922,7 +974,7 @@
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
           <valueString value="string"/>
         </extension>
-        <linkId value="Coverage.copay.id"/>
+        <linkId value="Coverage.costToBeneficiary.id"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -940,15 +992,15 @@
           <type value="display"/>
         </item>
         <item>
-          <linkId value="Coverage.copay.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <linkId value="Coverage.costToBeneficiary.id.value"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
         </item>
       </item>
       <item>
-        <linkId value="Coverage.copay.extension"/>
+        <linkId value="Coverage.costToBeneficiary.extension"/>
         <text value="Additional content defined by implementations"/>
         <type value="group"/>
         <required value="false"/>
@@ -968,8 +1020,8 @@
         </item>
       </item>
       <item>
-        <linkId value="Coverage.copay.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <linkId value="Coverage.costToBeneficiary.modifierExtension"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -983,7 +1035,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>
@@ -992,9 +1044,10 @@
           <valueInteger value="1"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="Coding"/>
+          <valueString value="CodeableConcept"/>
         </extension>
-        <linkId value="Coverage.copay.type"/>
+        <linkId value="Coverage.costToBeneficiary.type"/>
+        <text value="Cost category"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -1008,13 +1061,20 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="Types of products or services such as visit, specialist visits, emergency, inpatient care, etc."/>
+          <text value="The category of patient centric costs associated with treatment. For example visit, specialist visits, emergency, inpatient care, etc."/>
           <type value="display"/>
         </item>
         <item>
-          <linkId value="Coverage.copay.type.value"/>
-          <text value="The type of service or product"/>
+          <linkId value="Coverage.costToBeneficiary.type.coding"/>
+          <text value="code:"/>
           <type value="open-choice"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+        <item>
+          <linkId value="Coverage.costToBeneficiary.type.text"/>
+          <text value="text:"/>
+          <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
         </item>
@@ -1026,11 +1086,8 @@
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
           <valueInteger value="1"/>
         </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="Quantity"/>
-        </extension>
-        <linkId value="Coverage.copay.value"/>
-        <text value="The amount or percentage of the copayment"/>
+        <linkId value="Coverage.costToBeneficiary.value[x]"/>
+        <text value="The amount or percentage due from the beneficiary"/>
         <type value="group"/>
         <required value="true"/>
         <repeats value="true"/>
@@ -1044,44 +1101,308 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The amount of patient payments for various types of services/products, expressed as a percentage of the service/product cost or a fixed amount of currency."/>
+          <text value="The amount due from the patient for the cost category. Amount may be expressed as a percentage of the service/product cost or a fixed amount of currency."/>
           <type value="display"/>
         </item>
         <item>
-          <linkId value="Coverage.copay.value.comparator"/>
-          <text value="comp:"/>
+          <linkId value="Coverage.costToBeneficiary.value[x]._type"/>
+          <text value="type"/>
           <type value="choice"/>
           <required value="false"/>
           <repeats value="false"/>
+          <answerValueSet value="#vs2"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="Quantity"/>
+            </extension>
+            <linkId value="Coverage.costToBeneficiary.value[x]._null"/>
+            <type value="group"/>
+            <item>
+              <linkId value="Coverage.costToBeneficiary.value[x]._null.comparator"/>
+              <text value="comp:"/>
+              <type value="choice"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="Coverage.costToBeneficiary.value[x]._null.value"/>
+              <text value="value:"/>
+              <type value="decimal"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="Coverage.costToBeneficiary.value[x]._null.units"/>
+              <text value="units:"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="Coverage.costToBeneficiary.value[x]._null.code"/>
+              <text value="coded units:"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="Coverage.costToBeneficiary.value[x]._null.system"/>
+              <text value="units system:"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="Quantity"/>
+            </extension>
+            <linkId value="Coverage.costToBeneficiary.value[x]._null"/>
+            <type value="group"/>
+            <item>
+              <linkId value="Coverage.costToBeneficiary.value[x]._null.comparator"/>
+              <text value="comp:"/>
+              <type value="choice"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="Coverage.costToBeneficiary.value[x]._null.value"/>
+              <text value="value:"/>
+              <type value="decimal"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="Coverage.costToBeneficiary.value[x]._null.units"/>
+              <text value="units:"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="Coverage.costToBeneficiary.value[x]._null.code"/>
+              <text value="coded units:"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="Coverage.costToBeneficiary.value[x]._null.system"/>
+              <text value="units system:"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+        </item>
+      </item>
+      <item>
+        <linkId value="Coverage.costToBeneficiary.exception"/>
+        <text value="Exceptions for patient payments"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="A suite of codes indicating exceptions or reductions to patient costs and their effective periods."/>
+          <type value="display"/>
         </item>
         <item>
-          <linkId value="Coverage.copay.value.value"/>
-          <text value="value:"/>
-          <type value="decimal"/>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="string"/>
+          </extension>
+          <linkId value="Coverage.costToBeneficiary.exception.id"/>
+          <type value="group"/>
           <required value="false"/>
-          <repeats value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="Coverage.costToBeneficiary.exception.id.value"/>
+            <text value="Unique id for inter-element referencing"/>
+            <type value="string"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
         </item>
         <item>
-          <linkId value="Coverage.copay.value.units"/>
-          <text value="units:"/>
-          <type value="string"/>
+          <linkId value="Coverage.costToBeneficiary.exception.extension"/>
+          <text value="Additional content defined by implementations"/>
+          <type value="group"/>
           <required value="false"/>
-          <repeats value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+            <type value="display"/>
+          </item>
         </item>
         <item>
-          <linkId value="Coverage.copay.value.code"/>
-          <text value="coded units:"/>
-          <type value="string"/>
+          <linkId value="Coverage.costToBeneficiary.exception.modifierExtension"/>
+          <text value="Extensions that cannot be ignored even if unrecognized"/>
+          <type value="group"/>
           <required value="false"/>
-          <repeats value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+            <type value="display"/>
+          </item>
         </item>
         <item>
-          <linkId value="Coverage.copay.value.system"/>
-          <text value="units system:"/>
-          <type value="string"/>
-          <required value="false"/>
-          <repeats value="false"/>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="CodeableConcept"/>
+          </extension>
+          <linkId value="Coverage.costToBeneficiary.exception.type"/>
+          <text value="Exception category"/>
+          <type value="group"/>
+          <required value="true"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="The code for the specific exception."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="Coverage.costToBeneficiary.exception.type.coding"/>
+            <text value="code:"/>
+            <type value="open-choice"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+          <item>
+            <linkId value="Coverage.costToBeneficiary.exception.type.text"/>
+            <text value="text:"/>
+            <type value="string"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
         </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="Period"/>
+          </extension>
+          <linkId value="Coverage.costToBeneficiary.exception.period"/>
+          <text value="The effective period of the exception"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="The timeframe during when the exception is in force."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="Coverage.costToBeneficiary.exception.period.low"/>
+            <text value="start:"/>
+            <type value="dateTime"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+          <item>
+            <linkId value="Coverage.costToBeneficiary.exception.period.end"/>
+            <text value="end:"/>
+            <type value="dateTime"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="boolean"/>
+      </extension>
+      <linkId value="Coverage.subrogation"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="When &#39;subrogation=true&#39; this insurance instance has been included not for adjudication but to provide insurers with the details to recover costs. Typically, automotive and worker&#39;s compensation policies would be flagged with &#39;subrogation=true&#39; to enable healthcare payors to collect against accident claims."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <linkId value="Coverage.subrogation.value"/>
+        <text value="Reimbursement to insurer"/>
+        <type value="boolean"/>
+        <required value="false"/>
+        <repeats value="false"/>
       </item>
     </item>
     <item>

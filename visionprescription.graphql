@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type VisionPrescription {
   id: ID
@@ -11,25 +11,24 @@ type VisionPrescription {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
-  patient: Reference
+  created: dateTime  _created: ElementBase
+  patient: Reference!
   encounter: Reference
   dateWritten: dateTime  _dateWritten: ElementBase
-  prescriber: Reference
-  reasonCodeableConcept: CodeableConcept
-  reasonReference: Reference
-  dispense: [VisionPrescriptionDispense]
+  prescriber: Reference!
+  lensSpecification: [VisionPrescriptionLensSpecification]!
 }
 
-type VisionPrescriptionDispense {
+type VisionPrescriptionLensSpecification {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  product: CodeableConcept
+  product: CodeableConcept!
   eye: code  _eye: ElementBase
   sphere: decimal  _sphere: ElementBase
   cylinder: decimal  _cylinder: ElementBase
   axis: Int  _axis: ElementBase
-  prism: [VisionPrescriptionDispensePrism]
+  prism: [VisionPrescriptionLensSpecificationPrism]
   add: decimal  _add: ElementBase
   power: decimal  _power: ElementBase
   backCurve: decimal  _backCurve: ElementBase
@@ -40,7 +39,7 @@ type VisionPrescriptionDispense {
   note: [Annotation]
 }
 
-type VisionPrescriptionDispensePrism {
+type VisionPrescriptionLensSpecificationPrism {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -59,25 +58,24 @@ input VisionPrescription {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
-  patient: Reference
+  created: dateTime  _created: ElementBase
+  patient: Reference!
   encounter: Reference
   dateWritten: dateTime  _dateWritten: ElementBase
-  prescriber: Reference
-  reasonCodeableConcept: CodeableConcept
-  reasonReference: Reference
-  dispense: [VisionPrescriptionDispense]
+  prescriber: Reference!
+  lensSpecification: [VisionPrescriptionLensSpecification]!
 }
 
-input VisionPrescriptionDispense {
+input VisionPrescriptionLensSpecification {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  product: CodeableConcept
+  product: CodeableConcept!
   eye: code  _eye: ElementBase
   sphere: decimal  _sphere: ElementBase
   cylinder: decimal  _cylinder: ElementBase
   axis: Int  _axis: ElementBase
-  prism: [VisionPrescriptionDispensePrism]
+  prism: [VisionPrescriptionLensSpecificationPrism]
   add: decimal  _add: ElementBase
   power: decimal  _power: ElementBase
   backCurve: decimal  _backCurve: ElementBase
@@ -88,7 +86,7 @@ input VisionPrescriptionDispense {
   note: [Annotation]
 }
 
-input VisionPrescriptionDispensePrism {
+input VisionPrescriptionLensSpecificationPrism {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]

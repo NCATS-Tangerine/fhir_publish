@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type DocumentManifest {
   id: ID
@@ -15,20 +15,12 @@ type DocumentManifest {
   type: CodeableConcept
   subject: Reference
   created: dateTime  _created: ElementBase
-  agent: [DocumentManifestAgent]
+  author: [Reference]
   recipient: [Reference]
   source: uri  _source: ElementBase
   description: String  _description: ElementBase
   content: [Reference]!
   related: [DocumentManifestRelated]
-}
-
-type DocumentManifestAgent {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  type: CodeableConcept
-  who: Reference!
 }
 
 type DocumentManifestRelated {
@@ -54,20 +46,12 @@ input DocumentManifest {
   type: CodeableConcept
   subject: Reference
   created: dateTime  _created: ElementBase
-  agent: [DocumentManifestAgent]
+  author: [Reference]
   recipient: [Reference]
   source: uri  _source: ElementBase
   description: String  _description: ElementBase
   content: [Reference]!
   related: [DocumentManifestRelated]
-}
-
-input DocumentManifestAgent {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  type: CodeableConcept
-  who: Reference!
 }
 
 input DocumentManifestRelated {
@@ -84,7 +68,7 @@ type DocumentManifestReadType {
 
 type DocumentManifestListType {
   DocumentManifestList(_filter : String
-    agent : [reference]
+    author : [reference]
     created : [date]
     description : [String]
     identifier : [token]
@@ -113,7 +97,7 @@ type DocumentManifestListType {
 
 type DocumentManifestConnectionType {
   DocumentManifestConection(_filter : String
-    agent : [reference]
+    author : [reference]
     created : [date]
     description : [String]
     identifier : [token]

@@ -10,6 +10,7 @@
     "valueInteger" : 1
   }],
   "url" : "http://hl7.org/fhir/StructureDefinition/rendering-styleSensitive",
+  "version" : "3.6.0",
   "name" : "styleSensitive",
   "status" : "draft",
   "date" : "2014-04-23",
@@ -20,8 +21,8 @@
       "value" : "http://www.hl7.org/Special/committees/fiwg"
     }]
   }],
-  "description" : "Indicates that the style extensions ([style](extension-rendering-style.html), [markdown](extension-rendering-markdown.html)) and [xhtml](extension-rendering-xhtml.html)) in this resource are essential to the interpretation of the styled text and that it cannot be rendered without the style without losing essential information.",
-  "fhirVersion" : "3.5.0",
+  "description" : "Indicates that the style extensions (style, markdown and xhtml) in this resource instance are essential to the interpretation of the instance and that systems that are not capable of rendering using those extensions should not be used to render the resource.",
+  "fhirVersion" : "3.6.0",
   "mapping" : [{
     "identity" : "rim",
     "uri" : "http://hl7.org/v3",
@@ -39,10 +40,18 @@
   "snapshot" : {
     "element" : [{
       "id" : "Extension",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+        "valueCode" : "normative"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
+        "valueCode" : "4.0.0"
+      }],
       "path" : "Extension",
       "short" : "Are styles important for processing?",
-      "definition" : "Indicates that the style extensions ([style](extension-rendering-style.html), [markdown](extension-rendering-markdown.html)) and [xhtml](extension-rendering-xhtml.html)) in this resource are essential to the interpretation of the styled text and that it cannot be rendered without the style without losing essential information.",
-      "comment" : "If set to true, all systems that claim to support this extension and which render elements of the resource containing this extension SHALL either render the content as required by the style extensions defined by this profile that are present in the resource or shall (if safe to do so based on their own rules), omit entirely the styled content they cannot render in accordance with the extensions.",
+      "definition" : "Indicates that the style extensions (style, markdown and xhtml) in this resource instance are essential to the interpretation of the instance and that systems that are not capable of rendering using those extensions should not be used to render the resource.",
+      "comment" : "If set to true, all systems that claim to support this extension and that render elements from the resource SHALL either render the content as required by the style extensions ([style], [xhtml] and [markdown]) or shall indicate to the user that the resource (or specific elements in the resource) cannot be appropriately rendered by the system.",
       "min" : 0,
       "max" : "1",
       "base" : {
@@ -73,7 +82,7 @@
       "id" : "Extension.id",
       "path" : "Extension.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -147,7 +156,7 @@
       "id" : "Extension.valueBoolean",
       "path" : "Extension.valueBoolean",
       "short" : "Value of extension",
-      "definition" : "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).",
+      "definition" : "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
       "min" : 0,
       "max" : "1",
       "base" : {
@@ -171,8 +180,8 @@
       "id" : "Extension",
       "path" : "Extension",
       "short" : "Are styles important for processing?",
-      "definition" : "Indicates that the style extensions ([style](extension-rendering-style.html), [markdown](extension-rendering-markdown.html)) and [xhtml](extension-rendering-xhtml.html)) in this resource are essential to the interpretation of the styled text and that it cannot be rendered without the style without losing essential information.",
-      "comment" : "If set to true, all systems that claim to support this extension and which render elements of the resource containing this extension SHALL either render the content as required by the style extensions defined by this profile that are present in the resource or shall (if safe to do so based on their own rules), omit entirely the styled content they cannot render in accordance with the extensions.",
+      "definition" : "Indicates that the style extensions (style, markdown and xhtml) in this resource instance are essential to the interpretation of the instance and that systems that are not capable of rendering using those extensions should not be used to render the resource.",
+      "comment" : "If set to true, all systems that claim to support this extension and that render elements from the resource SHALL either render the content as required by the style extensions ([style], [xhtml] and [markdown]) or shall indicate to the user that the resource (or specific elements in the resource) cannot be appropriately rendered by the system.",
       "min" : 0,
       "max" : "1"
     },

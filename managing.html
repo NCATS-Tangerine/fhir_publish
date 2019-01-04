@@ -8,7 +8,7 @@ or consumer. -->  <!-- A person or animal receiving care at multiple organizatio
 
  What are the explicit mechanisms that should be used to synchronize them? This dynamic behavior,  is not covered at any depth (that I can see), except to suggest that a message that emulates a HL7 v2 or V3 event be employed. The entire notion of dynamic behavior of a model employing resources is not covered well. If one happens to employ RESTful services (not required AFAICS) then, yes, we have CRUD verb mappings on resources, but no real discussion of the dynamic behavior of multiple resources involved in transactions/events, except to fall back on HL7 v2 and V3. Am I missing something? --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Managing - FHIR v3.5.0</title>
+  <title>Managing - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -45,7 +45,7 @@ or consumer. -->  <!-- A person or animal receiving care at multiple organizatio
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -114,14 +114,15 @@ or consumer. -->  <!-- A person or animal receiving care at multiple organizatio
 
 <a name="identity"></a>
 <h2 class="self-link-parent"><span class="sectioncount">7.12<a name="7.12"> </a></span> Managing Resource Identity <a href="managing.html#7.12" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h2>
-<table class="colsi"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: n/a</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Informative</a></td></tr></table>
+<table class="colsi"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: n/a</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Informative</a></td></tr></table>
 
 <p>
-The content on this page builds on the Normative <a href="resource.html#id">docuemntation about managing resource identification</a>.
+The content on this page builds on the Normative <a href="resource.html#id">documentation about managing resource identification</a>.
 </p>
 
 <p>
-Each resource has a known identity, which is a URL. The identity is not stored
+Each resource has a known identity, which is a URI. All resources accessed through the
+RESTful API have a URL for their identity. The identity is not stored
 inside the resource, but must be tracked by systems handling resources. For
 RESTful systems, the resource identity is the same as the URL by which it is found.
 When a resource is packaged in a <a href="bundle.html">bundle</a> (e.g. for
@@ -133,14 +134,14 @@ resources are identified with URLs needs to be managed carefully.
 </p>
 
 <p>
-Note that many resources also have an identifier element, and usually there can be
+Note that many resources also have an <code>identifier</code> element, and usually there can be
 multiple identifiers. This identifier is a logical identifier for the concept that
 the resource describes and is different from the identity discussed in this section,
 which is the literal identity of the resource. Note that there are often multiple
 resource instances that describe the same concept across multiple systems, e.g. each
 application keeps its own copy of the patient information in a
 <a href="patient.html">Patient</a> resource. This can even exist within a single
-system, such as in the case of <a href="patient.html#links">patient duplicates</a>).
+system, such as in the case of <a href="patient.html#links">patient duplicates</a>.
 </p>
 
 <p>
@@ -179,7 +180,7 @@ a logical id is always required, in order to enable seamless exchange amongst pa
 <h3 class="self-link-parent"><span class="sectioncount">7.12.2</span> Copying Resources and Assigning new Ids <a href="managing.html#distributed" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 <p>
 When resources are exchanged between systems, they may need to have new logical resource ids assigned.
-When a resource has a new logical id assigned, nothing in the resource change other than the <a href="resource-definitions.html#Resource.id">Resource.id</a>, 
+When a resource has a new logical id assigned, nothing in the resource changes other than the <a href="resource-definitions.html#Resource.id">Resource.id</a>, 
 but any references that point to the resource need to be updated. Whether new ids are required or not depends on the context, as does how resource
 references are updated.
 </p>
@@ -203,7 +204,7 @@ In some cases, however, the client may deal with multiple servers. In this case,
 resource is not guaranteed to be unique (unless all resources have a UUID for the logical id, which is
 allowed but not required). When the client cannot be sure that the resource identities are unique, it
 will have assign new ids to the resources. In practice this means that the client needs to keep some kind of
-identity translation table, and update references to the resources it has copied locally when other resources
+identity translation table and update references to the resources it has copied locally when other resources
 are received.
 </p>
 <p>
@@ -220,8 +221,96 @@ would make the boundary management problem easier but remove useful and convenie
 other uses of FHIR. Implementers should design their systems accordingly.
 </p></blockquote>
 
+<a name="multi-server"> </a>
+<h3 class="self-link-parent"><span class="sectioncount">7.12.3</span> Working with multiple servers <a href="managing.html#multi-server" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
+<p>
+FHIR supports managing healthcare data in a distributed environment where different records reside on different servers - and reference data on remote servers.
+Implementers working in such a multi-server environment should be aware of several considerations:
+</p>
+
+<a name="discovery"> </a>
+<h4 class="self-link-parent"><span class="sectioncount">7.12.3.1</span> Discovering relevant systems <a href="managing.html#discovery" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<p>
+In an environment where relevant information may be distributed across multiple servers, client systems in the space will need a mechanism to determine where
+data is located.  There are three primary mechanisms for discovery:
+</p>
+<ul>
+  <li>Manual configuration: Systems are manually configured to point to other (relevant) servers with guidance around what types of data reside in which
+   server, the address of the server, any necessary authentication information, etc. either hard-coded in the software or managed through system 
+   configuration files</li>
+  <li>Traversal: Client systems are expected to start queries from a single server that manages the "primary" resources (e.g. 
+   <a href="encounter.html">encounters</a>, <a href="diagnosticreport.html">diagnostic reports</a>, <a href="episodeofcare.html">episodes</a>, etc.)  Other relevant
+   information such as diagnoses, observations, conditions, procedures, etc. is found by navigating references from those primary resources to other resource -
+   on whatever servers that information happens to reside on</li>
+ <li>System registry: Client systems discover the 'current' set of relevant servers by querying a central location for the 
+   <a href="endpoint.html">Endpoints</a> for servers that carry relevant data for a particular community.  As servers join or leave the community, the list
+   of potential endpoints would change.  Clients would discover relevant servers by querying for endpoints of particular types and then retrieve more
+   information by looking up the <a href="capabilitystatement.html">CapabilityStatements</a> for each server</li>
+</ul>
+
+<a name="registries"> </a>
+<h4 class="self-link-parent"><span class="sectioncount">7.12.3.2</span> Managing shared entities <a href="managing.html#registries" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<p>
+A typical multi-server environment is one where each server is responsible for different "types" of information.  For example, one server handles lab
+information, one handles medication information, one handles imaging information, etc.  In this scenario, it's not uncommon for each of the servers to also
+hold their own records for certain types of resources such as <a href="patient.html">Patient</a>, <a href="practitioner.html">Practitioner</a>,
+<a href="location.html">Location</a>, etc.  When exploring linking the systems together, consideration needs to be given for how to manage such shared entities.
+Possibilities include:
+</p>
+<ul>
+  <li>Shared registry:  A single system acts as a source of truth for a particular resource type and all other systems cease maintaining local information and instead merely reference resources on the central server.</li>
+  <li>Source-of-truth registry: A single system acts as source of truth for a particular resource type and pushes a read-only view of the information to other servers.  Records are created or updated only in the source of truth system.</li>
+  <li>Linked resources: Each system maintains their own 'version' of information for a given individual, but linkages are maintained allowing determination which instances from different servers represent the same individual.  This can be done using the <a href="person.html">Person</a> resource for patients, practitioners and <a href="relatedperson.html">RelatedPerson</a>s.  The <a href="linkage.html">Linkage</a> resource can be used for other shared resources.  Linkages can also be managed just by sharing <code>identifier</code> values (e.g. shared medical record numbers, license numbers, etc.)</li>
+  <li>Independent resources: Each system manages their resources independently and no linkage is maintained.  Determination of what resources are appropriate to link to must be managed by human-based searching and matching on the patients/providers/etc. in each system separately</li>
+</ul>
+<p>
+Choice of architecture will be driven by the capabilities of the systems involved, needs of organizational workflow, ability to integrate legacy data, etc.  Other architectures are possible, and mixtures of architectures are possible too.  For example, a shared registry for patients while using linked resources for practitioners; shared registry for "licensed" practitioners while independent resources for administrative staff; etc.
+</p>
+<p>
+Where synchronization is required, this can be done by polling, by having the "master" system pushing updates to other systems, by using FHIR's 
+<a href="subscription.html">Subscription</a> mechanism, through database synchronization technologies or other means.  Design decisions will also be necessary around synchronization frequency, managing merges in a distributed environment, etc.
+</p>
+
+<a name="queries"> </a>
+<h4 class="self-link-parent"><span class="sectioncount">7.12.3.3</span> Querying shared data <a href="managing.html#queries" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<p>
+FHIR defines several mechanisms for retrieving resources that are referenced by other resources: <a href="search.html#include">_include</a> and 
+<a href="search.html#revinclude">_revinclude</a>, <a href="compartmentdefinition.html">compartments</a> and special operations such as
+<a href="patient-operation-everything.html">Patient/$everything</a>.  Query behavior becomes more complex when references span servers.  Servers 
+returning _include and _revinclude capabilities <b>can</b> but need not return data stored from other servers.  Similarly, the definition of 
+compartments doesn't strictly limit data to that found on a single server, but servers are certainly not expected to include data found elsewhere 
+when performing compartment-based queries or operations.  As a result, query behavior may be different if data is stored on the same server as the
+referencing resource vs. stored on a different server.
+</p>
+<p>
+For servers that support cross-server search, there are multiple considerations:
+</p>
+<ul>
+  <li>Querying across servers will impose constraints on query response time.  This is particularly true in situations where subsequent sub-queries may
+  need to be executed based on returned data (e.g. includes based on other included data)</li>
+  <li>The remote server might not always be available, or might not respond in a sufficiently timely manner and the user may need to be made aware (via
+  a 'warning' <a href="operationoutcome.html">OperationOutcome</a> that some results are not available</li>
+  <li>When a query is executed, the general presumption is that the result set is "frozen" such that paging operations behave consistently.  This becomes
+  more complex when querying across servers.  To truly 'freeze' the result set, a great deal of data may need to be queried from the remote server, even if
+  the client only retrieves first page or two.  This has ramifications for performance, for accuracy of logs indicating what clients have accessed
+  what data and possibly for changes of access permission when data has been cached on a different server.</li>
+  <li>Systems will need to manage propagating user authentication across servers such that access permissions are appropriately enforced by each server</li>
+  <li>Where data is being aggregated from multiple servers (e.g. Observations returned from multiple repositories), there may be difference in search filtering
+   behavior by different servers.  There may also be a need to identify (and possibly suppress duplicates) when the same record appears in more than one
+   repository</li>
+</ul>
+
+<a name="storage"> </a>
+<h4 class="self-link-parent"><span class="sectioncount">7.12.3.4</span> Storage location <a href="managing.html#storage" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<p>
+In some multi-server environments, there may be multiple servers that support storing a particular resource type.  For example, one server might store 
+lab-related observations, another might store vital sign observations and yet another could store clinician assessment observations.  Alternatively, both the ordering system and the pharmacy system might have records of patient allergies.  Clients will need rules to determine which server (or servers) a given record should be created on.
+Ideally, servers should also have logic that allows them to detect if a record has been submitted to them inappropriately.  Such rules could be based on
+originating client, associated encounter, record type or other considerations.
+</p>
 
 </div>
+
 
 
 
@@ -236,7 +325,7 @@ other uses of FHIR. Implementers should design their systems accordingly.
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -246,7 +335,7 @@ other uses of FHIR. Implementers should design their systems accordingly.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fmanaging.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmanaging.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fmanaging.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmanaging.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

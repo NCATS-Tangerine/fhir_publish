@@ -4,27 +4,30 @@
       <element path="NutritionOrder.instantiatesCanonical" status="new"/>
       <element path="NutritionOrder.instantiatesUri" status="new"/>
       <element path="NutritionOrder.instantiates" status="new"/>
-      <element binding-status="changed"
+      <element binding-codes-changed="true"
+               binding-status="changed"
                binding-valueset-changed="true"
                new-min="1"
                old-min="0"
                path="NutritionOrder.status">
+         <removed-code code="suspended"/>
+         <removed-code code="cancelled"/>
+         <added-code code="on-hold"/>
+         <added-code code="revoked"/>
          <old-binding reference="http://hl7.org/fhir/ValueSet/nutrition-request-status"
                       strength="required"/>
          <new-binding reference="http://hl7.org/fhir/ValueSet/request-status"
                       strength="required"/>
       </element>
       <element path="NutritionOrder.intent" status="new"/>
-      <element path="NutritionOrder.context" status="new"/>
       <element path="NutritionOrder.orderer">
          <removed-type name="Reference(Practitioner)"/>
-         <added-type name="Reference(Practitioner|PractitionerRole)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole)"/>
       </element>
       <element path="NutritionOrder.enteralFormula.administration.rate[x]">
-         <removed-type name="canonical()"/>
-         <added-type name="canonical()"/>
+         <removed-type name="Quantity()"/>
+         <added-type name="Quantity()"/>
       </element>
       <element path="NutritionOrder.note" status="new"/>
-      <element path="NutritionOrder.encounter" status="deleted"/>
    </type>
 </difference>

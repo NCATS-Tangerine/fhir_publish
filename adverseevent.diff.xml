@@ -16,18 +16,38 @@
       </element>
       <element path="AdverseEvent.event" status="new"/>
       <element new-min="1" old-min="0" path="AdverseEvent.subject">
-         <removed-type name="Reference(Patient|ResearchSubject|Medication|Device)"/>
-         <added-type name="Reference(Patient|Group|Practitioner|RelatedPerson)"/>
+         <removed-type name="Reference(Patient | ResearchSubject | Medication | Device)"/>
+         <added-type name="Reference(Patient | Group | Practitioner | RelatedPerson)"/>
       </element>
-      <element path="AdverseEvent.context" status="new"/>
+      <element path="AdverseEvent.encounter" status="new"/>
       <element path="AdverseEvent.detected" status="new"/>
       <element path="AdverseEvent.recordedDate" status="new"/>
       <element path="AdverseEvent.resultingCondition" status="new"/>
       <element path="AdverseEvent.severity" status="new"/>
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               path="AdverseEvent.outcome">
+         <removed-code code="resolved"/>
+         <removed-code code="recovering"/>
+         <removed-code code="ongoing"/>
+         <removed-code code="resolvedWithSequelae"/>
+         <removed-code code="fatal"/>
+         <removed-code code="unknown"/>
+         <added-code code="resolved"/>
+         <added-code code="recovering"/>
+         <added-code code="ongoing"/>
+         <added-code code="resolvedWithSequelae"/>
+         <added-code code="fatal"/>
+         <added-code code="unknown"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/adverse-event-outcome"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/adverse-event-outcome"
+                      strength="required"/>
+      </element>
       <element path="AdverseEvent.contributor" status="new"/>
       <element path="AdverseEvent.suspectEntity.instance">
-         <removed-type name="Reference(Substance|Medication|MedicationAdministration|MedicationStatement|Device)"/>
-         <added-type name="Reference(Immunization|Procedure|Substance|Medication|MedicationAdministration|MedicationStatement|Device)"/>
+         <removed-type name="Reference(Substance | Medication | MedicationAdministration | MedicationStatement | Device)"/>
+         <added-type name="Reference(Immunization | Procedure | Substance | Medication | MedicationAdministration | MedicationStatement | Device)"/>
       </element>
       <element binding-status="removed"
                new-max="*"
@@ -44,8 +64,8 @@
       <element path="AdverseEvent.suspectEntity.causality.author" status="new"/>
       <element path="AdverseEvent.suspectEntity.causality.method" status="new"/>
       <element path="AdverseEvent.subjectMedicalHistory">
-         <removed-type name="Reference(Condition|Observation|AllergyIntolerance|FamilyMemberHistory|Immunization|Procedure)"/>
-         <added-type name="Reference(Condition|Observation|AllergyIntolerance|FamilyMemberHistory|Immunization|Procedure|Media|DocumentReference)"/>
+         <removed-type name="Reference(Condition | Observation | AllergyIntolerance | FamilyMemberHistory | Immunization | Procedure)"/>
+         <added-type name="Reference(Condition | Observation | AllergyIntolerance | FamilyMemberHistory | Immunization | Procedure | Media | DocumentReference)"/>
       </element>
       <element path="AdverseEvent.type" status="deleted"/>
       <element path="AdverseEvent.reaction" status="deleted"/>

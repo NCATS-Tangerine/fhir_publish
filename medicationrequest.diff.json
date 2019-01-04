@@ -6,7 +6,32 @@
     "elements": {
       "MedicationRequest.status": {
         "old-min": 0,
-        "new-min": 1
+        "new-min": 1,
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medication-request-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medicationrequest-status",
+          "strength": "required"
+        }
+      },
+      "MedicationRequest.statusReason": {
+        "status": "new"
+      },
+      "MedicationRequest.intent": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medication-request-intent",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medicationrequest-intent",
+          "strength": "required"
+        }
       },
       "MedicationRequest.category": {
         "old-max": "1",
@@ -27,20 +52,18 @@
       "MedicationRequest.doNotPerform": {
         "status": "new"
       },
-      "MedicationRequest.medication[x]": {
-        "removed-types": [
-          "Reference(Medication)"
-        ],
-        "added-types": [
-          "Reference(Medication)"
-        ]
+      "MedicationRequest.reported[x]": {
+        "status": "new"
+      },
+      "MedicationRequest.encounter": {
+        "status": "new"
       },
       "MedicationRequest.requester": {
         "removed-types": [
           "BackboneElement"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson|Device)"
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson | Device)"
         ]
       },
       "MedicationRequest.performer": {
@@ -49,19 +72,19 @@
       "MedicationRequest.performerType": {
         "status": "new"
       },
-      "MedicationRequest.instantiates": {
+      "MedicationRequest.instantiatesCanonical": {
+        "status": "new"
+      },
+      "MedicationRequest.instantiatesUri": {
         "status": "new"
       },
       "MedicationRequest.basedOn": {
         "removed-types": [
-          "Reference(CarePlan|MedicationRequest|ProcedureRequest|ReferralRequest)"
+          "Reference(CarePlan | MedicationRequest | ProcedureRequest | ReferralRequest)"
         ],
         "added-types": [
-          "Reference(CarePlan|MedicationRequest|ServiceRequest)"
+          "Reference(CarePlan | MedicationRequest | ServiceRequest | ImmunizationRecommendation)"
         ]
-      },
-      "MedicationRequest.statusReason": {
-        "status": "new"
       },
       "MedicationRequest.courseOfTherapyType": {
         "status": "new"
@@ -89,10 +112,17 @@
           "unsignedInt"
         ]
       },
-      "MedicationRequest.substitution.allowed": {
+      "MedicationRequest.substitution.allowed[x]": {
+        "old-name": "allowed",
+        "added-types": [
+          "CodeableConcept"
+        ],
         "modifier": "removed"
       },
       "MedicationRequest.definition": {
+        "status": "deleted"
+      },
+      "MedicationRequest.context": {
         "status": "deleted"
       },
       "MedicationRequest.requester.agent": {

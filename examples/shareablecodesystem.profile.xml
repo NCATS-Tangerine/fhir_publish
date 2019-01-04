@@ -13,16 +13,17 @@
     <valueCode value="vocab"/>
   </extension>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-    <valueString value="Trial Use"/>
+    <valueCode value="trial-use"/>
   </extension>
   <url value="http://hl7.org/fhir/StructureDefinition/shareablecodesystem"/>
+  <version value="3.6.0"/>
   <name value="Shareable CodeSystem"/>
   <status value="draft"/>
   <experimental value="false"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="HL7"/>
   <description value="Enforces the minimum information set for the value set metadata required by HL7 and other organizations that share and publish value sets"/>
-  <fhirVersion value="3.5.0"/>
+  <fhirVersion value="3.6.0"/>
   <mapping>
     <identity value="rim"/>
     <uri value="http://hl7.org/v3"/>
@@ -36,7 +37,7 @@
   <mapping>
     <identity value="w5"/>
     <uri value="http://hl7.org/fhir/fivews"/>
-    <name value="FiveWs Pattern"/>
+    <name value="FiveWs Pattern Mapping"/>
   </mapping>
   <mapping>
     <identity value="objimpl"/>
@@ -89,7 +90,7 @@
           <valueBoolean value="true"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-bestpractice-explanation">
-          <valueMarkdown value="When a resource has no narrative, only systems that fully understand the data can display the resource to a human safely. Including a guman readable representation in the resource makes for a much more robust eco-system and cheaper handling of resources by intermediary systems. Some ecosystems restrict distribution of resources to only those systems that do fully understand the resources, and as a consequence implementers may believe that the narrative is superfluous. However experience shows that such eco-systems often open up to new participants over time."/>
+          <valueMarkdown value="When a resource has no narrative, only systems that fully understand the data can display the resource to a human safely. Including a human readable representation in the resource makes for a much more robust eco-system and cheaper handling of resources by intermediary systems. Some ecosystems restrict distribution of resources to only those systems that do fully understand the resources, and as a consequence implementers may believe that the narrative is superfluous. However experience shows that such eco-systems often open up to new participants over time."/>
         </extension>
         <key value="dom-6"/>
         <severity value="warning"/>
@@ -272,7 +273,7 @@
     </element>
     <element id="CodeSystem.extension">
       <path value="CodeSystem.extension"/>
-      <short value="Additional Content defined by implementations"/>
+      <short value="Additional content defined by implementations"/>
       <definition value="May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."/>
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
       <alias value="extensions"/>
@@ -297,8 +298,9 @@
     <element id="CodeSystem.modifierExtension">
       <path value="CodeSystem.modifierExtension"/>
       <short value="Extensions that cannot be ignored"/>
-      <definition value="May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
+      <definition value="May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+      <requirements value="Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension)."/>
       <alias value="extensions"/>
       <alias value="user content"/>
       <min value="0"/>
@@ -323,7 +325,7 @@
       <path value="CodeSystem.url"/>
       <short value="Canonical identifier for this code system, represented as a URI (globally unique) (Coding.system)"/>
       <definition value="An absolute URI that is used to identify this code system when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this code system is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the code system is stored on different servers. This is used in [Coding](datatypes.html#Coding).system."/>
-      <comment value="Can be a urn:uuid: or a urn:oid: but real http: addresses are preferred.  Multiple instances may share the same URL if they have a distinct version.&#xA;&#xA;The determination of when to create a new version of a resource (same url, new version) vs. defining a new artifact is up to the author.  Considerations for making this decision are found in [Technical and Business Versions](resource.html#versions)."/>
+      <comment value="Can be a urn:uuid: or a urn:oid: but real http: addresses are preferred.  Multiple instances may share the same URL if they have a distinct version.&#xA;&#xA;The determination of when to create a new version of a resource (same url, new version) vs. defining a new artifact is up to the author.  Considerations for making this decision are found in [Technical and Business Versions](resource.html#versions). &#xA;&#xA;In some cases, the resource can no longer be found at the stated url, but the url itself cannot change. Implementations can use the [meta.source](resource.html#meta) element to indicate where the current master source of the resource can be found."/>
       <requirements value="Allows the code system to be referenced by a single globally unique identifier."/>
       <min value="1"/>
       <max value="1"/>
@@ -348,9 +350,9 @@
     </element>
     <element id="CodeSystem.identifier">
       <path value="CodeSystem.identifier"/>
-      <short value="Additional identifier for the code system"/>
-      <definition value="A formal identifier that is used to identify this code system when it is represented in other formats, or referenced in a specification, model, design or an instance. (business identifier)."/>
-      <comment value="Typically, this is used for identifiers that can go in an HL7 V3 II (instance identifier) data type, and can then identify this code system outside of FHIR, where it is not possible to use the logical URI.  Note that HL7 defines at least three identifiers for many of its code systems - the FHIR canonical URI, the OID and the V2 Table 0396 mnemonic code."/>
+      <short value="Additional identifier for the code system (business identifier)"/>
+      <definition value="A formal identifier that is used to identify this code system when it is represented in other formats, or referenced in a specification, model, design or an instance."/>
+      <comment value="Typically, this is used for identifiers that can go in an HL7 V3 II (instance identifier) data type, and can then identify this code system outside of FHIR, where it is not possible to use the logical URI.  Note that HL7 defines at least three identifiers for many of its code systems - the FHIR canonical URL, the OID and the V2 Table 0396 mnemonic code."/>
       <requirements value="Allows externally provided and/or usable business identifiers to be easily associated with the module."/>
       <min value="0"/>
       <max value="*"/>
@@ -448,7 +450,7 @@
     <element id="CodeSystem.status">
       <path value="CodeSystem.status"/>
       <short value="draft | active | retired | unknown"/>
-      <definition value="The status of this code system. Enables tracking the life-cycle of the content."/>
+      <definition value="The date (and optionally time) when the code system resource was created or revised."/>
       <comment value="Allows filtering of code systems that are appropriate for use versus not."/>
       <min value="1"/>
       <max value="1"/>
@@ -621,9 +623,12 @@
       </mapping>
     </element>
     <element id="CodeSystem.useContext">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+        <valueCode value="trial-use"/>
+      </extension>
       <path value="CodeSystem.useContext"/>
       <short value="The context that the content is intended to support"/>
-      <definition value="The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate code system instances."/>
+      <definition value="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate code system instances."/>
       <comment value="When multiple useContexts are specified, there is no expectation that all or any of the contexts apply."/>
       <requirements value="Assist in searching for appropriate content."/>
       <min value="0"/>
@@ -755,8 +760,8 @@
     </element>
     <element id="CodeSystem.valueSet">
       <path value="CodeSystem.valueSet"/>
-      <short value="Canonical URL for value set with entire code system"/>
-      <definition value="Canonical URL of value set that contains the entire code system."/>
+      <short value="Canonical reference to the value set with entire code system"/>
+      <definition value="Canonical reference to the value set that contains the entire code system."/>
       <comment value="The definition of the value set SHALL include all codes from this code system and only codes from this code system, and it SHALL be immutable."/>
       <min value="0"/>
       <max value="1"/>
@@ -821,7 +826,7 @@
       <path value="CodeSystem.versionNeeded"/>
       <short value="If definitions are not stable"/>
       <definition value="This flag is used to signify that the code system does not commit to concept permanence across versions. If true, a version must be specified when referencing this code system."/>
-      <comment value="Best practice is that code systems do not redefine concepts, or that if concepts are redefined, a new code system definition is created. But this is not always possible, so some code systems may be defined as &#39;versionNeeded&#39;."/>
+      <comment value="Best practice is that code systems do not redefine concepts, or that if concepts are redefined, a new code system definition is created. But this is not always possible, so some code systems may be defined as &#39;versionNeeded&#39;.&#xA;&#xA;Most code systems occasionally refine the displays defined for concepts between versions. Contexts in which the concept display values are validated may require that the version be specified for some code systems irrespective of the value of this property."/>
       <min value="0"/>
       <max value="1"/>
       <base>
@@ -862,8 +867,8 @@
     </element>
     <element id="CodeSystem.supplements">
       <path value="CodeSystem.supplements"/>
-      <short value="Code System this adds designations and properties to"/>
-      <definition value="References the code system that this code system supplement is adding designations and properties to."/>
+      <short value="Canonical URL of Code System this adds designations and properties to"/>
+      <definition value="The canonical URL of the code system that this code system supplement is adding designations and properties to."/>
       <comment value="The most common use of a code system supplement is to add additional language support."/>
       <min value="0"/>
       <max value="1"/>
@@ -901,6 +906,7 @@
       <path value="CodeSystem.filter"/>
       <short value="Filter that can be used in a value set"/>
       <definition value="A filter that can be used in a value set compose statement when selecting concepts using a filter."/>
+      <comment value="Note that filters defined in code systems usually require custom code on the part of any terminology engine that will make them available for use in value set filters. For this reason, they are generally only seen in high value published terminologies."/>
       <min value="0"/>
       <max value="*"/>
       <base>
@@ -925,7 +931,7 @@
     <element id="CodeSystem.filter.id">
       <path value="CodeSystem.filter.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -970,9 +976,10 @@
     </element>
     <element id="CodeSystem.filter.modifierExtension">
       <path value="CodeSystem.filter.modifierExtension"/>
-      <short value="Extensions that cannot be ignored if unrecognized"/>
-      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
+      <short value="Extensions that cannot be ignored even if unrecognized"/>
+      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+      <requirements value="Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension)."/>
       <alias value="extensions"/>
       <alias value="user content"/>
       <alias value="modifiers"/>
@@ -1101,7 +1108,7 @@
     <element id="CodeSystem.property.id">
       <path value="CodeSystem.property.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -1146,9 +1153,10 @@
     </element>
     <element id="CodeSystem.property.modifierExtension">
       <path value="CodeSystem.property.modifierExtension"/>
-      <short value="Extensions that cannot be ignored if unrecognized"/>
-      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
+      <short value="Extensions that cannot be ignored even if unrecognized"/>
+      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+      <requirements value="Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension)."/>
       <alias value="extensions"/>
       <alias value="user content"/>
       <alias value="modifiers"/>
@@ -1278,7 +1286,7 @@
     <element id="CodeSystem.concept.id">
       <path value="CodeSystem.concept.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -1323,9 +1331,10 @@
     </element>
     <element id="CodeSystem.concept.modifierExtension">
       <path value="CodeSystem.concept.modifierExtension"/>
-      <short value="Extensions that cannot be ignored if unrecognized"/>
-      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
+      <short value="Extensions that cannot be ignored even if unrecognized"/>
+      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+      <requirements value="Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension)."/>
       <alias value="extensions"/>
       <alias value="user content"/>
       <alias value="modifiers"/>
@@ -1402,7 +1411,7 @@
       <path value="CodeSystem.concept.designation"/>
       <short value="Additional representations for the concept"/>
       <definition value="Additional representations for the concept - other languages, aliases, specialized purposes, used for particular purposes, etc."/>
-      <comment value="Concepts have both a ```display``` and an array of ```designation```. The display is equivalent to a special designation with a n implied ```designation.use``` of &quot;primary code&quot; and a language equal to the [Resource Language](resource.html#language)."/>
+      <comment value="Concepts have both a ```display``` and an array of ```designation```. The display is equivalent to a special designation with an implied ```designation.use``` of &quot;primary code&quot; and a language equal to the [Resource Language](resource.html#language)."/>
       <requirements value="Many concept definition systems support multiple representations, in multiple languages, and for multiple purposes."/>
       <min value="0"/>
       <max value="*"/>
@@ -1428,7 +1437,7 @@
     <element id="CodeSystem.concept.designation.id">
       <path value="CodeSystem.concept.designation.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -1473,9 +1482,10 @@
     </element>
     <element id="CodeSystem.concept.designation.modifierExtension">
       <path value="CodeSystem.concept.designation.modifierExtension"/>
-      <short value="Extensions that cannot be ignored if unrecognized"/>
-      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
+      <short value="Extensions that cannot be ignored even if unrecognized"/>
+      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+      <requirements value="Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension)."/>
       <alias value="extensions"/>
       <alias value="user content"/>
       <alias value="modifiers"/>
@@ -1603,7 +1613,7 @@
     <element id="CodeSystem.concept.property.id">
       <path value="CodeSystem.concept.property.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -1648,9 +1658,10 @@
     </element>
     <element id="CodeSystem.concept.property.modifierExtension">
       <path value="CodeSystem.concept.property.modifierExtension"/>
-      <short value="Extensions that cannot be ignored if unrecognized"/>
-      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
+      <short value="Extensions that cannot be ignored even if unrecognized"/>
+      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+      <requirements value="Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension)."/>
       <alias value="extensions"/>
       <alias value="user content"/>
       <alias value="modifiers"/>

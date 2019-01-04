@@ -7,13 +7,14 @@
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-    "valueString" : "Informative"
+    "valueCode" : "informative"
   }],
   "url" : "http://hl7.org/fhir/StructureDefinition/Request",
+  "version" : "3.6.0",
   "name" : "Request",
   "title" : "request",
   "status" : "draft",
-  "date" : "2018-09-15T09:06:56-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "Health Level Seven International fhir",
   "contact" : [{
     "telecom" : [{
@@ -22,7 +23,7 @@
     }]
   }],
   "description" : "Logical Model: A pattern to be followed by resources that represent a specific proposal, plan and/or order for some sort of action or service.",
-  "fhirVersion" : "3.5.0",
+  "fhirVersion" : "3.6.0",
   "mapping" : [{
     "identity" : "v2",
     "uri" : "http://hl7.org/v2",
@@ -36,7 +37,7 @@
   {
     "identity" : "w5",
     "uri" : "http://hl7.org/fhir/fivews",
-    "name" : "FiveWs Pattern"
+    "name" : "FiveWs Pattern Mapping"
   }],
   "kind" : "logical",
   "abstract" : false,
@@ -464,7 +465,7 @@
     {
       "id" : "Request.subject",
       "path" : "Request.subject",
-      "short" : "Individual the service is ordered for",
+      "short" : "Individual the service is ordered/prohibited for",
       "definition" : "The individual or set of individuals the action is to be performed/not performed on or for.",
       "comment" : "[For resources that aren't patient-specific, the set of allowed resources may be extended to include other things.  Group should generally be retained unless there's certainty this resource won't be used for veterinary, research or public health settings where Group may be necessary (e.g. this cage of rats/crate of chickens, group of people in a 5 mile radious of the incident, etc.)].",
       "requirements" : "Links the request to the Patient context.",
@@ -497,24 +498,23 @@
       }]
     },
     {
-      "id" : "Request.context",
-      "path" : "Request.context",
-      "short" : "Encounter / Episode associated with request",
-      "definition" : "The encounter or episode of care that establishes the context for making this request.",
-      "comment" : "This will typically be the encounter the request was created during, but some requests may be initiated prior to or after the official completion of an encounter or episode but still be tied to the context of the encounter or episode (e.g. pre-admission lab tests).",
-      "requirements" : "Links the request to the Encounter context.",
-      "alias" : ["encounter"],
+      "id" : "Request.encounter",
+      "path" : "Request.encounter",
+      "short" : "Encounter created as part of",
+      "definition" : "The Encounter during which this {{title}} was created or to which the creation of this record is tightly associated.",
+      "comment" : "This will typically be the encounter the request was created during, but some requests may be initiated prior to or after the official completion of an encounter but still be tied to the context of the encounter (e.g. pre-admission lab tests).",
+      "requirements" : "Links the {{title}} to the Encounter context.",
+      "alias" : ["context"],
       "min" : 0,
       "max" : "1",
       "base" : {
-        "path" : "Request.context",
+        "path" : "Request.encounter",
         "min" : 0,
         "max" : "1"
       },
       "type" : [{
         "code" : "Reference",
-        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Encounter",
-        "http://hl7.org/fhir/StructureDefinition/EpisodeOfCare"]
+        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Encounter"]
       }],
       "isModifier" : false,
       "isSummary" : true,
@@ -534,7 +534,7 @@
     {
       "id" : "Request.occurrence[x]",
       "path" : "Request.occurrence[x]",
-      "short" : "When service should occur",
+      "short" : "When service should (not) occur",
       "definition" : "The date or time(s) at which the activity or service is desired to occur or not occur.",
       "comment" : "[The list of types may be constrained as appropriate for the type of event].",
       "alias" : ["timing"],
@@ -572,7 +572,7 @@
     {
       "id" : "Request.authoredOn",
       "path" : "Request.authoredOn",
-      "short" : "When request transitioned to being actionable",
+      "short" : "When request was created/transitioned to active",
       "definition" : "For draft {{title}}s, indicates the date of initial creation.  For requests with other statuses, indicates the date of activation.",
       "alias" : ["createdOn",
       "signedOn"],
@@ -637,6 +637,42 @@
       {
         "identity" : "w5",
         "map" : "FiveWs.author"
+      }]
+    },
+    {
+      "id" : "Request.reported[x]",
+      "path" : "Request.reported[x]",
+      "short" : "Reported rather than primary record",
+      "definition" : "Indicates if this record was captured as a secondary 'reported' record rather than as an original primary source-of-truth record.  It may also indicate the source of the report.",
+      "requirements" : "Reported data may have different rules on editing and may be visually distinguished from primary data.",
+      "alias" : ["informer"],
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "Request.reported[x]",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "boolean"
+      },
+      {
+        "code" : "Reference",
+        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Patient",
+        "http://hl7.org/fhir/StructureDefinition/RelatedPerson",
+        "http://hl7.org/fhir/StructureDefinition/Practitioner",
+        "http://hl7.org/fhir/StructureDefinition/PractitionerRole",
+        "http://hl7.org/fhir/StructureDefinition/Organization"]
+      }],
+      "isModifier" : false,
+      "isSummary" : true,
+      "mapping" : [{
+        "identity" : "rim",
+        "map" : ".participation[typeCode=RPT].role"
+      },
+      {
+        "identity" : "w5",
+        "map" : "FiveWs.source"
       }]
     },
     {

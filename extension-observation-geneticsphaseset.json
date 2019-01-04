@@ -10,6 +10,7 @@
     "valueInteger" : 1
   }],
   "url" : "http://hl7.org/fhir/StructureDefinition/observation-geneticsPhaseSet",
+  "version" : "3.6.0",
   "name" : "PhaseSet",
   "status" : "draft",
   "date" : "2016-03-14",
@@ -21,7 +22,7 @@
     }]
   }],
   "description" : "Phase set information.",
-  "fhirVersion" : "3.5.0",
+  "fhirVersion" : "3.6.0",
   "mapping" : [{
     "identity" : "rim",
     "uri" : "http://hl7.org/v3",
@@ -39,6 +40,14 @@
   "snapshot" : {
     "element" : [{
       "id" : "Extension",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+        "valueCode" : "normative"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
+        "valueCode" : "4.0.0"
+      }],
       "path" : "Extension",
       "short" : "Phase set",
       "definition" : "Phase set information.",
@@ -72,7 +81,7 @@
       "id" : "Extension.id",
       "path" : "Extension.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -147,7 +156,7 @@
       "id" : "Extension.extension:Id.id",
       "path" : "Extension.extension.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -221,7 +230,7 @@
       "id" : "Extension.extension:Id.valueUri",
       "path" : "Extension.extension.valueUri",
       "short" : "Value of extension",
-      "definition" : "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).",
+      "definition" : "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
       "min" : 0,
       "max" : "1",
       "base" : {
@@ -240,11 +249,11 @@
       }]
     },
     {
-      "id" : "Extension.extension:Sequence",
+      "id" : "Extension.extension:MolecularSequence",
       "path" : "Extension.extension",
-      "sliceName" : "Sequence",
+      "sliceName" : "MolecularSequence",
       "short" : "Phase set sequence",
-      "definition" : "Sequence pointed to phase set (from: https://www.hl7.org/fhir/STU3/extension-observation-geneticssequence.html).",
+      "definition" : "MolecularSequence pointed to phase set (from: https://www.hl7.org/fhir/STU3/extension-observation-geneticssequence.html).",
       "min" : 1,
       "max" : "*",
       "base" : {
@@ -259,10 +268,10 @@
       "isSummary" : false
     },
     {
-      "id" : "Extension.extension:Sequence.id",
+      "id" : "Extension.extension:MolecularSequence.id",
       "path" : "Extension.extension.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -282,7 +291,7 @@
       }]
     },
     {
-      "id" : "Extension.extension:Sequence.extension",
+      "id" : "Extension.extension:MolecularSequence.extension",
       "path" : "Extension.extension.extension",
       "slicing" : {
         "discriminator" : [{
@@ -308,7 +317,7 @@
       "isSummary" : false
     },
     {
-      "id" : "Extension.extension:Sequence.url",
+      "id" : "Extension.extension:MolecularSequence.url",
       "path" : "Extension.extension.url",
       "representation" : ["xmlAttr"],
       "short" : "identifies the meaning of the extension",
@@ -324,7 +333,7 @@
       "type" : [{
         "code" : "uri"
       }],
-      "fixedUri" : "Sequence",
+      "fixedUri" : "MolecularSequence",
       "isModifier" : false,
       "isSummary" : false,
       "mapping" : [{
@@ -333,10 +342,10 @@
       }]
     },
     {
-      "id" : "Extension.extension:Sequence.valueReference",
+      "id" : "Extension.extension:MolecularSequence.valueReference",
       "path" : "Extension.extension.valueReference",
       "short" : "Value of extension",
-      "definition" : "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).",
+      "definition" : "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
       "min" : 0,
       "max" : "1",
       "base" : {
@@ -346,7 +355,7 @@
       },
       "type" : [{
         "code" : "Reference",
-        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Sequence"]
+        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/MolecularSequence"]
       }],
       "isModifier" : false,
       "isSummary" : false,
@@ -384,7 +393,7 @@
       "id" : "Extension.value[x]",
       "path" : "Extension.value[x]",
       "short" : "Value of extension",
-      "definition" : "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).",
+      "definition" : "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
       "min" : 0,
       "max" : "0",
       "base" : {
@@ -513,25 +522,25 @@
         "code" : "Timing"
       },
       {
-        "code" : "ParameterDefinition"
-      },
-      {
-        "code" : "DataRequirement"
-      },
-      {
-        "code" : "RelatedArtifact"
-      },
-      {
         "code" : "ContactDetail"
       },
       {
         "code" : "Contributor"
       },
       {
-        "code" : "TriggerDefinition"
+        "code" : "DataRequirement"
       },
       {
         "code" : "Expression"
+      },
+      {
+        "code" : "ParameterDefinition"
+      },
+      {
+        "code" : "RelatedArtifact"
+      },
+      {
+        "code" : "TriggerDefinition"
       },
       {
         "code" : "UsageContext"
@@ -589,11 +598,11 @@
       }]
     },
     {
-      "id" : "Extension.extension:Sequence",
+      "id" : "Extension.extension:MolecularSequence",
       "path" : "Extension.extension",
-      "sliceName" : "Sequence",
+      "sliceName" : "MolecularSequence",
       "short" : "Phase set sequence",
-      "definition" : "Sequence pointed to phase set (from: https://www.hl7.org/fhir/STU3/extension-observation-geneticssequence.html).",
+      "definition" : "MolecularSequence pointed to phase set (from: https://www.hl7.org/fhir/STU3/extension-observation-geneticssequence.html).",
       "min" : 1,
       "max" : "*",
       "type" : [{
@@ -601,24 +610,24 @@
       }]
     },
     {
-      "id" : "Extension.extension:Sequence.extension",
+      "id" : "Extension.extension:MolecularSequence.extension",
       "path" : "Extension.extension.extension",
       "max" : "0"
     },
     {
-      "id" : "Extension.extension:Sequence.url",
+      "id" : "Extension.extension:MolecularSequence.url",
       "path" : "Extension.extension.url",
       "type" : [{
         "code" : "uri"
       }],
-      "fixedUri" : "Sequence"
+      "fixedUri" : "MolecularSequence"
     },
     {
-      "id" : "Extension.extension:Sequence.valueReference",
+      "id" : "Extension.extension:MolecularSequence.valueReference",
       "path" : "Extension.extension.valueReference",
       "type" : [{
         "code" : "Reference",
-        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Sequence"]
+        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/MolecularSequence"]
       }]
     },
     {

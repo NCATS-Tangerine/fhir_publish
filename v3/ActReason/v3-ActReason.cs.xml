@@ -4594,7 +4594,7 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
     </div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-    <valueString value="Draft"/>
+    <valueCode value="draft"/>
   </extension>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
     <valueInteger value="1"/>
@@ -4630,6 +4630,12 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
     <uri value="http://hl7.org/fhir/concept-properties#notSelectable"/>
     <description value="Indicates that the code is abstract - only intended to be used as a selector for other concepts"/>
     <type value="boolean"/>
+  </property>
+  <property>
+    <code value="child"/>
+    <uri value="http://hl7.org/fhir/concept-properties#child"/>
+    <description value="The concept identified in this property is a child of the concept on which it is a property. The property type will be &#39;code&#39;. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute"/>
+    <type value="code"/>
   </property>
   <property>
     <code value="status"/>
@@ -5506,12 +5512,13 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
       <definition value="The record is already in the requested state."/>
     </concept>
     <concept>
-      <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-        <valueCode value="NORECMTCH"/>
-      </extension>
       <code value="NOMATCH"/>
       <display value="no match"/>
       <definition value="Description: There is no match."/>
+      <property>
+        <code value="child"/>
+        <valueCode value="NORECMTCH"/>
+      </property>
       <concept>
         <code value="NOPRODMTCH"/>
         <display value="no product match"/>
@@ -5738,15 +5745,16 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
       </concept>
     </concept>
     <concept>
-      <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-        <valueCode value="DISCONT"/>
-      </extension>
       <code value="_PharmacySupplyRequestRenewalRefusalReasonCode"/>
       <display value="pharmacy supply request renewal refusal reason"/>
       <definition value="Definition:A collection of concepts that identifies why a renewal prescription has been refused."/>
       <property>
         <code value="notSelectable"/>
         <valueBoolean value="true"/>
+      </property>
+      <property>
+        <code value="child"/>
+        <valueCode value="DISCONT"/>
       </property>
       <concept>
         <code value="ALREADYRX"/>
@@ -5864,15 +5872,16 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
     </concept>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="LEGAL"/>
-    </extension>
     <code value="_PatientProfileQueryReasonCode"/>
     <display value="patient profile query reason"/>
     <definition value="Definition:A collection of concepts identifying why the patient&#39;s profile is being queried."/>
     <property>
       <code value="notSelectable"/>
       <valueBoolean value="true"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="LEGAL"/>
     </property>
     <concept>
       <code value="ADMREV"/>
@@ -5911,12 +5920,13 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
     </concept>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="NOUSERPERM"/>
-    </extension>
     <code value="_PharmacySupplyRequestFulfillerRevisionRefusalReasonCode"/>
     <display value="PharmacySupplyRequestFulfillerRevisionRefusalReasonCode"/>
     <definition value="Definition:Indicates why the request to transfer a prescription from one dispensing facility to another has been refused."/>
+    <property>
+      <code value="child"/>
+      <valueCode value="NOUSERPERM"/>
+    </property>
     <concept>
       <code value="LOCKED"/>
       <display value="locked"/>
@@ -5929,12 +5939,6 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
     </concept>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="NOMATCH"/>
-    </extension>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="NOPERM"/>
-    </extension>
     <code value="_RefusalReasonCode"/>
     <display value="RefusalReasonCode"/>
     <definition value="Description: Identifies why a request to add (or activate) a record is being refused.  Examples include the receiving system not able to match the identifier and find that record in the receiving system, having no permission, or a detected issue exists which precludes the requested action."/>
@@ -5942,17 +5946,26 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
       <code value="notSelectable"/>
       <valueBoolean value="true"/>
     </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="NOMATCH"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="NOPERM"/>
+    </property>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="PAT"/>
-    </extension>
     <code value="_SchedulingActReason"/>
     <display value="SchedulingActReason"/>
     <definition value="Reasons for cancelling or rescheduling an Appointment"/>
     <property>
       <code value="notSelectable"/>
       <valueBoolean value="true"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="PAT"/>
     </property>
     <concept>
       <code value="BLK"/>
@@ -5986,18 +5999,21 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
     </concept>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="NORECMTCH"/>
-    </extension>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="INRQSTATE"/>
-    </extension>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="NOUSERPERM"/>
-    </extension>
     <code value="_StatusRevisionRefusalReasonCode"/>
     <display value="StatusRevisionRefusalReasonCode"/>
     <definition value="Indicates why the act revision (status update) is being refused."/>
+    <property>
+      <code value="child"/>
+      <valueCode value="NORECMTCH"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="INRQSTATE"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="NOUSERPERM"/>
+    </property>
     <concept>
       <code value="FILLED"/>
       <display value="fully filled"/>
@@ -6005,12 +6021,13 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
     </concept>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="NOUSERPERM"/>
-    </extension>
     <code value="_SubstanceAdministrationPermissionRefusalReasonCode"/>
     <display value="SubstanceAdministrationPermissionRefusalReasonCode"/>
     <definition value="Definition:Indicates why the requested authorization to prescribe or dispense a medication has been refused."/>
+    <property>
+      <code value="child"/>
+      <valueCode value="NOUSERPERM"/>
+    </property>
     <concept>
       <code value="PATINELIG"/>
       <display value="patient not eligible"/>
@@ -6028,15 +6045,16 @@ The ISO description conflates both of the proposed specializations of HL7 ETREAT
     </concept>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="PAT"/>
-    </extension>
     <code value="_SubstanceAdminSubstitutionNotAllowedReason"/>
     <display value="SubstanceAdminSubstitutionNotAllowedReason"/>
     <definition value="Reasons why substitution of a substance administration request is not permitted."/>
     <property>
       <code value="notSelectable"/>
       <valueBoolean value="true"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="PAT"/>
     </property>
     <concept>
       <code value="ALGINT"/>

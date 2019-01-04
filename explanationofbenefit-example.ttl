@@ -35,9 +35,26 @@
      fhir:link <http://hl7.org/fhir/Practitioner/1>;
      fhir:Reference.reference [ fhir:value "Practitioner/1" ]
   ];
+  fhir:ExplanationOfBenefit.insurer [
+     fhir:link <http://hl7.org/fhir/Organization/3>;
+     fhir:Reference.reference [ fhir:value "Organization/3" ]
+  ];
   fhir:ExplanationOfBenefit.provider [
      fhir:link <http://hl7.org/fhir/Practitioner/1>;
      fhir:Reference.reference [ fhir:value "Practitioner/1" ]
+  ];
+  fhir:ExplanationOfBenefit.payee [
+     fhir:ExplanationOfBenefit.payee.type [
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.system [ fhir:value "http://terminology.hl7.org/CodeSystem/payeetype" ];
+         fhir:Coding.code [ fhir:value "provider" ]
+       ]
+     ];
+     fhir:ExplanationOfBenefit.payee.party [
+       fhir:link <http://hl7.org/fhir/Organization/2>;
+       fhir:Reference.reference [ fhir:value "Organization/2" ]
+     ]
   ];
   fhir:ExplanationOfBenefit.facility [
      fhir:link <http://hl7.org/fhir/Location/1>;
@@ -53,23 +70,6 @@
   ];
   fhir:ExplanationOfBenefit.outcome [ fhir:value "complete"];
   fhir:ExplanationOfBenefit.disposition [ fhir:value "Claim settled as per contract."];
-  fhir:ExplanationOfBenefit.payee [
-     fhir:ExplanationOfBenefit.payee.type [
-       fhir:CodeableConcept.coding [
-         fhir:index 0;
-         fhir:Coding.system [ fhir:value "http://terminology.hl7.org/CodeSystem/payeetype" ];
-         fhir:Coding.code [ fhir:value "provider" ]
-       ]
-     ];
-     fhir:ExplanationOfBenefit.payee.resource [
-       fhir:Coding.system [ fhir:value "http://terminology.hl7.org/CodeSystem/resource-type-link" ];
-       fhir:Coding.code [ fhir:value "organization" ]
-     ];
-     fhir:ExplanationOfBenefit.payee.party [
-       fhir:link <http://hl7.org/fhir/Organization/2>;
-       fhir:Reference.reference [ fhir:value "Organization/2" ]
-     ]
-  ];
   fhir:ExplanationOfBenefit.careTeam [
      fhir:index 0;
      fhir:ExplanationOfBenefit.careTeam.sequence [ fhir:value "1"^^xsd:positiveInteger ];
@@ -93,7 +93,7 @@
        fhir:value "1"^^xsd:positiveInteger;
        fhir:index 0
      ];
-     fhir:ExplanationOfBenefit.item.billcode [
+     fhir:ExplanationOfBenefit.item.productOrService [
        fhir:CodeableConcept.coding [
          fhir:index 0;
          fhir:Coding.system [ fhir:value "http://terminology.hl7.org/CodeSystem/ex-USCLS" ];
@@ -179,13 +179,15 @@
 
 <http://hl7.org/fhir/Practitioner/1> a fhir:Practitioner .
 
+<http://hl7.org/fhir/Organization/3> a fhir:Organization .
+
+<http://hl7.org/fhir/Organization/2> a fhir:Organization .
+
 <http://hl7.org/fhir/Location/1> a fhir:Location .
 
 <http://hl7.org/fhir/Claim/100150> a fhir:Claim .
 
 <http://hl7.org/fhir/ClaimResponse/R3500> a fhir:ClaimResponse .
-
-<http://hl7.org/fhir/Organization/2> a fhir:Organization .
 
 <http://hl7.org/fhir/Practitioner/example> a fhir:Practitioner .
 

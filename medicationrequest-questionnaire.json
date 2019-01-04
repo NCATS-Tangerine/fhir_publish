@@ -4,12 +4,48 @@
   "contained" : [{
     "resourceType" : "ValueSet",
     "id" : "vs2",
+    "name" : "Type options for MedicationRequest.reported[x]",
+    "status" : "active",
+    "description" : "Type options for MedicationRequest.reported[x]",
+    "expansion" : {
+      "identifier" : "urn:uuid:ffa1d2d5-367f-40ed-a73b-9ba7c208f803",
+      "timestamp" : "2018-12-13T14:27:03-06:00",
+      "contains" : [{
+        "system" : "http://hl7.org/fhir/data-types",
+        "code" : "boolean",
+        "display" : "boolean"
+      },
+      {
+        "system" : "http://hl7.org/fhir/resource-types",
+        "code" : "Patient",
+        "display" : "Patient"
+      },
+      {
+        "system" : "http://hl7.org/fhir/resource-types",
+        "code" : "Practitioner",
+        "display" : "Practitioner"
+      },
+      {
+        "system" : "http://hl7.org/fhir/resource-types",
+        "code" : "RelatedPerson",
+        "display" : "RelatedPerson"
+      },
+      {
+        "system" : "http://hl7.org/fhir/resource-types",
+        "code" : "Organization",
+        "display" : "Organization"
+      }]
+    }
+  },
+  {
+    "resourceType" : "ValueSet",
+    "id" : "vs3",
     "name" : "Type options for MedicationRequest.medication[x]",
     "status" : "active",
     "description" : "Type options for MedicationRequest.medication[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:23bb1b64-5036-4765-ade8-7dde11b73972",
-      "timestamp" : "2018-09-14T07:26:58-05:00",
+      "identifier" : "urn:uuid:974c0949-a299-43f3-bb73-030cb13f77c5",
+      "timestamp" : "2018-12-13T14:27:03-06:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "CodeableConcept",
@@ -21,12 +57,34 @@
         "display" : "Medication"
       }]
     }
+  },
+  {
+    "resourceType" : "ValueSet",
+    "id" : "vs4",
+    "name" : "Type options for MedicationRequest.substitution.allowed[x]",
+    "status" : "active",
+    "description" : "Type options for MedicationRequest.substitution.allowed[x]",
+    "expansion" : {
+      "identifier" : "urn:uuid:be0bae26-5750-4c49-9e81-2d5914c5ebc4",
+      "timestamp" : "2018-12-13T14:27:03-06:00",
+      "contains" : [{
+        "system" : "http://hl7.org/fhir/data-types",
+        "code" : "boolean",
+        "display" : "boolean"
+      },
+      {
+        "system" : "http://hl7.org/fhir/data-types",
+        "code" : "CodeableConcept",
+        "display" : "CodeableConcept"
+      }]
+    }
   }],
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
+  "version" : "3.6.0",
   "status" : "draft",
-  "date" : "2018-09-14T07:16:19-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "Health Level Seven International (Pharmacy)",
   "item" : [{
     "linkId" : "MedicationRequest",
@@ -226,7 +284,7 @@
     },
     {
       "linkId" : "MedicationRequest.extension",
-      "text" : "Additional Content defined by implementations",
+      "text" : "Additional content defined by implementations",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -262,7 +320,7 @@
             }]
           }
         }],
-        "text" : "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "text" : "May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
         "type" : "display"
       }]
     },
@@ -287,7 +345,7 @@
             }]
           }
         }],
-        "text" : "This records identifiers associated with this medication request that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate. For example a reimbursement system might issue its own id for each prescription that is created.  This is particularly important where FHIR only provides part of an entire workflow process where records must be tracked through an entire system.",
+        "text" : "Identifiers associated with this medication request that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate. They are business identifiers assigned to this resource by the performer or other systems and remain constant as the resource is updated and propagates from server to server. This is a business identifier, not a resource identifer.",
         "type" : "display"
       },
       {
@@ -347,6 +405,49 @@
         "linkId" : "MedicationRequest.status.value",
         "text" : "status",
         "type" : "choice",
+        "required" : false,
+        "repeats" : false
+      }]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "CodeableConcept"
+      }],
+      "linkId" : "MedicationRequest.statusReason",
+      "text" : "Reason for current status",
+      "type" : "group",
+      "required" : false,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "Captures the reason for the current state of the MedicationRequest. This is generally only used for \"exception\" statuses such as \"suspended\" or \"cancelled\". The reason why the MedicationRequest was created at all is captured in reasonCode, not here.",
+        "type" : "display"
+      },
+      {
+        "linkId" : "MedicationRequest.statusReason.coding",
+        "text" : "code:",
+        "type" : "open-choice",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "MedicationRequest.statusReason.text",
+        "text" : "text:",
+        "type" : "string",
         "required" : false,
         "repeats" : false
       }]
@@ -501,6 +602,75 @@
     },
     {
       "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+        "valueInteger" : 1
+      }],
+      "linkId" : "MedicationRequest.reported[x]",
+      "text" : "Reported rather than primary record",
+      "type" : "group",
+      "required" : false,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "Indicates if this record was captured as a secondary 'reported' record rather than as an original primary source-of-truth record.  It may also indicate the source of the report.",
+        "type" : "display"
+      },
+      {
+        "linkId" : "MedicationRequest.reported[x]._type",
+        "text" : "type",
+        "type" : "choice",
+        "required" : false,
+        "repeats" : false,
+        "answerValueSet" : "#vs2",
+        "item" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+            "valueString" : "boolean"
+          }],
+          "linkId" : "MedicationRequest.reported[x]._null",
+          "type" : "group",
+          "item" : [{
+            "linkId" : "MedicationRequest.reported[x]._null.value",
+            "type" : "boolean",
+            "required" : false,
+            "repeats" : false
+          }]
+        },
+        {
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+            "valueString" : "Reference"
+          }],
+          "linkId" : "MedicationRequest.reported[x]._null",
+          "type" : "group",
+          "item" : [{
+            "extension" : [{
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
+              "valueCode" : "Patient, Practitioner, RelatedPerson, Organization"
+            },
+            {
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
+              "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
+            }],
+            "linkId" : "MedicationRequest.reported[x]._null.value",
+            "type" : "reference",
+            "required" : false,
+            "repeats" : false
+          }]
+        }]
+      }]
+    },
+    {
+      "extension" : [{
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
         "valueInteger" : 1
       },
@@ -533,7 +703,7 @@
         "type" : "choice",
         "required" : false,
         "repeats" : false,
-        "answerValueSet" : "#vs2",
+        "answerValueSet" : "#vs3",
         "item" : [{
           "extension" : [{
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
@@ -636,7 +806,7 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "Reference"
       }],
-      "linkId" : "MedicationRequest.context",
+      "linkId" : "MedicationRequest.encounter",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -651,20 +821,20 @@
             }]
           }
         }],
-        "text" : "A link to an encounter, or episode of care, that identifies the particular occurrence or set occurrences of contact between patient and health care provider. SubstanceAdministration->component->EncounterEvent.",
+        "text" : "The Encounter during which this [x] was created or to which the creation of this record is tightly associated. This will typically be the encounter the event occurred within, but some activities may be initiated prior to or after the official completion of an encounter but still be tied to the context of the encounter.\"    If there is a need to link to episodes of care they will be handled with an extension.",
         "type" : "display"
       },
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "Encounter, EpisodeOfCare"
+          "valueCode" : "Encounter"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
-        "linkId" : "MedicationRequest.context.value",
-        "text" : "Created during encounter/admission/stay",
+        "linkId" : "MedicationRequest.encounter.value",
+        "text" : "Encounter created as part of encounter/admission/stay",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -999,7 +1169,7 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "uri"
       }],
-      "linkId" : "MedicationRequest.instantiates",
+      "linkId" : "MedicationRequest.instantiatesCanonical",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -1018,8 +1188,39 @@
         "type" : "display"
       },
       {
-        "linkId" : "MedicationRequest.instantiates.value",
-        "text" : "Instantiates protocol or definition",
+        "linkId" : "MedicationRequest.instantiatesCanonical.value",
+        "text" : "Instantiates FHIR protocol or definition",
+        "type" : "string",
+        "required" : false,
+        "repeats" : false
+      }]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "uri"
+      }],
+      "linkId" : "MedicationRequest.instantiatesUri",
+      "type" : "group",
+      "required" : false,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "The URL pointing to an externally maintained protocol, guideline, orderset or other definition that is adhered to in whole or in part by this MedicationRequest.",
+        "type" : "display"
+      },
+      {
+        "linkId" : "MedicationRequest.instantiatesUri.value",
+        "text" : "Instantiates external protocol or definition",
         "type" : "string",
         "required" : false,
         "repeats" : false
@@ -1051,7 +1252,7 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "CarePlan, MedicationRequest, ServiceRequest"
+          "valueCode" : "CarePlan, MedicationRequest, ServiceRequest, ImmunizationRecommendation"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
@@ -1109,49 +1310,6 @@
       {
         "linkId" : "MedicationRequest.groupIdentifier.value",
         "text" : "value:",
-        "type" : "string",
-        "required" : false,
-        "repeats" : false
-      }]
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
-        "valueInteger" : 1
-      },
-      {
-        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "CodeableConcept"
-      }],
-      "linkId" : "MedicationRequest.statusReason",
-      "text" : "Reason for current status",
-      "type" : "group",
-      "required" : false,
-      "repeats" : true,
-      "item" : [{
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-          "valueCodeableConcept" : {
-            "coding" : [{
-              "system" : "http://hl7.org/fhir/questionnaire-item-control",
-              "code" : "flyover",
-              "display" : "Fly-over"
-            }]
-          }
-        }],
-        "text" : "Captures the reason for the current state of the MedicationRequest. This is generally only used for \"exception\" statuses such as \"suspended\" or \"cancelled\". The reason why the MedicationRequest was created at all is captured in reasonCode, not here.",
-        "type" : "display"
-      },
-      {
-        "linkId" : "MedicationRequest.statusReason.coding",
-        "text" : "code:",
-        "type" : "open-choice",
-        "required" : false,
-        "repeats" : false
-      },
-      {
-        "linkId" : "MedicationRequest.statusReason.text",
-        "text" : "text:",
         "type" : "string",
         "required" : false,
         "repeats" : false
@@ -1342,7 +1500,7 @@
         },
         {
           "linkId" : "MedicationRequest.dispenseRequest.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -1371,7 +1529,7 @@
       },
       {
         "linkId" : "MedicationRequest.dispenseRequest.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1386,7 +1544,7 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
@@ -1447,7 +1605,7 @@
           },
           {
             "linkId" : "MedicationRequest.dispenseRequest.initialFill.id.value",
-            "text" : "xml:id (or equivalent in JSON)",
+            "text" : "Unique id for inter-element referencing",
             "type" : "string",
             "required" : false,
             "repeats" : false
@@ -1476,7 +1634,7 @@
         },
         {
           "linkId" : "MedicationRequest.dispenseRequest.initialFill.modifierExtension",
-          "text" : "Extensions that cannot be ignored if unrecognized",
+          "text" : "Extensions that cannot be ignored even if unrecognized",
           "type" : "group",
           "required" : false,
           "repeats" : true,
@@ -1491,7 +1649,7 @@
                 }]
               }
             }],
-            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
             "type" : "display"
           }]
         },
@@ -1991,7 +2149,7 @@
         },
         {
           "linkId" : "MedicationRequest.substitution.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -2020,7 +2178,7 @@
       },
       {
         "linkId" : "MedicationRequest.substitution.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -2035,7 +2193,7 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
@@ -2047,12 +2205,9 @@
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
           "valueInteger" : 1
-        },
-        {
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-          "valueString" : "boolean"
         }],
-        "linkId" : "MedicationRequest.substitution.allowed",
+        "linkId" : "MedicationRequest.substitution.allowed[x]",
+        "text" : "Whether substitution is allowed or not",
         "type" : "group",
         "required" : true,
         "repeats" : true,
@@ -2071,11 +2226,48 @@
           "type" : "display"
         },
         {
-          "linkId" : "MedicationRequest.substitution.allowed.value",
-          "text" : "Whether substitution is allowed or not",
-          "type" : "boolean",
+          "linkId" : "MedicationRequest.substitution.allowed[x]._type",
+          "text" : "type",
+          "type" : "choice",
           "required" : false,
-          "repeats" : false
+          "repeats" : false,
+          "answerValueSet" : "#vs4",
+          "item" : [{
+            "extension" : [{
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+              "valueString" : "boolean"
+            }],
+            "linkId" : "MedicationRequest.substitution.allowed[x]._null",
+            "type" : "group",
+            "item" : [{
+              "linkId" : "MedicationRequest.substitution.allowed[x]._null.value",
+              "type" : "boolean",
+              "required" : false,
+              "repeats" : false
+            }]
+          },
+          {
+            "extension" : [{
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+              "valueString" : "CodeableConcept"
+            }],
+            "linkId" : "MedicationRequest.substitution.allowed[x]._null",
+            "type" : "group",
+            "item" : [{
+              "linkId" : "MedicationRequest.substitution.allowed[x]._null.coding",
+              "text" : "code:",
+              "type" : "open-choice",
+              "required" : false,
+              "repeats" : false
+            },
+            {
+              "linkId" : "MedicationRequest.substitution.allowed[x]._null.text",
+              "text" : "text:",
+              "type" : "string",
+              "required" : false,
+              "repeats" : false
+            }]
+          }]
         }]
       },
       {

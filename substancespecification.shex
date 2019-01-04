@@ -18,17 +18,22 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:DomainResource.text @<Narrative>?;  # Text summary of the resource, for 
                                             # human interpretation 
     fhir:DomainResource.contained @<Resource>*;  # Contained, inline Resources
-    fhir:DomainResource.extension @<Extension>*;  # Additional Content defined by 
+    fhir:DomainResource.extension @<Extension>*;  # Additional content defined by 
                                             # implementations 
     fhir:DomainResource.modifierExtension @<Extension>*;  # Extensions that cannot be ignored
-    fhir:SubstanceSpecification.comment @<string>?;  # Textual comment
-    fhir:SubstanceSpecification.stoichiometric @<boolean>?;  # Chemicals may be stoichiometric or 
-                                            # non-stoichiometric 
     fhir:SubstanceSpecification.identifier @<Identifier>?;  # Identifier by which this substance 
                                             # is known 
     fhir:SubstanceSpecification.type @<CodeableConcept>?;  # High level categorization, e.g. 
                                             # polymer or nucleic acid 
-    fhir:SubstanceSpecification.referenceSource @<string>*;  # Supporting literature
+    fhir:SubstanceSpecification.status @<CodeableConcept>?;  # Status of substance within the 
+                                            # catalogue e.g. approved 
+    fhir:SubstanceSpecification.domain @<CodeableConcept>?;  # If the substance applies to only 
+                                            # human or veterinary use 
+    fhir:SubstanceSpecification.description @<string>?;  # Textual description of the 
+                                            # substance 
+    fhir:SubstanceSpecification.source @<Reference>*;  # Supporting literature
+    fhir:SubstanceSpecification.comment @<string>?;  # Textual comment about this record 
+                                            # of a substance 
     fhir:SubstanceSpecification.moiety @<SubstanceSpecification.moiety>*;  # Moiety, for structural 
                                             # modifications 
     fhir:SubstanceSpecification.property @<SubstanceSpecification.property>*;  # General specifications for this 
@@ -37,22 +42,148 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:SubstanceSpecification.referenceInformation @<Reference>?;  # General information detailing this 
                                             # substance 
     fhir:SubstanceSpecification.structure @<SubstanceSpecification.structure>?;  # Structural information
-    fhir:SubstanceSpecification.substanceCode @<SubstanceSpecification.substanceCode>*;  # Codes associated with the substance
-    fhir:SubstanceSpecification.substanceName @<SubstanceSpecification.substanceName>*;  # Names applicable to this substence
+    fhir:SubstanceSpecification.code @<SubstanceSpecification.code>*;  # Codes associated with the substance
+    fhir:SubstanceSpecification.name @<SubstanceSpecification.name>*;  # Names applicable to this substance
     fhir:SubstanceSpecification.molecularWeight @<SubstanceSpecification.structure.isotope.molecularWeight>*;  # The molecular weight or weight 
                                             # range (for proteins, polymers or 
                                             # nucleic acids) 
+    fhir:SubstanceSpecification.relationship @<SubstanceSpecification.relationship>*;  # A link between this substance and 
+                                            # another, with details of the 
+                                            # relationship 
+    fhir:SubstanceSpecification.nucleicAcid @<Reference>?;  # Data items specific to nucleic 
+                                            # acids 
     fhir:SubstanceSpecification.polymer @<Reference>?;  # Data items specific to polymers
+    fhir:SubstanceSpecification.protein @<Reference>?;  # Data items specific to proteins
+    fhir:SubstanceSpecification.sourceMaterial @<Reference>?;  # Material or taxonomic/anatomical 
+                                            # source for the substance 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# A link between this substance and another, with details of the relationship
+<SubstanceSpecification.relationship> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    (                                       # A pointer to another substance, as 
+                                            # a resource or just a 
+                                            # representational code 
+        fhir:SubstanceSpecification.relationship.substanceReference @<Reference>  |
+        fhir:SubstanceSpecification.relationship.substanceCodeableConcept @<CodeableConcept> 
+    )?;
+    fhir:SubstanceSpecification.relationship.relationship @<CodeableConcept>?;  # For example "salt to parent", 
+                                            # "active moiety", "starting 
+                                            # material" 
+    fhir:SubstanceSpecification.relationship.isDefining @<boolean>?;  # For example where an enzyme 
+                                            # strongly bonds with a particular 
+                                            # substance, this is a defining 
+                                            # relationship for that enzyme, out 
+                                            # of several possible substance 
+                                            # relationships 
+    (                                       # A numeric factor for the 
+                                            # relationship, for instance to 
+                                            # express that the salt of a 
+                                            # substance has some percentage of 
+                                            # the active substance in relation 
+                                            # to some other 
+        fhir:SubstanceSpecification.relationship.amountQuantity @<Quantity>  |
+        fhir:SubstanceSpecification.relationship.amountRange @<Range>  |
+        fhir:SubstanceSpecification.relationship.amountRatio @<Ratio>  |
+        fhir:SubstanceSpecification.relationship.amountString @<string> 
+    )?;
+    fhir:SubstanceSpecification.relationship.amountRatioLowLimit @<Ratio>?;  # For use when the numeric
+    fhir:SubstanceSpecification.relationship.amountType @<CodeableConcept>?;  # An operator for the amount, for 
+                                            # example "average", 
+                                            # "approximately", "less than" 
+    fhir:SubstanceSpecification.relationship.source @<Reference>*;  # Supporting literature
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Codes associated with the substance
+<SubstanceSpecification.code> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:SubstanceSpecification.code.code @<CodeableConcept>?;  # The specific code
+    fhir:SubstanceSpecification.code.status @<CodeableConcept>?;  # Status of the code assignment
+    fhir:SubstanceSpecification.code.statusDate @<dateTime>?;  # The date at which the code status 
+                                            # is changed as part of the 
+                                            # terminology maintenance 
+    fhir:SubstanceSpecification.code.comment @<string>?;  # Any comment can be provided in 
+                                            # this field, if necessary 
+    fhir:SubstanceSpecification.code.source @<Reference>*;  # Supporting literature
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Structural information
+<SubstanceSpecification.structure> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:SubstanceSpecification.structure.stereochemistry @<CodeableConcept>?;  # Stereochemistry type
+    fhir:SubstanceSpecification.structure.opticalActivity @<CodeableConcept>?;  # Optical activity type
+    fhir:SubstanceSpecification.structure.molecularFormula @<string>?;  # Molecular formula
+    fhir:SubstanceSpecification.structure.molecularFormulaByMoiety @<string>?;  # Specified per moiety according to 
+                                            # the Hill system, i.e. first C, 
+                                            # then H, then alphabetical, each 
+                                            # moiety separated by a dot 
+    fhir:SubstanceSpecification.structure.isotope @<SubstanceSpecification.structure.isotope>*;  # Applicable for single substances 
+                                            # that contain a radionuclide or a 
+                                            # non-natural isotopic ratio 
+    fhir:SubstanceSpecification.structure.molecularWeight @<SubstanceSpecification.structure.isotope.molecularWeight>?;  # The molecular weight or weight 
+                                            # range (for proteins, polymers or 
+                                            # nucleic acids) 
+    fhir:SubstanceSpecification.structure.source @<Reference>*;  # Supporting literature
+    fhir:SubstanceSpecification.structure.representation @<SubstanceSpecification.structure.representation>*;  # Molecular structural representation
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# General specifications for this substance, including how it is related to other substances
+<SubstanceSpecification.property> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:SubstanceSpecification.property.category @<CodeableConcept>?;  # A category for this property, e.g. 
+                                            # Physical, Chemical, Enzymatic 
+    fhir:SubstanceSpecification.property.code @<CodeableConcept>?;  # Property type e.g. viscosity, pH, 
+                                            # isoelectric point 
+    fhir:SubstanceSpecification.property.parameters @<string>?;  # Parameters that were used in the 
+                                            # measurement of a property (e.g. 
+                                            # for viscosity: measured at 20C 
+                                            # with a pH of 7.1) 
+    (                                       # A substance upon which a defining 
+                                            # property depends (e.g. for 
+                                            # solubility: in water, in alcohol) 
+        fhir:SubstanceSpecification.property.definingSubstanceReference @<Reference>  |
+        fhir:SubstanceSpecification.property.definingSubstanceCodeableConcept @<CodeableConcept> 
+    )?;
+    (                                       # Quantitative value for this 
+                                            # property 
+        fhir:SubstanceSpecification.property.amountQuantity @<Quantity>  |
+        fhir:SubstanceSpecification.property.amountString @<string> 
+    )?;
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # Moiety, for structural modifications
 <SubstanceSpecification.moiety> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     fhir:SubstanceSpecification.moiety.role @<CodeableConcept>?;  # Role that the moiety is playing
     fhir:SubstanceSpecification.moiety.identifier @<Identifier>?;  # Identifier by which this moiety 
                                             # substance is known 
@@ -61,163 +192,110 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:SubstanceSpecification.moiety.stereochemistry @<CodeableConcept>?;  # Stereochemistry type
     fhir:SubstanceSpecification.moiety.opticalActivity @<CodeableConcept>?;  # Optical activity type
     fhir:SubstanceSpecification.moiety.molecularFormula @<string>?;  # Molecular formula
-    fhir:SubstanceSpecification.moiety.amount @<string>?;  # Quantitative value for this moiety
+    (                                       # Quantitative value for this moiety
+        fhir:SubstanceSpecification.moiety.amountQuantity @<Quantity>  |
+        fhir:SubstanceSpecification.moiety.amountString @<string> 
+    )?;
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# General specifications for this substance, including how it is related to other substances
-<SubstanceSpecification.property> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+# Names applicable to this substance
+<SubstanceSpecification.name> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:SubstanceSpecification.property.type @<CodeableConcept>?;  # Description todo
-    fhir:SubstanceSpecification.property.name @<CodeableConcept>?;  # Description todo
-    fhir:SubstanceSpecification.property.parameters @<string>?;  # A field that should be used to 
-                                            # capture parameters that were used 
-                                            # in the measurement of a property 
-    fhir:SubstanceSpecification.property.substanceId @<Identifier>?;  # Identifier for a substance upon 
-                                            # which a defining property depends 
-    fhir:SubstanceSpecification.property.substanceName @<string>?;  # Description todo
-    fhir:SubstanceSpecification.property.amount @<string>?;  # Quantitative value for this 
-                                            # property 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Names applicable to this substence
-<SubstanceSpecification.substanceName> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:SubstanceSpecification.substanceName.name @<string>?;  # The actual name
-    fhir:SubstanceSpecification.substanceName.type @<CodeableConcept>?;  # Name type
-    fhir:SubstanceSpecification.substanceName.language @<CodeableConcept>*;  # Language of the name
-    fhir:SubstanceSpecification.substanceName.domain @<CodeableConcept>*;  # The use context of this name for 
+                                            # even if unrecognized 
+    fhir:SubstanceSpecification.name.name @<string>;  # The actual name
+    fhir:SubstanceSpecification.name.type @<CodeableConcept>?;  # Name type
+    fhir:SubstanceSpecification.name.status @<CodeableConcept>?;  # The status of the name
+    fhir:SubstanceSpecification.name.preferred @<boolean>?;  # If this is the preferred name for 
+                                            # this substance 
+    fhir:SubstanceSpecification.name.language @<CodeableConcept>*;  # Language of the name
+    fhir:SubstanceSpecification.name.domain @<CodeableConcept>*;  # The use context of this name for 
                                             # example if there is a different 
                                             # name a drug active ingredient as 
                                             # opposed to a food colour additive 
-    fhir:SubstanceSpecification.substanceName.jurisdiction @<CodeableConcept>*;  # The jurisdiction where this name 
+    fhir:SubstanceSpecification.name.jurisdiction @<CodeableConcept>*;  # The jurisdiction where this name 
                                             # applies 
-    fhir:SubstanceSpecification.substanceName.officialName @<SubstanceSpecification.substanceName.officialName>*;  # Details of the official nature of 
+    fhir:SubstanceSpecification.name.synonym @<SubstanceSpecification.name>*;  # A synonym of this name
+    fhir:SubstanceSpecification.name.translation @<SubstanceSpecification.name>*;  # A translation for this name
+    fhir:SubstanceSpecification.name.official @<SubstanceSpecification.name.official>*;  # Details of the official nature of 
                                             # this name 
-    fhir:SubstanceSpecification.substanceName.referenceSource @<string>*;  # Supporting literature
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Codes associated with the substance
-<SubstanceSpecification.substanceCode> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:SubstanceSpecification.substanceCode.code @<CodeableConcept>?;  # The specific code
-    fhir:SubstanceSpecification.substanceCode.status @<CodeableConcept>?;  # Status of the code assignment
-    fhir:SubstanceSpecification.substanceCode.statusDate @<dateTime>?;  # The date at which the code status 
-                                            # is changed as part of the 
-                                            # terminology maintenance 
-    fhir:SubstanceSpecification.substanceCode.comment @<string>?;  # Any comment can be provided in 
-                                            # this field, if necessary 
-    fhir:SubstanceSpecification.substanceCode.referenceSource @<string>*;  # Supporting literature
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Structural information
-<SubstanceSpecification.structure> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:SubstanceSpecification.structure.stereochemistry @<CodeableConcept>?;  # Stereochemistry type
-    fhir:SubstanceSpecification.structure.opticalActivity @<CodeableConcept>?;  # Optical activity type
-    fhir:SubstanceSpecification.structure.molecularFormula @<string>?;  # Molecular formula
-    fhir:SubstanceSpecification.structure.molecularFormulaByMoiety @<string>?;  # Specified per moiety according to 
-                                            # the Hill system, i.e. first C, 
-                                            # then H, then alphabetical. and 
-                                            # each moiety separated by a dot 
-    fhir:SubstanceSpecification.structure.isotope @<SubstanceSpecification.structure.isotope>*;  # Applicable for single substances 
-                                            # that contain a radionuclide or a 
-                                            # non-natural isotopic ratio 
-    fhir:SubstanceSpecification.structure.molecularWeight @<SubstanceSpecification.structure.isotope.molecularWeight>?;  # The molecular weight or weight 
-                                            # range (for proteins, polymers or 
-                                            # nucleic acids) 
-    fhir:SubstanceSpecification.structure.referenceSource @<Reference>*;  # Supporting literature
-    fhir:SubstanceSpecification.structure.structuralRepresentation @<SubstanceSpecification.structure.structuralRepresentation>*;  # Molectular structural 
-                                            # representation 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Molectular structural representation
-<SubstanceSpecification.structure.structuralRepresentation> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:SubstanceSpecification.structure.structuralRepresentation.type @<CodeableConcept>?;  # The type of structure (e.g. Full, 
-                                            # Partial, Representative) 
-    fhir:SubstanceSpecification.structure.structuralRepresentation.representation @<string>?;  # The structural representation as 
-                                            # text string in a format e.g. 
-                                            # InChI, SMILES, MOLFILE, CDX 
-    fhir:SubstanceSpecification.structure.structuralRepresentation.attachment @<Attachment>?;  # An attached file with the 
-                                            # structural representation 
+    fhir:SubstanceSpecification.name.source @<Reference>*;  # Supporting literature
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # Applicable for single substances that contain a radionuclide or a non-natural isotopic ratio
 <SubstanceSpecification.structure.isotope> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:SubstanceSpecification.structure.isotope.nuclideId @<Identifier>?;  # Substance identifier for each 
+                                            # even if unrecognized 
+    fhir:SubstanceSpecification.structure.isotope.identifier @<Identifier>?;  # Substance identifier for each 
                                             # non-natural or radioisotope 
-    fhir:SubstanceSpecification.structure.isotope.nuclideName @<CodeableConcept>?;  # Substance name for each 
+    fhir:SubstanceSpecification.structure.isotope.name @<CodeableConcept>?;  # Substance name for each 
                                             # non-natural or radioisotope 
-    fhir:SubstanceSpecification.structure.isotope.substitutionType @<CodeableConcept>?;  # The type of isotopic substitution 
+    fhir:SubstanceSpecification.structure.isotope.substitution @<CodeableConcept>?;  # The type of isotopic substitution 
                                             # present in a single substance 
-    fhir:SubstanceSpecification.structure.isotope.nuclideHalfLife @<Quantity>?;  # Half life - for a non-natural 
+    fhir:SubstanceSpecification.structure.isotope.halfLife @<Quantity>?;  # Half life - for a non-natural 
                                             # nuclide 
-    fhir:SubstanceSpecification.structure.isotope.amount @<string>?;  # Quantitative values for this 
-                                            # isotope 
     fhir:SubstanceSpecification.structure.isotope.molecularWeight @<SubstanceSpecification.structure.isotope.molecularWeight>?;  # The molecular weight or weight 
                                             # range (for proteins, polymers or 
                                             # nucleic acids) 
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Details of the official nature of this name
-<SubstanceSpecification.substanceName.officialName> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+# Molecular structural representation
+<SubstanceSpecification.structure.representation> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:SubstanceSpecification.substanceName.officialName.authority @<CodeableConcept>?;  # Which authority uses this official 
+                                            # even if unrecognized 
+    fhir:SubstanceSpecification.structure.representation.type @<CodeableConcept>?;  # The type of structure (e.g. Full, 
+                                            # Partial, Representative) 
+    fhir:SubstanceSpecification.structure.representation.representation @<string>?;  # The structural representation as 
+                                            # text string in a format e.g. 
+                                            # InChI, SMILES, MOLFILE, CDX 
+    fhir:SubstanceSpecification.structure.representation.attachment @<Attachment>?;  # An attached file with the 
+                                            # structural representation 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Details of the official nature of this name
+<SubstanceSpecification.name.official> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:SubstanceSpecification.name.official.authority @<CodeableConcept>?;  # Which authority uses this official 
                                             # name 
-    fhir:SubstanceSpecification.substanceName.officialName.status @<CodeableConcept>?;  # The status of the official name
-    fhir:SubstanceSpecification.substanceName.officialName.date @<dateTime>?;  # Date of official name change
+    fhir:SubstanceSpecification.name.official.status @<CodeableConcept>?;  # The status of the official name
+    fhir:SubstanceSpecification.name.official.date @<dateTime>?;  # Date of official name change
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # The molecular weight or weight range (for proteins, polymers or nucleic acids)
 <SubstanceSpecification.structure.isotope.molecularWeight> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     fhir:SubstanceSpecification.structure.isotope.molecularWeight.method @<CodeableConcept>?;  # The method by which the molecular 
                                             # weight was determined 
     fhir:SubstanceSpecification.structure.isotope.molecularWeight.type @<CodeableConcept>?;  # Type of molecular weight such as 
                                             # exact, average (also known as. 
                                             # number average), weight average 
-    fhir:SubstanceSpecification.structure.isotope.molecularWeight.amount @<string>?;  # Used to capture quantitative 
+    fhir:SubstanceSpecification.structure.isotope.molecularWeight.amount @<Quantity>?;  # Used to capture quantitative 
                                             # values for a variety of elements. 
                                             # If only limits are given, the 
                                             # arithmetic mean would be the 
@@ -233,7 +311,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type dateTime
 <dateTime> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:gYear OR xsd:gYearMonth OR xsd:date OR xsd:dateTime?;  # Primitive value for dateTime
     fhir:index xsd:integer?                 # Relative position in a list
@@ -241,7 +319,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Metadata about a resource
 <Meta> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Meta.versionId @<id>?;             # Version specific identifier
@@ -260,7 +339,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type code
 <code> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for code
     fhir:index xsd:integer?                 # Relative position in a list
@@ -269,7 +348,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type string
 <string> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string MAXLENGTH 1048576?;  # Primitive value for string
     fhir:index xsd:integer?                 # Relative position in a list
@@ -278,7 +357,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # A reference from one resource to another
 <Reference> CLOSED {
     fhir:link IRI?;
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Reference.reference @<string>?;    # Literal reference, Relative, 
@@ -303,7 +383,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A measured or measurable amount
 <Quantity> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -319,7 +400,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Content in a format defined elsewhere
 <Attachment> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Attachment.contentType @<code> AND
@@ -338,10 +420,21 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# Set of values bounded by low and high
+<Range> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:Range.low @<SimpleQuantity>?;      # Low limit
+    fhir:Range.high @<SimpleQuantity>?;     # High limit
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # Primitive Type uri
 <uri> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for uri
     fhir:index xsd:integer?                 # Relative position in a list
@@ -393,31 +486,23 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
         fhir:Extension.valueSampledData @<SampledData>  |
         fhir:Extension.valueSignature @<Signature>  |
         fhir:Extension.valueTiming @<Timing>  |
-        fhir:Extension.valueParameterDefinition @<ParameterDefinition>  |
-        fhir:Extension.valueDataRequirement @<DataRequirement>  |
-        fhir:Extension.valueRelatedArtifact @<RelatedArtifact>  |
         fhir:Extension.valueContactDetail @<ContactDetail>  |
         fhir:Extension.valueContributor @<Contributor>  |
-        fhir:Extension.valueTriggerDefinition @<TriggerDefinition>  |
+        fhir:Extension.valueDataRequirement @<DataRequirement>  |
         fhir:Extension.valueExpression @<Expression>  |
+        fhir:Extension.valueParameterDefinition @<ParameterDefinition>  |
+        fhir:Extension.valueRelatedArtifact @<RelatedArtifact>  |
+        fhir:Extension.valueTriggerDefinition @<TriggerDefinition>  |
         fhir:Extension.valueUsageContext @<UsageContext>  |
         fhir:Extension.valueDosage @<Dosage> 
     )?;
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Primitive Type boolean
-<boolean> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
-                                            # implementations 
-    fhir:value xsd:boolean?;                # Primitive value for boolean
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # An identifier intended for computation
 <Identifier> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Identifier.use @<code> AND
@@ -434,9 +519,19 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# A human-readable formatted text, including images
-<Narrative> CLOSED {
+# Primitive Type boolean
+<boolean> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:value xsd:boolean?;                # Primitive value for boolean
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Human-readable summary of the resource (essential clinical and business information)
+<Narrative> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Narrative.status @<code> AND
@@ -446,10 +541,21 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# A ratio of two Quantity values - a numerator and a denominator
+<Ratio> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:Ratio.numerator @<Quantity>?;      # Numerator value
+    fhir:Ratio.denominator @<Quantity>?;    # Denominator value
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # Primitive Type id
 <id> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for id
     fhir:index xsd:integer?                 # Relative position in a list
@@ -458,7 +564,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Concept - reference to a terminology or just  text
 <CodeableConcept> CLOSED {
     a NONLITERAL*;
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:CodeableConcept.coding @<Coding>*;  # Code defined by a terminology 
@@ -471,7 +578,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type date
 <date> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:gYear OR xsd:gYearMonth OR xsd:date?;  # Primitive value for date
     fhir:index xsd:integer?                 # Relative position in a list
@@ -479,7 +586,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # An address expressed using postal conventions (as opposed to GPS or other location definition formats)
 <Address> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Address.use @<code> AND
@@ -505,15 +613,16 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type integer
 <integer> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
-    fhir:value xsd:integer MININCLUSIVE "-2147483648"^^xsd:integer MAXINCLUSIVE "2147483647"^^xsd:integer?;  # Primitive value for integer
+    fhir:value xsd:integer MININCLUSIVE -2147483648 MAXINCLUSIVE 2147483647?;  # Primitive value for integer
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # A measured or measurable amount
 <Count> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -529,7 +638,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Describes a required data item
 <DataRequirement> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:DataRequirement.type @<code> AND
@@ -553,11 +663,12 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # How the medication is/was taken or should be taken
 <Dosage> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     fhir:Dosage.sequence @<integer>?;       # The order of the dosage 
                                             # instructions 
     fhir:Dosage.text @<string>?;            # Free text dosage instructions e.g. 
@@ -591,7 +702,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type uuid
 <uuid> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for uuid
     fhir:index xsd:integer?                 # Relative position in a list
@@ -600,7 +711,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # A reference to a code defined by a terminology system
 <Coding> CLOSED {
     a NONLITERAL?;
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Coding.system @<uri>?;             # Identity of the terminology system
@@ -616,7 +728,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A series of measurements taken by a device
 <SampledData> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:SampledData.origin @<SimpleQuantity>;  # Zero value and units
@@ -636,7 +749,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type positiveInt
 <positiveInt> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:positiveInteger?;        # Primitive value for positiveInt
     fhir:index xsd:integer?                 # Relative position in a list
@@ -644,7 +757,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A length - a value with a unit that is a physical distance
 <Distance> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -660,7 +774,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Time range defined by start and end date/time
 <Period> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Period.start @<dateTime>?;         # Starting time with inclusive 
@@ -672,7 +787,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A length of time
 <Duration> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -689,25 +805,16 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type canonical
 <canonical> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for canonical
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Set of values bounded by low and high
-<Range> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:Range.low @<SimpleQuantity>?;      # Low limit
-    fhir:Range.high @<SimpleQuantity>?;     # High limit
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # Related artifacts for a knowledge resource
 <RelatedArtifact> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:RelatedArtifact.type @<code> AND
@@ -715,9 +822,10 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
                                             # citation | predecessor | successor 
                                             # | derived-from | depends-on | 
                                             # composed-of 
+    fhir:RelatedArtifact.label @<string>?;  # Short label
     fhir:RelatedArtifact.display @<string>?;  # Brief description of the related 
                                             # artifact 
-    fhir:RelatedArtifact.citation @<string>?;  # Bibliographic citation for the 
+    fhir:RelatedArtifact.citation @<markdown>?;  # Bibliographic citation for the 
                                             # artifact 
     fhir:RelatedArtifact.url @<url>?;       # Where the artifact can be accessed
     fhir:RelatedArtifact.document @<Attachment>?;  # What document is being referenced
@@ -728,7 +836,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type base64Binary
 <base64Binary> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:base64Binary?;           # Primitive value for base64Binary
     fhir:index xsd:integer?                 # Relative position in a list
@@ -736,25 +844,28 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Describes the context of use for a conformance or knowledge resource
 <UsageContext> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:UsageContext.code @<Coding>;       # Type of context being specified
     (                                       # Value that defines the context
         fhir:UsageContext.valueCodeableConcept @<CodeableConcept>  |
         fhir:UsageContext.valueQuantity @<Quantity>  |
-        fhir:UsageContext.valueRange @<Range> 
+        fhir:UsageContext.valueRange @<Range>  |
+        fhir:UsageContext.valueReference @<Reference> 
     );
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # A timing schedule that specifies an event that may occur multiple times
 <Timing> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     fhir:Timing.event @<dateTime>*;         # When the event occurs
     fhir:Timing.repeat @<Timing.repeat>?;   # When the event is to occur
     fhir:Timing.code @<CodeableConcept>?;   # BID | TID | QID | AM | PM | QD | 
@@ -765,7 +876,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type decimal
 <decimal> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:decimal OR xsd:double?;  # Primitive value for decimal
     fhir:index xsd:integer?                 # Relative position in a list
@@ -773,7 +884,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Definition of a parameter to a module
 <ParameterDefinition> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:ParameterDefinition.name @<code>?;  # Name used to access the parameter 
@@ -793,7 +905,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Contributor information
 <Contributor> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Contributor.type @<code> AND
@@ -807,7 +920,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type oid
 <oid> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for oid
     fhir:index xsd:integer?                 # Relative position in a list
@@ -816,7 +929,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type instant
 <instant> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:dateTime?;               # Primitive value for instant
     fhir:index xsd:integer?                 # Relative position in a list
@@ -824,7 +937,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Details of a Technology mediated contact point (phone, fax, email, etc.)
 <ContactPoint> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:ContactPoint.system @<code> AND
@@ -843,7 +957,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Name of a human - parts and usage
 <HumanName> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:HumanName.use @<code> AND
@@ -863,7 +978,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # An amount of economic utility in some recognized currency
 <Money> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Money.value @<decimal>?;           # Numerical value (with implicit 
@@ -876,25 +992,16 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type markdown
 <markdown> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for markdown
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# A ratio of two Quantity values - a numerator and a denominator
-<Ratio> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:Ratio.numerator @<Quantity>?;      # Numerator value
-    fhir:Ratio.denominator @<Quantity>?;    # Denominator value
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # A duration of time during which an organism (or a process) has existed
 <Age> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
@@ -910,7 +1017,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Defines an expected trigger for a module
 <TriggerDefinition> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:TriggerDefinition.type @<code> AND
@@ -926,16 +1034,31 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
         fhir:TriggerDefinition.timingDate @<date>  |
         fhir:TriggerDefinition.timingDateTime @<dateTime> 
     )?;
-    fhir:TriggerDefinition.data @<DataRequirement>?;  # Triggering data of the event
+    fhir:TriggerDefinition.data @<DataRequirement>*;  # Triggering data of the event 
+                                            # (multiple = 'and') 
     fhir:TriggerDefinition.condition @<Expression>?;  # Whether the event triggers 
                                             # (boolean expression) 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# A fixed quantity (no comparator)
+<SimpleQuantity> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
+                                            # precision) 
+    fhir:Quantity.unit @<string>?;          # Unit representation
+    fhir:Quantity.system @<uri>?;           # System that defines coded unit form
+    fhir:Quantity.code @<code>?;            # Coded form of the unit
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # Primitive Type url
 <url> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for url
     fhir:index xsd:integer?                 # Relative position in a list
@@ -943,7 +1066,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Text node with attribution
 <Annotation> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     (                                       # Individual responsible for the 
@@ -959,7 +1083,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Contact information
 <ContactDetail> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:ContactDetail.name @<string>?;     # Name of an individual to contact
@@ -970,7 +1095,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # An expression that can be used to generate a value
 <Expression> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Expression.description @<string>?;  # Natural language description of 
@@ -986,7 +1112,8 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A Signature - XML DigSig, JWS, Graphical image of signature, etc.
 <Signature> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:Signature.type @<Coding>+;         # Indication of the reason the 
@@ -1008,7 +1135,7 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type unsignedInt
 <unsignedInt> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:nonNegativeInteger?;     # Primitive value for unsignedInt
     fhir:index xsd:integer?                 # Relative position in a list
@@ -1017,28 +1144,16 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type time
 <time> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional Content defined by 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:time?;                   # Primitive value for time
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# A fixed quantity (no comparator)
-<SimpleQuantity> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
-                                            # precision) 
-    fhir:Quantity.unit @<string>?;          # Unit representation
-    fhir:Quantity.system @<uri>?;           # System that defines coded unit form
-    fhir:Quantity.code @<code>?;            # Coded form of the unit
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # What codes are expected
 <DataRequirement.codeFilter> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
@@ -1050,28 +1165,10 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What dates/date ranges are expected
-<DataRequirement.dateFilter> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.dateFilter.path @<string>?;  # A date-valued attribute to filter 
-                                            # on 
-    fhir:DataRequirement.dateFilter.searchParam @<string>?;  # A date valued parameter to search 
-                                            # on 
-    (                                       # The value of the filter, as a 
-                                            # Period, DateTime, or Duration 
-                                            # value 
-        fhir:DataRequirement.dateFilter.valueDateTime @<dateTime>  |
-        fhir:DataRequirement.dateFilter.valuePeriod @<Period>  |
-        fhir:DataRequirement.dateFilter.valueDuration @<Duration> 
-    )?;
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # When the event is to occur
 <Timing.repeat> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     (                                       # Length/Range of lengths, or (Start 
@@ -1108,12 +1205,46 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Amount of medication administered
-<Dosage.doseAndRate> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+# What dates/date ranges are expected
+<DataRequirement.dateFilter> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
-    fhir:Dosage.doseAndRate.type @<CodeableConcept>;  # The kind of dose or rate specified
+    fhir:DataRequirement.dateFilter.path @<string>?;  # A date-valued attribute to filter 
+                                            # on 
+    fhir:DataRequirement.dateFilter.searchParam @<string>?;  # A date valued parameter to search 
+                                            # on 
+    (                                       # The value of the filter, as a 
+                                            # Period, DateTime, or Duration 
+                                            # value 
+        fhir:DataRequirement.dateFilter.valueDateTime @<dateTime>  |
+        fhir:DataRequirement.dateFilter.valuePeriod @<Period>  |
+        fhir:DataRequirement.dateFilter.valueDuration @<Duration> 
+    )?;
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Order of the results
+<DataRequirement.sort> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
+                                            # perform the sort 
+    fhir:DataRequirement.sort.direction @<code> AND
+    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Amount of medication administered
+<Dosage.doseAndRate> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:Dosage.doseAndRate.type @<CodeableConcept>?;  # The kind of dose or rate specified
     (                                       # Amount of medication per dose
         fhir:Dosage.doseAndRate.doseRange @<Range>  |
         fhir:Dosage.doseAndRate.doseQuantity @<SimpleQuantity> 
@@ -1127,51 +1258,12 @@ start=@<SubstanceSpecification> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Order of the results
-<DataRequirement.sort> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
-                                            # perform the sort 
-    fhir:DataRequirement.sort.direction @<code> AND
-    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 #---------------------- Reference Types -------------------
 
 #---------------------- Value Sets ------------------------
 
-# Whether an operation parameter is an input or an output parameter.
-fhirvs:operation-parameter-use ["in" "out"]
-
-# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
-fhirvs:mimetypes EXTERNAL
-
-# Real world event relating to the schedule.
-fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
-
-# The type of contributor.
-fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
-
-# The use of an address.
-fhirvs:address-use ["home" "work" "temp" "old" "billing"]
-
-# A unit of time (units from UCUM).
-fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
-
-# How the Quantity should be understood and represented.
-fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
-
-# Use of contact point.
-fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
-
-# The days of the week.
-fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
-
-# Telecommunications form for contact point.
-fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
+# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
+fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "ItemInstance" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
 
 # The possible sort directions, ascending or descending.
 fhirvs:sort-direction ["ascending" "descending"]
@@ -1179,23 +1271,50 @@ fhirvs:sort-direction ["ascending" "descending"]
 # The type of an address (physical / postal).
 fhirvs:address-type ["postal" "physical" "both"]
 
-# The type of relationship to the related artifact.
-fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
-
-# The use of a human name.
-fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
-
-# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
-fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "BAM" "BBD" "BDT" "BGN" "BHD" "BIF" "BMD" "BND" "BOB" "BOV" "BRL" "BSD" "BTN" "BWP" "BYN" "BZD" "CAD" "CDF" "CHE" "CHF" "CHW" "CLF" "CLP" "CNY" "COP" "COU" "CRC" "CUC" "CUP" "CVE" "CZK" "DJF" "DKK" "DOP" "DZD" "EGP" "ERN" "ETB" "EUR" "FJD" "FKP" "GBP" "GEL" "GHS" "GIP" "GMD" "GNF" "GTQ" "GYD" "HKD" "HNL" "HRK" "HTG" "HUF" "IDR" "ILS" "INR" "IQD" "IRR" "ISK" "JMD" "JOD" "JPY" "KES" "KGS" "KHR" "KMF" "KPW" "KRW" "KWD" "KYD" "KZT" "LAK" "LBP" "LKR" "LRD" "LSL" "LYD" "MAD" "MDL" "MGA" "MKD" "MMK" "MNT" "MOP" "MRU" "MUR" "MVR" "MWK" "MXN" "MXV" "MYR" "MZN" "NAD" "NGN" "NIO" "NOK" "NPR" "NZD" "OMR" "PAB" "PEN" "PGK" "PHP" "PKR" "PLN" "PYG" "QAR" "RON" "RSD" "RUB" "RWF" "SAR" "SBD" "SCR" "SDG" "SEK" "SGD" "SHP" "SLL" "SOS" "SRD" "SSP" "STN" "SVC" "SYP" "SZL" "THB" "TJS" "TMT" "TND" "TOP" "TRY" "TTD" "TWD" "TZS" "UAH" "UGX" "USD" "USN" "UYI" "UYU" "UZS" "VEF" "VND" "VUV" "WST" "XAF" "XAG" "XAU" "XBA" "XBB" "XBC" "XBD" "XCD" "XDR" "XOF" "XPD" "XPF" "XPT" "XSU" "XTS" "XUA" "XXX" "YER" "ZAR" "ZMW" "ZWL"]
-
 # The status of a resource narrative.
 fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
 
-# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
-fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "SubstanceMoiety" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EntryDefinition" "EpisodeOfCare" "EventDefinition" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "ItemInstance" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductClinicals" "MedicinalProductContraindication" "MedicinalProductDeviceSpec" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "ProcessRequest" "ProcessResponse" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "Schedule" "SearchParameter" "Sequence" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstancePolymer" "SubstanceReferenceInformation" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "UserSession" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
+# A unit of time (units from UCUM).
+fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
+
+# The type of trigger.
+fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
+
+# The type of relationship to the related artifact.
+fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
+
+# The days of the week.
+fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
+
+# Whether an operation parameter is an input or an output parameter.
+fhirvs:operation-parameter-use ["in" "out"]
+
+# Telecommunications form for contact point.
+fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
+
+# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
+fhirvs:mimetypes EXTERNAL
 
 # Identifies the purpose for this identifier, if known .
 fhirvs:identifier-use ["usual" "official" "temp" "secondary" "old"]
 
-# The type of trigger.
-fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
+# How the Quantity should be understood and represented.
+fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
+
+# Real world event relating to the schedule.
+fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
+
+# Use of contact point.
+fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
+
+# The use of a human name.
+fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
+
+# The type of contributor.
+fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
+
+# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
+fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "BAM" "BBD" "BDT" "BGN" "BHD" "BIF" "BMD" "BND" "BOB" "BOV" "BRL" "BSD" "BTN" "BWP" "BYN" "BZD" "CAD" "CDF" "CHE" "CHF" "CHW" "CLF" "CLP" "CNY" "COP" "COU" "CRC" "CUC" "CUP" "CVE" "CZK" "DJF" "DKK" "DOP" "DZD" "EGP" "ERN" "ETB" "EUR" "FJD" "FKP" "GBP" "GEL" "GGP" "GHS" "GIP" "GMD" "GNF" "GTQ" "GYD" "HKD" "HNL" "HRK" "HTG" "HUF" "IDR" "ILS" "IMP" "INR" "IQD" "IRR" "ISK" "JEP" "JMD" "JOD" "JPY" "KES" "KGS" "KHR" "KMF" "KPW" "KRW" "KWD" "KYD" "KZT" "LAK" "LBP" "LKR" "LRD" "LSL" "LYD" "MAD" "MDL" "MGA" "MKD" "MMK" "MNT" "MOP" "MRU" "MUR" "MVR" "MWK" "MXN" "MXV" "MYR" "MZN" "NAD" "NGN" "NIO" "NOK" "NPR" "NZD" "OMR" "PAB" "PEN" "PGK" "PHP" "PKR" "PLN" "PYG" "QAR" "RON" "RSD" "RUB" "RWF" "SAR" "SBD" "SCR" "SDG" "SEK" "SGD" "SHP" "SLL" "SOS" "SRD" "SSP" "STN" "SVC" "SYP" "SZL" "THB" "TJS" "TMT" "TND" "TOP" "TRY" "TTD" "TVD" "TWD" "TZS" "UAH" "UGX" "USD" "USN" "UYI" "UYU" "UZS" "VEF" "VND" "VUV" "WST" "XAF" "XAG" "XAU" "XBA" "XBB" "XBC" "XBD" "XCD" "XDR" "XOF" "XPD" "XPF" "XPT" "XSU" "XTS" "XUA" "XXX" "YER" "ZAR" "ZMW" "ZWL"]
+
+# The use of an address.
+fhirvs:address-use ["home" "work" "temp" "old" "billing"]

@@ -4,6 +4,10 @@
   ],
   "ClaimResponse": {
     "elements": {
+      "ClaimResponse.status": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ClaimResponse.type": {
         "status": "new"
       },
@@ -13,15 +17,30 @@
       "ClaimResponse.use": {
         "status": "new"
       },
-      "ClaimResponse.requestProvider": {
+      "ClaimResponse.patient": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.created": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.insurer": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.requestor": {
+        "old-name": "requestProvider",
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       },
       "ClaimResponse.outcome": {
+        "old-min": 0,
+        "new-min": 1,
         "removed-types": [
           "CodeableConcept"
         ],
@@ -35,19 +54,31 @@
         }
       },
       "ClaimResponse.preAuthRef": {
+        "old-max": "*",
+        "new-max": "1"
+      },
+      "ClaimResponse.preAuthPeriod": {
         "status": "new"
       },
       "ClaimResponse.item.itemSequence": {
-        "status": "new"
+        "old-name": "sequenceLinkId"
+      },
+      "ClaimResponse.item.adjudication": {
+        "old-min": 0,
+        "new-min": 1
       },
       "ClaimResponse.item.detail.detailSequence": {
-        "status": "new"
+        "old-name": "sequenceLinkId"
+      },
+      "ClaimResponse.item.detail.adjudication": {
+        "old-min": 0,
+        "new-min": 1
       },
       "ClaimResponse.item.detail.subDetail.subDetailSequence": {
-        "status": "new"
+        "old-name": "sequenceLinkId"
       },
       "ClaimResponse.addItem.itemSequence": {
-        "status": "new"
+        "old-name": "sequenceLinkId"
       },
       "ClaimResponse.addItem.detailSequence": {
         "status": "new"
@@ -58,8 +89,10 @@
       "ClaimResponse.addItem.provider": {
         "status": "new"
       },
-      "ClaimResponse.addItem.billcode": {
-        "status": "new"
+      "ClaimResponse.addItem.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "ClaimResponse.addItem.programCode": {
         "status": "new"
@@ -88,8 +121,14 @@
       "ClaimResponse.addItem.subSite": {
         "status": "new"
       },
-      "ClaimResponse.addItem.detail.billcode": {
-        "status": "new"
+      "ClaimResponse.addItem.adjudication": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.addItem.detail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "ClaimResponse.addItem.detail.quantity": {
         "status": "new"
@@ -103,10 +142,14 @@
       "ClaimResponse.addItem.detail.net": {
         "status": "new"
       },
+      "ClaimResponse.addItem.detail.adjudication": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ClaimResponse.addItem.detail.subDetail": {
         "status": "new"
       },
-      "ClaimResponse.addItem.detail.subDetail.billcode": {
+      "ClaimResponse.addItem.detail.subDetail.productOrService": {
         "status": "new"
       },
       "ClaimResponse.addItem.detail.subDetail.modifier": {
@@ -130,13 +173,7 @@
       "ClaimResponse.addItem.detail.subDetail.adjudication": {
         "status": "new"
       },
-      "ClaimResponse.error.itemSequence": {
-        "status": "new"
-      },
-      "ClaimResponse.error.detailSequence": {
-        "status": "new"
-      },
-      "ClaimResponse.error.subDetailSequence": {
+      "ClaimResponse.adjudication": {
         "status": "new"
       },
       "ClaimResponse.total": {
@@ -148,6 +185,34 @@
       "ClaimResponse.total.amount": {
         "status": "new"
       },
+      "ClaimResponse.payment.type": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.payment.amount": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.fundsReserve": {
+        "old-name": "reserved",
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "ClaimResponse.formCode": {
+        "status": "new"
+      },
+      "ClaimResponse.form": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "Attachment"
+        ]
+      },
       "ClaimResponse.processNote.type": {
         "removed-types": [
           "CodeableConcept"
@@ -156,35 +221,40 @@
           "code"
         ]
       },
+      "ClaimResponse.processNote.text": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ClaimResponse.processNote.language": {
-        "binding-status": "removed",
+        "binding-strength-changed": true,
+        "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/languages",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "preferred",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
         }
       },
+      "ClaimResponse.error.itemSequence": {
+        "old-name": "sequenceLinkId"
+      },
+      "ClaimResponse.error.detailSequence": {
+        "old-name": "detailSequenceLinkId"
+      },
+      "ClaimResponse.error.subDetailSequence": {
+        "old-name": "subdetailSequenceLinkId"
+      },
       "ClaimResponse.requestOrganization": {
-        "status": "deleted"
-      },
-      "ClaimResponse.item.sequenceLinkId": {
-        "status": "deleted"
-      },
-      "ClaimResponse.item.detail.sequenceLinkId": {
-        "status": "deleted"
-      },
-      "ClaimResponse.item.detail.subDetail.sequenceLinkId": {
-        "status": "deleted"
-      },
-      "ClaimResponse.addItem.sequenceLinkId": {
         "status": "deleted"
       },
       "ClaimResponse.addItem.revenue": {
         "status": "deleted"
       },
       "ClaimResponse.addItem.category": {
-        "status": "deleted"
-      },
-      "ClaimResponse.addItem.service": {
         "status": "deleted"
       },
       "ClaimResponse.addItem.fee": {
@@ -196,19 +266,7 @@
       "ClaimResponse.addItem.detail.category": {
         "status": "deleted"
       },
-      "ClaimResponse.addItem.detail.service": {
-        "status": "deleted"
-      },
       "ClaimResponse.addItem.detail.fee": {
-        "status": "deleted"
-      },
-      "ClaimResponse.error.sequenceLinkId": {
-        "status": "deleted"
-      },
-      "ClaimResponse.error.detailSequenceLinkId": {
-        "status": "deleted"
-      },
-      "ClaimResponse.error.subdetailSequenceLinkId": {
         "status": "deleted"
       },
       "ClaimResponse.totalCost": {
@@ -218,9 +276,6 @@
         "status": "deleted"
       },
       "ClaimResponse.totalBenefit": {
-        "status": "deleted"
-      },
-      "ClaimResponse.insurance.preAuthRef": {
         "status": "deleted"
       }
     },

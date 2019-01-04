@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Search - FHIR v3.5.0</title>
+  <title>Search - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -38,7 +38,7 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -108,11 +108,7 @@
 
 <a name="base"></a>
 <h2 class="self-link-parent"><span class="sectioncount">3.1.1<a name="3.1.1"> </a></span> Search <a href="search.html#3.1.1" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h2>
-<table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: 5</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
-<p style="border: 1px black solid; background-color: #e6ffe6; padding: 5px">
-Normative Candidate Note: This page is candidate normative content for R4 in the <a href="ballot-intro.html#infrastructure">Infrastructure Package</a>.
-Once normative, it will lose it's Maturity Level, and <a href="versions.html#change">breaking changes</a> will no longer be made.
-</p>
+<table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: Normative</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
 
 
 <p>
@@ -160,6 +156,7 @@ complexity that they require for their implementations.
 <a href="#include"><code>_include</code></a><br/>
 <a href="#revinclude"><code>_revinclude</code></a><br/>
 <a href="#summary"><code>_summary</code></a><br/>
+<a href="#total"><code>_total</code></a><br/>
 <a href="#elements"><code>_elements</code></a><br/>
 <a href="#contained"><code>_contained</code></a><br/>
 <a href="#containedType"><code>_containedType</code></a><br/>
@@ -175,6 +172,9 @@ Also, there is a single page that lists <a href="searchparameter-registry.html">
 Note that search parameter names are case sensitive, though this specification never defines different
 parameters with names that differ only in case. Clients SHOULD use correct case, and servers SHALL
 not define additional parameters with different meanings with names that only differ in case.
+</p>
+<p>
+There are <a href="safety.html#search">several safety issues</a> associated with the implementation of searching that implementers should always keep in mind.
 </p>
 
 <a name="Introduction"></a>
@@ -219,7 +219,7 @@ contained in the search parameters as described below. However
 the server has the prerogative to return additional search results
 if it believes them to be relevant. Note: There is a
 special search for the most relevant context in which the
-search set is indeterminate: <a href="patient.html#mpi">Patient MPI Search</a>.
+search set is indeterminate: <a href="patient.html#match">Patient MPI Search</a>.
 </p>
 <p>
 Search using <code>GET</code> may include sensitive information in the search parameters.  Therefore,
@@ -520,7 +520,7 @@ the following prefixes are used:
 <p>
 If no prefix is present, the prefix <code>eq</code> is assumed. Note that the way search parameters operate
 is not the same as the way the operations on two numbers work in a mathematical sense. <code>sa</code> (<code>starts-after</code>) and
-<code>eb</code> (<code>ends-before</code>) are not used with integer values.
+<code>eb</code> (<code>ends-before</code>) are not used with integer values but are used for decimals.
 </p>
 <p>
 For each prefix above, two interpretations are provided - the simple intent of the prefix and the
@@ -583,6 +583,8 @@ Notes about searching on Numbers:
  <li>When a comparison prefix in the set <code>lgt, lt, ge, le, sa &amp; eb</code> is provided, the 
      implicit precision of the number is ignored, and they are treated as if they have arbitrarily high precision</li>
  <li>The way search parameters operate in resources is not the same as whether two numbers are equal to each other in a mathematical sense</li>
+ <li>Searching on decimals involves an implicit range.  The number of significant digits of the implicit range is the number of digits specified in 
+     the search parameter value, excluding leading zeros. So 100 and 1.00e2 both have the same number of significant digits - three</li>
 </ul>
 
 <p>
@@ -739,14 +741,14 @@ To search for all the procedures in a patient compartment that occurred over a 2
 <p>
 Managing timezones and offsets and their impact on search is a very difficult area. The FHIR
 implementation community is still investigating and debating the best way to handle timezones.
-Implementation guides may made additional rules in this regard. 
+Implementation guides may make additional rules in this regard. 
 </p>
 <p>
 Future versions of this specification may impose rules around the use of timezones with dates.
 Implementers and authors of implementation guides should be aware of ongoing work in this area.
 </p>
 <p>
-Implementer feedback is welcome <a href="http://wiki.hl7.org????">on the HL7 wiki <img src="external.png" style="text-align: baseline"/></a> or <a href="https://chat.fhir.org/#narrow/stream/4-implementers">chat.fhir.org <img src="external.png" style="text-align: baseline"/></a>.
+Implementer feedback is welcome <a href="http://hl7.org/fhir-issues">on the issue tracker <img src="external.png" style="text-align: baseline"/></a> or <a href="https://chat.fhir.org/#narrow/stream/4-implementers">chat.fhir.org <img src="external.png" style="text-align: baseline"/></a>.
 </p>
 </div><p>&nbsp;</p>
 
@@ -824,7 +826,7 @@ The type <a href="#reference">reference</a> is used for the types <a href="refer
 the <a href="references.html#canonical">Canonical URLs</a> of the conformance and knowledge resources (e.g. 
 <a href="structuredefinition.html">StructureDefinition</a>, <a href="valueset.html">ValueSet</a>, 
 <a href="plandefinition.html">PlanDefinition</a> etc), servers SHOULD support searching by
-Canonical URLs, and SHOULD support automatically detecting a <code>|[version]</code> portion as part of the
+canonical references, and SHOULD support automatically detecting a <code>|[version]</code> portion as part of the
 search parameter, and interpreting that portion as a search on the version.
 </p>
 
@@ -1014,7 +1016,8 @@ The syntax for the value follows the form:
 <p>
 The prefix is optional, and is as described <a href="#prefix">above</a>, both regarding how 
 precision and comparator/range operators are interpreted. Like a number parameter, the 
-number part of the search value can be a decimal in exponential format. Example searches:
+number part of the search value can be a decimal in exponential format. The <code>system</code> and <code>code</code>
+follow the same pattern as <a href="#token">token parameters</a> are also optional. Example searches:
 </p>
 
 <table>
@@ -1022,6 +1025,7 @@ number part of the search value can be a decimal in exponential format. Example 
  <tr><td><pre> GET [base]/Observation?value-quantity=5.4|http://unitsofmeasure.org|mg</pre></td><td>Search for all the observations with a value of 5.4(+/-0.05) mg where mg is understood as a UCUM unit (<code>system</code>/<code>code</code>)</td></tr>
  <tr><td><pre> GET [base]/Observation?value-quantity=5.40e-3|http://unitsofmeasure.org|g</pre></td><td>Search for all the observations with a value of 0.0054(+/-0.000005) g where g is understood as a UCUM unit (<code>system</code>/<code>code</code>)</td></tr>
  <tr><td><pre> GET [base]/Observation?value-quantity=5.4||mg</pre></td><td>Search for all the observations with a value of 5.4(+/-0.05) mg where the unit - either the code (<code>code</code>) or the stated human unit (<code>unit</code>) are "mg"</td></tr>
+ <tr><td><pre> GET [base]/Observation?value-quantity=5.4</pre></td><td>Search for all the observations with a value of 5.4(+/-0.05) irrespective of the unit</td></tr>
  <tr><td><pre> GET [base]/Observation?value-quantity=le5.4|http://unitsofmeasure.org|mg</pre></td><td>Search for all the observations where the value of is less than 5.4 mg exactly where mg is understood as a UCUM unit</td></tr>
  <tr><td><pre> GET [base]/Observation?value-quantity=ap5.4|http://unitsofmeasure.org|mg</pre></td><td>Search for all the observations where the value of is about 5.4 mg where mg is understood as a UCUM unit (typically, within 10% of the value - see above)</td></tr>
 </table>
@@ -1372,7 +1376,7 @@ Examples of using composite parameters:
 Consider the case of searching for all AllergyIntolerance resources:
 </p>
 <pre>
-GET [base]/AllergyIntolerance?clinical-status=active
+GET [base]/AllergyIntolerance?clinical-status=http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical|active
 </pre>
 <p>
 This search will only return resources that have a value for clinicalStatus:
@@ -1380,7 +1384,14 @@ This search will only return resources that have a value for clinicalStatus:
 <pre fragment="AllergyIntolerance" class="json">
 {
   "resourceType" : "AllergyIntolerance",
-  "clinicalStatus" : "active"
+   "clinicalStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+        "code": "active"
+      }
+    ]
+  }
 }
 </pre>
 <p>
@@ -1390,7 +1401,7 @@ only return resources with an explicit clinicalStatus. Instead, it might be desi
 AllergyIntolerance resources with either an explicit value for clinicalStatus, or none:
 </p>
 <pre>
-GET [base]/AllergyIntolerance?clinical-status=active
+GET [base]/AllergyIntolerance?clinical-status=http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical|active
 GET [base]/AllergyIntolerance?clinical-status:missing=true
 </pre>
 <p>
@@ -1398,7 +1409,7 @@ Note that this is 2 separate queries. They can be <a href="http.html#transaction
 but not in a single operation. This query will always return an empty list, as no resource can satisfy both criteria at once:
 </p>
 <pre>
-GET [base]/AllergyIntolerance?clinical-status=active&amp;clinical-status:missing=true
+GET [base]/AllergyIntolerance?clinical-status=http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical|active&amp;clinical-status:missing=true
 </pre>
 <p>
 There is no way to use the :missing modifier and mix with a value using the
@@ -1643,8 +1654,43 @@ Notes:
     "Reasonable" may vary by use case and realm, particularly for accented characters.</li>
 </ul>
 
+<div class="trial-content">
+<p>
+The _total parameter has the status <a href="versions.html#std-process" title="Trial Content" class="draft-flag">trial-use</a> 
+pending real world experience of it's use.
+</p>
+
+<a name="total"></a>
+<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.2</span> Total number of matching resources <a href="search.html#total" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<p>
+The return <a href="bundle.html">Bundle</a> has an element <code>total</code>
+which is the number of resources that match the search parameters. 
+</p>
+<p>
+Note that <code>Bundle.total</code> represents the total 
+number of matches, not how many resources are returned in 
+a particular response (see <a href="#count">paging</a>, immediately below).
+</p>
+<p>
+Providing a precise number of matching resources may be onerous for the 
+server, depending on how the server is designed. To help reduce the server 
+load, a client can provide the parameter <code>_total</code> to indicate
+it's preference with regard to the total, which can have one of the 
+following values:
+</p>
+<table class="codes">
+ <tr><td>none</td><td>There is no need to populate the total count; the client will not use it</td></tr>
+ <tr><td>estimate</td><td>A rough estimate of the number of matching resources is sufficient</td></tr>
+ <tr><td>accurate</td><td>The client requests that the server provide an exact total of the number of matching resources</td></tr>
+</table>
+<p>
+The <code>Bundle.total</code> element is still optional, and the servers can ignore the <code>_total</code> 
+parameter: it is just an optimization hint, that might possibly save the server some work.
+</p>
+</div>
+
 <a name="count"></a>
-<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.2</span> Page Count <a href="search.html#count" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.3</span> Page Count <a href="search.html#count" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 
 <p>
 In order to keep the load on clients, servers and the network
@@ -1697,7 +1743,7 @@ number of matches, not how many are returned in a single Bundle response.
 
 <a name="include"></a>
 <a name="revinclude"></a>
-<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.3</span> Including other resources in result (<code>_include</code> and <code>_revinclude</code>) <a href="search.html#revinclude" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.4</span> Including other resources in result (<code>_include</code> and <code>_revinclude</code>) <a href="search.html#revinclude" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p>
 Clients may request that the engine return resources related to the search results, in order to reduce
 the overall network delay of repeated retrievals of related resources. This is useful when the client
@@ -1802,7 +1848,7 @@ approaches in their context.
 <a name="containedType"></a>
 
 
-<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.4</span> Contained Resources <a href="search.html#containedType" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.5</span> Contained Resources <a href="search.html#containedType" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 
 <p>
 By default, search results only include resources that are not contained in other resources.
@@ -1904,7 +1950,7 @@ along with indicating the identity of the containing resource.
 
 <a name="external"></a>
 
-<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.5</span> External References <a href="search.html#external" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.6</span> External References <a href="search.html#external" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p>
 If the <code>_include</code> path selects a reference that refers to a resource on another server,
 the server can elect to include that resource in the search results for the convenience
@@ -1928,7 +1974,7 @@ results for the convenience of the client.
 </p>
 
 <a name="Paging"></a>
-<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.6</span> Paging <a href="search.html#Paging" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.7</span> Paging <a href="search.html#Paging" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p>
 When returning paged results for a search with <code>_include</code> resources, all <code>_include</code> resources that are
 related to the primary resources returned for the page SHOULD also be returned as part of that
@@ -1937,7 +1983,7 @@ pages.  This approach allows both sender and receiver to avoid caching results o
 </p>
 
 <a name="summary"></a>
-<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.7</span> Summary <a href="search.html#summary" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.8</span> Summary <a href="search.html#summary" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p>
 The client can request the server to return only a portion of the resources
 by using the parameter <code>_summary</code>:
@@ -1985,7 +2031,7 @@ around this in the future.
 </p></blockquote>
 
 <a name="elements"></a>
-<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.8</span> Elements <a href="search.html#elements" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.9</span> Elements <a href="search.html#elements" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p>
 If one of the summary views defined above is not appropriate, a client can
 request a specific set of elements be returned as part of a resource in the search results using
@@ -2011,7 +2057,7 @@ a complete resource.
 </p>
 
 <a name="score"></a>
-<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.9</span> Relevance <a href="search.html#score" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<h4 class="self-link-parent"><span class="sectioncount">3.1.1.5.10</span> Relevance <a href="search.html#score" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p>
 Where a search specifies a non-deterministic sort, the search algorithm
 may generate some kind of ranking score to indicate which resources meet
@@ -2155,241 +2201,321 @@ Cross-map between search parameter types and Data types:
   <td><b>Data Type</b></td>
   <td><b><a href="#number">number</a></b></td>
   <td><b><a href="#date">date</a></b></td>
-  <td><b><a href="#string">string</a></b></td>
-  <td><b><a href="#token">token</a></b></td>
   <td><b><a href="#reference">reference</a></b></td>
   <td><b><a href="#quantity">quantity</a></b></td>
   <td><b><a href="#uri">uri</a></b></td>
+  <td><b><a href="#string">string</a></b></td>
+  <td><b><a href="#token">token</a></b></td>
+ </tr>
+ <tr>
+   <td colspan="8" style="background-color: #efefef"><b>Primitive Types</b></td>
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#base64Binary">base64Binary</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td>   <!-- uri -->
  </tr>
  <tr>
   <td><a href="datatypes.html#boolean">boolean</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="font-weight: bold">Y</span> . true|false (System = http://hl7.org/fhir/special-values but not usually needed)</td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="font-weight: bold">Y</span> . true|false (System = http://hl7.org/fhir/special-values but not usually needed)</td>   <!-- token -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#canonical">canonical</a></td>
+  <td><span style="color: grey">N</span></td>   <!-- number -->
+  <td><span style="color: grey">N</span></td>   <!-- date -->
+  <td><span style="color: grey">N</span></td>   <!-- reference -->
+  <td><span style="color: grey">N</span></td>   <!-- quantity -->
+  <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#code">code</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="font-weight: bold">Y</span> . (System, if desired, is defined in the underlying value set for eeach code)</td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="font-weight: bold">Y</span> . (System, if desired, is defined in the underlying value set for each code)</td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#date">date</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#dateTime">dateTime</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
  </tr>
   <tr>
   <td><a href="datatypes.html#decimal">decimal</a></td>
   <td><span style="font-weight: bold">Y</span> </td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#id">id</a></td>
+  <td><span style="color: grey">N</span></td>   <!-- number -->
+  <td><span style="color: grey">N</span></td>   <!-- date -->
+  <td><span style="color: grey">N</span></td>   <!-- reference -->
+  <td><span style="color: grey">N</span></td>   <!-- quantity -->
+  <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#instant">instant</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#integer">integer</a></td>
   <td><span style="font-weight: bold">Y</span> </td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#markdown">markdown</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td> 
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#oid">oid</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search (but see uri)</td> 
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#positiveInt">positiveInt</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search (but see integer)</td> 
  </tr>
  <tr>
   <td><a href="datatypes.html#string">string</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="font-weight: bold">Y</span> </td>   <!-- string -->
-  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="font-weight: bold">Y</span> </td>   <!-- string -->
+  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#time">time</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td> 
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#unsignedInt">unsignedInt</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search (but see integer)</td> 
  </tr>
  <tr>
   <td><a href="datatypes.html#uri">uri</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span> </td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- uri -->
+  <td><span style="color: grey">N</span> </td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#url">url</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search (but see uri)</td> 
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#uuid">uuid</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search (but see uri)</td> 
+ </tr>
+ <tr>
+   <td colspan="8" style="background-color: #efefef"><b>Data Types</b></td>
  </tr>
  <tr>
   <td><a href="datatypes.html#Address">Address</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="font-weight: bold">Y</span>  search on any string element in the address</td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="font-weight: bold">Y</span>  search on any string element in the address</td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#Age">Age</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td> 
  </tr>
  <tr>
   <td><a href="datatypes.html#Annotation">Annotation</a></td>
-  <td><span style="color: grey">N</span></td>   <!-- number -->
-  <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
-  <td><span style="color: grey">N</span></td>   <!-- reference -->
-  <td><span style="color: grey">N</span></td>   <!-- quantity -->
-  <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td> 
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#Annotation">Attachment</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td> 
  </tr>
  <tr>
   <td><a href="datatypes.html#CodeableConcept">CodeableConcept</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#Coding">Coding</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#Count">Count</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td> 
  </tr>
  <tr>
   <td><a href="datatypes.html#ContactPoint">ContactPoint</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#Distance">Distance</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td> 
  </tr>
  <tr>
   <td><a href="datatypes.html#Duration">Duration</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#HumanName">HumanName</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="font-weight: bold">Y</span>  Search on any string element in the name</td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="font-weight: bold">Y</span>  Search on any string element in the name</td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#Identifier">Identifier</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="font-weight: bold">Y</span> </td>   <!-- token -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#Money">Money</a></td>
+  <td><span style="color: grey">N</span></td>   <!-- number -->
+  <td><span style="color: grey">N</span></td>   <!-- date -->
+  <td><span style="color: grey">N</span></td>   <!-- reference -->
+  <td><span style="font-weight: bold">Y</span> </td>   <!-- quantity -->
+  <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#Period">Period</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#Quantity">Quantity</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
  </tr>
  <tr>
   <td><a href="datatypes.html#Range">Range</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#Ratio">Ratio</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td> 
  </tr>
  <tr>
   <td><a href="datatypes.html#Reference">Reference</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="color: grey">N</span></td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
- </tr>
- <tr>
-  <td><a href="datatypes.html#SampledData">SampledData</a></td>
-  <td><span style="color: grey">N</span></td>   <!-- number -->
-  <td><span style="color: grey">N</span></td>   <!-- date -->
   <td><span style="color: grey">N</span></td>   <!-- string -->
   <td><span style="color: grey">N</span></td>   <!-- token -->
-  <td><span style="color: grey">N</span></td>   <!-- reference -->
-  <td><span style="color: grey">N</span></td>   <!-- quantity -->
-  <td><span style="color: grey">N</span></td>   <!-- uri -->
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#base64Binary">SampledData</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td> 
+ </tr>
+ <tr>
+  <td><a href="datatypes.html#Signature">Signature</a></td>
+  <td colspan="7" style="background-color: #f9f9f9">Not used in search</td> 
  </tr>
  <tr>
   <td><a href="datatypes.html#Timing">Timing</a></td>
   <td><span style="color: grey">N</span></td>   <!-- number -->
   <td><span style="font-weight: bold">Y</span> </td>   <!-- date -->
-  <td><span style="color: grey">N</span></td>   <!-- string -->
-  <td><span style="color: grey">N</span></td>   <!-- token -->
   <td><span style="color: grey">N</span></td>   <!-- reference -->
   <td><span style="color: grey">N</span></td>   <!-- quantity -->
   <td><span style="color: grey">N</span></td>   <!-- uri -->
+  <td><span style="color: grey">N</span></td>   <!-- string -->
+  <td><span style="color: grey">N</span></td>   <!-- token -->
  </tr>
 </table>
 
@@ -2407,7 +2533,7 @@ Cross-map between search parameter types and Data types:
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -2417,7 +2543,7 @@ Cross-map between search parameter types and Data types:
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fsearch.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fsearch.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fsearch.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fsearch.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Operation-activitydefinition-apply - FHIR v3.5.0</title>
+  <title>Operation-activitydefinition-apply - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -41,7 +41,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -108,7 +108,7 @@
 <div class="col-12">
 
 <h1>Operation-activitydefinition-apply</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/dss/index.cfm">Clinical Decision Support</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/dss/index.cfm">Clinical Decision Support</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
 
 <p>
 
@@ -118,7 +118,7 @@ This is the narrative for the resource. See also the <a href="operation-activity
 <hr/>
 <div xmlns="http://www.w3.org/1999/xhtml"><h2>Apply</h2><p>OPERATION: Apply</p><p>The official URL for this operation definition is: </p><pre>http://hl7.org/fhir/OperationDefinition/ActivityDefinition-apply</pre><div><p>The apply operation applies a definition in a specific context</p>
 </div><p>URL: [base]/ActivityDefinition/$apply</p><p>URL: [base]/ActivityDefinition/[id]/$apply</p><p>Parameters</p><table class="grid"><tr><td><b>Use</b></td><td><b>Name</b></td><td><b>Cardinality</b></td><td><b>Type</b></td><td><b>Binding</b></td><td><b>Documentation</b></td></tr><tr><td>IN</td><td>activityDefinition</td><td>0..1</td><td><a href="activitydefinition.html">ActivityDefinition</a></td><td></td><td><div><p>The activity definition to apply. If the operation is invoked on an instance, this parameter is not allowed. If the operation is invoked at the type level, this parameter is required</p>
-</div></td></tr><tr><td>IN</td><td>patient</td><td>1..1</td><td><a href="datatypes.html#string">string</a><br/>(<a href="search.html#reference">reference</a>)</td><td></td><td><div><p>The patient that is the target of the activity to be applied</p>
+</div></td></tr><tr><td>IN</td><td>subject</td><td>1..*</td><td><a href="datatypes.html#string">string</a><br/>(<a href="search.html#reference">reference</a>)</td><td></td><td><div><p>The subject(s) that is/are the target of the activity definition to be applied. The subject may be a Patient, Practitioner, Organization, Location, Device, or Group. Subjects provided in this parameter will be resolved as the subject of the PlanDefinition based on the type of the subject. If multiple subjects of the same type are provided, the behavior is implementation-defined</p>
 </div></td></tr><tr><td>IN</td><td>encounter</td><td>0..1</td><td><a href="datatypes.html#string">string</a><br/>(<a href="search.html#reference">reference</a>)</td><td></td><td><div><p>The encounter in context, if any</p>
 </div></td></tr><tr><td>IN</td><td>practitioner</td><td>0..1</td><td><a href="datatypes.html#string">string</a><br/>(<a href="search.html#reference">reference</a>)</td><td></td><td><div><p>The practitioner in context</p>
 </div></td></tr><tr><td>IN</td><td>organization</td><td>0..1</td><td><a href="datatypes.html#string">string</a><br/>(<a href="search.html#reference">reference</a>)</td><td></td><td><div><p>The organization in context</p>
@@ -128,7 +128,7 @@ This is the narrative for the resource. See also the <a href="operation-activity
 </div></td></tr><tr><td>IN</td><td>setting</td><td>0..1</td><td><a href="datatypes.html#CodeableConcept">CodeableConcept</a></td><td></td><td><div><p>The current setting of the request (inpatient, outpatient, etc.)</p>
 </div></td></tr><tr><td>IN</td><td>settingContext</td><td>0..1</td><td><a href="datatypes.html#CodeableConcept">CodeableConcept</a></td><td></td><td><div><p>Additional detail about the setting of the request, if any</p>
 </div></td></tr><tr><td>OUT</td><td>return</td><td>1..1</td><td>Any</td><td></td><td><div><p>The resource that is the result of applying the definition</p>
-</div></td></tr></table><div><p>The result of invoking this operation is a resource of the type specified by the activity definition, with all the definitions resolved as appropriate for the type of resource. Any dynamicValue elements will be evaluated (in the order in which they appear in the resource) and the results applied to the returned resource.  If the ActivityDefinition includes library references, those libraries will be available to the evaluated expressions. If those libraries have parameters, those parameters will be bound by name to the parameters given to the operation. For a more detailed description, refer to the ActivityDefinition resource</p>
+</div></td></tr></table><div><p>The result of invoking this operation is a resource of the type specified by the activity definition, with all the definitions resolved as appropriate for the type of resource. Any dynamicValue elements will be evaluated (in the order in which they appear in the resource) and the results applied to the returned resource.  If the ActivityDefinition includes library references, those libraries will be available to the evaluated expressions. If those libraries have parameters, those parameters will be bound by name to the parameters given to the operation. In addition, parameters to the $apply operation are available within dynamicValue expressions as context variables, accessible by the name of the parameter, prefixed with a percent (%) symbol. For a more detailed description, refer to the ActivityDefinition resource</p>
 </div></div>
 <hr/>
 
@@ -166,7 +166,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:23-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:26-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -176,7 +176,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Foperation-activitydefinition-apply.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperation-activitydefinition-apply.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Foperation-activitydefinition-apply.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperation-activitydefinition-apply.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

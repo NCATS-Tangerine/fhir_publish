@@ -2,24 +2,41 @@
 <difference>
    <type name="MedicationAdministration" status="changed">
       <element path="MedicationAdministration.instantiates" status="new"/>
-      <element path="MedicationAdministration.medication[x]">
-         <removed-type name="Reference(Medication)"/>
-         <added-type name="Reference(Medication)"/>
-      </element>
-      <element path="MedicationAdministration.performer.function" status="new"/>
-      <element path="MedicationAdministration.performer.actor">
-         <removed-type name="Reference(Practitioner|Patient|RelatedPerson|Device)"/>
-         <added-type name="Reference(Practitioner|PractitionerRole|Patient|RelatedPerson|Device)"/>
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               path="MedicationAdministration.status">
+         <removed-code code="in-progress"/>
+         <removed-code code="on-hold"/>
+         <removed-code code="completed"/>
+         <removed-code code="entered-in-error"/>
+         <removed-code code="stopped"/>
+         <removed-code code="unknown"/>
+         <added-code code="in-progress"/>
+         <added-code code="not-done"/>
+         <added-code code="on-hold"/>
+         <added-code code="completed"/>
+         <added-code code="entered-in-error"/>
+         <added-code code="stopped"/>
+         <added-code code="unknown"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/medication-admin-status"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/medication-admin-status"
+                      strength="required"/>
       </element>
       <element path="MedicationAdministration.statusReason" status="new"/>
+      <element path="MedicationAdministration.performer.function" status="new"/>
+      <element path="MedicationAdministration.performer.actor">
+         <removed-type name="Reference(Practitioner | Patient | RelatedPerson | Device)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Patient | RelatedPerson | Device)"/>
+      </element>
       <element path="MedicationAdministration.reasonReference">
-         <removed-type name="Reference(Condition|Observation)"/>
-         <added-type name="Reference(Condition|Observation|DiagnosticReport)"/>
+         <removed-type name="Reference(Condition | Observation)"/>
+         <added-type name="Reference(Condition | Observation | DiagnosticReport)"/>
       </element>
       <element path="MedicationAdministration.request" status="new"/>
       <element path="MedicationAdministration.dosage.rate[x]">
-         <removed-type name="canonical()"/>
-         <added-type name="canonical()"/>
+         <removed-type name="Quantity()"/>
+         <added-type name="Quantity()"/>
       </element>
       <element path="MedicationAdministration.definition" status="deleted"/>
       <element path="MedicationAdministration.performer.onBehalfOf" status="deleted"/>

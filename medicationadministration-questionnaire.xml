@@ -9,8 +9,8 @@
       <status value="active"/>
       <description value="Type options for MedicationAdministration.medication[x]"/>
       <expansion>
-        <identifier value="urn:uuid:850d9b96-3be3-47c0-93df-6e67f343716f"/>
-        <timestamp value="2018-09-14T07:26:51-05:00"/>
+        <identifier value="urn:uuid:6e895cf5-8d79-4bdb-b9ae-d5690c1c5dd7"/>
+        <timestamp value="2018-12-13T14:27:00-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="CodeableConcept"/>
@@ -31,8 +31,8 @@
       <status value="active"/>
       <description value="Type options for MedicationAdministration.effective[x]"/>
       <expansion>
-        <identifier value="urn:uuid:c1c6a447-7177-49fb-b960-1e05732e6be5"/>
-        <timestamp value="2018-09-14T07:26:51-05:00"/>
+        <identifier value="urn:uuid:25c86be0-125a-48fc-b5c7-96e8fbc1d47f"/>
+        <timestamp value="2018-12-13T14:27:00-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="dateTime"/>
@@ -53,8 +53,8 @@
       <status value="active"/>
       <description value="Type options for MedicationAdministration.dosage.rate[x]"/>
       <expansion>
-        <identifier value="urn:uuid:4de49ab6-fd2f-40f9-a1a4-e1fa38fedc4a"/>
-        <timestamp value="2018-09-14T07:26:51-05:00"/>
+        <identifier value="urn:uuid:041abe94-c48a-485f-87e3-b9dbded2d65e"/>
+        <timestamp value="2018-12-13T14:27:00-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="Ratio"/>
@@ -71,8 +71,9 @@
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
+  <version value="3.6.0"/>
   <status value="draft"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="Health Level Seven International (Pharmacy)"/>
   <item>
     <linkId value="MedicationAdministration"/>
@@ -80,10 +81,6 @@
     <type value="group"/>
     <required value="false"/>
     <repeats value="true"/>
-    <item>
-      <text value="The WG will be updating the MedicationAdministration resource  to adjust each affected resource to align with the workflow pattern (see workflow.html)."/>
-      <type value="display"/>
-    </item>
     <item>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
         <valueCodeableConcept>
@@ -261,7 +258,7 @@
     </item>
     <item>
       <linkId value="MedicationAdministration.extension"/>
-      <text value="Additional Content defined by implementations"/>
+      <text value="Additional content defined by implementations"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -295,7 +292,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+        <text value="May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
         <type value="display"/>
       </item>
     </item>
@@ -318,7 +315,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="External identifier - FHIR will generate its own internal identifiers (probably URLs) which do not need to be explicitly managed by the resource.  The identifier here is one that would be used by another non-FHIR system - for example an automated medication pump would provide a record each time it operated; an administration while the patient was off the ward might be made with a different system and entered after the event. This identifier is particularly important when these records require updates."/>
+        <text value="Identifiers associated with this Medication Administration that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate. They are business identifiers assigned to this resource by the performer or other systems and remain constant as the resource is updated and propagates from server to server. This is a business identifier, not a resource identifier."/>
         <type value="display"/>
       </item>
       <item>
@@ -438,6 +435,43 @@
         <linkId value="MedicationAdministration.status.value"/>
         <text value="status"/>
         <type value="choice"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="CodeableConcept"/>
+      </extension>
+      <linkId value="MedicationAdministration.statusReason"/>
+      <text value="Reason administration not performed"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="A code indicating why the administration was not performed."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <linkId value="MedicationAdministration.statusReason.coding"/>
+        <text value="code:"/>
+        <type value="open-choice"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+      <item>
+        <linkId value="MedicationAdministration.statusReason.text"/>
+        <text value="text:"/>
+        <type value="string"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
@@ -783,7 +817,7 @@
         </item>
         <item>
           <linkId value="MedicationAdministration.performer.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -811,7 +845,7 @@
       </item>
       <item>
         <linkId value="MedicationAdministration.performer.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -825,7 +859,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>
@@ -909,43 +943,6 @@
           <required value="false"/>
           <repeats value="false"/>
         </item>
-      </item>
-    </item>
-    <item>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="CodeableConcept"/>
-      </extension>
-      <linkId value="MedicationAdministration.statusReason"/>
-      <text value="Reason administration not performed"/>
-      <type value="group"/>
-      <required value="false"/>
-      <repeats value="true"/>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-          <valueCodeableConcept>
-            <coding>
-              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-              <code value="flyover"/>
-              <display value="Fly-over"/>
-            </coding>
-          </valueCodeableConcept>
-        </extension>
-        <text value="A code indicating why the administration was not performed."/>
-        <type value="display"/>
-      </item>
-      <item>
-        <linkId value="MedicationAdministration.statusReason.coding"/>
-        <text value="code:"/>
-        <type value="open-choice"/>
-        <required value="false"/>
-        <repeats value="false"/>
-      </item>
-      <item>
-        <linkId value="MedicationAdministration.statusReason.text"/>
-        <text value="text:"/>
-        <type value="string"/>
-        <required value="false"/>
-        <repeats value="false"/>
       </item>
     </item>
     <item>
@@ -1164,7 +1161,7 @@
         </item>
         <item>
           <linkId value="MedicationAdministration.dosage.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -1192,7 +1189,7 @@
       </item>
       <item>
         <linkId value="MedicationAdministration.dosage.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -1206,7 +1203,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>
@@ -1442,7 +1439,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="Identifies the speed with which the medication was or will be introduced into the patient.  Typically the rate for an infusion e.g. 100 ml per 1 hour or 100 ml/hr.  May also be expressed as a rate per unit of time e.g. 500 ml per 2 hours.  Other examples:  200 mcg/min or 200 mcg/1 minute; 1 liter/8 hours. If the rate changes over time, and you want to capture this in MedicationAdministration, then each change should be captured as a distinct MedicationAdministration, with a specific MedicationAdministration.dosage.rate, and the date time when the rate change occurred. Typically, the MedicationAdministration.dosage.rate element is not used to convey an average rate."/>
+          <text value="Identifies the speed with which the medication was or will be introduced into the patient.  Typically the rate for an infusion e.g. 100 ml per 1 hour or 100 ml/hr.  May also be expressed as a rate per unit of time, e.g. 500 ml per 2 hours.  Other examples:  200 mcg/min or 200 mcg/1 minute; 1 liter/8 hours. If the rate changes over time, and you want to capture this in MedicationAdministration, then each change should be captured as a distinct MedicationAdministration, with a specific MedicationAdministration.dosage.rate, and the date time when the rate change occurred. Typically, the MedicationAdministration.dosage.rate element is not used to convey an average rate."/>
           <type value="display"/>
         </item>
         <item>

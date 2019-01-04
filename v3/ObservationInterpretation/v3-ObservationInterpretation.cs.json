@@ -10,7 +10,7 @@
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-    "valueString" : "Normative"
+    "valueCode" : "normative"
   },
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
@@ -19,6 +19,10 @@
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
     "valueCode" : "oo"
+  },
+  {
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
+    "valueCode" : "4.0.0"
   }],
   "url" : "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
   "identifier" : [{
@@ -60,6 +64,12 @@
     "uri" : "http://hl7.org/fhir/concept-properties#deprecationDate",
     "description" : "The date at which a concept was deprecated. Concepts that are deprecated but not inactive can still be used, but their use is discouraged",
     "type" : "dateTime"
+  },
+  {
+    "code" : "child",
+    "uri" : "http://hl7.org/fhir/concept-properties#child",
+    "description" : "The concept identified in this property is a child of the concept on which it is a property. The property type will be 'code'. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute",
+    "type" : "code"
   }],
   "concept" : [{
     "code" : "_GeneticObservationInterpretation",
@@ -212,10 +222,6 @@
         "display" : "High",
         "definition" : "The result for a quantitative observation is above the upper limit of the reference range (as defined for the respective test procedure).\r\n\n                        Synonym: Above high normal",
         "concept" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "HH"
-          }],
           "code" : "H>",
           "display" : "Significantly high",
           "definition" : "A test result that is significantly higher than the reference (normal) or therapeutic interval, but has not reached the critically high value and might need special attention, as defined by the laboratory or the clinician.[Note: This level is situated between 'H' and 'HH'.]\r\n\n                        \n                           Deprecation Comment: The code 'H>' is being deprecated in order to align with the use of the code 'HU' for \"Very high\" in V2 Table 0078 \"Interpretation Codes\".\r\n\n                        [Note: The use of code 'H>' is non-preferred, as this code is deprecated and on track to be retired; use code 'HU' instead.",
@@ -226,16 +232,20 @@
           {
             "code" : "deprecationDate",
             "valueDateTime" : "2015-03-23"
+          },
+          {
+            "code" : "child",
+            "valueCode" : "HH"
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "HH"
-          }],
           "code" : "HU",
           "display" : "Significantly high",
-          "definition" : "A test result that is significantly higher than the reference (normal) or therapeutic interval, but has not reached the critically high value and might need special attention, as defined by the laboratory or the clinician."
+          "definition" : "A test result that is significantly higher than the reference (normal) or therapeutic interval, but has not reached the critically high value and might need special attention, as defined by the laboratory or the clinician.",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "HH"
+          }]
         }]
       },
       {
@@ -243,10 +253,6 @@
         "display" : "Low",
         "definition" : "The result for a quantitative observation is below the lower limit of the reference range (as defined for the respective test procedure).\r\n\n                        Synonym: Below low normal",
         "concept" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "LL"
-          }],
           "code" : "L<",
           "display" : "Significantly low",
           "definition" : "A test result that is significantly lower than the reference (normal) or therapeutic interval, but has not reached the critically low value and might need special attention, as defined by the laboratory or the clinician.[Note: This level is situated between 'L' and 'LL'.]\r\n\n                        \n                           Deprecation Comment: The code 'L<' is being deprecated in order to align with the use of the code 'LU' for \"Very low\" in V2 Table 0078 \"Interpretation Codes\".\r\n\n                        [Note: The use of code 'L<' is non-preferred, as this code is deprecated and on track to be retired; use code 'LU' instead.",
@@ -257,16 +263,20 @@
           {
             "code" : "deprecationDate",
             "valueDateTime" : "2015-03-23"
+          },
+          {
+            "code" : "child",
+            "valueCode" : "LL"
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "LL"
-          }],
           "code" : "LU",
           "display" : "Significantly low",
-          "definition" : "A test result that is significantly lower than the reference (normal) or therapeutic interval, but has not reached the critically low value and might need special attention, as defined by the laboratory or the clinician."
+          "definition" : "A test result that is significantly lower than the reference (normal) or therapeutic interval, but has not reached the critically low value and might need special attention, as defined by the laboratory or the clinician.",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "LL"
+          }]
         }]
       }]
     },
@@ -277,16 +287,16 @@
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "IE"
-    }],
     "code" : "_ObservationInterpretationSusceptibility",
     "display" : "ObservationInterpretationSusceptibility",
     "definition" : "Interpretations of anti-microbial susceptibility testing results (microbiology). At most one allowed.",
     "property" : [{
       "code" : "notSelectable",
       "valueBoolean" : true
+    },
+    {
+      "code" : "child",
+      "valueCode" : "IE"
     }],
     "concept" : [{
       "code" : "I",

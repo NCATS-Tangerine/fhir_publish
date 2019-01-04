@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type MedicinalProductAuthorization {
   id: ID
@@ -13,7 +13,6 @@ type MedicinalProductAuthorization {
   subject: Reference
   country: [CodeableConcept]
   jurisdiction: [CodeableConcept]
-  legalStatusOfSupply: CodeableConcept
   status: CodeableConcept
   statusDate: dateTime  _statusDate: ElementBase
   restoreDate: dateTime  _restoreDate: ElementBase
@@ -63,7 +62,6 @@ input MedicinalProductAuthorization {
   subject: Reference
   country: [CodeableConcept]
   jurisdiction: [CodeableConcept]
-  legalStatusOfSupply: CodeableConcept
   status: CodeableConcept
   statusDate: dateTime  _statusDate: ElementBase
   restoreDate: dateTime  _restoreDate: ElementBase
@@ -106,6 +104,10 @@ type MedicinalProductAuthorizationReadType {
 
 type MedicinalProductAuthorizationListType {
   MedicinalProductAuthorizationList(_filter : String
+    country : [token]
+    holder : [reference]
+    identifier : [token]
+    status : [token]
     subject : [reference]
     _text : [String]
     _content : [String]
@@ -123,6 +125,10 @@ type MedicinalProductAuthorizationListType {
 
 type MedicinalProductAuthorizationConnectionType {
   MedicinalProductAuthorizationConection(_filter : String
+    country : [token]
+    holder : [reference]
+    identifier : [token]
+    status : [token]
     subject : [reference]
     _text : [String]
     _content : [String]

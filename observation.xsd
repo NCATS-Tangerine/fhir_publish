@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -139,9 +139,9 @@
               <xs:documentation xml:lang="en">A categorical assessment of an observation value.  For example, high, low, normal.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="comment" minOccurs="0" maxOccurs="1" type="string">
+          <xs:element name="note" minOccurs="0" maxOccurs="unbounded" type="Annotation">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Comments about the test result value may include statements about significant, unexpected or unreliable results values, or information about the its source when this is relevant to its interpretation.</xs:documentation>
+              <xs:documentation xml:lang="en">Comments about the observation or the results.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="bodySite" minOccurs="0" maxOccurs="1" type="CodeableConcept">
@@ -166,7 +166,7 @@
           </xs:element>
           <xs:element name="referenceRange" type="Observation.ReferenceRange" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Guidance on how to interpret the value by comparison to a normal or recommended range.</xs:documentation>
+              <xs:documentation xml:lang="en">Guidance on how to interpret the value by comparison to a normal or recommended range.  Multiple reference ranges are interpreted as an &quot;OR&quot;.   In other words, to represent two distinct target populations, two `referenceRange` elements would be used.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="hasMember" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -212,7 +212,7 @@
           </xs:element>
           <xs:element name="appliesTo" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Codes to indicate the target population this reference range applies to.  For example, a reference range may be based on the normal population or a particular sex or race.</xs:documentation>
+              <xs:documentation xml:lang="en">Codes to indicate the target population this reference range applies to.  For example, a reference range may be based on the normal population or a particular sex or race.  Multiple `appliesTo`  are interpreted as an &quot;AND&quot; of the target populations.  For example, to represent a target population of African American females, both a code of female and a code for African American would be used.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="age" minOccurs="0" maxOccurs="1" type="Range">

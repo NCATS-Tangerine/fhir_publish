@@ -5,8 +5,9 @@
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
+  <version value="3.6.0"/>
   <status value="draft"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="Health Level Seven International (Structured Documents)"/>
   <item>
     <linkId value="DocumentManifest"/>
@@ -191,7 +192,7 @@
     </item>
     <item>
       <linkId value="DocumentManifest.extension"/>
-      <text value="Additional Content defined by implementations"/>
+      <text value="Additional content defined by implementations"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -225,7 +226,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+        <text value="May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
         <type value="display"/>
       </item>
     </item>
@@ -466,15 +467,13 @@
       </item>
     </item>
     <item>
-      <linkId value="DocumentManifest.agent"/>
-      <text value="Agent involved"/>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="Reference"/>
+      </extension>
+      <linkId value="DocumentManifest.author"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
-      <item>
-        <text value="Several agents may be associated with the manifest."/>
-        <type value="display"/>
-      </item>
       <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
           <valueCodeableConcept>
@@ -485,161 +484,21 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="An actor taking an active role in the manifest."/>
+        <text value="Identifies who is the author of the manifest. Manifest author is not necessarly the author of the references included. Not necessarily who did the actual data entry (i.e. typist) or who was the source (informant)."/>
         <type value="display"/>
       </item>
       <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-          <valueInteger value="1"/>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+          <valueCode value="Practitioner, PractitionerRole, Organization, Device, Patient, RelatedPerson"/>
         </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="string"/>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
         </extension>
-        <linkId value="DocumentManifest.agent.id"/>
-        <type value="group"/>
+        <linkId value="DocumentManifest.author.value"/>
+        <text value="Who and/or what authored the DocumentManifest"/>
+        <type value="reference"/>
         <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-          <type value="display"/>
-        </item>
-        <item>
-          <linkId value="DocumentManifest.agent.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
-          <type value="string"/>
-          <required value="false"/>
-          <repeats value="false"/>
-        </item>
-      </item>
-      <item>
-        <linkId value="DocumentManifest.agent.extension"/>
-        <text value="Additional content defined by implementations"/>
-        <type value="group"/>
-        <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-          <type value="display"/>
-        </item>
-      </item>
-      <item>
-        <linkId value="DocumentManifest.agent.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
-        <type value="group"/>
-        <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-          <type value="display"/>
-        </item>
-      </item>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-          <valueInteger value="1"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="CodeableConcept"/>
-        </extension>
-        <linkId value="DocumentManifest.agent.type"/>
-        <text value="How agent participated"/>
-        <type value="group"/>
-        <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="Specification of the participation type the agent played."/>
-          <type value="display"/>
-        </item>
-        <item>
-          <linkId value="DocumentManifest.agent.type.coding"/>
-          <text value="code:"/>
-          <type value="open-choice"/>
-          <required value="false"/>
-          <repeats value="false"/>
-        </item>
-        <item>
-          <linkId value="DocumentManifest.agent.type.text"/>
-          <text value="text:"/>
-          <type value="string"/>
-          <required value="false"/>
-          <repeats value="false"/>
-        </item>
-      </item>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-          <valueInteger value="1"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-          <valueInteger value="1"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="Reference"/>
-        </extension>
-        <linkId value="DocumentManifest.agent.who"/>
-        <type value="group"/>
-        <required value="true"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="Identifies who is the agent. Such as the author of the manifest, and adding  documents to it. Not necessarily who did the actual data entry (i.e. typist) or who was the source (informant)."/>
-          <type value="display"/>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-            <valueCode value="Practitioner, PractitionerRole, Organization, Device, Patient, RelatedPerson"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-            <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-          </extension>
-          <linkId value="DocumentManifest.agent.who.value"/>
-          <text value="Who and/or what had an agent participation"/>
-          <type value="reference"/>
-          <required value="false"/>
-          <repeats value="false"/>
-        </item>
+        <repeats value="false"/>
       </item>
     </item>
     <item>
@@ -828,7 +687,7 @@
         </item>
         <item>
           <linkId value="DocumentManifest.related.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -856,7 +715,7 @@
       </item>
       <item>
         <linkId value="DocumentManifest.related.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -870,7 +729,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>

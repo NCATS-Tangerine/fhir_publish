@@ -10,7 +10,7 @@
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-    "valueString" : "External"
+    "valueCode" : "external"
   },
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
@@ -44,6 +44,12 @@
     "uri" : "http://hl7.org/fhir/concept-properties#notSelectable",
     "description" : "Indicates that the code is abstract - only intended to be used as a selector for other concepts",
     "type" : "boolean"
+  },
+  {
+    "code" : "child",
+    "uri" : "http://hl7.org/fhir/concept-properties#child",
+    "description" : "The concept identified in this property is a child of the concept on which it is a property. The property type will be 'code'. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute",
+    "type" : "code"
   }],
   "concept" : [{
     "code" : "_ContextControlAdditive",
@@ -65,16 +71,16 @@
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "AN"
-    }],
     "code" : "_ContextControlNonPropagating",
     "display" : "ContextControlNonPropagating",
     "definition" : "The association applies only to the current Act and will not propagate to any child Acts that are related via a conducting ActRelationship (refer to contextConductionInd).",
     "property" : [{
       "code" : "notSelectable",
       "valueBoolean" : true
+    },
+    {
+      "code" : "child",
+      "valueCode" : "AN"
     }],
     "concept" : [{
       "code" : "ON",
@@ -83,16 +89,16 @@
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "ON"
-    }],
     "code" : "_ContextControlOverriding",
     "display" : "ContextControlOverriding",
     "definition" : "The association adds to the existing context associated with the Act, but replaces associations propagated from ancestor Acts whose typeCodes are the same or more specific.",
     "property" : [{
       "code" : "notSelectable",
       "valueBoolean" : true
+    },
+    {
+      "code" : "child",
+      "valueCode" : "ON"
     }],
     "concept" : [{
       "code" : "OP",
@@ -101,20 +107,20 @@
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "AP"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "OP"
-    }],
     "code" : "_ContextControlPropagating",
     "display" : "ContextControlPropagating",
     "definition" : "The association propagates to any child Acts that are related via a conducting ActRelationship (refer to contextConductionInd).",
     "property" : [{
       "code" : "notSelectable",
       "valueBoolean" : true
+    },
+    {
+      "code" : "child",
+      "valueCode" : "AP"
+    },
+    {
+      "code" : "child",
+      "valueCode" : "OP"
     }]
   }]
 }

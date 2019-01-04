@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type PaymentReconciliation {
   id: ID
@@ -13,14 +13,16 @@ type PaymentReconciliation {
   status: code  _status: ElementBase
   period: Period
   created: dateTime  _created: ElementBase
-  organization: Reference
+  paymentIssuer: Reference
   request: Reference
+  requestor: Reference
   outcome: code  _outcome: ElementBase
   disposition: String  _disposition: ElementBase
-  requestProvider: Reference
+  paymentDate: date  _paymentDate: ElementBase
+  paymentAmount: Money!
+  paymentIdentifier: Identifier
   detail: [PaymentReconciliationDetail]
-  form: CodeableConcept
-  total: Money
+  formCode: CodeableConcept
   processNote: [PaymentReconciliationProcessNote]
 }
 
@@ -28,12 +30,15 @@ type PaymentReconciliationDetail {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
+  identifier: Identifier
+  predecessor: Identifier
   type: CodeableConcept!
   request: Reference
-  response: Reference
   submitter: Reference
-  payee: Reference
+  response: Reference
   date: date  _date: ElementBase
+  responsible: Reference
+  payee: Reference
   amount: Money
 }
 
@@ -58,14 +63,16 @@ input PaymentReconciliation {
   status: code  _status: ElementBase
   period: Period
   created: dateTime  _created: ElementBase
-  organization: Reference
+  paymentIssuer: Reference
   request: Reference
+  requestor: Reference
   outcome: code  _outcome: ElementBase
   disposition: String  _disposition: ElementBase
-  requestProvider: Reference
+  paymentDate: date  _paymentDate: ElementBase
+  paymentAmount: Money!
+  paymentIdentifier: Identifier
   detail: [PaymentReconciliationDetail]
-  form: CodeableConcept
-  total: Money
+  formCode: CodeableConcept
   processNote: [PaymentReconciliationProcessNote]
 }
 
@@ -73,12 +80,15 @@ input PaymentReconciliationDetail {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
+  identifier: Identifier
+  predecessor: Identifier
   type: CodeableConcept!
   request: Reference
-  response: Reference
   submitter: Reference
-  payee: Reference
+  response: Reference
   date: date  _date: ElementBase
+  responsible: Reference
+  payee: Reference
   amount: Money
 }
 
@@ -99,10 +109,10 @@ type PaymentReconciliationListType {
     created : [date]
     disposition : [String]
     identifier : [token]
-    organization : [reference]
     outcome : [token]
+    payment_issuer : [reference]
     request : [reference]
-    request_provider : [reference]
+    requestor : [reference]
     status : [token]
     _text : [String]
     _content : [String]
@@ -123,10 +133,10 @@ type PaymentReconciliationConnectionType {
     created : [date]
     disposition : [String]
     identifier : [token]
-    organization : [reference]
     outcome : [token]
+    payment_issuer : [reference]
     request : [reference]
-    request_provider : [reference]
+    requestor : [reference]
     status : [token]
     _text : [String]
     _content : [String]

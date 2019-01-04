@@ -1,11 +1,48 @@
 {
   "resourceType" : "Questionnaire",
   "id" : "qs1",
+  "contained" : [{
+    "resourceType" : "ValueSet",
+    "id" : "vs2",
+    "name" : "Type options for MedicinalProductInteraction.interactant.item[x]",
+    "status" : "active",
+    "description" : "Type options for MedicinalProductInteraction.interactant.item[x]",
+    "expansion" : {
+      "identifier" : "urn:uuid:728bdea0-8fbb-4c2d-a35c-7d00965e05b6",
+      "timestamp" : "2018-12-13T14:27:07-06:00",
+      "contains" : [{
+        "system" : "http://hl7.org/fhir/resource-types",
+        "code" : "MedicinalProduct",
+        "display" : "MedicinalProduct"
+      },
+      {
+        "system" : "http://hl7.org/fhir/resource-types",
+        "code" : "Medication",
+        "display" : "Medication"
+      },
+      {
+        "system" : "http://hl7.org/fhir/resource-types",
+        "code" : "Substance",
+        "display" : "Substance"
+      },
+      {
+        "system" : "http://hl7.org/fhir/resource-types",
+        "code" : "ObservationDefinition",
+        "display" : "ObservationDefinition"
+      },
+      {
+        "system" : "http://hl7.org/fhir/data-types",
+        "code" : "CodeableConcept",
+        "display" : "CodeableConcept"
+      }]
+    }
+  }],
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
+  "version" : "3.6.0",
   "status" : "draft",
-  "date" : "2018-09-14T07:16:19-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "Health Level Seven International (Biomedical Research and Regulation)",
   "item" : [{
     "linkId" : "MedicinalProductInteraction",
@@ -205,7 +242,7 @@
     },
     {
       "linkId" : "MedicinalProductInteraction.extension",
-      "text" : "Additional Content defined by implementations",
+      "text" : "Additional content defined by implementations",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -241,7 +278,7 @@
             }]
           }
         }],
-        "text" : "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "text" : "May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
         "type" : "display"
       }]
     },
@@ -265,20 +302,20 @@
             }]
           }
         }],
-        "text" : "The medication for which this is an indication.",
+        "text" : "The medication for which this is a described interaction.",
         "type" : "display"
       },
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "MedicinalProduct, Medication"
+          "valueCode" : "MedicinalProduct, Medication, Substance"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
         "linkId" : "MedicinalProductInteraction.subject.value",
-        "text" : "The medication for which this is an indication",
+        "text" : "The medication for which this is a described interaction",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -293,7 +330,7 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "string"
       }],
-      "linkId" : "MedicinalProductInteraction.interaction",
+      "linkId" : "MedicinalProductInteraction.description",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -312,7 +349,7 @@
         "type" : "display"
       },
       {
-        "linkId" : "MedicinalProductInteraction.interaction.value",
+        "linkId" : "MedicinalProductInteraction.description.value",
         "text" : "The interaction described",
         "type" : "string",
         "required" : false,
@@ -320,10 +357,6 @@
       }]
     },
     {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "CodeableConcept"
-      }],
       "linkId" : "MedicinalProductInteraction.interactant",
       "text" : "The specific medication, food or laboratory test that interacts",
       "type" : "group",
@@ -344,18 +377,162 @@
         "type" : "display"
       },
       {
-        "linkId" : "MedicinalProductInteraction.interactant.coding",
-        "text" : "code:",
-        "type" : "open-choice",
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+          "valueInteger" : 1
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+          "valueString" : "string"
+        }],
+        "linkId" : "MedicinalProductInteraction.interactant.id",
+        "type" : "group",
         "required" : false,
-        "repeats" : false
+        "repeats" : true,
+        "item" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+            "valueCodeableConcept" : {
+              "coding" : [{
+                "system" : "http://hl7.org/fhir/questionnaire-item-control",
+                "code" : "flyover",
+                "display" : "Fly-over"
+              }]
+            }
+          }],
+          "text" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+          "type" : "display"
+        },
+        {
+          "linkId" : "MedicinalProductInteraction.interactant.id.value",
+          "text" : "Unique id for inter-element referencing",
+          "type" : "string",
+          "required" : false,
+          "repeats" : false
+        }]
       },
       {
-        "linkId" : "MedicinalProductInteraction.interactant.text",
-        "text" : "text:",
-        "type" : "string",
+        "linkId" : "MedicinalProductInteraction.interactant.extension",
+        "text" : "Additional content defined by implementations",
+        "type" : "group",
         "required" : false,
-        "repeats" : false
+        "repeats" : true,
+        "item" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+            "valueCodeableConcept" : {
+              "coding" : [{
+                "system" : "http://hl7.org/fhir/questionnaire-item-control",
+                "code" : "flyover",
+                "display" : "Fly-over"
+              }]
+            }
+          }],
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "type" : "display"
+        }]
+      },
+      {
+        "linkId" : "MedicinalProductInteraction.interactant.modifierExtension",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
+        "type" : "group",
+        "required" : false,
+        "repeats" : true,
+        "item" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+            "valueCodeableConcept" : {
+              "coding" : [{
+                "system" : "http://hl7.org/fhir/questionnaire-item-control",
+                "code" : "flyover",
+                "display" : "Fly-over"
+              }]
+            }
+          }],
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "type" : "display"
+        }]
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+          "valueInteger" : 1
+        },
+        {
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+          "valueInteger" : 1
+        }],
+        "linkId" : "MedicinalProductInteraction.interactant.item[x]",
+        "text" : "The specific medication, food or laboratory test that interacts",
+        "type" : "group",
+        "required" : true,
+        "repeats" : true,
+        "item" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+            "valueCodeableConcept" : {
+              "coding" : [{
+                "system" : "http://hl7.org/fhir/questionnaire-item-control",
+                "code" : "flyover",
+                "display" : "Fly-over"
+              }]
+            }
+          }],
+          "text" : "The specific medication, food or laboratory test that interacts.",
+          "type" : "display"
+        },
+        {
+          "linkId" : "MedicinalProductInteraction.interactant.item[x]._type",
+          "text" : "type",
+          "type" : "choice",
+          "required" : false,
+          "repeats" : false,
+          "answerValueSet" : "#vs2",
+          "item" : [{
+            "extension" : [{
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+              "valueString" : "Reference"
+            }],
+            "linkId" : "MedicinalProductInteraction.interactant.item[x]._null",
+            "type" : "group",
+            "item" : [{
+              "extension" : [{
+                "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
+                "valueCode" : "MedicinalProduct, Medication, Substance, ObservationDefinition"
+              },
+              {
+                "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
+                "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
+              }],
+              "linkId" : "MedicinalProductInteraction.interactant.item[x]._null.value",
+              "type" : "reference",
+              "required" : false,
+              "repeats" : false
+            }]
+          },
+          {
+            "extension" : [{
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+              "valueString" : "CodeableConcept"
+            }],
+            "linkId" : "MedicinalProductInteraction.interactant.item[x]._null",
+            "type" : "group",
+            "item" : [{
+              "linkId" : "MedicinalProductInteraction.interactant.item[x]._null.coding",
+              "text" : "code:",
+              "type" : "open-choice",
+              "required" : false,
+              "repeats" : false
+            },
+            {
+              "linkId" : "MedicinalProductInteraction.interactant.item[x]._null.text",
+              "text" : "text:",
+              "type" : "string",
+              "required" : false,
+              "repeats" : false
+            }]
+          }]
+        }]
       }]
     },
     {
@@ -368,7 +545,7 @@
         "valueString" : "CodeableConcept"
       }],
       "linkId" : "MedicinalProductInteraction.type",
-      "text" : "The type of the interaction",
+      "text" : "The type of the interaction e.g. drug-drug interaction, drug-food interaction, drug-lab test interaction",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -383,7 +560,7 @@
             }]
           }
         }],
-        "text" : "The type of the interaction.",
+        "text" : "The type of the interaction e.g. drug-drug interaction, drug-food interaction, drug-lab test interaction.",
         "type" : "display"
       },
       {
@@ -411,7 +588,7 @@
         "valueString" : "CodeableConcept"
       }],
       "linkId" : "MedicinalProductInteraction.effect",
-      "text" : "The effect of the interaction",
+      "text" : "The effect of the interaction, for example \"reduced gastric absorption of primary medication\"",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -426,7 +603,7 @@
             }]
           }
         }],
-        "text" : "The effect of the interaction.",
+        "text" : "The effect of the interaction, for example \"reduced gastric absorption of primary medication\".",
         "type" : "display"
       },
       {
@@ -454,7 +631,7 @@
         "valueString" : "CodeableConcept"
       }],
       "linkId" : "MedicinalProductInteraction.incidence",
-      "text" : "The incidence of the interaction",
+      "text" : "The incidence of the interaction, e.g. theoretical, observed",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -469,7 +646,7 @@
             }]
           }
         }],
-        "text" : "The incidence of the interaction.",
+        "text" : "The incidence of the interaction, e.g. theoretical, observed.",
         "type" : "display"
       },
       {

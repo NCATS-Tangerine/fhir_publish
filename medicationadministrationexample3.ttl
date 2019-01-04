@@ -11,7 +11,7 @@
   fhir:Resource.id [ fhir:value "medadminexample03"];
   fhir:DomainResource.text [
      fhir:Narrative.status [ fhir:value "generated" ];
-     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: medadminexample03</p><p><b>contained</b>: </p><p><b>status</b>: on-hold</p><p><b>medication</b>: id: med0303; Alemtuzumab 10mg/ml (Lemtrada) <span>(Details : {RxNorm code '1594660' = 'alemtuzumab 10 MG/ML [Lemtrada]', given as 'Alemtuzumab 10mg/ml (Lemtrada)'})</span></p><p><b>subject</b>: <a>Donald Duck</a></p><p><b>context</b>: <a>Encounter/f001</a></p><p><b>supportingInformation</b>: <a>Condition/f204</a></p><p><b>effective</b>: Jan 15, 2015, 2:30:00 PM --&gt; Jan 15, 2015, 2:30:00 PM</p><p><b>statusReason</b>: Administration of medication not done due to a contraindication (situation) <span>(Details : {SNOMED CT code '373147003' = 'Medication not administered because contraindicated', given as 'Administration of medication not done due to a contraindication (situation)'})</span></p><p><b>request</b>: <a>MedicationRequest/medrx0317</a></p><p><b>note</b>: Patient started Bupropion this morning - will administer in a reduced dose tomorrow</p></div>"
+     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: medadminexample03</p><p><b>contained</b>: </p><p><b>status</b>: on-hold</p><p><b>statusReason</b>: Administration of medication not done due to a contraindication (situation) <span>(Details : {SNOMED CT code '373147003' = 'Medication not administered because contraindicated', given as 'Administration of medication not done due to a contraindication (situation)'})</span></p><p><b>medication</b>: id: med0303; Alemtuzumab 10mg/ml (Lemtrada) <span>(Details : {RxNorm code '1594660' = 'alemtuzumab 10 MG/ML [Lemtrada]', given as 'Alemtuzumab 10mg/ml (Lemtrada)'})</span></p><p><b>subject</b>: <a>Donald Duck</a></p><p><b>context</b>: <a>Encounter/f001</a></p><p><b>supportingInformation</b>: <a>Condition/f204</a></p><p><b>effective</b>: Jan 15, 2015, 2:30:00 PM --&gt; Jan 15, 2015, 2:30:00 PM</p><p><b>request</b>: <a>MedicationRequest/medrx0317</a></p><p><b>note</b>: Patient started Bupropion this morning - will administer in a reduced dose tomorrow</p></div>"
   ];
   fhir:DomainResource.contained [
      a fhir:Medication;
@@ -27,6 +27,16 @@
      ]
   ];
   fhir:MedicationAdministration.status [ fhir:value "on-hold"];
+  fhir:MedicationAdministration.statusReason [
+     fhir:index 0;
+     fhir:CodeableConcept.coding [
+       fhir:index 0;
+       a sct:373147003;
+       fhir:Coding.system [ fhir:value "http://snomed.info/sct" ];
+       fhir:Coding.code [ fhir:value "373147003" ];
+       fhir:Coding.display [ fhir:value "Administration of medication not done due to a contraindication (situation)" ]
+     ]
+  ];
   fhir:MedicationAdministration.medicationReference [
      fhir:Reference.reference [ fhir:value "#med0303" ]
   ];
@@ -47,16 +57,6 @@
   fhir:MedicationAdministration.effectivePeriod [
      fhir:Period.start [ fhir:value "2015-01-15T14:30:00+01:00"^^xsd:dateTime ];
      fhir:Period.end [ fhir:value "2015-01-15T14:30:00+01:00"^^xsd:dateTime ]
-  ];
-  fhir:MedicationAdministration.statusReason [
-     fhir:index 0;
-     fhir:CodeableConcept.coding [
-       fhir:index 0;
-       a sct:373147003;
-       fhir:Coding.system [ fhir:value "http://snomed.info/sct" ];
-       fhir:Coding.code [ fhir:value "373147003" ];
-       fhir:Coding.display [ fhir:value "Administration of medication not done due to a contraindication (situation)" ]
-     ]
   ];
   fhir:MedicationAdministration.request [
      fhir:link <http://hl7.org/fhir/MedicationRequest/medrx0317>;

@@ -4,8 +4,9 @@
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
+  "version" : "3.6.0",
   "status" : "draft",
-  "date" : "2018-09-14T07:16:19-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "Health Level Seven International (Patient Administration)",
   "item" : [{
     "linkId" : "Appointment",
@@ -205,7 +206,7 @@
     },
     {
       "linkId" : "Appointment.extension",
-      "text" : "Additional Content defined by implementations",
+      "text" : "Additional content defined by implementations",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -241,7 +242,7 @@
             }]
           }
         }],
-        "text" : "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "text" : "May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
         "type" : "display"
       }]
     },
@@ -326,6 +327,49 @@
         "linkId" : "Appointment.status.value",
         "text" : "status",
         "type" : "choice",
+        "required" : false,
+        "repeats" : false
+      }]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "CodeableConcept"
+      }],
+      "linkId" : "Appointment.cancelationReason",
+      "text" : "The coded reason for the appointment being cancelled",
+      "type" : "group",
+      "required" : false,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "The coded reason for the appointment being cancelled. This is often used in reporting/billing/futher processing to determine if further actions are required, or specific fees apply.",
+        "type" : "display"
+      },
+      {
+        "linkId" : "Appointment.cancelationReason.coding",
+        "text" : "code:",
+        "type" : "open-choice",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "Appointment.cancelationReason.text",
+        "text" : "text:",
+        "type" : "string",
         "required" : false,
         "repeats" : false
       }]
@@ -495,8 +539,8 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "CodeableConcept"
       }],
-      "linkId" : "Appointment.reason",
-      "text" : "Reason this appointment is scheduled",
+      "linkId" : "Appointment.reasonCode",
+      "text" : "Coded reason this appointment is scheduled",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -511,18 +555,18 @@
             }]
           }
         }],
-        "text" : "The reason that this appointment is being scheduled. This is more clinical than administrative.",
+        "text" : "The coded reason that this appointment is being scheduled. This is more clinical than administrative.",
         "type" : "display"
       },
       {
-        "linkId" : "Appointment.reason.coding",
+        "linkId" : "Appointment.reasonCode.coding",
         "text" : "code:",
         "type" : "open-choice",
         "required" : false,
         "repeats" : false
       },
       {
-        "linkId" : "Appointment.reason.text",
+        "linkId" : "Appointment.reasonCode.text",
         "text" : "text:",
         "type" : "string",
         "required" : false,
@@ -534,7 +578,7 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "Reference"
       }],
-      "linkId" : "Appointment.indication",
+      "linkId" : "Appointment.reasonReference",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -555,14 +599,14 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "Condition, Procedure"
+          "valueCode" : "Condition, Procedure, Observation, ImmunizationRecommendation"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
-        "linkId" : "Appointment.indication.value",
-        "text" : "Reason the appointment is to takes place (resource)",
+        "linkId" : "Appointment.reasonReference.value",
+        "text" : "Reason the appointment is to take place (resource)",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -1018,7 +1062,7 @@
         },
         {
           "linkId" : "Appointment.participant.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -1047,7 +1091,7 @@
       },
       {
         "linkId" : "Appointment.participant.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1062,7 +1106,7 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
@@ -1135,7 +1179,7 @@
         {
           "extension" : [{
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-            "valueCode" : "Patient, Practitioner, RelatedPerson, Device, HealthcareService, Location"
+            "valueCode" : "Patient, Practitioner, PractitionerRole, RelatedPerson, Device, HealthcareService, Location"
           },
           {
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
@@ -1287,7 +1331,7 @@
             }]
           }
         }],
-        "text" : "A set of date ranges (potentially including times) that the appointment is preferred to be scheduled within. When using these values, the duration (usually in minutes) should be provided to indicate the length of the appointment to fill and populate the start/end times for the actual allocated time. This does not introduce a capacity for recurring appointments.",
+        "text" : "A set of date ranges (potentially including times) that the appointment is preferred to be scheduled within.\n\nThe duration (usually in minutes) could also be provided to indicate the length of the appointment to fill and populate the start/end times for the actual allocated time. However in other situations the duration may be calculated by the scheduling system. This does not introduce a capacity for recurring appointments.",
         "type" : "display"
       },
       {

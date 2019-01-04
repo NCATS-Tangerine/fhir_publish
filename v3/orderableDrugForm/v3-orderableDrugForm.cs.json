@@ -10,7 +10,7 @@
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-    "valueString" : "External"
+    "valueCode" : "external"
   },
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
@@ -44,6 +44,12 @@
     "uri" : "http://hl7.org/fhir/concept-properties#notSelectable",
     "description" : "Indicates that the code is abstract - only intended to be used as a selector for other concepts",
     "type" : "boolean"
+  },
+  {
+    "code" : "child",
+    "uri" : "http://hl7.org/fhir/concept-properties#child",
+    "description" : "The concept identified in this property is a child of the concept on which it is a property. The property type will be 'code'. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute",
+    "type" : "code"
   },
   {
     "code" : "status",
@@ -284,13 +290,13 @@
         }]
       },
       {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-          "valueCode" : "DROP"
-        }],
         "code" : "SOL",
         "display" : "Solution",
         "definition" : "A liquid preparation that contains one or more chemical substances dissolved, i.e., molecularly dispersed, in a suitable solvent or mixture of mutually miscible solvents.",
+        "property" : [{
+          "code" : "child",
+          "valueCode" : "DROP"
+        }],
         "concept" : [{
           "code" : "IPSOL",
           "display" : "Intraperitoneal Solution",
@@ -322,13 +328,13 @@
           "definition" : "Intravenous Solution"
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "ORDROP"
-          }],
           "code" : "ORALSOL",
           "display" : "Oral Solution",
           "definition" : "Oral Solution",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "ORDROP"
+          }],
           "concept" : [{
             "code" : "ELIXIR",
             "display" : "Elixir",
@@ -736,13 +742,13 @@
               }]
             },
             {
-              "extension" : [{
-                "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-                "valueCode" : "ERENTCAP"
-              }],
               "code" : "ERCAP",
               "display" : "Extended Release Capsule",
               "definition" : "A solid dosage form in which the drug is enclosed within either a hard or soft soluble container made from a suitable form of gelatin, and which releases a drug (or drugs) in such a manner to allow a reduction in dosing frequency as compared to that drug (or drugs) presented as a conventional dosage form.",
+              "property" : [{
+                "code" : "child",
+                "valueCode" : "ERENTCAP"
+              }],
               "concept" : [{
                 "code" : "ERCAP12",
                 "display" : "12 Hour Extended Release Capsule",
@@ -819,13 +825,13 @@
               }]
             },
             {
-              "extension" : [{
-                "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-                "valueCode" : "ERECTAB"
-              }],
               "code" : "ERTAB",
               "display" : "Extended Release Tablet",
               "definition" : "A solid dosage form containing a drug which allows at least a reduction in dosing frequency as compared to that drug presented in conventional dosage form.",
+              "property" : [{
+                "code" : "child",
+                "valueCode" : "ERECTAB"
+              }],
               "concept" : [{
                 "code" : "ERTAB12",
                 "display" : "12 Hour Extended Release Tablet",

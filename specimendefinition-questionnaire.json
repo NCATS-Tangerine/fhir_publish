@@ -4,12 +4,33 @@
   "contained" : [{
     "resourceType" : "ValueSet",
     "id" : "vs2",
+    "name" : "Type options for SpecimenDefinition.typeTested.container.minimumVolume[x]",
+    "status" : "active",
+    "description" : "Type options for SpecimenDefinition.typeTested.container.minimumVolume[x]",
+    "expansion" : {
+      "identifier" : "urn:uuid:b42e7cda-fe3c-4b4b-8d28-d93eecb7dbe7",
+      "timestamp" : "2018-12-13T14:27:33-06:00",
+      "contains" : [{
+        "system" : "http://hl7.org/fhir/resource-types",
+        "code" : "http://hl7.org/fhir/StructureDefinition/SimpleQuantity",
+        "display" : "Quantity"
+      },
+      {
+        "system" : "http://hl7.org/fhir/data-types",
+        "code" : "string",
+        "display" : "string"
+      }]
+    }
+  },
+  {
+    "resourceType" : "ValueSet",
+    "id" : "vs3",
     "name" : "Type options for SpecimenDefinition.typeTested.container.additive.additive[x]",
     "status" : "active",
     "description" : "Type options for SpecimenDefinition.typeTested.container.additive.additive[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:67f16a8c-3e46-43d2-9fce-91d9aa78f9a5",
-      "timestamp" : "2018-09-14T07:28:22-05:00",
+      "identifier" : "urn:uuid:a92c567b-d673-4aa7-b315-e74d7eaa3603",
+      "timestamp" : "2018-12-13T14:27:33-06:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "CodeableConcept",
@@ -25,8 +46,9 @@
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
+  "version" : "3.6.0",
   "status" : "draft",
-  "date" : "2018-09-14T07:16:19-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "Health Level Seven International (Orders and Observations)",
   "item" : [{
     "linkId" : "SpecimenDefinition",
@@ -226,7 +248,7 @@
     },
     {
       "linkId" : "SpecimenDefinition.extension",
-      "text" : "Additional Content defined by implementations",
+      "text" : "Additional content defined by implementations",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -262,7 +284,7 @@
             }]
           }
         }],
-        "text" : "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "text" : "May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
         "type" : "display"
       }]
     },
@@ -361,14 +383,11 @@
     },
     {
       "extension" : [{
-        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
-        "valueInteger" : 1
-      },
-      {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "string"
+        "valueString" : "CodeableConcept"
       }],
       "linkId" : "SpecimenDefinition.patientPreparation",
+      "text" : "Patient preparation for collection",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -387,8 +406,15 @@
         "type" : "display"
       },
       {
-        "linkId" : "SpecimenDefinition.patientPreparation.value",
-        "text" : "Patient preparation for collection",
+        "linkId" : "SpecimenDefinition.patientPreparation.coding",
+        "text" : "code:",
+        "type" : "open-choice",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "SpecimenDefinition.patientPreparation.text",
+        "text" : "text:",
         "type" : "string",
         "required" : false,
         "repeats" : false
@@ -517,7 +543,7 @@
         },
         {
           "linkId" : "SpecimenDefinition.typeTested.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -546,7 +572,7 @@
       },
       {
         "linkId" : "SpecimenDefinition.typeTested.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -561,16 +587,12 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
       {
         "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
-          "valueInteger" : 1
-        },
-        {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
           "valueInteger" : 1
         },
@@ -580,7 +602,7 @@
         }],
         "linkId" : "SpecimenDefinition.typeTested.isDerived",
         "type" : "group",
-        "required" : true,
+        "required" : false,
         "repeats" : true,
         "item" : [{
           "extension" : [{
@@ -739,7 +761,7 @@
           },
           {
             "linkId" : "SpecimenDefinition.typeTested.container.id.value",
-            "text" : "xml:id (or equivalent in JSON)",
+            "text" : "Unique id for inter-element referencing",
             "type" : "string",
             "required" : false,
             "repeats" : false
@@ -768,7 +790,7 @@
         },
         {
           "linkId" : "SpecimenDefinition.typeTested.container.modifierExtension",
-          "text" : "Extensions that cannot be ignored if unrecognized",
+          "text" : "Extensions that cannot be ignored even if unrecognized",
           "type" : "group",
           "required" : false,
           "repeats" : true,
@@ -783,7 +805,7 @@
                 }]
               }
             }],
-            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
             "type" : "display"
           }]
         },
@@ -1019,12 +1041,8 @@
           "extension" : [{
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
             "valueInteger" : 1
-          },
-          {
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "Quantity"
           }],
-          "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume",
+          "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume[x]",
           "text" : "Minimum volume",
           "type" : "group",
           "required" : false,
@@ -1044,39 +1062,69 @@
             "type" : "display"
           },
           {
-            "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume.comparator",
-            "text" : "comp:",
+            "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume[x]._type",
+            "text" : "type",
             "type" : "choice",
             "required" : false,
-            "repeats" : false
-          },
-          {
-            "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume.value",
-            "text" : "value:",
-            "type" : "decimal",
-            "required" : false,
-            "repeats" : false
-          },
-          {
-            "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume.units",
-            "text" : "units:",
-            "type" : "string",
-            "required" : false,
-            "repeats" : false
-          },
-          {
-            "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume.code",
-            "text" : "coded units:",
-            "type" : "string",
-            "required" : false,
-            "repeats" : false
-          },
-          {
-            "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume.system",
-            "text" : "units system:",
-            "type" : "string",
-            "required" : false,
-            "repeats" : false
+            "repeats" : false,
+            "answerValueSet" : "#vs2",
+            "item" : [{
+              "extension" : [{
+                "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+                "valueString" : "Quantity"
+              }],
+              "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume[x]._null",
+              "type" : "group",
+              "item" : [{
+                "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume[x]._null.comparator",
+                "text" : "comp:",
+                "type" : "choice",
+                "required" : false,
+                "repeats" : false
+              },
+              {
+                "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume[x]._null.value",
+                "text" : "value:",
+                "type" : "decimal",
+                "required" : false,
+                "repeats" : false
+              },
+              {
+                "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume[x]._null.units",
+                "text" : "units:",
+                "type" : "string",
+                "required" : false,
+                "repeats" : false
+              },
+              {
+                "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume[x]._null.code",
+                "text" : "coded units:",
+                "type" : "string",
+                "required" : false,
+                "repeats" : false
+              },
+              {
+                "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume[x]._null.system",
+                "text" : "units system:",
+                "type" : "string",
+                "required" : false,
+                "repeats" : false
+              }]
+            },
+            {
+              "extension" : [{
+                "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+                "valueString" : "string"
+              }],
+              "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume[x]._null",
+              "type" : "group",
+              "item" : [{
+                "linkId" : "SpecimenDefinition.typeTested.container.minimumVolume[x]._null.value",
+                "type" : "string",
+                "required" : false,
+                "repeats" : false
+              }]
+            }]
           }]
         },
         {
@@ -1128,7 +1176,7 @@
             },
             {
               "linkId" : "SpecimenDefinition.typeTested.container.additive.id.value",
-              "text" : "xml:id (or equivalent in JSON)",
+              "text" : "Unique id for inter-element referencing",
               "type" : "string",
               "required" : false,
               "repeats" : false
@@ -1157,7 +1205,7 @@
           },
           {
             "linkId" : "SpecimenDefinition.typeTested.container.additive.modifierExtension",
-            "text" : "Extensions that cannot be ignored if unrecognized",
+            "text" : "Extensions that cannot be ignored even if unrecognized",
             "type" : "group",
             "required" : false,
             "repeats" : true,
@@ -1172,7 +1220,7 @@
                   }]
                 }
               }],
-              "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+              "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
               "type" : "display"
             }]
           },
@@ -1210,7 +1258,7 @@
               "type" : "choice",
               "required" : false,
               "repeats" : false,
-              "answerValueSet" : "#vs2",
+              "answerValueSet" : "#vs3",
               "item" : [{
                 "extension" : [{
                   "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
@@ -1481,7 +1529,7 @@
           },
           {
             "linkId" : "SpecimenDefinition.typeTested.handling.id.value",
-            "text" : "xml:id (or equivalent in JSON)",
+            "text" : "Unique id for inter-element referencing",
             "type" : "string",
             "required" : false,
             "repeats" : false
@@ -1510,7 +1558,7 @@
         },
         {
           "linkId" : "SpecimenDefinition.typeTested.handling.modifierExtension",
-          "text" : "Extensions that cannot be ignored if unrecognized",
+          "text" : "Extensions that cannot be ignored even if unrecognized",
           "type" : "group",
           "required" : false,
           "repeats" : true,
@@ -1525,7 +1573,7 @@
                 }]
               }
             }],
-            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
             "type" : "display"
           }]
         },

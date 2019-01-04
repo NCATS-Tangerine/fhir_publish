@@ -26,17 +26,29 @@
      fhir:link <http://benefitsinc.com/fhir/claimresponse/CR12345>;
      fhir:Reference.reference [ fhir:value "http://benefitsinc.com/fhir/claimresponse/CR12345" ]
   ];
-  fhir:PaymentNotice.statusDate [ fhir:value "2014-08-15"^^xsd:date];
   fhir:PaymentNotice.created [ fhir:value "2014-08-16"^^xsd:date];
-  fhir:PaymentNotice.target [
+  fhir:PaymentNotice.provider [
+     fhir:link <http://hl7.org/fhir/Organization/1>;
+     fhir:Reference.reference [ fhir:value "Organization/1" ]
+  ];
+  fhir:PaymentNotice.payment [
+     fhir:link <http://hl7.org/fhir/PaymentReconciliation/1>;
+     fhir:Reference.reference [ fhir:value "PaymentReconciliation/1" ]
+  ];
+  fhir:PaymentNotice.paymentDate [ fhir:value "2014-08-15"^^xsd:date];
+  fhir:PaymentNotice.payee [
+     fhir:link <http://hl7.org/fhir/Organization/1>;
+     fhir:Reference.reference [ fhir:value "Organization/1" ]
+  ];
+  fhir:PaymentNotice.recipient [
      fhir:Reference.identifier [
        fhir:Identifier.system [ fhir:value "http://regulators.gov" ];
        fhir:Identifier.value [ fhir:value "AB123" ]
      ]
   ];
-  fhir:PaymentNotice.provider [
-     fhir:link <http://hl7.org/fhir/Organization/1>;
-     fhir:Reference.reference [ fhir:value "Organization/1" ]
+  fhir:PaymentNotice.amount [
+     fhir:Money.value [ fhir:value "12500.00"^^xsd:decimal ];
+     fhir:Money.currency [ fhir:value "USD" ]
   ];
   fhir:PaymentNotice.paymentStatus [
      fhir:CodeableConcept.coding [
@@ -47,6 +59,8 @@
   ] .
 
 <http://hl7.org/fhir/Organization/1> a fhir:Organization .
+
+<http://hl7.org/fhir/PaymentReconciliation/1> a fhir:PaymentReconciliation .
 
 # - ontology header ------------------------------------------------------------
 

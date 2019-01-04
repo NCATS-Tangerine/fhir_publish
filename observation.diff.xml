@@ -2,19 +2,22 @@
 <difference>
    <type name="Observation" status="changed">
       <element path="Observation.basedOn">
-         <removed-type name="Reference(CarePlan|DeviceRequest|ImmunizationRecommendation|MedicationRequest|NutritionOrder|ProcedureRequest|ReferralRequest)"/>
-         <added-type name="Reference(CarePlan|DeviceRequest|ImmunizationRecommendation|MedicationRequest|NutritionOrder|ServiceRequest)"/>
+         <removed-type name="Reference(CarePlan | DeviceRequest | ImmunizationRecommendation | MedicationRequest | NutritionOrder | ProcedureRequest | ReferralRequest)"/>
+         <added-type name="Reference(CarePlan | DeviceRequest | ImmunizationRecommendation | MedicationRequest | NutritionOrder | ServiceRequest)"/>
       </element>
       <element path="Observation.partOf" status="new"/>
       <element path="Observation.focus" status="new"/>
-      <element path="Observation.encounter" status="new"/>
+      <element old-name="context" path="Observation.encounter">
+         <removed-type name="Reference(Encounter | EpisodeOfCare)"/>
+         <added-type name="Reference(Encounter)"/>
+      </element>
       <element path="Observation.effective[x]">
          <added-type name="Timing"/>
          <added-type name="instant"/>
       </element>
       <element path="Observation.performer">
-         <removed-type name="Reference(Practitioner|Organization|Patient|RelatedPerson)"/>
-         <added-type name="Reference(Practitioner|PractitionerRole|Organization|CareTeam|Patient|RelatedPerson)"/>
+         <removed-type name="Reference(Practitioner | Organization | Patient | RelatedPerson)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Organization | CareTeam | Patient | RelatedPerson)"/>
       </element>
       <element path="Observation.value[x]">
          <removed-type name="Attachment"/>
@@ -29,6 +32,13 @@
                       strength="extensible"/>
       </element>
       <element new-max="*" old-max="1" path="Observation.interpretation"/>
+      <element new-max="*"
+               old-max="1"
+               old-name="comment"
+               path="Observation.note">
+         <removed-type name="string"/>
+         <added-type name="Annotation"/>
+      </element>
       <element binding-status="removed" path="Observation.referenceRange.type">
          <old-binding reference="http://hl7.org/fhir/ValueSet/referencerange-meaning"
                       strength="extensible"/>
@@ -49,7 +59,6 @@
                       strength="extensible"/>
       </element>
       <element new-max="*" old-max="1" path="Observation.component.interpretation"/>
-      <element path="Observation.context" status="deleted"/>
       <element path="Observation.related" status="deleted"/>
    </type>
 </difference>

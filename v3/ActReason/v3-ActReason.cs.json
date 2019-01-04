@@ -10,7 +10,7 @@
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-    "valueString" : "Draft"
+    "valueCode" : "draft"
   },
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
@@ -48,6 +48,12 @@
     "uri" : "http://hl7.org/fhir/concept-properties#notSelectable",
     "description" : "Indicates that the code is abstract - only intended to be used as a selector for other concepts",
     "type" : "boolean"
+  },
+  {
+    "code" : "child",
+    "uri" : "http://hl7.org/fhir/concept-properties#child",
+    "description" : "The concept identified in this property is a child of the concept on which it is a property. The property type will be 'code'. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute",
+    "type" : "code"
   },
   {
     "code" : "status",
@@ -924,13 +930,13 @@
       "definition" : "The record is already in the requested state."
     },
     {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-        "valueCode" : "NORECMTCH"
-      }],
       "code" : "NOMATCH",
       "display" : "no match",
       "definition" : "Description: There is no match.",
+      "property" : [{
+        "code" : "child",
+        "valueCode" : "NORECMTCH"
+      }],
       "concept" : [{
         "code" : "NOPRODMTCH",
         "display" : "no product match",
@@ -1157,16 +1163,16 @@
       }]
     },
     {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-        "valueCode" : "DISCONT"
-      }],
       "code" : "_PharmacySupplyRequestRenewalRefusalReasonCode",
       "display" : "pharmacy supply request renewal refusal reason",
       "definition" : "Definition:A collection of concepts that identifies why a renewal prescription has been refused.",
       "property" : [{
         "code" : "notSelectable",
         "valueBoolean" : true
+      },
+      {
+        "code" : "child",
+        "valueCode" : "DISCONT"
       }],
       "concept" : [{
         "code" : "ALREADYRX",
@@ -1284,16 +1290,16 @@
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "LEGAL"
-    }],
     "code" : "_PatientProfileQueryReasonCode",
     "display" : "patient profile query reason",
     "definition" : "Definition:A collection of concepts identifying why the patient's profile is being queried.",
     "property" : [{
       "code" : "notSelectable",
       "valueBoolean" : true
+    },
+    {
+      "code" : "child",
+      "valueCode" : "LEGAL"
     }],
     "concept" : [{
       "code" : "ADMREV",
@@ -1332,13 +1338,13 @@
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "NOUSERPERM"
-    }],
     "code" : "_PharmacySupplyRequestFulfillerRevisionRefusalReasonCode",
     "display" : "PharmacySupplyRequestFulfillerRevisionRefusalReasonCode",
     "definition" : "Definition:Indicates why the request to transfer a prescription from one dispensing facility to another has been refused.",
+    "property" : [{
+      "code" : "child",
+      "valueCode" : "NOUSERPERM"
+    }],
     "concept" : [{
       "code" : "LOCKED",
       "display" : "locked",
@@ -1351,33 +1357,33 @@
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "NOMATCH"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "NOPERM"
-    }],
     "code" : "_RefusalReasonCode",
     "display" : "RefusalReasonCode",
     "definition" : "Description: Identifies why a request to add (or activate) a record is being refused.  Examples include the receiving system not able to match the identifier and find that record in the receiving system, having no permission, or a detected issue exists which precludes the requested action.",
     "property" : [{
       "code" : "notSelectable",
       "valueBoolean" : true
+    },
+    {
+      "code" : "child",
+      "valueCode" : "NOMATCH"
+    },
+    {
+      "code" : "child",
+      "valueCode" : "NOPERM"
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "PAT"
-    }],
     "code" : "_SchedulingActReason",
     "display" : "SchedulingActReason",
     "definition" : "Reasons for cancelling or rescheduling an Appointment",
     "property" : [{
       "code" : "notSelectable",
       "valueBoolean" : true
+    },
+    {
+      "code" : "child",
+      "valueCode" : "PAT"
     }],
     "concept" : [{
       "code" : "BLK",
@@ -1411,21 +1417,21 @@
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "NORECMTCH"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "INRQSTATE"
-    },
-    {
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "NOUSERPERM"
-    }],
     "code" : "_StatusRevisionRefusalReasonCode",
     "display" : "StatusRevisionRefusalReasonCode",
     "definition" : "Indicates why the act revision (status update) is being refused.",
+    "property" : [{
+      "code" : "child",
+      "valueCode" : "NORECMTCH"
+    },
+    {
+      "code" : "child",
+      "valueCode" : "INRQSTATE"
+    },
+    {
+      "code" : "child",
+      "valueCode" : "NOUSERPERM"
+    }],
     "concept" : [{
       "code" : "FILLED",
       "display" : "fully filled",
@@ -1433,13 +1439,13 @@
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "NOUSERPERM"
-    }],
     "code" : "_SubstanceAdministrationPermissionRefusalReasonCode",
     "display" : "SubstanceAdministrationPermissionRefusalReasonCode",
     "definition" : "Definition:Indicates why the requested authorization to prescribe or dispense a medication has been refused.",
+    "property" : [{
+      "code" : "child",
+      "valueCode" : "NOUSERPERM"
+    }],
     "concept" : [{
       "code" : "PATINELIG",
       "display" : "patient not eligible",
@@ -1457,16 +1463,16 @@
     }]
   },
   {
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-      "valueCode" : "PAT"
-    }],
     "code" : "_SubstanceAdminSubstitutionNotAllowedReason",
     "display" : "SubstanceAdminSubstitutionNotAllowedReason",
     "definition" : "Reasons why substitution of a substance administration request is not permitted.",
     "property" : [{
       "code" : "notSelectable",
       "valueBoolean" : true
+    },
+    {
+      "code" : "child",
+      "valueCode" : "PAT"
     }],
     "concept" : [{
       "code" : "ALGINT",

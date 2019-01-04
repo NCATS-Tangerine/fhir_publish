@@ -4,6 +4,12 @@
   ],
   "CapabilityStatement": {
     "elements": {
+      "CapabilityStatement": {
+        "old-min": 1,
+        "new-min": 0,
+        "old-max": "1",
+        "new-max": "*"
+      },
       "CapabilityStatement.experimental": {
         "modifier": "removed"
       },
@@ -12,7 +18,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(CapabilityStatement)"
         ]
       },
       "CapabilityStatement.imports": {
@@ -30,9 +36,15 @@
         "status": "new"
       },
       "CapabilityStatement.fhirVersion": {
+        "removed-types": [
+          "id"
+        ],
+        "added-types": [
+          "code"
+        ],
         "binding-status": "added",
         "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/fhir-versions",
+          "reference": "http://hl7.org/fhir/ValueSet/FHIR-version",
           "strength": "required"
         }
       },
@@ -41,7 +53,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ImplementationGuide)"
         ]
       },
       "CapabilityStatement.rest.documentation": {
@@ -60,16 +72,95 @@
           "markdown"
         ]
       },
+      "CapabilityStatement.rest.resource.type": {
+        "binding-codes-changed": true,
+        "removed-codes": [
+          "BodySite",
+          "DataElement",
+          "DeviceComponent",
+          "EligibilityRequest",
+          "EligibilityResponse",
+          "ExpansionProfile",
+          "ImagingManifest",
+          "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
+          "ReferralRequest",
+          "Sequence",
+          "ServiceDefinition"
+        ],
+        "added-codes": [
+          "BiologicallyDerivedProduct",
+          "BodyStructure",
+          "CatalogEntry",
+          "ChargeItemDefinition",
+          "ClinicalProfile",
+          "CoverageEligibilityRequest",
+          "CoverageEligibilityResponse",
+          "DeviceDefinition",
+          "EffectEvidenceSynthesis",
+          "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
+          "ExampleScenario",
+          "ImmunizationEvaluation",
+          "InsurancePlan",
+          "Invoice",
+          "ItemInstance",
+          "MedicationKnowledge",
+          "MedicinalProduct",
+          "MedicinalProductAuthorization",
+          "MedicinalProductContraindication",
+          "MedicinalProductIndication",
+          "MedicinalProductIngredient",
+          "MedicinalProductInteraction",
+          "MedicinalProductManufactured",
+          "MedicinalProductPackaged",
+          "MedicinalProductPharmaceutical",
+          "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
+          "ObservationDefinition",
+          "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
+          "ServiceRequest",
+          "SpecimenDefinition",
+          "SubstanceNucleicAcid",
+          "SubstancePolymer",
+          "SubstanceProtein",
+          "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
+          "SubstanceSpecification",
+          "TerminologyCapabilities",
+          "VerificationResult"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/resource-types",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/resource-types",
+          "strength": "required"
+        }
+      },
       "CapabilityStatement.rest.resource.profile": {
         "removed-types": [
           "Reference(StructureDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "CapabilityStatement.rest.resource.supportedProfile": {
-        "status": "new"
+        "old-name": "profile",
+        "removed-types": [
+          "Reference(StructureDefinition)"
+        ],
+        "added-types": [
+          "canonical(StructureDefinition)"
+        ]
       },
       "CapabilityStatement.rest.resource.interaction": {
         "old-min": 1,
@@ -88,8 +179,23 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(SearchParameter)"
         ]
+      },
+      "CapabilityStatement.rest.resource.searchParam.type": {
+        "binding-codes-changed": true,
+        "added-codes": [
+          "special"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/search-param-type",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/search-param-type",
+          "strength": "required"
+        }
       },
       "CapabilityStatement.rest.resource.searchParam.documentation": {
         "removed-types": [
@@ -129,7 +235,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(CompartmentDefinition)"
         ]
       },
       "CapabilityStatement.messaging.endpoint.address": {
@@ -153,7 +259,7 @@
           "Reference(MessageDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(MessageDefinition)"
         ]
       },
       "CapabilityStatement.document.documentation": {
@@ -169,13 +275,10 @@
           "Reference(StructureDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "CapabilityStatement.acceptUnknown": {
-        "status": "deleted"
-      },
-      "CapabilityStatement.profile": {
         "status": "deleted"
       },
       "CapabilityStatement.rest.security.certificate": {

@@ -10,9 +10,10 @@
     <valueCode value="fhir"/>
   </extension>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-    <valueString value="Trial Use"/>
+    <valueCode value="trial-use"/>
   </extension>
   <url value="http://hl7.org/fhir/StructureDefinition/elementdefinition-de"/>
+  <version value="3.6.0"/>
   <name value="DataElement constraint on ElementDefinition data type"/>
   <status value="draft"/>
   <experimental value="false"/>
@@ -25,7 +26,7 @@
     </telecom>
   </contact>
   <description value="Identifies how the ElementDefinition data type is used when it appears within a data element"/>
-  <fhirVersion value="3.5.0"/>
+  <fhirVersion value="3.6.0"/>
   <mapping>
     <identity value="v2"/>
     <uri value="http://hl7.org/v2"/>
@@ -58,6 +59,12 @@
   <derivation value="constraint"/>
   <snapshot>
     <element id="ElementDefinition">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+        <valueCode value="normative"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
+        <valueCode value="4.0.0"/>
+      </extension>
       <path value="ElementDefinition"/>
       <short value="Definition of an element in a resource or extension"/>
       <definition value="Captures constraints on each element within the resource, profile, or extension."/>
@@ -145,7 +152,7 @@
         <severity value="error"/>
         <human value="Types must be unique by code"/>
         <expression value="type.select(code).isDistinct()"/>
-        <xpath value="not(exists(for $type in f:type return $type/preceding-sibling::f:type[f:code/@value=$type/f:code/@value))"/>
+        <xpath value="not(exists(for $type in f:type return $type/preceding-sibling::f:type[f:code/@value=$type/f:code/@value]))"/>
         <source value="ElementDefinition"/>
       </constraint>
       <constraint>
@@ -205,7 +212,7 @@
     <element id="ElementDefinition.id">
       <path value="ElementDefinition.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -259,8 +266,9 @@
     <element id="ElementDefinition.extension:Question">
       <path value="ElementDefinition.extension"/>
       <sliceName value="Question"/>
-      <short value="Extension"/>
-      <definition value="An Extension"/>
+      <short value="Prompt for element phrased as question"/>
+      <definition value="The default/suggested phrasing to use when prompting a human to capture the data element in question form (e.g. In a survey)."/>
+      <comment value="Question and label serve similar purposes in they both can be used to prompt for capturing a data element.  Whether the question form or label form should be used will depend on the type of instrument being used to capture the information.  The ordering is in order of preference.  I.e. Most preferred question form is listed first.  Note that this is for alternate phrasings of the question.  Language translations are handled using the ISO 21090 string translation extensions."/>
       <min value="0"/>
       <max value="*"/>
       <base>
@@ -274,11 +282,15 @@
       </type>
       <isModifier value="false"/>
       <isSummary value="false"/>
+      <mapping>
+        <identity value="rim"/>
+        <map value="N/A (MIF-level)"/>
+      </mapping>
     </element>
     <element id="ElementDefinition.extension:Question.id">
       <path value="ElementDefinition.extension.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -349,7 +361,7 @@
     <element id="ElementDefinition.extension:Question.valueString">
       <path value="ElementDefinition.extension.valueString"/>
       <short value="Value of extension"/>
-      <definition value="Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."/>
+      <definition value="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list)."/>
       <min value="0"/>
       <max value="1"/>
       <base>
@@ -370,8 +382,9 @@
     <element id="ElementDefinition.extension:AllowedUnits">
       <path value="ElementDefinition.extension"/>
       <sliceName value="AllowedUnits"/>
-      <short value="Extension"/>
-      <definition value="An Extension"/>
+      <short value="Units to use for measured value"/>
+      <definition value="Identifies the units of measure in which the element should be captured or expressed."/>
+      <comment value="Use a value set if more than one unit of measure is possible.  Value sets will typically be short enough to display in a drop-down selection list."/>
       <min value="0"/>
       <max value="1"/>
       <base>
@@ -385,11 +398,19 @@
       </type>
       <isModifier value="false"/>
       <isSummary value="false"/>
+      <mapping>
+        <identity value="v2"/>
+        <map value="OM2.2"/>
+      </mapping>
+      <mapping>
+        <identity value="rim"/>
+        <map value="N/A (MIF territory)"/>
+      </mapping>
     </element>
     <element id="ElementDefinition.extension:AllowedUnits.id">
       <path value="ElementDefinition.extension.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -460,7 +481,7 @@
     <element id="ElementDefinition.extension:AllowedUnits.value[x]">
       <path value="ElementDefinition.extension.value[x]"/>
       <short value="Value of extension"/>
-      <definition value="Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list)."/>
+      <definition value="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list)."/>
       <min value="1"/>
       <max value="1"/>
       <base>
@@ -492,9 +513,10 @@
     </element>
     <element id="ElementDefinition.modifierExtension">
       <path value="ElementDefinition.modifierExtension"/>
-      <short value="Extensions that cannot be ignored if unrecognized"/>
-      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
+      <short value="Extensions that cannot be ignored even if unrecognized"/>
+      <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+      <requirements value="Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension)."/>
       <alias value="extensions"/>
       <alias value="user content"/>
       <alias value="modifiers"/>
@@ -615,6 +637,9 @@
       </mapping>
     </element>
     <element id="ElementDefinition.sliceIsConstraining">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+        <valueCode value="trial-use"/>
+      </extension>
       <path value="ElementDefinition.sliceIsConstraining"/>
       <short value="If this slice definition constrains an inherited slice definition (or not)"/>
       <definition value="If true, indicates that this slice definition is constraining a slice definition with the same name in an inherited profile. If false, the slice is not overriding any slice in an inherited profile. If missing, the slice might or might not be overriding a slice in an inherited profile, depending on the sliceName."/>
@@ -762,7 +787,7 @@
     <element id="ElementDefinition.slicing.id">
       <path value="ElementDefinition.slicing.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -850,7 +875,7 @@
     <element id="ElementDefinition.slicing.discriminator.id">
       <path value="ElementDefinition.slicing.discriminator.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -1317,7 +1342,7 @@
     <element id="ElementDefinition.base.id">
       <path value="ElementDefinition.base.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -1506,7 +1531,7 @@
       <constraint>
         <key value="eld-17"/>
         <severity value="error"/>
-        <human value="targetProfile is only allowed if the type is reference or canonical"/>
+        <human value="targetProfile is only allowed if the type is Reference or canonical"/>
         <expression value="(code=&#39;Reference&#39; or code = &#39;canonical&#39;) or targetProfile.empty()"/>
         <xpath value="not(exists(f:targetProfile)) or (f:code/@value = &#39;Reference&#39;)"/>
         <source value="ElementDefinition.type"/>
@@ -1537,7 +1562,7 @@
     <element id="ElementDefinition.type.id">
       <path value="ElementDefinition.type.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -1634,6 +1659,7 @@
       <path value="ElementDefinition.type.profile"/>
       <short value="Profiles (StructureDefinition or IG) - one must apply"/>
       <definition value="Identifies a profile structure or implementation Guide that applies to the datatype this element refers to. If any profiles are specified, then the content must conform to at least one of them. The URL can be a local reference - to a contained StructureDefinition, or a reference to another StructureDefinition or Implementation Guide by a canonical URL. When an implementation guide is specified, the type SHALL conform to at least one profile defined in the implementation guide."/>
+      <comment value="It is possible to profile  backbone element (e.g. part of a resource), using the [profile-element](extension-elementdefinition-profile-element.html) extension."/>
       <min value="0"/>
       <max value="0"/>
       <base>
@@ -1882,25 +1908,25 @@
         <code value="Timing"/>
       </type>
       <type>
-        <code value="ParameterDefinition"/>
-      </type>
-      <type>
-        <code value="DataRequirement"/>
-      </type>
-      <type>
-        <code value="RelatedArtifact"/>
-      </type>
-      <type>
         <code value="ContactDetail"/>
       </type>
       <type>
         <code value="Contributor"/>
       </type>
       <type>
-        <code value="TriggerDefinition"/>
+        <code value="DataRequirement"/>
       </type>
       <type>
         <code value="Expression"/>
+      </type>
+      <type>
+        <code value="ParameterDefinition"/>
+      </type>
+      <type>
+        <code value="RelatedArtifact"/>
+      </type>
+      <type>
+        <code value="TriggerDefinition"/>
       </type>
       <type>
         <code value="UsageContext"/>
@@ -2097,25 +2123,25 @@
         <code value="Timing"/>
       </type>
       <type>
-        <code value="ParameterDefinition"/>
-      </type>
-      <type>
-        <code value="DataRequirement"/>
-      </type>
-      <type>
-        <code value="RelatedArtifact"/>
-      </type>
-      <type>
         <code value="ContactDetail"/>
       </type>
       <type>
         <code value="Contributor"/>
       </type>
       <type>
-        <code value="TriggerDefinition"/>
+        <code value="DataRequirement"/>
       </type>
       <type>
         <code value="Expression"/>
+      </type>
+      <type>
+        <code value="ParameterDefinition"/>
+      </type>
+      <type>
+        <code value="RelatedArtifact"/>
+      </type>
+      <type>
+        <code value="TriggerDefinition"/>
       </type>
       <type>
         <code value="UsageContext"/>
@@ -2140,8 +2166,8 @@
     <element id="ElementDefinition.pattern[x]">
       <path value="ElementDefinition.pattern[x]"/>
       <short value="Value must have at least these property values"/>
-      <definition value="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.)."/>
-      <comment value="Mostly used for fixing values of CodeableConcept. At present, pattern[x] is not recommended as a basis for slicing while issues related to this are investigated during the STU period."/>
+      <definition value="Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  &#xA;&#xA;When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly.&#xA;&#xA;When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array.&#xA;&#xA;When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e.,&#xA;&#xA;1. If primitive: it must match exactly the pattern value&#xA;2. If a complex object: it must match (recursively) the pattern value&#xA;3. If an array: it must match (recursively) the pattern value."/>
+      <comment value="Mostly used for fixing values of CodeableConcept. In general, pattern[x] is not intended for use with primitive types, where is has the same meaning as fixed[x]."/>
       <min value="0"/>
       <max value="0"/>
       <base>
@@ -2270,25 +2296,25 @@
         <code value="Timing"/>
       </type>
       <type>
-        <code value="ParameterDefinition"/>
-      </type>
-      <type>
-        <code value="DataRequirement"/>
-      </type>
-      <type>
-        <code value="RelatedArtifact"/>
-      </type>
-      <type>
         <code value="ContactDetail"/>
       </type>
       <type>
         <code value="Contributor"/>
       </type>
       <type>
-        <code value="TriggerDefinition"/>
+        <code value="DataRequirement"/>
       </type>
       <type>
         <code value="Expression"/>
+      </type>
+      <type>
+        <code value="ParameterDefinition"/>
+      </type>
+      <type>
+        <code value="RelatedArtifact"/>
+      </type>
+      <type>
+        <code value="TriggerDefinition"/>
       </type>
       <type>
         <code value="UsageContext"/>
@@ -2339,7 +2365,7 @@
     <element id="ElementDefinition.example.id">
       <path value="ElementDefinition.example.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -2546,25 +2572,25 @@
         <code value="Timing"/>
       </type>
       <type>
-        <code value="ParameterDefinition"/>
-      </type>
-      <type>
-        <code value="DataRequirement"/>
-      </type>
-      <type>
-        <code value="RelatedArtifact"/>
-      </type>
-      <type>
         <code value="ContactDetail"/>
       </type>
       <type>
         <code value="Contributor"/>
       </type>
       <type>
-        <code value="TriggerDefinition"/>
+        <code value="DataRequirement"/>
       </type>
       <type>
         <code value="Expression"/>
+      </type>
+      <type>
+        <code value="ParameterDefinition"/>
+      </type>
+      <type>
+        <code value="RelatedArtifact"/>
+      </type>
+      <type>
+        <code value="TriggerDefinition"/>
       </type>
       <type>
         <code value="UsageContext"/>
@@ -2591,7 +2617,7 @@
       <path value="ElementDefinition.minValue[x]"/>
       <short value="Minimum Allowed Value (for some types)"/>
       <definition value="The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity."/>
-      <comment value="Except for date/date/instant, the type of the minValue[x] SHALL be the same as the specified type of the element. For the date/dateTime/instant values, the type of minValue[x] SHALL be either the same, or a a [Duration](datatypes.html#Duration) which specifies a relative time limit to the current time. The duration value is positive, and is subtracted from the current clock to determine the minimum allowable value.   A minimum value for a Quantity is interpreted as an canonical minimum - e.g. you cannot provide 100mg if the minimum value is 10g."/>
+      <comment value="Except for date/date/instant, the type of the minValue[x] SHALL be the same as the specified type of the element. For the date/dateTime/instant values, the type of minValue[x] SHALL be either the same, or a [Duration](datatypes.html#Duration) which specifies a relative time limit to the current time. The duration value is positive, and is subtracted from the current clock to determine the minimum allowable value.   A minimum value for a Quantity is interpreted as an canonical minimum - e.g. you cannot provide 100mg if the minimum value is 10g."/>
       <min value="0"/>
       <max value="1"/>
       <base>
@@ -2637,7 +2663,7 @@
       <path value="ElementDefinition.maxValue[x]"/>
       <short value="Maximum Allowed Value (for some types)"/>
       <definition value="The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity."/>
-      <comment value="Except for date/date/instant, the type of the maxValue[x] SHALL be the same as the specified type of the element. For the date/dateTime/instant values, the type of maxValue[x] SHALL be either the same, or a a [Duration](datatypes.html#Duration) which specifies a relative time limit to the current time. The duration value is positive, and is added to the current clock to determine the maximum allowable value.   A maximum value for a Quantity is interpreted as an canonical maximum - e.g. you cannot provide 10g if the maximum value is 50mg."/>
+      <comment value="Except for date/date/instant, the type of the maxValue[x] SHALL be the same as the specified type of the element. For the date/dateTime/instant values, the type of maxValue[x] SHALL be either the same, or a [Duration](datatypes.html#Duration) which specifies a relative time limit to the current time. The duration value is positive, and is added to the current clock to determine the maximum allowable value.   A maximum value for a Quantity is interpreted as an canonical maximum - e.g. you cannot provide 10g if the maximum value is 50mg."/>
       <min value="0"/>
       <max value="1"/>
       <base>
@@ -2774,7 +2800,7 @@
     <element id="ElementDefinition.constraint.id">
       <path value="ElementDefinition.constraint.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -2948,6 +2974,9 @@
       </mapping>
     </element>
     <element id="ElementDefinition.constraint.xpath">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+        <valueCode value="trial-use"/>
+      </extension>
       <path value="ElementDefinition.constraint.xpath"/>
       <short value="XPath expression of constraint"/>
       <definition value="An XPath expression of constraint that can be executed to see if this constraint is met."/>
@@ -3154,7 +3183,7 @@
     <element id="ElementDefinition.binding.id">
       <path value="ElementDefinition.binding.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -3354,7 +3383,7 @@
     <element id="ElementDefinition.mapping.id">
       <path value="ElementDefinition.mapping.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>

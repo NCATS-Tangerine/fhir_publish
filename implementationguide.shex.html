@@ -3,7 +3,7 @@
 <!-- template-example-shex.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Implementationguide.shex - FHIR v3.5.0</title>
+  <title>Implementationguide.shex - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -108,7 +108,7 @@
 
 <h1>Implementationguide.shex</h1>
 
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm">FHIR Infrastructure</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm">FHIR Infrastructure</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
 
 <p>
 <a href="implementationguide.shex">Raw ShEx</a>
@@ -137,7 +137,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:DomainResource.text @&lt;Narrative&gt;?;  # Text summary of the resource, for 
                                             # human interpretation 
     fhir:DomainResource.contained @&lt;Resource&gt;*;  # Contained, inline Resources
-    fhir:DomainResource.extension @&lt;Extension&gt;*;  # Additional Content defined by 
+    fhir:DomainResource.extension @&lt;Extension&gt;*;  # Additional content defined by 
                                             # implementations 
     fhir:DomainResource.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored
     fhir:ImplementationGuide.url @&lt;uri&gt;;    # Canonical identifier for this 
@@ -165,12 +165,13 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
                                             # implementation guide (if 
                                             # applicable) 
     fhir:ImplementationGuide.copyright @&lt;markdown&gt;?;  # Use and/or publishing restrictions
-    fhir:ImplementationGuide.packageId @&lt;id&gt;?;  # NPM Package name for IG
+    fhir:ImplementationGuide.packageId @&lt;id&gt;;  # NPM Package name for IG
     fhir:ImplementationGuide.license @&lt;code&gt; AND
     	{fhir:value @fhirvs:spdx-license}?;  # SPDX license code for this IG (or 
                                             # not-open-source) 
-    fhir:ImplementationGuide.fhirVersion @&lt;id&gt;?;  # FHIR Version this Implementation 
-                                            # Guide targets 
+    fhir:ImplementationGuide.fhirVersion @&lt;code&gt; AND
+    	{fhir:value @fhirvs:FHIR-version}+;  # FHIR Version(s) this 
+                                            # Implementation Guide targets 
     fhir:ImplementationGuide.dependsOn @&lt;ImplementationGuide.dependsOn&gt;*;  # Another Implementation guide this 
                                             # depends on 
     fhir:ImplementationGuide.global @&lt;ImplementationGuide.global&gt;*;  # Profiles that apply globally
@@ -179,13 +180,63 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Information about an assembled IG
-&lt;ImplementationGuide.manifest&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+# Profiles that apply globally
+&lt;ImplementationGuide.global&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
+    fhir:ImplementationGuide.global.type @&lt;code&gt; AND
+    	{fhir:value @fhirvs:resource-types};  # Type this profile applies to
+    fhir:ImplementationGuide.global.profile @&lt;canonical&gt;;  # Profile that all resources must 
+                                            # conform to 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Information needed to build the IG
+&lt;ImplementationGuide.definition&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ImplementationGuide.definition.grouping @&lt;ImplementationGuide.definition.grouping&gt;*;  # Grouping used to present related 
+                                            # resources in the IG 
+    fhir:ImplementationGuide.definition.resource @&lt;ImplementationGuide.definition.resource&gt;+;  # Resource in the implementation 
+                                            # guide 
+    fhir:ImplementationGuide.definition.page @&lt;ImplementationGuide.definition.page&gt;?;  # Page/Section in the Guide
+    fhir:ImplementationGuide.definition.parameter @&lt;ImplementationGuide.definition.parameter&gt;*;  # Defines how IG is built by tools
+    fhir:ImplementationGuide.definition.template @&lt;ImplementationGuide.definition.template&gt;*;  # A template for building resources
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Another Implementation guide this depends on
+&lt;ImplementationGuide.dependsOn&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ImplementationGuide.dependsOn.uri @&lt;canonical&gt;;  # Identity of the IG that this 
+                                            # depends on 
+    fhir:ImplementationGuide.dependsOn.packageId @&lt;id&gt;?;  # NPM Package name for IG this 
+                                            # depends on 
+    fhir:ImplementationGuide.dependsOn.version @&lt;string&gt;?;  # Version of the IG
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Information about an assembled IG
+&lt;ImplementationGuide.manifest&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
     fhir:ImplementationGuide.manifest.rendering @&lt;url&gt;?;  # Location of rendered 
                                             # implementation guide 
     fhir:ImplementationGuide.manifest.resource @&lt;ImplementationGuide.manifest.resource&gt;+;  # Resource in the implementation 
@@ -196,63 +247,47 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Profiles that apply globally
-&lt;ImplementationGuide.global&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+# A template for building resources
+&lt;ImplementationGuide.definition.template&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:ImplementationGuide.global.type @&lt;code&gt; AND
-    	{fhir:value @fhirvs:resource-types};  # Type this profile applies to
-    fhir:ImplementationGuide.global.profile @&lt;canonical&gt;;  # Profile that all resources must 
-                                            # conform to 
+                                            # even if unrecognized 
+    fhir:ImplementationGuide.definition.template.code @&lt;code&gt;;  # Type of template specified
+    fhir:ImplementationGuide.definition.template.source @&lt;string&gt;;  # The source location for the 
+                                            # template 
+    fhir:ImplementationGuide.definition.template.scope @&lt;string&gt;?;  # The scope in which the template 
+                                            # applies 
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Another Implementation guide this depends on
-&lt;ImplementationGuide.dependsOn&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+# Grouping used to present related resources in the IG
+&lt;ImplementationGuide.definition.grouping&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:ImplementationGuide.dependsOn.uri @&lt;canonical&gt;;  # Identity of the IG that this 
-                                            # depends on 
-    fhir:ImplementationGuide.dependsOn.packageId @&lt;id&gt;?;  # NPM Package name for IG this 
-                                            # depends on 
-    fhir:ImplementationGuide.dependsOn.version @&lt;string&gt;?;  # Version of the IG
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Information needed to build the IG
-&lt;ImplementationGuide.definition&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:ImplementationGuide.definition.package @&lt;ImplementationGuide.definition.package&gt;*;  # Grouping used to present related 
-                                            # resources in the IG 
-    fhir:ImplementationGuide.definition.resource @&lt;ImplementationGuide.definition.resource&gt;+;  # Resource in the implementation 
-                                            # guide 
-    fhir:ImplementationGuide.definition.page @&lt;ImplementationGuide.definition.page&gt;?;  # Page/Section in the Guide
-    fhir:ImplementationGuide.definition.parameter @&lt;ImplementationGuide.definition.parameter&gt;*;  # Defines how IG is built by tools
-    fhir:ImplementationGuide.definition.template @&lt;ImplementationGuide.definition.template&gt;*;  # A template for building resources
+                                            # even if unrecognized 
+    fhir:ImplementationGuide.definition.grouping.name @&lt;string&gt;;  # Descriptive name for the package
+    fhir:ImplementationGuide.definition.grouping.description @&lt;string&gt;?;  # Human readable text describing the 
+                                            # package 
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # Defines how IG is built by tools
 &lt;ImplementationGuide.definition.parameter&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     fhir:ImplementationGuide.definition.parameter.code @&lt;code&gt; AND
-    	{fhir:value @fhirvs:guide-parameter-code};  # apply-business-version | 
-                                            # apply-jurisdiction | path-resource 
-                                            # | path-pages | path-tx-cache | 
+    	{fhir:value @fhirvs:guide-parameter-code};  # apply | path-resource | path-pages 
+                                            # | path-tx-cache | 
                                             # expansion-parameter | 
                                             # rule-broken-links | generate-xml | 
                                             # generate-json | generate-turtle | 
@@ -261,58 +296,14 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Resource in the implementation guide
-&lt;ImplementationGuide.definition.resource&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:ImplementationGuide.definition.resource.reference @&lt;Reference&gt;;  # Location of the resource
-    fhir:ImplementationGuide.definition.resource.name @&lt;string&gt;?;  # Human Name for the resource
-    fhir:ImplementationGuide.definition.resource.description @&lt;string&gt;?;  # Reason why included in guide
-    (                                       # Is an example/What is this an 
-                                            # example of? 
-        fhir:ImplementationGuide.definition.resource.exampleBoolean @&lt;boolean&gt;  |
-        fhir:ImplementationGuide.definition.resource.exampleCanonical @&lt;canonical&gt; 
-    )?;
-    fhir:ImplementationGuide.definition.resource.package @&lt;id&gt;?;  # Pack this is part of
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# HTML page within the parent IG
-&lt;ImplementationGuide.manifest.page&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:ImplementationGuide.manifest.page.name @&lt;string&gt;;  # HTML page name
-    fhir:ImplementationGuide.manifest.page.title @&lt;string&gt;?;  # Title of the page, for references
-    fhir:ImplementationGuide.manifest.page.anchor @&lt;string&gt;*;  # Anchor available on the page
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Grouping used to present related resources in the IG
-&lt;ImplementationGuide.definition.package&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:ImplementationGuide.definition.package.name @&lt;string&gt;;  # Descriptive name for the package
-    fhir:ImplementationGuide.definition.package.description @&lt;string&gt;?;  # Human readable text describing the 
-                                            # package 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # Page/Section in the Guide
 &lt;ImplementationGuide.definition.page&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     (                                       # Where to find that page
         fhir:ImplementationGuide.definition.page.nameUrl @&lt;url&gt;  |
         fhir:ImplementationGuide.definition.page.nameReference @&lt;Reference&gt; 
@@ -325,28 +316,51 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# A template for building resources
-&lt;ImplementationGuide.definition.template&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+# HTML page within the parent IG
+&lt;ImplementationGuide.manifest.page&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
-    fhir:ImplementationGuide.definition.template.code @&lt;code&gt;;  # Type of template specified
-    fhir:ImplementationGuide.definition.template.source @&lt;string&gt;;  # The source location for the 
-                                            # template 
-    fhir:ImplementationGuide.definition.template.scope @&lt;string&gt;?;  # The scope in which the template 
-                                            # applies 
+                                            # even if unrecognized 
+    fhir:ImplementationGuide.manifest.page.name @&lt;string&gt;;  # HTML page name
+    fhir:ImplementationGuide.manifest.page.title @&lt;string&gt;?;  # Title of the page, for references
+    fhir:ImplementationGuide.manifest.page.anchor @&lt;string&gt;*;  # Anchor available on the page
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Resource in the implementation guide
+&lt;ImplementationGuide.definition.resource&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ImplementationGuide.definition.resource.reference @&lt;Reference&gt;;  # Location of the resource
+    fhir:ImplementationGuide.definition.resource.fhirVersion @&lt;code&gt; AND
+    	{fhir:value @fhirvs:FHIR-version}*;  # Versions this applies to (if 
+                                            # different to IG) 
+    fhir:ImplementationGuide.definition.resource.name @&lt;string&gt;?;  # Human Name for the resource
+    fhir:ImplementationGuide.definition.resource.description @&lt;string&gt;?;  # Reason why included in guide
+    (                                       # Is an example/What is this an 
+                                            # example of? 
+        fhir:ImplementationGuide.definition.resource.exampleBoolean @&lt;boolean&gt;  |
+        fhir:ImplementationGuide.definition.resource.exampleCanonical @&lt;canonical&gt; 
+    )?;
+    fhir:ImplementationGuide.definition.resource.groupingId @&lt;id&gt;?;  # Grouping this is part of
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # Resource in the implementation guide
 &lt;ImplementationGuide.manifest.resource&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     fhir:ImplementationGuide.manifest.resource.reference @&lt;Reference&gt;;  # Location of the resource
     (                                       # Is an example/What is this an 
                                             # example of? 
@@ -362,7 +376,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type dateTime
 &lt;dateTime&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:gYear OR xsd:gYearMonth OR xsd:date OR xsd:dateTime?;  # Primitive value for dateTime
     fhir:index xsd:integer?                 # Relative position in a list
@@ -370,7 +384,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Metadata about a resource
 &lt;Meta&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Meta.versionId @&lt;id&gt;?;             # Version specific identifier
@@ -389,7 +404,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type code
 &lt;code&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for code
     fhir:index xsd:integer?                 # Relative position in a list
@@ -398,7 +413,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type string
 &lt;string&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string MAXLENGTH 1048576?;  # Primitive value for string
     fhir:index xsd:integer?                 # Relative position in a list
@@ -407,7 +422,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # A reference from one resource to another
 &lt;Reference&gt; CLOSED {
     fhir:link IRI?;
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Reference.reference @&lt;string&gt;?;    # Literal reference, Relative, 
@@ -433,7 +449,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type canonical
 &lt;canonical&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for canonical
     fhir:index xsd:integer?                 # Relative position in a list
@@ -442,7 +458,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type uri
 &lt;uri&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for uri
     fhir:index xsd:integer?                 # Relative position in a list
@@ -451,7 +467,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type url
 &lt;url&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for url
     fhir:index xsd:integer?                 # Relative position in a list
@@ -503,13 +519,13 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
         fhir:Extension.valueSampledData @&lt;SampledData&gt;  |
         fhir:Extension.valueSignature @&lt;Signature&gt;  |
         fhir:Extension.valueTiming @&lt;Timing&gt;  |
-        fhir:Extension.valueParameterDefinition @&lt;ParameterDefinition&gt;  |
-        fhir:Extension.valueDataRequirement @&lt;DataRequirement&gt;  |
-        fhir:Extension.valueRelatedArtifact @&lt;RelatedArtifact&gt;  |
         fhir:Extension.valueContactDetail @&lt;ContactDetail&gt;  |
         fhir:Extension.valueContributor @&lt;Contributor&gt;  |
-        fhir:Extension.valueTriggerDefinition @&lt;TriggerDefinition&gt;  |
+        fhir:Extension.valueDataRequirement @&lt;DataRequirement&gt;  |
         fhir:Extension.valueExpression @&lt;Expression&gt;  |
+        fhir:Extension.valueParameterDefinition @&lt;ParameterDefinition&gt;  |
+        fhir:Extension.valueRelatedArtifact @&lt;RelatedArtifact&gt;  |
+        fhir:Extension.valueTriggerDefinition @&lt;TriggerDefinition&gt;  |
         fhir:Extension.valueUsageContext @&lt;UsageContext&gt;  |
         fhir:Extension.valueDosage @&lt;Dosage&gt; 
     )?;
@@ -518,7 +534,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Contact information
 &lt;ContactDetail&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:ContactDetail.name @&lt;string&gt;?;     # Name of an individual to contact
@@ -530,15 +547,16 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type boolean
 &lt;boolean&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:boolean?;                # Primitive value for boolean
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# A human-readable formatted text, including images
+# Human-readable summary of the resource (essential clinical and business information)
 &lt;Narrative&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Narrative.status @&lt;code&gt; AND
@@ -550,14 +568,16 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Describes the context of use for a conformance or knowledge resource
 &lt;UsageContext&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:UsageContext.code @&lt;Coding&gt;;       # Type of context being specified
     (                                       # Value that defines the context
         fhir:UsageContext.valueCodeableConcept @&lt;CodeableConcept&gt;  |
         fhir:UsageContext.valueQuantity @&lt;Quantity&gt;  |
-        fhir:UsageContext.valueRange @&lt;Range&gt; 
+        fhir:UsageContext.valueRange @&lt;Range&gt;  |
+        fhir:UsageContext.valueReference @&lt;Reference&gt; 
     );
     fhir:index xsd:integer?                 # Relative position in a list
 }
@@ -565,7 +585,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type markdown
 &lt;markdown&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for markdown
     fhir:index xsd:integer?                 # Relative position in a list
@@ -574,7 +594,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type id
 &lt;id&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for id
     fhir:index xsd:integer?                 # Relative position in a list
@@ -583,7 +603,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Concept - reference to a terminology or just  text
 &lt;CodeableConcept&gt; CLOSED {
     a NONLITERAL*;
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:CodeableConcept.coding @&lt;Coding&gt;*;  # Code defined by a terminology 
@@ -596,7 +617,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type date
 &lt;date&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:gYear OR xsd:gYearMonth OR xsd:date?;  # Primitive value for date
     fhir:index xsd:integer?                 # Relative position in a list
@@ -604,7 +625,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # An address expressed using postal conventions (as opposed to GPS or other location definition formats)
 &lt;Address&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Address.use @&lt;code&gt; AND
@@ -629,7 +651,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Content in a format defined elsewhere
 &lt;Attachment&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Attachment.contentType @&lt;code&gt; AND
@@ -651,15 +674,16 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type integer
 &lt;integer&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
-    fhir:value xsd:integer MININCLUSIVE &quot;-2147483648&quot;^^xsd:integer MAXINCLUSIVE &quot;2147483647&quot;^^xsd:integer?;  # Primitive value for integer
+    fhir:value xsd:integer MININCLUSIVE -2147483648 MAXINCLUSIVE 2147483647?;  # Primitive value for integer
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # A measured or measurable amount
 &lt;Count&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @&lt;decimal&gt;?;        # Numerical value (with implicit 
@@ -675,7 +699,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Describes a required data item
 &lt;DataRequirement&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:DataRequirement.type @&lt;code&gt; AND
@@ -699,11 +724,12 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # How the medication is/was taken or should be taken
 &lt;Dosage&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     fhir:Dosage.sequence @&lt;integer&gt;?;       # The order of the dosage 
                                             # instructions 
     fhir:Dosage.text @&lt;string&gt;?;            # Free text dosage instructions e.g. 
@@ -737,7 +763,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type uuid
 &lt;uuid&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for uuid
     fhir:index xsd:integer?                 # Relative position in a list
@@ -745,7 +771,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # An identifier intended for computation
 &lt;Identifier&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Identifier.use @&lt;code&gt; AND
@@ -765,7 +792,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # A reference to a code defined by a terminology system
 &lt;Coding&gt; CLOSED {
     a NONLITERAL?;
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Coding.system @&lt;uri&gt;?;             # Identity of the terminology system
@@ -781,7 +809,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A series of measurements taken by a device
 &lt;SampledData&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:SampledData.origin @&lt;SimpleQuantity&gt;;  # Zero value and units
@@ -801,7 +830,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type positiveInt
 &lt;positiveInt&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:positiveInteger?;        # Primitive value for positiveInt
     fhir:index xsd:integer?                 # Relative position in a list
@@ -809,7 +838,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A length - a value with a unit that is a physical distance
 &lt;Distance&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @&lt;decimal&gt;?;        # Numerical value (with implicit 
@@ -825,7 +855,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Time range defined by start and end date/time
 &lt;Period&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Period.start @&lt;dateTime&gt;?;         # Starting time with inclusive 
@@ -837,7 +868,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A length of time
 &lt;Duration&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @&lt;decimal&gt;?;        # Numerical value (with implicit 
@@ -853,7 +885,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Set of values bounded by low and high
 &lt;Range&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Range.low @&lt;SimpleQuantity&gt;?;      # Low limit
@@ -863,7 +896,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Related artifacts for a knowledge resource
 &lt;RelatedArtifact&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:RelatedArtifact.type @&lt;code&gt; AND
@@ -871,9 +905,10 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
                                             # citation | predecessor | successor 
                                             # | derived-from | depends-on | 
                                             # composed-of 
+    fhir:RelatedArtifact.label @&lt;string&gt;?;  # Short label
     fhir:RelatedArtifact.display @&lt;string&gt;?;  # Brief description of the related 
                                             # artifact 
-    fhir:RelatedArtifact.citation @&lt;string&gt;?;  # Bibliographic citation for the 
+    fhir:RelatedArtifact.citation @&lt;markdown&gt;?;  # Bibliographic citation for the 
                                             # artifact 
     fhir:RelatedArtifact.url @&lt;url&gt;?;       # Where the artifact can be accessed
     fhir:RelatedArtifact.document @&lt;Attachment&gt;?;  # What document is being referenced
@@ -884,7 +919,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type base64Binary
 &lt;base64Binary&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:base64Binary?;           # Primitive value for base64Binary
     fhir:index xsd:integer?                 # Relative position in a list
@@ -892,11 +927,12 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A timing schedule that specifies an event that may occur multiple times
 &lt;Timing&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # if unrecognized 
+                                            # even if unrecognized 
     fhir:Timing.event @&lt;dateTime&gt;*;         # When the event occurs
     fhir:Timing.repeat @&lt;Timing.repeat&gt;?;   # When the event is to occur
     fhir:Timing.code @&lt;CodeableConcept&gt;?;   # BID | TID | QID | AM | PM | QD | 
@@ -907,7 +943,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type decimal
 &lt;decimal&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:decimal OR xsd:double?;  # Primitive value for decimal
     fhir:index xsd:integer?                 # Relative position in a list
@@ -915,7 +951,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Definition of a parameter to a module
 &lt;ParameterDefinition&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:ParameterDefinition.name @&lt;code&gt;?;  # Name used to access the parameter 
@@ -935,7 +972,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Contributor information
 &lt;Contributor&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Contributor.type @&lt;code&gt; AND
@@ -949,7 +987,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type oid
 &lt;oid&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for oid
     fhir:index xsd:integer?                 # Relative position in a list
@@ -958,7 +996,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type instant
 &lt;instant&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:dateTime?;               # Primitive value for instant
     fhir:index xsd:integer?                 # Relative position in a list
@@ -966,7 +1004,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Details of a Technology mediated contact point (phone, fax, email, etc.)
 &lt;ContactPoint&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:ContactPoint.system @&lt;code&gt; AND
@@ -985,7 +1024,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Name of a human - parts and usage
 &lt;HumanName&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:HumanName.use @&lt;code&gt; AND
@@ -1005,7 +1045,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # An amount of economic utility in some recognized currency
 &lt;Money&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Money.value @&lt;decimal&gt;?;           # Numerical value (with implicit 
@@ -1017,7 +1058,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A ratio of two Quantity values - a numerator and a denominator
 &lt;Ratio&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Ratio.numerator @&lt;Quantity&gt;?;      # Numerator value
@@ -1027,7 +1069,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A duration of time during which an organism (or a process) has existed
 &lt;Age&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @&lt;decimal&gt;?;        # Numerical value (with implicit 
@@ -1043,7 +1086,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Defines an expected trigger for a module
 &lt;TriggerDefinition&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:TriggerDefinition.type @&lt;code&gt; AND
@@ -1059,7 +1103,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
         fhir:TriggerDefinition.timingDate @&lt;date&gt;  |
         fhir:TriggerDefinition.timingDateTime @&lt;dateTime&gt; 
     )?;
-    fhir:TriggerDefinition.data @&lt;DataRequirement&gt;?;  # Triggering data of the event
+    fhir:TriggerDefinition.data @&lt;DataRequirement&gt;*;  # Triggering data of the event 
+                                            # (multiple = 'and') 
     fhir:TriggerDefinition.condition @&lt;Expression&gt;?;  # Whether the event triggers 
                                             # (boolean expression) 
     fhir:index xsd:integer?                 # Relative position in a list
@@ -1067,7 +1112,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A measured or measurable amount
 &lt;Quantity&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @&lt;decimal&gt;?;        # Numerical value (with implicit 
@@ -1083,7 +1129,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # Text node with attribution
 &lt;Annotation&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     (                                       # Individual responsible for the 
@@ -1099,7 +1146,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # An expression that can be used to generate a value
 &lt;Expression&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Expression.description @&lt;string&gt;?;  # Natural language description of 
@@ -1115,7 +1163,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A Signature - XML DigSig, JWS, Graphical image of signature, etc.
 &lt;Signature&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Signature.type @&lt;Coding&gt;+;         # Indication of the reason the 
@@ -1137,7 +1186,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type unsignedInt
 &lt;unsignedInt&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:nonNegativeInteger?;     # Primitive value for unsignedInt
     fhir:index xsd:integer?                 # Relative position in a list
@@ -1146,7 +1195,7 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 # Primitive Type time
 &lt;time&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional Content defined by 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:time?;                   # Primitive value for time
     fhir:index xsd:integer?                 # Relative position in a list
@@ -1154,7 +1203,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # A fixed quantity (no comparator)
 &lt;SimpleQuantity&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @&lt;decimal&gt;?;        # Numerical value (with implicit 
@@ -1167,7 +1217,8 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 # What codes are expected
 &lt;DataRequirement.codeFilter&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:DataRequirement.codeFilter.path @&lt;string&gt;?;  # A code-valued attribute to filter 
@@ -1179,28 +1230,10 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What dates/date ranges are expected
-&lt;DataRequirement.dateFilter&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.dateFilter.path @&lt;string&gt;?;  # A date-valued attribute to filter 
-                                            # on 
-    fhir:DataRequirement.dateFilter.searchParam @&lt;string&gt;?;  # A date valued parameter to search 
-                                            # on 
-    (                                       # The value of the filter, as a 
-                                            # Period, DateTime, or Duration 
-                                            # value 
-        fhir:DataRequirement.dateFilter.valueDateTime @&lt;dateTime&gt;  |
-        fhir:DataRequirement.dateFilter.valuePeriod @&lt;Period&gt;  |
-        fhir:DataRequirement.dateFilter.valueDuration @&lt;Duration&gt; 
-    )?;
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # When the event is to occur
 &lt;Timing.repeat&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     (                                       # Length/Range of lengths, or (Start 
@@ -1237,12 +1270,46 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Amount of medication administered
-&lt;Dosage.doseAndRate&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+# What dates/date ranges are expected
+&lt;DataRequirement.dateFilter&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
-    fhir:Dosage.doseAndRate.type @&lt;CodeableConcept&gt;;  # The kind of dose or rate specified
+    fhir:DataRequirement.dateFilter.path @&lt;string&gt;?;  # A date-valued attribute to filter 
+                                            # on 
+    fhir:DataRequirement.dateFilter.searchParam @&lt;string&gt;?;  # A date valued parameter to search 
+                                            # on 
+    (                                       # The value of the filter, as a 
+                                            # Period, DateTime, or Duration 
+                                            # value 
+        fhir:DataRequirement.dateFilter.valueDateTime @&lt;dateTime&gt;  |
+        fhir:DataRequirement.dateFilter.valuePeriod @&lt;Period&gt;  |
+        fhir:DataRequirement.dateFilter.valueDuration @&lt;Duration&gt; 
+    )?;
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Order of the results
+&lt;DataRequirement.sort&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.sort.path @&lt;string&gt;;  # The name of the attribute to 
+                                            # perform the sort 
+    fhir:DataRequirement.sort.direction @&lt;code&gt; AND
+    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Amount of medication administered
+&lt;Dosage.doseAndRate&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:Dosage.doseAndRate.type @&lt;CodeableConcept&gt;?;  # The kind of dose or rate specified
     (                                       # Amount of medication per dose
         fhir:Dosage.doseAndRate.doseRange @&lt;Range&gt;  |
         fhir:Dosage.doseAndRate.doseQuantity @&lt;SimpleQuantity&gt; 
@@ -1256,60 +1323,39 @@ start=@&lt;ImplementationGuide&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Order of the results
-&lt;DataRequirement.sort&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.sort.path @&lt;string&gt;;  # The name of the attribute to 
-                                            # perform the sort 
-    fhir:DataRequirement.sort.direction @&lt;code&gt; AND
-    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 #---------------------- Reference Types -------------------
 
 #---------------------- Value Sets ------------------------
 
-# Whether an operation parameter is an input or an output parameter.
-fhirvs:operation-parameter-use [&quot;in&quot; &quot;out&quot;]
+# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
+fhirvs:all-types [&quot;Address&quot; &quot;Age&quot; &quot;Annotation&quot; &quot;Attachment&quot; &quot;BackboneElement&quot; &quot;CodeableConcept&quot; &quot;Coding&quot; &quot;ContactDetail&quot; &quot;ContactPoint&quot; &quot;Contributor&quot; &quot;Count&quot; &quot;DataRequirement&quot; &quot;Distance&quot; &quot;Dosage&quot; &quot;Duration&quot; &quot;Element&quot; &quot;ElementDefinition&quot; &quot;Expression&quot; &quot;Extension&quot; &quot;HumanName&quot; &quot;Identifier&quot; &quot;MarketingStatus&quot; &quot;Meta&quot; &quot;Money&quot; &quot;MoneyQuantity&quot; &quot;Narrative&quot; &quot;ParameterDefinition&quot; &quot;Period&quot; &quot;Population&quot; &quot;ProdCharacteristic&quot; &quot;ProductShelfLife&quot; &quot;Quantity&quot; &quot;Range&quot; &quot;Ratio&quot; &quot;Reference&quot; &quot;RelatedArtifact&quot; &quot;SampledData&quot; &quot;Signature&quot; &quot;SimpleQuantity&quot; &quot;SubstanceAmount&quot; &quot;Timing&quot; &quot;TriggerDefinition&quot; &quot;UsageContext&quot; &quot;base64Binary&quot; &quot;boolean&quot; &quot;canonical&quot; &quot;code&quot; &quot;date&quot; &quot;dateTime&quot; &quot;decimal&quot; &quot;id&quot; &quot;instant&quot; &quot;integer&quot; &quot;markdown&quot; &quot;oid&quot; &quot;positiveInt&quot; &quot;string&quot; &quot;time&quot; &quot;unsignedInt&quot; &quot;uri&quot; &quot;url&quot; &quot;uuid&quot; &quot;xhtml&quot; &quot;Account&quot; &quot;ActivityDefinition&quot; &quot;AdverseEvent&quot; &quot;AllergyIntolerance&quot; &quot;Appointment&quot; &quot;AppointmentResponse&quot; &quot;AuditEvent&quot; &quot;Basic&quot; &quot;Binary&quot; &quot;BiologicallyDerivedProduct&quot; &quot;BodyStructure&quot; &quot;Bundle&quot; &quot;CapabilityStatement&quot; &quot;CarePlan&quot; &quot;CareTeam&quot; &quot;CatalogEntry&quot; &quot;ChargeItem&quot; &quot;ChargeItemDefinition&quot; &quot;Claim&quot; &quot;ClaimResponse&quot; &quot;ClinicalImpression&quot; &quot;ClinicalProfile&quot; &quot;CodeSystem&quot; &quot;Communication&quot; &quot;CommunicationRequest&quot; &quot;CompartmentDefinition&quot; &quot;Composition&quot; &quot;ConceptMap&quot; &quot;Condition&quot; &quot;Consent&quot; &quot;Contract&quot; &quot;Coverage&quot; &quot;CoverageEligibilityRequest&quot; &quot;CoverageEligibilityResponse&quot; &quot;DetectedIssue&quot; &quot;Device&quot; &quot;DeviceDefinition&quot; &quot;DeviceMetric&quot; &quot;DeviceRequest&quot; &quot;DeviceUseStatement&quot; &quot;DiagnosticReport&quot; &quot;DocumentManifest&quot; &quot;DocumentReference&quot; &quot;DomainResource&quot; &quot;EffectEvidenceSynthesis&quot; &quot;Encounter&quot; &quot;Endpoint&quot; &quot;EnrollmentRequest&quot; &quot;EnrollmentResponse&quot; &quot;EpisodeOfCare&quot; &quot;EventDefinition&quot; &quot;Evidence&quot; &quot;EvidenceVariable&quot; &quot;ExampleScenario&quot; &quot;ExplanationOfBenefit&quot; &quot;FamilyMemberHistory&quot; &quot;Flag&quot; &quot;Goal&quot; &quot;GraphDefinition&quot; &quot;Group&quot; &quot;GuidanceResponse&quot; &quot;HealthcareService&quot; &quot;ImagingStudy&quot; &quot;Immunization&quot; &quot;ImmunizationEvaluation&quot; &quot;ImmunizationRecommendation&quot; &quot;ImplementationGuide&quot; &quot;InsurancePlan&quot; &quot;Invoice&quot; &quot;ItemInstance&quot; &quot;Library&quot; &quot;Linkage&quot; &quot;List&quot; &quot;Location&quot; &quot;Measure&quot; &quot;MeasureReport&quot; &quot;Media&quot; &quot;Medication&quot; &quot;MedicationAdministration&quot; &quot;MedicationDispense&quot; &quot;MedicationKnowledge&quot; &quot;MedicationRequest&quot; &quot;MedicationStatement&quot; &quot;MedicinalProduct&quot; &quot;MedicinalProductAuthorization&quot; &quot;MedicinalProductContraindication&quot; &quot;MedicinalProductIndication&quot; &quot;MedicinalProductIngredient&quot; &quot;MedicinalProductInteraction&quot; &quot;MedicinalProductManufactured&quot; &quot;MedicinalProductPackaged&quot; &quot;MedicinalProductPharmaceutical&quot; &quot;MedicinalProductUndesirableEffect&quot; &quot;MessageDefinition&quot; &quot;MessageHeader&quot; &quot;MolecularSequence&quot; &quot;NamingSystem&quot; &quot;NutritionOrder&quot; &quot;Observation&quot; &quot;ObservationDefinition&quot; &quot;OperationDefinition&quot; &quot;OperationOutcome&quot; &quot;Organization&quot; &quot;OrganizationAffiliation&quot; &quot;Parameters&quot; &quot;Patient&quot; &quot;PaymentNotice&quot; &quot;PaymentReconciliation&quot; &quot;Person&quot; &quot;PlanDefinition&quot; &quot;Practitioner&quot; &quot;PractitionerRole&quot; &quot;Procedure&quot; &quot;Provenance&quot; &quot;Questionnaire&quot; &quot;QuestionnaireResponse&quot; &quot;RelatedPerson&quot; &quot;RequestGroup&quot; &quot;ResearchDefinition&quot; &quot;ResearchElementDefinition&quot; &quot;ResearchStudy&quot; &quot;ResearchSubject&quot; &quot;Resource&quot; &quot;RiskAssessment&quot; &quot;RiskEvidenceSynthesis&quot; &quot;Schedule&quot; &quot;SearchParameter&quot; &quot;ServiceRequest&quot; &quot;Slot&quot; &quot;Specimen&quot; &quot;SpecimenDefinition&quot; &quot;StructureDefinition&quot; &quot;StructureMap&quot; &quot;Subscription&quot; &quot;Substance&quot; &quot;SubstanceNucleicAcid&quot; &quot;SubstancePolymer&quot; &quot;SubstanceProtein&quot; &quot;SubstanceReferenceInformation&quot; &quot;SubstanceSourceMaterial&quot; &quot;SubstanceSpecification&quot; &quot;SupplyDelivery&quot; &quot;SupplyRequest&quot; &quot;Task&quot; &quot;TerminologyCapabilities&quot; &quot;TestReport&quot; &quot;TestScript&quot; &quot;ValueSet&quot; &quot;VerificationResult&quot; &quot;VisionPrescription&quot; &quot;Type&quot; &quot;Any&quot;]
 
-# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
-fhirvs:mimetypes EXTERNAL
+# Code of parameter that is input to the guide.
+fhirvs:guide-parameter-code [&quot;apply&quot; &quot;path-resource&quot; &quot;path-pages&quot; &quot;path-tx-cache&quot; &quot;expansion-parameter&quot; &quot;rule-broken-links&quot; &quot;generate-xml&quot; &quot;generate-json&quot; &quot;generate-turtle&quot; &quot;html-template&quot;]
 
-# Real world event relating to the schedule.
-fhirvs:event-timing [&quot;MORN&quot; &quot;MORN.early&quot; &quot;MORN.late&quot; &quot;NOON&quot; &quot;AFT&quot; &quot;AFT.early&quot; &quot;AFT.late&quot; &quot;EVE&quot; &quot;EVE.early&quot; &quot;EVE.late&quot; &quot;NIGHT&quot; &quot;PHS&quot; &quot;HS&quot; &quot;WAKE&quot; &quot;C&quot; &quot;CM&quot; &quot;CD&quot; &quot;CV&quot; &quot;AC&quot; &quot;ACM&quot; &quot;ACD&quot; &quot;ACV&quot; &quot;PC&quot; &quot;PCM&quot; &quot;PCD&quot; &quot;PCV&quot;]
-
-# One of the resource types defined as part of this version of FHIR.
-fhirvs:resource-types [&quot;Account&quot; &quot;ActivityDefinition&quot; &quot;AdverseEvent&quot; &quot;AllergyIntolerance&quot; &quot;Appointment&quot; &quot;AppointmentResponse&quot; &quot;AuditEvent&quot; &quot;Basic&quot; &quot;Binary&quot; &quot;BiologicallyDerivedProduct&quot; &quot;BodyStructure&quot; &quot;Bundle&quot; &quot;CapabilityStatement&quot; &quot;CarePlan&quot; &quot;CareTeam&quot; &quot;ChargeItem&quot; &quot;ChargeItemDefinition&quot; &quot;Claim&quot; &quot;ClaimResponse&quot; &quot;ClinicalImpression&quot; &quot;ClinicalProfile&quot; &quot;CodeSystem&quot; &quot;Communication&quot; &quot;CommunicationRequest&quot; &quot;CompartmentDefinition&quot; &quot;Composition&quot; &quot;ConceptMap&quot; &quot;Condition&quot; &quot;Consent&quot; &quot;Contract&quot; &quot;Coverage&quot; &quot;CoverageEligibilityRequest&quot; &quot;CoverageEligibilityResponse&quot; &quot;DetectedIssue&quot; &quot;Device&quot; &quot;DeviceDefinition&quot; &quot;DeviceMetric&quot; &quot;DeviceRequest&quot; &quot;DeviceUseStatement&quot; &quot;DiagnosticReport&quot; &quot;DocumentManifest&quot; &quot;DocumentReference&quot; &quot;DomainResource&quot; &quot;Encounter&quot; &quot;Endpoint&quot; &quot;EnrollmentRequest&quot; &quot;EnrollmentResponse&quot; &quot;EntryDefinition&quot; &quot;EpisodeOfCare&quot; &quot;EventDefinition&quot; &quot;ExampleScenario&quot; &quot;ExplanationOfBenefit&quot; &quot;FamilyMemberHistory&quot; &quot;Flag&quot; &quot;Goal&quot; &quot;GraphDefinition&quot; &quot;Group&quot; &quot;GuidanceResponse&quot; &quot;HealthcareService&quot; &quot;ImagingStudy&quot; &quot;Immunization&quot; &quot;ImmunizationEvaluation&quot; &quot;ImmunizationRecommendation&quot; &quot;ImplementationGuide&quot; &quot;InsurancePlan&quot; &quot;Invoice&quot; &quot;ItemInstance&quot; &quot;Library&quot; &quot;Linkage&quot; &quot;List&quot; &quot;Location&quot; &quot;Measure&quot; &quot;MeasureReport&quot; &quot;Media&quot; &quot;Medication&quot; &quot;MedicationAdministration&quot; &quot;MedicationDispense&quot; &quot;MedicationKnowledge&quot; &quot;MedicationRequest&quot; &quot;MedicationStatement&quot; &quot;MedicinalProduct&quot; &quot;MedicinalProductAuthorization&quot; &quot;MedicinalProductClinicals&quot; &quot;MedicinalProductContraindication&quot; &quot;MedicinalProductDeviceSpec&quot; &quot;MedicinalProductIndication&quot; &quot;MedicinalProductIngredient&quot; &quot;MedicinalProductInteraction&quot; &quot;MedicinalProductManufactured&quot; &quot;MedicinalProductPackaged&quot; &quot;MedicinalProductPharmaceutical&quot; &quot;MedicinalProductUndesirableEffect&quot; &quot;MessageDefinition&quot; &quot;MessageHeader&quot; &quot;NamingSystem&quot; &quot;NutritionOrder&quot; &quot;Observation&quot; &quot;ObservationDefinition&quot; &quot;OperationDefinition&quot; &quot;OperationOutcome&quot; &quot;Organization&quot; &quot;OrganizationAffiliation&quot; &quot;Parameters&quot; &quot;Patient&quot; &quot;PaymentNotice&quot; &quot;PaymentReconciliation&quot; &quot;Person&quot; &quot;PlanDefinition&quot; &quot;Practitioner&quot; &quot;PractitionerRole&quot; &quot;Procedure&quot; &quot;ProcessRequest&quot; &quot;ProcessResponse&quot; &quot;Provenance&quot; &quot;Questionnaire&quot; &quot;QuestionnaireResponse&quot; &quot;RelatedPerson&quot; &quot;RequestGroup&quot; &quot;ResearchStudy&quot; &quot;ResearchSubject&quot; &quot;Resource&quot; &quot;RiskAssessment&quot; &quot;Schedule&quot; &quot;SearchParameter&quot; &quot;Sequence&quot; &quot;ServiceRequest&quot; &quot;Slot&quot; &quot;Specimen&quot; &quot;SpecimenDefinition&quot; &quot;StructureDefinition&quot; &quot;StructureMap&quot; &quot;Subscription&quot; &quot;Substance&quot; &quot;SubstancePolymer&quot; &quot;SubstanceReferenceInformation&quot; &quot;SubstanceSpecification&quot; &quot;SupplyDelivery&quot; &quot;SupplyRequest&quot; &quot;Task&quot; &quot;TerminologyCapabilities&quot; &quot;TestReport&quot; &quot;TestScript&quot; &quot;UserSession&quot; &quot;ValueSet&quot; &quot;VerificationResult&quot; &quot;VisionPrescription&quot;]
-
-# The lifecycle status of an artifact.
-fhirvs:publication-status [&quot;draft&quot; &quot;active&quot; &quot;retired&quot; &quot;unknown&quot;]
-
-# A code that indicates how the page is generated.
-fhirvs:guide-page-generation [&quot;html&quot; &quot;markdown&quot; &quot;xml&quot; &quot;generated&quot;]
-
-# The type of contributor.
-fhirvs:contributor-type [&quot;author&quot; &quot;editor&quot; &quot;reviewer&quot; &quot;endorser&quot;]
-
-# The use of an address.
-fhirvs:address-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &quot;old&quot; &quot;billing&quot;]
+# The status of a resource narrative.
+fhirvs:narrative-status [&quot;generated&quot; &quot;extensions&quot; &quot;additional&quot; &quot;empty&quot;]
 
 # A unit of time (units from UCUM).
 fhirvs:units-of-time [&quot;s&quot; &quot;min&quot; &quot;h&quot; &quot;d&quot; &quot;wk&quot; &quot;mo&quot; &quot;a&quot;]
 
-# How the Quantity should be understood and represented.
-fhirvs:quantity-comparator [&quot;&lt;&quot; &quot;&lt;=&quot; &quot;&gt;=&quot; &quot;&gt;&quot;]
-
-# Use of contact point.
-fhirvs:contact-point-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &quot;old&quot; &quot;mobile&quot;]
+# The type of relationship to the related artifact.
+fhirvs:related-artifact-type [&quot;documentation&quot; &quot;justification&quot; &quot;citation&quot; &quot;predecessor&quot; &quot;successor&quot; &quot;derived-from&quot; &quot;depends-on&quot; &quot;composed-of&quot;]
 
 # The days of the week.
 fhirvs:days-of-week [&quot;mon&quot; &quot;tue&quot; &quot;wed&quot; &quot;thu&quot; &quot;fri&quot; &quot;sat&quot; &quot;sun&quot;]
 
-# Telecommunications form for contact point.
-fhirvs:contact-point-system [&quot;phone&quot; &quot;fax&quot; &quot;email&quot; &quot;pager&quot; &quot;url&quot; &quot;sms&quot; &quot;other&quot;]
+# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
+fhirvs:mimetypes EXTERNAL
+
+# A code that indicates how the page is generated.
+fhirvs:guide-page-generation [&quot;html&quot; &quot;markdown&quot; &quot;xml&quot; &quot;generated&quot;]
+
+# Use of contact point.
+fhirvs:contact-point-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &quot;old&quot; &quot;mobile&quot;]
+
+# The use of an address.
+fhirvs:address-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &quot;old&quot; &quot;billing&quot;]
 
 # The possible sort directions, ascending or descending.
 fhirvs:sort-direction [&quot;ascending&quot; &quot;descending&quot;]
@@ -1317,32 +1363,44 @@ fhirvs:sort-direction [&quot;ascending&quot; &quot;descending&quot;]
 # The type of an address (physical / postal).
 fhirvs:address-type [&quot;postal&quot; &quot;physical&quot; &quot;both&quot;]
 
-# The type of relationship to the related artifact.
-fhirvs:related-artifact-type [&quot;documentation&quot; &quot;justification&quot; &quot;citation&quot; &quot;predecessor&quot; &quot;successor&quot; &quot;derived-from&quot; &quot;depends-on&quot; &quot;composed-of&quot;]
+# The lifecycle status of an artifact.
+fhirvs:publication-status [&quot;draft&quot; &quot;active&quot; &quot;retired&quot; &quot;unknown&quot;]
 
-# Code of parameter that is input to the guide.
-fhirvs:guide-parameter-code [&quot;apply-business-version&quot; &quot;apply-jurisdiction&quot; &quot;path-resource&quot; &quot;path-pages&quot; &quot;path-tx-cache&quot; &quot;expansion-parameter&quot; &quot;rule-broken-links&quot; &quot;generate-xml&quot; &quot;generate-json&quot; &quot;generate-turtle&quot; &quot;html-template&quot;]
+# The type of trigger.
+fhirvs:trigger-type [&quot;named-event&quot; &quot;periodic&quot; &quot;data-changed&quot; &quot;data-added&quot; &quot;data-modified&quot; &quot;data-removed&quot; &quot;data-accessed&quot; &quot;data-access-ended&quot;]
 
-# The use of a human name.
-fhirvs:name-use [&quot;usual&quot; &quot;official&quot; &quot;temp&quot; &quot;nickname&quot; &quot;anonymous&quot; &quot;old&quot; &quot;maiden&quot;]
+# All published FHIR Versions.
+fhirvs:FHIR-version [&quot;0.01&quot; &quot;0.05&quot; &quot;0.06&quot; &quot;0.11&quot; &quot;0.0.80&quot; &quot;0.0.81&quot; &quot;0.0.82&quot; &quot;0.4.0&quot; &quot;0.5.0&quot; &quot;1.0.0&quot; &quot;1.0.1&quot; &quot;1.0.2&quot; &quot;1.1.0&quot; &quot;1.4.0&quot; &quot;1.6.0&quot; &quot;1.8.0&quot; &quot;3.0.0&quot; &quot;3.0.1&quot; &quot;3.3.0&quot; &quot;3.5.0&quot; &quot;3.6.0&quot; &quot;4.0.0&quot;]
 
-# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
-fhirvs:currencies [&quot;AED&quot; &quot;AFN&quot; &quot;ALL&quot; &quot;AMD&quot; &quot;ANG&quot; &quot;AOA&quot; &quot;ARS&quot; &quot;AUD&quot; &quot;AWG&quot; &quot;AZN&quot; &quot;BAM&quot; &quot;BBD&quot; &quot;BDT&quot; &quot;BGN&quot; &quot;BHD&quot; &quot;BIF&quot; &quot;BMD&quot; &quot;BND&quot; &quot;BOB&quot; &quot;BOV&quot; &quot;BRL&quot; &quot;BSD&quot; &quot;BTN&quot; &quot;BWP&quot; &quot;BYN&quot; &quot;BZD&quot; &quot;CAD&quot; &quot;CDF&quot; &quot;CHE&quot; &quot;CHF&quot; &quot;CHW&quot; &quot;CLF&quot; &quot;CLP&quot; &quot;CNY&quot; &quot;COP&quot; &quot;COU&quot; &quot;CRC&quot; &quot;CUC&quot; &quot;CUP&quot; &quot;CVE&quot; &quot;CZK&quot; &quot;DJF&quot; &quot;DKK&quot; &quot;DOP&quot; &quot;DZD&quot; &quot;EGP&quot; &quot;ERN&quot; &quot;ETB&quot; &quot;EUR&quot; &quot;FJD&quot; &quot;FKP&quot; &quot;GBP&quot; &quot;GEL&quot; &quot;GHS&quot; &quot;GIP&quot; &quot;GMD&quot; &quot;GNF&quot; &quot;GTQ&quot; &quot;GYD&quot; &quot;HKD&quot; &quot;HNL&quot; &quot;HRK&quot; &quot;HTG&quot; &quot;HUF&quot; &quot;IDR&quot; &quot;ILS&quot; &quot;INR&quot; &quot;IQD&quot; &quot;IRR&quot; &quot;ISK&quot; &quot;JMD&quot; &quot;JOD&quot; &quot;JPY&quot; &quot;KES&quot; &quot;KGS&quot; &quot;KHR&quot; &quot;KMF&quot; &quot;KPW&quot; &quot;KRW&quot; &quot;KWD&quot; &quot;KYD&quot; &quot;KZT&quot; &quot;LAK&quot; &quot;LBP&quot; &quot;LKR&quot; &quot;LRD&quot; &quot;LSL&quot; &quot;LYD&quot; &quot;MAD&quot; &quot;MDL&quot; &quot;MGA&quot; &quot;MKD&quot; &quot;MMK&quot; &quot;MNT&quot; &quot;MOP&quot; &quot;MRU&quot; &quot;MUR&quot; &quot;MVR&quot; &quot;MWK&quot; &quot;MXN&quot; &quot;MXV&quot; &quot;MYR&quot; &quot;MZN&quot; &quot;NAD&quot; &quot;NGN&quot; &quot;NIO&quot; &quot;NOK&quot; &quot;NPR&quot; &quot;NZD&quot; &quot;OMR&quot; &quot;PAB&quot; &quot;PEN&quot; &quot;PGK&quot; &quot;PHP&quot; &quot;PKR&quot; &quot;PLN&quot; &quot;PYG&quot; &quot;QAR&quot; &quot;RON&quot; &quot;RSD&quot; &quot;RUB&quot; &quot;RWF&quot; &quot;SAR&quot; &quot;SBD&quot; &quot;SCR&quot; &quot;SDG&quot; &quot;SEK&quot; &quot;SGD&quot; &quot;SHP&quot; &quot;SLL&quot; &quot;SOS&quot; &quot;SRD&quot; &quot;SSP&quot; &quot;STN&quot; &quot;SVC&quot; &quot;SYP&quot; &quot;SZL&quot; &quot;THB&quot; &quot;TJS&quot; &quot;TMT&quot; &quot;TND&quot; &quot;TOP&quot; &quot;TRY&quot; &quot;TTD&quot; &quot;TWD&quot; &quot;TZS&quot; &quot;UAH&quot; &quot;UGX&quot; &quot;USD&quot; &quot;USN&quot; &quot;UYI&quot; &quot;UYU&quot; &quot;UZS&quot; &quot;VEF&quot; &quot;VND&quot; &quot;VUV&quot; &quot;WST&quot; &quot;XAF&quot; &quot;XAG&quot; &quot;XAU&quot; &quot;XBA&quot; &quot;XBB&quot; &quot;XBC&quot; &quot;XBD&quot; &quot;XCD&quot; &quot;XDR&quot; &quot;XOF&quot; &quot;XPD&quot; &quot;XPF&quot; &quot;XPT&quot; &quot;XSU&quot; &quot;XTS&quot; &quot;XUA&quot; &quot;XXX&quot; &quot;YER&quot; &quot;ZAR&quot; &quot;ZMW&quot; &quot;ZWL&quot;]
+# Whether an operation parameter is an input or an output parameter.
+fhirvs:operation-parameter-use [&quot;in&quot; &quot;out&quot;]
+
+# Telecommunications form for contact point.
+fhirvs:contact-point-system [&quot;phone&quot; &quot;fax&quot; &quot;email&quot; &quot;pager&quot; &quot;url&quot; &quot;sms&quot; &quot;other&quot;]
 
 # The license that applies to an Implementation Guide (using an SPDX license Identifiers, or 'not-open-source'). The binding is required but new SPDX license Identifiers are allowed to be used (https://spdx.org/licenses/).
 fhirvs:spdx-license [&quot;not-open-source&quot; &quot;0BSD&quot; &quot;AAL&quot; &quot;Abstyles&quot; &quot;Adobe-2006&quot; &quot;Adobe-Glyph&quot; &quot;ADSL&quot; &quot;AFL-1.1&quot; &quot;AFL-1.2&quot; &quot;AFL-2.0&quot; &quot;AFL-2.1&quot; &quot;AFL-3.0&quot; &quot;Afmparse&quot; &quot;AGPL-1.0-only&quot; &quot;AGPL-1.0-or-later&quot; &quot;AGPL-3.0-only&quot; &quot;AGPL-3.0-or-later&quot; &quot;Aladdin&quot; &quot;AMDPLPA&quot; &quot;AML&quot; &quot;AMPAS&quot; &quot;ANTLR-PD&quot; &quot;Apache-1.0&quot; &quot;Apache-1.1&quot; &quot;Apache-2.0&quot; &quot;APAFML&quot; &quot;APL-1.0&quot; &quot;APSL-1.0&quot; &quot;APSL-1.1&quot; &quot;APSL-1.2&quot; &quot;APSL-2.0&quot; &quot;Artistic-1.0-cl8&quot; &quot;Artistic-1.0-Perl&quot; &quot;Artistic-1.0&quot; &quot;Artistic-2.0&quot; &quot;Bahyph&quot; &quot;Barr&quot; &quot;Beerware&quot; &quot;BitTorrent-1.0&quot; &quot;BitTorrent-1.1&quot; &quot;Borceux&quot; &quot;BSD-1-Clause&quot; &quot;BSD-2-Clause-FreeBSD&quot; &quot;BSD-2-Clause-NetBSD&quot; &quot;BSD-2-Clause-Patent&quot; &quot;BSD-2-Clause&quot; &quot;BSD-3-Clause-Attribution&quot; &quot;BSD-3-Clause-Clear&quot; &quot;BSD-3-Clause-LBNL&quot; &quot;BSD-3-Clause-No-Nuclear-License-2014&quot; &quot;BSD-3-Clause-No-Nuclear-License&quot; &quot;BSD-3-Clause-No-Nuclear-Warranty&quot; &quot;BSD-3-Clause&quot; &quot;BSD-4-Clause-UC&quot; &quot;BSD-4-Clause&quot; &quot;BSD-Protection&quot; &quot;BSD-Source-Code&quot; &quot;BSL-1.0&quot; &quot;bzip2-1.0.5&quot; &quot;bzip2-1.0.6&quot; &quot;Caldera&quot; &quot;CATOSL-1.1&quot; &quot;CC-BY-1.0&quot; &quot;CC-BY-2.0&quot; &quot;CC-BY-2.5&quot; &quot;CC-BY-3.0&quot; &quot;CC-BY-4.0&quot; &quot;CC-BY-NC-1.0&quot; &quot;CC-BY-NC-2.0&quot; &quot;CC-BY-NC-2.5&quot; &quot;CC-BY-NC-3.0&quot; &quot;CC-BY-NC-4.0&quot; &quot;CC-BY-NC-ND-1.0&quot; &quot;CC-BY-NC-ND-2.0&quot; &quot;CC-BY-NC-ND-2.5&quot; &quot;CC-BY-NC-ND-3.0&quot; &quot;CC-BY-NC-ND-4.0&quot; &quot;CC-BY-NC-SA-1.0&quot; &quot;CC-BY-NC-SA-2.0&quot; &quot;CC-BY-NC-SA-2.5&quot; &quot;CC-BY-NC-SA-3.0&quot; &quot;CC-BY-NC-SA-4.0&quot; &quot;CC-BY-ND-1.0&quot; &quot;CC-BY-ND-2.0&quot; &quot;CC-BY-ND-2.5&quot; &quot;CC-BY-ND-3.0&quot; &quot;CC-BY-ND-4.0&quot; &quot;CC-BY-SA-1.0&quot; &quot;CC-BY-SA-2.0&quot; &quot;CC-BY-SA-2.5&quot; &quot;CC-BY-SA-3.0&quot; &quot;CC-BY-SA-4.0&quot; &quot;CC0-1.0&quot; &quot;CDDL-1.0&quot; &quot;CDDL-1.1&quot; &quot;CDLA-Permissive-1.0&quot; &quot;CDLA-Sharing-1.0&quot; &quot;CECILL-1.0&quot; &quot;CECILL-1.1&quot; &quot;CECILL-2.0&quot; &quot;CECILL-2.1&quot; &quot;CECILL-B&quot; &quot;CECILL-C&quot; &quot;ClArtistic&quot; &quot;CNRI-Jython&quot; &quot;CNRI-Python-GPL-Compatible&quot; &quot;CNRI-Python&quot; &quot;Condor-1.1&quot; &quot;CPAL-1.0&quot; &quot;CPL-1.0&quot; &quot;CPOL-1.02&quot; &quot;Crossword&quot; &quot;CrystalStacker&quot; &quot;CUA-OPL-1.0&quot; &quot;Cube&quot; &quot;curl&quot; &quot;D-FSL-1.0&quot; &quot;diffmark&quot; &quot;DOC&quot; &quot;Dotseqn&quot; &quot;DSDP&quot; &quot;dvipdfm&quot; &quot;ECL-1.0&quot; &quot;ECL-2.0&quot; &quot;EFL-1.0&quot; &quot;EFL-2.0&quot; &quot;eGenix&quot; &quot;Entessa&quot; &quot;EPL-1.0&quot; &quot;EPL-2.0&quot; &quot;ErlPL-1.1&quot; &quot;EUDatagrid&quot; &quot;EUPL-1.0&quot; &quot;EUPL-1.1&quot; &quot;EUPL-1.2&quot; &quot;Eurosym&quot; &quot;Fair&quot; &quot;Frameworx-1.0&quot; &quot;FreeImage&quot; &quot;FSFAP&quot; &quot;FSFUL&quot; &quot;FSFULLR&quot; &quot;FTL&quot; &quot;GFDL-1.1-only&quot; &quot;GFDL-1.1-or-later&quot; &quot;GFDL-1.2-only&quot; &quot;GFDL-1.2-or-later&quot; &quot;GFDL-1.3-only&quot; &quot;GFDL-1.3-or-later&quot; &quot;Giftware&quot; &quot;GL2PS&quot; &quot;Glide&quot; &quot;Glulxe&quot; &quot;gnuplot&quot; &quot;GPL-1.0-only&quot; &quot;GPL-1.0-or-later&quot; &quot;GPL-2.0-only&quot; &quot;GPL-2.0-or-later&quot; &quot;GPL-3.0-only&quot; &quot;GPL-3.0-or-later&quot; &quot;gSOAP-1.3b&quot; &quot;HaskellReport&quot; &quot;HPND&quot; &quot;IBM-pibs&quot; &quot;ICU&quot; &quot;IJG&quot; &quot;ImageMagick&quot; &quot;iMatix&quot; &quot;Imlib2&quot; &quot;Info-ZIP&quot; &quot;Intel-ACPI&quot; &quot;Intel&quot; &quot;Interbase-1.0&quot; &quot;IPA&quot; &quot;IPL-1.0&quot; &quot;ISC&quot; &quot;JasPer-2.0&quot; &quot;JSON&quot; &quot;LAL-1.2&quot; &quot;LAL-1.3&quot; &quot;Latex2e&quot; &quot;Leptonica&quot; &quot;LGPL-2.0-only&quot; &quot;LGPL-2.0-or-later&quot; &quot;LGPL-2.1-only&quot; &quot;LGPL-2.1-or-later&quot; &quot;LGPL-3.0-only&quot; &quot;LGPL-3.0-or-later&quot; &quot;LGPLLR&quot; &quot;Libpng&quot; &quot;libtiff&quot; &quot;LiLiQ-P-1.1&quot; &quot;LiLiQ-R-1.1&quot; &quot;LiLiQ-Rplus-1.1&quot; &quot;Linux-OpenIB&quot; &quot;LPL-1.0&quot; &quot;LPL-1.02&quot; &quot;LPPL-1.0&quot; &quot;LPPL-1.1&quot; &quot;LPPL-1.2&quot; &quot;LPPL-1.3a&quot; &quot;LPPL-1.3c&quot; &quot;MakeIndex&quot; &quot;MirOS&quot; &quot;MIT-0&quot; &quot;MIT-advertising&quot; &quot;MIT-CMU&quot; &quot;MIT-enna&quot; &quot;MIT-feh&quot; &quot;MIT&quot; &quot;MITNFA&quot; &quot;Motosoto&quot; &quot;mpich2&quot; &quot;MPL-1.0&quot; &quot;MPL-1.1&quot; &quot;MPL-2.0-no-copyleft-exception&quot; &quot;MPL-2.0&quot; &quot;MS-PL&quot; &quot;MS-RL&quot; &quot;MTLL&quot; &quot;Multics&quot; &quot;Mup&quot; &quot;NASA-1.3&quot; &quot;Naumen&quot; &quot;NBPL-1.0&quot; &quot;NCSA&quot; &quot;Net-SNMP&quot; &quot;NetCDF&quot; &quot;Newsletr&quot; &quot;NGPL&quot; &quot;NLOD-1.0&quot; &quot;NLPL&quot; &quot;Nokia&quot; &quot;NOSL&quot; &quot;Noweb&quot; &quot;NPL-1.0&quot; &quot;NPL-1.1&quot; &quot;NPOSL-3.0&quot; &quot;NRL&quot; &quot;NTP&quot; &quot;OCCT-PL&quot; &quot;OCLC-2.0&quot; &quot;ODbL-1.0&quot; &quot;OFL-1.0&quot; &quot;OFL-1.1&quot; &quot;OGTSL&quot; &quot;OLDAP-1.1&quot; &quot;OLDAP-1.2&quot; &quot;OLDAP-1.3&quot; &quot;OLDAP-1.4&quot; &quot;OLDAP-2.0.1&quot; &quot;OLDAP-2.0&quot; &quot;OLDAP-2.1&quot; &quot;OLDAP-2.2.1&quot; &quot;OLDAP-2.2.2&quot; &quot;OLDAP-2.2&quot; &quot;OLDAP-2.3&quot; &quot;OLDAP-2.4&quot; &quot;OLDAP-2.5&quot; &quot;OLDAP-2.6&quot; &quot;OLDAP-2.7&quot; &quot;OLDAP-2.8&quot; &quot;OML&quot; &quot;OpenSSL&quot; &quot;OPL-1.0&quot; &quot;OSET-PL-2.1&quot; &quot;OSL-1.0&quot; &quot;OSL-1.1&quot; &quot;OSL-2.0&quot; &quot;OSL-2.1&quot; &quot;OSL-3.0&quot; &quot;PDDL-1.0&quot; &quot;PHP-3.0&quot; &quot;PHP-3.01&quot; &quot;Plexus&quot; &quot;PostgreSQL&quot; &quot;psfrag&quot; &quot;psutils&quot; &quot;Python-2.0&quot; &quot;Qhull&quot; &quot;QPL-1.0&quot; &quot;Rdisc&quot; &quot;RHeCos-1.1&quot; &quot;RPL-1.1&quot; &quot;RPL-1.5&quot; &quot;RPSL-1.0&quot; &quot;RSA-MD&quot; &quot;RSCPL&quot; &quot;Ruby&quot; &quot;SAX-PD&quot; &quot;Saxpath&quot; &quot;SCEA&quot; &quot;Sendmail&quot; &quot;SGI-B-1.0&quot; &quot;SGI-B-1.1&quot; &quot;SGI-B-2.0&quot; &quot;SimPL-2.0&quot; &quot;SISSL-1.2&quot; &quot;SISSL&quot; &quot;Sleepycat&quot; &quot;SMLNJ&quot; &quot;SMPPL&quot; &quot;SNIA&quot; &quot;Spencer-86&quot; &quot;Spencer-94&quot; &quot;Spencer-99&quot; &quot;SPL-1.0&quot; &quot;SugarCRM-1.1.3&quot; &quot;SWL&quot; &quot;TCL&quot; &quot;TCP-wrappers&quot; &quot;TMate&quot; &quot;TORQUE-1.1&quot; &quot;TOSL&quot; &quot;Unicode-DFS-2015&quot; &quot;Unicode-DFS-2016&quot; &quot;Unicode-TOU&quot; &quot;Unlicense&quot; &quot;UPL-1.0&quot; &quot;Vim&quot; &quot;VOSTROM&quot; &quot;VSL-1.0&quot; &quot;W3C-19980720&quot; &quot;W3C-20150513&quot; &quot;W3C&quot; &quot;Watcom-1.0&quot; &quot;Wsuipa&quot; &quot;WTFPL&quot; &quot;X11&quot; &quot;Xerox&quot; &quot;XFree86-1.1&quot; &quot;xinetd&quot; &quot;Xnet&quot; &quot;xpp&quot; &quot;XSkat&quot; &quot;YPL-1.0&quot; &quot;YPL-1.1&quot; &quot;Zed&quot; &quot;Zend-2.0&quot; &quot;Zimbra-1.3&quot; &quot;Zimbra-1.4&quot; &quot;zlib-acknowledgement&quot; &quot;Zlib&quot; &quot;ZPL-1.1&quot; &quot;ZPL-2.0&quot; &quot;ZPL-2.1&quot;]
 
-# The status of a resource narrative.
-fhirvs:narrative-status [&quot;generated&quot; &quot;extensions&quot; &quot;additional&quot; &quot;empty&quot;]
-
-# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
-fhirvs:all-types [&quot;Address&quot; &quot;Age&quot; &quot;Annotation&quot; &quot;Attachment&quot; &quot;BackboneElement&quot; &quot;CodeableConcept&quot; &quot;Coding&quot; &quot;ContactDetail&quot; &quot;ContactPoint&quot; &quot;Contributor&quot; &quot;Count&quot; &quot;DataRequirement&quot; &quot;Distance&quot; &quot;Dosage&quot; &quot;Duration&quot; &quot;Element&quot; &quot;ElementDefinition&quot; &quot;Expression&quot; &quot;Extension&quot; &quot;HumanName&quot; &quot;Identifier&quot; &quot;MarketingStatus&quot; &quot;Meta&quot; &quot;Money&quot; &quot;MoneyQuantity&quot; &quot;Narrative&quot; &quot;ParameterDefinition&quot; &quot;Period&quot; &quot;ProdCharacteristic&quot; &quot;ProductShelfLife&quot; &quot;Quantity&quot; &quot;Range&quot; &quot;Ratio&quot; &quot;Reference&quot; &quot;RelatedArtifact&quot; &quot;SampledData&quot; &quot;Signature&quot; &quot;SimpleQuantity&quot; &quot;SubstanceAmount&quot; &quot;SubstanceMoiety&quot; &quot;Timing&quot; &quot;TriggerDefinition&quot; &quot;UsageContext&quot; &quot;base64Binary&quot; &quot;boolean&quot; &quot;canonical&quot; &quot;code&quot; &quot;date&quot; &quot;dateTime&quot; &quot;decimal&quot; &quot;id&quot; &quot;instant&quot; &quot;integer&quot; &quot;markdown&quot; &quot;oid&quot; &quot;positiveInt&quot; &quot;string&quot; &quot;time&quot; &quot;unsignedInt&quot; &quot;uri&quot; &quot;url&quot; &quot;uuid&quot; &quot;xhtml&quot; &quot;Account&quot; &quot;ActivityDefinition&quot; &quot;AdverseEvent&quot; &quot;AllergyIntolerance&quot; &quot;Appointment&quot; &quot;AppointmentResponse&quot; &quot;AuditEvent&quot; &quot;Basic&quot; &quot;Binary&quot; &quot;BiologicallyDerivedProduct&quot; &quot;BodyStructure&quot; &quot;Bundle&quot; &quot;CapabilityStatement&quot; &quot;CarePlan&quot; &quot;CareTeam&quot; &quot;ChargeItem&quot; &quot;ChargeItemDefinition&quot; &quot;Claim&quot; &quot;ClaimResponse&quot; &quot;ClinicalImpression&quot; &quot;ClinicalProfile&quot; &quot;CodeSystem&quot; &quot;Communication&quot; &quot;CommunicationRequest&quot; &quot;CompartmentDefinition&quot; &quot;Composition&quot; &quot;ConceptMap&quot; &quot;Condition&quot; &quot;Consent&quot; &quot;Contract&quot; &quot;Coverage&quot; &quot;CoverageEligibilityRequest&quot; &quot;CoverageEligibilityResponse&quot; &quot;DetectedIssue&quot; &quot;Device&quot; &quot;DeviceDefinition&quot; &quot;DeviceMetric&quot; &quot;DeviceRequest&quot; &quot;DeviceUseStatement&quot; &quot;DiagnosticReport&quot; &quot;DocumentManifest&quot; &quot;DocumentReference&quot; &quot;DomainResource&quot; &quot;Encounter&quot; &quot;Endpoint&quot; &quot;EnrollmentRequest&quot; &quot;EnrollmentResponse&quot; &quot;EntryDefinition&quot; &quot;EpisodeOfCare&quot; &quot;EventDefinition&quot; &quot;ExampleScenario&quot; &quot;ExplanationOfBenefit&quot; &quot;FamilyMemberHistory&quot; &quot;Flag&quot; &quot;Goal&quot; &quot;GraphDefinition&quot; &quot;Group&quot; &quot;GuidanceResponse&quot; &quot;HealthcareService&quot; &quot;ImagingStudy&quot; &quot;Immunization&quot; &quot;ImmunizationEvaluation&quot; &quot;ImmunizationRecommendation&quot; &quot;ImplementationGuide&quot; &quot;InsurancePlan&quot; &quot;Invoice&quot; &quot;ItemInstance&quot; &quot;Library&quot; &quot;Linkage&quot; &quot;List&quot; &quot;Location&quot; &quot;Measure&quot; &quot;MeasureReport&quot; &quot;Media&quot; &quot;Medication&quot; &quot;MedicationAdministration&quot; &quot;MedicationDispense&quot; &quot;MedicationKnowledge&quot; &quot;MedicationRequest&quot; &quot;MedicationStatement&quot; &quot;MedicinalProduct&quot; &quot;MedicinalProductAuthorization&quot; &quot;MedicinalProductClinicals&quot; &quot;MedicinalProductContraindication&quot; &quot;MedicinalProductDeviceSpec&quot; &quot;MedicinalProductIndication&quot; &quot;MedicinalProductIngredient&quot; &quot;MedicinalProductInteraction&quot; &quot;MedicinalProductManufactured&quot; &quot;MedicinalProductPackaged&quot; &quot;MedicinalProductPharmaceutical&quot; &quot;MedicinalProductUndesirableEffect&quot; &quot;MessageDefinition&quot; &quot;MessageHeader&quot; &quot;NamingSystem&quot; &quot;NutritionOrder&quot; &quot;Observation&quot; &quot;ObservationDefinition&quot; &quot;OperationDefinition&quot; &quot;OperationOutcome&quot; &quot;Organization&quot; &quot;OrganizationAffiliation&quot; &quot;Parameters&quot; &quot;Patient&quot; &quot;PaymentNotice&quot; &quot;PaymentReconciliation&quot; &quot;Person&quot; &quot;PlanDefinition&quot; &quot;Practitioner&quot; &quot;PractitionerRole&quot; &quot;Procedure&quot; &quot;ProcessRequest&quot; &quot;ProcessResponse&quot; &quot;Provenance&quot; &quot;Questionnaire&quot; &quot;QuestionnaireResponse&quot; &quot;RelatedPerson&quot; &quot;RequestGroup&quot; &quot;ResearchStudy&quot; &quot;ResearchSubject&quot; &quot;Resource&quot; &quot;RiskAssessment&quot; &quot;Schedule&quot; &quot;SearchParameter&quot; &quot;Sequence&quot; &quot;ServiceRequest&quot; &quot;Slot&quot; &quot;Specimen&quot; &quot;SpecimenDefinition&quot; &quot;StructureDefinition&quot; &quot;StructureMap&quot; &quot;Subscription&quot; &quot;Substance&quot; &quot;SubstancePolymer&quot; &quot;SubstanceReferenceInformation&quot; &quot;SubstanceSpecification&quot; &quot;SupplyDelivery&quot; &quot;SupplyRequest&quot; &quot;Task&quot; &quot;TerminologyCapabilities&quot; &quot;TestReport&quot; &quot;TestScript&quot; &quot;UserSession&quot; &quot;ValueSet&quot; &quot;VerificationResult&quot; &quot;VisionPrescription&quot; &quot;Type&quot; &quot;Any&quot;]
-
 # Identifies the purpose for this identifier, if known .
 fhirvs:identifier-use [&quot;usual&quot; &quot;official&quot; &quot;temp&quot; &quot;secondary&quot; &quot;old&quot;]
 
-# The type of trigger.
-fhirvs:trigger-type [&quot;named-event&quot; &quot;periodic&quot; &quot;data-changed&quot; &quot;data-added&quot; &quot;data-modified&quot; &quot;data-removed&quot; &quot;data-accessed&quot; &quot;data-access-ended&quot;]
+# How the Quantity should be understood and represented.
+fhirvs:quantity-comparator [&quot;&lt;&quot; &quot;&lt;=&quot; &quot;&gt;=&quot; &quot;&gt;&quot;]
+
+# Real world event relating to the schedule.
+fhirvs:event-timing [&quot;MORN&quot; &quot;MORN.early&quot; &quot;MORN.late&quot; &quot;NOON&quot; &quot;AFT&quot; &quot;AFT.early&quot; &quot;AFT.late&quot; &quot;EVE&quot; &quot;EVE.early&quot; &quot;EVE.late&quot; &quot;NIGHT&quot; &quot;PHS&quot; &quot;HS&quot; &quot;WAKE&quot; &quot;C&quot; &quot;CM&quot; &quot;CD&quot; &quot;CV&quot; &quot;AC&quot; &quot;ACM&quot; &quot;ACD&quot; &quot;ACV&quot; &quot;PC&quot; &quot;PCM&quot; &quot;PCD&quot; &quot;PCV&quot;]
+
+# One of the resource types defined as part of this version of FHIR.
+fhirvs:resource-types [&quot;Account&quot; &quot;ActivityDefinition&quot; &quot;AdverseEvent&quot; &quot;AllergyIntolerance&quot; &quot;Appointment&quot; &quot;AppointmentResponse&quot; &quot;AuditEvent&quot; &quot;Basic&quot; &quot;Binary&quot; &quot;BiologicallyDerivedProduct&quot; &quot;BodyStructure&quot; &quot;Bundle&quot; &quot;CapabilityStatement&quot; &quot;CarePlan&quot; &quot;CareTeam&quot; &quot;CatalogEntry&quot; &quot;ChargeItem&quot; &quot;ChargeItemDefinition&quot; &quot;Claim&quot; &quot;ClaimResponse&quot; &quot;ClinicalImpression&quot; &quot;ClinicalProfile&quot; &quot;CodeSystem&quot; &quot;Communication&quot; &quot;CommunicationRequest&quot; &quot;CompartmentDefinition&quot; &quot;Composition&quot; &quot;ConceptMap&quot; &quot;Condition&quot; &quot;Consent&quot; &quot;Contract&quot; &quot;Coverage&quot; &quot;CoverageEligibilityRequest&quot; &quot;CoverageEligibilityResponse&quot; &quot;DetectedIssue&quot; &quot;Device&quot; &quot;DeviceDefinition&quot; &quot;DeviceMetric&quot; &quot;DeviceRequest&quot; &quot;DeviceUseStatement&quot; &quot;DiagnosticReport&quot; &quot;DocumentManifest&quot; &quot;DocumentReference&quot; &quot;DomainResource&quot; &quot;EffectEvidenceSynthesis&quot; &quot;Encounter&quot; &quot;Endpoint&quot; &quot;EnrollmentRequest&quot; &quot;EnrollmentResponse&quot; &quot;EpisodeOfCare&quot; &quot;EventDefinition&quot; &quot;Evidence&quot; &quot;EvidenceVariable&quot; &quot;ExampleScenario&quot; &quot;ExplanationOfBenefit&quot; &quot;FamilyMemberHistory&quot; &quot;Flag&quot; &quot;Goal&quot; &quot;GraphDefinition&quot; &quot;Group&quot; &quot;GuidanceResponse&quot; &quot;HealthcareService&quot; &quot;ImagingStudy&quot; &quot;Immunization&quot; &quot;ImmunizationEvaluation&quot; &quot;ImmunizationRecommendation&quot; &quot;ImplementationGuide&quot; &quot;InsurancePlan&quot; &quot;Invoice&quot; &quot;ItemInstance&quot; &quot;Library&quot; &quot;Linkage&quot; &quot;List&quot; &quot;Location&quot; &quot;Measure&quot; &quot;MeasureReport&quot; &quot;Media&quot; &quot;Medication&quot; &quot;MedicationAdministration&quot; &quot;MedicationDispense&quot; &quot;MedicationKnowledge&quot; &quot;MedicationRequest&quot; &quot;MedicationStatement&quot; &quot;MedicinalProduct&quot; &quot;MedicinalProductAuthorization&quot; &quot;MedicinalProductContraindication&quot; &quot;MedicinalProductIndication&quot; &quot;MedicinalProductIngredient&quot; &quot;MedicinalProductInteraction&quot; &quot;MedicinalProductManufactured&quot; &quot;MedicinalProductPackaged&quot; &quot;MedicinalProductPharmaceutical&quot; &quot;MedicinalProductUndesirableEffect&quot; &quot;MessageDefinition&quot; &quot;MessageHeader&quot; &quot;MolecularSequence&quot; &quot;NamingSystem&quot; &quot;NutritionOrder&quot; &quot;Observation&quot; &quot;ObservationDefinition&quot; &quot;OperationDefinition&quot; &quot;OperationOutcome&quot; &quot;Organization&quot; &quot;OrganizationAffiliation&quot; &quot;Parameters&quot; &quot;Patient&quot; &quot;PaymentNotice&quot; &quot;PaymentReconciliation&quot; &quot;Person&quot; &quot;PlanDefinition&quot; &quot;Practitioner&quot; &quot;PractitionerRole&quot; &quot;Procedure&quot; &quot;Provenance&quot; &quot;Questionnaire&quot; &quot;QuestionnaireResponse&quot; &quot;RelatedPerson&quot; &quot;RequestGroup&quot; &quot;ResearchDefinition&quot; &quot;ResearchElementDefinition&quot; &quot;ResearchStudy&quot; &quot;ResearchSubject&quot; &quot;Resource&quot; &quot;RiskAssessment&quot; &quot;RiskEvidenceSynthesis&quot; &quot;Schedule&quot; &quot;SearchParameter&quot; &quot;ServiceRequest&quot; &quot;Slot&quot; &quot;Specimen&quot; &quot;SpecimenDefinition&quot; &quot;StructureDefinition&quot; &quot;StructureMap&quot; &quot;Subscription&quot; &quot;Substance&quot; &quot;SubstanceNucleicAcid&quot; &quot;SubstancePolymer&quot; &quot;SubstanceProtein&quot; &quot;SubstanceReferenceInformation&quot; &quot;SubstanceSourceMaterial&quot; &quot;SubstanceSpecification&quot; &quot;SupplyDelivery&quot; &quot;SupplyRequest&quot; &quot;Task&quot; &quot;TerminologyCapabilities&quot; &quot;TestReport&quot; &quot;TestScript&quot; &quot;ValueSet&quot; &quot;VerificationResult&quot; &quot;VisionPrescription&quot;]
+
+# The use of a human name.
+fhirvs:name-use [&quot;usual&quot; &quot;official&quot; &quot;temp&quot; &quot;nickname&quot; &quot;anonymous&quot; &quot;old&quot; &quot;maiden&quot;]
+
+# The type of contributor.
+fhirvs:contributor-type [&quot;author&quot; &quot;editor&quot; &quot;reviewer&quot; &quot;endorser&quot;]
+
+# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
+fhirvs:currencies [&quot;AED&quot; &quot;AFN&quot; &quot;ALL&quot; &quot;AMD&quot; &quot;ANG&quot; &quot;AOA&quot; &quot;ARS&quot; &quot;AUD&quot; &quot;AWG&quot; &quot;AZN&quot; &quot;BAM&quot; &quot;BBD&quot; &quot;BDT&quot; &quot;BGN&quot; &quot;BHD&quot; &quot;BIF&quot; &quot;BMD&quot; &quot;BND&quot; &quot;BOB&quot; &quot;BOV&quot; &quot;BRL&quot; &quot;BSD&quot; &quot;BTN&quot; &quot;BWP&quot; &quot;BYN&quot; &quot;BZD&quot; &quot;CAD&quot; &quot;CDF&quot; &quot;CHE&quot; &quot;CHF&quot; &quot;CHW&quot; &quot;CLF&quot; &quot;CLP&quot; &quot;CNY&quot; &quot;COP&quot; &quot;COU&quot; &quot;CRC&quot; &quot;CUC&quot; &quot;CUP&quot; &quot;CVE&quot; &quot;CZK&quot; &quot;DJF&quot; &quot;DKK&quot; &quot;DOP&quot; &quot;DZD&quot; &quot;EGP&quot; &quot;ERN&quot; &quot;ETB&quot; &quot;EUR&quot; &quot;FJD&quot; &quot;FKP&quot; &quot;GBP&quot; &quot;GEL&quot; &quot;GGP&quot; &quot;GHS&quot; &quot;GIP&quot; &quot;GMD&quot; &quot;GNF&quot; &quot;GTQ&quot; &quot;GYD&quot; &quot;HKD&quot; &quot;HNL&quot; &quot;HRK&quot; &quot;HTG&quot; &quot;HUF&quot; &quot;IDR&quot; &quot;ILS&quot; &quot;IMP&quot; &quot;INR&quot; &quot;IQD&quot; &quot;IRR&quot; &quot;ISK&quot; &quot;JEP&quot; &quot;JMD&quot; &quot;JOD&quot; &quot;JPY&quot; &quot;KES&quot; &quot;KGS&quot; &quot;KHR&quot; &quot;KMF&quot; &quot;KPW&quot; &quot;KRW&quot; &quot;KWD&quot; &quot;KYD&quot; &quot;KZT&quot; &quot;LAK&quot; &quot;LBP&quot; &quot;LKR&quot; &quot;LRD&quot; &quot;LSL&quot; &quot;LYD&quot; &quot;MAD&quot; &quot;MDL&quot; &quot;MGA&quot; &quot;MKD&quot; &quot;MMK&quot; &quot;MNT&quot; &quot;MOP&quot; &quot;MRU&quot; &quot;MUR&quot; &quot;MVR&quot; &quot;MWK&quot; &quot;MXN&quot; &quot;MXV&quot; &quot;MYR&quot; &quot;MZN&quot; &quot;NAD&quot; &quot;NGN&quot; &quot;NIO&quot; &quot;NOK&quot; &quot;NPR&quot; &quot;NZD&quot; &quot;OMR&quot; &quot;PAB&quot; &quot;PEN&quot; &quot;PGK&quot; &quot;PHP&quot; &quot;PKR&quot; &quot;PLN&quot; &quot;PYG&quot; &quot;QAR&quot; &quot;RON&quot; &quot;RSD&quot; &quot;RUB&quot; &quot;RWF&quot; &quot;SAR&quot; &quot;SBD&quot; &quot;SCR&quot; &quot;SDG&quot; &quot;SEK&quot; &quot;SGD&quot; &quot;SHP&quot; &quot;SLL&quot; &quot;SOS&quot; &quot;SRD&quot; &quot;SSP&quot; &quot;STN&quot; &quot;SVC&quot; &quot;SYP&quot; &quot;SZL&quot; &quot;THB&quot; &quot;TJS&quot; &quot;TMT&quot; &quot;TND&quot; &quot;TOP&quot; &quot;TRY&quot; &quot;TTD&quot; &quot;TVD&quot; &quot;TWD&quot; &quot;TZS&quot; &quot;UAH&quot; &quot;UGX&quot; &quot;USD&quot; &quot;USN&quot; &quot;UYI&quot; &quot;UYU&quot; &quot;UZS&quot; &quot;VEF&quot; &quot;VND&quot; &quot;VUV&quot; &quot;WST&quot; &quot;XAF&quot; &quot;XAG&quot; &quot;XAU&quot; &quot;XBA&quot; &quot;XBB&quot; &quot;XBC&quot; &quot;XBD&quot; &quot;XCD&quot; &quot;XDR&quot; &quot;XOF&quot; &quot;XPD&quot; &quot;XPF&quot; &quot;XPT&quot; &quot;XSU&quot; &quot;XTS&quot; &quot;XUA&quot; &quot;XXX&quot; &quot;YER&quot; &quot;ZAR&quot; &quot;ZMW&quot; &quot;ZWL&quot;]
 
 </pre>
 </div>
@@ -1368,7 +1426,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:26-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:26-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -1378,7 +1436,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fimplementationguide.shex.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fimplementationguide.shex.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fimplementationguide.shex.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fimplementationguide.shex.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

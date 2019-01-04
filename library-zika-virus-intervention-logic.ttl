@@ -1,6 +1,7 @@
 @prefix fhir: <http://hl7.org/fhir/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sct: <http://snomed.info/id/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # - resource -------------------------------------------------------------------
@@ -29,6 +30,34 @@
   ];
   fhir:Library.date [ fhir:value "2016-11-14"^^xsd:date];
   fhir:Library.description [ fhir:value "Decision support logic for managing zika virus infection"];
+  fhir:Library.useContext [
+     fhir:index 0;
+     fhir:UsageContext.code [
+       fhir:Coding.system [ fhir:value "http://terminology.hl7.org/CodeSystem/usage-context-type" ];
+       fhir:Coding.code [ fhir:value "age" ]
+     ];
+     fhir:UsageContext.valueRange [
+       fhir:Range.low [
+         fhir:Quantity.value [ fhir:value "12"^^xsd:decimal ];
+         fhir:Quantity.unit [ fhir:value "a" ]
+       ]
+     ]
+  ], [
+     fhir:index 1;
+     fhir:UsageContext.code [
+       fhir:Coding.system [ fhir:value "http://terminology.hl7.org/CodeSystem/usage-context-type" ];
+       fhir:Coding.code [ fhir:value "user" ]
+     ];
+     fhir:UsageContext.valueCodeableConcept [
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         a sct:309343006;
+         fhir:Coding.system [ fhir:value "http://snomed.info/sct" ];
+         fhir:Coding.code [ fhir:value "309343006" ];
+         fhir:Coding.display [ fhir:value "Physician" ]
+       ]
+     ]
+  ];
   fhir:Library.topic [
      fhir:index 0;
      fhir:CodeableConcept.text [ fhir:value "Zika Virus Management" ]

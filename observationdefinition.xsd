@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -49,7 +49,7 @@
     <xs:complexContent>
       <xs:extension base="DomainResource">
         <xs:sequence>
-          <xs:element name="category" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="category" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">A code that classifies the general type of observation.</xs:documentation>
            </xs:annotation>
@@ -61,17 +61,17 @@
           </xs:element>
           <xs:element name="identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Unique identifier for this ObservationDefinition artifact.</xs:documentation>
+              <xs:documentation xml:lang="en">A unique identifier assigned to this ObservationDefinition artifact.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="permittedDataType" minOccurs="0" maxOccurs="unbounded" type="Coding">
+          <xs:element name="permittedDataType" minOccurs="0" maxOccurs="unbounded" type="ObservationDataType">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Data type allowed for the result of the observation.</xs:documentation>
+              <xs:documentation xml:lang="en">The data types allowed for the value element of the instance observations conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="multipleResultsAllowed" minOccurs="0" maxOccurs="1" type="boolean">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Multiple results allowed for this kind of observation.</xs:documentation>
+              <xs:documentation xml:lang="en">Multiple results allowed for observations conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="method" minOccurs="0" maxOccurs="1" type="CodeableConcept">
@@ -81,7 +81,7 @@
           </xs:element>
           <xs:element name="preferredReportName" minOccurs="0" maxOccurs="1" type="string">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The preferred name to be used when reporting the results of this observation.</xs:documentation>
+              <xs:documentation xml:lang="en">The preferred name to be used when reporting the results of observations conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="quantitativeDetails" type="ObservationDefinition.QuantitativeDetails" minOccurs="0" maxOccurs="1">
@@ -91,27 +91,27 @@
           </xs:element>
           <xs:element name="qualifiedInterval" type="ObservationDefinition.QualifiedInterval" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Reference range for ordinal and continuous observations.</xs:documentation>
+              <xs:documentation xml:lang="en">Multiple  ranges of results qualified by different contexts for ordinal or continuous observations conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="validCodedValueSet" minOccurs="0" maxOccurs="1" type="uri">
+          <xs:element name="validCodedValueSet" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The set of valid coded results for the observation.</xs:documentation>
+              <xs:documentation xml:lang="en">The set of valid coded results for the observations  conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="normalCodedValueSet" minOccurs="0" maxOccurs="1" type="uri">
+          <xs:element name="normalCodedValueSet" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The set of normal coded results for the observation.</xs:documentation>
+              <xs:documentation xml:lang="en">The set of normal coded results for the observations conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="abnormalCodedValueSet" minOccurs="0" maxOccurs="1" type="uri">
+          <xs:element name="abnormalCodedValueSet" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The set of abnormal coded results for the observation.</xs:documentation>
+              <xs:documentation xml:lang="en">The set of abnormal coded results for the observation conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="criticalCodedValueSet" minOccurs="0" maxOccurs="1" type="uri">
+          <xs:element name="criticalCodedValueSet" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The set of critical coded results for the observation.</xs:documentation>
+              <xs:documentation xml:lang="en">The set of critical coded results for the observation conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -125,14 +125,14 @@
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="customaryUnit" minOccurs="0" maxOccurs="1" type="Coding">
+          <xs:element name="customaryUnit" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Customary unit used to report quantitative results of this observation.</xs:documentation>
+              <xs:documentation xml:lang="en">Customary unit used to report quantitative results of observations conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="unit" minOccurs="0" maxOccurs="1" type="Coding">
+          <xs:element name="unit" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">SI unit used to report quantitative results of this observation.</xs:documentation>
+              <xs:documentation xml:lang="en">SI unit used to report quantitative results of observations conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="conversionFactor" minOccurs="0" maxOccurs="1" type="decimal">
@@ -142,7 +142,7 @@
           </xs:element>
           <xs:element name="decimalPrecision" minOccurs="0" maxOccurs="1" type="integer">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Number of digits after decimal separator when the results of this observation are of type Quantity.</xs:documentation>
+              <xs:documentation xml:lang="en">Number of digits after decimal separator when the results of such observations are of type Quantity.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -156,24 +156,29 @@
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="category" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="category" minOccurs="0" maxOccurs="1" type="ObservationRangeCategory">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The category or type of interval.</xs:documentation>
+              <xs:documentation xml:lang="en">The category of interval of values for continuous or ordinal observations conforming to this ObservationDefinition.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="range" minOccurs="0" maxOccurs="1" type="Range">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The range of the interval.</xs:documentation>
+              <xs:documentation xml:lang="en">The low and high values determining the interval. There may be only one of the two.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="type" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="context" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Codes to indicate what part of the targeted reference population it applies to. For example, the normal or therapeutic range.</xs:documentation>
+              <xs:documentation xml:lang="en">Codes to indicate the health context the range applies to. For example, the normal or therapeutic range.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="appliesTo" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">Codes to indicate the target population this reference range applies to.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="gender" minOccurs="0" maxOccurs="1" type="AdministrativeGender">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Sex of the population the range applies to.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="age" minOccurs="0" maxOccurs="1" type="Range">
@@ -183,7 +188,7 @@
           </xs:element>
           <xs:element name="gestationalAge" minOccurs="0" maxOccurs="1" type="Range">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The gestational age at which this reference range is applicable, in the context of pregnancy.</xs:documentation>
+              <xs:documentation xml:lang="en">The gestational age to which this reference range is applicable, in the context of pregnancy.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="condition" minOccurs="0" maxOccurs="1" type="string">
@@ -192,6 +197,106 @@
            </xs:annotation>
           </xs:element>
         </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ObservationDataType-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="Quantity">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Quantity</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CodeableConcept">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">CodeableConcept</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">string</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">boolean</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="integer">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">integer</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Range">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Range</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Ratio">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Ratio</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SampledData">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">SampledData</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="time">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">time</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">dateTime</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Period">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Period</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ObservationDataType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Permitted data type for observation value.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Element">
+        <xs:attribute name="value" type="ObservationDataType-list" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ObservationRangeCategory-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="reference">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">reference range</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="critical">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">critical range</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="absolute">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">absolute range</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ObservationRangeCategory">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Codes identifying the category of observation range.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Element">
+        <xs:attribute name="value" type="ObservationRangeCategory-list" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

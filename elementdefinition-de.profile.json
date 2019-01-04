@@ -11,9 +11,10 @@
   },
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-    "valueString" : "Trial Use"
+    "valueCode" : "trial-use"
   }],
   "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-de",
+  "version" : "3.6.0",
   "name" : "DataElement constraint on ElementDefinition data type",
   "status" : "draft",
   "experimental" : false,
@@ -26,7 +27,7 @@
     }]
   }],
   "description" : "Identifies how the ElementDefinition data type is used when it appears within a data element",
-  "fhirVersion" : "3.5.0",
+  "fhirVersion" : "3.6.0",
   "mapping" : [{
     "identity" : "v2",
     "uri" : "http://hl7.org/v2",
@@ -60,6 +61,14 @@
   "snapshot" : {
     "element" : [{
       "id" : "ElementDefinition",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+        "valueCode" : "normative"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
+        "valueCode" : "4.0.0"
+      }],
       "path" : "ElementDefinition",
       "short" : "Definition of an element in a resource or extension",
       "definition" : "Captures constraints on each element within the resource, profile, or extension.",
@@ -147,7 +156,7 @@
         "severity" : "error",
         "human" : "Types must be unique by code",
         "expression" : "type.select(code).isDistinct()",
-        "xpath" : "not(exists(for $type in f:type return $type/preceding-sibling::f:type[f:code/@value=$type/f:code/@value))",
+        "xpath" : "not(exists(for $type in f:type return $type/preceding-sibling::f:type[f:code/@value=$type/f:code/@value]))",
         "source" : "ElementDefinition"
       },
       {
@@ -208,7 +217,7 @@
       "id" : "ElementDefinition.id",
       "path" : "ElementDefinition.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -264,8 +273,9 @@
       "id" : "ElementDefinition.extension:Question",
       "path" : "ElementDefinition.extension",
       "sliceName" : "Question",
-      "short" : "Extension",
-      "definition" : "An Extension",
+      "short" : "Prompt for element phrased as question",
+      "definition" : "The default/suggested phrasing to use when prompting a human to capture the data element in question form (e.g. In a survey).",
+      "comment" : "Question and label serve similar purposes in they both can be used to prompt for capturing a data element.  Whether the question form or label form should be used will depend on the type of instrument being used to capture the information.  The ordering is in order of preference.  I.e. Most preferred question form is listed first.  Note that this is for alternate phrasings of the question.  Language translations are handled using the ISO 21090 string translation extensions.",
       "min" : 0,
       "max" : "*",
       "base" : {
@@ -278,13 +288,17 @@
         "profile" : ["http://hl7.org/fhir/StructureDefinition/elementdefinition-question"]
       }],
       "isModifier" : false,
-      "isSummary" : false
+      "isSummary" : false,
+      "mapping" : [{
+        "identity" : "rim",
+        "map" : "N/A (MIF-level)"
+      }]
     },
     {
       "id" : "ElementDefinition.extension:Question.id",
       "path" : "ElementDefinition.extension.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -358,7 +372,7 @@
       "id" : "ElementDefinition.extension:Question.valueString",
       "path" : "ElementDefinition.extension.valueString",
       "short" : "Value of extension",
-      "definition" : "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).",
+      "definition" : "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
       "min" : 0,
       "max" : "1",
       "base" : {
@@ -380,8 +394,9 @@
       "id" : "ElementDefinition.extension:AllowedUnits",
       "path" : "ElementDefinition.extension",
       "sliceName" : "AllowedUnits",
-      "short" : "Extension",
-      "definition" : "An Extension",
+      "short" : "Units to use for measured value",
+      "definition" : "Identifies the units of measure in which the element should be captured or expressed.",
+      "comment" : "Use a value set if more than one unit of measure is possible.  Value sets will typically be short enough to display in a drop-down selection list.",
       "min" : 0,
       "max" : "1",
       "base" : {
@@ -394,13 +409,21 @@
         "profile" : ["http://hl7.org/fhir/StructureDefinition/elementdefinition-allowedUnits"]
       }],
       "isModifier" : false,
-      "isSummary" : false
+      "isSummary" : false,
+      "mapping" : [{
+        "identity" : "v2",
+        "map" : "OM2.2"
+      },
+      {
+        "identity" : "rim",
+        "map" : "N/A (MIF territory)"
+      }]
     },
     {
       "id" : "ElementDefinition.extension:AllowedUnits.id",
       "path" : "ElementDefinition.extension.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -474,7 +497,7 @@
       "id" : "ElementDefinition.extension:AllowedUnits.value[x]",
       "path" : "ElementDefinition.extension.value[x]",
       "short" : "Value of extension",
-      "definition" : "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).",
+      "definition" : "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
       "min" : 1,
       "max" : "1",
       "base" : {
@@ -508,9 +531,10 @@
     {
       "id" : "ElementDefinition.modifierExtension",
       "path" : "ElementDefinition.modifierExtension",
-      "short" : "Extensions that cannot be ignored if unrecognized",
-      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+      "short" : "Extensions that cannot be ignored even if unrecognized",
+      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
       "comment" : "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+      "requirements" : "Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).",
       "alias" : ["extensions",
       "user content",
       "modifiers"],
@@ -636,6 +660,10 @@
     },
     {
       "id" : "ElementDefinition.sliceIsConstraining",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+        "valueCode" : "trial-use"
+      }],
       "path" : "ElementDefinition.sliceIsConstraining",
       "short" : "If this slice definition constrains an inherited slice definition (or not)",
       "definition" : "If true, indicates that this slice definition is constraining a slice definition with the same name in an inherited profile. If false, the slice is not overriding any slice in an inherited profile. If missing, the slice might or might not be overriding a slice in an inherited profile, depending on the sliceName.",
@@ -789,7 +817,7 @@
       "id" : "ElementDefinition.slicing.id",
       "path" : "ElementDefinition.slicing.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -880,7 +908,7 @@
       "id" : "ElementDefinition.slicing.discriminator.id",
       "path" : "ElementDefinition.slicing.discriminator.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -1370,7 +1398,7 @@
       "id" : "ElementDefinition.base.id",
       "path" : "ElementDefinition.base.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -1566,7 +1594,7 @@
       {
         "key" : "eld-17",
         "severity" : "error",
-        "human" : "targetProfile is only allowed if the type is reference or canonical",
+        "human" : "targetProfile is only allowed if the type is Reference or canonical",
         "expression" : "(code='Reference' or code = 'canonical') or targetProfile.empty()",
         "xpath" : "not(exists(f:targetProfile)) or (f:code/@value = 'Reference')",
         "source" : "ElementDefinition.type"
@@ -1598,7 +1626,7 @@
       "id" : "ElementDefinition.type.id",
       "path" : "ElementDefinition.type.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -1699,6 +1727,7 @@
       "path" : "ElementDefinition.type.profile",
       "short" : "Profiles (StructureDefinition or IG) - one must apply",
       "definition" : "Identifies a profile structure or implementation Guide that applies to the datatype this element refers to. If any profiles are specified, then the content must conform to at least one of them. The URL can be a local reference - to a contained StructureDefinition, or a reference to another StructureDefinition or Implementation Guide by a canonical URL. When an implementation guide is specified, the type SHALL conform to at least one profile defined in the implementation guide.",
+      "comment" : "It is possible to profile  backbone element (e.g. part of a resource), using the [profile-element](extension-elementdefinition-profile-element.html) extension.",
       "min" : 0,
       "max" : "0",
       "base" : {
@@ -1953,25 +1982,25 @@
         "code" : "Timing"
       },
       {
-        "code" : "ParameterDefinition"
-      },
-      {
-        "code" : "DataRequirement"
-      },
-      {
-        "code" : "RelatedArtifact"
-      },
-      {
         "code" : "ContactDetail"
       },
       {
         "code" : "Contributor"
       },
       {
-        "code" : "TriggerDefinition"
+        "code" : "DataRequirement"
       },
       {
         "code" : "Expression"
+      },
+      {
+        "code" : "ParameterDefinition"
+      },
+      {
+        "code" : "RelatedArtifact"
+      },
+      {
+        "code" : "TriggerDefinition"
       },
       {
         "code" : "UsageContext"
@@ -2172,25 +2201,25 @@
         "code" : "Timing"
       },
       {
-        "code" : "ParameterDefinition"
-      },
-      {
-        "code" : "DataRequirement"
-      },
-      {
-        "code" : "RelatedArtifact"
-      },
-      {
         "code" : "ContactDetail"
       },
       {
         "code" : "Contributor"
       },
       {
-        "code" : "TriggerDefinition"
+        "code" : "DataRequirement"
       },
       {
         "code" : "Expression"
+      },
+      {
+        "code" : "ParameterDefinition"
+      },
+      {
+        "code" : "RelatedArtifact"
+      },
+      {
+        "code" : "TriggerDefinition"
       },
       {
         "code" : "UsageContext"
@@ -2216,8 +2245,8 @@
       "id" : "ElementDefinition.pattern[x]",
       "path" : "ElementDefinition.pattern[x]",
       "short" : "Value must have at least these property values",
-      "definition" : "Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).",
-      "comment" : "Mostly used for fixing values of CodeableConcept. At present, pattern[x] is not recommended as a basis for slicing while issues related to this are investigated during the STU period.",
+      "definition" : "Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  \n\nWhen pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly.\n\nWhen pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array.\n\nWhen pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e.,\n\n1. If primitive: it must match exactly the pattern value\n2. If a complex object: it must match (recursively) the pattern value\n3. If an array: it must match (recursively) the pattern value.",
+      "comment" : "Mostly used for fixing values of CodeableConcept. In general, pattern[x] is not intended for use with primitive types, where is has the same meaning as fixed[x].",
       "min" : 0,
       "max" : "0",
       "base" : {
@@ -2346,25 +2375,25 @@
         "code" : "Timing"
       },
       {
-        "code" : "ParameterDefinition"
-      },
-      {
-        "code" : "DataRequirement"
-      },
-      {
-        "code" : "RelatedArtifact"
-      },
-      {
         "code" : "ContactDetail"
       },
       {
         "code" : "Contributor"
       },
       {
-        "code" : "TriggerDefinition"
+        "code" : "DataRequirement"
       },
       {
         "code" : "Expression"
+      },
+      {
+        "code" : "ParameterDefinition"
+      },
+      {
+        "code" : "RelatedArtifact"
+      },
+      {
+        "code" : "TriggerDefinition"
       },
       {
         "code" : "UsageContext"
@@ -2417,7 +2446,7 @@
       "id" : "ElementDefinition.example.id",
       "path" : "ElementDefinition.example.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -2628,25 +2657,25 @@
         "code" : "Timing"
       },
       {
-        "code" : "ParameterDefinition"
-      },
-      {
-        "code" : "DataRequirement"
-      },
-      {
-        "code" : "RelatedArtifact"
-      },
-      {
         "code" : "ContactDetail"
       },
       {
         "code" : "Contributor"
       },
       {
-        "code" : "TriggerDefinition"
+        "code" : "DataRequirement"
       },
       {
         "code" : "Expression"
+      },
+      {
+        "code" : "ParameterDefinition"
+      },
+      {
+        "code" : "RelatedArtifact"
+      },
+      {
+        "code" : "TriggerDefinition"
       },
       {
         "code" : "UsageContext"
@@ -2674,7 +2703,7 @@
       "path" : "ElementDefinition.minValue[x]",
       "short" : "Minimum Allowed Value (for some types)",
       "definition" : "The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
-      "comment" : "Except for date/date/instant, the type of the minValue[x] SHALL be the same as the specified type of the element. For the date/dateTime/instant values, the type of minValue[x] SHALL be either the same, or a a [Duration](datatypes.html#Duration) which specifies a relative time limit to the current time. The duration value is positive, and is subtracted from the current clock to determine the minimum allowable value.   A minimum value for a Quantity is interpreted as an canonical minimum - e.g. you cannot provide 100mg if the minimum value is 10g.",
+      "comment" : "Except for date/date/instant, the type of the minValue[x] SHALL be the same as the specified type of the element. For the date/dateTime/instant values, the type of minValue[x] SHALL be either the same, or a [Duration](datatypes.html#Duration) which specifies a relative time limit to the current time. The duration value is positive, and is subtracted from the current clock to determine the minimum allowable value.   A minimum value for a Quantity is interpreted as an canonical minimum - e.g. you cannot provide 100mg if the minimum value is 10g.",
       "min" : 0,
       "max" : "1",
       "base" : {
@@ -2721,7 +2750,7 @@
       "path" : "ElementDefinition.maxValue[x]",
       "short" : "Maximum Allowed Value (for some types)",
       "definition" : "The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.",
-      "comment" : "Except for date/date/instant, the type of the maxValue[x] SHALL be the same as the specified type of the element. For the date/dateTime/instant values, the type of maxValue[x] SHALL be either the same, or a a [Duration](datatypes.html#Duration) which specifies a relative time limit to the current time. The duration value is positive, and is added to the current clock to determine the maximum allowable value.   A maximum value for a Quantity is interpreted as an canonical maximum - e.g. you cannot provide 10g if the maximum value is 50mg.",
+      "comment" : "Except for date/date/instant, the type of the maxValue[x] SHALL be the same as the specified type of the element. For the date/dateTime/instant values, the type of maxValue[x] SHALL be either the same, or a [Duration](datatypes.html#Duration) which specifies a relative time limit to the current time. The duration value is positive, and is added to the current clock to determine the maximum allowable value.   A maximum value for a Quantity is interpreted as an canonical maximum - e.g. you cannot provide 10g if the maximum value is 50mg.",
       "min" : 0,
       "max" : "1",
       "base" : {
@@ -2862,7 +2891,7 @@
       "id" : "ElementDefinition.constraint.id",
       "path" : "ElementDefinition.constraint.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -3045,6 +3074,10 @@
     },
     {
       "id" : "ElementDefinition.constraint.xpath",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+        "valueCode" : "trial-use"
+      }],
       "path" : "ElementDefinition.constraint.xpath",
       "short" : "XPath expression of constraint",
       "definition" : "An XPath expression of constraint that can be executed to see if this constraint is met.",
@@ -3259,7 +3292,7 @@
       "id" : "ElementDefinition.binding.id",
       "path" : "ElementDefinition.binding.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -3468,7 +3501,7 @@
       "id" : "ElementDefinition.mapping.id",
       "path" : "ElementDefinition.mapping.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",

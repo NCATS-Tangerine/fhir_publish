@@ -23,7 +23,7 @@
      fhir:Period.end [ fhir:value "2014-08-31"^^xsd:date ]
   ];
   fhir:PaymentReconciliation.created [ fhir:value "2014-08-16"^^xsd:date];
-  fhir:PaymentReconciliation.organization [
+  fhir:PaymentReconciliation.paymentIssuer [
      fhir:link <http://hl7.org/fhir/Organization/2>;
      fhir:Reference.reference [ fhir:value "Organization/2" ]
   ];
@@ -31,14 +31,27 @@
      fhir:link <http://www.BenefitsInc.com/fhir/eligibility/225476332402>;
      fhir:Reference.reference [ fhir:value "http://www.BenefitsInc.com/fhir/eligibility/225476332402" ]
   ];
-  fhir:PaymentReconciliation.outcome [ fhir:value "complete"];
-  fhir:PaymentReconciliation.disposition [ fhir:value "2014 August mid-month settlement."];
-  fhir:PaymentReconciliation.requestProvider [
+  fhir:PaymentReconciliation.requestor [
      fhir:link <http://hl7.org/fhir/Organization/1>;
      fhir:Reference.reference [ fhir:value "Organization/1" ]
   ];
+  fhir:PaymentReconciliation.outcome [ fhir:value "complete"];
+  fhir:PaymentReconciliation.disposition [ fhir:value "2014 August mid-month settlement."];
+  fhir:PaymentReconciliation.paymentDate [ fhir:value "2014-08-01"^^xsd:date];
+  fhir:PaymentReconciliation.paymentAmount [
+     fhir:Money.value [ fhir:value "7000.00"^^xsd:decimal ];
+     fhir:Money.currency [ fhir:value "USD" ]
+  ];
+  fhir:PaymentReconciliation.paymentIdentifier [
+     fhir:Identifier.system [ fhir:value "http://www.BenefitsInc.com/payment/2018" ];
+     fhir:Identifier.value [ fhir:value "10-12345" ]
+  ];
   fhir:PaymentReconciliation.detail [
      fhir:index 0;
+     fhir:PaymentReconciliation.detail.identifier [
+       fhir:Identifier.system [ fhir:value "http://www.BenefitsInc.com/payment/2018/detail" ];
+       fhir:Identifier.value [ fhir:value "10-12345-001" ]
+     ];
      fhir:PaymentReconciliation.detail.type [
        fhir:CodeableConcept.coding [
          fhir:index 0;
@@ -52,27 +65,31 @@
          fhir:Identifier.value [ fhir:value "AB12345" ]
        ]
      ];
+     fhir:PaymentReconciliation.detail.submitter [
+       fhir:link <http://hl7.org/fhir/Organization/1>;
+       fhir:Reference.reference [ fhir:value "Organization/1" ]
+     ];
      fhir:PaymentReconciliation.detail.response [
        fhir:Reference.identifier [
          fhir:Identifier.system [ fhir:value "http://www.BenefitsInc.com/fhir/claimresponse" ];
          fhir:Identifier.value [ fhir:value "CR20140815-AB12345" ]
        ]
      ];
-     fhir:PaymentReconciliation.detail.submitter [
-       fhir:link <http://hl7.org/fhir/Organization/1>;
-       fhir:Reference.reference [ fhir:value "Organization/1" ]
-     ];
+     fhir:PaymentReconciliation.detail.date [ fhir:value "2014-08-16"^^xsd:date ];
      fhir:PaymentReconciliation.detail.payee [
        fhir:link <http://hl7.org/fhir/Organization/1>;
        fhir:Reference.reference [ fhir:value "Organization/1" ]
      ];
-     fhir:PaymentReconciliation.detail.date [ fhir:value "2014-08-16"^^xsd:date ];
      fhir:PaymentReconciliation.detail.amount [
-       fhir:Money.value [ fhir:value "1000.00"^^xsd:decimal ];
+       fhir:Money.value [ fhir:value "3500.00"^^xsd:decimal ];
        fhir:Money.currency [ fhir:value "USD" ]
      ]
   ], [
      fhir:index 1;
+     fhir:PaymentReconciliation.detail.identifier [
+       fhir:Identifier.system [ fhir:value "http://www.BenefitsInc.com/payment/2018/detail" ];
+       fhir:Identifier.value [ fhir:value "10-12345-002" ]
+     ];
      fhir:PaymentReconciliation.detail.type [
        fhir:CodeableConcept.coding [
          fhir:index 0;
@@ -91,6 +108,10 @@
      ]
   ], [
      fhir:index 2;
+     fhir:PaymentReconciliation.detail.identifier [
+       fhir:Identifier.system [ fhir:value "http://www.BenefitsInc.com/payment/2018/detail" ];
+       fhir:Identifier.value [ fhir:value "10-12345-003" ]
+     ];
      fhir:PaymentReconciliation.detail.type [
        fhir:CodeableConcept.coding [
          fhir:index 0;
@@ -104,16 +125,12 @@
        fhir:Money.currency [ fhir:value "USD" ]
      ]
   ];
-  fhir:PaymentReconciliation.form [
+  fhir:PaymentReconciliation.formCode [
      fhir:CodeableConcept.coding [
        fhir:index 0;
        fhir:Coding.system [ fhir:value "http://ncforms.org/formid" ];
        fhir:Coding.code [ fhir:value "PAYREC/2016/01B" ]
      ]
-  ];
-  fhir:PaymentReconciliation.total [
-     fhir:Money.value [ fhir:value "3500.00"^^xsd:decimal ];
-     fhir:Money.currency [ fhir:value "USD" ]
   ];
   fhir:PaymentReconciliation.processNote [
      fhir:index 0;

@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -51,7 +51,7 @@
         <xs:sequence>
           <xs:element name="identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier">
             <xs:annotation>
-              <xs:documentation xml:lang="en">DICOM Study Instance UID, and Accession Number.</xs:documentation>
+              <xs:documentation xml:lang="en">Identifiers for the ImagingStudy such as DICOM Study Instance UID, and Accession Number.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="status" minOccurs="1" maxOccurs="1" type="ImagingStudyStatus">
@@ -69,9 +69,9 @@
               <xs:documentation xml:lang="en">The subject, typically a patient, of the imaging study.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="context" minOccurs="0" maxOccurs="1" type="Reference">
+          <xs:element name="encounter" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The encounter or episode at which the request is initiated.</xs:documentation>
+              <xs:documentation xml:lang="en">The healthcare event (e.g. a patient and healthcare provider interaction) during which this ImagingStudy is made.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="started" minOccurs="0" maxOccurs="1" type="dateTime">
@@ -111,7 +111,7 @@
           </xs:element>
           <xs:element name="procedureReference" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">A reference to the performed Procedure.</xs:documentation>
+              <xs:documentation xml:lang="en">The procedure which this ImagingStudy was part of.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="procedureCode" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
@@ -160,9 +160,9 @@
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="identifier" minOccurs="1" maxOccurs="1" type="Identifier">
+          <xs:element name="uid" minOccurs="1" maxOccurs="1" type="id">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Formal identifier for this series.</xs:documentation>
+              <xs:documentation xml:lang="en">The DICOM Series Instance UID for the series.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="number" minOccurs="0" maxOccurs="1" type="unsignedInt">
@@ -252,19 +252,19 @@
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="identifier" minOccurs="1" maxOccurs="1" type="Identifier">
+          <xs:element name="uid" minOccurs="1" maxOccurs="1" type="id">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Formal identifier for this image or other content.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="number" minOccurs="0" maxOccurs="1" type="unsignedInt">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The number of instance in the series.</xs:documentation>
+              <xs:documentation xml:lang="en">The DICOM SOP Instance UID for this image or other DICOM content.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="sopClass" minOccurs="1" maxOccurs="1" type="Coding">
             <xs:annotation>
               <xs:documentation xml:lang="en">DICOM instance  type.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="number" minOccurs="0" maxOccurs="1" type="unsignedInt">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The number of instance in the series.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="title" minOccurs="0" maxOccurs="1" type="string">

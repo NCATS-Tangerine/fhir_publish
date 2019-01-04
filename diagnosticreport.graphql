@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type DiagnosticReport {
   id: ID
@@ -12,10 +12,10 @@ type DiagnosticReport {
   identifier: [Identifier]
   basedOn: [Reference]
   status: code  _status: ElementBase
-  category: CodeableConcept
+  category: [CodeableConcept]
   code: CodeableConcept!
   subject: Reference
-  context: Reference
+  encounter: Reference
   effectiveDateTime: dateTime  _effectiveDateTime: ElementBase
   effectivePeriod: Period
   issued: instant  _issued: ElementBase
@@ -50,10 +50,10 @@ input DiagnosticReport {
   identifier: [Identifier]
   basedOn: [Reference]
   status: code  _status: ElementBase
-  category: CodeableConcept
+  category: [CodeableConcept]
   code: CodeableConcept!
   subject: Reference
-  context: Reference
+  encounter: Reference
   effectiveDateTime: dateTime  _effectiveDateTime: ElementBase
   effectivePeriod: Period
   issued: instant  _issued: ElementBase
@@ -86,7 +86,6 @@ type DiagnosticReportListType {
     category : [token]
     code : [token]
     conclusion : [token]
-    context : [reference]
     date : [date]
     encounter : [reference]
     identifier : [token]
@@ -119,7 +118,6 @@ type DiagnosticReportConnectionType {
     category : [token]
     code : [token]
     conclusion : [token]
-    context : [reference]
     date : [date]
     encounter : [reference]
     identifier : [token]

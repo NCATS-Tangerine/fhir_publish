@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type Medication {
   id: ID
@@ -9,11 +9,12 @@ type Medication {
   contained: [Resource]
   extension: [Extension]
   modifierExtension: [Extension]
+  identifier: [Identifier]
   code: CodeableConcept
   status: code  _status: ElementBase
   manufacturer: Reference
   form: CodeableConcept
-  amount: Quantity
+  amount: Ratio
   ingredient: [MedicationIngredient]
   batch: MedicationBatch
 }
@@ -25,7 +26,7 @@ type MedicationIngredient {
   itemCodeableConcept: CodeableConcept
   itemReference: Reference
   isActive: Boolean  _isActive: ElementBase
-  amount: Ratio
+  strength: Ratio
 }
 
 type MedicationBatch {
@@ -34,7 +35,6 @@ type MedicationBatch {
   modifierExtension: [Extension]
   lotNumber: String  _lotNumber: ElementBase
   expirationDate: dateTime  _expirationDate: ElementBase
-  serialNumber: String  _serialNumber: ElementBase
 }
 
 input Medication {
@@ -46,11 +46,12 @@ input Medication {
   contained: [Resource]
   extension: [Extension]
   modifierExtension: [Extension]
+  identifier: [Identifier]
   code: CodeableConcept
   status: code  _status: ElementBase
   manufacturer: Reference
   form: CodeableConcept
-  amount: Quantity
+  amount: Ratio
   ingredient: [MedicationIngredient]
   batch: MedicationBatch
 }
@@ -62,7 +63,7 @@ input MedicationIngredient {
   itemCodeableConcept: CodeableConcept
   itemReference: Reference
   isActive: Boolean  _isActive: ElementBase
-  amount: Ratio
+  strength: Ratio
 }
 
 input MedicationBatch {
@@ -71,7 +72,6 @@ input MedicationBatch {
   modifierExtension: [Extension]
   lotNumber: String  _lotNumber: ElementBase
   expirationDate: dateTime  _expirationDate: ElementBase
-  serialNumber: String  _serialNumber: ElementBase
 }
 
 type MedicationReadType {
@@ -83,11 +83,11 @@ type MedicationListType {
     code : [token]
     expiration_date : [date]
     form : [token]
+    identifier : [token]
     ingredient : [reference]
     ingredient_code : [token]
     lot_number : [token]
     manufacturer : [reference]
-    serial_number : [token]
     status : [token]
     _text : [String]
     _content : [String]
@@ -108,11 +108,11 @@ type MedicationConnectionType {
     code : [token]
     expiration_date : [date]
     form : [token]
+    identifier : [token]
     ingredient : [reference]
     ingredient_code : [token]
     lot_number : [token]
     manufacturer : [reference]
-    serial_number : [token]
     status : [token]
     _text : [String]
     _content : [String]

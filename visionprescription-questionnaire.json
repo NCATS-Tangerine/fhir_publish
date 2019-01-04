@@ -1,32 +1,12 @@
 {
   "resourceType" : "Questionnaire",
   "id" : "qs1",
-  "contained" : [{
-    "resourceType" : "ValueSet",
-    "id" : "vs2",
-    "name" : "Type options for VisionPrescription.reason[x]",
-    "status" : "active",
-    "description" : "Type options for VisionPrescription.reason[x]",
-    "expansion" : {
-      "identifier" : "urn:uuid:83a45ce3-bd1c-40cc-af98-ad335e31200d",
-      "timestamp" : "2018-09-14T07:28:40-05:00",
-      "contains" : [{
-        "system" : "http://hl7.org/fhir/data-types",
-        "code" : "CodeableConcept",
-        "display" : "CodeableConcept"
-      },
-      {
-        "system" : "http://hl7.org/fhir/resource-types",
-        "code" : "Condition",
-        "display" : "Condition"
-      }]
-    }
-  }],
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
+  "version" : "3.6.0",
   "status" : "draft",
-  "date" : "2018-09-14T07:16:19-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "Health Level Seven International (Financial Management)",
   "item" : [{
     "linkId" : "VisionPrescription",
@@ -45,7 +25,7 @@
           }]
         }
       }],
-      "text" : "An authorization for the supply of glasses and/or contact lenses to a patient.",
+      "text" : "An authorization for the provision of glasses and/or contact lenses to a patient.",
       "type" : "display"
     },
     {
@@ -226,7 +206,7 @@
     },
     {
       "linkId" : "VisionPrescription.extension",
-      "text" : "Additional Content defined by implementations",
+      "text" : "Additional content defined by implementations",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -262,7 +242,7 @@
             }]
           }
         }],
-        "text" : "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "text" : "May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
         "type" : "display"
       }]
     },
@@ -272,7 +252,7 @@
         "valueString" : "Identifier"
       }],
       "linkId" : "VisionPrescription.identifier",
-      "text" : "Business identifier",
+      "text" : "Business Identifier for vision prescription",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -287,7 +267,7 @@
             }]
           }
         }],
-        "text" : "Business identifier which may be used by other parties to reference or identify the prescription.",
+        "text" : "A unique identifier assigned to this vision prescription.",
         "type" : "display"
       },
       {
@@ -314,6 +294,10 @@
     },
     {
       "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+        "valueInteger" : 1
+      },
+      {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
         "valueInteger" : 1
       },
@@ -323,7 +307,7 @@
       }],
       "linkId" : "VisionPrescription.status",
       "type" : "group",
-      "required" : false,
+      "required" : true,
       "repeats" : true,
       "item" : [{
         "extension" : [{
@@ -336,7 +320,7 @@
             }]
           }
         }],
-        "text" : "The status of the resource instance.",
+        "text" : "The status of the resource instance. This element is labeled as a modifier because the status contains codes that mark the resource as not currently valid.",
         "type" : "display"
       },
       {
@@ -349,16 +333,20 @@
     },
     {
       "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+        "valueInteger" : 1
+      },
+      {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
         "valueInteger" : 1
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "Reference"
+        "valueString" : "datetime"
       }],
-      "linkId" : "VisionPrescription.patient",
+      "linkId" : "VisionPrescription.created",
       "type" : "group",
-      "required" : false,
+      "required" : true,
       "repeats" : true,
       "item" : [{
         "extension" : [{
@@ -371,7 +359,46 @@
             }]
           }
         }],
-        "text" : "A link to a resource representing the person to whom the vision products will be supplied.",
+        "text" : "The date this resource was created.",
+        "type" : "display"
+      },
+      {
+        "linkId" : "VisionPrescription.created.value",
+        "text" : "Response creation date",
+        "type" : "dateTime",
+        "required" : false,
+        "repeats" : false
+      }]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "Reference"
+      }],
+      "linkId" : "VisionPrescription.patient",
+      "type" : "group",
+      "required" : true,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "A resource reference to the person to whom the vision prescription applies.",
         "type" : "display"
       },
       {
@@ -414,7 +441,7 @@
             }]
           }
         }],
-        "text" : "A link to a resource that identifies the particular occurrence of contact between patient and health care provider.",
+        "text" : "A reference to a resource that identifies the particular occurrence of contact between patient and health care provider during which the prescription was issued.",
         "type" : "display"
       },
       {
@@ -435,6 +462,10 @@
     },
     {
       "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+        "valueInteger" : 1
+      },
+      {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
         "valueInteger" : 1
       },
@@ -444,7 +475,7 @@
       }],
       "linkId" : "VisionPrescription.dateWritten",
       "type" : "group",
-      "required" : false,
+      "required" : true,
       "repeats" : true,
       "item" : [{
         "extension" : [{
@@ -457,7 +488,7 @@
             }]
           }
         }],
-        "text" : "The date (and perhaps time) when the prescription was written.",
+        "text" : "The date (and perhaps time) when the prescription was written. Jurisdictions determine the valid lifetime of a prescription. Typically vision prescriptions are valid for two years from the date written.",
         "type" : "display"
       },
       {
@@ -470,6 +501,10 @@
     },
     {
       "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+        "valueInteger" : 1
+      },
+      {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
         "valueInteger" : 1
       },
@@ -479,7 +514,7 @@
       }],
       "linkId" : "VisionPrescription.prescriber",
       "type" : "group",
-      "required" : false,
+      "required" : true,
       "repeats" : true,
       "item" : [{
         "extension" : [{
@@ -505,7 +540,7 @@
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
         "linkId" : "VisionPrescription.prescriber.value",
-        "text" : "Who authorizes the vision product",
+        "text" : "Who authorized the vision prescription",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -513,13 +548,13 @@
     },
     {
       "extension" : [{
-        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
         "valueInteger" : 1
       }],
-      "linkId" : "VisionPrescription.reason[x]",
-      "text" : "Reason or indication for writing the prescription",
+      "linkId" : "VisionPrescription.lensSpecification",
+      "text" : "Vision lens authorization",
       "type" : "group",
-      "required" : false,
+      "required" : true,
       "repeats" : true,
       "item" : [{
         "extension" : [{
@@ -532,80 +567,7 @@
             }]
           }
         }],
-        "text" : "Can be the reason or the indication for writing the prescription.",
-        "type" : "display"
-      },
-      {
-        "linkId" : "VisionPrescription.reason[x]._type",
-        "text" : "type",
-        "type" : "choice",
-        "required" : false,
-        "repeats" : false,
-        "answerValueSet" : "#vs2",
-        "item" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "CodeableConcept"
-          }],
-          "linkId" : "VisionPrescription.reason[x]._null",
-          "type" : "group",
-          "item" : [{
-            "linkId" : "VisionPrescription.reason[x]._null.coding",
-            "text" : "code:",
-            "type" : "open-choice",
-            "required" : false,
-            "repeats" : false
-          },
-          {
-            "linkId" : "VisionPrescription.reason[x]._null.text",
-            "text" : "text:",
-            "type" : "string",
-            "required" : false,
-            "repeats" : false
-          }]
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "Reference"
-          }],
-          "linkId" : "VisionPrescription.reason[x]._null",
-          "type" : "group",
-          "item" : [{
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-              "valueCode" : "Condition"
-            },
-            {
-              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
-              "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
-            }],
-            "linkId" : "VisionPrescription.reason[x]._null.value",
-            "type" : "reference",
-            "required" : false,
-            "repeats" : false
-          }]
-        }]
-      }]
-    },
-    {
-      "linkId" : "VisionPrescription.dispense",
-      "text" : "Vision supply authorization",
-      "type" : "group",
-      "required" : false,
-      "repeats" : true,
-      "item" : [{
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-          "valueCodeableConcept" : {
-            "coding" : [{
-              "system" : "http://hl7.org/fhir/questionnaire-item-control",
-              "code" : "flyover",
-              "display" : "Fly-over"
-            }]
-          }
-        }],
-        "text" : "Deals with details of the dispense part of the supply specification.",
+        "text" : "Contain the details of  the individual lens specifications and serves as the authorization for the fullfillment by certified professionals.",
         "type" : "display"
       },
       {
@@ -617,7 +579,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "string"
         }],
-        "linkId" : "VisionPrescription.dispense.id",
+        "linkId" : "VisionPrescription.lensSpecification.id",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -636,15 +598,15 @@
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "linkId" : "VisionPrescription.lensSpecification.id.value",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
         }]
       },
       {
-        "linkId" : "VisionPrescription.dispense.extension",
+        "linkId" : "VisionPrescription.lensSpecification.extension",
         "text" : "Additional content defined by implementations",
         "type" : "group",
         "required" : false,
@@ -665,8 +627,8 @@
         }]
       },
       {
-        "linkId" : "VisionPrescription.dispense.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "linkId" : "VisionPrescription.lensSpecification.modifierExtension",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -681,12 +643,16 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
       {
         "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+          "valueInteger" : 1
+        },
+        {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
           "valueInteger" : 1
         },
@@ -694,10 +660,10 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "CodeableConcept"
         }],
-        "linkId" : "VisionPrescription.dispense.product",
+        "linkId" : "VisionPrescription.lensSpecification.product",
         "text" : "Product to be supplied",
         "type" : "group",
-        "required" : false,
+        "required" : true,
         "repeats" : true,
         "item" : [{
           "extension" : [{
@@ -714,14 +680,14 @@
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.product.coding",
+          "linkId" : "VisionPrescription.lensSpecification.product.coding",
           "text" : "code:",
           "type" : "open-choice",
           "required" : false,
           "repeats" : false
         },
         {
-          "linkId" : "VisionPrescription.dispense.product.text",
+          "linkId" : "VisionPrescription.lensSpecification.product.text",
           "text" : "text:",
           "type" : "string",
           "required" : false,
@@ -730,6 +696,10 @@
       },
       {
         "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs",
+          "valueInteger" : 1
+        },
+        {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
           "valueInteger" : 1
         },
@@ -737,9 +707,9 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "code"
         }],
-        "linkId" : "VisionPrescription.dispense.eye",
+        "linkId" : "VisionPrescription.lensSpecification.eye",
         "type" : "group",
-        "required" : false,
+        "required" : true,
         "repeats" : true,
         "item" : [{
           "extension" : [{
@@ -752,11 +722,11 @@
               }]
             }
           }],
-          "text" : "The eye for which the lens applies.",
+          "text" : "The eye for which the lens specification applies. May also appear as OD (oculus dexter) for the right eye and OS (oculus siniter) for the left eye.",
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.eye.value",
+          "linkId" : "VisionPrescription.lensSpecification.eye.value",
           "text" : "eye",
           "type" : "choice",
           "required" : false,
@@ -772,7 +742,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "decimal"
         }],
-        "linkId" : "VisionPrescription.dispense.sphere",
+        "linkId" : "VisionPrescription.lensSpecification.sphere",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -787,12 +757,12 @@
               }]
             }
           }],
-          "text" : "Lens power measured in dioptres (0.25 units).",
+          "text" : "Lens power measured in dioptres (0.25 units). The value is negative for near-sighted and positive for far sighted.\nOften insurance will not cover a lens with power between +75 and -75.",
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.sphere.value",
-          "text" : "Lens sphere",
+          "linkId" : "VisionPrescription.lensSpecification.sphere.value",
+          "text" : "Power of the lens",
           "type" : "decimal",
           "required" : false,
           "repeats" : false
@@ -807,7 +777,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "decimal"
         }],
-        "linkId" : "VisionPrescription.dispense.cylinder",
+        "linkId" : "VisionPrescription.lensSpecification.cylinder",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -826,8 +796,8 @@
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.cylinder.value",
-          "text" : "Lens cylinder",
+          "linkId" : "VisionPrescription.lensSpecification.cylinder.value",
+          "text" : "Lens power for astigmatism",
           "type" : "decimal",
           "required" : false,
           "repeats" : false
@@ -842,7 +812,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "integer"
         }],
-        "linkId" : "VisionPrescription.dispense.axis",
+        "linkId" : "VisionPrescription.lensSpecification.axis",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -857,20 +827,20 @@
               }]
             }
           }],
-          "text" : "Adjustment for astigmatism measured in integer degrees.",
+          "text" : "Adjustment for astigmatism measured in integer degrees. The limits are +180 and -180 degrees.",
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.axis.value",
-          "text" : "Lens axis",
+          "linkId" : "VisionPrescription.lensSpecification.axis.value",
+          "text" : "Lens meridian which contain no power for astigmatism",
           "type" : "integer",
           "required" : false,
           "repeats" : false
         }]
       },
       {
-        "linkId" : "VisionPrescription.dispense.prism",
-        "text" : "Lens prism",
+        "linkId" : "VisionPrescription.lensSpecification.prism",
+        "text" : "Eye alignment compensation",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -897,7 +867,7 @@
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
             "valueString" : "string"
           }],
-          "linkId" : "VisionPrescription.dispense.prism.id",
+          "linkId" : "VisionPrescription.lensSpecification.prism.id",
           "type" : "group",
           "required" : false,
           "repeats" : true,
@@ -916,15 +886,15 @@
             "type" : "display"
           },
           {
-            "linkId" : "VisionPrescription.dispense.prism.id.value",
-            "text" : "xml:id (or equivalent in JSON)",
+            "linkId" : "VisionPrescription.lensSpecification.prism.id.value",
+            "text" : "Unique id for inter-element referencing",
             "type" : "string",
             "required" : false,
             "repeats" : false
           }]
         },
         {
-          "linkId" : "VisionPrescription.dispense.prism.extension",
+          "linkId" : "VisionPrescription.lensSpecification.prism.extension",
           "text" : "Additional content defined by implementations",
           "type" : "group",
           "required" : false,
@@ -945,8 +915,8 @@
           }]
         },
         {
-          "linkId" : "VisionPrescription.dispense.prism.modifierExtension",
-          "text" : "Extensions that cannot be ignored if unrecognized",
+          "linkId" : "VisionPrescription.lensSpecification.prism.modifierExtension",
+          "text" : "Extensions that cannot be ignored even if unrecognized",
           "type" : "group",
           "required" : false,
           "repeats" : true,
@@ -961,7 +931,7 @@
                 }]
               }
             }],
-            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+            "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
             "type" : "display"
           }]
         },
@@ -978,7 +948,7 @@
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
             "valueString" : "decimal"
           }],
-          "linkId" : "VisionPrescription.dispense.prism.amount",
+          "linkId" : "VisionPrescription.lensSpecification.prism.amount",
           "type" : "group",
           "required" : true,
           "repeats" : true,
@@ -997,7 +967,7 @@
             "type" : "display"
           },
           {
-            "linkId" : "VisionPrescription.dispense.prism.amount.value",
+            "linkId" : "VisionPrescription.lensSpecification.prism.amount.value",
             "text" : "Amount of adjustment",
             "type" : "decimal",
             "required" : false,
@@ -1017,7 +987,7 @@
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
             "valueString" : "code"
           }],
-          "linkId" : "VisionPrescription.dispense.prism.base",
+          "linkId" : "VisionPrescription.lensSpecification.prism.base",
           "type" : "group",
           "required" : true,
           "repeats" : true,
@@ -1036,7 +1006,7 @@
             "type" : "display"
           },
           {
-            "linkId" : "VisionPrescription.dispense.prism.base.value",
+            "linkId" : "VisionPrescription.lensSpecification.prism.base.value",
             "text" : "base",
             "type" : "choice",
             "required" : false,
@@ -1053,7 +1023,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "decimal"
         }],
-        "linkId" : "VisionPrescription.dispense.add",
+        "linkId" : "VisionPrescription.lensSpecification.add",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1072,8 +1042,8 @@
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.add.value",
-          "text" : "Lens add",
+          "linkId" : "VisionPrescription.lensSpecification.add.value",
+          "text" : "Added power for multifocal levels",
           "type" : "decimal",
           "required" : false,
           "repeats" : false
@@ -1088,7 +1058,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "decimal"
         }],
-        "linkId" : "VisionPrescription.dispense.power",
+        "linkId" : "VisionPrescription.lensSpecification.power",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1107,7 +1077,7 @@
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.power.value",
+          "linkId" : "VisionPrescription.lensSpecification.power.value",
           "text" : "Contact lens power",
           "type" : "decimal",
           "required" : false,
@@ -1123,7 +1093,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "decimal"
         }],
-        "linkId" : "VisionPrescription.dispense.backCurve",
+        "linkId" : "VisionPrescription.lensSpecification.backCurve",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1142,7 +1112,7 @@
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.backCurve.value",
+          "linkId" : "VisionPrescription.lensSpecification.backCurve.value",
           "text" : "Contact lens back curvature",
           "type" : "decimal",
           "required" : false,
@@ -1158,7 +1128,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "decimal"
         }],
-        "linkId" : "VisionPrescription.dispense.diameter",
+        "linkId" : "VisionPrescription.lensSpecification.diameter",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1177,7 +1147,7 @@
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.diameter.value",
+          "linkId" : "VisionPrescription.lensSpecification.diameter.value",
           "text" : "Contact lens diameter",
           "type" : "decimal",
           "required" : false,
@@ -1193,7 +1163,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "Quantity"
         }],
-        "linkId" : "VisionPrescription.dispense.duration",
+        "linkId" : "VisionPrescription.lensSpecification.duration",
         "text" : "Lens wear duration",
         "type" : "group",
         "required" : false,
@@ -1213,35 +1183,35 @@
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.duration.comparator",
+          "linkId" : "VisionPrescription.lensSpecification.duration.comparator",
           "text" : "comp:",
           "type" : "choice",
           "required" : false,
           "repeats" : false
         },
         {
-          "linkId" : "VisionPrescription.dispense.duration.value",
+          "linkId" : "VisionPrescription.lensSpecification.duration.value",
           "text" : "value:",
           "type" : "decimal",
           "required" : false,
           "repeats" : false
         },
         {
-          "linkId" : "VisionPrescription.dispense.duration.units",
+          "linkId" : "VisionPrescription.lensSpecification.duration.units",
           "text" : "units:",
           "type" : "string",
           "required" : false,
           "repeats" : false
         },
         {
-          "linkId" : "VisionPrescription.dispense.duration.code",
+          "linkId" : "VisionPrescription.lensSpecification.duration.code",
           "text" : "coded units:",
           "type" : "string",
           "required" : false,
           "repeats" : false
         },
         {
-          "linkId" : "VisionPrescription.dispense.duration.system",
+          "linkId" : "VisionPrescription.lensSpecification.duration.system",
           "text" : "units system:",
           "type" : "string",
           "required" : false,
@@ -1257,7 +1227,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "string"
         }],
-        "linkId" : "VisionPrescription.dispense.color",
+        "linkId" : "VisionPrescription.lensSpecification.color",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1276,7 +1246,7 @@
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.color.value",
+          "linkId" : "VisionPrescription.lensSpecification.color.value",
           "text" : "Color required",
           "type" : "string",
           "required" : false,
@@ -1292,7 +1262,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "string"
         }],
-        "linkId" : "VisionPrescription.dispense.brand",
+        "linkId" : "VisionPrescription.lensSpecification.brand",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -1311,7 +1281,7 @@
           "type" : "display"
         },
         {
-          "linkId" : "VisionPrescription.dispense.brand.value",
+          "linkId" : "VisionPrescription.lensSpecification.brand.value",
           "text" : "Brand required",
           "type" : "string",
           "required" : false,
@@ -1323,7 +1293,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "Annotation"
         }],
-        "linkId" : "VisionPrescription.dispense.note",
+        "linkId" : "VisionPrescription.lensSpecification.note",
         "text" : "Notes for coatings",
         "type" : "group",
         "required" : false,

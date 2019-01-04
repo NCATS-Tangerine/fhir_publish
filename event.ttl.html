@@ -3,7 +3,7 @@
 <!-- template-example-ttl.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Event.ttl - FHIR v3.5.0</title>
+  <title>Event.ttl - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>Event.ttl</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm">FHIR Infrastructure</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm">FHIR Infrastructure</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
 
 </tbody></table>
 <p>
@@ -130,13 +130,14 @@
   fhir:DomainResource.extension [
      fhir:index 0;
      fhir:Extension.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot; ];
-     fhir:Extension.value [ fhir:value &quot;Informative&quot; ]
+     fhir:Extension.value [ fhir:value &quot;informative&quot; ]
   ];
   fhir:StructureDefinition.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Event&quot;];
+  fhir:StructureDefinition.version [ fhir:value &quot;3.6.0&quot;];
   fhir:StructureDefinition.name [ fhir:value &quot;Event&quot;];
   fhir:StructureDefinition.title [ fhir:value &quot;event&quot;];
   fhir:StructureDefinition.status [ fhir:value &quot;draft&quot;];
-  fhir:StructureDefinition.date [ fhir:value &quot;2018-09-15T09:06:56-05:00&quot;];
+  fhir:StructureDefinition.date [ fhir:value &quot;2018-12-13T14:23:07-06:00&quot;];
   fhir:StructureDefinition.publisher [ fhir:value &quot;Health Level Seven International fhir&quot;];
   fhir:StructureDefinition.contact [
      fhir:index 0;
@@ -147,7 +148,7 @@
      ]
   ];
   fhir:StructureDefinition.description [ fhir:value &quot;Logical Model: A pattern to be followed by resources that represent the performance of some activity, possibly in accordance with a request or service definition.&quot;];
-  fhir:StructureDefinition.fhirVersion [ fhir:value &quot;3.5.0&quot;];
+  fhir:StructureDefinition.fhirVersion [ fhir:value &quot;3.6.0&quot;];
   fhir:StructureDefinition.mapping [
      fhir:index 0;
      fhir:StructureDefinition.identity [ fhir:value &quot;v2&quot; ];
@@ -162,7 +163,7 @@
      fhir:index 2;
      fhir:StructureDefinition.identity [ fhir:value &quot;w5&quot; ];
      fhir:StructureDefinition.uri [ fhir:value &quot;http://hl7.org/fhir/fivews&quot; ];
-     fhir:StructureDefinition.name [ fhir:value &quot;FiveWs Pattern&quot; ]
+     fhir:StructureDefinition.name [ fhir:value &quot;FiveWs Pattern Mapping&quot; ]
   ];
   fhir:StructureDefinition.kind [ fhir:value &quot;logical&quot;];
   fhir:StructureDefinition.abstract [ fhir:value &quot;false&quot;];
@@ -438,7 +439,7 @@
            fhir:Extension.value [ fhir:value &quot;EventStatus&quot; ]
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
-         fhir:ElementDefinition.description [ fhir:value &quot;Codes identifying the lifecycle stage of a event.&quot; ];
+         fhir:ElementDefinition.description [ fhir:value &quot;Codes identifying the lifecycle stage of an event.&quot; ];
          fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/event-status&quot; ]
        ];
        fhir:ElementDefinition.mapping [
@@ -525,7 +526,7 @@
            fhir:Extension.value [ fhir:value &quot;EventCode&quot; ]
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;example&quot; ];
-         fhir:ElementDefinition.description [ fhir:value &quot;Codes indicating the details of what is/was done.  These will vary significantly based on the type of request resource and will often be example/preferred rather than extensible/required.&quot; ]
+         fhir:ElementDefinition.description [ fhir:value &quot;Codes indicating the details of what is/was done.  These will vary significantly based on the type of event resource and will often be example/preferred rather than extensible/required.&quot; ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
@@ -587,20 +588,20 @@
        ]
      ], [
        fhir:index 11;
-       fhir:Element.id [ fhir:value &quot;Event.context&quot; ];
-       fhir:ElementDefinition.path [ fhir:value &quot;Event.context&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Associated Encounter / Episode&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;The encounter or episode of care that establishes the context for this {{title}}.&quot; ];
-       fhir:ElementDefinition.comment [ fhir:value &quot;This will typically be the encounter the {{title}} occurred within, but some {{title}}s may be initiated prior to or after the official completion of an encounter or episode but still be tied to the context of the encounter or episode (e.g. pre-admission lab tests).&quot; ];
+       fhir:Element.id [ fhir:value &quot;Event.encounter&quot; ];
+       fhir:ElementDefinition.path [ fhir:value &quot;Event.encounter&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;Encounter created as part of&quot; ];
+       fhir:ElementDefinition.definition [ fhir:value &quot;The Encounter during which this {{title}} was created or to which the creation of this record is tightly associated.&quot; ];
+       fhir:ElementDefinition.comment [ fhir:value &quot;This will typically be the encounter the {{title}} was created during, but some {{title}}s may be initiated prior to or after the official completion of an encounter but still be tied to the context of the encounter (e.g. pre-admission lab tests).&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;Links the {{title}} to the Encounter context.&quot; ];
        fhir:ElementDefinition.alias [
-         fhir:value &quot;encounter&quot;;
+         fhir:value &quot;context&quot;;
          fhir:index 0
        ];
        fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.base [
-         fhir:ElementDefinition.path [ fhir:value &quot;Event.context&quot; ];
+         fhir:ElementDefinition.path [ fhir:value &quot;Event.encounter&quot; ];
          fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
          fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ]
        ];
@@ -610,9 +611,6 @@
          fhir:ElementDefinition.targetProfile [
            fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Encounter&quot;;
            fhir:index 0
-         ], [
-           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/EpisodeOfCare&quot;;
-           fhir:index 1
          ]
        ];
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
@@ -707,6 +705,58 @@
        ]
      ], [
        fhir:index 14;
+       fhir:Element.id [ fhir:value &quot;Event.reported[x]&quot; ];
+       fhir:ElementDefinition.path [ fhir:value &quot;Event.reported[x]&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;Reported rather than primary record&quot; ];
+       fhir:ElementDefinition.definition [ fhir:value &quot;Indicates if this record was captured as a secondary 'reported' record rather than as an original primary source-of-truth record.  It may also indicate the source of the report.&quot; ];
+       fhir:ElementDefinition.requirements [ fhir:value &quot;Reported data may have different rules on editing and may be visually distinguished from primary data.&quot; ];
+       fhir:ElementDefinition.alias [
+         fhir:value &quot;informer&quot;;
+         fhir:index 0
+       ];
+       fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
+       fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
+       fhir:ElementDefinition.base [
+         fhir:ElementDefinition.path [ fhir:value &quot;Event.reported[x]&quot; ];
+         fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
+         fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ]
+       ];
+       fhir:ElementDefinition.type [
+         fhir:index 0;
+         fhir:ElementDefinition.code [ fhir:value &quot;boolean&quot; ]
+       ], [
+         fhir:index 1;
+         fhir:ElementDefinition.code [ fhir:value &quot;Reference&quot; ];
+         fhir:ElementDefinition.targetProfile [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Patient&quot;;
+           fhir:index 0
+         ], [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/RelatedPerson&quot;;
+           fhir:index 1
+         ], [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Practitioner&quot;;
+           fhir:index 2
+         ], [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/PractitionerRole&quot;;
+           fhir:index 3
+         ], [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Organization&quot;;
+           fhir:index 4
+         ]
+       ];
+       fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
+       fhir:ElementDefinition.isSummary [ fhir:value &quot;true&quot; ];
+       fhir:ElementDefinition.mapping [
+         fhir:index 0;
+         fhir:ElementDefinition.identity [ fhir:value &quot;rim&quot; ];
+         fhir:ElementDefinition.map [ fhir:value &quot;.participation[typeCode=RPT].role&quot; ]
+       ], [
+         fhir:index 1;
+         fhir:ElementDefinition.identity [ fhir:value &quot;w5&quot; ];
+         fhir:ElementDefinition.map [ fhir:value &quot;FiveWs.source&quot; ]
+       ]
+     ], [
+       fhir:index 15;
        fhir:Element.id [ fhir:value &quot;Event.performer&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Event.performer&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Who performed {{title}} and what they did&quot; ];
@@ -726,7 +776,7 @@
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
        fhir:ElementDefinition.isSummary [ fhir:value &quot;true&quot; ]
      ], [
-       fhir:index 15;
+       fhir:index 16;
        fhir:Element.id [ fhir:value &quot;Event.performer.function&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Event.performer.function&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Type of performance&quot; ];
@@ -755,7 +805,7 @@
          fhir:ElementDefinition.description [ fhir:value &quot;Codes that describe the specific involvement of a performer in an event.  E.g. Primary vs. secondary vs. supervising, etc.&quot; ]
        ]
      ], [
-       fhir:index 16;
+       fhir:index 17;
        fhir:Element.id [ fhir:value &quot;Event.performer.actor&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Event.performer.actor&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Who performed {{title}}&quot; ];
@@ -809,7 +859,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;FiveWs.actor&quot; ]
        ]
      ], [
-       fhir:index 17;
+       fhir:index 18;
        fhir:Element.id [ fhir:value &quot;Event.location&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Event.location&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Where {{title}} occurred&quot; ];
@@ -846,7 +896,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;FiveWs.where[x]&quot; ]
        ]
      ], [
-       fhir:index 18;
+       fhir:index 19;
        fhir:Element.id [ fhir:value &quot;Event.reasonCode&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Event.reasonCode&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Why was {{title}} performed?&quot; ];
@@ -888,7 +938,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;FiveWs.why[x]&quot; ]
        ]
      ], [
-       fhir:index 19;
+       fhir:index 20;
        fhir:Element.id [ fhir:value &quot;Event.reasonReference&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Event.reasonReference&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Why was {{title}} performed?&quot; ];
@@ -937,7 +987,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;FiveWs.why[x]&quot; ]
        ]
      ], [
-       fhir:index 20;
+       fhir:index 21;
        fhir:Element.id [ fhir:value &quot;Event.note&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Event.note&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Comments made about the event&quot; ];
@@ -994,7 +1044,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Sat, Sep 15, 2018 09:08-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:25-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -1004,7 +1054,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fevent.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fevent.ttl.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fevent.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fevent.ttl.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

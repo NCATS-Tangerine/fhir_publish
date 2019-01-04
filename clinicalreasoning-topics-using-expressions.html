@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Clinicalreasoning-topics-using-expressions - FHIR v3.5.0</title>
+  <title>Clinicalreasoning-topics-using-expressions - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -38,7 +38,7 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -105,12 +105,12 @@
 
 <div class="col-12">
 
+<table class="cols"><tbody><tr><td id="wg">Work Group <a href="http://www.hl7.org/Special/committees/dss/index.cfm" _target="blank">Clinical Decision Support <img src="external.png" style="text-align: baseline"/></a></td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: 2</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>:    <!-- !ns! --><a href="versions.html#std-process">Trial Use</a></td></tr></tbody></table>
+
 <a name="using-expressions"> </a>
 <h3 class="self-link-parent"><span class="sectioncount">14.1<a name="14.1"> </a></span> Using Expressions <a href="clinicalreasoning-topics-using-expressions.html#14.1" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
-<table class="cols"><tbody><tr><td id="wg">Work Group <a href="http://www.hl7.org/Special/committees/dss/index.cfm" _target="blank">Clinical Decision Support <img src="external.png" style="text-align: baseline"/></a></td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: 2</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>:    <!-- !ns! --><a href="versions.html#std-process">Trial Use</a></td></tr></tbody></table>
 
-
-<p>This topic discusses the use of expression logic within FHIR resources using expression languages such as <a href="fhirpath.html">FHIRPath</a> and <a href="http://cql.hl7.org/">Clinical Quality Language (CQL) <img src="external.png" style="text-align: baseline"/></a>. The clinical reasoning module defines an approach to representing logic that enables dynamic functionality to be utilized directly within the Clinical Reasoning resources, as well as within FHIR resources more generally using extensions.</p>
+<p>This topic discusses the use of expression logic within FHIR resources using expression languages such as <a href="fhirpath.html">FHIRPath</a> and <a href="http://cql.hl7.org/">Clinical Quality Language (CQL) <img src="external.png" style="text-align: baseline"/></a>. The clinical reasoning module resources use the <a href="metadatatypes.html#expression">Expression</a> data type to represent logic that enables dynamic functionality to be utilized directly within the Clinical Reasoning resources, as well as within FHIR resources more generally using extensions.</p>
 
 <a name="expression elements"> </a>
 <h4 class="self-link-parent"><span class="sectioncount">14.1.1</span> Expression Elements <a href="clinicalreasoning-topics-using-expressions.html#expression elements" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
@@ -130,7 +130,7 @@
 	<li>Mixed - The logic in this case is communicated using both a natural language description, as well as a computable expression in a formal language. This information is useful for communicating to environments that may support the computation as well as to environments that do not, or to environments that support the computation but desire human-readable information to more easily understand the logic.</li>
 </ul>
 
-<p>For example, the <code>dynamicValue</code> element of the ActivityDefinition and PlanDefinition resources contains these three elements - <code>description</code>, <code>language</code>, and <code>expression</code> - directly. However, for resources that do not define these elements, extensions are provided to enable expression information to be associated with any FHIR resource.</p>
+<p>For example, the <code>dynamicValue</code> element of the ActivityDefinition and PlanDefinition resources contains an <code>expression</code> element directly. However, for resources that do not define these elements, the <a href="extension-cqf-expression.html">cqf-expression</a> extension can be used to enable expression information to be associated with any FHIR resource.</p>
 
 <a name="expression-description"> </a>
 <h5 class="self-link-parent"><span class="sectioncount">14.1.1.1</span> Description <a href="clinicalreasoning-topics-using-expressions.html#expression-description" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h5>
@@ -146,7 +146,7 @@
 
 <a name="expression-language"> </a>
 <h5 class="self-link-parent"><span class="sectioncount">14.1.1.2</span> Expression Language <a href="clinicalreasoning-topics-using-expressions.html#expression-language" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h5>
-<p>The <i>language</i> element identifies the expression language used to represent the logic. The Clinical Reasoning module defines support for FHIRPath and Clinical Quality Language, but support for other languages can be provided.</p>
+<p>The <i>language</i> element identifies the expression language used to represent the logic. The <a href="codesystem-expression-language.html">ExpressionLanguage</a> code system defines support for FHIRPath, Clinical Quality Language, and FHIR Query (FHIR's RESTful query syntax), but support for other languages can also be provided.</p>
 
 <p>The language element is specified using the Media Type of the language. For inline expressions using FHIRPath and Clinical Quality Language, the media type SHALL be specified as follows:</p>
 
@@ -275,7 +275,7 @@
 <h4 class="self-link-parent"><span class="sectioncount">14.1.4</span> Clinical Quality Language <a href="clinicalreasoning-topics-using-expressions.html#clinical-quality-language" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p><a href="http://cql.hl7.org/">Clinical Quality Language (CQL) <img src="external.png" style="text-align: baseline"/></a> defines a high-level clinically-oriented syntax to enable formal representation of clinical logic. It is defined as a general purpose specification available here:</p>
 
-<p><a href="http://www.hl7.org/implement/standards/product_brief.cfm?product_id=400">HL7 Standard: Clinical Quality Language Specification, Release 1.2 <img src="external.png" style="text-align: baseline"/></a>.</p>
+<p><a href="http://www.hl7.org/implement/standards/product_brief.cfm?product_id=400">HL7 Standard: Clinical Quality Language Specification, Release 1.3 <img src="external.png" style="text-align: baseline"/></a>.</p>
 
 <p>CQL is used to describe the logic used by knowledge artifacts such as clinical decision support rules, quality measure logic, and conditions and actions within order sets and protocols. CQL expressions generally provide a means of computing new information from existing data.</p>
 
@@ -292,7 +292,7 @@
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -302,7 +302,7 @@
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fclinicalreasoning-topics-using-expressions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fclinicalreasoning-topics-using-expressions.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fclinicalreasoning-topics-using-expressions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fclinicalreasoning-topics-using-expressions.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <difference>
    <type name="ExplanationOfBenefit" status="changed">
+      <element new-min="1" old-min="0" path="ExplanationOfBenefit.status"/>
       <element binding-status="changed"
                binding-strength-changed="true"
+               new-min="1"
+               old-min="0"
                path="ExplanationOfBenefit.type">
          <old-binding reference="http://hl7.org/fhir/ValueSet/claim-type" strength="required"/>
          <new-binding reference="http://hl7.org/fhir/ValueSet/claim-type"
@@ -10,48 +13,54 @@
       </element>
       <element new-max="1" old-max="*" path="ExplanationOfBenefit.subType"/>
       <element path="ExplanationOfBenefit.use" status="new"/>
+      <element new-min="1" old-min="0" path="ExplanationOfBenefit.patient"/>
+      <element new-min="1" old-min="0" path="ExplanationOfBenefit.created"/>
       <element path="ExplanationOfBenefit.enterer">
          <removed-type name="Reference(Practitioner)"/>
-         <added-type name="Reference(Practitioner|PractitionerRole)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole)"/>
       </element>
-      <element path="ExplanationOfBenefit.provider">
+      <element new-min="1" old-min="0" path="ExplanationOfBenefit.insurer"/>
+      <element new-min="1" old-min="0" path="ExplanationOfBenefit.provider">
          <removed-type name="Reference(Practitioner)"/>
-         <added-type name="Reference(Practitioner|PractitionerRole|Organization)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Organization)"/>
+      </element>
+      <element path="ExplanationOfBenefit.priority" status="new"/>
+      <element path="ExplanationOfBenefit.fundsReserveRequested" status="new"/>
+      <element path="ExplanationOfBenefit.fundsReserve" status="new"/>
+      <element path="ExplanationOfBenefit.payee.party">
+         <removed-type name="Reference(Practitioner | Organization | Patient | RelatedPerson)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson)"/>
       </element>
       <element path="ExplanationOfBenefit.referral">
          <removed-type name="Reference(ReferralRequest)"/>
          <added-type name="Reference(ServiceRequest)"/>
       </element>
-      <element binding-status="added" path="ExplanationOfBenefit.outcome">
+      <element binding-status="added"
+               new-min="1"
+               old-min="0"
+               path="ExplanationOfBenefit.outcome">
          <removed-type name="CodeableConcept"/>
          <added-type name="code"/>
          <new-binding reference="http://hl7.org/fhir/ValueSet/remittance-outcome"
                       strength="required"/>
       </element>
-      <element path="ExplanationOfBenefit.payee.resource" status="new"/>
-      <element path="ExplanationOfBenefit.payee.party">
-         <removed-type name="Reference(Practitioner|Organization|Patient|RelatedPerson)"/>
-         <added-type name="Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson)"/>
-      </element>
-      <element path="ExplanationOfBenefit.information.value[x]">
-         <removed-type name="Reference(Resource)"/>
-         <added-type name="boolean"/>
-         <added-type name="Reference(Resource)"/>
-      </element>
+      <element path="ExplanationOfBenefit.preAuthRef" status="new"/>
+      <element path="ExplanationOfBenefit.preAuthRefPeriod" status="new"/>
       <element path="ExplanationOfBenefit.careTeam.provider">
-         <removed-type name="Reference(Practitioner|Organization)"/>
-         <added-type name="Reference(Practitioner|PractitionerRole|Organization)"/>
+         <removed-type name="Reference(Practitioner | Organization)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Organization)"/>
       </element>
-      <element path="ExplanationOfBenefit.diagnosis.diagnosis[x]">
-         <removed-type name="Reference(Condition)"/>
-         <added-type name="Reference(Condition)"/>
+      <element old-name="information" path="ExplanationOfBenefit.supportingInfo"/>
+      <element path="ExplanationOfBenefit.supportingInfo.value[x]">
+         <added-type name="boolean"/>
       </element>
       <element path="ExplanationOfBenefit.diagnosis.onAdmission" status="new"/>
-      <element path="ExplanationOfBenefit.procedure.procedure[x]">
-         <removed-type name="Reference(Procedure)"/>
-         <added-type name="Reference(Procedure)"/>
-      </element>
-      <element new-max="*" old-max="1" path="ExplanationOfBenefit.insurance"/>
+      <element path="ExplanationOfBenefit.procedure.udi" status="new"/>
+      <element new-max="*"
+               new-min="1"
+               old-max="1"
+               old-min="0"
+               path="ExplanationOfBenefit.insurance"/>
       <element path="ExplanationOfBenefit.insurance.focal" status="new"/>
       <element new-min="1"
                old-min="0"
@@ -64,42 +73,54 @@
          <new-binding reference="http://terminology.hl7.org/ValueSet/v3-ActIncidentCode"
                       strength="extensible"/>
       </element>
-      <element path="ExplanationOfBenefit.accident.location[x]">
-         <removed-type name="Reference(Location)"/>
-         <added-type name="Reference(Location)"/>
-      </element>
-      <element path="ExplanationOfBenefit.item.careTeamSequence" status="new"/>
-      <element path="ExplanationOfBenefit.item.diagnosisSequence" status="new"/>
-      <element path="ExplanationOfBenefit.item.procedureSequence" status="new"/>
-      <element path="ExplanationOfBenefit.item.informationSequence" status="new"/>
-      <element path="ExplanationOfBenefit.item.billcode" status="new"/>
-      <element path="ExplanationOfBenefit.item.location[x]">
-         <removed-type name="Reference(Location)"/>
-         <added-type name="Reference(Location)"/>
-      </element>
-      <element path="ExplanationOfBenefit.item.detail.billcode" status="new"/>
-      <element path="ExplanationOfBenefit.item.detail.subDetail.billcode" status="new"/>
-      <element path="ExplanationOfBenefit.addItem.itemSequence" status="new"/>
+      <element old-name="careTeamLinkId"
+               path="ExplanationOfBenefit.item.careTeamSequence"/>
+      <element old-name="diagnosisLinkId"
+               path="ExplanationOfBenefit.item.diagnosisSequence"/>
+      <element old-name="procedureLinkId"
+               path="ExplanationOfBenefit.item.procedureSequence"/>
+      <element old-name="informationLinkId"
+               path="ExplanationOfBenefit.item.informationSequence"/>
+      <element new-min="1"
+               old-min="0"
+               old-name="service"
+               path="ExplanationOfBenefit.item.productOrService"/>
+      <element new-min="1"
+               old-min="0"
+               old-name="service"
+               path="ExplanationOfBenefit.item.detail.productOrService"/>
+      <element new-min="1"
+               old-min="0"
+               old-name="service"
+               path="ExplanationOfBenefit.item.detail.subDetail.productOrService"/>
+      <element old-name="sequenceLinkId"
+               path="ExplanationOfBenefit.addItem.itemSequence"/>
       <element path="ExplanationOfBenefit.addItem.detailSequence" status="new"/>
       <element path="ExplanationOfBenefit.addItem.subDetailSequence" status="new"/>
       <element path="ExplanationOfBenefit.addItem.provider" status="new"/>
-      <element path="ExplanationOfBenefit.addItem.billcode" status="new"/>
+      <element new-min="1"
+               old-min="0"
+               old-name="service"
+               path="ExplanationOfBenefit.addItem.productOrService"/>
       <element path="ExplanationOfBenefit.addItem.programCode" status="new"/>
       <element path="ExplanationOfBenefit.addItem.serviced[x]" status="new"/>
       <element path="ExplanationOfBenefit.addItem.location[x]" status="new"/>
       <element path="ExplanationOfBenefit.addItem.quantity" status="new"/>
       <element path="ExplanationOfBenefit.addItem.unitPrice" status="new"/>
       <element path="ExplanationOfBenefit.addItem.factor" status="new"/>
-      <element path="ExplanationOfBenefit.addItem.net" status="new"/>
+      <element old-name="fee" path="ExplanationOfBenefit.addItem.net"/>
       <element path="ExplanationOfBenefit.addItem.bodySite" status="new"/>
       <element path="ExplanationOfBenefit.addItem.subSite" status="new"/>
-      <element path="ExplanationOfBenefit.addItem.detail.billcode" status="new"/>
+      <element new-min="1"
+               old-min="0"
+               old-name="service"
+               path="ExplanationOfBenefit.addItem.detail.productOrService"/>
       <element path="ExplanationOfBenefit.addItem.detail.quantity" status="new"/>
       <element path="ExplanationOfBenefit.addItem.detail.unitPrice" status="new"/>
       <element path="ExplanationOfBenefit.addItem.detail.factor" status="new"/>
-      <element path="ExplanationOfBenefit.addItem.detail.net" status="new"/>
+      <element old-name="fee" path="ExplanationOfBenefit.addItem.detail.net"/>
       <element path="ExplanationOfBenefit.addItem.detail.subDetail" status="new"/>
-      <element path="ExplanationOfBenefit.addItem.detail.subDetail.billcode"
+      <element path="ExplanationOfBenefit.addItem.detail.subDetail.productOrService"
                status="new"/>
       <element path="ExplanationOfBenefit.addItem.detail.subDetail.modifier"
                status="new"/>
@@ -114,42 +135,40 @@
                status="new"/>
       <element path="ExplanationOfBenefit.addItem.detail.subDetail.adjudication"
                status="new"/>
+      <element path="ExplanationOfBenefit.adjudication" status="new"/>
       <element path="ExplanationOfBenefit.total" status="new"/>
       <element path="ExplanationOfBenefit.total.category" status="new"/>
       <element path="ExplanationOfBenefit.total.amount" status="new"/>
+      <element path="ExplanationOfBenefit.formCode" status="new"/>
+      <element path="ExplanationOfBenefit.form">
+         <removed-type name="CodeableConcept"/>
+         <added-type name="Attachment"/>
+      </element>
       <element path="ExplanationOfBenefit.processNote.type">
          <removed-type name="CodeableConcept"/>
          <added-type name="code"/>
       </element>
-      <element binding-status="removed"
+      <element binding-status="changed"
+               binding-strength-changed="true"
                path="ExplanationOfBenefit.processNote.language">
-         <old-binding reference="http://hl7.org/fhir/ValueSet/languages"
+         <old-binding max="http://hl7.org/fhir/ValueSet/all-languages"
+                      reference="http://hl7.org/fhir/ValueSet/languages"
                       strength="extensible"/>
+         <new-binding max="http://hl7.org/fhir/ValueSet/all-languages"
+                      reference="http://hl7.org/fhir/ValueSet/languages"
+                      strength="preferred"/>
       </element>
+      <element path="ExplanationOfBenefit.benefitPeriod" status="new"/>
       <element path="ExplanationOfBenefit.organization" status="deleted"/>
       <element path="ExplanationOfBenefit.payee.resourceType" status="deleted"/>
-      <element path="ExplanationOfBenefit.insurance.preAuthRef" status="deleted"/>
       <element path="ExplanationOfBenefit.employmentImpacted" status="deleted"/>
       <element path="ExplanationOfBenefit.hospitalization" status="deleted"/>
-      <element path="ExplanationOfBenefit.item.careTeamLinkId" status="deleted"/>
-      <element path="ExplanationOfBenefit.item.diagnosisLinkId" status="deleted"/>
-      <element path="ExplanationOfBenefit.item.procedureLinkId" status="deleted"/>
-      <element path="ExplanationOfBenefit.item.informationLinkId" status="deleted"/>
-      <element path="ExplanationOfBenefit.item.service" status="deleted"/>
       <element path="ExplanationOfBenefit.item.detail.type" status="deleted"/>
-      <element path="ExplanationOfBenefit.item.detail.service" status="deleted"/>
       <element path="ExplanationOfBenefit.item.detail.subDetail.type" status="deleted"/>
-      <element path="ExplanationOfBenefit.item.detail.subDetail.service"
-               status="deleted"/>
-      <element path="ExplanationOfBenefit.addItem.sequenceLinkId" status="deleted"/>
       <element path="ExplanationOfBenefit.addItem.revenue" status="deleted"/>
       <element path="ExplanationOfBenefit.addItem.category" status="deleted"/>
-      <element path="ExplanationOfBenefit.addItem.service" status="deleted"/>
-      <element path="ExplanationOfBenefit.addItem.fee" status="deleted"/>
       <element path="ExplanationOfBenefit.addItem.detail.revenue" status="deleted"/>
       <element path="ExplanationOfBenefit.addItem.detail.category" status="deleted"/>
-      <element path="ExplanationOfBenefit.addItem.detail.service" status="deleted"/>
-      <element path="ExplanationOfBenefit.addItem.detail.fee" status="deleted"/>
       <element path="ExplanationOfBenefit.totalCost" status="deleted"/>
       <element path="ExplanationOfBenefit.unallocDeductable" status="deleted"/>
       <element path="ExplanationOfBenefit.totalBenefit" status="deleted"/>

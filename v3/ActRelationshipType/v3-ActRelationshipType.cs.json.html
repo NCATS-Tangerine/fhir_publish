@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>V3-ActRelationshipType.cs.json - FHIR v3.5.0</title>
+  <title>V3-ActRelationshipType.cs.json - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="../.././assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>V3-ActRelationshipType.cs.json</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
 
 <p>
 <a href="v3-ActRelationshipType.cs.json">Raw JSON</a> (<a href="v3-ActRelationshipType.cs.canonical.json">canonical form</a> + also see <a href="json.html">JSON Format Specification</a>)
@@ -128,7 +128,7 @@
   },
   &quot;extension&quot; : [{
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot;,
-    &quot;valueString&quot; : &quot;External&quot;
+    &quot;valueCode&quot; : &quot;external&quot;
   },
   {
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm&quot;,
@@ -162,6 +162,12 @@
     &quot;uri&quot; : &quot;http://hl7.org/fhir/concept-properties#notSelectable&quot;,
     &quot;description&quot; : &quot;Indicates that the code is abstract - only intended to be used as a selector for other concepts&quot;,
     &quot;type&quot; : &quot;boolean&quot;
+  },
+  {
+    &quot;code&quot; : &quot;child&quot;,
+    &quot;uri&quot; : &quot;http://hl7.org/fhir/concept-properties#child&quot;,
+    &quot;description&quot; : &quot;The concept identified in this property is a child of the concept on which it is a property. The property type will be 'code'. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute&quot;,
+    &quot;type&quot; : &quot;code&quot;
   },
   {
     &quot;code&quot; : &quot;status&quot;,
@@ -384,13 +390,13 @@
           &quot;display&quot; : &quot;starts near start&quot;,
           &quot;definition&quot; : &quot;A relationship in which the source act's effective time starts near the start of the target act's effective time. Near is defined separately as a time interval.\r\n\n                        \n                           Usage Note: Inverse code is SNE&quot;,
           &quot;concept&quot; : [{
-            &quot;extension&quot; : [{
-              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-              &quot;valueCode&quot; : &quot;CONCURRENT&quot;
-            }],
             &quot;code&quot; : &quot;SCW&quot;,
             &quot;display&quot; : &quot;starts concurrent with&quot;,
             &quot;definition&quot; : &quot;A relationship in which the source act's effective time starts with the start of the target act's effective time.\r\n\n                        \n                           UsageNote: This code is reflexive.  Therefore its inverse code is itself.&quot;,
+            &quot;property&quot; : [{
+              &quot;code&quot; : &quot;child&quot;,
+              &quot;valueCode&quot; : &quot;CONCURRENT&quot;
+            }],
             &quot;concept&quot; : [{
               &quot;code&quot; : &quot;SCWSEBE&quot;,
               &quot;display&quot; : &quot;starts with. ends before end of&quot;,
@@ -413,21 +419,21 @@
           &quot;display&quot; : &quot;ends after end of&quot;,
           &quot;definition&quot; : &quot;A relationship in which the source act ends after the target act ends.\r\n\n                        \n                           UsageNote: Inverse code is EBE&quot;,
           &quot;concept&quot; : [{
-            &quot;extension&quot; : [{
-              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-              &quot;valueCode&quot; : &quot;SASSBEEAS&quot;
-            }],
             &quot;code&quot; : &quot;SASEAE&quot;,
             &quot;display&quot; : &quot;starts after start of, ends after end of&quot;,
             &quot;definition&quot; : &quot;The source Act starts after start of the target Act and ends after end of the target Act.\r\n\n                        \n                           UsageNote: Inverse code is SBSEBE&quot;,
+            &quot;property&quot; : [{
+              &quot;code&quot; : &quot;child&quot;,
+              &quot;valueCode&quot; : &quot;SASSBEEAS&quot;
+            }],
             &quot;concept&quot; : [{
-              &quot;extension&quot; : [{
-                &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-                &quot;valueCode&quot; : &quot;SCWSEAE&quot;
-              }],
               &quot;code&quot; : &quot;SBEEAE&quot;,
               &quot;display&quot; : &quot;contains end of&quot;,
               &quot;definition&quot; : &quot;The source Act contains the end of the target Act.\r\n\n                        \n                           UsageNote: Inverse code is EDU&quot;,
+              &quot;property&quot; : [{
+                &quot;code&quot; : &quot;child&quot;,
+                &quot;valueCode&quot; : &quot;SCWSEAE&quot;
+              }],
               &quot;concept&quot; : [{
                 &quot;code&quot; : &quot;SASSBEEAS&quot;,
                 &quot;display&quot; : &quot;start after start of, contains end of&quot;,
@@ -442,13 +448,13 @@
           }]
         },
         {
-          &quot;extension&quot; : [{
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;SASEAE&quot;
-          }],
           &quot;code&quot; : &quot;SAS&quot;,
           &quot;display&quot; : &quot;starts after start of&quot;,
           &quot;definition&quot; : &quot;The source Act starts after the start of the target Act (i.e. if we say \&quot;ActOne SAS ActTwo\&quot;, it means that ActOne starts after the start of ActTwo, therefore ActOne is the source and ActTwo is the target).\r\n\n                        \n                           UsageNote: Inverse code is SBS&quot;,
+          &quot;property&quot; : [{
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;SASEAE&quot;
+          }],
           &quot;concept&quot; : [{
             &quot;code&quot; : &quot;SAE&quot;,
             &quot;display&quot; : &quot;starts after end of&quot;,
@@ -467,29 +473,29 @@
         }]
       },
       {
-        &quot;extension&quot; : [{
-          &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-          &quot;valueCode&quot; : &quot;EAS&quot;
-        },
-        {
-          &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-          &quot;valueCode&quot; : &quot;ECWS&quot;
-        }],
         &quot;code&quot; : &quot;EASORECWS&quot;,
         &quot;display&quot; : &quot;ends after or concurrent with start of&quot;,
         &quot;definition&quot; : &quot;A relationship in which the source act's effective time ends after or concurrent with the start of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is EBSORECWS&quot;,
+        &quot;property&quot; : [{
+          &quot;code&quot; : &quot;child&quot;,
+          &quot;valueCode&quot; : &quot;EAS&quot;
+        },
+        {
+          &quot;code&quot; : &quot;child&quot;,
+          &quot;valueCode&quot; : &quot;ECWS&quot;
+        }],
         &quot;concept&quot; : [{
-          &quot;extension&quot; : [{
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+          &quot;code&quot; : &quot;EAEORECW&quot;,
+          &quot;display&quot; : &quot;ends after or concurrent with end of&quot;,
+          &quot;definition&quot; : &quot;A relationship in which the source act's effective time ends after or concurrent with the end of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is EBEORECW&quot;,
+          &quot;property&quot; : [{
+            &quot;code&quot; : &quot;child&quot;,
             &quot;valueCode&quot; : &quot;EAE&quot;
           },
           {
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+            &quot;code&quot; : &quot;child&quot;,
             &quot;valueCode&quot; : &quot;ECW&quot;
-          }],
-          &quot;code&quot; : &quot;EAEORECW&quot;,
-          &quot;display&quot; : &quot;ends after or concurrent with end of&quot;,
-          &quot;definition&quot; : &quot;A relationship in which the source act's effective time ends after or concurrent with the end of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is EBEORECW&quot;
+          }]
         }]
       },
       {
@@ -498,63 +504,63 @@
         &quot;definition&quot; : &quot;The source Act is independent of the time of the target Act.\r\n\n                        \n                           UsageNote: This code is reflexive.  Therefore its inverse code is itself.&quot;
       },
       {
-        &quot;extension&quot; : [{
-          &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+        &quot;code&quot; : &quot;SAEORSCWE&quot;,
+        &quot;display&quot; : &quot;starts after or concurrent with end of&quot;,
+        &quot;definition&quot; : &quot;A relationship in which the source act's effective time starts after or concurrent with the end of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is SBEORSCWE&quot;,
+        &quot;property&quot; : [{
+          &quot;code&quot; : &quot;child&quot;,
           &quot;valueCode&quot; : &quot;SCWE&quot;
         },
         {
-          &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+          &quot;code&quot; : &quot;child&quot;,
           &quot;valueCode&quot; : &quot;SAE&quot;
-        }],
-        &quot;code&quot; : &quot;SAEORSCWE&quot;,
-        &quot;display&quot; : &quot;starts after or concurrent with end of&quot;,
-        &quot;definition&quot; : &quot;A relationship in which the source act's effective time starts after or concurrent with the end of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is SBEORSCWE&quot;
+        }]
       },
       {
-        &quot;extension&quot; : [{
-          &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+        &quot;code&quot; : &quot;SASORSCW&quot;,
+        &quot;display&quot; : &quot;starts after or concurrent with start of&quot;,
+        &quot;definition&quot; : &quot;A relationship in which the source act's effective time starts after or concurrent with the start of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is SBSORSCW&quot;,
+        &quot;property&quot; : [{
+          &quot;code&quot; : &quot;child&quot;,
           &quot;valueCode&quot; : &quot;SAS&quot;
         },
         {
-          &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+          &quot;code&quot; : &quot;child&quot;,
           &quot;valueCode&quot; : &quot;SCW&quot;
-        }],
-        &quot;code&quot; : &quot;SASORSCW&quot;,
-        &quot;display&quot; : &quot;starts after or concurrent with start of&quot;,
-        &quot;definition&quot; : &quot;A relationship in which the source act's effective time starts after or concurrent with the start of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is SBSORSCW&quot;
+        }]
       },
       {
         &quot;code&quot; : &quot;SBEORSCWE&quot;,
         &quot;display&quot; : &quot;starts before or concurrent with end of&quot;,
         &quot;definition&quot; : &quot;A relationship in which the source act's effective time starts before or concurrent with the end of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is SAEORSCWE&quot;,
         &quot;concept&quot; : [{
-          &quot;extension&quot; : [{
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;ECW&quot;
-          },
-          {
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;SBEEAE&quot;
-          },
-          {
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;SCW&quot;
-          },
-          {
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;SCWE&quot;
-          }],
           &quot;code&quot; : &quot;OVERLAP&quot;,
           &quot;display&quot; : &quot;overlaps with&quot;,
           &quot;definition&quot; : &quot;A relationship in which the source act's effective time overlaps the target act's effective time in any way.\r\n\n                        \n                           UsageNote: This code is reflexive.  Therefore its inverse code is itself.&quot;,
+          &quot;property&quot; : [{
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;ECW&quot;
+          },
+          {
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;SBEEAE&quot;
+          },
+          {
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;SCW&quot;
+          },
+          {
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;SCWE&quot;
+          }],
           &quot;concept&quot; : [{
-            &quot;extension&quot; : [{
-              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-              &quot;valueCode&quot; : &quot;SCWSEBE&quot;
-            }],
             &quot;code&quot; : &quot;EDU&quot;,
             &quot;display&quot; : &quot;ends during&quot;,
             &quot;definition&quot; : &quot;A relationship in which the source act ends within the target act's effective time (including end points, as defined in the act's effective times)\r\n\n                        \n                           UsageNote: Inverse code is SBEEAE&quot;,
+            &quot;property&quot; : [{
+              &quot;code&quot; : &quot;child&quot;,
+              &quot;valueCode&quot; : &quot;SCWSEBE&quot;
+            }],
             &quot;concept&quot; : [{
               &quot;code&quot; : &quot;SBSEASEBE&quot;,
               &quot;display&quot; : &quot;contains start of, ends before end of&quot;,
@@ -562,64 +568,64 @@
             }]
           },
           {
-            &quot;extension&quot; : [{
-              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+            &quot;code&quot; : &quot;SBSEAS&quot;,
+            &quot;display&quot; : &quot;contains start of&quot;,
+            &quot;definition&quot; : &quot;The source Act contains the start of the target Act.\r\n\n                        \n                           UsageNote: Inverse code is SDU&quot;,
+            &quot;property&quot; : [{
+              &quot;code&quot; : &quot;child&quot;,
               &quot;valueCode&quot; : &quot;SBSECWE&quot;
             },
             {
-              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+              &quot;code&quot; : &quot;child&quot;,
               &quot;valueCode&quot; : &quot;SBSEASEBE&quot;
             },
             {
-              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+              &quot;code&quot; : &quot;child&quot;,
               &quot;valueCode&quot; : &quot;SBSEAE&quot;
-            }],
-            &quot;code&quot; : &quot;SBSEAS&quot;,
-            &quot;display&quot; : &quot;contains start of&quot;,
-            &quot;definition&quot; : &quot;The source Act contains the start of the target Act.\r\n\n                        \n                           UsageNote: Inverse code is SDU&quot;
+            }]
           },
           {
-            &quot;extension&quot; : [{
-              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-              &quot;valueCode&quot; : &quot;SASSBEEAS&quot;
-            }],
             &quot;code&quot; : &quot;SDU&quot;,
             &quot;display&quot; : &quot;starts during&quot;,
-            &quot;definition&quot; : &quot;A relationship in which the source act starts within the target act's effective time (including end points, as defined in the act's effective times)\r\n\n                        \n                           UsageNote: Inverse code is SBSEAS&quot;
+            &quot;definition&quot; : &quot;A relationship in which the source act starts within the target act's effective time (including end points, as defined in the act's effective times)\r\n\n                        \n                           UsageNote: Inverse code is SBSEAS&quot;,
+            &quot;property&quot; : [{
+              &quot;code&quot; : &quot;child&quot;,
+              &quot;valueCode&quot; : &quot;SASSBEEAS&quot;
+            }]
           }]
         },
         {
-          &quot;extension&quot; : [{
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;SBSEASEBE&quot;
-          },
-          {
-            &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-            &quot;valueCode&quot; : &quot;SCWSEBE&quot;
-          }],
           &quot;code&quot; : &quot;SBE&quot;,
           &quot;display&quot; : &quot;starts before end of&quot;,
           &quot;definition&quot; : &quot;The source Act starts before the end of the target Act (i.e. if we say \&quot;ActOne SBE ActTwo\&quot;, it means that ActOne starts before the end of ActTwo, therefore ActOne is the source and ActTwo is the target).\r\n\n                        \n                           UsageNote: Inverse code is EAS&quot;,
+          &quot;property&quot; : [{
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;SBSEASEBE&quot;
+          },
+          {
+            &quot;code&quot; : &quot;child&quot;,
+            &quot;valueCode&quot; : &quot;SCWSEBE&quot;
+          }],
           &quot;concept&quot; : [{
             &quot;code&quot; : &quot;EBE&quot;,
             &quot;display&quot; : &quot;ends before end of&quot;,
             &quot;definition&quot; : &quot;The source Act ends before the end of the target Act (i.e. if we say \&quot;ActOne EBE ActTwo\&quot;, it means that ActOne ends before the end of ActTwo, therefore ActOne is the source and ActTwo is the target).\r\n\n                        \n                           UsageNote: Inverse code is EAE&quot;,
             &quot;concept&quot; : [{
-              &quot;extension&quot; : [{
-                &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-                &quot;valueCode&quot; : &quot;SBSEASEBE&quot;
-              }],
               &quot;code&quot; : &quot;SBSEBE&quot;,
               &quot;display&quot; : &quot;starts before start of, ends before end of&quot;,
               &quot;definition&quot; : &quot;The source Act starts before the start of the target Act, and ends before the end of the target Act.\r\n\n                        \n                           UsageNote: Inverse code is SASEAE&quot;,
+              &quot;property&quot; : [{
+                &quot;code&quot; : &quot;child&quot;,
+                &quot;valueCode&quot; : &quot;SBSEASEBE&quot;
+              }],
               &quot;concept&quot; : [{
-                &quot;extension&quot; : [{
-                  &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-                  &quot;valueCode&quot; : &quot;ECWS&quot;
-                }],
                 &quot;code&quot; : &quot;EBSORECWS&quot;,
                 &quot;display&quot; : &quot;ends before or concurrent with start of&quot;,
                 &quot;definition&quot; : &quot;A relationship in which the source act's effective time ends before or concurrent with the start of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is EASORECWS&quot;,
+                &quot;property&quot; : [{
+                  &quot;code&quot; : &quot;child&quot;,
+                  &quot;valueCode&quot; : &quot;ECWS&quot;
+                }],
                 &quot;concept&quot; : [{
                   &quot;code&quot; : &quot;EBS&quot;,
                   &quot;display&quot; : &quot;ends before start of&quot;,
@@ -629,38 +635,38 @@
             }]
           },
           {
-            &quot;extension&quot; : [{
-              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+            &quot;code&quot; : &quot;EBEORECW&quot;,
+            &quot;display&quot; : &quot;ends before or concurrent with end of&quot;,
+            &quot;definition&quot; : &quot;A relationship in which the source act's effective time ends before or concurrent with the end of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is EAEORECW&quot;,
+            &quot;property&quot; : [{
+              &quot;code&quot; : &quot;child&quot;,
               &quot;valueCode&quot; : &quot;ECW&quot;
             },
             {
-              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+              &quot;code&quot; : &quot;child&quot;,
               &quot;valueCode&quot; : &quot;EBE&quot;
-            }],
-            &quot;code&quot; : &quot;EBEORECW&quot;,
-            &quot;display&quot; : &quot;ends before or concurrent with end of&quot;,
-            &quot;definition&quot; : &quot;A relationship in which the source act's effective time ends before or concurrent with the end of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is EAEORECW&quot;
+            }]
           },
           {
-            &quot;extension&quot; : [{
-              &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
-              &quot;valueCode&quot; : &quot;SCW&quot;
-            }],
             &quot;code&quot; : &quot;SBSORSCW&quot;,
             &quot;display&quot; : &quot;starts before or concurrent with start of&quot;,
             &quot;definition&quot; : &quot;A relationship in which the source act's effective time starts before or concurrent with the start of the target act's effective time.\r\n\n                        \n                           Usage Note: Inverse code is SASORSCW&quot;,
+            &quot;property&quot; : [{
+              &quot;code&quot; : &quot;child&quot;,
+              &quot;valueCode&quot; : &quot;SCW&quot;
+            }],
             &quot;concept&quot; : [{
-              &quot;extension&quot; : [{
-                &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+              &quot;code&quot; : &quot;SBS&quot;,
+              &quot;display&quot; : &quot;starts before start of&quot;,
+              &quot;definition&quot; : &quot;A relationship in which the source act begins before the target act begins.\r\n\n                        \n                           UsageNote: Inverse code is SAS&quot;,
+              &quot;property&quot; : [{
+                &quot;code&quot; : &quot;child&quot;,
                 &quot;valueCode&quot; : &quot;SBSEBE&quot;
               },
               {
-                &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/codesystem-subsumes&quot;,
+                &quot;code&quot; : &quot;child&quot;,
                 &quot;valueCode&quot; : &quot;SBSEAS&quot;
-              }],
-              &quot;code&quot; : &quot;SBS&quot;,
-              &quot;display&quot; : &quot;starts before start of&quot;,
-              &quot;definition&quot; : &quot;A relationship in which the source act begins before the target act begins.\r\n\n                        \n                           UsageNote: Inverse code is SAS&quot;
+              }]
             }]
           }]
         }]
@@ -1047,7 +1053,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:29-0500. <a  style="color: #ffffff" href="../../qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:28-0600. <a  style="color: #ffffff" href="../../qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -1057,7 +1063,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fv3-ActRelationshipType.cs.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fv3-ActRelationshipType.cs.json.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fv3-ActRelationshipType.cs.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fv3-ActRelationshipType.cs.json.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="../../license.html"><img src="../../cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

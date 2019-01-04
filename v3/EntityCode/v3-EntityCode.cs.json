@@ -10,7 +10,7 @@
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-    "valueString" : "External"
+    "valueCode" : "external"
   },
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
@@ -44,6 +44,12 @@
     "uri" : "http://hl7.org/fhir/concept-properties#notSelectable",
     "description" : "Indicates that the code is abstract - only intended to be used as a selector for other concepts",
     "type" : "boolean"
+  },
+  {
+    "code" : "child",
+    "uri" : "http://hl7.org/fhir/concept-properties#child",
+    "description" : "The concept identified in this property is a child of the concept on which it is a property. The property type will be 'code'. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute",
+    "type" : "code"
   },
   {
     "code" : "status",
@@ -238,13 +244,13 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "BLSTRPK"
-          }],
           "code" : "COMPPKG",
           "display" : "Compliance Package",
           "definition" : "A container intended to contain sufficient material for more than one use, but grouped or organized to provide individual access to sufficient material for a single use.  Often used to ensure that the proper type and amount of material is consumed/expended for each use.",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "BLSTRPK"
+          }],
           "concept" : [{
             "code" : "DIALPK",
             "display" : "Dial Pack",

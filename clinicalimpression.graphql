@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type ClinicalImpression {
   id: ID
@@ -15,7 +15,7 @@ type ClinicalImpression {
   code: CodeableConcept
   description: String  _description: ElementBase
   subject: Reference!
-  context: Reference
+  encounter: Reference
   effectiveDateTime: dateTime  _effectiveDateTime: ElementBase
   effectivePeriod: Period
   date: dateTime  _date: ElementBase
@@ -64,7 +64,7 @@ input ClinicalImpression {
   code: CodeableConcept
   description: String  _description: ElementBase
   subject: Reference!
-  context: Reference
+  encounter: Reference
   effectiveDateTime: dateTime  _effectiveDateTime: ElementBase
   effectivePeriod: Period
   date: dateTime  _date: ElementBase
@@ -105,8 +105,8 @@ type ClinicalImpressionReadType {
 type ClinicalImpressionListType {
   ClinicalImpressionList(_filter : String
     assessor : [reference]
-    context : [reference]
     date : [date]
+    encounter : [reference]
     finding_code : [token]
     finding_ref : [reference]
     identifier : [token]
@@ -134,8 +134,8 @@ type ClinicalImpressionListType {
 type ClinicalImpressionConnectionType {
   ClinicalImpressionConection(_filter : String
     assessor : [reference]
-    context : [reference]
     date : [date]
+    encounter : [reference]
     finding_code : [token]
     finding_ref : [reference]
     identifier : [token]

@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Triggerdefinition.profile.json - FHIR v3.5.0</title>
+  <title>Triggerdefinition.profile.json - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>Triggerdefinition.profile.json</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/special/committees/mnm/index.cfm">Modeling and Methodology</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/special/committees/mnm/index.cfm">Modeling and Methodology</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
 
 <p>
 <a href="triggerdefinition.profile.json">Raw JSON</a> (<a href="triggerdefinition.profile.canonical.json">canonical form</a> + also see <a href="json.html">JSON Format Specification</a>)
@@ -120,7 +120,7 @@
   &quot;resourceType&quot; : &quot;StructureDefinition&quot;,
   &quot;id&quot; : &quot;TriggerDefinition&quot;,
   &quot;meta&quot; : {
-    &quot;lastUpdated&quot; : &quot;2018-09-14T07:16:19.170-05:00&quot;
+    &quot;lastUpdated&quot; : &quot;2018-12-13T14:23:07.677-06:00&quot;
   },
   &quot;text&quot; : {
     &quot;status&quot; : &quot;generated&quot;,
@@ -128,12 +128,13 @@
   },
   &quot;extension&quot; : [{
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot;,
-    &quot;valueString&quot; : &quot;Trial Use&quot;
+    &quot;valueCode&quot; : &quot;trial-use&quot;
   }],
   &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/TriggerDefinition&quot;,
+  &quot;version&quot; : &quot;3.6.0&quot;,
   &quot;name&quot; : &quot;TriggerDefinition&quot;,
   &quot;status&quot; : &quot;draft&quot;,
-  &quot;date&quot; : &quot;2018-09-14T07:16:19-05:00&quot;,
+  &quot;date&quot; : &quot;2018-12-13T14:23:07-06:00&quot;,
   &quot;publisher&quot; : &quot;HL7 FHIR Standard&quot;,
   &quot;contact&quot; : [{
     &quot;telecom&quot; : [{
@@ -142,7 +143,7 @@
     }]
   }],
   &quot;description&quot; : &quot;Base StructureDefinition for TriggerDefinition Type: A description of a triggering event. Triggering events can be named events, data events, or periodic, as determined by the type element.&quot;,
-  &quot;fhirVersion&quot; : &quot;3.5.0&quot;,
+  &quot;fhirVersion&quot; : &quot;3.6.0&quot;,
   &quot;mapping&quot; : [{
     &quot;identity&quot; : &quot;rim&quot;,
     &quot;uri&quot; : &quot;http://hl7.org/v3&quot;,
@@ -156,6 +157,10 @@
   &quot;snapshot&quot; : {
     &quot;element&quot; : [{
       &quot;id&quot; : &quot;TriggerDefinition&quot;,
+      &quot;extension&quot; : [{
+        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot;,
+        &quot;valueCode&quot; : &quot;trial-use&quot;
+      }],
       &quot;path&quot; : &quot;TriggerDefinition&quot;,
       &quot;short&quot; : &quot;Defines an expected trigger for a module&quot;,
       &quot;definition&quot; : &quot;A description of a triggering event. Triggering events can be named events, data events, or periodic, as determined by the type element.&quot;,
@@ -175,6 +180,13 @@
         &quot;expression&quot; : &quot;hasValue() or (children().count() &gt; id.count())&quot;,
         &quot;xpath&quot; : &quot;@value|f:*|h:div&quot;,
         &quot;source&quot; : &quot;Element&quot;
+      },
+      {
+        &quot;key&quot; : &quot;trd-3&quot;,
+        &quot;severity&quot; : &quot;error&quot;,
+        &quot;human&quot; : &quot;A named event requires a name, a periodic event requires timing, and a data event requires data&quot;,
+        &quot;expression&quot; : &quot;(type = 'named-event' implies name.exists()) and (type = 'periodic' implies timing.exists()) and (type.startsWith('data-') implies data.exists())&quot;,
+        &quot;xpath&quot; : &quot;((not(f:type/@value = 'named-event')) or name.exists()) and (not(f:type/@value = 'periodic') or timing.exists()) and (not(starts-with(f:type/@value, 'data-')) or data.exists())&quot;
       },
       {
         &quot;key&quot; : &quot;trd-2&quot;,
@@ -200,7 +212,7 @@
       &quot;id&quot; : &quot;TriggerDefinition.id&quot;,
       &quot;path&quot; : &quot;TriggerDefinition.id&quot;,
       &quot;representation&quot; : [&quot;xmlAttr&quot;],
-      &quot;short&quot; : &quot;xml:id (or equivalent in JSON)&quot;,
+      &quot;short&quot; : &quot;Unique id for inter-element referencing&quot;,
       &quot;definition&quot; : &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
@@ -329,15 +341,15 @@
     {
       &quot;id&quot; : &quot;TriggerDefinition.data&quot;,
       &quot;path&quot; : &quot;TriggerDefinition.data&quot;,
-      &quot;short&quot; : &quot;Triggering data of the event&quot;,
-      &quot;definition&quot; : &quot;The triggering data of the event (if this is a data trigger).&quot;,
+      &quot;short&quot; : &quot;Triggering data of the event (multiple = 'and')&quot;,
+      &quot;definition&quot; : &quot;The triggering data of the event (if this is a data trigger). If more than one data is requirement is specified, then all the data requirements must be true.&quot;,
       &quot;comment&quot; : &quot;This element shall be present for any data type trigger.&quot;,
       &quot;min&quot; : 0,
-      &quot;max&quot; : &quot;1&quot;,
+      &quot;max&quot; : &quot;*&quot;,
       &quot;base&quot; : {
         &quot;path&quot; : &quot;TriggerDefinition.data&quot;,
         &quot;min&quot; : 0,
-        &quot;max&quot; : &quot;1&quot;
+        &quot;max&quot; : &quot;*&quot;
       },
       &quot;type&quot; : [{
         &quot;code&quot; : &quot;DataRequirement&quot;
@@ -369,6 +381,10 @@
   &quot;differential&quot; : {
     &quot;element&quot; : [{
       &quot;id&quot; : &quot;TriggerDefinition&quot;,
+      &quot;extension&quot; : [{
+        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot;,
+        &quot;valueCode&quot; : &quot;trial-use&quot;
+      }],
       &quot;path&quot; : &quot;TriggerDefinition&quot;,
       &quot;short&quot; : &quot;Defines an expected trigger for a module&quot;,
       &quot;definition&quot; : &quot;A description of a triggering event. Triggering events can be named events, data events, or periodic, as determined by the type element.&quot;,
@@ -376,6 +392,13 @@
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;constraint&quot; : [{
+        &quot;key&quot; : &quot;trd-3&quot;,
+        &quot;severity&quot; : &quot;error&quot;,
+        &quot;human&quot; : &quot;A named event requires a name, a periodic event requires timing, and a data event requires data&quot;,
+        &quot;expression&quot; : &quot;(type = 'named-event' implies name.exists()) and (type = 'periodic' implies timing.exists()) and (type.startsWith('data-') implies data.exists())&quot;,
+        &quot;xpath&quot; : &quot;((not(f:type/@value = 'named-event')) or name.exists()) and (not(f:type/@value = 'periodic') or timing.exists()) and (not(starts-with(f:type/@value, 'data-')) or data.exists())&quot;
+      },
+      {
         &quot;key&quot; : &quot;trd-2&quot;,
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;A condition only if there is a data requirement&quot;,
@@ -449,11 +472,11 @@
     {
       &quot;id&quot; : &quot;TriggerDefinition.data&quot;,
       &quot;path&quot; : &quot;TriggerDefinition.data&quot;,
-      &quot;short&quot; : &quot;Triggering data of the event&quot;,
-      &quot;definition&quot; : &quot;The triggering data of the event (if this is a data trigger).&quot;,
+      &quot;short&quot; : &quot;Triggering data of the event (multiple = 'and')&quot;,
+      &quot;definition&quot; : &quot;The triggering data of the event (if this is a data trigger). If more than one data is requirement is specified, then all the data requirements must be true.&quot;,
       &quot;comment&quot; : &quot;This element shall be present for any data type trigger.&quot;,
       &quot;min&quot; : 0,
-      &quot;max&quot; : &quot;1&quot;,
+      &quot;max&quot; : &quot;*&quot;,
       &quot;type&quot; : [{
         &quot;code&quot; : &quot;DataRequirement&quot;
       }],
@@ -499,7 +522,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:23-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:26-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -509,7 +532,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Ftriggerdefinition.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Ftriggerdefinition.profile.json.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Ftriggerdefinition.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Ftriggerdefinition.profile.json.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

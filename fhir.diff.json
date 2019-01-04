@@ -28,6 +28,7 @@
     "Narrative",
     "ParameterDefinition",
     "Period",
+    "Population",
     "ProdCharacteristic",
     "ProductShelfLife",
     "Quantity",
@@ -39,7 +40,6 @@
     "Signature",
     "SimpleQuantity",
     "SubstanceAmount",
-    "SubstanceMoiety",
     "Timing",
     "TriggerDefinition",
     "UsageContext",
@@ -78,6 +78,7 @@
     "CapabilityStatement",
     "CarePlan",
     "CareTeam",
+    "CatalogEntry",
     "ChargeItem",
     "ChargeItemDefinition",
     "Claim",
@@ -106,13 +107,15 @@
     "DocumentManifest",
     "DocumentReference",
     "DomainResource",
+    "EffectEvidenceSynthesis",
     "Encounter",
     "Endpoint",
     "EnrollmentRequest",
     "EnrollmentResponse",
-    "EntryDefinition",
     "EpisodeOfCare",
     "EventDefinition",
+    "Evidence",
+    "EvidenceVariable",
     "ExampleScenario",
     "ExplanationOfBenefit",
     "FamilyMemberHistory",
@@ -145,9 +148,7 @@
     "MedicationStatement",
     "MedicinalProduct",
     "MedicinalProductAuthorization",
-    "MedicinalProductClinicals",
     "MedicinalProductContraindication",
-    "MedicinalProductDeviceSpec",
     "MedicinalProductIndication",
     "MedicinalProductIngredient",
     "MedicinalProductInteraction",
@@ -158,6 +159,7 @@
     "MessageDefinition",
     "MessageHeader",
     "MetadataResource",
+    "MolecularSequence",
     "NamingSystem",
     "NutritionOrder",
     "Observation",
@@ -175,20 +177,20 @@
     "Practitioner",
     "PractitionerRole",
     "Procedure",
-    "ProcessRequest",
-    "ProcessResponse",
     "Provenance",
     "Questionnaire",
     "QuestionnaireResponse",
     "RelatedPerson",
     "RequestGroup",
+    "ResearchDefinition",
+    "ResearchElementDefinition",
     "ResearchStudy",
     "ResearchSubject",
     "Resource",
     "RiskAssessment",
+    "RiskEvidenceSynthesis",
     "Schedule",
     "SearchParameter",
-    "Sequence",
     "ServiceRequest",
     "Slot",
     "Specimen",
@@ -197,8 +199,11 @@
     "StructureMap",
     "Subscription",
     "Substance",
+    "SubstanceNucleicAcid",
     "SubstancePolymer",
+    "SubstanceProtein",
     "SubstanceReferenceInformation",
+    "SubstanceSourceMaterial",
     "SubstanceSpecification",
     "SupplyDelivery",
     "SupplyRequest",
@@ -206,7 +211,6 @@
     "TerminologyCapabilities",
     "TestReport",
     "TestScript",
-    "UserSession",
     "ValueSet",
     "VerificationResult",
     "VisionPrescription",
@@ -218,7 +222,10 @@
     "ExpansionProfile",
     "ImagingManifest",
     "ProcedureRequest",
+    "ProcessRequest",
+    "ProcessResponse",
     "ReferralRequest",
+    "Sequence",
     "ServiceDefinition"
   ],
   "Address": {
@@ -247,7 +254,8 @@
         "binding-status": "added",
         "new-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/age-units",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-time-units"
         }
       }
     },
@@ -255,14 +263,6 @@
   },
   "Annotation": {
     "elements": {
-      "Annotation.author[x]": {
-        "removed-types": [
-          "Reference(Practitioner|Patient|RelatedPerson)"
-        ],
-        "added-types": [
-          "Reference(Practitioner|Patient|RelatedPerson|Organization)"
-        ]
-      },
       "Annotation.text": {
         "removed-types": [
           "string"
@@ -277,10 +277,17 @@
   "Attachment": {
     "elements": {
       "Attachment.language": {
-        "binding-status": "removed",
+        "binding-strength-changed": true,
+        "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/languages",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "preferred",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
         }
       },
       "Attachment.url": {
@@ -328,28 +335,34 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "Expression",
           "MarketingStatus",
           "MoneyQuantity",
+          "Population",
           "ProdCharacteristic",
           "ProductShelfLife",
           "SubstanceAmount",
-          "SubstanceMoiety",
           "canonical",
           "url",
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -358,9 +371,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -368,15 +379,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -394,7 +411,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "DataRequirement.subject[x]": {
@@ -414,7 +431,7 @@
           "Reference(ValueSet)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ValueSet)"
         ]
       },
       "DataRequirement.codeFilter.code": {
@@ -457,7 +474,8 @@
         "binding-status": "added",
         "new-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/distance-units",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-distance-units"
         }
       }
     },
@@ -492,7 +510,8 @@
         "binding-status": "added",
         "new-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/duration-units",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-time-units"
         }
       }
     },
@@ -517,7 +536,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition | ImplementationGuide)"
         ]
       },
       "ElementDefinition.type.targetProfile": {
@@ -527,7 +546,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition | ImplementationGuide)"
         ]
       },
       "ElementDefinition.type.versioning": {
@@ -542,13 +561,13 @@
           "canonical",
           "url",
           "uuid",
-          "ParameterDefinition",
-          "DataRequirement",
-          "RelatedArtifact",
           "ContactDetail",
           "Contributor",
-          "TriggerDefinition",
+          "DataRequirement",
           "Expression",
+          "ParameterDefinition",
+          "RelatedArtifact",
+          "TriggerDefinition",
           "UsageContext",
           "Dosage"
         ]
@@ -561,13 +580,13 @@
           "canonical",
           "url",
           "uuid",
-          "ParameterDefinition",
-          "DataRequirement",
-          "RelatedArtifact",
           "ContactDetail",
           "Contributor",
-          "TriggerDefinition",
+          "DataRequirement",
           "Expression",
+          "ParameterDefinition",
+          "RelatedArtifact",
+          "TriggerDefinition",
           "UsageContext",
           "Dosage"
         ]
@@ -580,13 +599,13 @@
           "canonical",
           "url",
           "uuid",
-          "ParameterDefinition",
-          "DataRequirement",
-          "RelatedArtifact",
           "ContactDetail",
           "Contributor",
-          "TriggerDefinition",
+          "DataRequirement",
           "Expression",
+          "ParameterDefinition",
+          "RelatedArtifact",
+          "TriggerDefinition",
           "UsageContext",
           "Dosage"
         ]
@@ -599,13 +618,13 @@
           "canonical",
           "url",
           "uuid",
-          "ParameterDefinition",
-          "DataRequirement",
-          "RelatedArtifact",
           "ContactDetail",
           "Contributor",
-          "TriggerDefinition",
+          "DataRequirement",
           "Expression",
+          "ParameterDefinition",
+          "RelatedArtifact",
+          "TriggerDefinition",
           "UsageContext",
           "Dosage"
         ]
@@ -619,7 +638,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "ElementDefinition.mustSupport": {
@@ -644,7 +663,7 @@
           "Reference(ValueSet)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ValueSet)"
         ]
       }
     },
@@ -671,13 +690,13 @@
           "canonical",
           "url",
           "uuid",
-          "ParameterDefinition",
-          "DataRequirement",
-          "RelatedArtifact",
           "ContactDetail",
           "Contributor",
-          "TriggerDefinition",
+          "DataRequirement",
           "Expression",
+          "ParameterDefinition",
+          "RelatedArtifact",
+          "TriggerDefinition",
           "UsageContext",
           "Dosage"
         ]
@@ -721,7 +740,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       }
     },
@@ -757,28 +776,34 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "Expression",
           "MarketingStatus",
           "MoneyQuantity",
+          "Population",
           "ProdCharacteristic",
           "ProductShelfLife",
           "SubstanceAmount",
-          "SubstanceMoiety",
           "canonical",
           "url",
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -787,9 +812,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -797,15 +820,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -823,7 +852,7 @@
           "Reference(StructureDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       }
     },
@@ -831,6 +860,9 @@
   },
   "Period": {
     "status": "no-change"
+  },
+  "Population": {
+    "status": "new"
   },
   "ProdCharacteristic": {
     "status": "new"
@@ -857,6 +889,17 @@
   },
   "RelatedArtifact": {
     "elements": {
+      "RelatedArtifact.label": {
+        "status": "new"
+      },
+      "RelatedArtifact.citation": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
       "RelatedArtifact.url": {
         "removed-types": [
           "uri"
@@ -870,7 +913,7 @@
           "Reference(Resource)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(Resource)"
         ]
       }
     },
@@ -894,21 +937,13 @@
       "Signature.who": {
         "old-name": "who[x]",
         "removed-types": [
-          "uri",
-          "Reference(Practitioner|RelatedPerson|Patient|Device|Organization)"
-        ],
-        "added-types": [
-          "Reference(Practitioner|RelatedPerson|Patient|Device|Organization)"
+          "uri"
         ]
       },
       "Signature.onBehalfOf": {
         "old-name": "onBehalfOf[x]",
         "removed-types": [
-          "uri",
-          "Reference(Practitioner|RelatedPerson|Patient|Device|Organization)"
-        ],
-        "added-types": [
-          "Reference(Practitioner|RelatedPerson|Patient|Device|Organization)"
+          "uri"
         ]
       },
       "Signature.targetFormat": {
@@ -918,12 +953,9 @@
         "status": "new"
       },
       "Signature.data": {
-        "status": "new"
+        "old-name": "blob"
       },
       "Signature.contentType": {
-        "status": "deleted"
-      },
-      "Signature.blob": {
         "status": "deleted"
       }
     },
@@ -933,9 +965,6 @@
     "status": "no-change"
   },
   "SubstanceAmount": {
-    "status": "new"
-  },
-  "SubstanceMoiety": {
     "status": "new"
   },
   "Timing": {
@@ -1016,31 +1045,31 @@
         }
       },
       "TriggerDefinition.name": {
-        "status": "new"
+        "old-name": "eventName"
       },
       "TriggerDefinition.timing[x]": {
-        "status": "new"
+        "old-name": "eventTiming[x]"
       },
       "TriggerDefinition.data": {
-        "status": "new"
+        "old-name": "eventData",
+        "old-max": "1",
+        "new-max": "*"
       },
       "TriggerDefinition.condition": {
         "status": "new"
-      },
-      "TriggerDefinition.eventName": {
-        "status": "deleted"
-      },
-      "TriggerDefinition.eventTiming[x]": {
-        "status": "deleted"
-      },
-      "TriggerDefinition.eventData": {
-        "status": "deleted"
       }
     },
     "status": "changed"
   },
   "UsageContext": {
-    "status": "no-change"
+    "elements": {
+      "UsageContext.value[x]": {
+        "added-types": [
+          "Reference(PlanDefinition | ResearchStudy | InsurancePlan | HealthcareService | Group | Location | Organization)"
+        ]
+      }
+    },
+    "status": "changed"
   },
   "base64Binary": {
     "status": "no-change"
@@ -1127,13 +1156,10 @@
         "new-max": "*"
       },
       "Account.servicePeriod": {
-        "status": "new"
+        "old-name": "period"
       },
       "Account.partOf": {
         "status": "new"
-      },
-      "Account.period": {
-        "status": "deleted"
       },
       "Account.active": {
         "status": "deleted"
@@ -1172,7 +1198,7 @@
           "Reference(Library)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(Library)"
         ]
       },
       "ActivityDefinition.kind": {
@@ -1220,14 +1246,6 @@
           "strength": "required"
         }
       },
-      "ActivityDefinition.product[x]": {
-        "removed-types": [
-          "Reference(Medication|Substance)"
-        ],
-        "added-types": [
-          "Reference(Medication|Substance)"
-        ]
-      },
       "ActivityDefinition.specimenRequirement": {
         "status": "new"
       },
@@ -1242,7 +1260,7 @@
           "Reference(StructureMap)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureMap)"
         ]
       },
       "ActivityDefinition.dynamicValue.path": {
@@ -1303,13 +1321,13 @@
         "old-min": 0,
         "new-min": 1,
         "removed-types": [
-          "Reference(Patient|ResearchSubject|Medication|Device)"
+          "Reference(Patient | ResearchSubject | Medication | Device)"
         ],
         "added-types": [
-          "Reference(Patient|Group|Practitioner|RelatedPerson)"
+          "Reference(Patient | Group | Practitioner | RelatedPerson)"
         ]
       },
-      "AdverseEvent.context": {
+      "AdverseEvent.encounter": {
         "status": "new"
       },
       "AdverseEvent.detected": {
@@ -1357,10 +1375,10 @@
       },
       "AdverseEvent.suspectEntity.instance": {
         "removed-types": [
-          "Reference(Substance|Medication|MedicationAdministration|MedicationStatement|Device)"
+          "Reference(Substance | Medication | MedicationAdministration | MedicationStatement | Device)"
         ],
         "added-types": [
-          "Reference(Immunization|Procedure|Substance|Medication|MedicationAdministration|MedicationStatement|Device)"
+          "Reference(Immunization | Procedure | Substance | Medication | MedicationAdministration | MedicationStatement | Device)"
         ]
       },
       "AdverseEvent.suspectEntity.causality": {
@@ -1392,10 +1410,10 @@
       },
       "AdverseEvent.subjectMedicalHistory": {
         "removed-types": [
-          "Reference(Condition|Observation|AllergyIntolerance|FamilyMemberHistory|Immunization|Procedure)"
+          "Reference(Condition | Observation | AllergyIntolerance | FamilyMemberHistory | Immunization | Procedure)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|AllergyIntolerance|FamilyMemberHistory|Immunization|Procedure|Media|DocumentReference)"
+          "Reference(Condition | Observation | AllergyIntolerance | FamilyMemberHistory | Immunization | Procedure | Media | DocumentReference)"
         ]
       },
       "AdverseEvent.type": {
@@ -1430,26 +1448,57 @@
   },
   "AllergyIntolerance": {
     "elements": {
+      "AllergyIntolerance.clinicalStatus": {
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/allergy-clinical-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/allergyintolerance-clinical",
+          "strength": "required"
+        }
+      },
       "AllergyIntolerance.verificationStatus": {
         "old-min": 1,
-        "new-min": 0
+        "new-min": 0,
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/allergy-verification-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/allergyintolerance-verification",
+          "strength": "required"
+        }
       },
       "AllergyIntolerance.encounter": {
         "status": "new"
       },
       "AllergyIntolerance.recordedDate": {
-        "status": "new"
+        "old-name": "assertedDate"
       },
       "AllergyIntolerance.recorder": {
         "removed-types": [
-          "Reference(Practitioner|Patient)"
+          "Reference(Practitioner | Patient)"
         ],
         "added-types": [
-          "Reference(Practitioner|Patient|RelatedPerson)"
+          "Reference(Practitioner | Patient | RelatedPerson)"
         ]
-      },
-      "AllergyIntolerance.assertedDate": {
-        "status": "deleted"
       }
     },
     "status": "changed"
@@ -1459,7 +1508,8 @@
       "Appointment.status": {
         "binding-codes-changed": true,
         "added-codes": [
-          "checked-in"
+          "checked-in",
+          "waitlist"
         ],
         "binding-status": "changed",
         "old-binding": {
@@ -1471,9 +1521,18 @@
           "strength": "required"
         }
       },
+      "Appointment.cancelationReason": {
+        "status": "new"
+      },
       "Appointment.serviceCategory": {
         "old-max": "1",
         "new-max": "*"
+      },
+      "Appointment.reasonCode": {
+        "status": "new"
+      },
+      "Appointment.reasonReference": {
+        "status": "new"
       },
       "Appointment.patientInstruction": {
         "status": "new"
@@ -1481,8 +1540,22 @@
       "Appointment.basedOn": {
         "status": "new"
       },
+      "Appointment.participant.actor": {
+        "removed-types": [
+          "Reference(Patient | Practitioner | RelatedPerson | Device | HealthcareService | Location)"
+        ],
+        "added-types": [
+          "Reference(Patient | Practitioner | PractitionerRole | RelatedPerson | Device | HealthcareService | Location)"
+        ]
+      },
       "Appointment.participant.period": {
         "status": "new"
+      },
+      "Appointment.reason": {
+        "status": "deleted"
+      },
+      "Appointment.indication": {
+        "status": "deleted"
       },
       "Appointment.incomingReferral": {
         "status": "deleted"
@@ -1545,10 +1618,10 @@
     "elements": {
       "Basic.author": {
         "removed-types": [
-          "Reference(Practitioner|Patient|RelatedPerson)"
+          "Reference(Practitioner | Patient | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Practitioner|Patient|RelatedPerson|Organization)"
+          "Reference(Practitioner | Patient | RelatedPerson | Organization)"
         ]
       }
     },
@@ -1557,10 +1630,9 @@
   "Binary": {
     "elements": {
       "Binary.data": {
-        "status": "new"
-      },
-      "Binary.content": {
-        "status": "deleted"
+        "old-name": "content",
+        "old-min": 1,
+        "new-min": 0
       }
     },
     "status": "changed"
@@ -1597,6 +1669,12 @@
   },
   "CapabilityStatement": {
     "elements": {
+      "CapabilityStatement": {
+        "old-min": 1,
+        "new-min": 0,
+        "old-max": "1",
+        "new-max": "*"
+      },
       "CapabilityStatement.experimental": {
         "modifier": "removed"
       },
@@ -1605,7 +1683,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(CapabilityStatement)"
         ]
       },
       "CapabilityStatement.imports": {
@@ -1623,9 +1701,15 @@
         "status": "new"
       },
       "CapabilityStatement.fhirVersion": {
+        "removed-types": [
+          "id"
+        ],
+        "added-types": [
+          "code"
+        ],
         "binding-status": "added",
         "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/fhir-versions",
+          "reference": "http://hl7.org/fhir/ValueSet/FHIR-version",
           "strength": "required"
         }
       },
@@ -1634,7 +1718,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ImplementationGuide)"
         ]
       },
       "CapabilityStatement.rest.documentation": {
@@ -1664,19 +1748,25 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -1685,9 +1775,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -1695,15 +1783,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -1721,11 +1815,17 @@
           "Reference(StructureDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "CapabilityStatement.rest.resource.supportedProfile": {
-        "status": "new"
+        "old-name": "profile",
+        "removed-types": [
+          "Reference(StructureDefinition)"
+        ],
+        "added-types": [
+          "canonical(StructureDefinition)"
+        ]
       },
       "CapabilityStatement.rest.resource.interaction": {
         "old-min": 1,
@@ -1744,7 +1844,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(SearchParameter)"
         ]
       },
       "CapabilityStatement.rest.resource.searchParam.type": {
@@ -1800,7 +1900,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(CompartmentDefinition)"
         ]
       },
       "CapabilityStatement.messaging.endpoint.address": {
@@ -1824,7 +1924,7 @@
           "Reference(MessageDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(MessageDefinition)"
         ]
       },
       "CapabilityStatement.document.documentation": {
@@ -1840,13 +1940,10 @@
           "Reference(StructureDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "CapabilityStatement.acceptUnknown": {
-        "status": "deleted"
-      },
-      "CapabilityStatement.profile": {
         "status": "deleted"
       },
       "CapabilityStatement.rest.security.certificate": {
@@ -1917,6 +2014,9 @@
           "strength": "required"
         }
       },
+      "CarePlan.encounter": {
+        "status": "new"
+      },
       "CarePlan.created": {
         "status": "new"
       },
@@ -1924,10 +2024,10 @@
         "old-max": "*",
         "new-max": "1",
         "removed-types": [
-          "Reference(Patient|Practitioner|RelatedPerson|Organization|CareTeam)"
+          "Reference(Patient | Practitioner | RelatedPerson | Organization | CareTeam)"
         ],
         "added-types": [
-          "Reference(Patient|Practitioner|PractitionerRole|Device|RelatedPerson|Organization|CareTeam)"
+          "Reference(Patient | Practitioner | PractitionerRole | Device | RelatedPerson | Organization | CareTeam)"
         ]
       },
       "CarePlan.contributor": {
@@ -1935,14 +2035,25 @@
       },
       "CarePlan.activity.reference": {
         "removed-types": [
-          "Reference(Appointment|CommunicationRequest|DeviceRequest|MedicationRequest|NutritionOrder|Task|ProcedureRequest|ReferralRequest|VisionPrescription|RequestGroup)"
+          "Reference(Appointment | CommunicationRequest | DeviceRequest | MedicationRequest | NutritionOrder | Task | ProcedureRequest | ReferralRequest | VisionPrescription | RequestGroup)"
         ],
         "added-types": [
-          "Reference(Appointment|CommunicationRequest|DeviceRequest|MedicationRequest|NutritionOrder|Task|ServiceRequest|VisionPrescription|RequestGroup)"
+          "Reference(Appointment | CommunicationRequest | DeviceRequest | MedicationRequest | NutritionOrder | Task | ServiceRequest | VisionPrescription | RequestGroup)"
         ]
       },
       "CarePlan.activity.detail.kind": {
-        "status": "new"
+        "old-name": "category",
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "code"
+        ],
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/care-plan-activity-kind",
+          "strength": "required"
+        }
       },
       "CarePlan.activity.detail.instantiatesCanonical": {
         "status": "new"
@@ -1955,7 +2066,7 @@
           "Reference(Condition)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|DiagnosticReport|DocumentReference)"
+          "Reference(Condition | Observation | DiagnosticReport | DocumentReference)"
         ]
       },
       "CarePlan.activity.detail.status": {
@@ -1983,34 +2094,25 @@
         ]
       },
       "CarePlan.activity.detail.doNotPerform": {
-        "status": "new"
+        "old-name": "prohibited",
+        "default": "removed",
+        "old-default": "\"false\""
       },
       "CarePlan.activity.detail.performer": {
         "removed-types": [
-          "Reference(Practitioner|Organization|RelatedPerson|Patient|CareTeam)"
+          "Reference(Practitioner | Organization | RelatedPerson | Patient | CareTeam)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|RelatedPerson|Patient|CareTeam|HealthcareService|Device)"
-        ]
-      },
-      "CarePlan.activity.detail.product[x]": {
-        "removed-types": [
-          "Reference(Medication|Substance)"
-        ],
-        "added-types": [
-          "Reference(Medication|Substance)"
+          "Reference(Practitioner | PractitionerRole | Organization | RelatedPerson | Patient | CareTeam | HealthcareService | Device)"
         ]
       },
       "CarePlan.definition": {
         "status": "deleted"
       },
-      "CarePlan.activity.detail.category": {
+      "CarePlan.context": {
         "status": "deleted"
       },
       "CarePlan.activity.detail.definition": {
-        "status": "deleted"
-      },
-      "CarePlan.activity.detail.prohibited": {
         "status": "deleted"
       }
     },
@@ -2018,29 +2120,44 @@
   },
   "CareTeam": {
     "elements": {
+      "CareTeam.encounter": {
+        "status": "new"
+      },
       "CareTeam.participant.role": {
         "old-max": "1",
         "new-max": "*"
       },
       "CareTeam.participant.member": {
         "removed-types": [
-          "Reference(Practitioner|RelatedPerson|Patient|Organization|CareTeam)"
+          "Reference(Practitioner | RelatedPerson | Patient | Organization | CareTeam)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|RelatedPerson|Patient|Organization|CareTeam)"
+          "Reference(Practitioner | PractitionerRole | RelatedPerson | Patient | Organization | CareTeam)"
         ]
       },
       "CareTeam.telecom": {
         "status": "new"
+      },
+      "CareTeam.context": {
+        "status": "deleted"
       }
     },
     "status": "changed"
+  },
+  "CatalogEntry": {
+    "status": "new"
   },
   "ChargeItem": {
     "elements": {
       "ChargeItem.identifier": {
         "old-max": "1",
         "new-max": "*"
+      },
+      "ChargeItem.definitionUri": {
+        "status": "new"
+      },
+      "ChargeItem.definitionCanonical": {
+        "status": "new"
       },
       "ChargeItem.performer": {
         "status": "new"
@@ -2057,6 +2174,9 @@
       "ChargeItem.product[x]": {
         "status": "new"
       },
+      "ChargeItem.definition": {
+        "status": "deleted"
+      },
       "ChargeItem.participant": {
         "status": "deleted"
       }
@@ -2068,7 +2188,13 @@
   },
   "Claim": {
     "elements": {
+      "Claim.status": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "Claim.type": {
+        "old-min": 0,
+        "new-min": 1,
         "binding-strength-changed": true,
         "binding-status": "changed",
         "old-binding": {
@@ -2085,6 +2211,8 @@
         "new-max": "1"
       },
       "Claim.use": {
+        "old-min": 0,
+        "new-min": 1,
         "binding-codes-changed": true,
         "removed-codes": [
           "complete",
@@ -2107,31 +2235,58 @@
           "strength": "required"
         }
       },
+      "Claim.patient": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "Claim.created": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "Claim.enterer": {
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole)"
+          "Reference(Practitioner | PractitionerRole)"
         ]
       },
       "Claim.provider": {
+        "old-min": 0,
+        "new-min": 1,
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       },
-      "Claim.payee.resource": {
-        "status": "new"
+      "Claim.priority": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "Claim.prescription": {
+        "removed-types": [
+          "Reference(MedicationRequest | VisionPrescription)"
+        ],
+        "added-types": [
+          "Reference(DeviceRequest | MedicationRequest | VisionPrescription)"
+        ]
+      },
+      "Claim.originalPrescription": {
+        "removed-types": [
+          "Reference(MedicationRequest)"
+        ],
+        "added-types": [
+          "Reference(DeviceRequest | MedicationRequest | VisionPrescription)"
+        ]
       },
       "Claim.payee.party": {
         "removed-types": [
-          "Reference(Practitioner|Organization|Patient|RelatedPerson)"
+          "Reference(Practitioner | Organization | Patient | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson)"
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson)"
         ]
       },
       "Claim.referral": {
@@ -2144,39 +2299,32 @@
       },
       "Claim.careTeam.provider": {
         "removed-types": [
-          "Reference(Practitioner|Organization)"
+          "Reference(Practitioner | Organization)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       },
-      "Claim.information.value[x]": {
-        "removed-types": [
-          "Reference(Resource)"
-        ],
-        "added-types": [
-          "boolean",
-          "Reference(Resource)"
-        ]
+      "Claim.supportingInfo": {
+        "old-name": "information"
       },
-      "Claim.diagnosis.diagnosis[x]": {
-        "removed-types": [
-          "Reference(Condition)"
-        ],
+      "Claim.supportingInfo.value[x]": {
         "added-types": [
-          "Reference(Condition)"
+          "boolean"
         ]
       },
       "Claim.diagnosis.onAdmission": {
         "status": "new"
       },
-      "Claim.procedure.procedure[x]": {
-        "removed-types": [
-          "Reference(Procedure)"
-        ],
-        "added-types": [
-          "Reference(Procedure)"
-        ]
+      "Claim.procedure.type": {
+        "status": "new"
+      },
+      "Claim.procedure.udi": {
+        "status": "new"
+      },
+      "Claim.insurance": {
+        "old-min": 0,
+        "new-min": 1
       },
       "Claim.insurance.identifier": {
         "status": "new"
@@ -2193,42 +2341,32 @@
           "strength": "extensible"
         }
       },
-      "Claim.accident.location[x]": {
-        "removed-types": [
-          "Reference(Location)"
-        ],
-        "added-types": [
-          "Reference(Location)"
-        ]
-      },
       "Claim.item.careTeamSequence": {
-        "status": "new"
+        "old-name": "careTeamLinkId"
       },
       "Claim.item.diagnosisSequence": {
-        "status": "new"
+        "old-name": "diagnosisLinkId"
       },
       "Claim.item.procedureSequence": {
-        "status": "new"
+        "old-name": "procedureLinkId"
       },
       "Claim.item.informationSequence": {
-        "status": "new"
+        "old-name": "informationLinkId"
       },
-      "Claim.item.billcode": {
-        "status": "new"
+      "Claim.item.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
-      "Claim.item.location[x]": {
-        "removed-types": [
-          "Reference(Location)"
-        ],
-        "added-types": [
-          "Reference(Location)"
-        ]
+      "Claim.item.detail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
-      "Claim.item.detail.billcode": {
-        "status": "new"
-      },
-      "Claim.item.detail.subDetail.billcode": {
-        "status": "new"
+      "Claim.item.detail.subDetail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "Claim.organization": {
         "status": "deleted"
@@ -2241,33 +2379,16 @@
       },
       "Claim.hospitalization": {
         "status": "deleted"
-      },
-      "Claim.item.careTeamLinkId": {
-        "status": "deleted"
-      },
-      "Claim.item.diagnosisLinkId": {
-        "status": "deleted"
-      },
-      "Claim.item.procedureLinkId": {
-        "status": "deleted"
-      },
-      "Claim.item.informationLinkId": {
-        "status": "deleted"
-      },
-      "Claim.item.service": {
-        "status": "deleted"
-      },
-      "Claim.item.detail.service": {
-        "status": "deleted"
-      },
-      "Claim.item.detail.subDetail.service": {
-        "status": "deleted"
       }
     },
     "status": "changed"
   },
   "ClaimResponse": {
     "elements": {
+      "ClaimResponse.status": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ClaimResponse.type": {
         "status": "new"
       },
@@ -2277,15 +2398,30 @@
       "ClaimResponse.use": {
         "status": "new"
       },
-      "ClaimResponse.requestProvider": {
+      "ClaimResponse.patient": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.created": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.insurer": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.requestor": {
+        "old-name": "requestProvider",
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       },
       "ClaimResponse.outcome": {
+        "old-min": 0,
+        "new-min": 1,
         "removed-types": [
           "CodeableConcept"
         ],
@@ -2299,19 +2435,31 @@
         }
       },
       "ClaimResponse.preAuthRef": {
+        "old-max": "*",
+        "new-max": "1"
+      },
+      "ClaimResponse.preAuthPeriod": {
         "status": "new"
       },
       "ClaimResponse.item.itemSequence": {
-        "status": "new"
+        "old-name": "sequenceLinkId"
+      },
+      "ClaimResponse.item.adjudication": {
+        "old-min": 0,
+        "new-min": 1
       },
       "ClaimResponse.item.detail.detailSequence": {
-        "status": "new"
+        "old-name": "sequenceLinkId"
+      },
+      "ClaimResponse.item.detail.adjudication": {
+        "old-min": 0,
+        "new-min": 1
       },
       "ClaimResponse.item.detail.subDetail.subDetailSequence": {
-        "status": "new"
+        "old-name": "sequenceLinkId"
       },
       "ClaimResponse.addItem.itemSequence": {
-        "status": "new"
+        "old-name": "sequenceLinkId"
       },
       "ClaimResponse.addItem.detailSequence": {
         "status": "new"
@@ -2322,8 +2470,10 @@
       "ClaimResponse.addItem.provider": {
         "status": "new"
       },
-      "ClaimResponse.addItem.billcode": {
-        "status": "new"
+      "ClaimResponse.addItem.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "ClaimResponse.addItem.programCode": {
         "status": "new"
@@ -2352,8 +2502,14 @@
       "ClaimResponse.addItem.subSite": {
         "status": "new"
       },
-      "ClaimResponse.addItem.detail.billcode": {
-        "status": "new"
+      "ClaimResponse.addItem.adjudication": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.addItem.detail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "ClaimResponse.addItem.detail.quantity": {
         "status": "new"
@@ -2367,10 +2523,14 @@
       "ClaimResponse.addItem.detail.net": {
         "status": "new"
       },
+      "ClaimResponse.addItem.detail.adjudication": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ClaimResponse.addItem.detail.subDetail": {
         "status": "new"
       },
-      "ClaimResponse.addItem.detail.subDetail.billcode": {
+      "ClaimResponse.addItem.detail.subDetail.productOrService": {
         "status": "new"
       },
       "ClaimResponse.addItem.detail.subDetail.modifier": {
@@ -2394,13 +2554,7 @@
       "ClaimResponse.addItem.detail.subDetail.adjudication": {
         "status": "new"
       },
-      "ClaimResponse.error.itemSequence": {
-        "status": "new"
-      },
-      "ClaimResponse.error.detailSequence": {
-        "status": "new"
-      },
-      "ClaimResponse.error.subDetailSequence": {
+      "ClaimResponse.adjudication": {
         "status": "new"
       },
       "ClaimResponse.total": {
@@ -2412,6 +2566,34 @@
       "ClaimResponse.total.amount": {
         "status": "new"
       },
+      "ClaimResponse.payment.type": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.payment.amount": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ClaimResponse.fundsReserve": {
+        "old-name": "reserved",
+        "removed-types": [
+          "Coding"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "ClaimResponse.formCode": {
+        "status": "new"
+      },
+      "ClaimResponse.form": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "Attachment"
+        ]
+      },
       "ClaimResponse.processNote.type": {
         "removed-types": [
           "CodeableConcept"
@@ -2420,35 +2602,40 @@
           "code"
         ]
       },
+      "ClaimResponse.processNote.text": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ClaimResponse.processNote.language": {
-        "binding-status": "removed",
+        "binding-strength-changed": true,
+        "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/languages",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "preferred",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
         }
       },
+      "ClaimResponse.error.itemSequence": {
+        "old-name": "sequenceLinkId"
+      },
+      "ClaimResponse.error.detailSequence": {
+        "old-name": "detailSequenceLinkId"
+      },
+      "ClaimResponse.error.subDetailSequence": {
+        "old-name": "subdetailSequenceLinkId"
+      },
       "ClaimResponse.requestOrganization": {
-        "status": "deleted"
-      },
-      "ClaimResponse.item.sequenceLinkId": {
-        "status": "deleted"
-      },
-      "ClaimResponse.item.detail.sequenceLinkId": {
-        "status": "deleted"
-      },
-      "ClaimResponse.item.detail.subDetail.sequenceLinkId": {
-        "status": "deleted"
-      },
-      "ClaimResponse.addItem.sequenceLinkId": {
         "status": "deleted"
       },
       "ClaimResponse.addItem.revenue": {
         "status": "deleted"
       },
       "ClaimResponse.addItem.category": {
-        "status": "deleted"
-      },
-      "ClaimResponse.addItem.service": {
         "status": "deleted"
       },
       "ClaimResponse.addItem.fee": {
@@ -2460,19 +2647,7 @@
       "ClaimResponse.addItem.detail.category": {
         "status": "deleted"
       },
-      "ClaimResponse.addItem.detail.service": {
-        "status": "deleted"
-      },
       "ClaimResponse.addItem.detail.fee": {
-        "status": "deleted"
-      },
-      "ClaimResponse.error.sequenceLinkId": {
-        "status": "deleted"
-      },
-      "ClaimResponse.error.detailSequenceLinkId": {
-        "status": "deleted"
-      },
-      "ClaimResponse.error.subdetailSequenceLinkId": {
         "status": "deleted"
       },
       "ClaimResponse.totalCost": {
@@ -2482,9 +2657,6 @@
         "status": "deleted"
       },
       "ClaimResponse.totalBenefit": {
-        "status": "deleted"
-      },
-      "ClaimResponse.insurance.preAuthRef": {
         "status": "deleted"
       }
     },
@@ -2507,12 +2679,15 @@
       "ClinicalImpression.statusReason": {
         "status": "new"
       },
+      "ClinicalImpression.encounter": {
+        "status": "new"
+      },
       "ClinicalImpression.investigation.item": {
         "removed-types": [
-          "Reference(Observation|QuestionnaireResponse|FamilyMemberHistory|DiagnosticReport|RiskAssessment|ImagingStudy)"
+          "Reference(Observation | QuestionnaireResponse | FamilyMemberHistory | DiagnosticReport | RiskAssessment | ImagingStudy)"
         ],
         "added-types": [
-          "Reference(Observation|QuestionnaireResponse|FamilyMemberHistory|DiagnosticReport|RiskAssessment|ImagingStudy|Media)"
+          "Reference(Observation | QuestionnaireResponse | FamilyMemberHistory | DiagnosticReport | RiskAssessment | ImagingStudy | Media)"
         ]
       },
       "ClinicalImpression.finding.itemCodeableConcept": {
@@ -2523,6 +2698,9 @@
       },
       "ClinicalImpression.supportingInfo": {
         "status": "new"
+      },
+      "ClinicalImpression.context": {
+        "status": "deleted"
       },
       "ClinicalImpression.finding.item[x]": {
         "status": "deleted"
@@ -2550,7 +2728,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ValueSet)"
         ]
       },
       "CodeSystem.content": {
@@ -2587,10 +2765,17 @@
         }
       },
       "CodeSystem.concept.designation.language": {
-        "binding-status": "removed",
+        "binding-strength-changed": true,
+        "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/languages",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "preferred",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
         }
       },
       "CodeSystem.concept.property.value[x]": {
@@ -2652,36 +2837,31 @@
       "Communication.about": {
         "status": "new"
       },
+      "Communication.encounter": {
+        "status": "new"
+      },
       "Communication.recipient": {
         "removed-types": [
-          "Reference(Device|Organization|Patient|Practitioner|RelatedPerson|Group)"
+          "Reference(Device | Organization | Patient | Practitioner | RelatedPerson | Group)"
         ],
         "added-types": [
-          "Reference(Device|Organization|Patient|Practitioner|PractitionerRole|RelatedPerson|Group|CareTeam|HealthcareService)"
+          "Reference(Device | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson | Group | CareTeam | HealthcareService)"
         ]
       },
       "Communication.sender": {
         "removed-types": [
-          "Reference(Device|Organization|Patient|Practitioner|RelatedPerson)"
+          "Reference(Device | Organization | Patient | Practitioner | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Device|Organization|Patient|Practitioner|PractitionerRole|RelatedPerson|HealthcareService)"
+          "Reference(Device | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson | HealthcareService)"
         ]
       },
       "Communication.reasonReference": {
         "removed-types": [
-          "Reference(Condition|Observation)"
+          "Reference(Condition | Observation)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|DiagnosticReport|DocumentReference)"
-        ]
-      },
-      "Communication.payload.content[x]": {
-        "removed-types": [
-          "Reference(Resource)"
-        ],
-        "added-types": [
-          "Reference(Resource)"
+          "Reference(Condition | Observation | DiagnosticReport | DocumentReference)"
         ]
       },
       "Communication.definition": {
@@ -2691,6 +2871,9 @@
         "status": "deleted"
       },
       "Communication.notDoneReason": {
+        "status": "deleted"
+      },
+      "Communication.context": {
         "status": "deleted"
       }
     },
@@ -2727,47 +2910,45 @@
       "CommunicationRequest.about": {
         "status": "new"
       },
-      "CommunicationRequest.payload.content[x]": {
-        "removed-types": [
-          "Reference(Resource)"
-        ],
-        "added-types": [
-          "Reference(Resource)"
-        ]
+      "CommunicationRequest.encounter": {
+        "status": "new"
       },
       "CommunicationRequest.requester": {
         "removed-types": [
           "BackboneElement"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson|Device)"
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson | Device)"
         ]
       },
       "CommunicationRequest.recipient": {
         "removed-types": [
-          "Reference(Device|Organization|Patient|Practitioner|RelatedPerson|Group|CareTeam)"
+          "Reference(Device | Organization | Patient | Practitioner | RelatedPerson | Group | CareTeam)"
         ],
         "added-types": [
-          "Reference(Device|Organization|Patient|Practitioner|PractitionerRole|RelatedPerson|Group|CareTeam|HealthcareService)"
+          "Reference(Device | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson | Group | CareTeam | HealthcareService)"
         ]
       },
       "CommunicationRequest.sender": {
         "removed-types": [
-          "Reference(Device|Organization|Patient|Practitioner|RelatedPerson)"
+          "Reference(Device | Organization | Patient | Practitioner | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Device|Organization|Patient|Practitioner|PractitionerRole|RelatedPerson|HealthcareService)"
+          "Reference(Device | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson | HealthcareService)"
         ]
       },
       "CommunicationRequest.reasonReference": {
         "removed-types": [
-          "Reference(Condition|Observation)"
+          "Reference(Condition | Observation)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|DiagnosticReport|DocumentReference)"
+          "Reference(Condition | Observation | DiagnosticReport | DocumentReference)"
         ]
       },
       "CommunicationRequest.topic": {
+        "status": "deleted"
+      },
+      "CommunicationRequest.context": {
         "status": "deleted"
       },
       "CommunicationRequest.requester.agent": {
@@ -2781,6 +2962,12 @@
   },
   "CompartmentDefinition": {
     "elements": {
+      "CompartmentDefinition": {
+        "old-min": 1,
+        "new-min": 0,
+        "old-max": "1",
+        "new-max": "*"
+      },
       "CompartmentDefinition.version": {
         "status": "new"
       },
@@ -2798,19 +2985,25 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -2819,9 +3012,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -2829,15 +3020,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -2862,7 +3059,9 @@
   "Composition": {
     "elements": {
       "Composition.category": {
-        "status": "new"
+        "old-name": "class",
+        "old-max": "1",
+        "new-max": "*"
       },
       "Composition.subject": {
         "old-min": 1,
@@ -2870,10 +3069,10 @@
       },
       "Composition.author": {
         "removed-types": [
-          "Reference(Practitioner|Device|Patient|RelatedPerson)"
+          "Reference(Practitioner | Device | Patient | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Device|Patient|RelatedPerson|Organization)"
+          "Reference(Practitioner | PractitionerRole | Device | Patient | RelatedPerson | Organization)"
         ]
       },
       "Composition.confidentiality": {
@@ -2885,28 +3084,20 @@
       },
       "Composition.attester.party": {
         "removed-types": [
-          "Reference(Patient|Practitioner|Organization)"
+          "Reference(Patient | Practitioner | Organization)"
         ],
         "added-types": [
-          "Reference(Patient|RelatedPerson|Practitioner|PractitionerRole|Organization)"
-        ]
-      },
-      "Composition.relatesTo.target[x]": {
-        "removed-types": [
-          "Reference(Composition)"
-        ],
-        "added-types": [
-          "Reference(Composition)"
+          "Reference(Patient | RelatedPerson | Practitioner | PractitionerRole | Organization)"
         ]
       },
       "Composition.section.author": {
         "status": "new"
       },
+      "Composition.section.focus": {
+        "status": "new"
+      },
       "Composition.section.mode": {
         "modifier": "removed"
-      },
-      "Composition.class": {
-        "status": "deleted"
       }
     },
     "status": "changed"
@@ -2921,7 +3112,7 @@
           "Reference(ValueSet)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ValueSet)"
         ]
       },
       "ConceptMap.target[x]": {
@@ -2929,7 +3120,7 @@
           "Reference(ValueSet)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ValueSet)"
         ]
       },
       "ConceptMap.group.element.target.equivalence": {
@@ -2943,22 +3134,19 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(CodeSystem)"
         ]
       },
       "ConceptMap.group.element.target.dependsOn.value": {
-        "status": "new"
+        "old-name": "code"
       },
       "ConceptMap.group.unmapped.url": {
         "removed-types": [
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ConceptMap)"
         ]
-      },
-      "ConceptMap.group.element.target.dependsOn.code": {
-        "status": "deleted"
       }
     },
     "status": "changed"
@@ -2984,8 +3172,6 @@
           "active",
           "recurrence",
           "relapse",
-          "well-controlled",
-          "poorly-controlled",
           "inactive",
           "remission",
           "resolved"
@@ -3036,23 +3222,33 @@
         "default": "removed",
         "old-default": "\"unknown\""
       },
+      "Condition.category": {
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/condition-category",
+          "strength": "extensible"
+        }
+      },
+      "Condition.encounter": {
+        "status": "new"
+      },
       "Condition.abatement[x]": {
         "removed-types": [
           "boolean"
         ]
       },
       "Condition.recordedDate": {
-        "status": "new"
+        "old-name": "assertedDate"
       },
       "Condition.recorder": {
         "status": "new"
       },
       "Condition.asserter": {
         "removed-types": [
-          "Reference(Practitioner|Patient|RelatedPerson)"
+          "Reference(Practitioner | Patient | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Patient|RelatedPerson)"
+          "Reference(Practitioner | PractitionerRole | Patient | RelatedPerson)"
         ]
       },
       "Condition.stage": {
@@ -3062,7 +3258,7 @@
       "Condition.stage.type": {
         "status": "new"
       },
-      "Condition.assertedDate": {
+      "Condition.context": {
         "status": "deleted"
       }
     },
@@ -3117,10 +3313,7 @@
       },
       "Consent.source[x]": {
         "removed-types": [
-          "Reference(Consent|DocumentReference|Contract|QuestionnaireResponse)"
-        ],
-        "added-types": [
-          "Reference(Consent|DocumentReference|Contract|QuestionnaireResponse)"
+          "Identifier"
         ]
       },
       "Consent.policyRule": {
@@ -3275,12 +3468,8 @@
         "old-name": "topic",
         "old-max": "*",
         "new-max": "1",
-        "removed-types": [
-          "Reference(Resource)"
-        ],
         "added-types": [
-          "CodeableConcept",
-          "Reference(Resource)"
+          "CodeableConcept"
         ]
       },
       "Contract.contentDefinition": {
@@ -3308,12 +3497,8 @@
         "old-name": "topic",
         "old-max": "*",
         "new-max": "1",
-        "removed-types": [
-          "Reference(Resource)"
-        ],
         "added-types": [
-          "CodeableConcept",
-          "Reference(Resource)"
+          "CodeableConcept"
         ]
       },
       "Contract.term.securityLabel": {
@@ -3565,30 +3750,6 @@
       "Contract.relevantHistory": {
         "status": "new"
       },
-      "Contract.friendly.content[x]": {
-        "removed-types": [
-          "Reference(Composition|DocumentReference|QuestionnaireResponse)"
-        ],
-        "added-types": [
-          "Reference(Composition|DocumentReference|QuestionnaireResponse)"
-        ]
-      },
-      "Contract.legal.content[x]": {
-        "removed-types": [
-          "Reference(Composition|DocumentReference|QuestionnaireResponse)"
-        ],
-        "added-types": [
-          "Reference(Composition|DocumentReference|QuestionnaireResponse)"
-        ]
-      },
-      "Contract.rule.content[x]": {
-        "removed-types": [
-          "Reference(DocumentReference)"
-        ],
-        "added-types": [
-          "Reference(DocumentReference)"
-        ]
-      },
       "Contract.legallyBinding[x]": {
         "status": "new"
       },
@@ -3627,8 +3788,29 @@
   },
   "Coverage": {
     "elements": {
+      "Coverage.status": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "Coverage.beneficiary": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "Coverage.relationship": {
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/subscriber-relationship",
+          "strength": "extensible"
+        }
+      },
+      "Coverage.payor": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "Coverage.class": {
-        "status": "new"
+        "old-name": "grouping",
+        "old-max": "1",
+        "new-max": "*"
       },
       "Coverage.class.type": {
         "status": "new"
@@ -3639,16 +3821,61 @@
       "Coverage.class.name": {
         "status": "new"
       },
-      "Coverage.copay": {
+      "Coverage.costToBeneficiary": {
         "status": "new"
       },
-      "Coverage.copay.type": {
+      "Coverage.costToBeneficiary.type": {
         "status": "new"
       },
-      "Coverage.copay.value": {
+      "Coverage.costToBeneficiary.value[x]": {
         "status": "new"
       },
-      "Coverage.grouping": {
+      "Coverage.costToBeneficiary.exception": {
+        "status": "new"
+      },
+      "Coverage.costToBeneficiary.exception.type": {
+        "status": "new"
+      },
+      "Coverage.costToBeneficiary.exception.period": {
+        "status": "new"
+      },
+      "Coverage.subrogation": {
+        "status": "new"
+      },
+      "Coverage.grouping.group": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.groupDisplay": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.subGroup": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.subGroupDisplay": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.plan": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.planDisplay": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.subPlan": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.subPlanDisplay": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.class": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.classDisplay": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.subClass": {
+        "status": "deleted"
+      },
+      "Coverage.grouping.subClassDisplay": {
         "status": "deleted"
       },
       "Coverage.sequence": {
@@ -3668,6 +3895,24 @@
       "DetectedIssue.identifier": {
         "old-max": "1",
         "new-max": "*"
+      },
+      "DetectedIssue.code": {
+        "old-name": "category"
+      },
+      "DetectedIssue.identified[x]": {
+        "status": "new"
+      },
+      "DetectedIssue.evidence": {
+        "status": "new"
+      },
+      "DetectedIssue.evidence.code": {
+        "status": "new"
+      },
+      "DetectedIssue.evidence.detail": {
+        "status": "new"
+      },
+      "DetectedIssue.date": {
+        "status": "deleted"
       }
     },
     "status": "changed"
@@ -3701,7 +3946,7 @@
       "Device.statusReason": {
         "status": "new"
       },
-      "Device.distinctIdentificationCode": {
+      "Device.distinctIdentifier": {
         "status": "new"
       },
       "Device.serialNumber": {
@@ -3756,7 +4001,7 @@
       "Device.property.type": {
         "status": "new"
       },
-      "Device.property.valueQuanity": {
+      "Device.property.valueQuantity": {
         "status": "new"
       },
       "Device.property.valueCode": {
@@ -3832,6 +4077,10 @@
           "code"
         ],
         "binding-valueset-changed": true,
+        "binding-codes-changed": true,
+        "added-codes": [
+          "directive"
+        ],
         "binding-status": "changed",
         "old-binding": {
           "reference": "http://build.fhir.org/valueset-request-intent.html",
@@ -3846,14 +4095,6 @@
         "default": "removed",
         "old-default": "\"If missing, normal priority\""
       },
-      "DeviceRequest.code[x]": {
-        "removed-types": [
-          "Reference(Device)"
-        ],
-        "added-types": [
-          "Reference(Device)"
-        ]
-      },
       "DeviceRequest.parameter": {
         "status": "new"
       },
@@ -3863,20 +4104,23 @@
       "DeviceRequest.parameter.value[x]": {
         "status": "new"
       },
+      "DeviceRequest.encounter": {
+        "status": "new"
+      },
       "DeviceRequest.requester": {
         "removed-types": [
           "BackboneElement"
         ],
         "added-types": [
-          "Reference(Device|Practitioner|PractitionerRole|Organization)"
+          "Reference(Device | Practitioner | PractitionerRole | Organization)"
         ]
       },
       "DeviceRequest.performer": {
         "removed-types": [
-          "Reference(Practitioner|Organization|Patient|Device|RelatedPerson|HealthcareService)"
+          "Reference(Practitioner | Organization | Patient | Device | RelatedPerson | HealthcareService)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|CareTeam|HealthcareService|Patient|Device|RelatedPerson)"
+          "Reference(Practitioner | PractitionerRole | Organization | CareTeam | HealthcareService | Patient | Device | RelatedPerson)"
         ]
       },
       "DeviceRequest.reasonReference": {
@@ -3884,13 +4128,16 @@
           "Reference(Resource)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|DiagnosticReport|DocumentReference)"
+          "Reference(Condition | Observation | DiagnosticReport | DocumentReference)"
         ]
       },
       "DeviceRequest.insurance": {
         "status": "new"
       },
       "DeviceRequest.definition": {
+        "status": "deleted"
+      },
+      "DeviceRequest.context": {
         "status": "deleted"
       },
       "DeviceRequest.requester.agent": {
@@ -3929,18 +4176,25 @@
     "elements": {
       "DiagnosticReport.basedOn": {
         "removed-types": [
-          "Reference(CarePlan|ImmunizationRecommendation|MedicationRequest|NutritionOrder|ProcedureRequest|ReferralRequest)"
+          "Reference(CarePlan | ImmunizationRecommendation | MedicationRequest | NutritionOrder | ProcedureRequest | ReferralRequest)"
         ],
         "added-types": [
-          "Reference(CarePlan|ImmunizationRecommendation|MedicationRequest|NutritionOrder|ServiceRequest)"
+          "Reference(CarePlan | ImmunizationRecommendation | MedicationRequest | NutritionOrder | ServiceRequest)"
         ]
+      },
+      "DiagnosticReport.category": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "DiagnosticReport.encounter": {
+        "status": "new"
       },
       "DiagnosticReport.performer": {
         "removed-types": [
           "BackboneElement"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|CareTeam)"
+          "Reference(Practitioner | PractitionerRole | Organization | CareTeam)"
         ]
       },
       "DiagnosticReport.resultsInterpreter": {
@@ -3948,34 +4202,25 @@
       },
       "DiagnosticReport.imagingStudy": {
         "removed-types": [
-          "Reference(ImagingStudy|ImagingManifest)"
+          "Reference(ImagingStudy | ImagingManifest)"
         ],
         "added-types": [
           "Reference(ImagingStudy)"
         ]
       },
       "DiagnosticReport.media": {
-        "status": "new"
-      },
-      "DiagnosticReport.media.comment": {
-        "status": "new"
-      },
-      "DiagnosticReport.media.link": {
-        "status": "new"
+        "old-name": "image"
       },
       "DiagnosticReport.conclusionCode": {
-        "status": "new"
+        "old-name": "codedDiagnosis"
+      },
+      "DiagnosticReport.context": {
+        "status": "deleted"
       },
       "DiagnosticReport.performer.role": {
         "status": "deleted"
       },
       "DiagnosticReport.performer.actor": {
-        "status": "deleted"
-      },
-      "DiagnosticReport.image": {
-        "status": "deleted"
-      },
-      "DiagnosticReport.codedDiagnosis": {
         "status": "deleted"
       }
     },
@@ -3983,21 +4228,20 @@
   },
   "DocumentManifest": {
     "elements": {
-      "DocumentManifest.agent": {
-        "status": "new"
-      },
-      "DocumentManifest.agent.type": {
-        "status": "new"
-      },
-      "DocumentManifest.agent.who": {
-        "status": "new"
+      "DocumentManifest.author": {
+        "removed-types": [
+          "Reference(Practitioner | Organization | Device | Patient | RelatedPerson)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization | Device | Patient | RelatedPerson)"
+        ]
       },
       "DocumentManifest.recipient": {
         "removed-types": [
-          "Reference(Patient|Practitioner|RelatedPerson|Organization)"
+          "Reference(Patient | Practitioner | RelatedPerson | Organization)"
         ],
         "added-types": [
-          "Reference(Patient|Practitioner|PractitionerRole|RelatedPerson|Organization)"
+          "Reference(Patient | Practitioner | PractitionerRole | RelatedPerson | Organization)"
         ]
       },
       "DocumentManifest.content": {
@@ -4007,9 +4251,6 @@
         "added-types": [
           "Reference(Resource)"
         ]
-      },
-      "DocumentManifest.author": {
-        "status": "deleted"
       },
       "DocumentManifest.content.p[x]": {
         "status": "deleted"
@@ -4024,19 +4265,20 @@
         "new-min": 0
       },
       "DocumentReference.category": {
-        "status": "new"
+        "old-name": "class",
+        "old-max": "1",
+        "new-max": "*"
       },
       "DocumentReference.date": {
         "status": "new"
       },
-      "DocumentReference.agent": {
-        "status": "new"
-      },
-      "DocumentReference.agent.type": {
-        "status": "new"
-      },
-      "DocumentReference.agent.who": {
-        "status": "new"
+      "DocumentReference.author": {
+        "removed-types": [
+          "Reference(Practitioner | Organization | Device | Patient | RelatedPerson)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization | Device | Patient | RelatedPerson)"
+        ]
       },
       "DocumentReference.relatesTo": {
         "modifier": "removed"
@@ -4048,7 +4290,7 @@
           "Reference(Encounter)"
         ],
         "added-types": [
-          "Reference(Encounter|EpisodeOfCare)"
+          "Reference(Encounter | EpisodeOfCare)"
         ]
       },
       "DocumentReference.context.related": {
@@ -4059,16 +4301,10 @@
           "Reference(Resource)"
         ]
       },
-      "DocumentReference.class": {
-        "status": "deleted"
-      },
       "DocumentReference.created": {
         "status": "deleted"
       },
       "DocumentReference.indexed": {
-        "status": "deleted"
-      },
-      "DocumentReference.author": {
         "status": "deleted"
       },
       "DocumentReference.context.related.identifier": {
@@ -4083,6 +4319,9 @@
   "DomainResource": {
     "status": "no-change"
   },
+  "EffectEvidenceSynthesis": {
+    "status": "new"
+  },
   "Encounter": {
     "elements": {
       "Encounter.class": {
@@ -4093,6 +4332,33 @@
         "status": "new"
       },
       "Encounter.basedOn": {
+        "old-name": "incomingReferral",
+        "removed-types": [
+          "Reference(ReferralRequest)"
+        ],
+        "added-types": [
+          "Reference(ServiceRequest)"
+        ]
+      },
+      "Encounter.participant.individual": {
+        "removed-types": [
+          "Reference(Practitioner | RelatedPerson)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | RelatedPerson)"
+        ]
+      },
+      "Encounter.appointment": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Encounter.reasonCode": {
+        "status": "new"
+      },
+      "Encounter.reasonReference": {
+        "status": "new"
+      },
+      "Encounter.diagnosis.use": {
         "status": "new"
       },
       "Encounter.hospitalization.origin": {
@@ -4100,7 +4366,7 @@
           "Reference(Location)"
         ],
         "added-types": [
-          "Reference(Location|Organization)"
+          "Reference(Location | Organization)"
         ]
       },
       "Encounter.hospitalization.destination": {
@@ -4108,10 +4374,16 @@
           "Reference(Location)"
         ],
         "added-types": [
-          "Reference(Location|Organization)"
+          "Reference(Location | Organization)"
         ]
       },
-      "Encounter.incomingReferral": {
+      "Encounter.location.physicalType": {
+        "status": "new"
+      },
+      "Encounter.reason": {
+        "status": "deleted"
+      },
+      "Encounter.diagnosis.role": {
         "status": "deleted"
       }
     },
@@ -4137,16 +4409,13 @@
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       },
       "EnrollmentRequest.candidate": {
-        "status": "new"
+        "old-name": "subject"
       },
       "EnrollmentRequest.organization": {
-        "status": "deleted"
-      },
-      "EnrollmentRequest.subject": {
         "status": "deleted"
       }
     },
@@ -4180,7 +4449,7 @@
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       },
       "EnrollmentResponse.requestOrganization": {
@@ -4188,9 +4457,6 @@
       }
     },
     "status": "changed"
-  },
-  "EntryDefinition": {
-    "status": "new"
   },
   "EpisodeOfCare": {
     "elements": {
@@ -4208,12 +4474,24 @@
   "EventDefinition": {
     "status": "new"
   },
+  "Evidence": {
+    "status": "new"
+  },
+  "EvidenceVariable": {
+    "status": "new"
+  },
   "ExampleScenario": {
     "status": "new"
   },
   "ExplanationOfBenefit": {
     "elements": {
+      "ExplanationOfBenefit.status": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ExplanationOfBenefit.type": {
+        "old-min": 0,
+        "new-min": 1,
         "binding-strength-changed": true,
         "binding-status": "changed",
         "old-binding": {
@@ -4232,20 +4510,51 @@
       "ExplanationOfBenefit.use": {
         "status": "new"
       },
+      "ExplanationOfBenefit.patient": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ExplanationOfBenefit.created": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ExplanationOfBenefit.enterer": {
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole)"
+          "Reference(Practitioner | PractitionerRole)"
         ]
       },
+      "ExplanationOfBenefit.insurer": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ExplanationOfBenefit.provider": {
+        "old-min": 0,
+        "new-min": 1,
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
+        ]
+      },
+      "ExplanationOfBenefit.priority": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.fundsReserveRequested": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.fundsReserve": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payee.party": {
+        "removed-types": [
+          "Reference(Practitioner | Organization | Patient | RelatedPerson)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson)"
         ]
       },
       "ExplanationOfBenefit.referral": {
@@ -4257,6 +4566,8 @@
         ]
       },
       "ExplanationOfBenefit.outcome": {
+        "old-min": 0,
+        "new-min": 1,
         "removed-types": [
           "CodeableConcept"
         ],
@@ -4269,54 +4580,37 @@
           "strength": "required"
         }
       },
-      "ExplanationOfBenefit.payee.resource": {
+      "ExplanationOfBenefit.preAuthRef": {
         "status": "new"
       },
-      "ExplanationOfBenefit.payee.party": {
-        "removed-types": [
-          "Reference(Practitioner|Organization|Patient|RelatedPerson)"
-        ],
-        "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson)"
-        ]
-      },
-      "ExplanationOfBenefit.information.value[x]": {
-        "removed-types": [
-          "Reference(Resource)"
-        ],
-        "added-types": [
-          "boolean",
-          "Reference(Resource)"
-        ]
+      "ExplanationOfBenefit.preAuthRefPeriod": {
+        "status": "new"
       },
       "ExplanationOfBenefit.careTeam.provider": {
         "removed-types": [
-          "Reference(Practitioner|Organization)"
+          "Reference(Practitioner | Organization)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       },
-      "ExplanationOfBenefit.diagnosis.diagnosis[x]": {
-        "removed-types": [
-          "Reference(Condition)"
-        ],
+      "ExplanationOfBenefit.supportingInfo": {
+        "old-name": "information"
+      },
+      "ExplanationOfBenefit.supportingInfo.value[x]": {
         "added-types": [
-          "Reference(Condition)"
+          "boolean"
         ]
       },
       "ExplanationOfBenefit.diagnosis.onAdmission": {
         "status": "new"
       },
-      "ExplanationOfBenefit.procedure.procedure[x]": {
-        "removed-types": [
-          "Reference(Procedure)"
-        ],
-        "added-types": [
-          "Reference(Procedure)"
-        ]
+      "ExplanationOfBenefit.procedure.udi": {
+        "status": "new"
       },
       "ExplanationOfBenefit.insurance": {
+        "old-min": 0,
+        "new-min": 1,
         "old-max": "1",
         "new-max": "*"
       },
@@ -4339,45 +4633,35 @@
           "strength": "extensible"
         }
       },
-      "ExplanationOfBenefit.accident.location[x]": {
-        "removed-types": [
-          "Reference(Location)"
-        ],
-        "added-types": [
-          "Reference(Location)"
-        ]
-      },
       "ExplanationOfBenefit.item.careTeamSequence": {
-        "status": "new"
+        "old-name": "careTeamLinkId"
       },
       "ExplanationOfBenefit.item.diagnosisSequence": {
-        "status": "new"
+        "old-name": "diagnosisLinkId"
       },
       "ExplanationOfBenefit.item.procedureSequence": {
-        "status": "new"
+        "old-name": "procedureLinkId"
       },
       "ExplanationOfBenefit.item.informationSequence": {
-        "status": "new"
+        "old-name": "informationLinkId"
       },
-      "ExplanationOfBenefit.item.billcode": {
-        "status": "new"
+      "ExplanationOfBenefit.item.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
-      "ExplanationOfBenefit.item.location[x]": {
-        "removed-types": [
-          "Reference(Location)"
-        ],
-        "added-types": [
-          "Reference(Location)"
-        ]
+      "ExplanationOfBenefit.item.detail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
-      "ExplanationOfBenefit.item.detail.billcode": {
-        "status": "new"
-      },
-      "ExplanationOfBenefit.item.detail.subDetail.billcode": {
-        "status": "new"
+      "ExplanationOfBenefit.item.detail.subDetail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "ExplanationOfBenefit.addItem.itemSequence": {
-        "status": "new"
+        "old-name": "sequenceLinkId"
       },
       "ExplanationOfBenefit.addItem.detailSequence": {
         "status": "new"
@@ -4388,8 +4672,10 @@
       "ExplanationOfBenefit.addItem.provider": {
         "status": "new"
       },
-      "ExplanationOfBenefit.addItem.billcode": {
-        "status": "new"
+      "ExplanationOfBenefit.addItem.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "ExplanationOfBenefit.addItem.programCode": {
         "status": "new"
@@ -4410,7 +4696,7 @@
         "status": "new"
       },
       "ExplanationOfBenefit.addItem.net": {
-        "status": "new"
+        "old-name": "fee"
       },
       "ExplanationOfBenefit.addItem.bodySite": {
         "status": "new"
@@ -4418,8 +4704,10 @@
       "ExplanationOfBenefit.addItem.subSite": {
         "status": "new"
       },
-      "ExplanationOfBenefit.addItem.detail.billcode": {
-        "status": "new"
+      "ExplanationOfBenefit.addItem.detail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "ExplanationOfBenefit.addItem.detail.quantity": {
         "status": "new"
@@ -4431,12 +4719,12 @@
         "status": "new"
       },
       "ExplanationOfBenefit.addItem.detail.net": {
-        "status": "new"
+        "old-name": "fee"
       },
       "ExplanationOfBenefit.addItem.detail.subDetail": {
         "status": "new"
       },
-      "ExplanationOfBenefit.addItem.detail.subDetail.billcode": {
+      "ExplanationOfBenefit.addItem.detail.subDetail.productOrService": {
         "status": "new"
       },
       "ExplanationOfBenefit.addItem.detail.subDetail.modifier": {
@@ -4460,6 +4748,9 @@
       "ExplanationOfBenefit.addItem.detail.subDetail.adjudication": {
         "status": "new"
       },
+      "ExplanationOfBenefit.adjudication": {
+        "status": "new"
+      },
       "ExplanationOfBenefit.total": {
         "status": "new"
       },
@@ -4468,6 +4759,17 @@
       },
       "ExplanationOfBenefit.total.amount": {
         "status": "new"
+      },
+      "ExplanationOfBenefit.formCode": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.form": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "Attachment"
+        ]
       },
       "ExplanationOfBenefit.processNote.type": {
         "removed-types": [
@@ -4478,19 +4780,26 @@
         ]
       },
       "ExplanationOfBenefit.processNote.language": {
-        "binding-status": "removed",
+        "binding-strength-changed": true,
+        "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/languages",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "preferred",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
         }
+      },
+      "ExplanationOfBenefit.benefitPeriod": {
+        "status": "new"
       },
       "ExplanationOfBenefit.organization": {
         "status": "deleted"
       },
       "ExplanationOfBenefit.payee.resourceType": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.insurance.preAuthRef": {
         "status": "deleted"
       },
       "ExplanationOfBenefit.employmentImpacted": {
@@ -4499,34 +4808,10 @@
       "ExplanationOfBenefit.hospitalization": {
         "status": "deleted"
       },
-      "ExplanationOfBenefit.item.careTeamLinkId": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.item.diagnosisLinkId": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.item.procedureLinkId": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.item.informationLinkId": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.item.service": {
-        "status": "deleted"
-      },
       "ExplanationOfBenefit.item.detail.type": {
         "status": "deleted"
       },
-      "ExplanationOfBenefit.item.detail.service": {
-        "status": "deleted"
-      },
       "ExplanationOfBenefit.item.detail.subDetail.type": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.item.detail.subDetail.service": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.addItem.sequenceLinkId": {
         "status": "deleted"
       },
       "ExplanationOfBenefit.addItem.revenue": {
@@ -4535,22 +4820,10 @@
       "ExplanationOfBenefit.addItem.category": {
         "status": "deleted"
       },
-      "ExplanationOfBenefit.addItem.service": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.addItem.fee": {
-        "status": "deleted"
-      },
       "ExplanationOfBenefit.addItem.detail.revenue": {
         "status": "deleted"
       },
       "ExplanationOfBenefit.addItem.detail.category": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.addItem.detail.service": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.addItem.detail.fee": {
         "status": "deleted"
       },
       "ExplanationOfBenefit.totalCost": {
@@ -4579,35 +4852,22 @@
       "FamilyMemberHistory.dataAbsentReason": {
         "status": "new"
       },
-      "FamilyMemberHistory.gender": {
-        "removed-types": [
-          "code"
-        ],
-        "added-types": [
-          "CodeableConcept"
-        ],
-        "binding-strength-changed": true,
-        "binding-valueset-changed": true,
-        "binding-status": "changed",
-        "old-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/administrative-gender",
-          "strength": "required"
-        },
-        "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/birth-sex",
-          "strength": "extensible"
-        }
+      "FamilyMemberHistory.sex": {
+        "status": "new"
       },
       "FamilyMemberHistory.estimatedAge": {
         "modifier": "removed"
       },
       "FamilyMemberHistory.reasonReference": {
         "removed-types": [
-          "Reference(Condition|Observation|AllergyIntolerance|QuestionnaireResponse)"
+          "Reference(Condition | Observation | AllergyIntolerance | QuestionnaireResponse)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|AllergyIntolerance|QuestionnaireResponse|DiagnosticReport|DocumentReference)"
+          "Reference(Condition | Observation | AllergyIntolerance | QuestionnaireResponse | DiagnosticReport | DocumentReference)"
         ]
+      },
+      "FamilyMemberHistory.condition.contributedToDeath": {
+        "status": "new"
       },
       "FamilyMemberHistory.definition": {
         "status": "deleted"
@@ -4616,6 +4876,9 @@
         "status": "deleted"
       },
       "FamilyMemberHistory.notDoneReason": {
+        "status": "deleted"
+      },
+      "FamilyMemberHistory.gender": {
         "status": "deleted"
       }
     },
@@ -4632,17 +4895,38 @@
   },
   "Goal": {
     "elements": {
+      "Goal.lifecycleStatus": {
+        "status": "new"
+      },
+      "Goal.achievementStatus": {
+        "status": "new"
+      },
       "Goal.subject": {
         "old-min": 0,
         "new-min": 1
       },
+      "Goal.target": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "Goal.target.detail[x]": {
+        "added-types": [
+          "string",
+          "boolean",
+          "integer",
+          "Ratio"
+        ]
+      },
       "Goal.addresses": {
         "removed-types": [
-          "Reference(Condition|Observation|MedicationStatement|NutritionOrder|ProcedureRequest|RiskAssessment)"
+          "Reference(Condition | Observation | MedicationStatement | NutritionOrder | ProcedureRequest | RiskAssessment)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|MedicationStatement|NutritionOrder|ServiceRequest|RiskAssessment)"
+          "Reference(Condition | Observation | MedicationStatement | NutritionOrder | ServiceRequest | RiskAssessment)"
         ]
+      },
+      "Goal.status": {
+        "status": "deleted"
       }
     },
     "status": "changed"
@@ -4663,19 +4947,25 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -4684,9 +4974,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -4694,15 +4982,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -4720,7 +5014,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "GraphDefinition.link.path": {
@@ -4742,19 +5036,25 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -4763,9 +5063,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -4773,15 +5071,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -4802,7 +5106,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "GraphDefinition.link.target.compartment.use": {
@@ -4817,15 +5121,23 @@
         "default": "removed",
         "old-default": "\"true\""
       },
+      "Group.managingEntity": {
+        "status": "new"
+      },
+      "Group.characteristic.value[x]": {
+        "added-types": [
+          "Reference"
+        ]
+      },
       "Group.characteristic.exclude": {
         "modifier": "removed"
       },
       "Group.member.entity": {
         "removed-types": [
-          "Reference(Patient|Practitioner|Device|Medication|Substance)"
+          "Reference(Patient | Practitioner | Device | Medication | Substance)"
         ],
         "added-types": [
-          "Reference(Patient|Practitioner|PractitionerRole|Device|Medication|Substance)"
+          "Reference(Patient | Practitioner | PractitionerRole | Device | Medication | Substance | Group)"
         ]
       },
       "Group.member.inactive": {
@@ -4838,7 +5150,13 @@
   "GuidanceResponse": {
     "elements": {
       "GuidanceResponse.requestIdentifier": {
-        "status": "new"
+        "old-name": "requestId",
+        "removed-types": [
+          "id"
+        ],
+        "added-types": [
+          "Identifier"
+        ]
       },
       "GuidanceResponse.identifier": {
         "old-max": "1",
@@ -4855,13 +5173,16 @@
           "CodeableConcept"
         ]
       },
+      "GuidanceResponse.encounter": {
+        "status": "new"
+      },
       "GuidanceResponse.reasonCode": {
         "status": "new"
       },
       "GuidanceResponse.reasonReference": {
         "status": "new"
       },
-      "GuidanceResponse.requestId": {
+      "GuidanceResponse.context": {
         "status": "deleted"
       },
       "GuidanceResponse.reason[x]": {
@@ -4879,6 +5200,42 @@
       "HealthcareService.category": {
         "old-max": "1",
         "new-max": "*"
+      },
+      "HealthcareService.extraDetails": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "markdown"
+        ]
+      },
+      "HealthcareService.eligibility": {
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "BackboneElement"
+        ]
+      },
+      "HealthcareService.eligibility.code": {
+        "status": "new"
+      },
+      "HealthcareService.eligibility.comment": {
+        "status": "new"
+      },
+      "HealthcareService.program": {
+        "status": "new"
+      },
+      "HealthcareService.communication": {
+        "status": "new"
+      },
+      "HealthcareService.eligibilityNote": {
+        "status": "deleted"
+      },
+      "HealthcareService.programName": {
+        "status": "deleted"
       }
     },
     "status": "changed"
@@ -4889,17 +5246,36 @@
         "status": "new"
       },
       "ImagingStudy.modality": {
-        "status": "new"
+        "old-name": "modalityList",
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/dicom-cid29",
+          "strength": "extensible"
+        },
+        "new-binding": {
+          "reference": "http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_29.html",
+          "strength": "extensible"
+        }
       },
       "ImagingStudy.subject": {
+        "old-name": "patient",
+        "removed-types": [
+          "Reference(Patient)"
+        ],
+        "added-types": [
+          "Reference(Patient | Device | Group)"
+        ]
+      },
+      "ImagingStudy.encounter": {
         "status": "new"
       },
       "ImagingStudy.basedOn": {
         "removed-types": [
-          "Reference(ReferralRequest|CarePlan|ProcedureRequest)"
+          "Reference(ReferralRequest | CarePlan | ProcedureRequest)"
         ],
         "added-types": [
-          "Reference(CarePlan|ServiceRequest|Appointment|AppointmentResponse|Task)"
+          "Reference(CarePlan | ServiceRequest | Appointment | AppointmentResponse | Task)"
         ]
       },
       "ImagingStudy.procedureReference": {
@@ -4925,8 +5301,13 @@
       "ImagingStudy.note": {
         "status": "new"
       },
-      "ImagingStudy.series.identifier": {
-        "status": "new"
+      "ImagingStudy.series.uid": {
+        "removed-types": [
+          "oid"
+        ],
+        "added-types": [
+          "id"
+        ]
       },
       "ImagingStudy.series.modality": {
         "binding-valueset-changed": true,
@@ -4957,8 +5338,13 @@
       "ImagingStudy.series.performer.actor": {
         "status": "new"
       },
-      "ImagingStudy.series.instance.identifier": {
-        "status": "new"
+      "ImagingStudy.series.instance.uid": {
+        "removed-types": [
+          "oid"
+        ],
+        "added-types": [
+          "id"
+        ]
       },
       "ImagingStudy.series.instance.sopClass": {
         "removed-types": [
@@ -4982,22 +5368,13 @@
       "ImagingStudy.availability": {
         "status": "deleted"
       },
-      "ImagingStudy.modalityList": {
-        "status": "deleted"
-      },
-      "ImagingStudy.patient": {
+      "ImagingStudy.context": {
         "status": "deleted"
       },
       "ImagingStudy.reason": {
         "status": "deleted"
       },
-      "ImagingStudy.series.uid": {
-        "status": "deleted"
-      },
       "ImagingStudy.series.availability": {
-        "status": "deleted"
-      },
-      "ImagingStudy.series.instance.uid": {
         "status": "deleted"
       }
     },
@@ -5027,10 +5404,24 @@
         }
       },
       "Immunization.statusReason": {
-        "status": "new"
+        "old-name": "notGiven",
+        "old-min": 1,
+        "new-min": 0,
+        "removed-types": [
+          "boolean"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ],
+        "modifier": "removed"
       },
       "Immunization.occurrence[x]": {
-        "status": "new"
+        "old-name": "date",
+        "old-min": 0,
+        "new-min": 1,
+        "added-types": [
+          "string"
+        ]
       },
       "Immunization.recorded": {
         "status": "new"
@@ -5040,16 +5431,31 @@
         "new-min": 0
       },
       "Immunization.performer": {
-        "status": "new"
+        "old-name": "practitioner"
       },
       "Immunization.performer.function": {
-        "status": "new"
+        "old-name": "role",
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/immunization-role",
+          "strength": "extensible"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/immunization-function",
+          "strength": "extensible"
+        }
       },
       "Immunization.performer.actor": {
-        "status": "new"
+        "removed-types": [
+          "Reference(Practitioner)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization)"
+        ]
       },
       "Immunization.reasonCode": {
-        "status": "new"
+        "old-name": "reason"
       },
       "Immunization.reasonReference": {
         "status": "new"
@@ -5082,36 +5488,36 @@
         "status": "new"
       },
       "Immunization.protocolApplied": {
-        "status": "new"
-      },
-      "Immunization.protocolApplied.series": {
-        "status": "new"
-      },
-      "Immunization.protocolApplied.authority": {
-        "status": "new"
+        "old-name": "vaccinationProtocol"
       },
       "Immunization.protocolApplied.targetDisease": {
-        "status": "new"
+        "old-min": 1,
+        "new-min": 0
       },
       "Immunization.protocolApplied.doseNumber[x]": {
-        "status": "new"
+        "old-name": "doseSequence",
+        "old-min": 0,
+        "new-min": 1,
+        "added-types": [
+          "string"
+        ]
       },
-      "Immunization.notGiven": {
-        "status": "deleted"
-      },
-      "Immunization.date": {
-        "status": "deleted"
-      },
-      "Immunization.practitioner": {
-        "status": "deleted"
+      "Immunization.protocolApplied.seriesDoses[x]": {
+        "old-name": "seriesDoses",
+        "added-types": [
+          "string"
+        ]
       },
       "Immunization.explanation": {
         "status": "deleted"
       },
-      "Immunization.reaction": {
+      "Immunization.vaccinationProtocol.description": {
         "status": "deleted"
       },
-      "Immunization.vaccinationProtocol": {
+      "Immunization.vaccinationProtocol.doseStatus": {
+        "status": "deleted"
+      },
+      "Immunization.vaccinationProtocol.doseStatusReason": {
         "status": "deleted"
       }
     },
@@ -5122,12 +5528,6 @@
   },
   "ImmunizationRecommendation": {
     "elements": {
-      "ImmunizationRecommendation.date": {
-        "status": "new"
-      },
-      "ImmunizationRecommendation.authority": {
-        "status": "new"
-      },
       "ImmunizationRecommendation.recommendation.vaccineCode": {
         "old-max": "1",
         "new-max": "*"
@@ -5141,12 +5541,6 @@
       "ImmunizationRecommendation.recommendation.forecastReason": {
         "status": "new"
       },
-      "ImmunizationRecommendation.recommendation.description": {
-        "status": "new"
-      },
-      "ImmunizationRecommendation.recommendation.series": {
-        "status": "new"
-      },
       "ImmunizationRecommendation.recommendation.doseNumber[x]": {
         "old-name": "doseNumber",
         "added-types": [
@@ -5154,26 +5548,26 @@
         ]
       },
       "ImmunizationRecommendation.recommendation.seriesDoses[x]": {
-        "status": "new"
+        "old-name": "doseSequence",
+        "added-types": [
+          "string"
+        ]
       },
       "ImmunizationRecommendation.recommendation.supportingImmunization": {
         "removed-types": [
           "Reference(Immunization)"
         ],
         "added-types": [
-          "Reference(Immunization|ImmunizationEvaluation)"
+          "Reference(Immunization | ImmunizationEvaluation)"
         ]
       },
       "ImmunizationRecommendation.recommendation.supportingPatientInformation": {
         "removed-types": [
-          "Reference(Observation|AllergyIntolerance)"
+          "Reference(Observation | AllergyIntolerance)"
         ],
         "added-types": [
           "Reference(Resource)"
         ]
-      },
-      "ImmunizationRecommendation.recommendation.date": {
-        "status": "deleted"
       },
       "ImmunizationRecommendation.recommendation.protocol": {
         "status": "deleted"
@@ -5183,6 +5577,12 @@
   },
   "ImplementationGuide": {
     "elements": {
+      "ImplementationGuide": {
+        "old-min": 1,
+        "new-min": 0,
+        "old-max": "1",
+        "new-max": "*"
+      },
       "ImplementationGuide.title": {
         "status": "new"
       },
@@ -5196,9 +5596,19 @@
         "status": "new"
       },
       "ImplementationGuide.fhirVersion": {
+        "old-min": 0,
+        "new-min": 1,
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "id"
+        ],
+        "added-types": [
+          "code"
+        ],
         "binding-status": "added",
         "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/fhir-versions",
+          "reference": "http://hl7.org/fhir/ValueSet/FHIR-version",
           "strength": "required"
         }
       },
@@ -5210,7 +5620,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ImplementationGuide)"
         ]
       },
       "ImplementationGuide.dependsOn.packageId": {
@@ -5230,19 +5640,25 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -5251,9 +5667,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -5261,15 +5675,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -5287,13 +5707,25 @@
           "Reference(StructureDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "ImplementationGuide.definition": {
         "status": "new"
       },
+      "ImplementationGuide.definition.grouping": {
+        "status": "new"
+      },
+      "ImplementationGuide.definition.grouping.name": {
+        "status": "new"
+      },
+      "ImplementationGuide.definition.grouping.description": {
+        "status": "new"
+      },
       "ImplementationGuide.definition.resource.reference": {
+        "status": "new"
+      },
+      "ImplementationGuide.definition.resource.fhirVersion": {
         "status": "new"
       },
       "ImplementationGuide.definition.resource.example[x]": {
@@ -5301,10 +5733,10 @@
         "old-min": 1,
         "new-min": 0,
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
-      "ImplementationGuide.definition.resource.package": {
+      "ImplementationGuide.definition.resource.groupingId": {
         "status": "new"
       },
       "ImplementationGuide.definition.page.name[x]": {
@@ -5373,13 +5805,7 @@
       "ImplementationGuide.dependency.type": {
         "status": "deleted"
       },
-      "ImplementationGuide.package.resource.acronym": {
-        "status": "deleted"
-      },
-      "ImplementationGuide.package.resource.source[x]": {
-        "status": "deleted"
-      },
-      "ImplementationGuide.package.resource.exampleFor": {
+      "ImplementationGuide.package": {
         "status": "deleted"
       },
       "ImplementationGuide.binary": {
@@ -5462,10 +5888,10 @@
     "elements": {
       "List.source": {
         "removed-types": [
-          "Reference(Practitioner|Patient|Device)"
+          "Reference(Practitioner | Patient | Device)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Patient|Device)"
+          "Reference(Practitioner | PractitionerRole | Patient | Device)"
         ]
       },
       "List.entry.deleted": {
@@ -5533,7 +5959,7 @@
           "Reference(Library)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(Library)"
         ]
       },
       "Measure.improvementNotation": {
@@ -5541,7 +5967,7 @@
           "string"
         ],
         "added-types": [
-          "code"
+          "CodeableConcept"
         ],
         "binding-status": "added",
         "new-binding": {
@@ -5567,14 +5993,24 @@
         "status": "new"
       },
       "Measure.group.stratifier.criteria": {
-        "old-min": 0,
-        "new-min": 1,
         "removed-types": [
           "string"
         ],
         "added-types": [
           "Expression"
         ]
+      },
+      "Measure.group.stratifier.component": {
+        "status": "new"
+      },
+      "Measure.group.stratifier.component.code": {
+        "status": "new"
+      },
+      "Measure.group.stratifier.component.description": {
+        "status": "new"
+      },
+      "Measure.group.stratifier.component.criteria": {
+        "status": "new"
       },
       "Measure.supplementalData.code": {
         "status": "new"
@@ -5655,7 +6091,7 @@
           "Reference(Measure)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(Measure)"
         ]
       },
       "MeasureReport.subject": {
@@ -5685,12 +6121,23 @@
         "status": "new"
       },
       "MeasureReport.group.stratifier.stratum.value": {
+        "old-min": 1,
+        "new-min": 0,
         "removed-types": [
           "string"
         ],
         "added-types": [
           "CodeableConcept"
         ]
+      },
+      "MeasureReport.group.stratifier.stratum.component": {
+        "status": "new"
+      },
+      "MeasureReport.group.stratifier.stratum.component.code": {
+        "status": "new"
+      },
+      "MeasureReport.group.stratifier.stratum.component.value": {
+        "status": "new"
       },
       "MeasureReport.group.stratifier.stratum.population.subjectResults": {
         "status": "new"
@@ -5743,7 +6190,7 @@
           "Reference(ProcedureRequest)"
         ],
         "added-types": [
-          "Reference(ServiceRequest|CarePlan)"
+          "Reference(ServiceRequest | CarePlan)"
         ]
       },
       "Media.partOf": {
@@ -5774,18 +6221,21 @@
         }
       },
       "Media.modality": {
-        "status": "new"
+        "old-name": "subtype"
       },
       "Media.subject": {
         "removed-types": [
-          "Reference(Patient|Practitioner|Group|Device|Specimen)"
+          "Reference(Patient | Practitioner | Group | Device | Specimen)"
         ],
         "added-types": [
-          "Reference(Patient|Practitioner|Group|Device|Specimen|Location)"
+          "Reference(Patient | Practitioner | Group | Device | Specimen | Location)"
         ]
       },
-      "Media.created[x]": {
+      "Media.encounter": {
         "status": "new"
+      },
+      "Media.created[x]": {
+        "old-name": "occurrence[x]"
       },
       "Media.issued": {
         "status": "new"
@@ -5795,7 +6245,7 @@
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|CareTeam|Patient|Device|RelatedPerson)"
+          "Reference(Practitioner | PractitionerRole | Organization | CareTeam | Patient | Device | RelatedPerson)"
         ]
       },
       "Media.deviceName": {
@@ -5803,10 +6253,10 @@
       },
       "Media.device": {
         "removed-types": [
-          "Reference(Device|DeviceMetric)"
+          "Reference(Device | DeviceMetric)"
         ],
         "added-types": [
-          "Reference(Device|DeviceMetric|Device)"
+          "Reference(Device | DeviceMetric | Device)"
         ]
       },
       "Media.frames": {
@@ -5821,10 +6271,7 @@
           "decimal"
         ]
       },
-      "Media.subtype": {
-        "status": "deleted"
-      },
-      "Media.occurrence[x]": {
+      "Media.context": {
         "status": "deleted"
       }
     },
@@ -5832,19 +6279,37 @@
   },
   "Medication": {
     "elements": {
+      "Medication.identifier": {
+        "status": "new"
+      },
       "Medication.status": {
+        "binding-codes-changed": true,
+        "removed-codes": [
+          "active",
+          "inactive",
+          "entered-in-error"
+        ],
+        "added-codes": [
+          "active",
+          "inactive",
+          "entered-in-error"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medication-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medication-status",
+          "strength": "required"
+        },
         "modifier": "added"
       },
       "Medication.amount": {
         "status": "new"
       },
-      "Medication.ingredient.item[x]": {
-        "removed-types": [
-          "Reference(Substance|Medication)"
-        ],
-        "added-types": [
-          "Reference(Substance|Medication)"
-        ]
+      "Medication.ingredient.strength": {
+        "status": "new"
       },
       "Medication.batch": {
         "status": "new"
@@ -5855,13 +6320,13 @@
       "Medication.batch.expirationDate": {
         "status": "new"
       },
-      "Medication.batch.serialNumber": {
-        "status": "new"
-      },
       "Medication.isBrand": {
         "status": "deleted"
       },
       "Medication.isOverTheCounter": {
+        "status": "deleted"
+      },
+      "Medication.ingredient.amount": {
         "status": "deleted"
       },
       "Medication.package": {
@@ -5880,8 +6345,22 @@
       },
       "MedicationAdministration.status": {
         "binding-codes-changed": true,
+        "removed-codes": [
+          "in-progress",
+          "on-hold",
+          "completed",
+          "entered-in-error",
+          "stopped",
+          "unknown"
+        ],
         "added-codes": [
-          "not-done"
+          "in-progress",
+          "not-done",
+          "on-hold",
+          "completed",
+          "entered-in-error",
+          "stopped",
+          "unknown"
         ],
         "binding-status": "changed",
         "old-binding": {
@@ -5893,34 +6372,26 @@
           "strength": "required"
         }
       },
-      "MedicationAdministration.medication[x]": {
-        "removed-types": [
-          "Reference(Medication)"
-        ],
-        "added-types": [
-          "Reference(Medication)"
-        ]
+      "MedicationAdministration.statusReason": {
+        "status": "new"
       },
       "MedicationAdministration.performer.function": {
         "status": "new"
       },
       "MedicationAdministration.performer.actor": {
         "removed-types": [
-          "Reference(Practitioner|Patient|RelatedPerson|Device)"
+          "Reference(Practitioner | Patient | RelatedPerson | Device)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Patient|RelatedPerson|Device)"
+          "Reference(Practitioner | PractitionerRole | Patient | RelatedPerson | Device)"
         ]
-      },
-      "MedicationAdministration.statusReason": {
-        "status": "new"
       },
       "MedicationAdministration.reasonReference": {
         "removed-types": [
-          "Reference(Condition|Observation)"
+          "Reference(Condition | Observation)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|DiagnosticReport)"
+          "Reference(Condition | Observation | DiagnosticReport)"
         ]
       },
       "MedicationAdministration.request": {
@@ -5928,10 +6399,10 @@
       },
       "MedicationAdministration.dosage.rate[x]": {
         "removed-types": [
-          "canonical()"
+          "Quantity()"
         ],
         "added-types": [
-          "canonical()"
+          "Quantity()"
         ]
       },
       "MedicationAdministration.definition": {
@@ -5957,44 +6428,32 @@
       "MedicationDispense.status": {
         "old-min": 0,
         "new-min": 1,
-        "binding-codes-changed": true,
-        "added-codes": [
-          "cancelled",
-          "unknown"
-        ],
+        "binding-valueset-changed": true,
         "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/medication-dispense-status",
           "strength": "required"
         },
         "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/medication-dispense-status",
+          "reference": "http://hl7.org/fhir/ValueSet/medicationdispense-status",
           "strength": "required"
         }
       },
-      "MedicationDispense.medication[x]": {
-        "removed-types": [
-          "Reference(Medication)"
-        ],
-        "added-types": [
-          "Reference(Medication)"
-        ]
+      "MedicationDispense.statusReason[x]": {
+        "status": "new"
       },
       "MedicationDispense.performer.function": {
         "status": "new"
       },
       "MedicationDispense.performer.actor": {
         "removed-types": [
-          "Reference(Practitioner|Organization|Patient|Device|RelatedPerson)"
+          "Reference(Practitioner | Organization | Patient | Device | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|Patient|Device|RelatedPerson)"
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | Device | RelatedPerson)"
         ]
       },
       "MedicationDispense.location": {
-        "status": "new"
-      },
-      "MedicationDispense.statusReason[x]": {
         "status": "new"
       },
       "MedicationDispense.performer.onBehalfOf": {
@@ -6016,21 +6475,30 @@
     "elements": {
       "MedicationRequest.status": {
         "old-min": 0,
-        "new-min": 1
+        "new-min": 1,
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medication-request-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medicationrequest-status",
+          "strength": "required"
+        }
+      },
+      "MedicationRequest.statusReason": {
+        "status": "new"
       },
       "MedicationRequest.intent": {
-        "binding-codes-changed": true,
-        "added-codes": [
-          "original-order",
-          "option"
-        ],
+        "binding-valueset-changed": true,
         "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/medication-request-intent",
           "strength": "required"
         },
         "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/medication-request-intent",
+          "reference": "http://hl7.org/fhir/ValueSet/medicationrequest-intent",
           "strength": "required"
         }
       },
@@ -6053,20 +6521,18 @@
       "MedicationRequest.doNotPerform": {
         "status": "new"
       },
-      "MedicationRequest.medication[x]": {
-        "removed-types": [
-          "Reference(Medication)"
-        ],
-        "added-types": [
-          "Reference(Medication)"
-        ]
+      "MedicationRequest.reported[x]": {
+        "status": "new"
+      },
+      "MedicationRequest.encounter": {
+        "status": "new"
       },
       "MedicationRequest.requester": {
         "removed-types": [
           "BackboneElement"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson|Device)"
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson | Device)"
         ]
       },
       "MedicationRequest.performer": {
@@ -6075,19 +6541,19 @@
       "MedicationRequest.performerType": {
         "status": "new"
       },
-      "MedicationRequest.instantiates": {
+      "MedicationRequest.instantiatesCanonical": {
+        "status": "new"
+      },
+      "MedicationRequest.instantiatesUri": {
         "status": "new"
       },
       "MedicationRequest.basedOn": {
         "removed-types": [
-          "Reference(CarePlan|MedicationRequest|ProcedureRequest|ReferralRequest)"
+          "Reference(CarePlan | MedicationRequest | ProcedureRequest | ReferralRequest)"
         ],
         "added-types": [
-          "Reference(CarePlan|MedicationRequest|ServiceRequest)"
+          "Reference(CarePlan | MedicationRequest | ServiceRequest | ImmunizationRecommendation)"
         ]
-      },
-      "MedicationRequest.statusReason": {
-        "status": "new"
       },
       "MedicationRequest.courseOfTherapyType": {
         "status": "new"
@@ -6115,10 +6581,17 @@
           "unsignedInt"
         ]
       },
-      "MedicationRequest.substitution.allowed": {
+      "MedicationRequest.substitution.allowed[x]": {
+        "old-name": "allowed",
+        "added-types": [
+          "CodeableConcept"
+        ],
         "modifier": "removed"
       },
       "MedicationRequest.definition": {
+        "status": "deleted"
+      },
+      "MedicationRequest.context": {
         "status": "deleted"
       },
       "MedicationRequest.requester.agent": {
@@ -6134,15 +6607,29 @@
     "elements": {
       "MedicationStatement.basedOn": {
         "removed-types": [
-          "Reference(MedicationRequest|CarePlan|ProcedureRequest|ReferralRequest)"
+          "Reference(MedicationRequest | CarePlan | ProcedureRequest | ReferralRequest)"
         ],
         "added-types": [
-          "Reference(MedicationRequest|CarePlan|ServiceRequest)"
+          "Reference(MedicationRequest | CarePlan | ServiceRequest)"
         ]
       },
       "MedicationStatement.status": {
         "binding-codes-changed": true,
+        "removed-codes": [
+          "active",
+          "completed",
+          "entered-in-error",
+          "intended",
+          "stopped",
+          "on-hold"
+        ],
         "added-codes": [
+          "active",
+          "completed",
+          "entered-in-error",
+          "intended",
+          "stopped",
+          "on-hold",
           "unknown",
           "not-taken"
         ],
@@ -6159,20 +6646,12 @@
       "MedicationStatement.statusReason": {
         "status": "new"
       },
-      "MedicationStatement.medication[x]": {
-        "removed-types": [
-          "Reference(Medication)"
-        ],
-        "added-types": [
-          "Reference(Medication)"
-        ]
-      },
       "MedicationStatement.reasonReference": {
         "removed-types": [
-          "Reference(Condition|Observation)"
+          "Reference(Condition | Observation)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|DiagnosticReport)"
+          "Reference(Condition | Observation | DiagnosticReport)"
         ]
       },
       "MedicationStatement.taken": {
@@ -6190,13 +6669,7 @@
   "MedicinalProductAuthorization": {
     "status": "new"
   },
-  "MedicinalProductClinicals": {
-    "status": "new"
-  },
   "MedicinalProductContraindication": {
-    "status": "new"
-  },
-  "MedicinalProductDeviceSpec": {
     "status": "new"
   },
   "MedicinalProductIndication": {
@@ -6231,7 +6704,7 @@
           "Reference(MessageDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(MessageDefinition)"
         ]
       },
       "MessageDefinition.experimental": {
@@ -6242,15 +6715,15 @@
           "Reference(MessageDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(MessageDefinition)"
         ]
       },
       "MessageDefinition.parent": {
         "removed-types": [
-          "Reference(ActivityDefinition|PlanDefinition)"
+          "Reference(ActivityDefinition | PlanDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ActivityDefinition | PlanDefinition)"
         ]
       },
       "MessageDefinition.event[x]": {
@@ -6292,19 +6765,25 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -6313,9 +6792,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -6323,15 +6800,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -6349,7 +6832,7 @@
           "Reference(StructureDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "MessageDefinition.focus.min": {
@@ -6378,7 +6861,7 @@
           "Reference(MessageDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(MessageDefinition)"
         ]
       },
       "MessageDefinition.graph": {
@@ -6403,9 +6886,6 @@
           "url"
         ]
       },
-      "MessageHeader.destination.receiver": {
-        "status": "new"
-      },
       "MessageHeader.source.endpoint": {
         "removed-types": [
           "uri"
@@ -6416,9 +6896,6 @@
       },
       "MessageHeader.definition": {
         "status": "new"
-      },
-      "MessageHeader.receiver": {
-        "status": "deleted"
       },
       "MessageHeader.timestamp": {
         "status": "deleted"
@@ -6433,6 +6910,9 @@
       }
     },
     "status": "changed"
+  },
+  "MolecularSequence": {
+    "status": "new"
   },
   "NamingSystem": {
     "elements": {
@@ -6479,30 +6959,24 @@
       "NutritionOrder.intent": {
         "status": "new"
       },
-      "NutritionOrder.context": {
-        "status": "new"
-      },
       "NutritionOrder.orderer": {
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole)"
+          "Reference(Practitioner | PractitionerRole)"
         ]
       },
       "NutritionOrder.enteralFormula.administration.rate[x]": {
         "removed-types": [
-          "canonical()"
+          "Quantity()"
         ],
         "added-types": [
-          "canonical()"
+          "Quantity()"
         ]
       },
       "NutritionOrder.note": {
         "status": "new"
-      },
-      "NutritionOrder.encounter": {
-        "status": "deleted"
       }
     },
     "status": "changed"
@@ -6511,10 +6985,10 @@
     "elements": {
       "Observation.basedOn": {
         "removed-types": [
-          "Reference(CarePlan|DeviceRequest|ImmunizationRecommendation|MedicationRequest|NutritionOrder|ProcedureRequest|ReferralRequest)"
+          "Reference(CarePlan | DeviceRequest | ImmunizationRecommendation | MedicationRequest | NutritionOrder | ProcedureRequest | ReferralRequest)"
         ],
         "added-types": [
-          "Reference(CarePlan|DeviceRequest|ImmunizationRecommendation|MedicationRequest|NutritionOrder|ServiceRequest)"
+          "Reference(CarePlan | DeviceRequest | ImmunizationRecommendation | MedicationRequest | NutritionOrder | ServiceRequest)"
         ]
       },
       "Observation.partOf": {
@@ -6524,7 +6998,13 @@
         "status": "new"
       },
       "Observation.encounter": {
-        "status": "new"
+        "old-name": "context",
+        "removed-types": [
+          "Reference(Encounter | EpisodeOfCare)"
+        ],
+        "added-types": [
+          "Reference(Encounter)"
+        ]
       },
       "Observation.effective[x]": {
         "added-types": [
@@ -6534,10 +7014,10 @@
       },
       "Observation.performer": {
         "removed-types": [
-          "Reference(Practitioner|Organization|Patient|RelatedPerson)"
+          "Reference(Practitioner | Organization | Patient | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|CareTeam|Patient|RelatedPerson)"
+          "Reference(Practitioner | PractitionerRole | Organization | CareTeam | Patient | RelatedPerson)"
         ]
       },
       "Observation.value[x]": {
@@ -6563,6 +7043,17 @@
       "Observation.interpretation": {
         "old-max": "1",
         "new-max": "*"
+      },
+      "Observation.note": {
+        "old-name": "comment",
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Annotation"
+        ]
       },
       "Observation.referenceRange.type": {
         "binding-status": "removed",
@@ -6602,9 +7093,6 @@
         "old-max": "1",
         "new-max": "*"
       },
-      "Observation.context": {
-        "status": "deleted"
-      },
       "Observation.related": {
         "status": "deleted"
       }
@@ -6623,7 +7111,7 @@
         "modifier": "removed"
       },
       "OperationDefinition.affectsState": {
-        "status": "new"
+        "old-name": "idempotent"
       },
       "OperationDefinition.comment": {
         "removed-types": [
@@ -6638,7 +7126,7 @@
           "Reference(OperationDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(OperationDefinition)"
         ]
       },
       "OperationDefinition.resource": {
@@ -6652,19 +7140,25 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -6673,9 +7167,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -6683,15 +7175,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -6721,28 +7219,34 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "Expression",
           "MarketingStatus",
           "MoneyQuantity",
+          "Population",
           "ProdCharacteristic",
           "ProductShelfLife",
           "SubstanceAmount",
-          "SubstanceMoiety",
           "canonical",
           "url",
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -6751,9 +7255,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -6761,15 +7263,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -6783,7 +7291,15 @@
         }
       },
       "OperationDefinition.parameter.targetProfile": {
-        "status": "new"
+        "old-name": "profile",
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "Reference(StructureDefinition)"
+        ],
+        "added-types": [
+          "canonical(StructureDefinition)"
+        ]
       },
       "OperationDefinition.parameter.searchType": {
         "binding-codes-changed": true,
@@ -6807,7 +7323,7 @@
           "Reference(ValueSet)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ValueSet)"
         ]
       },
       "OperationDefinition.parameter.referencedFrom": {
@@ -6818,12 +7334,6 @@
       },
       "OperationDefinition.parameter.referencedFrom.sourceId": {
         "status": "new"
-      },
-      "OperationDefinition.idempotent": {
-        "status": "deleted"
-      },
-      "OperationDefinition.parameter.profile": {
-        "status": "deleted"
       }
     },
     "status": "changed"
@@ -6874,13 +7384,13 @@
           "canonical",
           "url",
           "uuid",
-          "ParameterDefinition",
-          "DataRequirement",
-          "RelatedArtifact",
           "ContactDetail",
           "Contributor",
-          "TriggerDefinition",
+          "DataRequirement",
           "Expression",
+          "ParameterDefinition",
+          "RelatedArtifact",
+          "TriggerDefinition",
           "UsageContext",
           "Dosage"
         ]
@@ -6907,18 +7417,25 @@
         }
       },
       "Patient.communication.language": {
-        "binding-status": "removed",
+        "binding-strength-changed": true,
+        "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/languages",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "preferred",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
         }
       },
       "Patient.generalPractitioner": {
         "removed-types": [
-          "Reference(Organization|Practitioner)"
+          "Reference(Organization | Practitioner)"
         ],
         "added-types": [
-          "Reference(Organization|Practitioner|PractitionerRole)"
+          "Reference(Organization | Practitioner | PractitionerRole)"
         ]
       },
       "Patient.animal": {
@@ -6929,22 +7446,67 @@
   },
   "PaymentNotice": {
     "elements": {
-      "PaymentNotice.provider": {
-        "removed-types": [
-          "Reference(Practitioner)"
-        ],
-        "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
-        ]
+      "PaymentNotice.status": {
+        "old-min": 0,
+        "new-min": 1
       },
-      "PaymentNotice.organization": {
+      "PaymentNotice.created": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "PaymentNotice.provider": {
         "status": "deleted"
+      },
+      "PaymentNotice.payment": {
+        "status": "new"
+      },
+      "PaymentNotice.paymentDate": {
+        "old-name": "statusDate"
+      },
+      "PaymentNotice.payee": {
+        "status": "new"
+      },
+      "PaymentNotice.recipient": {
+        "old-name": "target",
+        "old-min": 0,
+        "new-min": 1
+      },
+      "PaymentNotice.amount": {
+        "status": "new"
       }
     },
     "status": "changed"
   },
   "PaymentReconciliation": {
     "elements": {
+      "PaymentReconciliation.status": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "PaymentReconciliation.created": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "PaymentReconciliation.paymentIssuer": {
+        "old-name": "organization"
+      },
+      "PaymentReconciliation.request": {
+        "removed-types": [
+          "Reference(ProcessRequest)"
+        ],
+        "added-types": [
+          "Reference(Task)"
+        ]
+      },
+      "PaymentReconciliation.requestor": {
+        "old-name": "requestOrganization",
+        "removed-types": [
+          "Reference(Organization)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization)"
+        ]
+      },
       "PaymentReconciliation.outcome": {
         "removed-types": [
           "CodeableConcept"
@@ -6966,13 +7528,44 @@
           "strength": "required"
         }
       },
-      "PaymentReconciliation.requestProvider": {
+      "PaymentReconciliation.paymentDate": {
+        "status": "new"
+      },
+      "PaymentReconciliation.paymentAmount": {
+        "old-name": "total",
+        "old-min": 0,
+        "new-min": 1
+      },
+      "PaymentReconciliation.paymentIdentifier": {
+        "status": "new"
+      },
+      "PaymentReconciliation.detail.identifier": {
+        "status": "new"
+      },
+      "PaymentReconciliation.detail.predecessor": {
+        "status": "new"
+      },
+      "PaymentReconciliation.detail.submitter": {
         "removed-types": [
-          "Reference(Practitioner)"
+          "Reference(Organization)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
+      },
+      "PaymentReconciliation.detail.responsible": {
+        "status": "new"
+      },
+      "PaymentReconciliation.detail.payee": {
+        "removed-types": [
+          "Reference(Organization)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization)"
+        ]
+      },
+      "PaymentReconciliation.formCode": {
+        "old-name": "form"
       },
       "PaymentReconciliation.processNote.type": {
         "removed-types": [
@@ -6982,7 +7575,7 @@
           "code"
         ]
       },
-      "PaymentReconciliation.requestOrganization": {
+      "PaymentReconciliation.requestProvider": {
         "status": "deleted"
       }
     },
@@ -7019,13 +7612,16 @@
           "Reference(Library)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(Library)"
         ]
       },
       "PlanDefinition.action.prefix": {
         "status": "new"
       },
       "PlanDefinition.action.priority": {
+        "status": "new"
+      },
+      "PlanDefinition.action.subject[x]": {
         "status": "new"
       },
       "PlanDefinition.action.trigger": {
@@ -7077,12 +7673,14 @@
           "strength": "extensible"
         }
       },
-      "PlanDefinition.action.definition": {
+      "PlanDefinition.action.definition[x]": {
+        "old-name": "definition",
         "removed-types": [
-          "Reference(ActivityDefinition|PlanDefinition)"
+          "Reference(ActivityDefinition | PlanDefinition)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ActivityDefinition | PlanDefinition | Questionnaire)",
+          "uri"
         ]
       },
       "PlanDefinition.action.transform": {
@@ -7090,7 +7688,7 @@
           "Reference(StructureMap)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureMap)"
         ]
       },
       "PlanDefinition.action.dynamicValue.expression": {
@@ -7132,10 +7730,17 @@
         "old-default": "\"true\""
       },
       "Practitioner.communication": {
-        "binding-status": "removed",
+        "binding-strength-changed": true,
+        "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/languages",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "preferred",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
         }
       }
     },
@@ -7160,10 +7765,10 @@
       },
       "Procedure.basedOn": {
         "removed-types": [
-          "Reference(CarePlan|ProcedureRequest|ReferralRequest)"
+          "Reference(CarePlan | ProcedureRequest | ReferralRequest)"
         ],
         "added-types": [
-          "Reference(CarePlan|ServiceRequest)"
+          "Reference(CarePlan | ServiceRequest)"
         ]
       },
       "Procedure.status": {
@@ -7190,6 +7795,9 @@
       "Procedure.statusReason": {
         "status": "new"
       },
+      "Procedure.encounter": {
+        "status": "new"
+      },
       "Procedure.performed[x]": {
         "added-types": [
           "string",
@@ -7208,18 +7816,18 @@
       },
       "Procedure.performer.actor": {
         "removed-types": [
-          "Reference(Practitioner|Organization|Patient|RelatedPerson|Device)"
+          "Reference(Practitioner | Organization | Patient | RelatedPerson | Device)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson|Device)"
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson | Device)"
         ]
       },
       "Procedure.reasonReference": {
         "removed-types": [
-          "Reference(Condition|Observation)"
+          "Reference(Condition | Observation)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|Procedure|DiagnosticReport|DocumentReference)"
+          "Reference(Condition | Observation | Procedure | DiagnosticReport | DocumentReference)"
         ]
       },
       "Procedure.report": {
@@ -7227,7 +7835,7 @@
           "Reference(DiagnosticReport)"
         ],
         "added-types": [
-          "Reference(DiagnosticReport|DocumentReference|Composition)"
+          "Reference(DiagnosticReport | DocumentReference | Composition)"
         ]
       },
       "Procedure.definition": {
@@ -7239,60 +7847,10 @@
       "Procedure.notDoneReason": {
         "status": "deleted"
       },
+      "Procedure.context": {
+        "status": "deleted"
+      },
       "Procedure.performer.role": {
-        "status": "deleted"
-      }
-    },
-    "status": "changed"
-  },
-  "ProcessRequest": {
-    "elements": {
-      "ProcessRequest.provider": {
-        "removed-types": [
-          "Reference(Practitioner)"
-        ],
-        "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
-        ]
-      },
-      "ProcessRequest.organization": {
-        "status": "deleted"
-      }
-    },
-    "status": "changed"
-  },
-  "ProcessResponse": {
-    "elements": {
-      "ProcessResponse.outcome": {
-        "removed-types": [
-          "CodeableConcept"
-        ],
-        "added-types": [
-          "code"
-        ],
-        "binding-status": "added",
-        "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/process-outcome",
-          "strength": "required"
-        }
-      },
-      "ProcessResponse.requestProvider": {
-        "removed-types": [
-          "Reference(Practitioner)"
-        ],
-        "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
-        ]
-      },
-      "ProcessResponse.processNote.type": {
-        "removed-types": [
-          "CodeableConcept"
-        ],
-        "added-types": [
-          "code"
-        ]
-      },
-      "ProcessResponse.requestOrganization": {
         "status": "deleted"
       }
     },
@@ -7301,7 +7859,10 @@
   "Provenance": {
     "elements": {
       "Provenance.occurred[x]": {
-        "status": "new"
+        "old-name": "period",
+        "added-types": [
+          "dateTime"
+        ]
       },
       "Provenance.reason": {
         "removed-types": [
@@ -7332,36 +7893,21 @@
       "Provenance.agent.who": {
         "old-name": "who[x]",
         "removed-types": [
-          "uri",
-          "Reference(Practitioner|RelatedPerson|Patient|Device|Organization)"
-        ],
-        "added-types": [
-          "Reference(Practitioner|PractitionerRole|RelatedPerson|Patient|Device|Organization)"
+          "uri"
         ]
       },
       "Provenance.agent.onBehalfOf": {
         "old-name": "onBehalfOf[x]",
         "removed-types": [
-          "uri",
-          "Reference(Practitioner|RelatedPerson|Patient|Device|Organization)"
-        ],
-        "added-types": [
-          "Reference(Practitioner|PractitionerRole|RelatedPerson|Patient|Device|Organization)"
+          "uri"
         ]
       },
       "Provenance.entity.what": {
         "old-name": "what[x]",
         "removed-types": [
           "uri",
-          "Reference(Resource)",
           "Identifier"
-        ],
-        "added-types": [
-          "Reference(Resource)"
         ]
-      },
-      "Provenance.period": {
-        "status": "deleted"
       },
       "Provenance.agent.relatedAgentType": {
         "status": "deleted"
@@ -7388,19 +7934,25 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -7409,9 +7961,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -7419,15 +7969,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -7448,11 +8004,7 @@
         "new-min": 1,
         "removed-types": [
           "uri",
-          "Attachment",
-          "Reference(Resource)"
-        ],
-        "added-types": [
-          "Reference(Resource)"
+          "Attachment"
         ]
       },
       "Questionnaire.item.enableBehavior": {
@@ -7467,13 +8019,21 @@
         "old-default": "\"false\""
       },
       "Questionnaire.item.answerValueSet": {
-        "status": "new"
+        "old-name": "options",
+        "removed-types": [
+          "Reference(ValueSet)"
+        ],
+        "added-types": [
+          "canonical(ValueSet)"
+        ]
       },
       "Questionnaire.item.answerOption": {
-        "status": "new"
+        "old-name": "option"
       },
       "Questionnaire.item.answerOption.value[x]": {
-        "status": "new"
+        "added-types": [
+          "Reference(Resource)"
+        ]
       },
       "Questionnaire.item.answerOption.initialSelected": {
         "status": "new"
@@ -7502,12 +8062,6 @@
       },
       "Questionnaire.item.enableWhen.hasAnswer": {
         "status": "deleted"
-      },
-      "Questionnaire.item.options": {
-        "status": "deleted"
-      },
-      "Questionnaire.item.option": {
-        "status": "deleted"
       }
     },
     "status": "changed"
@@ -7516,40 +8070,35 @@
     "elements": {
       "QuestionnaireResponse.basedOn": {
         "removed-types": [
-          "Reference(ReferralRequest|CarePlan|ProcedureRequest)"
+          "Reference(ReferralRequest | CarePlan | ProcedureRequest)"
         ],
         "added-types": [
-          "Reference(CarePlan|ServiceRequest)"
+          "Reference(CarePlan | ServiceRequest)"
         ]
       },
       "QuestionnaireResponse.partOf": {
-        "status": "new"
+        "old-name": "parent"
       },
       "QuestionnaireResponse.questionnaire": {
         "removed-types": [
           "Reference(Questionnaire)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(Questionnaire)"
         ]
+      },
+      "QuestionnaireResponse.encounter": {
+        "status": "new"
       },
       "QuestionnaireResponse.author": {
         "removed-types": [
-          "Reference(Device|Practitioner|Patient|RelatedPerson)"
+          "Reference(Device | Practitioner | Patient | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Device|Practitioner|PractitionerRole|Patient|RelatedPerson|Organization)"
+          "Reference(Device | Practitioner | PractitionerRole | Patient | RelatedPerson | Organization)"
         ]
       },
-      "QuestionnaireResponse.item.answer.value[x]": {
-        "removed-types": [
-          "Reference(Resource)"
-        ],
-        "added-types": [
-          "Reference(Resource)"
-        ]
-      },
-      "QuestionnaireResponse.parent": {
+      "QuestionnaireResponse.context": {
         "status": "deleted"
       },
       "QuestionnaireResponse.item.subject": {
@@ -7567,6 +8116,15 @@
       "RelatedPerson.relationship": {
         "old-max": "1",
         "new-max": "*"
+      },
+      "RelatedPerson.communication": {
+        "status": "new"
+      },
+      "RelatedPerson.communication.language": {
+        "status": "new"
+      },
+      "RelatedPerson.communication.preferred": {
+        "status": "new"
       }
     },
     "status": "changed"
@@ -7599,6 +8157,21 @@
           "strength": "required"
         }
       },
+      "RequestGroup.intent": {
+        "binding-codes-changed": true,
+        "added-codes": [
+          "directive"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-intent",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-intent",
+          "strength": "required"
+        }
+      },
       "RequestGroup.code": {
         "status": "new"
       },
@@ -7621,10 +8194,10 @@
       },
       "RequestGroup.action.participant": {
         "removed-types": [
-          "Reference(Patient|Person|Practitioner|RelatedPerson)"
+          "Reference(Patient | Person | Practitioner | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Patient|Practitioner|RelatedPerson)"
+          "Reference(Patient | Practitioner | RelatedPerson)"
         ]
       },
       "RequestGroup.action.type": {
@@ -7646,6 +8219,12 @@
       }
     },
     "status": "changed"
+  },
+  "ResearchDefinition": {
+    "status": "new"
+  },
+  "ResearchElementDefinition": {
+    "status": "new"
   },
   "ResearchStudy": {
     "elements": {
@@ -7756,10 +8335,17 @@
   "Resource": {
     "elements": {
       "Resource.language": {
-        "binding-status": "removed",
+        "binding-strength-changed": true,
+        "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/languages",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "preferred",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
         }
       }
     },
@@ -7786,16 +8372,24 @@
         "new-min": 0
       },
       "RiskAssessment.note": {
-        "status": "new"
+        "old-name": "comment",
+        "old-max": "1",
+        "new-max": "*",
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Annotation"
+        ]
       },
       "RiskAssessment.reason[x]": {
-        "status": "deleted"
-      },
-      "RiskAssessment.comment": {
         "status": "deleted"
       }
     },
     "status": "changed"
+  },
+  "RiskEvidenceSynthesis": {
+    "status": "new"
   },
   "Schedule": {
     "elements": {
@@ -7812,12 +8406,18 @@
   },
   "SearchParameter": {
     "elements": {
+      "SearchParameter": {
+        "old-min": 1,
+        "new-min": 0,
+        "old-max": "1",
+        "new-max": "*"
+      },
       "SearchParameter.derivedFrom": {
         "removed-types": [
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(SearchParameter)"
         ]
       },
       "SearchParameter.experimental": {
@@ -7834,19 +8434,25 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -7855,9 +8461,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -7865,15 +8469,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -7912,19 +8522,25 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -7933,9 +8549,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -7943,15 +8557,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -7991,83 +8611,8 @@
           "Reference(SearchParameter)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(SearchParameter)"
         ]
-      }
-    },
-    "status": "changed"
-  },
-  "Sequence": {
-    "elements": {
-      "Sequence.referenceSeq.orientation": {
-        "status": "new"
-      },
-      "Sequence.referenceSeq.strand": {
-        "removed-types": [
-          "integer"
-        ],
-        "added-types": [
-          "code"
-        ],
-        "binding-status": "added",
-        "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/strand-type",
-          "strength": "required"
-        }
-      },
-      "Sequence.quality.roc": {
-        "status": "new"
-      },
-      "Sequence.quality.roc.score": {
-        "status": "new"
-      },
-      "Sequence.quality.roc.numTP": {
-        "status": "new"
-      },
-      "Sequence.quality.roc.numFP": {
-        "status": "new"
-      },
-      "Sequence.quality.roc.numFN": {
-        "status": "new"
-      },
-      "Sequence.quality.roc.precision": {
-        "status": "new"
-      },
-      "Sequence.quality.roc.sensitivity": {
-        "status": "new"
-      },
-      "Sequence.quality.roc.fMeasure": {
-        "status": "new"
-      },
-      "Sequence.structureVariant": {
-        "status": "new"
-      },
-      "Sequence.structureVariant.precision": {
-        "status": "new"
-      },
-      "Sequence.structureVariant.reportedaCGHRatio": {
-        "status": "new"
-      },
-      "Sequence.structureVariant.length": {
-        "status": "new"
-      },
-      "Sequence.structureVariant.outer": {
-        "status": "new"
-      },
-      "Sequence.structureVariant.outer.start": {
-        "status": "new"
-      },
-      "Sequence.structureVariant.outer.end": {
-        "status": "new"
-      },
-      "Sequence.structureVariant.inner": {
-        "status": "new"
-      },
-      "Sequence.structureVariant.inner.start": {
-        "status": "new"
-      },
-      "Sequence.structureVariant.inner.end": {
-        "status": "new"
       }
     },
     "status": "changed"
@@ -8090,10 +8635,10 @@
         "old-min": 1,
         "new-min": 0,
         "removed-types": [
-          "Reference(Patient|Group|Device|Substance)"
+          "Reference(Patient | Group | Device | Substance)"
         ],
         "added-types": [
-          "Reference(Patient|Group|Device|Substance|Location)"
+          "Reference(Patient | Group | Device | Substance | Location)"
         ]
       },
       "Specimen.request": {
@@ -8109,14 +8654,6 @@
       },
       "Specimen.collection.fastingStatus[x]": {
         "status": "new"
-      },
-      "Specimen.container.additive[x]": {
-        "removed-types": [
-          "Reference(Substance)"
-        ],
-        "added-types": [
-          "Reference(Substance)"
-        ]
       },
       "Specimen.condition": {
         "status": "new"
@@ -8140,9 +8677,15 @@
         }
       },
       "StructureDefinition.fhirVersion": {
+        "removed-types": [
+          "id"
+        ],
+        "added-types": [
+          "code"
+        ],
         "binding-status": "added",
         "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/fhir-versions",
+          "reference": "http://hl7.org/fhir/ValueSet/FHIR-version",
           "strength": "required"
         }
       },
@@ -8173,7 +8716,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "StructureDefinition.contextType": {
@@ -8184,6 +8727,12 @@
   },
   "StructureMap": {
     "elements": {
+      "StructureMap": {
+        "old-min": 1,
+        "new-min": 0,
+        "old-max": "1",
+        "new-max": "*"
+      },
       "StructureMap.experimental": {
         "modifier": "removed"
       },
@@ -8192,7 +8741,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureDefinition)"
         ]
       },
       "StructureMap.import": {
@@ -8200,7 +8749,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(StructureMap)"
         ]
       },
       "StructureMap.group.rule.source.defaultValue[x]": {
@@ -8211,13 +8760,13 @@
           "canonical",
           "url",
           "uuid",
-          "ParameterDefinition",
-          "DataRequirement",
-          "RelatedArtifact",
           "ContactDetail",
           "Contributor",
-          "TriggerDefinition",
+          "DataRequirement",
           "Expression",
+          "ParameterDefinition",
+          "RelatedArtifact",
+          "TriggerDefinition",
           "UsageContext",
           "Dosage"
         ]
@@ -8237,6 +8786,22 @@
         "added-types": [
           "url"
         ]
+      },
+      "Subscription.channel.payload": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "code"
+        ],
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/mimetypes",
+          "strength": "required"
+        }
+      },
+      "Subscription.tag": {
+        "status": "deleted"
       }
     },
     "status": "changed"
@@ -8245,22 +8810,23 @@
     "elements": {
       "Substance.status": {
         "modifier": "added"
-      },
-      "Substance.ingredient.substance[x]": {
-        "removed-types": [
-          "Reference(Substance)"
-        ],
-        "added-types": [
-          "Reference(Substance)"
-        ]
       }
     },
     "status": "changed"
   },
+  "SubstanceNucleicAcid": {
+    "status": "new"
+  },
   "SubstancePolymer": {
     "status": "new"
   },
+  "SubstanceProtein": {
+    "status": "new"
+  },
   "SubstanceReferenceInformation": {
+    "status": "new"
+  },
+  "SubstanceSourceMaterial": {
     "status": "new"
   },
   "SubstanceSpecification": {
@@ -8292,20 +8858,12 @@
           "strength": "required"
         }
       },
-      "SupplyDelivery.suppliedItem.item[x]": {
-        "removed-types": [
-          "Reference(Medication|Substance|Device)"
-        ],
-        "added-types": [
-          "Reference(Medication|Substance|Device)"
-        ]
-      },
       "SupplyDelivery.supplier": {
         "removed-types": [
-          "Reference(Practitioner|Organization)"
+          "Reference(Practitioner | Organization)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       }
     },
@@ -8313,6 +8871,10 @@
   },
   "SupplyRequest": {
     "elements": {
+      "SupplyRequest.identifier": {
+        "old-max": "1",
+        "new-max": "*"
+      },
       "SupplyRequest.item[x]": {
         "status": "new"
       },
@@ -8333,7 +8895,7 @@
           "BackboneElement"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson|Device)"
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson | Device)"
         ]
       },
       "SupplyRequest.supplier": {
@@ -8341,7 +8903,7 @@
           "Reference(Organization)"
         ],
         "added-types": [
-          "Reference(Organization|HealthcareService)"
+          "Reference(Organization | HealthcareService)"
         ]
       },
       "SupplyRequest.reasonCode": {
@@ -8388,20 +8950,23 @@
           "strength": "required"
         }
       },
+      "Task.encounter": {
+        "status": "new"
+      },
       "Task.requester": {
         "removed-types": [
           "BackboneElement"
         ],
         "added-types": [
-          "Reference(Device|Organization|Patient|Practitioner|PractitionerRole|RelatedPerson)"
+          "Reference(Device | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson)"
         ]
       },
       "Task.owner": {
         "removed-types": [
-          "Reference(Device|Organization|Patient|Practitioner|RelatedPerson)"
+          "Reference(Device | Organization | Patient | Practitioner | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|CareTeam|HealthcareService|Patient|Device|RelatedPerson)"
+          "Reference(Practitioner | PractitionerRole | Organization | CareTeam | HealthcareService | Patient | Device | RelatedPerson)"
         ]
       },
       "Task.location": {
@@ -8424,13 +8989,13 @@
           "canonical",
           "url",
           "uuid",
-          "ParameterDefinition",
-          "DataRequirement",
-          "RelatedArtifact",
           "ContactDetail",
           "Contributor",
-          "TriggerDefinition",
+          "DataRequirement",
           "Expression",
+          "ParameterDefinition",
+          "RelatedArtifact",
+          "TriggerDefinition",
           "UsageContext",
           "Dosage"
         ]
@@ -8443,18 +9008,21 @@
           "canonical",
           "url",
           "uuid",
-          "ParameterDefinition",
-          "DataRequirement",
-          "RelatedArtifact",
           "ContactDetail",
           "Contributor",
-          "TriggerDefinition",
+          "DataRequirement",
           "Expression",
+          "ParameterDefinition",
+          "RelatedArtifact",
+          "TriggerDefinition",
           "UsageContext",
           "Dosage"
         ]
       },
       "Task.definition[x]": {
+        "status": "deleted"
+      },
+      "Task.context": {
         "status": "deleted"
       },
       "Task.requester.agent": {
@@ -8497,7 +9065,7 @@
           "Reference(CapabilityStatement)"
         ],
         "added-types": [
-          "canonical"
+          "canonical(CapabilityStatement)"
         ]
       },
       "TestScript.fixture.autocreate": {
@@ -8523,28 +9091,34 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "Expression",
           "MarketingStatus",
           "MoneyQuantity",
+          "Population",
           "ProdCharacteristic",
           "ProductShelfLife",
           "SubstanceAmount",
-          "SubstanceMoiety",
           "canonical",
           "url",
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -8553,9 +9127,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -8563,15 +9135,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -8614,6 +9192,9 @@
         "default": "removed",
         "old-default": "\"true\""
       },
+      "TestScript.setup.action.operation.method": {
+        "status": "new"
+      },
       "TestScript.setup.action.assert.contentType": {
         "binding-valueset-changed": true,
         "binding-status": "changed",
@@ -8623,6 +9204,21 @@
         },
         "new-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/mimetypes",
+          "strength": "required"
+        }
+      },
+      "TestScript.setup.action.assert.requestMethod": {
+        "binding-codes-changed": true,
+        "added-codes": [
+          "head"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/http-operations",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/http-operations",
           "strength": "required"
         }
       },
@@ -8637,28 +9233,34 @@
           "ExpansionProfile",
           "ImagingManifest",
           "ProcedureRequest",
+          "ProcessRequest",
+          "ProcessResponse",
           "ReferralRequest",
+          "Sequence",
           "ServiceDefinition"
         ],
         "added-codes": [
           "Expression",
           "MarketingStatus",
           "MoneyQuantity",
+          "Population",
           "ProdCharacteristic",
           "ProductShelfLife",
           "SubstanceAmount",
-          "SubstanceMoiety",
           "canonical",
           "url",
           "BiologicallyDerivedProduct",
           "BodyStructure",
+          "CatalogEntry",
           "ChargeItemDefinition",
           "ClinicalProfile",
           "CoverageEligibilityRequest",
           "CoverageEligibilityResponse",
           "DeviceDefinition",
-          "EntryDefinition",
+          "EffectEvidenceSynthesis",
           "EventDefinition",
+          "Evidence",
+          "EvidenceVariable",
           "ExampleScenario",
           "ImmunizationEvaluation",
           "InsurancePlan",
@@ -8667,9 +9269,7 @@
           "MedicationKnowledge",
           "MedicinalProduct",
           "MedicinalProductAuthorization",
-          "MedicinalProductClinicals",
           "MedicinalProductContraindication",
-          "MedicinalProductDeviceSpec",
           "MedicinalProductIndication",
           "MedicinalProductIngredient",
           "MedicinalProductInteraction",
@@ -8677,15 +9277,21 @@
           "MedicinalProductPackaged",
           "MedicinalProductPharmaceutical",
           "MedicinalProductUndesirableEffect",
+          "MolecularSequence",
           "ObservationDefinition",
           "OrganizationAffiliation",
+          "ResearchDefinition",
+          "ResearchElementDefinition",
+          "RiskEvidenceSynthesis",
           "ServiceRequest",
           "SpecimenDefinition",
+          "SubstanceNucleicAcid",
           "SubstancePolymer",
+          "SubstanceProtein",
           "SubstanceReferenceInformation",
+          "SubstanceSourceMaterial",
           "SubstanceSpecification",
           "TerminologyCapabilities",
-          "UserSession",
           "VerificationResult"
         ],
         "binding-status": "changed",
@@ -8703,12 +9309,21 @@
         "new-min": 1,
         "default": "removed",
         "old-default": "\"false\""
+      },
+      "TestScript.rule": {
+        "status": "deleted"
+      },
+      "TestScript.ruleset": {
+        "status": "deleted"
+      },
+      "TestScript.setup.action.assert.rule": {
+        "status": "deleted"
+      },
+      "TestScript.setup.action.assert.ruleset": {
+        "status": "deleted"
       }
     },
     "status": "changed"
-  },
-  "UserSession": {
-    "status": "new"
   },
   "ValueSet": {
     "elements": {
@@ -8716,10 +9331,17 @@
         "modifier": "removed"
       },
       "ValueSet.compose.include.concept.designation.language": {
-        "binding-status": "removed",
+        "binding-strength-changed": true,
+        "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/languages",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "preferred",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
         }
       },
       "ValueSet.compose.include.filter": {
@@ -8738,7 +9360,7 @@
           "uri"
         ],
         "added-types": [
-          "canonical"
+          "canonical(ValueSet)"
         ]
       },
       "ValueSet.expansion.identifier": {
@@ -8769,39 +9391,86 @@
   },
   "VisionPrescription": {
     "elements": {
+      "VisionPrescription.status": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "VisionPrescription.created": {
+        "status": "new"
+      },
+      "VisionPrescription.patient": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "VisionPrescription.dateWritten": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "VisionPrescription.prescriber": {
+        "old-min": 0,
+        "new-min": 1,
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole)"
+          "Reference(Practitioner | PractitionerRole)"
         ]
+      },
+      "VisionPrescription.lensSpecification": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.product": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.eye": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.sphere": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.cylinder": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.axis": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.prism": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.prism.amount": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.prism.base": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.add": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.power": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.backCurve": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.diameter": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.duration": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.color": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.brand": {
+        "status": "new"
+      },
+      "VisionPrescription.lensSpecification.note": {
+        "status": "new"
       },
       "VisionPrescription.reason[x]": {
-        "removed-types": [
-          "Reference(Condition)"
-        ],
-        "added-types": [
-          "Reference(Condition)"
-        ]
+        "status": "deleted"
       },
-      "VisionPrescription.dispense.prism": {
-        "old-max": "1",
-        "new-max": "*",
-        "removed-types": [
-          "decimal"
-        ],
-        "added-types": [
-          "BackboneElement"
-        ]
-      },
-      "VisionPrescription.dispense.prism.amount": {
-        "status": "new"
-      },
-      "VisionPrescription.dispense.prism.base": {
-        "status": "new"
-      },
-      "VisionPrescription.dispense.base": {
+      "VisionPrescription.dispense": {
         "status": "deleted"
       }
     },
@@ -8831,7 +9500,16 @@
   "ProcedureRequest": {
     "status": "deleted"
   },
+  "ProcessRequest": {
+    "status": "deleted"
+  },
+  "ProcessResponse": {
+    "status": "deleted"
+  },
   "ReferralRequest": {
+    "status": "deleted"
+  },
+  "Sequence": {
     "status": "deleted"
   },
   "ServiceDefinition": {

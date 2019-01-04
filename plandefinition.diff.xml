@@ -10,10 +10,11 @@
       <element path="PlanDefinition.endorser" status="new"/>
       <element path="PlanDefinition.library">
          <removed-type name="Reference(Library)"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(Library)"/>
       </element>
       <element path="PlanDefinition.action.prefix" status="new"/>
       <element path="PlanDefinition.action.priority" status="new"/>
+      <element path="PlanDefinition.action.subject[x]" status="new"/>
       <element path="PlanDefinition.action.trigger" status="new"/>
       <element path="PlanDefinition.action.condition.expression">
          <removed-type name="string"/>
@@ -21,6 +22,15 @@
       </element>
       <element path="PlanDefinition.action.timing[x]">
          <added-type name="Age"/>
+      </element>
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               path="PlanDefinition.action.participant.type">
+         <added-code code="device"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/action-participant-type"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/action-participant-type"
+                      strength="required"/>
       </element>
       <element binding-status="changed"
                binding-strength-changed="true"
@@ -32,13 +42,14 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/action-type"
                       strength="extensible"/>
       </element>
-      <element path="PlanDefinition.action.definition">
-         <removed-type name="Reference(ActivityDefinition|PlanDefinition)"/>
-         <added-type name="canonical"/>
+      <element old-name="definition" path="PlanDefinition.action.definition[x]">
+         <removed-type name="Reference(ActivityDefinition | PlanDefinition)"/>
+         <added-type name="canonical(ActivityDefinition | PlanDefinition | Questionnaire)"/>
+         <added-type name="uri"/>
       </element>
       <element path="PlanDefinition.action.transform">
          <removed-type name="Reference(StructureMap)"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(StructureMap)"/>
       </element>
       <element path="PlanDefinition.action.dynamicValue.expression">
          <removed-type name="string"/>

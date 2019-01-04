@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -118,7 +118,7 @@
           </xs:element>
           <xs:element name="useContext" minOccurs="0" maxOccurs="unbounded" type="UsageContext">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate activity definition instances.</xs:documentation>
+              <xs:documentation xml:lang="en">The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate activity definition instances.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="jurisdiction" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
@@ -323,7 +323,7 @@
         <xs:sequence>
           <xs:element name="path" minOccurs="1" maxOccurs="1" type="string">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The path to the element to be customized. This is the path on the resource that will hold the result of the calculation defined by the expression.</xs:documentation>
+              <xs:documentation xml:lang="en">The path to the element to be customized. This is the path on the resource that will hold the result of the calculation defined by the expression. The specified path SHALL be a FHIRPath resolveable on the specified target type of the ActivityDefinition, and SHALL consist only of identifiers, constant indexers, and a restricted subset of functions. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements (see the [Simple FHIRPath Profile](fhirpath.html#simple) for full details).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="expression" minOccurs="1" maxOccurs="1" type="Expression">
@@ -380,6 +380,11 @@
       <xs:enumeration value="plan">
         <xs:annotation>
           <xs:documentation xml:lang="en">Plan</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="directive">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Directive</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="order">

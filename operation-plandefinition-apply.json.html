@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Operation-plandefinition-apply.json - FHIR v3.5.0</title>
+  <title>Operation-plandefinition-apply.json - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>Operation-plandefinition-apply.json</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/dss/index.cfm">Clinical Decision Support</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/dss/index.cfm">Clinical Decision Support</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
 
 <p>
 <a href="operation-plandefinition-apply.json">Raw JSON</a> (<a href="operation-plandefinition-apply.canonical.json">canonical form</a> + also see <a href="json.html">JSON Format Specification</a>)
@@ -129,13 +129,14 @@
   },
   {
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot;,
-    &quot;valueString&quot; : &quot;Trial Use&quot;
+    &quot;valueCode&quot; : &quot;trial-use&quot;
   }],
   &quot;url&quot; : &quot;http://hl7.org/fhir/OperationDefinition/PlanDefinition-apply&quot;,
+  &quot;version&quot; : &quot;3.6.0&quot;,
   &quot;name&quot; : &quot;Apply&quot;,
   &quot;status&quot; : &quot;draft&quot;,
   &quot;kind&quot; : &quot;operation&quot;,
-  &quot;date&quot; : &quot;2018-09-14T07:16:19-05:00&quot;,
+  &quot;date&quot; : &quot;2018-12-13T14:23:07-06:00&quot;,
   &quot;publisher&quot; : &quot;HL7 (FHIR Project)&quot;,
   &quot;contact&quot; : [{
     &quot;telecom&quot; : [{
@@ -149,7 +150,7 @@
   }],
   &quot;description&quot; : &quot;The apply operation applies a PlanDefinition to a given context&quot;,
   &quot;code&quot; : &quot;apply&quot;,
-  &quot;comment&quot; : &quot;The result of this operation is a CarePlan resource with a single activity represented by a RequestGroup. The RequestGroup will have actions for each of the applicable actions in the plan based on evaluating the applicability condition in context. For each applicable action, the definition is applied as described in the $apply operation of the ActivityDefinition resource, and the resulting resource is added as an activity to the CarePlan. If the ActivityDefinition includes library references, those libraries will be available to the evaluated expressions. If those libraries have parameters, those parameters will be bound by name to the parameters given to the operation. For a more detailed description, refer to the PlanDefinition and ActivityDefinition resource documentation&quot;,
+  &quot;comment&quot; : &quot;The result of this operation is a CarePlan resource with a single activity represented by a RequestGroup. The RequestGroup will have actions for each of the applicable actions in the plan based on evaluating the applicability condition in context. For each applicable action, the definition is applied as described in the $apply operation of the ActivityDefinition resource, and the resulting resource is added as an activity to the CarePlan. If the ActivityDefinition includes library references, those libraries will be available to the evaluated expressions. If those libraries have parameters, those parameters will be bound by name to the parameters given to the operation. In addition, parameters to the $apply operation are available within dynamicValue expressions as context variables, accessible by the name of the parameter, prefixed with a percent (%) symbol. For a more detailed description, refer to the PlanDefinition and ActivityDefinition resource documentation&quot;,
   &quot;resource&quot; : [&quot;PlanDefinition&quot;],
   &quot;system&quot; : false,
   &quot;type&quot; : true,
@@ -163,11 +164,11 @@
     &quot;type&quot; : &quot;PlanDefinition&quot;
   },
   {
-    &quot;name&quot; : &quot;patient&quot;,
+    &quot;name&quot; : &quot;subject&quot;,
     &quot;use&quot; : &quot;in&quot;,
     &quot;min&quot; : 1,
-    &quot;max&quot; : &quot;1&quot;,
-    &quot;documentation&quot; : &quot;The patient that is the target of the plan to be applied&quot;,
+    &quot;max&quot; : &quot;*&quot;,
+    &quot;documentation&quot; : &quot;The subject(s) that is/are the target of the plan to be applied. The subject may be a Patient, Practitioner, Organization, Location, Device, or Group. Subjects provided in this parameter will be resolved as the subject of the PlanDefinition based on the type of the subject. If multiple subjects of the same type are provided, the behavior is implementation-defined&quot;,
     &quot;type&quot; : &quot;string&quot;,
     &quot;searchType&quot; : &quot;reference&quot;
   },
@@ -271,7 +272,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:27-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -281,7 +282,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Foperation-plandefinition-apply.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperation-plandefinition-apply.json.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Foperation-plandefinition-apply.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperation-plandefinition-apply.json.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

@@ -9,8 +9,8 @@
       <status value="active"/>
       <description value="Type options for AllergyIntolerance.onset[x]"/>
       <expansion>
-        <identifier value="urn:uuid:8a7d2041-439a-46ba-a7e3-7e56f68a5441"/>
-        <timestamp value="2018-09-14T07:23:09-05:00"/>
+        <identifier value="urn:uuid:10df8fa3-02e8-4661-aa52-fe2f02ac3ed8"/>
+        <timestamp value="2018-12-13T14:26:18-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="dateTime"/>
@@ -42,8 +42,9 @@
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
+  <version value="3.6.0"/>
   <status value="draft"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="Health Level Seven International (Patient Care)"/>
   <item>
     <linkId value="AllergyIntolerance"/>
@@ -232,7 +233,7 @@
     </item>
     <item>
       <linkId value="AllergyIntolerance.extension"/>
-      <text value="Additional Content defined by implementations"/>
+      <text value="Additional content defined by implementations"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -266,7 +267,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+        <text value="May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
         <type value="display"/>
       </item>
     </item>
@@ -319,9 +320,10 @@
         <valueInteger value="1"/>
       </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="code"/>
+        <valueString value="CodeableConcept"/>
       </extension>
       <linkId value="AllergyIntolerance.clinicalStatus"/>
+      <text value="active | inactive | resolved"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -335,13 +337,20 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The clinical status of the allergy or intolerance."/>
+        <text value="The clinical status of the allergy or intolerance. Refer to [discussion](extensibility.html#Special-Case) if clincalStatus is missing data.&#xA;The data type is CodeableConcept because clinicalStatus has some clinical judgment involved, such that there might need to be more specificity than the required FHIR value set allows. For example, a SNOMED coding might allow for additional specificity."/>
         <type value="display"/>
       </item>
       <item>
-        <linkId value="AllergyIntolerance.clinicalStatus.value"/>
-        <text value="clinical status"/>
+        <linkId value="AllergyIntolerance.clinicalStatus.coding"/>
+        <text value="code:"/>
         <type value="choice"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+      <item>
+        <linkId value="AllergyIntolerance.clinicalStatus.text"/>
+        <text value="text:"/>
+        <type value="string"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
@@ -351,9 +360,10 @@
         <valueInteger value="1"/>
       </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="code"/>
+        <valueString value="CodeableConcept"/>
       </extension>
       <linkId value="AllergyIntolerance.verificationStatus"/>
+      <text value="unconfirmed | confirmed | refuted | entered-in-error"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -367,13 +377,20 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Assertion about certainty associated with the propensity, or potential risk, of a reaction to the identified substance (including pharmaceutical product)."/>
+        <text value="Assertion about certainty associated with the propensity, or potential risk, of a reaction to the identified substance (including pharmaceutical product). The data type is CodeableConcept because verificationStatus has some clinical judgment involved, such that there might need to be more specificity than the required FHIR value set allows. For example, a SNOMED coding might allow for additional specificity."/>
         <type value="display"/>
       </item>
       <item>
-        <linkId value="AllergyIntolerance.verificationStatus.value"/>
-        <text value="verification status"/>
+        <linkId value="AllergyIntolerance.verificationStatus.coding"/>
+        <text value="code:"/>
         <type value="choice"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+      <item>
+        <linkId value="AllergyIntolerance.verificationStatus.text"/>
+        <text value="text:"/>
+        <type value="string"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
@@ -764,7 +781,7 @@
       </item>
       <item>
         <linkId value="AllergyIntolerance.recordedDate.value"/>
-        <text value="Date record was first recorded"/>
+        <text value="Date first version of the resource instance was recorded"/>
         <type value="dateTime"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -946,7 +963,7 @@
         </item>
         <item>
           <linkId value="AllergyIntolerance.reaction.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -974,7 +991,7 @@
       </item>
       <item>
         <linkId value="AllergyIntolerance.reaction.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -988,7 +1005,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>

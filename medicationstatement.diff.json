@@ -6,29 +6,51 @@
     "elements": {
       "MedicationStatement.basedOn": {
         "removed-types": [
-          "Reference(MedicationRequest|CarePlan|ProcedureRequest|ReferralRequest)"
+          "Reference(MedicationRequest | CarePlan | ProcedureRequest | ReferralRequest)"
         ],
         "added-types": [
-          "Reference(MedicationRequest|CarePlan|ServiceRequest)"
+          "Reference(MedicationRequest | CarePlan | ServiceRequest)"
         ]
+      },
+      "MedicationStatement.status": {
+        "binding-codes-changed": true,
+        "removed-codes": [
+          "active",
+          "completed",
+          "entered-in-error",
+          "intended",
+          "stopped",
+          "on-hold"
+        ],
+        "added-codes": [
+          "active",
+          "completed",
+          "entered-in-error",
+          "intended",
+          "stopped",
+          "on-hold",
+          "unknown",
+          "not-taken"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medication-statement-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medication-statement-status",
+          "strength": "required"
+        }
       },
       "MedicationStatement.statusReason": {
         "status": "new"
       },
-      "MedicationStatement.medication[x]": {
-        "removed-types": [
-          "Reference(Medication)"
-        ],
-        "added-types": [
-          "Reference(Medication)"
-        ]
-      },
       "MedicationStatement.reasonReference": {
         "removed-types": [
-          "Reference(Condition|Observation)"
+          "Reference(Condition | Observation)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|DiagnosticReport)"
+          "Reference(Condition | Observation | DiagnosticReport)"
         ]
       },
       "MedicationStatement.taken": {

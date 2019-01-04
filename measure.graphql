@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type Measure {
   id: ID
@@ -46,7 +46,7 @@ type Measure {
   rateAggregation: String  _rateAggregation: ElementBase
   rationale: markdown  _rationale: ElementBase
   clinicalRecommendationStatement: markdown  _clinicalRecommendationStatement: ElementBase
-  improvementNotation: code  _improvementNotation: ElementBase
+  improvementNotation: CodeableConcept
   definition: markdown  _definition: [ElementBase]
   guidance: markdown  _guidance: ElementBase
   group: [MeasureGroup]
@@ -73,6 +73,16 @@ type MeasureGroupPopulation {
 }
 
 type MeasureGroupStratifier {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept
+  description: String  _description: ElementBase
+  criteria: Expression
+  component: [MeasureGroupStratifierComponent]
+}
+
+type MeasureGroupStratifierComponent {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -137,7 +147,7 @@ input Measure {
   rateAggregation: String  _rateAggregation: ElementBase
   rationale: markdown  _rationale: ElementBase
   clinicalRecommendationStatement: markdown  _clinicalRecommendationStatement: ElementBase
-  improvementNotation: code  _improvementNotation: ElementBase
+  improvementNotation: CodeableConcept
   definition: markdown  _definition: [ElementBase]
   guidance: markdown  _guidance: ElementBase
   group: [MeasureGroup]
@@ -164,6 +174,16 @@ input MeasureGroupPopulation {
 }
 
 input MeasureGroupStratifier {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept
+  description: String  _description: ElementBase
+  criteria: Expression
+  component: [MeasureGroupStratifierComponent]
+}
+
+input MeasureGroupStratifierComponent {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]

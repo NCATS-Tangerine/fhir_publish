@@ -1,18 +1,30 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <difference>
    <type name="Medication" status="changed">
-      <element modifier="added" path="Medication.status"/>
-      <element path="Medication.amount" status="new"/>
-      <element path="Medication.ingredient.item[x]">
-         <removed-type name="Reference(Substance|Medication)"/>
-         <added-type name="Reference(Substance|Medication)"/>
+      <element path="Medication.identifier" status="new"/>
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               modifier="added"
+               path="Medication.status">
+         <removed-code code="active"/>
+         <removed-code code="inactive"/>
+         <removed-code code="entered-in-error"/>
+         <added-code code="active"/>
+         <added-code code="inactive"/>
+         <added-code code="entered-in-error"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/medication-status"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/medication-status"
+                      strength="required"/>
       </element>
+      <element path="Medication.amount" status="new"/>
+      <element path="Medication.ingredient.strength" status="new"/>
       <element path="Medication.batch" status="new"/>
       <element path="Medication.batch.lotNumber" status="new"/>
       <element path="Medication.batch.expirationDate" status="new"/>
-      <element path="Medication.batch.serialNumber" status="new"/>
       <element path="Medication.isBrand" status="deleted"/>
       <element path="Medication.isOverTheCounter" status="deleted"/>
+      <element path="Medication.ingredient.amount" status="deleted"/>
       <element path="Medication.package" status="deleted"/>
       <element path="Medication.image" status="deleted"/>
    </type>

@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type Appointment {
   id: ID
@@ -11,12 +11,13 @@ type Appointment {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
+  cancelationReason: CodeableConcept
   serviceCategory: [CodeableConcept]
   serviceType: [CodeableConcept]
   specialty: [CodeableConcept]
   appointmentType: CodeableConcept
-  reason: [CodeableConcept]
-  indication: [Reference]
+  reasonCode: [CodeableConcept]
+  reasonReference: [Reference]
   priority: unsignedInt  _priority: ElementBase
   description: String  _description: ElementBase
   supportingInformation: [Reference]
@@ -54,12 +55,13 @@ input Appointment {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
+  cancelationReason: CodeableConcept
   serviceCategory: [CodeableConcept]
   serviceType: [CodeableConcept]
   specialty: [CodeableConcept]
   appointmentType: CodeableConcept
-  reason: [CodeableConcept]
-  indication: [Reference]
+  reasonCode: [CodeableConcept]
+  reasonReference: [Reference]
   priority: unsignedInt  _priority: ElementBase
   description: String  _description: ElementBase
   supportingInformation: [Reference]
@@ -101,8 +103,14 @@ type AppointmentListType {
     part_status : [token]
     patient : [reference]
     practitioner : [reference]
+    reason_code : [token]
+    reason_reference : [reference]
+    service_category : [token]
     service_type : [token]
+    slot : [reference]
+    specialty : [token]
     status : [token]
+    supporting_info : [reference]
     _text : [String]
     _content : [String]
     _id : [token]
@@ -128,8 +136,14 @@ type AppointmentConnectionType {
     part_status : [token]
     patient : [reference]
     practitioner : [reference]
+    reason_code : [token]
+    reason_reference : [reference]
+    service_category : [token]
     service_type : [token]
+    slot : [reference]
+    specialty : [token]
     status : [token]
+    supporting_info : [reference]
     _text : [String]
     _content : [String]
     _id : [token]

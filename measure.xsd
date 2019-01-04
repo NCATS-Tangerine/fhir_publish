@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -118,7 +118,7 @@
           </xs:element>
           <xs:element name="useContext" minOccurs="0" maxOccurs="unbounded" type="UsageContext">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate measure instances.</xs:documentation>
+              <xs:documentation xml:lang="en">The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate measure instances.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="jurisdiction" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
@@ -231,7 +231,7 @@
               <xs:documentation xml:lang="en">Provides a summary of relevant clinical guidelines or other clinical recommendations supporting the measure.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="improvementNotation" minOccurs="0" maxOccurs="1" type="MeasureImprovementNotation">
+          <xs:element name="improvementNotation" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">Information on whether an increase or decrease in score is the preferred result (e.g., a higher score indicates better quality OR a lower score indicates better quality OR quality is within a range).</xs:documentation>
            </xs:annotation>
@@ -334,9 +334,40 @@
               <xs:documentation xml:lang="en">The human readable description of this stratifier criteria.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="criteria" minOccurs="1" maxOccurs="1" type="Expression">
+          <xs:element name="criteria" minOccurs="0" maxOccurs="1" type="Expression">
             <xs:annotation>
               <xs:documentation xml:lang="en">An expression that specifies the criteria for the stratifier. This is typically the name of an expression defined within a referenced library, but it may also be a path to a stratifier element.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="component" type="Measure.Component" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A component of the stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library or a valid FHIR Resource Path.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Measure.Component">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The Measure resource provides the definition of a quality measure.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="code" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Indicates a meaning for the stratifier component. This can be as simple as a unique identifier, or it can establish meaning in a broader context by drawing from a terminology, allowing stratifiers to be correlated across measures.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="description" minOccurs="0" maxOccurs="1" type="string">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The human readable description of this stratifier criteria component.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="criteria" minOccurs="1" maxOccurs="1" type="Expression">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An expression that specifies the criteria for this component of the stratifier. This is typically the name of an expression defined within a referenced library, but it may also be a path to a stratifier element.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -371,31 +402,6 @@
            </xs:annotation>
           </xs:element>
         </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:simpleType name="MeasureImprovementNotation-list">
-    <xs:restriction base="code-primitive">
-      <xs:enumeration value="increase">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Increase</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="decrease">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Decrease</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="MeasureImprovementNotation">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">Improvement notation for a measure (e.g. increase or decrease).</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="Element">
-        <xs:attribute name="value" type="MeasureImprovementNotation-list" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

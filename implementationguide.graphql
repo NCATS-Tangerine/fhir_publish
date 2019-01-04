@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type ImplementationGuide {
   id: ID
@@ -24,7 +24,7 @@ type ImplementationGuide {
   copyright: markdown  _copyright: ElementBase
   packageId: ID  _packageId: ElementBase
   license: code  _license: ElementBase
-  fhirVersion: ID  _fhirVersion: ElementBase
+  fhirVersion: code  _fhirVersion: [ElementBase]
   dependsOn: [ImplementationGuideDependsOn]
   global: [ImplementationGuideGlobal]
   definition: ImplementationGuideDefinition
@@ -52,14 +52,14 @@ type ImplementationGuideDefinition {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  package: [ImplementationGuideDefinitionPackage]
+  grouping: [ImplementationGuideDefinitionGrouping]
   resource: [ImplementationGuideDefinitionResource]!
   page: ImplementationGuideDefinitionPage
   parameter: [ImplementationGuideDefinitionParameter]
   template: [ImplementationGuideDefinitionTemplate]
 }
 
-type ImplementationGuideDefinitionPackage {
+type ImplementationGuideDefinitionGrouping {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -72,11 +72,12 @@ type ImplementationGuideDefinitionResource {
   extension: [Extension]
   modifierExtension: [Extension]
   reference: Reference!
+  fhirVersion: code  _fhirVersion: [ElementBase]
   name: String  _name: ElementBase
   description: String  _description: ElementBase
   exampleBoolean: Boolean  _exampleBoolean: ElementBase
   exampleCanonical: canonical  _exampleCanonical: ElementBase
-  package: ID  _package: ElementBase
+  groupingId: ID  _groupingId: ElementBase
 }
 
 type ImplementationGuideDefinitionPage {
@@ -161,7 +162,7 @@ input ImplementationGuide {
   copyright: markdown  _copyright: ElementBase
   packageId: ID  _packageId: ElementBase
   license: code  _license: ElementBase
-  fhirVersion: ID  _fhirVersion: ElementBase
+  fhirVersion: code  _fhirVersion: [ElementBase]
   dependsOn: [ImplementationGuideDependsOn]
   global: [ImplementationGuideGlobal]
   definition: ImplementationGuideDefinition
@@ -189,14 +190,14 @@ input ImplementationGuideDefinition {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  package: [ImplementationGuideDefinitionPackage]
+  grouping: [ImplementationGuideDefinitionGrouping]
   resource: [ImplementationGuideDefinitionResource]!
   page: ImplementationGuideDefinitionPage
   parameter: [ImplementationGuideDefinitionParameter]
   template: [ImplementationGuideDefinitionTemplate]
 }
 
-input ImplementationGuideDefinitionPackage {
+input ImplementationGuideDefinitionGrouping {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -209,11 +210,12 @@ input ImplementationGuideDefinitionResource {
   extension: [Extension]
   modifierExtension: [Extension]
   reference: Reference!
+  fhirVersion: code  _fhirVersion: [ElementBase]
   name: String  _name: ElementBase
   description: String  _description: ElementBase
   exampleBoolean: Boolean  _exampleBoolean: ElementBase
   exampleCanonical: canonical  _exampleCanonical: ElementBase
-  package: ID  _package: ElementBase
+  groupingId: ID  _groupingId: ElementBase
 }
 
 input ImplementationGuideDefinitionPage {

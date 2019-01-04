@@ -3,7 +3,7 @@
 <CodeSystem xmlns="http://hl7.org/fhir">
   <id value="appointmentstatus"/>
   <meta>
-    <lastUpdated value="2018-09-15T09:06:56.624-05:00"/>
+    <lastUpdated value="2018-12-13T14:23:07.677-06:00"/>
   </meta>
   <text>
     <status value="generated"/>
@@ -59,7 +59,7 @@
             <a name="appointmentstatus-fulfilled"> </a>
           </td>
           <td>Fulfilled</td>
-          <td>This appointment has completed and may have resulted in an encounter.</td>
+          <td>The planning stages of the appointment are now complete, the encounter resource will exist and will track further status changes. Note that an encounter may exist before the appointment status is fulfilled for many reasons.</td>
         </tr>
         <tr>
           <td style="white-space:nowrap">cancelled
@@ -89,20 +89,37 @@
           <td>Checked In</td>
           <td>When checked in, all pre-encounter administrative work is complete, and the encounter may begin. (where multiple patients are involved, they are all present).</td>
         </tr>
+        <tr>
+          <td style="white-space:nowrap">waitlist
+            <a name="appointmentstatus-waitlist"> </a>
+          </td>
+          <td>Waitlisted</td>
+          <td>The appointment has been placed on a waitlist, to be scheduled/confirmed in the future when a slot/service is available.
+A specific time might or might not be pre-allocated.</td>
+        </tr>
       </table>
     </div>
   </text>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-wg">
+    <valueCode value="pa"/>
+  </extension>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+    <valueCode value="trial-use"/>
+  </extension>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
+    <valueInteger value="3"/>
+  </extension>
   <url value="http://hl7.org/fhir/appointmentstatus"/>
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
     <value value="urn:oid:2.16.840.1.113883.4.642.1.485"/>
   </identifier>
-  <version value="3.5.0"/>
+  <version value="3.6.0"/>
   <name value="AppointmentStatus"/>
   <title value="AppointmentStatus"/>
   <status value="draft"/>
   <experimental value="false"/>
-  <date value="2018-09-15T09:06:56-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="HL7 (FHIR Project)"/>
   <contact>
     <telecom>
@@ -141,7 +158,7 @@
   <concept>
     <code value="fulfilled"/>
     <display value="Fulfilled"/>
-    <definition value="This appointment has completed and may have resulted in an encounter."/>
+    <definition value="The planning stages of the appointment are now complete, the encounter resource will exist and will track further status changes. Note that an encounter may exist before the appointment status is fulfilled for many reasons."/>
   </concept>
   <concept>
     <code value="cancelled"/>
@@ -162,5 +179,10 @@
     <code value="checked-in"/>
     <display value="Checked In"/>
     <definition value="When checked in, all pre-encounter administrative work is complete, and the encounter may begin. (where multiple patients are involved, they are all present)."/>
+  </concept>
+  <concept>
+    <code value="waitlist"/>
+    <display value="Waitlisted"/>
+    <definition value="The appointment has been placed on a waitlist, to be scheduled/confirmed in the future when a slot/service is available.&#xA;A specific time might or might not be pre-allocated."/>
   </concept>
 </CodeSystem>

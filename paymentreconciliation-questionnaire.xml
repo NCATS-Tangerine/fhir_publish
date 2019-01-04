@@ -5,8 +5,9 @@
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
+  <version value="3.6.0"/>
   <status value="draft"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="Health Level Seven International (Financial Management)"/>
   <item>
     <linkId value="PaymentReconciliation"/>
@@ -24,7 +25,7 @@
           </coding>
         </valueCodeableConcept>
       </extension>
-      <text value="This resource provides payment details and claim references supporting a bulk payment."/>
+      <text value="This resource provides the details including amount of a payment and allocates the payment items being paid."/>
       <type value="display"/>
     </item>
     <item>
@@ -191,7 +192,7 @@
     </item>
     <item>
       <linkId value="PaymentReconciliation.extension"/>
-      <text value="Additional Content defined by implementations"/>
+      <text value="Additional content defined by implementations"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -225,7 +226,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+        <text value="May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
         <type value="display"/>
       </item>
     </item>
@@ -234,7 +235,7 @@
         <valueString value="Identifier"/>
       </extension>
       <linkId value="PaymentReconciliation.identifier"/>
-      <text value="Business Identifier"/>
+      <text value="Business Identifier for a payment reconciliation"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -248,7 +249,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The Response business identifier."/>
+        <text value="A unique identifier assigned to this payment reconciliation."/>
         <type value="display"/>
       </item>
       <item>
@@ -274,6 +275,9 @@
       </item>
     </item>
     <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+        <valueInteger value="1"/>
+      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
         <valueInteger value="1"/>
       </extension>
@@ -282,7 +286,7 @@
       </extension>
       <linkId value="PaymentReconciliation.status"/>
       <type value="group"/>
-      <required value="false"/>
+      <required value="true"/>
       <repeats value="true"/>
       <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
@@ -346,6 +350,9 @@
       </item>
     </item>
     <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+        <valueInteger value="1"/>
+      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
         <valueInteger value="1"/>
       </extension>
@@ -354,7 +361,7 @@
       </extension>
       <linkId value="PaymentReconciliation.created"/>
       <type value="group"/>
-      <required value="false"/>
+      <required value="true"/>
       <repeats value="true"/>
       <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
@@ -384,7 +391,7 @@
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
         <valueString value="Reference"/>
       </extension>
-      <linkId value="PaymentReconciliation.organization"/>
+      <linkId value="PaymentReconciliation.paymentIssuer"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -398,7 +405,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The Insurer who produced this adjudicated response."/>
+        <text value="The party who generated the payment. This party is also responsible for the reconciliation."/>
         <type value="display"/>
       </item>
       <item>
@@ -408,8 +415,8 @@
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
           <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
         </extension>
-        <linkId value="PaymentReconciliation.organization.value"/>
-        <text value="Insurer"/>
+        <linkId value="PaymentReconciliation.paymentIssuer.value"/>
+        <text value="Party generating payment"/>
         <type value="reference"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -441,13 +448,51 @@
       </item>
       <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-          <valueCode value="ProcessRequest"/>
+          <valueCode value="Task"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
           <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
         </extension>
         <linkId value="PaymentReconciliation.request.value"/>
-        <text value="Claim reference"/>
+        <text value="Reference to requesting resource"/>
+        <type value="reference"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="Reference"/>
+      </extension>
+      <linkId value="PaymentReconciliation.requestor"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="The practitioner who is responsible for the services rendered to the patient."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+          <valueCode value="Practitioner, PractitionerRole, Organization"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+        </extension>
+        <linkId value="PaymentReconciliation.requestor.value"/>
+        <text value="Responsible practitioner"/>
         <type value="reference"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -474,7 +519,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Transaction status: error, complete."/>
+        <text value="The outcome of a request for a reconciliation. The resource may be used to indicate that: the request has been held (queued) for processing; that it has been processed and errors found (error); that no errors were found and that some of the adjudication has been undertaken (partial) or that all of the adjudication has been undertaken (complete)."/>
         <type value="display"/>
       </item>
       <item>
@@ -506,12 +551,111 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="A description of the status of the adjudication."/>
+        <text value="A human readable description of the status of the request for the reconciliation."/>
         <type value="display"/>
       </item>
       <item>
         <linkId value="PaymentReconciliation.disposition.value"/>
-        <text value="Disposition Message"/>
+        <text value="Disposition message"/>
+        <type value="string"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="datetime"/>
+      </extension>
+      <linkId value="PaymentReconciliation.paymentDate"/>
+      <type value="group"/>
+      <required value="true"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="The date of payment as indicated on the financial instrument."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <linkId value="PaymentReconciliation.paymentDate.value"/>
+        <text value="When payment issued"/>
+        <type value="dateTime"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="Quantity"/>
+      </extension>
+      <linkId value="PaymentReconciliation.paymentAmount"/>
+      <text value="Total amount of Payment"/>
+      <type value="group"/>
+      <required value="true"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="Total payment amount as indicated on the financial instrument."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <linkId value="PaymentReconciliation.paymentAmount.comparator"/>
+        <text value="comp:"/>
+        <type value="choice"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+      <item>
+        <linkId value="PaymentReconciliation.paymentAmount.value"/>
+        <text value="value:"/>
+        <type value="decimal"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+      <item>
+        <linkId value="PaymentReconciliation.paymentAmount.units"/>
+        <text value="units:"/>
+        <type value="string"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+      <item>
+        <linkId value="PaymentReconciliation.paymentAmount.code"/>
+        <text value="coded units:"/>
+        <type value="string"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+      <item>
+        <linkId value="PaymentReconciliation.paymentAmount.system"/>
+        <text value="units system:"/>
         <type value="string"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -522,9 +666,10 @@
         <valueInteger value="1"/>
       </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="Reference"/>
+        <valueString value="Identifier"/>
       </extension>
-      <linkId value="PaymentReconciliation.requestProvider"/>
+      <linkId value="PaymentReconciliation.paymentIdentifier"/>
+      <text value="Business identifier for the payment"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -538,26 +683,34 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The practitioner who is responsible for the services rendered to the patient."/>
+        <text value="Issuer&#39;s unique identifier for the payment instrument. For example: EFT number or check number."/>
         <type value="display"/>
       </item>
       <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-          <valueCode value="Practitioner, PractitionerRole, Organization"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-        </extension>
-        <linkId value="PaymentReconciliation.requestProvider.value"/>
-        <text value="Responsible practitioner"/>
-        <type value="reference"/>
+        <linkId value="PaymentReconciliation.paymentIdentifier.label"/>
+        <text value="label:"/>
+        <type value="string"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+      <item>
+        <linkId value="PaymentReconciliation.paymentIdentifier.system"/>
+        <text value="system:"/>
+        <type value="string"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+      <item>
+        <linkId value="PaymentReconciliation.paymentIdentifier.value"/>
+        <text value="value:"/>
+        <type value="string"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
     </item>
     <item>
       <linkId value="PaymentReconciliation.detail"/>
-      <text value="List of settlements"/>
+      <text value="Settlement particulars"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -571,7 +724,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="List of individual settlement amounts and the corresponding transaction."/>
+        <text value="Distribution of the payment amount for a previously acknowledged payable."/>
         <type value="display"/>
       </item>
       <item>
@@ -600,7 +753,7 @@
         </item>
         <item>
           <linkId value="PaymentReconciliation.detail.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -628,7 +781,7 @@
       </item>
       <item>
         <linkId value="PaymentReconciliation.detail.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -642,8 +795,102 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="Identifier"/>
+        </extension>
+        <linkId value="PaymentReconciliation.detail.identifier"/>
+        <text value="Business identifier of the payment detail"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Unique identifier for the current payment item for the referenced payable."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="PaymentReconciliation.detail.identifier.label"/>
+          <text value="label:"/>
+          <type value="string"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+        <item>
+          <linkId value="PaymentReconciliation.detail.identifier.system"/>
+          <text value="system:"/>
+          <type value="string"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+        <item>
+          <linkId value="PaymentReconciliation.detail.identifier.value"/>
+          <text value="value:"/>
+          <type value="string"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="Identifier"/>
+        </extension>
+        <linkId value="PaymentReconciliation.detail.predecessor"/>
+        <text value="Business identifier of the prior payment detail"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Unique identifier for the prior payment item for the referenced payable."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="PaymentReconciliation.detail.predecessor.label"/>
+          <text value="label:"/>
+          <type value="string"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+        <item>
+          <linkId value="PaymentReconciliation.detail.predecessor.system"/>
+          <text value="system:"/>
+          <type value="string"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+        <item>
+          <linkId value="PaymentReconciliation.detail.predecessor.value"/>
+          <text value="value:"/>
+          <type value="string"/>
+          <required value="false"/>
+          <repeats value="false"/>
         </item>
       </item>
       <item>
@@ -657,7 +904,7 @@
           <valueString value="CodeableConcept"/>
         </extension>
         <linkId value="PaymentReconciliation.detail.type"/>
-        <text value="Type code"/>
+        <text value="Category of payment"/>
         <type value="group"/>
         <required value="true"/>
         <repeats value="true"/>
@@ -671,7 +918,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="Code to indicate the nature of the payment, adjustment, funds advance, etc."/>
+          <text value="Code to indicate the nature of the payment. For example: payment, adjustment, funds advance, etc."/>
           <type value="display"/>
         </item>
         <item>
@@ -710,7 +957,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The claim or financial resource."/>
+          <text value="A resource, such as a Claim, the evaluation of which could lead to payment."/>
           <type value="display"/>
         </item>
         <item>
@@ -721,45 +968,7 @@
             <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
           </extension>
           <linkId value="PaymentReconciliation.detail.request.value"/>
-          <text value="Claim"/>
-          <type value="reference"/>
-          <required value="false"/>
-          <repeats value="false"/>
-        </item>
-      </item>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-          <valueInteger value="1"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="Reference"/>
-        </extension>
-        <linkId value="PaymentReconciliation.detail.response"/>
-        <type value="group"/>
-        <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="The claim response resource."/>
-          <type value="display"/>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-            <valueCode value="Resource"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-            <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-          </extension>
-          <linkId value="PaymentReconciliation.detail.response.value"/>
-          <text value="Claim Response"/>
+          <text value="Request giving rise to the payment"/>
           <type value="reference"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -786,18 +995,18 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The Organization which submitted the claim or financial transaction."/>
+          <text value="The party which submitted the claim or financial transaction."/>
           <type value="display"/>
         </item>
         <item>
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-            <valueCode value="Organization"/>
+            <valueCode value="Practitioner, PractitionerRole, Organization"/>
           </extension>
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
             <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
           </extension>
           <linkId value="PaymentReconciliation.detail.submitter.value"/>
-          <text value="Organization which submitted the claim"/>
+          <text value="Submitter of the request"/>
           <type value="reference"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -810,7 +1019,7 @@
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
           <valueString value="Reference"/>
         </extension>
-        <linkId value="PaymentReconciliation.detail.payee"/>
+        <linkId value="PaymentReconciliation.detail.response"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -824,18 +1033,18 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The organization which is receiving the payment."/>
+          <text value="A resource, such as a ClaimResponse, which contains a commitment to payment."/>
           <type value="display"/>
         </item>
         <item>
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-            <valueCode value="Organization"/>
+            <valueCode value="Resource"/>
           </extension>
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
             <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
           </extension>
-          <linkId value="PaymentReconciliation.detail.payee.value"/>
-          <text value="Organization which is receiving the payment"/>
+          <linkId value="PaymentReconciliation.detail.response.value"/>
+          <text value="Response committing to a payment"/>
           <type value="reference"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -862,12 +1071,12 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The date of the invoice or financial resource."/>
+          <text value="The date from the response resource containing a commitment to pay."/>
           <type value="display"/>
         </item>
         <item>
           <linkId value="PaymentReconciliation.detail.date.value"/>
-          <text value="Invoice date"/>
+          <text value="Date of commitment to pay"/>
           <type value="dateTime"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -878,10 +1087,9 @@
           <valueInteger value="1"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="Quantity"/>
+          <valueString value="Reference"/>
         </extension>
-        <linkId value="PaymentReconciliation.detail.amount"/>
-        <text value="Amount being paid"/>
+        <linkId value="PaymentReconciliation.detail.responsible"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -895,7 +1103,84 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="Amount paid for this detail."/>
+          <text value="A reference to the individual who is responsible for inquiries regarding the response and its payment."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+            <valueCode value="PractitionerRole"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+            <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+          </extension>
+          <linkId value="PaymentReconciliation.detail.responsible.value"/>
+          <text value="Contact for the response"/>
+          <type value="reference"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="Reference"/>
+        </extension>
+        <linkId value="PaymentReconciliation.detail.payee"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="The party which is receiving the payment."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+            <valueCode value="Practitioner, PractitionerRole, Organization"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+            <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+          </extension>
+          <linkId value="PaymentReconciliation.detail.payee.value"/>
+          <text value="Recipient of the payment"/>
+          <type value="reference"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="Quantity"/>
+        </extension>
+        <linkId value="PaymentReconciliation.detail.amount"/>
+        <text value="Amount allocated to this payable"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="The monetary amount allocated from the total payment to the payable."/>
           <type value="display"/>
         </item>
         <item>
@@ -942,8 +1227,8 @@
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
         <valueString value="CodeableConcept"/>
       </extension>
-      <linkId value="PaymentReconciliation.form"/>
-      <text value="Printed Form Identifier"/>
+      <linkId value="PaymentReconciliation.formCode"/>
+      <text value="Printed form identifier"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -957,18 +1242,18 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The form to be used for printing the content."/>
+        <text value="A code for the form to be used for printing the content. May be needed to identify specific jurisdictional forms."/>
         <type value="display"/>
       </item>
       <item>
-        <linkId value="PaymentReconciliation.form.coding"/>
+        <linkId value="PaymentReconciliation.formCode.coding"/>
         <text value="code:"/>
         <type value="open-choice"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
       <item>
-        <linkId value="PaymentReconciliation.form.text"/>
+        <linkId value="PaymentReconciliation.formCode.text"/>
         <text value="text:"/>
         <type value="string"/>
         <required value="false"/>
@@ -976,69 +1261,8 @@
       </item>
     </item>
     <item>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-        <valueInteger value="1"/>
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="Quantity"/>
-      </extension>
-      <linkId value="PaymentReconciliation.total"/>
-      <text value="Total amount of Payment"/>
-      <type value="group"/>
-      <required value="false"/>
-      <repeats value="true"/>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-          <valueCodeableConcept>
-            <coding>
-              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-              <code value="flyover"/>
-              <display value="Fly-over"/>
-            </coding>
-          </valueCodeableConcept>
-        </extension>
-        <text value="Total payment amount."/>
-        <type value="display"/>
-      </item>
-      <item>
-        <linkId value="PaymentReconciliation.total.comparator"/>
-        <text value="comp:"/>
-        <type value="choice"/>
-        <required value="false"/>
-        <repeats value="false"/>
-      </item>
-      <item>
-        <linkId value="PaymentReconciliation.total.value"/>
-        <text value="value:"/>
-        <type value="decimal"/>
-        <required value="false"/>
-        <repeats value="false"/>
-      </item>
-      <item>
-        <linkId value="PaymentReconciliation.total.units"/>
-        <text value="units:"/>
-        <type value="string"/>
-        <required value="false"/>
-        <repeats value="false"/>
-      </item>
-      <item>
-        <linkId value="PaymentReconciliation.total.code"/>
-        <text value="coded units:"/>
-        <type value="string"/>
-        <required value="false"/>
-        <repeats value="false"/>
-      </item>
-      <item>
-        <linkId value="PaymentReconciliation.total.system"/>
-        <text value="units system:"/>
-        <type value="string"/>
-        <required value="false"/>
-        <repeats value="false"/>
-      </item>
-    </item>
-    <item>
       <linkId value="PaymentReconciliation.processNote"/>
-      <text value="Processing comments"/>
+      <text value="Note concerning processing"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -1052,7 +1276,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Suite of notes."/>
+        <text value="A note that describes or explains the processing in a human readable form."/>
         <type value="display"/>
       </item>
       <item>
@@ -1081,7 +1305,7 @@
         </item>
         <item>
           <linkId value="PaymentReconciliation.processNote.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -1109,7 +1333,7 @@
       </item>
       <item>
         <linkId value="PaymentReconciliation.processNote.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -1123,7 +1347,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>
@@ -1148,7 +1372,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The note purpose: Print/Display."/>
+          <text value="The business purpose of the note text."/>
           <type value="display"/>
         </item>
         <item>
@@ -1180,12 +1404,12 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The note text."/>
+          <text value="The explanation or description associated with the processing."/>
           <type value="display"/>
         </item>
         <item>
           <linkId value="PaymentReconciliation.processNote.text.value"/>
-          <text value="Comment on the processing"/>
+          <text value="Note explanatory text"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>

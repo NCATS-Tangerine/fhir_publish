@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type HealthcareService {
   id: ID
@@ -18,21 +18,29 @@ type HealthcareService {
   location: [Reference]
   name: String  _name: ElementBase
   comment: String  _comment: ElementBase
-  extraDetails: String  _extraDetails: ElementBase
+  extraDetails: markdown  _extraDetails: ElementBase
   photo: Attachment
   telecom: [ContactPoint]
   coverageArea: [Reference]
   serviceProvisionCode: [CodeableConcept]
-  eligibility: CodeableConcept
-  eligibilityNote: String  _eligibilityNote: ElementBase
-  programName: String  _programName: [ElementBase]
+  eligibility: [HealthcareServiceEligibility]
+  program: [CodeableConcept]
   characteristic: [CodeableConcept]
+  communication: [CodeableConcept]
   referralMethod: [CodeableConcept]
   appointmentRequired: Boolean  _appointmentRequired: ElementBase
   availableTime: [HealthcareServiceAvailableTime]
   notAvailable: [HealthcareServiceNotAvailable]
   availabilityExceptions: String  _availabilityExceptions: ElementBase
   endpoint: [Reference]
+}
+
+type HealthcareServiceEligibility {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept
+  comment: markdown  _comment: ElementBase
 }
 
 type HealthcareServiceAvailableTime {
@@ -71,21 +79,29 @@ input HealthcareService {
   location: [Reference]
   name: String  _name: ElementBase
   comment: String  _comment: ElementBase
-  extraDetails: String  _extraDetails: ElementBase
+  extraDetails: markdown  _extraDetails: ElementBase
   photo: Attachment
   telecom: [ContactPoint]
   coverageArea: [Reference]
   serviceProvisionCode: [CodeableConcept]
-  eligibility: CodeableConcept
-  eligibilityNote: String  _eligibilityNote: ElementBase
-  programName: String  _programName: [ElementBase]
+  eligibility: [HealthcareServiceEligibility]
+  program: [CodeableConcept]
   characteristic: [CodeableConcept]
+  communication: [CodeableConcept]
   referralMethod: [CodeableConcept]
   appointmentRequired: Boolean  _appointmentRequired: ElementBase
   availableTime: [HealthcareServiceAvailableTime]
   notAvailable: [HealthcareServiceNotAvailable]
   availabilityExceptions: String  _availabilityExceptions: ElementBase
   endpoint: [Reference]
+}
+
+input HealthcareServiceEligibility {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept
+  comment: markdown  _comment: ElementBase
 }
 
 input HealthcareServiceAvailableTime {
@@ -113,15 +129,17 @@ type HealthcareServiceReadType {
 type HealthcareServiceListType {
   HealthcareServiceList(_filter : String
     active : [token]
-    category : [token]
     characteristic : [token]
+    coverage_area : [reference]
     endpoint : [reference]
     identifier : [token]
     location : [reference]
     name : [String]
     organization : [reference]
-    programname : [String]
-    type : [token]
+    program : [token]
+    service_category : [token]
+    service_type : [token]
+    specialty : [token]
     _text : [String]
     _content : [String]
     _id : [token]
@@ -139,15 +157,17 @@ type HealthcareServiceListType {
 type HealthcareServiceConnectionType {
   HealthcareServiceConection(_filter : String
     active : [token]
-    category : [token]
     characteristic : [token]
+    coverage_area : [reference]
     endpoint : [reference]
     identifier : [token]
     location : [reference]
     name : [String]
     organization : [reference]
-    programname : [String]
-    type : [token]
+    program : [token]
+    service_category : [token]
+    service_type : [token]
+    specialty : [token]
     _text : [String]
     _content : [String]
     _id : [token]

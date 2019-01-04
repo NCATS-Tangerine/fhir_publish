@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type ObservationDefinition {
   id: ID
@@ -9,27 +9,27 @@ type ObservationDefinition {
   contained: [Resource]
   extension: [Extension]
   modifierExtension: [Extension]
-  category: CodeableConcept
+  category: [CodeableConcept]
   code: CodeableConcept!
   identifier: [Identifier]
-  permittedDataType: [Coding]
+  permittedDataType: code  _permittedDataType: [ElementBase]
   multipleResultsAllowed: Boolean  _multipleResultsAllowed: ElementBase
   method: CodeableConcept
   preferredReportName: String  _preferredReportName: ElementBase
   quantitativeDetails: ObservationDefinitionQuantitativeDetails
   qualifiedInterval: [ObservationDefinitionQualifiedInterval]
-  validCodedValueSet: uri  _validCodedValueSet: ElementBase
-  normalCodedValueSet: uri  _normalCodedValueSet: ElementBase
-  abnormalCodedValueSet: uri  _abnormalCodedValueSet: ElementBase
-  criticalCodedValueSet: uri  _criticalCodedValueSet: ElementBase
+  validCodedValueSet: Reference
+  normalCodedValueSet: Reference
+  abnormalCodedValueSet: Reference
+  criticalCodedValueSet: Reference
 }
 
 type ObservationDefinitionQuantitativeDetails {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  customaryUnit: Coding
-  unit: Coding
+  customaryUnit: CodeableConcept
+  unit: CodeableConcept
   conversionFactor: decimal  _conversionFactor: ElementBase
   decimalPrecision: Int  _decimalPrecision: ElementBase
 }
@@ -38,10 +38,11 @@ type ObservationDefinitionQualifiedInterval {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  category: CodeableConcept
+  category: code  _category: ElementBase
   range: Range
-  type: CodeableConcept
+  context: CodeableConcept
   appliesTo: [CodeableConcept]
+  gender: code  _gender: ElementBase
   age: Range
   gestationalAge: Range
   condition: String  _condition: ElementBase
@@ -56,27 +57,27 @@ input ObservationDefinition {
   contained: [Resource]
   extension: [Extension]
   modifierExtension: [Extension]
-  category: CodeableConcept
+  category: [CodeableConcept]
   code: CodeableConcept!
   identifier: [Identifier]
-  permittedDataType: [Coding]
+  permittedDataType: code  _permittedDataType: [ElementBase]
   multipleResultsAllowed: Boolean  _multipleResultsAllowed: ElementBase
   method: CodeableConcept
   preferredReportName: String  _preferredReportName: ElementBase
   quantitativeDetails: ObservationDefinitionQuantitativeDetails
   qualifiedInterval: [ObservationDefinitionQualifiedInterval]
-  validCodedValueSet: uri  _validCodedValueSet: ElementBase
-  normalCodedValueSet: uri  _normalCodedValueSet: ElementBase
-  abnormalCodedValueSet: uri  _abnormalCodedValueSet: ElementBase
-  criticalCodedValueSet: uri  _criticalCodedValueSet: ElementBase
+  validCodedValueSet: Reference
+  normalCodedValueSet: Reference
+  abnormalCodedValueSet: Reference
+  criticalCodedValueSet: Reference
 }
 
 input ObservationDefinitionQuantitativeDetails {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  customaryUnit: Coding
-  unit: Coding
+  customaryUnit: CodeableConcept
+  unit: CodeableConcept
   conversionFactor: decimal  _conversionFactor: ElementBase
   decimalPrecision: Int  _decimalPrecision: ElementBase
 }
@@ -85,10 +86,11 @@ input ObservationDefinitionQualifiedInterval {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  category: CodeableConcept
+  category: code  _category: ElementBase
   range: Range
-  type: CodeableConcept
+  context: CodeableConcept
   appliesTo: [CodeableConcept]
+  gender: code  _gender: ElementBase
   age: Range
   gestationalAge: Range
   condition: String  _condition: ElementBase

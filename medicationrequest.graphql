@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type MedicationRequest {
   id: ID
@@ -11,14 +11,17 @@ type MedicationRequest {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
+  statusReason: CodeableConcept
   intent: code  _intent: ElementBase
   category: [CodeableConcept]
   priority: code  _priority: ElementBase
   doNotPerform: Boolean  _doNotPerform: ElementBase
+  reportedBoolean: Boolean  _reportedBoolean: ElementBase
+  reportedReference: Reference
   medicationCodeableConcept: CodeableConcept
   medicationReference: Reference
   subject: Reference!
-  context: Reference
+  encounter: Reference
   supportingInformation: [Reference]
   authoredOn: dateTime  _authoredOn: ElementBase
   requester: Reference
@@ -27,10 +30,10 @@ type MedicationRequest {
   recorder: Reference
   reasonCode: [CodeableConcept]
   reasonReference: [Reference]
-  instantiates: uri  _instantiates: [ElementBase]
+  instantiatesCanonical: canonical  _instantiatesCanonical: [ElementBase]
+  instantiatesUri: uri  _instantiatesUri: [ElementBase]
   basedOn: [Reference]
   groupIdentifier: Identifier
-  statusReason: CodeableConcept
   courseOfTherapyType: CodeableConcept
   insurance: [Reference]
   note: [Annotation]
@@ -67,7 +70,8 @@ type MedicationRequestSubstitution {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  allowed: Boolean  _allowed: ElementBase
+  allowedBoolean: Boolean  _allowedBoolean: ElementBase
+  allowedCodeableConcept: CodeableConcept
   reason: CodeableConcept
 }
 
@@ -82,14 +86,17 @@ input MedicationRequest {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
+  statusReason: CodeableConcept
   intent: code  _intent: ElementBase
   category: [CodeableConcept]
   priority: code  _priority: ElementBase
   doNotPerform: Boolean  _doNotPerform: ElementBase
+  reportedBoolean: Boolean  _reportedBoolean: ElementBase
+  reportedReference: Reference
   medicationCodeableConcept: CodeableConcept
   medicationReference: Reference
   subject: Reference!
-  context: Reference
+  encounter: Reference
   supportingInformation: [Reference]
   authoredOn: dateTime  _authoredOn: ElementBase
   requester: Reference
@@ -98,10 +105,10 @@ input MedicationRequest {
   recorder: Reference
   reasonCode: [CodeableConcept]
   reasonReference: [Reference]
-  instantiates: uri  _instantiates: [ElementBase]
+  instantiatesCanonical: canonical  _instantiatesCanonical: [ElementBase]
+  instantiatesUri: uri  _instantiatesUri: [ElementBase]
   basedOn: [Reference]
   groupIdentifier: Identifier
-  statusReason: CodeableConcept
   courseOfTherapyType: CodeableConcept
   insurance: [Reference]
   note: [Annotation]
@@ -138,7 +145,8 @@ input MedicationRequestSubstitution {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  allowed: Boolean  _allowed: ElementBase
+  allowedBoolean: Boolean  _allowedBoolean: ElementBase
+  allowedCodeableConcept: CodeableConcept
   reason: CodeableConcept
 }
 
@@ -151,8 +159,8 @@ type MedicationRequestListType {
     authoredon : [date]
     category : [token]
     code : [token]
-    context : [reference]
     date : [date]
+    encounter : [reference]
     identifier : [token]
     intended_dispenser : [reference]
     intended_performer : [reference]
@@ -183,8 +191,8 @@ type MedicationRequestConnectionType {
     authoredon : [date]
     category : [token]
     code : [token]
-    context : [reference]
     date : [date]
+    encounter : [reference]
     identifier : [token]
     intended_dispenser : [reference]
     intended_performer : [reference]

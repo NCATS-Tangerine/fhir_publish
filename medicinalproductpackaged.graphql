@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type MedicinalProductPackaged {
   id: ID
@@ -9,8 +9,10 @@ type MedicinalProductPackaged {
   contained: [Resource]
   extension: [Extension]
   modifierExtension: [Extension]
-  identifier: Identifier!
+  identifier: [Identifier]
+  subject: [Reference]
   description: String  _description: ElementBase
+  legalStatusOfSupply: CodeableConcept
   marketingStatus: [MarketingStatus]
   marketingAuthorization: Reference
   manufacturer: [Reference]
@@ -53,8 +55,10 @@ input MedicinalProductPackaged {
   contained: [Resource]
   extension: [Extension]
   modifierExtension: [Extension]
-  identifier: Identifier!
+  identifier: [Identifier]
+  subject: [Reference]
   description: String  _description: ElementBase
+  legalStatusOfSupply: CodeableConcept
   marketingStatus: [MarketingStatus]
   marketingAuthorization: Reference
   manufacturer: [Reference]
@@ -94,6 +98,8 @@ type MedicinalProductPackagedReadType {
 
 type MedicinalProductPackagedListType {
   MedicinalProductPackagedList(_filter : String
+    identifier : [token]
+    subject : [reference]
     _text : [String]
     _content : [String]
     _id : [token]
@@ -110,6 +116,8 @@ type MedicinalProductPackagedListType {
 
 type MedicinalProductPackagedConnectionType {
   MedicinalProductPackagedConection(_filter : String
+    identifier : [token]
+    subject : [reference]
     _text : [String]
     _content : [String]
     _id : [token]

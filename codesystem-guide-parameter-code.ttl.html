@@ -3,7 +3,7 @@
 <!-- template-example-ttl.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Codesystem-guide-parameter-code.ttl - FHIR v3.5.0</title>
+  <title>Codesystem-guide-parameter-code.ttl - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -110,7 +110,7 @@
 <div class="col-12">
 
 <h1>Codesystem-guide-parameter-code.ttl</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm">FHIR Infrastructure</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
 
 </tbody></table>
 <p>
@@ -128,10 +128,23 @@
 [] a fhir:CodeSystem;
   fhir:Resource.id [ fhir:value &quot;guide-parameter-code&quot;];
   fhir:Resource.meta [
-     fhir:Meta.lastUpdated [ fhir:value &quot;2018-09-15T09:06:56.624-05:00&quot; ]
+     fhir:Meta.lastUpdated [ fhir:value &quot;2018-12-13T14:23:07.677-06:00&quot; ]
   ];
   fhir:DomainResource.text [
      fhir:Narrative.status [ fhir:value &quot;generated&quot; ]
+  ];
+  fhir:DomainResource.extension [
+     fhir:index 0;
+     fhir:Extension.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-wg&quot; ];
+     fhir:Extension.value [ fhir:value &quot;fhir&quot; ]
+  ], [
+     fhir:index 1;
+     fhir:Extension.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot; ];
+     fhir:Extension.value [ fhir:value &quot;trial-use&quot; ]
+  ], [
+     fhir:index 2;
+     fhir:Extension.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm&quot; ];
+     fhir:Extension.value [ fhir:value &quot;1&quot; ]
   ];
   fhir:CodeSystem.url [ fhir:value &quot;http://hl7.org/fhir/guide-parameter-code&quot;];
   fhir:CodeSystem.identifier [
@@ -139,12 +152,12 @@
      fhir:Identifier.system [ fhir:value &quot;urn:ietf:rfc:3986&quot; ];
      fhir:Identifier.value [ fhir:value &quot;urn:oid:2.16.840.1.113883.4.642.1.997&quot; ]
   ];
-  fhir:CodeSystem.version [ fhir:value &quot;3.5.0&quot;];
+  fhir:CodeSystem.version [ fhir:value &quot;3.6.0&quot;];
   fhir:CodeSystem.name [ fhir:value &quot;GuideParameterCode&quot;];
   fhir:CodeSystem.title [ fhir:value &quot;GuideParameterCode&quot;];
   fhir:CodeSystem.status [ fhir:value &quot;draft&quot;];
   fhir:CodeSystem.experimental [ fhir:value &quot;false&quot;];
-  fhir:CodeSystem.date [ fhir:value &quot;2018-09-15T09:06:56-05:00&quot;];
+  fhir:CodeSystem.date [ fhir:value &quot;2018-12-13T14:23:07-06:00&quot;];
   fhir:CodeSystem.publisher [ fhir:value &quot;HL7 (FHIR Project)&quot;];
   fhir:CodeSystem.contact [
      fhir:index 0;
@@ -164,56 +177,51 @@
   fhir:CodeSystem.content [ fhir:value &quot;complete&quot;];
   fhir:CodeSystem.concept [
      fhir:index 0;
-     fhir:CodeSystem.code [ fhir:value &quot;apply-business-version&quot; ];
-     fhir:CodeSystem.display [ fhir:value &quot;Apply Business Version&quot; ];
-     fhir:CodeSystem.definition [ fhir:value &quot;If the value of this boolean 0..1 parameter is \&quot;true\&quot; then all conformance resources will have any specified [Resource].version overwritten with the ImplementationGuide.version.&quot; ]
+     fhir:CodeSystem.code [ fhir:value &quot;apply&quot; ];
+     fhir:CodeSystem.display [ fhir:value &quot;Apply Metadata Value&quot; ];
+     fhir:CodeSystem.definition [ fhir:value &quot;If the value of this string 0..* parameter is one of the metadata fields then all conformance resources will have any specified [Resource].[field] overwritten with the ImplementationGuide.[field], where field is one of: version, date, status, publisher, contact, copyright, experimental, jurisdiction, useContext.&quot; ]
   ], [
      fhir:index 1;
-     fhir:CodeSystem.code [ fhir:value &quot;apply-jurisdiction&quot; ];
-     fhir:CodeSystem.display [ fhir:value &quot;Apply Jurisdiction&quot; ];
-     fhir:CodeSystem.definition [ fhir:value &quot;If the value of this boolean 0..1 parameter is \&quot;true\&quot; then all conformance resources will have any specified [Resource].jurisdiction overwritten with the ImplementationGuide.jurisdiction.&quot; ]
-  ], [
-     fhir:index 2;
      fhir:CodeSystem.code [ fhir:value &quot;path-resource&quot; ];
      fhir:CodeSystem.display [ fhir:value &quot;Resource Path&quot; ];
      fhir:CodeSystem.definition [ fhir:value &quot;The value of this string 0..* parameter is a subfolder of the build context's location that is to be scanned to load resources. Scope is (if present) a particular resource type.&quot; ]
   ], [
-     fhir:index 3;
+     fhir:index 2;
      fhir:CodeSystem.code [ fhir:value &quot;path-pages&quot; ];
      fhir:CodeSystem.display [ fhir:value &quot;Pages Path&quot; ];
      fhir:CodeSystem.definition [ fhir:value &quot;The value of this string 0..1 parameter is a subfolder of the build context's location that contains files that are part of the html content processed by the builder.&quot; ]
   ], [
-     fhir:index 4;
+     fhir:index 3;
      fhir:CodeSystem.code [ fhir:value &quot;path-tx-cache&quot; ];
      fhir:CodeSystem.display [ fhir:value &quot;Terminology Cache Path&quot; ];
      fhir:CodeSystem.definition [ fhir:value &quot;The value of this string 0..1 parameter is a subfolder of the build context's location that is used as the terminology cache. If this is not present, the terminology cache is on the local system, not under version control.&quot; ]
   ], [
-     fhir:index 5;
+     fhir:index 4;
      fhir:CodeSystem.code [ fhir:value &quot;expansion-parameter&quot; ];
      fhir:CodeSystem.display [ fhir:value &quot;Expansion Profile&quot; ];
      fhir:CodeSystem.definition [ fhir:value &quot;The value of this string 0..* parameter is a parameter (name=value) when expanding value sets for this implementation guide. This is particularly used to specify the versions of published terminologies such as SNOMED CT.&quot; ]
   ], [
-     fhir:index 6;
+     fhir:index 5;
      fhir:CodeSystem.code [ fhir:value &quot;rule-broken-links&quot; ];
      fhir:CodeSystem.display [ fhir:value &quot;Broken Links Rule&quot; ];
      fhir:CodeSystem.definition [ fhir:value &quot;The value of this string 0..1 parameter is either \&quot;warning\&quot; or \&quot;error\&quot; (default = \&quot;error\&quot;). If the value is \&quot;warning\&quot; then IG build tools allow the IG to be considered successfully build even when there is no internal broken links.&quot; ]
   ], [
-     fhir:index 7;
+     fhir:index 6;
      fhir:CodeSystem.code [ fhir:value &quot;generate-xml&quot; ];
      fhir:CodeSystem.display [ fhir:value &quot;Generate XML&quot; ];
      fhir:CodeSystem.definition [ fhir:value &quot;The value of this boolean 0..1 parameter specifies whether the IG publisher creates examples in XML format. If not present, the Publication Tool decides whether to generate XML.&quot; ]
   ], [
-     fhir:index 8;
+     fhir:index 7;
      fhir:CodeSystem.code [ fhir:value &quot;generate-json&quot; ];
      fhir:CodeSystem.display [ fhir:value &quot;Generate JSON&quot; ];
      fhir:CodeSystem.definition [ fhir:value &quot;The value of this boolean 0..1 parameter specifies whether the IG publisher creates examples in JSON format. If not present, the Publication Tool decides whether to generate JSON.&quot; ]
   ], [
-     fhir:index 9;
+     fhir:index 8;
      fhir:CodeSystem.code [ fhir:value &quot;generate-turtle&quot; ];
      fhir:CodeSystem.display [ fhir:value &quot;Generate Turtle&quot; ];
      fhir:CodeSystem.definition [ fhir:value &quot;The value of this boolean 0..1 parameter specifies whether the IG publisher creates examples in Turtle format. If not present, the Publication Tool decides whether to generate Turtle.&quot; ]
   ], [
-     fhir:index 10;
+     fhir:index 9;
      fhir:CodeSystem.code [ fhir:value &quot;html-template&quot; ];
      fhir:CodeSystem.display [ fhir:value &quot;HTML Template&quot; ];
      fhir:CodeSystem.definition [ fhir:value &quot;The value of this string singleton parameter is the name of the file to use as the builder template for each generated page (see templating).&quot; ]
@@ -246,7 +254,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Sat, Sep 15, 2018 09:08-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:25-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -256,7 +264,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fcodesystem-guide-parameter-code.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fcodesystem-guide-parameter-code.ttl.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fcodesystem-guide-parameter-code.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fcodesystem-guide-parameter-code.ttl.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

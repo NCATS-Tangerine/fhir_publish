@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>StructureDefinition: CQF-Questionnaire - FHIR v3.5.0</title>
+  <title>StructureDefinition: CQF-Questionnaire - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -41,7 +41,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -135,9 +135,10 @@
   },
   {
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot;,
-    &quot;valueString&quot; : &quot;Trial Use&quot;
+    &quot;valueCode&quot; : &quot;trial-use&quot;
   }],
   &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/cqf-questionnaire&quot;,
+  &quot;version&quot; : &quot;3.6.0&quot;,
   &quot;name&quot; : &quot;CQF-Questionnaire&quot;,
   &quot;status&quot; : &quot;draft&quot;,
   &quot;experimental&quot; : false,
@@ -150,7 +151,7 @@
     }]
   }],
   &quot;description&quot; : &quot;A questionnaire with the ability to specify behavior associated with questions or groups of questions&quot;,
-  &quot;fhirVersion&quot; : &quot;3.5.0&quot;,
+  &quot;fhirVersion&quot; : &quot;3.6.0&quot;,
   &quot;mapping&quot; : [{
     &quot;identity&quot; : &quot;workflow&quot;,
     &quot;uri&quot; : &quot;http://hl7.org/fhir/workflow&quot;,
@@ -164,7 +165,7 @@
   {
     &quot;identity&quot; : &quot;w5&quot;,
     &quot;uri&quot; : &quot;http://hl7.org/fhir/fivews&quot;,
-    &quot;name&quot; : &quot;FiveWs Pattern&quot;
+    &quot;name&quot; : &quot;FiveWs Pattern Mapping&quot;
   },
   {
     &quot;identity&quot; : &quot;objimpl&quot;,
@@ -228,7 +229,7 @@
         },
         {
           &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-bestpractice-explanation&quot;,
-          &quot;valueMarkdown&quot; : &quot;When a resource has no narrative, only systems that fully understand the data can display the resource to a human safely. Including a guman readable representation in the resource makes for a much more robust eco-system and cheaper handling of resources by intermediary systems. Some ecosystems restrict distribution of resources to only those systems that do fully understand the resources, and as a consequence implementers may believe that the narrative is superfluous. However experience shows that such eco-systems often open up to new participants over time.&quot;
+          &quot;valueMarkdown&quot; : &quot;When a resource has no narrative, only systems that fully understand the data can display the resource to a human safely. Including a human readable representation in the resource makes for a much more robust eco-system and cheaper handling of resources by intermediary systems. Some ecosystems restrict distribution of resources to only those systems that do fully understand the resources, and as a consequence implementers may believe that the narrative is superfluous. However experience shows that such eco-systems often open up to new participants over time.&quot;
         }],
         &quot;key&quot; : &quot;dom-6&quot;,
         &quot;severity&quot; : &quot;warning&quot;,
@@ -451,6 +452,14 @@
     },
     {
       &quot;id&quot; : &quot;Questionnaire.extension:library&quot;,
+      &quot;extension&quot; : [{
+        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot;,
+        &quot;valueCode&quot; : &quot;normative&quot;
+      },
+      {
+        &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version&quot;,
+        &quot;valueCode&quot; : &quot;4.0.0&quot;
+      }],
       &quot;path&quot; : &quot;Questionnaire.extension&quot;,
       &quot;sliceName&quot; : &quot;library&quot;,
       &quot;short&quot; : &quot;A library containing logic referenced by the questionnaire&quot;,
@@ -490,8 +499,9 @@
       &quot;id&quot; : &quot;Questionnaire.modifierExtension&quot;,
       &quot;path&quot; : &quot;Questionnaire.modifierExtension&quot;,
       &quot;short&quot; : &quot;Extensions that cannot be ignored&quot;,
-      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
       &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;requirements&quot; : &quot;Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).&quot;,
       &quot;alias&quot; : [&quot;extensions&quot;,
       &quot;user content&quot;],
       &quot;min&quot; : 0,
@@ -930,7 +940,7 @@
       &quot;id&quot; : &quot;Questionnaire.useContext&quot;,
       &quot;path&quot; : &quot;Questionnaire.useContext&quot;,
       &quot;short&quot; : &quot;The context that the content is intended to support&quot;,
-      &quot;definition&quot; : &quot;The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate questionnaire instances.&quot;,
+      &quot;definition&quot; : &quot;The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate questionnaire instances.&quot;,
       &quot;comment&quot; : &quot;When multiple useContexts are specified, there is no expectation that all or any of the contexts apply.&quot;,
       &quot;requirements&quot; : &quot;Assist in searching for appropriate content.&quot;,
       &quot;min&quot; : 0,
@@ -1131,7 +1141,7 @@
       &quot;short&quot; : &quot;When the questionnaire is expected to be used&quot;,
       &quot;definition&quot; : &quot;The period during which the questionnaire content was or is planned to be in active use.&quot;,
       &quot;comment&quot; : &quot;The effective period for a questionnaire  determines when the content is applicable for usage and is independent of publication and review dates. For example, a measure intended to be used for the year 2016 might be published in 2015.&quot;,
-      &quot;requirements&quot; : &quot;Allows establishing a transition before a resource comes into effect and also allows for a sunsetting  process when new versions of a the questionnaire are or are expected to be used instead.&quot;,
+      &quot;requirements&quot; : &quot;Allows establishing a transition before a resource comes into effect and also allows for a sunsetting  process when new versions of the questionnaire are or are expected to be used instead.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
       &quot;base&quot; : {
@@ -1219,88 +1229,77 @@
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;Read-only can't be specified for \&quot;display\&quot; items&quot;,
         &quot;expression&quot; : &quot;type!='display' or readOnly.empty()&quot;,
-        &quot;xpath&quot; : &quot;not(f:type/@value=('group', 'display') and f:*[starts-with(local-name(.), 'initial')])&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;not(f:type/@value=('group', 'display') and f:*[starts-with(local-name(.), 'initial')])&quot;
       },
       {
         &quot;key&quot; : &quot;que-8&quot;,
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;Initial values can't be specified for groups or display items&quot;,
         &quot;expression&quot; : &quot;(type!='group' and type!='display') or initial.empty()&quot;,
-        &quot;xpath&quot; : &quot;not(f:type/@value=('group', 'display') and f:*[starts-with(local-name(.), 'initial')])&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;not(f:type/@value=('group', 'display') and f:*[starts-with(local-name(.), 'initial')])&quot;
       },
       {
         &quot;key&quot; : &quot;que-6&quot;,
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;Required and repeat aren't permitted for display items&quot;,
         &quot;expression&quot; : &quot;type!='display' or (required.empty() and repeats.empty())&quot;,
-        &quot;xpath&quot; : &quot;not(f:type/@value='display' and (f:required or f:repeats))&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;not(f:type/@value='display' and (f:required or f:repeats))&quot;
       },
       {
         &quot;key&quot; : &quot;que-5&quot;,
         &quot;severity&quot; : &quot;error&quot;,
-        &quot;human&quot; : &quot;Only 'choice' items can have answerValueSet&quot;,
+        &quot;human&quot; : &quot;Only 'choice' and 'open-choice' items can have answerValueSet&quot;,
         &quot;expression&quot; : &quot;(type ='choice' or type = 'open-choice' or type = 'decimal' or type = 'integer' or type = 'date' or type = 'dateTime' or type = 'time' or type = 'string' or type = 'quantity') or (answerValueSet.empty() and answerOption.empty())&quot;,
-        &quot;xpath&quot; : &quot;f:type/@value=('choice','open-choice','decimal','integer','date','dateTime','time','string','quantity',') or not(f:answerOption or f:answerValueSet)&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;f:type/@value=('choice','open-choice','decimal','integer','date','dateTime','time','string','quantity',') or not(f:answerOption or f:answerValueSet)&quot;
       },
       {
         &quot;key&quot; : &quot;que-4&quot;,
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;A question cannot have both answerOption and answerValueSet&quot;,
         &quot;expression&quot; : &quot;answerOption.empty() or answerValueSet.empty()&quot;,
-        &quot;xpath&quot; : &quot;not(f:answerValueSet and f:answerOption)&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;not(f:answerValueSet and f:answerOption)&quot;
       },
       {
         &quot;key&quot; : &quot;que-3&quot;,
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;Display items cannot have a \&quot;code\&quot; asserted&quot;,
         &quot;expression&quot; : &quot;type!='display' or code.empty()&quot;,
-        &quot;xpath&quot; : &quot;not(f:type/@value='display' and f:code)&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;not(f:type/@value='display' and f:code)&quot;
       },
       {
         &quot;key&quot; : &quot;que-10&quot;,
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;Maximum length can only be declared for simple question types&quot;,
         &quot;expression&quot; : &quot;(type in ('boolean' | 'decimal' | 'integer' | 'string' | 'text' | 'url' | 'open-choice')) or maxLength.empty()&quot;,
-        &quot;xpath&quot; : &quot;f:type/@value=('boolean', 'decimal', 'integer', 'open-choice', 'string', 'text', 'url') or not(f:maxLength)&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;f:type/@value=('boolean', 'decimal', 'integer', 'open-choice', 'string', 'text', 'url') or not(f:maxLength)&quot;
       },
       {
         &quot;key&quot; : &quot;que-1&quot;,
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;Group items must have nested items, display items cannot have nested items&quot;,
         &quot;expression&quot; : &quot;(type='group' implies item.empty().not()) and (type.trace('type')='display' implies item.trace('item').empty())&quot;,
-        &quot;xpath&quot; : &quot;not((f:type/@value='group' and not(f:item)) or (f:type/@value='display' and f:item))&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;not((f:type/@value='group' and not(f:item)) or (f:type/@value='display' and f:item))&quot;
       },
       {
         &quot;key&quot; : &quot;que-13&quot;,
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;Can only have multiple initial values for repeating items&quot;,
         &quot;expression&quot; : &quot;repeats=true or initial.count() &lt;= 1&quot;,
-        &quot;xpath&quot; : &quot;f:repeats/@value='true' or count(f:initial)&lt;=1&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;f:repeats/@value='true' or count(f:initial)&lt;=1&quot;
       },
       {
         &quot;key&quot; : &quot;que-11&quot;,
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;If one or more answerOption is present, initial[x] must be missing&quot;,
         &quot;expression&quot; : &quot;answerOption.empty() or initial.empty()&quot;,
-        &quot;xpath&quot; : &quot;not(f:answerOption) or not(count(f:*[starts-with(local-name(.), 'initial')]))&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;not(f:answerOption) or not(count(f:*[starts-with(local-name(.), 'initial')]))&quot;
       },
       {
         &quot;key&quot; : &quot;que-12&quot;,
         &quot;severity&quot; : &quot;error&quot;,
         &quot;human&quot; : &quot;If there are more than one enableWhen, enableBehavior must be specified&quot;,
         &quot;expression&quot; : &quot;enableWhen.count() &gt; 2 implies enableBehavior.exists()&quot;,
-        &quot;xpath&quot; : &quot;not(f:answerOption) or not(count(f:*[starts-with(local-name(.), 'initial')]))&quot;,
-        &quot;source&quot; : &quot;Questionnaire.item&quot;
+        &quot;xpath&quot; : &quot;not(f:answerOption) or not(count(f:*[starts-with(local-name(.), 'initial')]))&quot;
       }],
       &quot;isModifier&quot; : false,
       &quot;isSummary&quot; : false,
@@ -1313,7 +1312,7 @@
       &quot;id&quot; : &quot;Questionnaire.item.id&quot;,
       &quot;path&quot; : &quot;Questionnaire.item.id&quot;,
       &quot;representation&quot; : [&quot;xmlAttr&quot;],
-      &quot;short&quot; : &quot;xml:id (or equivalent in JSON)&quot;,
+      &quot;short&quot; : &quot;Unique id for inter-element referencing&quot;,
       &quot;definition&quot; : &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
@@ -1360,9 +1359,10 @@
     {
       &quot;id&quot; : &quot;Questionnaire.item.modifierExtension&quot;,
       &quot;path&quot; : &quot;Questionnaire.item.modifierExtension&quot;,
-      &quot;short&quot; : &quot;Extensions that cannot be ignored if unrecognized&quot;,
-      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
+      &quot;short&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
       &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;requirements&quot; : &quot;Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).&quot;,
       &quot;alias&quot; : [&quot;extensions&quot;,
       &quot;user content&quot;,
       &quot;modifiers&quot;],
@@ -1496,6 +1496,7 @@
       &quot;path&quot; : &quot;Questionnaire.item.text&quot;,
       &quot;short&quot; : &quot;Primary text for the item&quot;,
       &quot;definition&quot; : &quot;The name of a section, the text of a question or text content for a display item.&quot;,
+      &quot;comment&quot; : &quot;When using this element to represent the name of a section, use group type item and also make sure to limit the text element to a short string suitable for display as a section heading.  Group item instructions should be included as a display type item within the group.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
       &quot;base&quot; : {
@@ -1590,7 +1591,7 @@
       &quot;id&quot; : &quot;Questionnaire.item.enableWhen.id&quot;,
       &quot;path&quot; : &quot;Questionnaire.item.enableWhen.id&quot;,
       &quot;representation&quot; : [&quot;xmlAttr&quot;],
-      &quot;short&quot; : &quot;xml:id (or equivalent in JSON)&quot;,
+      &quot;short&quot; : &quot;Unique id for inter-element referencing&quot;,
       &quot;definition&quot; : &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
@@ -1637,9 +1638,10 @@
     {
       &quot;id&quot; : &quot;Questionnaire.item.enableWhen.modifierExtension&quot;,
       &quot;path&quot; : &quot;Questionnaire.item.enableWhen.modifierExtension&quot;,
-      &quot;short&quot; : &quot;Extensions that cannot be ignored if unrecognized&quot;,
-      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
+      &quot;short&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
       &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;requirements&quot; : &quot;Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).&quot;,
       &quot;alias&quot; : [&quot;extensions&quot;,
       &quot;user content&quot;,
       &quot;modifiers&quot;],
@@ -1975,7 +1977,7 @@
       &quot;id&quot; : &quot;Questionnaire.item.answerOption.id&quot;,
       &quot;path&quot; : &quot;Questionnaire.item.answerOption.id&quot;,
       &quot;representation&quot; : [&quot;xmlAttr&quot;],
-      &quot;short&quot; : &quot;xml:id (or equivalent in JSON)&quot;,
+      &quot;short&quot; : &quot;Unique id for inter-element referencing&quot;,
       &quot;definition&quot; : &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
@@ -1997,17 +1999,11 @@
     {
       &quot;id&quot; : &quot;Questionnaire.item.answerOption.extension&quot;,
       &quot;path&quot; : &quot;Questionnaire.item.answerOption.extension&quot;,
-      &quot;slicing&quot; : {
-        &quot;id&quot; : &quot;4&quot;,
-        &quot;discriminator&quot; : [{
-          &quot;type&quot; : &quot;value&quot;,
-          &quot;path&quot; : &quot;url&quot;
-        }],
-        &quot;ordered&quot; : false,
-        &quot;rules&quot; : &quot;open&quot;
-      },
-      &quot;short&quot; : &quot;Extension&quot;,
-      &quot;definition&quot; : &quot;An Extension&quot;,
+      &quot;short&quot; : &quot;Additional content defined by implementations&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+      &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;alias&quot; : [&quot;extensions&quot;,
+      &quot;user content&quot;],
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;base&quot; : {
@@ -2019,52 +2015,19 @@
         &quot;code&quot; : &quot;Extension&quot;
       }],
       &quot;isModifier&quot; : false,
-      &quot;isSummary&quot; : false
-    },
-    {
-      &quot;id&quot; : &quot;Questionnaire.item.answerOption.extension:optionCode&quot;,
-      &quot;path&quot; : &quot;Questionnaire.item.answerOption.extension&quot;,
-      &quot;sliceName&quot; : &quot;optionCode&quot;,
-      &quot;short&quot; : &quot;Meaning of the response option&quot;,
-      &quot;definition&quot; : &quot;A CodeableConcept that assigns meaning to the response object on which it appears.&quot;,
-      &quot;requirements&quot; : &quot;Need to be able to determine the semantics of each potential response in order to interpret the meaning when processing the questionnaire response.  For example, the response option \&quot;Severe migraines within the past year\&quot; to the question \&quot;Select all that apply\&quot; needs detailed coding (such as via CodeableConcept) at the option level, as well as a way to represent that an affirmation/negative response should result in (perhaps) an Observation in the QuestionnaireResponse tied to a clinical model (such as CIMI). This is key to support sophisticated CDS based on the semantics of the QuestionnaireResponse -- not just the codes.&quot;,
-      &quot;alias&quot; : [&quot;optionCode&quot;],
-      &quot;min&quot; : 0,
-      &quot;max&quot; : &quot;*&quot;,
-      &quot;base&quot; : {
-        &quot;path&quot; : &quot;Element.extension&quot;,
-        &quot;min&quot; : 0,
-        &quot;max&quot; : &quot;*&quot;
-      },
-      &quot;type&quot; : [{
-        &quot;code&quot; : &quot;Extension&quot;,
-        &quot;profile&quot; : [&quot;http://hl7.org/fhir/StructureDefinition/cqf-optionCode&quot;]
-      }],
-      &quot;condition&quot; : [&quot;ele-1&quot;],
-      &quot;constraint&quot; : [{
-        &quot;key&quot; : &quot;ele-1&quot;,
-        &quot;severity&quot; : &quot;error&quot;,
-        &quot;human&quot; : &quot;All FHIR elements must have a @value or children&quot;,
-        &quot;expression&quot; : &quot;hasValue() or (children().count() &gt; id.count())&quot;,
-        &quot;xpath&quot; : &quot;@value|f:*|h:div&quot;,
-        &quot;source&quot; : &quot;Element&quot;
-      },
-      {
-        &quot;key&quot; : &quot;ext-1&quot;,
-        &quot;severity&quot; : &quot;error&quot;,
-        &quot;human&quot; : &quot;Must have either extensions or value[x], not both&quot;,
-        &quot;expression&quot; : &quot;extension.exists() != value.exists()&quot;,
-        &quot;xpath&quot; : &quot;exists(f:extension)!=exists(f:*[starts-with(local-name(.), 'value')])&quot;,
-        &quot;source&quot; : &quot;Extension&quot;
-      }],
-      &quot;isModifier&quot; : false
+      &quot;isSummary&quot; : false,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;n/a&quot;
+      }]
     },
     {
       &quot;id&quot; : &quot;Questionnaire.item.answerOption.modifierExtension&quot;,
       &quot;path&quot; : &quot;Questionnaire.item.answerOption.modifierExtension&quot;,
-      &quot;short&quot; : &quot;Extensions that cannot be ignored if unrecognized&quot;,
-      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
+      &quot;short&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
       &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;requirements&quot; : &quot;Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).&quot;,
       &quot;alias&quot; : [&quot;extensions&quot;,
       &quot;user content&quot;,
       &quot;modifiers&quot;],
@@ -2196,7 +2159,7 @@
       &quot;id&quot; : &quot;Questionnaire.item.initial.id&quot;,
       &quot;path&quot; : &quot;Questionnaire.item.initial.id&quot;,
       &quot;representation&quot; : [&quot;xmlAttr&quot;],
-      &quot;short&quot; : &quot;xml:id (or equivalent in JSON)&quot;,
+      &quot;short&quot; : &quot;Unique id for inter-element referencing&quot;,
       &quot;definition&quot; : &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
@@ -2243,9 +2206,10 @@
     {
       &quot;id&quot; : &quot;Questionnaire.item.initial.modifierExtension&quot;,
       &quot;path&quot; : &quot;Questionnaire.item.initial.modifierExtension&quot;,
-      &quot;short&quot; : &quot;Extensions that cannot be ignored if unrecognized&quot;,
-      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
+      &quot;short&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
       &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;requirements&quot; : &quot;Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).&quot;,
       &quot;alias&quot; : [&quot;extensions&quot;,
       &quot;user content&quot;,
       &quot;modifiers&quot;],
@@ -2377,29 +2341,6 @@
         &quot;code&quot; : &quot;Extension&quot;,
         &quot;profile&quot; : [&quot;http://hl7.org/fhir/StructureDefinition/cqf-library&quot;]
       }]
-    },
-    {
-      &quot;id&quot; : &quot;Questionnaire.item&quot;,
-      &quot;path&quot; : &quot;Questionnaire.item&quot;
-    },
-    {
-      &quot;id&quot; : &quot;Questionnaire.item.answerOption&quot;,
-      &quot;path&quot; : &quot;Questionnaire.item.answerOption&quot;
-    },
-    {
-      &quot;id&quot; : &quot;Questionnaire.item.answerOption.extension:optionCode&quot;,
-      &quot;path&quot; : &quot;Questionnaire.item.answerOption.extension&quot;,
-      &quot;sliceName&quot; : &quot;optionCode&quot;,
-      &quot;short&quot; : &quot;Meaning of the response option&quot;,
-      &quot;definition&quot; : &quot;A CodeableConcept that assigns meaning to the response object on which it appears.&quot;,
-      &quot;requirements&quot; : &quot;Need to be able to determine the semantics of each potential response in order to interpret the meaning when processing the questionnaire response.  For example, the response option \&quot;Severe migraines within the past year\&quot; to the question \&quot;Select all that apply\&quot; needs detailed coding (such as via CodeableConcept) at the option level, as well as a way to represent that an affirmation/negative response should result in (perhaps) an Observation in the QuestionnaireResponse tied to a clinical model (such as CIMI). This is key to support sophisticated CDS based on the semantics of the QuestionnaireResponse -- not just the codes.&quot;,
-      &quot;alias&quot; : [&quot;optionCode&quot;],
-      &quot;min&quot; : 0,
-      &quot;max&quot; : &quot;*&quot;,
-      &quot;type&quot; : [{
-        &quot;code&quot; : &quot;Extension&quot;,
-        &quot;profile&quot; : [&quot;http://hl7.org/fhir/StructureDefinition/cqf-optionCode&quot;]
-      }]
     }]
   }
 }
@@ -2422,7 +2363,7 @@
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -2432,7 +2373,7 @@
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fcqf-questionnaire.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fcqf-questionnaire.profile.json.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fcqf-questionnaire.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fcqf-questionnaire.profile.json.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

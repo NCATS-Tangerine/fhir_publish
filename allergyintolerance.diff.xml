@@ -1,15 +1,33 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <difference>
    <type name="AllergyIntolerance" status="changed">
-      <element new-min="0"
-               old-min="1"
-               path="AllergyIntolerance.verificationStatus"/>
-      <element path="AllergyIntolerance.encounter" status="new"/>
-      <element path="AllergyIntolerance.recordedDate" status="new"/>
-      <element path="AllergyIntolerance.recorder">
-         <removed-type name="Reference(Practitioner|Patient)"/>
-         <added-type name="Reference(Practitioner|Patient|RelatedPerson)"/>
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               path="AllergyIntolerance.clinicalStatus">
+         <removed-type name="code"/>
+         <added-type name="CodeableConcept"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/allergy-clinical-status"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/allergyintolerance-clinical"
+                      strength="required"/>
       </element>
-      <element path="AllergyIntolerance.assertedDate" status="deleted"/>
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               new-min="0"
+               old-min="1"
+               path="AllergyIntolerance.verificationStatus">
+         <removed-type name="code"/>
+         <added-type name="CodeableConcept"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/allergy-verification-status"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/allergyintolerance-verification"
+                      strength="required"/>
+      </element>
+      <element path="AllergyIntolerance.encounter" status="new"/>
+      <element old-name="assertedDate" path="AllergyIntolerance.recordedDate"/>
+      <element path="AllergyIntolerance.recorder">
+         <removed-type name="Reference(Practitioner | Patient)"/>
+         <added-type name="Reference(Practitioner | Patient | RelatedPerson)"/>
+      </element>
    </type>
 </difference>

@@ -4,7 +4,13 @@
   ],
   "ExplanationOfBenefit": {
     "elements": {
+      "ExplanationOfBenefit.status": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ExplanationOfBenefit.type": {
+        "old-min": 0,
+        "new-min": 1,
         "binding-strength-changed": true,
         "binding-status": "changed",
         "old-binding": {
@@ -23,20 +29,51 @@
       "ExplanationOfBenefit.use": {
         "status": "new"
       },
+      "ExplanationOfBenefit.patient": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "ExplanationOfBenefit.created": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ExplanationOfBenefit.enterer": {
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole)"
+          "Reference(Practitioner | PractitionerRole)"
         ]
       },
+      "ExplanationOfBenefit.insurer": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "ExplanationOfBenefit.provider": {
+        "old-min": 0,
+        "new-min": 1,
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
+        ]
+      },
+      "ExplanationOfBenefit.priority": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.fundsReserveRequested": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.fundsReserve": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.payee.party": {
+        "removed-types": [
+          "Reference(Practitioner | Organization | Patient | RelatedPerson)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson)"
         ]
       },
       "ExplanationOfBenefit.referral": {
@@ -48,6 +85,8 @@
         ]
       },
       "ExplanationOfBenefit.outcome": {
+        "old-min": 0,
+        "new-min": 1,
         "removed-types": [
           "CodeableConcept"
         ],
@@ -60,54 +99,37 @@
           "strength": "required"
         }
       },
-      "ExplanationOfBenefit.payee.resource": {
+      "ExplanationOfBenefit.preAuthRef": {
         "status": "new"
       },
-      "ExplanationOfBenefit.payee.party": {
-        "removed-types": [
-          "Reference(Practitioner|Organization|Patient|RelatedPerson)"
-        ],
-        "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson)"
-        ]
-      },
-      "ExplanationOfBenefit.information.value[x]": {
-        "removed-types": [
-          "Reference(Resource)"
-        ],
-        "added-types": [
-          "boolean",
-          "Reference(Resource)"
-        ]
+      "ExplanationOfBenefit.preAuthRefPeriod": {
+        "status": "new"
       },
       "ExplanationOfBenefit.careTeam.provider": {
         "removed-types": [
-          "Reference(Practitioner|Organization)"
+          "Reference(Practitioner | Organization)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       },
-      "ExplanationOfBenefit.diagnosis.diagnosis[x]": {
-        "removed-types": [
-          "Reference(Condition)"
-        ],
+      "ExplanationOfBenefit.supportingInfo": {
+        "old-name": "information"
+      },
+      "ExplanationOfBenefit.supportingInfo.value[x]": {
         "added-types": [
-          "Reference(Condition)"
+          "boolean"
         ]
       },
       "ExplanationOfBenefit.diagnosis.onAdmission": {
         "status": "new"
       },
-      "ExplanationOfBenefit.procedure.procedure[x]": {
-        "removed-types": [
-          "Reference(Procedure)"
-        ],
-        "added-types": [
-          "Reference(Procedure)"
-        ]
+      "ExplanationOfBenefit.procedure.udi": {
+        "status": "new"
       },
       "ExplanationOfBenefit.insurance": {
+        "old-min": 0,
+        "new-min": 1,
         "old-max": "1",
         "new-max": "*"
       },
@@ -130,45 +152,35 @@
           "strength": "extensible"
         }
       },
-      "ExplanationOfBenefit.accident.location[x]": {
-        "removed-types": [
-          "Reference(Location)"
-        ],
-        "added-types": [
-          "Reference(Location)"
-        ]
-      },
       "ExplanationOfBenefit.item.careTeamSequence": {
-        "status": "new"
+        "old-name": "careTeamLinkId"
       },
       "ExplanationOfBenefit.item.diagnosisSequence": {
-        "status": "new"
+        "old-name": "diagnosisLinkId"
       },
       "ExplanationOfBenefit.item.procedureSequence": {
-        "status": "new"
+        "old-name": "procedureLinkId"
       },
       "ExplanationOfBenefit.item.informationSequence": {
-        "status": "new"
+        "old-name": "informationLinkId"
       },
-      "ExplanationOfBenefit.item.billcode": {
-        "status": "new"
+      "ExplanationOfBenefit.item.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
-      "ExplanationOfBenefit.item.location[x]": {
-        "removed-types": [
-          "Reference(Location)"
-        ],
-        "added-types": [
-          "Reference(Location)"
-        ]
+      "ExplanationOfBenefit.item.detail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
-      "ExplanationOfBenefit.item.detail.billcode": {
-        "status": "new"
-      },
-      "ExplanationOfBenefit.item.detail.subDetail.billcode": {
-        "status": "new"
+      "ExplanationOfBenefit.item.detail.subDetail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "ExplanationOfBenefit.addItem.itemSequence": {
-        "status": "new"
+        "old-name": "sequenceLinkId"
       },
       "ExplanationOfBenefit.addItem.detailSequence": {
         "status": "new"
@@ -179,8 +191,10 @@
       "ExplanationOfBenefit.addItem.provider": {
         "status": "new"
       },
-      "ExplanationOfBenefit.addItem.billcode": {
-        "status": "new"
+      "ExplanationOfBenefit.addItem.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "ExplanationOfBenefit.addItem.programCode": {
         "status": "new"
@@ -201,7 +215,7 @@
         "status": "new"
       },
       "ExplanationOfBenefit.addItem.net": {
-        "status": "new"
+        "old-name": "fee"
       },
       "ExplanationOfBenefit.addItem.bodySite": {
         "status": "new"
@@ -209,8 +223,10 @@
       "ExplanationOfBenefit.addItem.subSite": {
         "status": "new"
       },
-      "ExplanationOfBenefit.addItem.detail.billcode": {
-        "status": "new"
+      "ExplanationOfBenefit.addItem.detail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "ExplanationOfBenefit.addItem.detail.quantity": {
         "status": "new"
@@ -222,12 +238,12 @@
         "status": "new"
       },
       "ExplanationOfBenefit.addItem.detail.net": {
-        "status": "new"
+        "old-name": "fee"
       },
       "ExplanationOfBenefit.addItem.detail.subDetail": {
         "status": "new"
       },
-      "ExplanationOfBenefit.addItem.detail.subDetail.billcode": {
+      "ExplanationOfBenefit.addItem.detail.subDetail.productOrService": {
         "status": "new"
       },
       "ExplanationOfBenefit.addItem.detail.subDetail.modifier": {
@@ -251,6 +267,9 @@
       "ExplanationOfBenefit.addItem.detail.subDetail.adjudication": {
         "status": "new"
       },
+      "ExplanationOfBenefit.adjudication": {
+        "status": "new"
+      },
       "ExplanationOfBenefit.total": {
         "status": "new"
       },
@@ -259,6 +278,17 @@
       },
       "ExplanationOfBenefit.total.amount": {
         "status": "new"
+      },
+      "ExplanationOfBenefit.formCode": {
+        "status": "new"
+      },
+      "ExplanationOfBenefit.form": {
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "Attachment"
+        ]
       },
       "ExplanationOfBenefit.processNote.type": {
         "removed-types": [
@@ -269,19 +299,26 @@
         ]
       },
       "ExplanationOfBenefit.processNote.language": {
-        "binding-status": "removed",
+        "binding-strength-changed": true,
+        "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/languages",
-          "strength": "extensible"
+          "strength": "extensible",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/languages",
+          "strength": "preferred",
+          "max": "http://hl7.org/fhir/ValueSet/all-languages"
         }
+      },
+      "ExplanationOfBenefit.benefitPeriod": {
+        "status": "new"
       },
       "ExplanationOfBenefit.organization": {
         "status": "deleted"
       },
       "ExplanationOfBenefit.payee.resourceType": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.insurance.preAuthRef": {
         "status": "deleted"
       },
       "ExplanationOfBenefit.employmentImpacted": {
@@ -290,34 +327,10 @@
       "ExplanationOfBenefit.hospitalization": {
         "status": "deleted"
       },
-      "ExplanationOfBenefit.item.careTeamLinkId": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.item.diagnosisLinkId": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.item.procedureLinkId": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.item.informationLinkId": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.item.service": {
-        "status": "deleted"
-      },
       "ExplanationOfBenefit.item.detail.type": {
         "status": "deleted"
       },
-      "ExplanationOfBenefit.item.detail.service": {
-        "status": "deleted"
-      },
       "ExplanationOfBenefit.item.detail.subDetail.type": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.item.detail.subDetail.service": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.addItem.sequenceLinkId": {
         "status": "deleted"
       },
       "ExplanationOfBenefit.addItem.revenue": {
@@ -326,22 +339,10 @@
       "ExplanationOfBenefit.addItem.category": {
         "status": "deleted"
       },
-      "ExplanationOfBenefit.addItem.service": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.addItem.fee": {
-        "status": "deleted"
-      },
       "ExplanationOfBenefit.addItem.detail.revenue": {
         "status": "deleted"
       },
       "ExplanationOfBenefit.addItem.detail.category": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.addItem.detail.service": {
-        "status": "deleted"
-      },
-      "ExplanationOfBenefit.addItem.detail.fee": {
         "status": "deleted"
       },
       "ExplanationOfBenefit.totalCost": {

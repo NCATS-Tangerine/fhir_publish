@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -51,7 +51,7 @@
         <xs:sequence>
           <xs:element name="identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Business idenfifier for this product. Could be an MPID.</xs:documentation>
+              <xs:documentation xml:lang="en">Business identifier for this product. Could be an MPID.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="type" minOccurs="0" maxOccurs="1" type="CodeableConcept">
@@ -67,6 +67,11 @@
           <xs:element name="combinedPharmaceuticalDoseForm" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">The dose form for a single part product, or combined form of a multiple part product.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="legalStatusOfSupply" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The legal status of supply of the medicinal product as classified by the regulator.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="additionalMonitoringIndicator" minOccurs="0" maxOccurs="1" type="CodeableConcept">
@@ -94,39 +99,14 @@
               <xs:documentation xml:lang="en">Marketing status of the medicinal product, in contrast to marketing authorizaton.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="marketingAuthorization" minOccurs="0" maxOccurs="1" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Product regulatory authorization.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="packagedMedicinalProduct" minOccurs="0" maxOccurs="unbounded" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Package representation for the product.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
           <xs:element name="pharmaceuticalProduct" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">Pharmaceutical aspects of product.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="contraindication" minOccurs="0" maxOccurs="unbounded" type="Reference">
+          <xs:element name="packagedMedicinalProduct" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Clinical contraindications, reasons for not giving this.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="interaction" minOccurs="0" maxOccurs="unbounded" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Clinical interactions with other medications or substances.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="therapeuticIndication" minOccurs="0" maxOccurs="unbounded" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Clinical reason for use.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="undesirableEffect" minOccurs="0" maxOccurs="unbounded" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Potential clinical unwanted effects of use.</xs:documentation>
+              <xs:documentation xml:lang="en">Package representation for the product.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="attachedDocument" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -299,16 +279,23 @@
               <xs:documentation xml:lang="en">Identifier for the designation, or procedure number.</xs:documentation>
            </xs:annotation>
           </xs:element>
+          <xs:element name="type" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The type of special designation, e.g. orphan drug, minor use.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
           <xs:element name="intendedUse" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">The intended use of the product, e.g. prevention, treatment.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="indication" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:choice minOccurs="0" maxOccurs="1" >
             <xs:annotation>
               <xs:documentation xml:lang="en">Condition for which the medicinal use applies.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
+            </xs:annotation>
+            <xs:element name="indicationCodeableConcept" type="CodeableConcept"/>
+            <xs:element name="indicationReference" type="Reference"/>
+          </xs:choice>
           <xs:element name="status" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">For example granted, pending, expired or withdrawn.</xs:documentation>

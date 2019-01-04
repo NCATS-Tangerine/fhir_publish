@@ -36,7 +36,7 @@
           </td>
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">
             <a style="padding-left: 3px; padding-right: 3px; color: black; background-color: white" href="elementdefinition-definitions.html#ElementDefinition.isSummary" title="This element is included in summaries">&#x3A3;</a>
-            <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #e6ffe6" href="versions.html#std-process" title="Ballot Status = Normative">N</a>
+            <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #e6ffe6" href="versions.html#std-process" title="Standards Status = Normative">N</a>
           </td>
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td>
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">
@@ -242,12 +242,16 @@
     </div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-    <valueString value="Normative"/>
+    <valueCode value="normative"/>
+  </extension>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
+    <valueCode value="4.0.0"/>
   </extension>
   <url value="http://hl7.org/fhir/StructureDefinition/Address"/>
+  <version value="3.6.0"/>
   <name value="Address"/>
   <status value="draft"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="HL7 FHIR Standard"/>
   <contact>
     <telecom>
@@ -257,7 +261,7 @@
   </contact>
   <description value="Base StructureDefinition for Address Type: An address expressed using postal conventions (as opposed to GPS or other location definition formats).  This data type may be used to convey addresses for use in delivering mail as well as for visiting locations which might not be valid for mail delivery.  There are a variety of postal address formats defined around the world."/>
   <purpose value="Need to be able to record postal addresses, along with notes about their use."/>
-  <fhirVersion value="3.5.0"/>
+  <fhirVersion value="3.6.0"/>
   <mapping>
     <identity value="v2"/>
     <uri value="http://hl7.org/v2"/>
@@ -285,10 +289,16 @@
   <derivation value="specialization"/>
   <snapshot>
     <element id="Address">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+        <valueCode value="normative"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
+        <valueCode value="4.0.0"/>
+      </extension>
       <path value="Address"/>
       <short value="An address expressed using postal conventions (as opposed to GPS or other location definition formats)"/>
       <definition value="An address expressed using postal conventions (as opposed to GPS or other location definition formats).  This data type may be used to convey addresses for use in delivering mail as well as for visiting locations which might not be valid for mail delivery.  There are a variety of postal address formats defined around the world."/>
-      <comment value="Note: address is for postal addresses, not physical locations."/>
+      <comment value="Note: address is intended to describe postal addresses for administrative purposes, not to describe absolute geographical coordinates.  Postal addresses are often used as proxies for physical locations (also see the [Location](location.html#) resource)."/>
       <min value="0"/>
       <max value="*"/>
       <base>
@@ -326,7 +336,7 @@
     <element id="Address.id">
       <path value="Address.id"/>
       <representation value="xmlAttr"/>
-      <short value="xml:id (or equivalent in JSON)"/>
+      <short value="Unique id for inter-element referencing"/>
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
       <min value="0"/>
       <max value="1"/>
@@ -425,7 +435,7 @@
       <path value="Address.type"/>
       <short value="postal | physical | both"/>
       <definition value="Distinguishes between physical addresses (those you can visit) and mailing addresses (e.g. PO Boxes and care-of addresses). Most addresses are both."/>
-      <comment value="The definition of Address states that &quot;address is for postal addresses, not physical locations&quot;. However, many applications track whether an address has a dual purpose of being a location that can be visited as well as being a valid delivery destination."/>
+      <comment value="The definition of Address states that &quot;address is intended to describe postal addresses, not physical locations&quot;. However, many applications track whether an address has a dual purpose of being a location that can be visited as well as being a valid delivery destination, and Postal addresses are often used as proxies for physical locations (also see the [Location](location.html#) resource)."/>
       <min value="0"/>
       <max value="1"/>
       <base>
@@ -752,10 +762,16 @@
   </snapshot>
   <differential>
     <element id="Address">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+        <valueCode value="normative"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
+        <valueCode value="4.0.0"/>
+      </extension>
       <path value="Address"/>
       <short value="An address expressed using postal conventions (as opposed to GPS or other location definition formats)"/>
       <definition value="An address expressed using postal conventions (as opposed to GPS or other location definition formats).  This data type may be used to convey addresses for use in delivering mail as well as for visiting locations which might not be valid for mail delivery.  There are a variety of postal address formats defined around the world."/>
-      <comment value="Note: address is for postal addresses, not physical locations."/>
+      <comment value="Note: address is intended to describe postal addresses for administrative purposes, not to describe absolute geographical coordinates.  Postal addresses are often used as proxies for physical locations (also see the [Location](location.html#) resource)."/>
       <min value="0"/>
       <max value="*"/>
       <mapping>
@@ -814,7 +830,7 @@
       <path value="Address.type"/>
       <short value="postal | physical | both"/>
       <definition value="Distinguishes between physical addresses (those you can visit) and mailing addresses (e.g. PO Boxes and care-of addresses). Most addresses are both."/>
-      <comment value="The definition of Address states that &quot;address is for postal addresses, not physical locations&quot;. However, many applications track whether an address has a dual purpose of being a location that can be visited as well as being a valid delivery destination."/>
+      <comment value="The definition of Address states that &quot;address is intended to describe postal addresses, not physical locations&quot;. However, many applications track whether an address has a dual purpose of being a location that can be visited as well as being a valid delivery destination, and Postal addresses are often used as proxies for physical locations (also see the [Location](location.html#) resource)."/>
       <min value="0"/>
       <max value="1"/>
       <type>

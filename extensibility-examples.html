@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Extensibility-examples - FHIR v3.5.0</title>
+  <title>Extensibility-examples - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -38,7 +38,7 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,11 +107,11 @@
 
 <div class="col-12">
 
-<ul class="nav nav-tabs"><li><a href="extensibility.html">Extensiblity</a></li><li><a href="defining-extensions.html">Defining Extensions</a></li><li class="active"><a href="#">Examples</a></li><li><a href="extensibility-definitions.html">Detailed Descriptions</a></li><li><a href="extensibility-registry.html">Registry</a></li></ul>
+<ul class="nav nav-tabs"><li><a href="extensibility.html">Extensibility</a></li><li><a href="defining-extensions.html">Defining Extensions</a></li><li class="active"><a href="#">Examples</a></li><li><a href="extensibility-definitions.html">Detailed Descriptions</a></li><li><a href="extensibility-registry.html">Registry</a></li></ul>
 
 
 <h2 class="self-link-parent"><span class="sectioncount">2.5.2<a name="2.5.2"> </a></span> Extensibility Examples <a href="extensibility-examples.html#2.5.2" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h2>
-<table class="colsi"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Informative</a></td></tr></table>
+<table class="colsi"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Informative</a></td></tr></table>
 
 <p>
 In order to use an extension, there is a three-step process:
@@ -136,8 +136,8 @@ might be obliged to keep track of the particular policy under which
 a patient has created their relationship with the PHR provider, and share
 this with their participants via their FHIR API. If they wish, they can
 extend the patient resource to represent the patient's participation
-agreement. Note that other approaches to this problem are possible, but
-it suffices to demonstrate the extension process.
+agreement. Note that <a href="consent.html">other approaches to this problem</a> are possible and preferred, but
+this example suffices to demonstrate the extension process.
 </p>
 <p>
 For the purposes of this example, we assume that the patient agrees to
@@ -160,7 +160,7 @@ extension</a>:
  <tr><td>Comment</td><td>URI is a literal reference to agreement text (html)</td></tr>
  <tr><td>Cardinality</td><td>1..* (patient cannot participate without at least one agreement)</td></tr>
  <tr><td>Type</td><td>uri</td></tr>
- <tr><td>XPaths</td><td>no Invariants</td></tr>
+ <tr><td>Invariants</td><td>no Invariants</td></tr>
  <tr><td>is Modifier</td><td>No (The participation agreements do not affect that interpretation of the elements of the patient, though they will likely influence how the system interacts with the patient)</td></tr>
  <tr><td>Binding</td><td>(No binding - not a coded value)</td></tr>
 </table>
@@ -177,7 +177,7 @@ From this table, we can build a formal extension definition. In this case, it lo
   &lt;!-- snip other metadata --&gt;
   &lt;kind value="complex-type"/&gt;
   &lt;context&gt;
-    &lt;type value="fhirpath"/&gt;
+    &lt;type value="element"/&gt;
     &lt;expression value="Patient"/&gt;
   &lt;/context&gt;
   &lt;type value="Extension"/&gt;
@@ -221,7 +221,7 @@ Note that usually one would build the actual profile using a tool. This example 
 <p>
 This means the profile shown above that defines the extension is placed on the web somewhere.
 By preference, it will be hosted at a FHIR Profile endpoint, and the best location of all
-is the HL7 Profile registry (yet to be implemented).
+is the <a href="http://hl7.org/fhir/registry">HL7 FHIR Registry <img src="external.png" style="text-align: baseline"/></a>.
 </p>
 <p>
 For this example, we assume that it has been uploaded to the PHR provider's own website at
@@ -230,9 +230,8 @@ http://example.org/phr/documents/fhir/extensions.
 
 <h4 class="self-link-parent"><span class="sectioncount">2.5.2.1.4<a name="2.5.2.1.4"> </a></span> Use it in the instance <a href="extensibility-examples.html#2.5.2.1.4" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p>
-To use the extension in an instance, the extension is placed in the root of the resource.
-Note that the URL of the extension refers to the registered location, with the id of the extension as a
-fragment identifier.
+To use the extension in an instance, the extension is placed in the root of the resource, because that was the declared context for the extension.
+Note that the URL of the extension refers to the registered location.
 
 </p>
 <pre fragment="Patient" class="xml">
@@ -247,7 +246,7 @@ fragment identifier.
 <a name="sliceextensions"></a>
 <h4 class="self-link-parent"><span class="sectioncount">2.5.2.1.5</span> Using it in a Patient Profile <a href="extensibility-examples.html#sliceextensions" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p>
-The profile definition above simply defines the extension "participation-agreement", and
+The extension definition above simply defines the extension "participation-agreement", and
 says that it is used with patient. But the profile above doesn't say that the server
 actually uses it. For the PHR provider to indicate that all Patient resources
 will use this resource, a StructureDefinition on the patient resource is used:
@@ -290,7 +289,7 @@ will use this resource, a StructureDefinition on the patient resource is used:
     &lt;!-- now, the slice that contains our extension --&gt;
     &lt;element&gt;
       &lt;path value="Patient.extension"/&gt;
-      &lt;sliceName value="base-extension"/&gt;
+      &lt;sliceName value="agreement"/&gt;
       &lt;!-- clone information from the extension definition.
         duplicative, but this duplication makes it simpler overall --&gt;
       &lt;short value="Agreed agreement/policy"/&gt;
@@ -304,7 +303,7 @@ will use this resource, a StructureDefinition on the patient resource is used:
         &lt;code value="Extension"/&gt;
         &lt;!-- and here is the link to the extension definition:
           this extension has to conform to the rules laid down in its definition --&gt;
-        &lt;profile value="http://example.org/phr/documents/fhir/extensions#participation-agreement"/&gt;
+        &lt;profile value="http://example.org/phr/documents/fhir/StructureDefinition/participation-agreement"/&gt;
       &lt;/type&gt;
       &lt;isModifier value="false"/&gt;
     &lt;/element&gt;
@@ -326,16 +325,17 @@ Note - this step is optional.
 <p>
 ISO 21090 (Healthcare Data Types) defines a concept called a "name part qualifier" that contains extra
 information about how a particular name part should be used or interpreted. In practice, this field
-is used rarely, except in particular cultural contexts, where certain part qualifiers are used as a
+is used rarely except in particular cultural contexts, where certain part qualifiers are used as a
 matter of practice. Following the <a href="extensibility.html">FHIR design policy</a>, such a field
 is not included in the overall definition of the core name data type, instead is it added as an
 extension.
 </p>
 
 <p>
-In practice, for cases such as these in ISO 21090, HL7 provides common extensions, and these
-are defined at [location still to be finalized].
+In practice, for cases such as these in ISO 21090, HL7 defines common extensions, and these
+are defined either in <a href="iso-21090.html">this specification</a>, or in the <a href="http://hl7.org/fhir/registry">FHIR registry <img src="external.png" style="text-align: baseline"/></a>.
 </p>
+
 <h4 class="self-link-parent"><span class="sectioncount">2.5.2.2.1<a name="2.5.2.2.1"> </a></span> Define the Extension <a href="extensibility-examples.html#2.5.2.2.1" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p>
 For each extension, the first thing to do is to fill out the <a href="extensibility.html#define">definitional properties of the
@@ -350,11 +350,11 @@ extension</a>:
  <tr><td>Comment</td><td>Used to indicate additional information about the name part and how it should be used</td></tr>
  <tr><td>Cardinality</td><td>0..* (this is always optional, but more than one can be used if required)</td></tr>
  <tr><td>Type</td><td>code</td></tr>
- <tr><td>XPaths</td><td>N/A</td></tr>
+ <tr><td>Invariants</td><td>N/A</td></tr>
  <tr><td>Is Modifier</td><td>No (Qualifiers do not change the fact that the part is a given or family name)</td></tr>
  <tr><td>RIM Mapping</td><td>ENXP.qualifier</td></tr>
  <tr><td>v2 Mapping</td><td>N/A</td></tr>
- <tr><td>Binding</td><td>Bound to a subset of the codes specified for  <a href="http://www.hl7.org/v3ballot/html/infrastructure/vocabulary/EntityNamePartQualifierR2.html">EntityNamePartQualifierR2 in ISO 21090 <img src="external.png" style="text-align: baseline"/></a> </td></tr>
+ <tr><td>Binding</td><td>Bound to a subset of the codes specified for  <a href="v3/EntityNamePartQualifierR2/cs.html">EntityNamePartQualifierR2 in ISO 21090</a> </td></tr>
 </table>
 <p>
 Not all the codes of the EntityNamePartQualifierR2 are required in this context,
@@ -362,7 +362,7 @@ because prefix and suffix are explicitly part of the name types. Rather than
 simply refer to the OID for EntityNamePartQualifierR2 (2.16.840.1.113883.5.1122),
 in this case we enumerate the available codes, and set the type of the extension to
 code. The type of "code" is only allowed if the profile itself defines the codes that
-can be used. Here is a table of the codes (see the <a href="http://www.hl7.org/v3ballot/html/infrastructure/vocabulary/EntityNamePartQualifierR2.html">EntityNamePartQualifierR2 <img src="external.png" style="text-align: baseline"/></a> reference for the full definitions):
+can be used. Here is a table of the codes (see the <a href="v3/EntityNamePartQualifierR2/cs.html">EntityNamePartQualifierR2</a> reference for the full definitions):
 </p>
 <table class="codes">
 <tr><td>LS</td><td>Legal status </td><td>For organizations, a suffix...</td></tr>
@@ -458,8 +458,7 @@ This is the URL that will appear in the definition element when the extension is
 <h4 class="self-link-parent"><span class="sectioncount">2.5.2.2.3<a name="2.5.2.2.3"> </a></span> Use it in the instance <a href="extensibility-examples.html#2.5.2.2.3" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
 <p>
 To use the extension in an instance, the extension is nested within the attribute that is extended.
-Note that the URL of the extension refers to the registered location, with the id of the extension as a
-fragment identifier.
+Note that the URL of the extension refers to the registered location.
 </p>
 <pre fragment="HumanName" class="xml">
 &lt;name&gt;
@@ -491,20 +490,23 @@ trial. There are 3 data items to collect:
 </table>
 
 <p>
+NOTE: This extension is included for example purposes only.  In most cases, participation in clinical trials would be handled using the <a href="researchstudy.html">ResearchStudy</a> resource, possibly referenced via the <a href="extension-workflow-researchstudy.html">workflow-researchstudy</a> extension.
+</p>
+
+<p>
 Like simple extensions, the first thing to do is to assign a URI to the
-extension. Since this one is part of the FHIR publication, it is assigned
-a URI where it will be published: http://hl7.org/fhir/StructureDefinition/patient-clinicalTrial.
+extension, e.g.: <code>http://example.org/fhir/StructureDefinition/patient-clinicalTrial</code>.
 </p>
 <p>
-Internally, in the extension, the cardinality of the value[x] element is set to 0 since it
+Internally, in the extension, the maximum cardinality of the value[x] element is set to 0 since it
 will not (and cannot) be used. The Extension.extension element is sliced by URL,
 and 3 slices are defined, each with a fixed relative URI which is the code from the table above.
-Tthe relevant parts of the definition of this extension are as follows:
+The relevant parts of the definition of this extension are as follows:
 </p>
 <pre class="xml">
 &lt;StructureDefinition xmlns="http://hl7.org/fhir"&gt;
   &lt;!-- metadata - setting up the base definition --&gt;
-  &lt;url value="http://hl7.org/fhir/StructureDefinition/patient-clinicalTrial"/&gt;
+  &lt;url value="http://example.org/fhir/StructureDefinition/patient-clinicalTrial"/&gt;
   &lt;name value="ClinicalTrialParticipation"/&gt;
   &lt;title value="The patient's participation in clinical trials"/&gt;
   &lt;context&gt;
@@ -615,7 +617,7 @@ Tthe relevant parts of the definition of this extension are as follows:
     &lt;!-- last (for order reasons): the fixed URI --&gt;
     &lt;element&gt;
       &lt;path value="Extension.url"/&gt;
-      &lt;fixedUri value="http://hl7.org/fhir/StructureDefinition/patient-clinicalTrial"/&gt;
+      &lt;fixedUri value="http://example.org/fhir/StructureDefinition/patient-clinicalTrial"/&gt;
     &lt;/element&gt;
     &lt;!-- and no value in the root --&gt;
     &lt;element&gt;
@@ -633,7 +635,7 @@ With complex extensions, only the first URL is an absolute URL:
 </p>
 <pre fragment="Patient" class="xml">
 &lt;Patient xmlns="http://hl7.org/fhir"&gt;
-  &lt;extension url="http://hl7.org/fhir/StructureDefinition/patient-clinicalTrial" &gt;
+  &lt;extension url="http://example.org/fhir/StructureDefinition/patient-clinicalTrial" &gt;
     &lt;extension url="NCT" &gt;
       &lt;valueString value="NCT00000419"/&gt;
     &lt;/extension&gt;
@@ -645,7 +647,7 @@ With complex extensions, only the first URL is an absolute URL:
     &lt;/extension&gt;
     &lt;extension url="reason" &gt;
       &lt;valueCodeableConcept&gt;
-        &lt;text value="NCT00000419"/&gt;
+        &lt;text value="healthy-volunteer"/&gt;
       &lt;/valueCodeableConcept&gt;
     &lt;/extension&gt;
   &lt;/extension&gt;
@@ -701,7 +703,7 @@ This is the same as for a simple extension:
         &lt;code value="Extension"/&gt;
         &lt;!-- and here is the link to the extension definition:
           this extension has to conform to the rules laid down in its definition --&gt;
-        &lt;profile value="http://hl7.org/fhir/StructureDefinition/patient-clinicalTrial"/&gt;
+        &lt;profile value="http://example.org/fhir/StructureDefinition/patient-clinicalTrial"/&gt;
       &lt;/type&gt;
     &lt;/element&gt;
 
@@ -713,12 +715,6 @@ This is the same as for a simple extension:
 </pre>
 
 </div>
-
-<div class="col-3"><div class="itoc">
-<p>On This Page:</p>
-<p class="link"><a href="#consent">Patient Consent</a></p><p class="link"><a href="#name-parts">Name Parts</a></p><p class="link"><a href="#complex">Complex Extension</a></p>
-</div></div>
-
 
 
 
@@ -733,7 +729,7 @@ This is the same as for a simple extension:
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -743,7 +739,7 @@ This is the same as for a simple extension:
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fextensibility-examples.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fextensibility-examples.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fextensibility-examples.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fextensibility-examples.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

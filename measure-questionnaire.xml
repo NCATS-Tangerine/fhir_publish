@@ -9,8 +9,8 @@
       <status value="active"/>
       <description value="Type options for Measure.subject[x]"/>
       <expansion>
-        <identifier value="urn:uuid:470e74f3-ba45-4849-bcdc-46c3f1f19385"/>
-        <timestamp value="2018-09-14T07:26:47-05:00"/>
+        <identifier value="urn:uuid:ea1eaae8-7b65-4a8b-bbf6-9825ac7306a5"/>
+        <timestamp value="2018-12-13T14:26:58-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="CodeableConcept"/>
@@ -27,8 +27,9 @@
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
+  <version value="3.6.0"/>
   <status value="draft"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="Health Level Seven International (Clinical Quality Information)"/>
   <item>
     <linkId value="Measure"/>
@@ -213,7 +214,7 @@
     </item>
     <item>
       <linkId value="Measure.extension"/>
-      <text value="Additional Content defined by implementations"/>
+      <text value="Additional content defined by implementations"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -247,7 +248,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+        <text value="May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
         <type value="display"/>
       </item>
     </item>
@@ -272,7 +273,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="An absolute URI that is used to identify this measure when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this measure is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the measure is stored on different servers. Can be a urn:uuid: or a urn:oid: but real http: addresses are preferred.  Multiple instances may share the same URL if they have a distinct version.&#xA;&#xA;The determination of when to create a new version of a resource (same url, new version) vs. defining a new artifact is up to the author.  Considerations for making this decision are found in [Technical and Business Versions](resource.html#versions)."/>
+        <text value="An absolute URI that is used to identify this measure when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this measure is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the measure is stored on different servers. Can be a urn:uuid: or a urn:oid: but real http: addresses are preferred.  Multiple instances may share the same URL if they have a distinct version.&#xA;&#xA;The determination of when to create a new version of a resource (same url, new version) vs. defining a new artifact is up to the author.  Considerations for making this decision are found in [Technical and Business Versions](resource.html#versions). &#xA;&#xA;In some cases, the resource can no longer be found at the stated url, but the url itself cannot change. Implementations can use the [meta.source](resource.html#meta) element to indicate where the current master source of the resource can be found."/>
         <type value="display"/>
       </item>
       <item>
@@ -733,7 +734,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate measure instances."/>
+        <text value="The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate measure instances."/>
         <type value="display"/>
       </item>
     </item>
@@ -1426,9 +1427,10 @@
         <valueInteger value="1"/>
       </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="code"/>
+        <valueString value="CodeableConcept"/>
       </extension>
       <linkId value="Measure.improvementNotation"/>
+      <text value="increase | decrease"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -1446,9 +1448,16 @@
         <type value="display"/>
       </item>
       <item>
-        <linkId value="Measure.improvementNotation.value"/>
-        <text value="improvement notation"/>
+        <linkId value="Measure.improvementNotation.coding"/>
+        <text value="code:"/>
         <type value="choice"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+      <item>
+        <linkId value="Measure.improvementNotation.text"/>
+        <text value="text:"/>
+        <type value="string"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
@@ -1559,7 +1568,7 @@
         </item>
         <item>
           <linkId value="Measure.group.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -1587,7 +1596,7 @@
       </item>
       <item>
         <linkId value="Measure.group.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -1601,7 +1610,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>
@@ -1722,7 +1731,7 @@
           </item>
           <item>
             <linkId value="Measure.group.population.id.value"/>
-            <text value="xml:id (or equivalent in JSON)"/>
+            <text value="Unique id for inter-element referencing"/>
             <type value="string"/>
             <required value="false"/>
             <repeats value="false"/>
@@ -1750,7 +1759,7 @@
         </item>
         <item>
           <linkId value="Measure.group.population.modifierExtension"/>
-          <text value="Extensions that cannot be ignored if unrecognized"/>
+          <text value="Extensions that cannot be ignored even if unrecognized"/>
           <type value="group"/>
           <required value="false"/>
           <repeats value="true"/>
@@ -1764,7 +1773,7 @@
                 </coding>
               </valueCodeableConcept>
             </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
             <type value="display"/>
           </item>
         </item>
@@ -1916,7 +1925,7 @@
           </item>
           <item>
             <linkId value="Measure.group.stratifier.id.value"/>
-            <text value="xml:id (or equivalent in JSON)"/>
+            <text value="Unique id for inter-element referencing"/>
             <type value="string"/>
             <required value="false"/>
             <repeats value="false"/>
@@ -1944,7 +1953,7 @@
         </item>
         <item>
           <linkId value="Measure.group.stratifier.modifierExtension"/>
-          <text value="Extensions that cannot be ignored if unrecognized"/>
+          <text value="Extensions that cannot be ignored even if unrecognized"/>
           <type value="group"/>
           <required value="false"/>
           <repeats value="true"/>
@@ -1958,7 +1967,7 @@
                 </coding>
               </valueCodeableConcept>
             </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
             <type value="display"/>
           </item>
         </item>
@@ -2035,16 +2044,13 @@
           </item>
         </item>
         <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-            <valueInteger value="1"/>
-          </extension>
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
             <valueInteger value="1"/>
           </extension>
           <linkId value="Measure.group.stratifier.criteria"/>
           <text value="How the measure should be stratified"/>
           <type value="group"/>
-          <required value="true"/>
+          <required value="false"/>
           <repeats value="false"/>
           <item>
             <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
@@ -2058,6 +2064,200 @@
             </extension>
             <text value="An expression that specifies the criteria for the stratifier. This is typically the name of an expression defined within a referenced library, but it may also be a path to a stratifier element."/>
             <type value="display"/>
+          </item>
+        </item>
+        <item>
+          <linkId value="Measure.group.stratifier.component"/>
+          <text value="Stratifier criteria component for the measure"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <text value="Stratifiers are defined either as a single criteria, or as a set of component criteria."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="A component of the stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library or a valid FHIR Resource Path."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="string"/>
+            </extension>
+            <linkId value="Measure.group.stratifier.component.id"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="Measure.group.stratifier.component.id.value"/>
+              <text value="Unique id for inter-element referencing"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+          <item>
+            <linkId value="Measure.group.stratifier.component.extension"/>
+            <text value="Additional content defined by implementations"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+              <type value="display"/>
+            </item>
+          </item>
+          <item>
+            <linkId value="Measure.group.stratifier.component.modifierExtension"/>
+            <text value="Extensions that cannot be ignored even if unrecognized"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+              <type value="display"/>
+            </item>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="CodeableConcept"/>
+            </extension>
+            <linkId value="Measure.group.stratifier.component.code"/>
+            <text value="Meaning of the stratifier component"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Indicates a meaning for the stratifier component. This can be as simple as a unique identifier, or it can establish meaning in a broader context by drawing from a terminology, allowing stratifiers to be correlated across measures."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="Measure.group.stratifier.component.code.coding"/>
+              <text value="code:"/>
+              <type value="open-choice"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="Measure.group.stratifier.component.code.text"/>
+              <text value="text:"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="string"/>
+            </extension>
+            <linkId value="Measure.group.stratifier.component.description"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="The human readable description of this stratifier criteria component."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="Measure.group.stratifier.component.description.value"/>
+              <text value="The human readable description of this stratifier component"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <linkId value="Measure.group.stratifier.component.criteria"/>
+            <text value="Component of how the measure should be stratified"/>
+            <type value="group"/>
+            <required value="true"/>
+            <repeats value="false"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="An expression that specifies the criteria for this component of the stratifier. This is typically the name of an expression defined within a referenced library, but it may also be a path to a stratifier element."/>
+              <type value="display"/>
+            </item>
           </item>
         </item>
       </item>
@@ -2111,7 +2311,7 @@
         </item>
         <item>
           <linkId value="Measure.supplementalData.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -2139,7 +2339,7 @@
       </item>
       <item>
         <linkId value="Measure.supplementalData.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -2153,7 +2353,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>

@@ -49,6 +49,22 @@
      fhir:UsageContext.valueCodeableConcept [
        fhir:CodeableConcept.text [ fhir:value "eligibile-provider" ]
      ]
+  ], [
+     fhir:index 1;
+     fhir:UsageContext.code [
+       fhir:Coding.system [ fhir:value "http://terminology.hl7.org/CodeSystem/usage-context-type" ];
+       fhir:Coding.code [ fhir:value "age" ]
+     ];
+     fhir:UsageContext.valueRange [
+       fhir:Range.low [
+         fhir:Quantity.value [ fhir:value "3"^^xsd:decimal ];
+         fhir:Quantity.unit [ fhir:value "a" ]
+       ];
+       fhir:Range.high [
+         fhir:Quantity.value [ fhir:value "18"^^xsd:decimal ];
+         fhir:Quantity.unit [ fhir:value "a" ]
+       ]
+     ]
   ];
   fhir:Measure.jurisdiction [
      fhir:index 0;
@@ -82,15 +98,15 @@
   fhir:Measure.relatedArtifact [
      fhir:index 0;
      fhir:RelatedArtifact.type [ fhir:value "documentation" ];
-     fhir:RelatedArtifact.citation [ fhir:value "Linder, J.A., D.W. Bates, G.M. Lee, J.A. Finkelstein. 2005. \"Antibiotic treatment of children with sore throat.\" JAMA 294(18):2315-2322. " ]
+     fhir:RelatedArtifact.citation [ fhir:value "Linder, J.A., D.W. Bates, G.M. Lee, J.A. Finkelstein. 2005. _Antibiotic treatment of children with sore throat._ JAMA 294(18):2315-2322. " ]
   ], [
      fhir:index 1;
      fhir:RelatedArtifact.type [ fhir:value "documentation" ];
-     fhir:RelatedArtifact.citation [ fhir:value "Infectious Diseases Society of America. 2012. \"Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis: 2012 Update.\" " ]
+     fhir:RelatedArtifact.citation [ fhir:value "Infectious Diseases Society of America. 2012. _Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis: 2012 Update._ " ]
   ], [
      fhir:index 2;
      fhir:RelatedArtifact.type [ fhir:value "documentation" ];
-     fhir:RelatedArtifact.citation [ fhir:value "Roberts, R.R., B. Hota, I. Ahmad, et al. \"Hospital and Societal Costs of Antimicrobial-Resistant Infections in a Chicago Teaching Hospital: Implications for Antibiotic Stewardship.\" Clin Infect Dis. Oct 2009; 49(8):1175-84." ]
+     fhir:RelatedArtifact.citation [ fhir:value "Roberts, R.R., B. Hota, I. Ahmad, et al. _Hospital and Societal Costs of Antimicrobial-Resistant Infections in a Chicago Teaching Hospital: Implications for Antibiotic Stewardship._ Clin Infect Dis. Oct 2009; 49(8):1175-84." ]
   ];
   fhir:Measure.library [
      fhir:value "Library/library-cms146-example";
@@ -113,7 +129,13 @@
   ];
   fhir:Measure.rationale [ fhir:value "Group A streptococcal bacterial infections and other infections that cause pharyngitis (which are most often viral) often produce the same signs and symptoms (IDSA 2002). The American Academy of Pediatrics, the Centers for Disease Control and Prevention, and the Infectious Diseases Society of America all recommend a diagnostic test for Strep A to improve diagnostic accuracy and avoid unnecessary antibiotic treatment (Linder et al. 2005). Estimated economic costs of pediatric streptococcal pharyngitis in the United States range from $224 million to $539 million per year, including indirect costs related to parental work losses. At a higher level, the economic cost of antibiotic resistance vary but have extended as high as $20 billion in excess direct healthcare costs, with additional costs to society for lost productivity as high as $35 billion a year (2008 dollars) (Roberts et al. 2009)."];
   fhir:Measure.clinicalRecommendationStatement [ fhir:value "The Infectious Diseases Society of America (IDSA) \"recommends swabbing the throat and testing for GAS pharyngitis by rapid antigen detection test (RADT) and/or culture because the clinical features alone do not reliably discriminate between GAS and viral pharyngitis except when overt viral features like rhinorrhea, cough, oral ulcers, and/or hoarseness are present\""];
-  fhir:Measure.improvementNotation [ fhir:value "increase"];
+  fhir:Measure.improvementNotation [
+     fhir:CodeableConcept.coding [
+       fhir:index 0;
+       fhir:Coding.system [ fhir:value "http://terminology.hl7.org/CodeSystem/measure-improvement-notation" ];
+       fhir:Coding.code [ fhir:value "increase" ]
+     ]
+  ];
   fhir:Measure.guidance [ fhir:value "This is an episode of care measure that examines all eligible episodes for the patient during the measurement period. If the patient has more than one episode, include all episodes in the measure"];
   fhir:Measure.group [
      fhir:index 0;

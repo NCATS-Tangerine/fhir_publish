@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -81,7 +81,7 @@ into another (possibly the same) biological entity.</xs:documentation>
               <xs:documentation xml:lang="en">Number of discrete units within this product.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="parent" minOccurs="0" maxOccurs="1" type="Reference">
+          <xs:element name="parent" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">Parent product (if any).</xs:documentation>
            </xs:annotation>
@@ -93,12 +93,12 @@ into another (possibly the same) biological entity.</xs:documentation>
           </xs:element>
           <xs:element name="processing" type="BiologicallyDerivedProduct.Processing" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Any processing of the product during collection.</xs:documentation>
+              <xs:documentation xml:lang="en">Any processing of the product during collection that does not change the fundamental nature of the product. For example adding anti-coagulants during the collection of Peripheral Blood Stem Cells.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="manipulation" type="BiologicallyDerivedProduct.Manipulation" minOccurs="0" maxOccurs="1">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Any manipulation of product post-collection.</xs:documentation>
+              <xs:documentation xml:lang="en">Any manipulation of product post-collection that is intended to alter the product.  For example a buffy-coat enrichment or CD8 reduction of Peripheral Blood Stem Cells to make it more suitable for infusion.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="storage" type="BiologicallyDerivedProduct.Storage" minOccurs="0" maxOccurs="unbounded">
@@ -120,12 +120,12 @@ into another (possibly the same) biological entity.</xs:documentation>
         <xs:sequence>
           <xs:element name="collector" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">HealthCare Professional performing collection.</xs:documentation>
+              <xs:documentation xml:lang="en">Healthcare professional who is performing the collection.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="source" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Person or entity providing product.</xs:documentation>
+              <xs:documentation xml:lang="en">The patient or entity, such as a hospital or vendor in the case of a processed/manipulated/manufactured product, providing the product.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:choice minOccurs="0" maxOccurs="1" >

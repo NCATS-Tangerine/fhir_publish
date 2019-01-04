@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
   <!-- template-operations.html --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Codesystem-operation-subsumes - FHIR v3.5.0</title>
+  <title>Codesystem-operation-subsumes - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -108,15 +108,12 @@
 
 <h3 class="self-link-parent"><span class="sectioncount">4.8.1.3<a name="4.8.1.3"> </a></span> Operation $subsumes on CodeSystem <a href="codesystem-operation-subsumes.html#4.8.1.3" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 
-<table class="colsn"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td>&nbsp;<a href="versions.html#maturity" title="Maturity Level">Maturity Level</a>: 5</td><td><a href="versions.html#std-process">Normative</a></td>  <!-- !ns! --><td><a href="compartmentdefinition.html">Compartments</a>: N/A</td></tr></table>
-
-<p style="border: 1px black solid; background-color: #e6ffe6; padding: 5px">
-Normative Candidate Note: This page is candidate normative content for R4 in the <a href="ballot-intro.html#conformance">Conformance Package</a>.
-Once normative, it will lose it's Maturity Level, and <a href="versions.html#change">breaking changes</a> will no longer be made.
-</p>
+<table class="colsn"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td>&nbsp;<a href="versions.html#maturity" title="Maturity Level">Maturity Level</a>: <a href="versions.html#std-process">N</a></td><td><a href="versions.html#std-process">Normative</a> (from v4.0.0)</td>  <!-- !ns! --><td><a href="compartmentdefinition.html">Compartments</a>: N/A</td></tr></table>
 
 
-<p>Test the subsumption relationship between code/Coding A and code/Coding B given the semantics of subsumption in the underlying code system (see hierarchyMeaning)</p>
+
+<p>Test the subsumption relationship between code/Coding A and code/Coding B given the semantics of subsumption in the underlying code system (see <a href="codesystem-definitions.html#CodeSystem.hierarchyMeaning">hierarchyMeaning</a>).</p>
+<p>When invoking this operation, a client SHALL provide both a and codes, either as code or Coding parameters. The system parameter is required unless the operation is invoked on an instance of a code system resource. Other parameters are optional.</p>
 
 <p>The official URL for this operation definition is</p>
 <pre> http://hl7.org/fhir/OperationDefinition/CodeSystem-subsumes</pre>
@@ -136,12 +133,15 @@ Once normative, it will lose it's Maturity Level, and <a href="versions.html#cha
 <tr><td><b>Name</b></td><td><b>Cardinality</b></td><td><b>Type</b></td><td><b>Binding</b></td><td><b>Profile</b></td><td><b>Documentation</b></td></tr><tr><td>outcome</td><td>1..1</td><td><a href="datatypes.html#code">code</a></td><td><a href="valueset-concept-subsumption-outcome.html">ConceptSubsumptionOutcome</a> (<a href="terminologies.html#required">Required</a>)</td><td></td><td><p>The subsumption relationship between code/Coding "A" and code/Coding "B". There are 4 possible codes to be returned (equivalent, subsumes, subsumed-by, and not-subsumed) as defined in the concept-subsumption-outcome value set.  If the server is unable to determine the relationship between the codes/Codings, then it returns an error response with an OperationOutcome.</p>
 </td></tr></table>
 
-<h4 class="self-link-parent"><span class="sectioncount">4.8.1.3.1<a name="4.8.1.3.1"> </a></span> Examples <a href="codesystem-operation-subsumes.html#4.8.1.3.1" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
-<p>Using simple parameters: is 'Viral hepatitis' (3738000) a 'Disorder of liver' (235856003)? (Request):</p>
+<a name="examples"> </a>
+<h4 class="self-link-parent"><span class="sectioncount">4.8.1.3.1</span> Examples <a href="codesystem-operation-subsumes.html#examples" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
+<p><p>Request: Using simple parameters: is 'Viral hepatitis' (3738000) a 'Disorder of liver' (235856003)?</p>
+</p>
 <pre>
 GET [base]/CodeSystem/$subsumes?system=http://snomed.info/sct&amp;codeA=3738000&amp;codeB=235856003
 </pre>
-<p>Using Codings (Request):</p>
+<p><p>Request: Using Codings</p>
+</p>
 <pre>
 POST [base]/CodeSystem/$subsumes
 [other headers]
@@ -173,8 +173,11 @@ POST [base]/CodeSystem/$subsumes
   &lt;/parameter&gt;
 &lt;/Parameters&gt;
 </pre>
-<p>Response:</p>
+<hr/>
+<p><p>Response: When the request can be processed ok</p>
+</p>
 <pre>
+
 HTTP/1.1 200 OK
 [other headers]
 
@@ -185,6 +188,32 @@ HTTP/1.1 200 OK
     "name" : "outcome",
     "valueCode" : "subsumed-by"
   }
+}
+</pre>
+<p><p>Response: When the subsumption cannot be tested</p>
+</p>
+<pre>
+
+
+HTTP/1.1 500 Error
+[other headers]
+
+{
+  "resourceType": "OperationOutcome",
+  "id": "exception",
+  "text": {
+    "status": "additional",
+    "div": "&lt;div xmlns=\"http://www.w3.org/1999/xhtml\"&gt;Version "XXX" for http://acme.com/fhir/CodeSystem/some-id is no longer available&lt;/div&gt;"
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "not-supported",
+      "details": {
+        "text": "Version "XXX" for http://acme.com/fhir/CodeSystem/some-id is no longer available"
+      }
+    }
+  ]
 }
 </pre>
 <p>&nbsp;</p>
@@ -207,7 +236,7 @@ For more information about operations, including how they are invoked, see <a hr
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:19-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:25-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -217,7 +246,7 @@ For more information about operations, including how they are invoked, see <a hr
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fsomething&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fsomething">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fsomething&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fsomething">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

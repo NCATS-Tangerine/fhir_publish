@@ -4,7 +4,13 @@
   ],
   "Claim": {
     "elements": {
+      "Claim.status": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "Claim.type": {
+        "old-min": 0,
+        "new-min": 1,
         "binding-strength-changed": true,
         "binding-status": "changed",
         "old-binding": {
@@ -20,31 +26,83 @@
         "old-max": "*",
         "new-max": "1"
       },
+      "Claim.use": {
+        "old-min": 0,
+        "new-min": 1,
+        "binding-codes-changed": true,
+        "removed-codes": [
+          "complete",
+          "proposed",
+          "exploratory",
+          "other"
+        ],
+        "added-codes": [
+          "claim",
+          "preauthorization",
+          "predetermination"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/claim-use",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/claim-use",
+          "strength": "required"
+        }
+      },
+      "Claim.patient": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "Claim.created": {
+        "old-min": 0,
+        "new-min": 1
+      },
       "Claim.enterer": {
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole)"
+          "Reference(Practitioner | PractitionerRole)"
         ]
       },
       "Claim.provider": {
+        "old-min": 0,
+        "new-min": 1,
         "removed-types": [
           "Reference(Practitioner)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       },
-      "Claim.payee.resource": {
-        "status": "new"
+      "Claim.priority": {
+        "old-min": 0,
+        "new-min": 1
+      },
+      "Claim.prescription": {
+        "removed-types": [
+          "Reference(MedicationRequest | VisionPrescription)"
+        ],
+        "added-types": [
+          "Reference(DeviceRequest | MedicationRequest | VisionPrescription)"
+        ]
+      },
+      "Claim.originalPrescription": {
+        "removed-types": [
+          "Reference(MedicationRequest)"
+        ],
+        "added-types": [
+          "Reference(DeviceRequest | MedicationRequest | VisionPrescription)"
+        ]
       },
       "Claim.payee.party": {
         "removed-types": [
-          "Reference(Practitioner|Organization|Patient|RelatedPerson)"
+          "Reference(Practitioner | Organization | Patient | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson)"
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson)"
         ]
       },
       "Claim.referral": {
@@ -57,39 +115,32 @@
       },
       "Claim.careTeam.provider": {
         "removed-types": [
-          "Reference(Practitioner|Organization)"
+          "Reference(Practitioner | Organization)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization)"
+          "Reference(Practitioner | PractitionerRole | Organization)"
         ]
       },
-      "Claim.information.value[x]": {
-        "removed-types": [
-          "Reference(Resource)"
-        ],
-        "added-types": [
-          "boolean",
-          "Reference(Resource)"
-        ]
+      "Claim.supportingInfo": {
+        "old-name": "information"
       },
-      "Claim.diagnosis.diagnosis[x]": {
-        "removed-types": [
-          "Reference(Condition)"
-        ],
+      "Claim.supportingInfo.value[x]": {
         "added-types": [
-          "Reference(Condition)"
+          "boolean"
         ]
       },
       "Claim.diagnosis.onAdmission": {
         "status": "new"
       },
-      "Claim.procedure.procedure[x]": {
-        "removed-types": [
-          "Reference(Procedure)"
-        ],
-        "added-types": [
-          "Reference(Procedure)"
-        ]
+      "Claim.procedure.type": {
+        "status": "new"
+      },
+      "Claim.procedure.udi": {
+        "status": "new"
+      },
+      "Claim.insurance": {
+        "old-min": 0,
+        "new-min": 1
       },
       "Claim.insurance.identifier": {
         "status": "new"
@@ -106,42 +157,32 @@
           "strength": "extensible"
         }
       },
-      "Claim.accident.location[x]": {
-        "removed-types": [
-          "Reference(Location)"
-        ],
-        "added-types": [
-          "Reference(Location)"
-        ]
-      },
       "Claim.item.careTeamSequence": {
-        "status": "new"
+        "old-name": "careTeamLinkId"
       },
       "Claim.item.diagnosisSequence": {
-        "status": "new"
+        "old-name": "diagnosisLinkId"
       },
       "Claim.item.procedureSequence": {
-        "status": "new"
+        "old-name": "procedureLinkId"
       },
       "Claim.item.informationSequence": {
-        "status": "new"
+        "old-name": "informationLinkId"
       },
-      "Claim.item.billcode": {
-        "status": "new"
+      "Claim.item.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
-      "Claim.item.location[x]": {
-        "removed-types": [
-          "Reference(Location)"
-        ],
-        "added-types": [
-          "Reference(Location)"
-        ]
+      "Claim.item.detail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
-      "Claim.item.detail.billcode": {
-        "status": "new"
-      },
-      "Claim.item.detail.subDetail.billcode": {
-        "status": "new"
+      "Claim.item.detail.subDetail.productOrService": {
+        "old-name": "service",
+        "old-min": 0,
+        "new-min": 1
       },
       "Claim.organization": {
         "status": "deleted"
@@ -153,27 +194,6 @@
         "status": "deleted"
       },
       "Claim.hospitalization": {
-        "status": "deleted"
-      },
-      "Claim.item.careTeamLinkId": {
-        "status": "deleted"
-      },
-      "Claim.item.diagnosisLinkId": {
-        "status": "deleted"
-      },
-      "Claim.item.procedureLinkId": {
-        "status": "deleted"
-      },
-      "Claim.item.informationLinkId": {
-        "status": "deleted"
-      },
-      "Claim.item.service": {
-        "status": "deleted"
-      },
-      "Claim.item.detail.service": {
-        "status": "deleted"
-      },
-      "Claim.item.detail.subDetail.service": {
         "status": "deleted"
       }
     },

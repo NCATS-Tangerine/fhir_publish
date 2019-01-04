@@ -3,7 +3,7 @@
 <!-- template-example-ttl.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Paymentreconciliation-example.ttl - FHIR v3.5.0</title>
+  <title>Paymentreconciliation-example.ttl - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>Paymentreconciliation-example.ttl</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fm/index.cfm">Financial Management</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: <a href="compartmentdefinition-practitioner.html">Practitioner</a></td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fm/index.cfm">Financial Management</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: <a href="compartmentdefinition-practitioner.html">Practitioner</a></td></tr></table>
 
 </tbody></table>
 <p>
@@ -116,7 +116,7 @@
 
 <div class="example">
 <p>General Payment Reconciliation Example</p>
-<pre class="json">
+<pre class="rdf">
 @prefix fhir: &lt;http://hl7.org/fhir/&gt; .
 @prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
@@ -142,7 +142,7 @@
      fhir:Period.end [ fhir:value &quot;2014-08-31&quot;^^xsd:date ]
   ];
   fhir:PaymentReconciliation.created [ fhir:value &quot;2014-08-16&quot;^^xsd:date];
-  fhir:PaymentReconciliation.organization [
+  fhir:PaymentReconciliation.paymentIssuer [
      fhir:link &lt;http://hl7.org/fhir/Organization/2&gt;;
      fhir:Reference.reference [ fhir:value &quot;Organization/2&quot; ]
   ];
@@ -150,14 +150,27 @@
      fhir:link &lt;http://www.BenefitsInc.com/fhir/eligibility/225476332402&gt;;
      fhir:Reference.reference [ fhir:value &quot;http://www.BenefitsInc.com/fhir/eligibility/225476332402&quot; ]
   ];
-  fhir:PaymentReconciliation.outcome [ fhir:value &quot;complete&quot;];
-  fhir:PaymentReconciliation.disposition [ fhir:value &quot;2014 August mid-month settlement.&quot;];
-  fhir:PaymentReconciliation.requestProvider [
+  fhir:PaymentReconciliation.requestor [
      fhir:link &lt;http://hl7.org/fhir/Organization/1&gt;;
      fhir:Reference.reference [ fhir:value &quot;Organization/1&quot; ]
   ];
+  fhir:PaymentReconciliation.outcome [ fhir:value &quot;complete&quot;];
+  fhir:PaymentReconciliation.disposition [ fhir:value &quot;2014 August mid-month settlement.&quot;];
+  fhir:PaymentReconciliation.paymentDate [ fhir:value &quot;2014-08-01&quot;^^xsd:date];
+  fhir:PaymentReconciliation.paymentAmount [
+     fhir:Money.value [ fhir:value &quot;7000.00&quot;^^xsd:decimal ];
+     fhir:Money.currency [ fhir:value &quot;USD&quot; ]
+  ];
+  fhir:PaymentReconciliation.paymentIdentifier [
+     fhir:Identifier.system [ fhir:value &quot;http://www.BenefitsInc.com/payment/2018&quot; ];
+     fhir:Identifier.value [ fhir:value &quot;10-12345&quot; ]
+  ];
   fhir:PaymentReconciliation.detail [
      fhir:index 0;
+     fhir:PaymentReconciliation.detail.identifier [
+       fhir:Identifier.system [ fhir:value &quot;http://www.BenefitsInc.com/payment/2018/detail&quot; ];
+       fhir:Identifier.value [ fhir:value &quot;10-12345-001&quot; ]
+     ];
      fhir:PaymentReconciliation.detail.type [
        fhir:CodeableConcept.coding [
          fhir:index 0;
@@ -171,27 +184,31 @@
          fhir:Identifier.value [ fhir:value &quot;AB12345&quot; ]
        ]
      ];
+     fhir:PaymentReconciliation.detail.submitter [
+       fhir:link &lt;http://hl7.org/fhir/Organization/1&gt;;
+       fhir:Reference.reference [ fhir:value &quot;Organization/1&quot; ]
+     ];
      fhir:PaymentReconciliation.detail.response [
        fhir:Reference.identifier [
          fhir:Identifier.system [ fhir:value &quot;http://www.BenefitsInc.com/fhir/claimresponse&quot; ];
          fhir:Identifier.value [ fhir:value &quot;CR20140815-AB12345&quot; ]
        ]
      ];
-     fhir:PaymentReconciliation.detail.submitter [
-       fhir:link &lt;http://hl7.org/fhir/Organization/1&gt;;
-       fhir:Reference.reference [ fhir:value &quot;Organization/1&quot; ]
-     ];
+     fhir:PaymentReconciliation.detail.date [ fhir:value &quot;2014-08-16&quot;^^xsd:date ];
      fhir:PaymentReconciliation.detail.payee [
        fhir:link &lt;http://hl7.org/fhir/Organization/1&gt;;
        fhir:Reference.reference [ fhir:value &quot;Organization/1&quot; ]
      ];
-     fhir:PaymentReconciliation.detail.date [ fhir:value &quot;2014-08-16&quot;^^xsd:date ];
      fhir:PaymentReconciliation.detail.amount [
-       fhir:Money.value [ fhir:value &quot;1000.00&quot;^^xsd:decimal ];
+       fhir:Money.value [ fhir:value &quot;3500.00&quot;^^xsd:decimal ];
        fhir:Money.currency [ fhir:value &quot;USD&quot; ]
      ]
   ], [
      fhir:index 1;
+     fhir:PaymentReconciliation.detail.identifier [
+       fhir:Identifier.system [ fhir:value &quot;http://www.BenefitsInc.com/payment/2018/detail&quot; ];
+       fhir:Identifier.value [ fhir:value &quot;10-12345-002&quot; ]
+     ];
      fhir:PaymentReconciliation.detail.type [
        fhir:CodeableConcept.coding [
          fhir:index 0;
@@ -210,6 +227,10 @@
      ]
   ], [
      fhir:index 2;
+     fhir:PaymentReconciliation.detail.identifier [
+       fhir:Identifier.system [ fhir:value &quot;http://www.BenefitsInc.com/payment/2018/detail&quot; ];
+       fhir:Identifier.value [ fhir:value &quot;10-12345-003&quot; ]
+     ];
      fhir:PaymentReconciliation.detail.type [
        fhir:CodeableConcept.coding [
          fhir:index 0;
@@ -223,16 +244,12 @@
        fhir:Money.currency [ fhir:value &quot;USD&quot; ]
      ]
   ];
-  fhir:PaymentReconciliation.form [
+  fhir:PaymentReconciliation.formCode [
      fhir:CodeableConcept.coding [
        fhir:index 0;
        fhir:Coding.system [ fhir:value &quot;http://ncforms.org/formid&quot; ];
        fhir:Coding.code [ fhir:value &quot;PAYREC/2016/01B&quot; ]
      ]
-  ];
-  fhir:PaymentReconciliation.total [
-     fhir:Money.value [ fhir:value &quot;3500.00&quot;^^xsd:decimal ];
-     fhir:Money.currency [ fhir:value &quot;USD&quot; ]
   ];
   fhir:PaymentReconciliation.processNote [
      fhir:index 0;
@@ -277,7 +294,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:27-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -287,7 +304,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fpaymentreconciliation-example.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fpaymentreconciliation-example.ttl.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fpaymentreconciliation-example.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fpaymentreconciliation-example.ttl.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

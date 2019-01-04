@@ -8,8 +8,8 @@
     "status" : "active",
     "description" : "Type options for Medication.ingredient.item[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:885403bb-0566-4c8b-9dae-386e5a73666d",
-      "timestamp" : "2018-09-14T07:26:50-05:00",
+      "identifier" : "urn:uuid:96e164ab-e932-4468-962c-882a0dae6dc9",
+      "timestamp" : "2018-12-13T14:27:00-06:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "CodeableConcept",
@@ -30,8 +30,9 @@
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
+  "version" : "3.6.0",
   "status" : "draft",
-  "date" : "2018-09-14T07:16:19-05:00",
+  "date" : "2018-12-13T14:23:07-06:00",
   "publisher" : "Health Level Seven International (Pharmacy)",
   "item" : [{
     "linkId" : "Medication",
@@ -231,7 +232,7 @@
     },
     {
       "linkId" : "Medication.extension",
-      "text" : "Additional Content defined by implementations",
+      "text" : "Additional content defined by implementations",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -267,8 +268,54 @@
             }]
           }
         }],
-        "text" : "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+        "text" : "May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
         "type" : "display"
+      }]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "Identifier"
+      }],
+      "linkId" : "Medication.identifier",
+      "text" : "Business identifier for this medication",
+      "type" : "group",
+      "required" : false,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "Business identifier for this medication. The serial number could be included as an identifier.",
+        "type" : "display"
+      },
+      {
+        "linkId" : "Medication.identifier.label",
+        "text" : "label:",
+        "type" : "string",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "Medication.identifier.system",
+        "text" : "system:",
+        "type" : "string",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "Medication.identifier.value",
+        "text" : "value:",
+        "type" : "string",
+        "required" : false,
+        "repeats" : false
       }]
     },
     {
@@ -442,7 +489,7 @@
       },
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-        "valueString" : "Quantity"
+        "valueString" : "Ratio"
       }],
       "linkId" : "Medication.amount",
       "text" : "Amount of drug in package",
@@ -464,15 +511,15 @@
         "type" : "display"
       },
       {
-        "linkId" : "Medication.amount.comparator",
-        "text" : "comp:",
-        "type" : "choice",
+        "linkId" : "Medication.amount.numerator",
+        "text" : "numerator:",
+        "type" : "decimal",
         "required" : false,
         "repeats" : false
       },
       {
-        "linkId" : "Medication.amount.value",
-        "text" : "value:",
+        "linkId" : "Medication.amount.denominator",
+        "text" : "denominator:",
         "type" : "decimal",
         "required" : false,
         "repeats" : false
@@ -480,20 +527,6 @@
       {
         "linkId" : "Medication.amount.units",
         "text" : "units:",
-        "type" : "string",
-        "required" : false,
-        "repeats" : false
-      },
-      {
-        "linkId" : "Medication.amount.code",
-        "text" : "coded units:",
-        "type" : "string",
-        "required" : false,
-        "repeats" : false
-      },
-      {
-        "linkId" : "Medication.amount.system",
-        "text" : "units system:",
         "type" : "string",
         "required" : false,
         "repeats" : false
@@ -552,7 +585,7 @@
         },
         {
           "linkId" : "Medication.ingredient.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -581,7 +614,7 @@
       },
       {
         "linkId" : "Medication.ingredient.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -596,7 +629,7 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
@@ -725,7 +758,7 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
           "valueString" : "Ratio"
         }],
-        "linkId" : "Medication.ingredient.amount",
+        "linkId" : "Medication.ingredient.strength",
         "text" : "Quantity of ingredient present",
         "type" : "group",
         "required" : false,
@@ -745,21 +778,21 @@
           "type" : "display"
         },
         {
-          "linkId" : "Medication.ingredient.amount.numerator",
+          "linkId" : "Medication.ingredient.strength.numerator",
           "text" : "numerator:",
           "type" : "decimal",
           "required" : false,
           "repeats" : false
         },
         {
-          "linkId" : "Medication.ingredient.amount.denominator",
+          "linkId" : "Medication.ingredient.strength.denominator",
           "text" : "denominator:",
           "type" : "decimal",
           "required" : false,
           "repeats" : false
         },
         {
-          "linkId" : "Medication.ingredient.amount.units",
+          "linkId" : "Medication.ingredient.strength.units",
           "text" : "units:",
           "type" : "string",
           "required" : false,
@@ -820,7 +853,7 @@
         },
         {
           "linkId" : "Medication.batch.id.value",
-          "text" : "xml:id (or equivalent in JSON)",
+          "text" : "Unique id for inter-element referencing",
           "type" : "string",
           "required" : false,
           "repeats" : false
@@ -849,7 +882,7 @@
       },
       {
         "linkId" : "Medication.batch.modifierExtension",
-        "text" : "Extensions that cannot be ignored if unrecognized",
+        "text" : "Extensions that cannot be ignored even if unrecognized",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -864,7 +897,7 @@
               }]
             }
           }],
-          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+          "text" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
           "type" : "display"
         }]
       },
@@ -934,41 +967,6 @@
           "linkId" : "Medication.batch.expirationDate.value",
           "text" : "When batch will expire",
           "type" : "dateTime",
-          "required" : false,
-          "repeats" : false
-        }]
-      },
-      {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
-          "valueInteger" : 1
-        },
-        {
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-          "valueString" : "string"
-        }],
-        "linkId" : "Medication.batch.serialNumber",
-        "type" : "group",
-        "required" : false,
-        "repeats" : true,
-        "item" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-            "valueCodeableConcept" : {
-              "coding" : [{
-                "system" : "http://hl7.org/fhir/questionnaire-item-control",
-                "code" : "flyover",
-                "display" : "Fly-over"
-              }]
-            }
-          }],
-          "text" : "An identifier assigned to a drug at the point of manufacturing and repackaging (at the package or pallet level), sufficient to facilitate the identification, validation, authentication, and tracking and tracking of drugs.",
-          "type" : "display"
-        },
-        {
-          "linkId" : "Medication.batch.serialNumber.value",
-          "text" : "Identifier assigned to a drug at the time of manufacture",
-          "type" : "string",
           "required" : false,
           "repeats" : false
         }]

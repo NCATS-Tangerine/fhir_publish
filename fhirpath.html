@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-  <title>Fhirpath - FHIR v3.5.0</title>
+  <title>Fhirpath - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -39,7 +39,7 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h2 class="self-link-parent"><span class="sectioncount">2.9<a name="2.9"> </a></span> FHIRPath <a href="fhirpath.html#2.9" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h2>
-<table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: 4</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
+<table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: Normative</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
 
 <p>
 FHIRPath is a separate specification published at <a href="http://hl7.org/fhirpath">http://hl7.org/fhirpath <img src="external.png" style="text-align: baseline"/></a> in order to support wider re-use across multiple specifications.
@@ -321,7 +321,7 @@ Note: the selector parameter is planned to be added to a future version of the b
 </p>
 
 <p><b>resolve() : collection</b></p>
-<p>For each item in the collection, if it is a string that is a URI or (canonical or URL), locate the target of the reference, and add it to the resulting collection. If the item does not resolve to a resource, the item is ignored and nothing is added to the output collection.</p>
+<p>For each item in the collection, if it is a string that is a <a href="datatypes.html#uri">uri</a> (or <a href="datatypes.html#canonical">canonical</a> or <a href="datatypes.html#url">url</a>), locate the target of the reference, and add it to the resulting collection. If the item does not resolve to a resource, the item is ignored and nothing is added to the output collection.</p>
 <p>The items in the collection may also represent a Reference, in which case the <code>Reference.reference</code> is resolved.</p>
 
 <p><b>ofType(type : identifier) : collection</b></p>
@@ -426,7 +426,7 @@ is used in a few contexts in this specification. When the restricted
 FHIRPath language subset is in use, the following rules apply:
 </p>
 <ul>
- <li>All statements SHALL start with the name of the context element (e.g. on a Patient resource, Patient.contact.name.)</li>
+ <li>All statements SHALL start with the name of the context element (e.g. on a Patient resource, Patient.contact.name.), or SHALL be simply "$this" to refer to the element that has focus</li>
  <li>Operators SHALL NOT be used</li>
  <li>Only the following functions may be used:
    <ul>
@@ -487,7 +487,7 @@ This calls the <a href="terminology-service.html#expand">Terminology Service $ex
 Parameters:
 </p>
 <ul>
- <li><b>valueSet</b>: either an actual <a href="valueset.html">ValueSet</a>, or a <a href="references.html#canonical">canonical URI</a> reference to a value set.</li>
+ <li><b>valueSet</b>: either an actual <a href="valueset.html">ValueSet</a>, or a <a href="references.html#canonical">canonical URL</a> reference to a value set.</li>
  <li><b>params</b>: a URL encoded string with other parameters for the expand operation (e.g. 'displayLanguage=en&amp;activeOnly=true')</li>
 </ul>
 <p>
@@ -526,7 +526,7 @@ This calls the <a href="terminology-service.html#expand">Terminology Service $va
 Parameters:
 </p>
 <ul>
- <li><b>valueSet</b>: either an actual <a href="valueset.html">ValueSet</a>, or a <a href="references.html#canonical">canonical URI</a> reference to a value set.</li>
+ <li><b>valueSet</b>: either an actual <a href="valueset.html">ValueSet</a>, or a <a href="references.html#canonical">canonical URL</a> reference to a value set.</li>
  <li><b>coded</b>: either a <a href="datatypes.html#coding">Coding</a>, a <a href="datatypes.html#CodeableConcept">CodeableConcept</a>, or a resource element that is a <a href="datatypes.html#code">code</a></li>
  <li><b>params</b>: a URL encoded string with other parameters for the validate-code operation (e.g. 'date=2011-03-04&amp;displayLanguage=en')</li>
 </ul>
@@ -547,7 +547,7 @@ This calls the <a href="terminology-service.html#expand">Terminology Service $va
 Parameters:
 </p>
 <ul>
- <li><b>codeSystem</b>: either an actual <a href="codesystem.html">CodeSystem</a>, or a <a href="references.html#canonical">canonical URI</a> reference to a code system.</li>
+ <li><b>codeSystem</b>: either an actual <a href="codesystem.html">CodeSystem</a>, or a <a href="references.html#canonical">canonical URL</a> reference to a code system.</li>
  <li><b>coded</b>: either a <a href="datatypes.html#coding">Coding</a>, a <a href="datatypes.html#CodeableConcept">CodeableConcept</a>, or a resource element that is a <a href="datatypes.html#code">code</a></li>
  <li><b>params</b>: a URL encoded string with other parameters for the validate-code operation (e.g. 'date=2011-03-04&amp;displayLanguage=en')</li>
 </ul>
@@ -588,7 +588,7 @@ This calls the <a href="terminology-service.html#translate">Terminology Service 
 Parameters:
 </p>
 <ul>
- <li><b>conceptMap</b>: either an actual <a href="conceptmap.html">ConceptMap</a>, or a <a href="references.html#canonical">canonical URI</a> reference to a value set.</li>
+ <li><b>conceptMap</b>: either an actual <a href="conceptmap.html">ConceptMap</a>, or a <a href="references.html#canonical">canonical URL</a> reference to a value set.</li>
  <li><b>coded</b>: The source to translate: a <a href="datatypes.html#coding">Coding</a> or a resource element that is a <a href="datatypes.html#code">code</a></li>
  <li><b>params</b>: a URL encoded string with other parameters for the validate-code operation (e.g. 'source=http://acme.org/valueset/23&amp;target=http://acme.org/valueset/23')</li>
 </ul>
@@ -613,7 +613,7 @@ Parameters:
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -623,7 +623,7 @@ Parameters:
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Ffhirpath.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Ffhirpath.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Ffhirpath.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Ffhirpath.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

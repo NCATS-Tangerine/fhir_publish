@@ -5,8 +5,9 @@
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
+  <version value="3.6.0"/>
   <status value="draft"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="Health Level Seven International (Orders and Observations)"/>
   <item>
     <linkId value="ObservationDefinition"/>
@@ -195,7 +196,7 @@
     </item>
     <item>
       <linkId value="ObservationDefinition.extension"/>
-      <text value="Additional Content defined by implementations"/>
+      <text value="Additional content defined by implementations"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -229,14 +230,11 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+        <text value="May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
         <type value="display"/>
       </item>
     </item>
     <item>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-        <valueInteger value="1"/>
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
         <valueString value="CodeableConcept"/>
       </extension>
@@ -255,7 +253,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="A code that classifies the general type of observation. In addition to the required category valueset, this element allows various categorization schemes based on the owner&#x2019;s definition of the category and effectively multiple categories can be used at once. The level of granularity is defined by the category concepts in the value set."/>
+        <text value="A code that classifies the general type of observation. This element allows various categorization schemes based on the owner&#x2019;s definition of the category and effectively multiple categories can be used for one instance of ObservationDefinition. The level of granularity is defined by the category concepts in the value set."/>
         <type value="display"/>
       </item>
       <item>
@@ -321,7 +319,7 @@
         <valueString value="Identifier"/>
       </extension>
       <linkId value="ObservationDefinition.identifier"/>
-      <text value="Unique identifier for this ObservationDefinition artifact"/>
+      <text value="Business identifier for this ObservationDefinition instance"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -335,7 +333,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Unique identifier for this ObservationDefinition artifact."/>
+        <text value="A unique identifier assigned to this ObservationDefinition artifact."/>
         <type value="display"/>
       </item>
       <item>
@@ -362,7 +360,7 @@
     </item>
     <item>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="Coding"/>
+        <valueString value="code"/>
       </extension>
       <linkId value="ObservationDefinition.permittedDataType"/>
       <type value="group"/>
@@ -378,13 +376,13 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Data type allowed for the result of the observation."/>
+        <text value="The data types allowed for the value element of the instance observations conforming to this ObservationDefinition."/>
         <type value="display"/>
       </item>
       <item>
         <linkId value="ObservationDefinition.permittedDataType.value"/>
-        <text value="Permitted data type for observation value"/>
-        <type value="open-choice"/>
+        <text value="permitted data type"/>
+        <type value="choice"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
@@ -410,7 +408,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Multiple results allowed for this kind of observation."/>
+        <text value="Multiple results allowed for observations conforming to this ObservationDefinition. An example of observation allowing multiple results is &quot;bacteria identified by culture&quot;. Conversely, the measurement of a potassium level allows a single result."/>
         <type value="display"/>
       </item>
       <item>
@@ -429,7 +427,7 @@
         <valueString value="CodeableConcept"/>
       </extension>
       <linkId value="ObservationDefinition.method"/>
-      <text value="The method or technique used to perform the observation"/>
+      <text value="Method used to produce the observation"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -482,7 +480,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The preferred name to be used when reporting the results of this observation."/>
+        <text value="The preferred name to be used when reporting the results of observations conforming to this ObservationDefinition."/>
         <type value="display"/>
       </item>
       <item>
@@ -541,7 +539,7 @@
         </item>
         <item>
           <linkId value="ObservationDefinition.quantitativeDetails.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -569,7 +567,7 @@
       </item>
       <item>
         <linkId value="ObservationDefinition.quantitativeDetails.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -583,7 +581,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>
@@ -592,9 +590,10 @@
           <valueInteger value="1"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="Coding"/>
+          <valueString value="CodeableConcept"/>
         </extension>
         <linkId value="ObservationDefinition.quantitativeDetails.customaryUnit"/>
+        <text value="Customary unit for quantitative results"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -608,13 +607,20 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="Customary unit used to report quantitative results of this observation."/>
+          <text value="Customary unit used to report quantitative results of observations conforming to this ObservationDefinition."/>
           <type value="display"/>
         </item>
         <item>
-          <linkId value="ObservationDefinition.quantitativeDetails.customaryUnit.value"/>
-          <text value="Customary unit for quantitative results"/>
+          <linkId value="ObservationDefinition.quantitativeDetails.customaryUnit.coding"/>
+          <text value="code:"/>
           <type value="open-choice"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+        <item>
+          <linkId value="ObservationDefinition.quantitativeDetails.customaryUnit.text"/>
+          <text value="text:"/>
+          <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
         </item>
@@ -624,9 +630,10 @@
           <valueInteger value="1"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="Coding"/>
+          <valueString value="CodeableConcept"/>
         </extension>
         <linkId value="ObservationDefinition.quantitativeDetails.unit"/>
+        <text value="SI unit for quantitative results"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -640,13 +647,20 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="SI unit used to report quantitative results of this observation."/>
+          <text value="SI unit used to report quantitative results of observations conforming to this ObservationDefinition."/>
           <type value="display"/>
         </item>
         <item>
-          <linkId value="ObservationDefinition.quantitativeDetails.unit.value"/>
-          <text value="SI unit for quantitative results"/>
+          <linkId value="ObservationDefinition.quantitativeDetails.unit.coding"/>
+          <text value="code:"/>
           <type value="open-choice"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+        <item>
+          <linkId value="ObservationDefinition.quantitativeDetails.unit.text"/>
+          <text value="text:"/>
+          <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
         </item>
@@ -704,7 +718,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="Number of digits after decimal separator when the results of this observation are of type Quantity."/>
+          <text value="Number of digits after decimal separator when the results of such observations are of type Quantity."/>
           <type value="display"/>
         </item>
         <item>
@@ -718,7 +732,7 @@
     </item>
     <item>
       <linkId value="ObservationDefinition.qualifiedInterval"/>
-      <text value="Reference range for observation result"/>
+      <text value="Qualified range for continuous and ordinal observation results"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -732,7 +746,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Reference range for ordinal and continuous observations."/>
+        <text value="Multiple  ranges of results qualified by different contexts for ordinal or continuous observations conforming to this ObservationDefinition."/>
         <type value="display"/>
       </item>
       <item>
@@ -761,7 +775,7 @@
         </item>
         <item>
           <linkId value="ObservationDefinition.qualifiedInterval.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -789,7 +803,7 @@
       </item>
       <item>
         <linkId value="ObservationDefinition.qualifiedInterval.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -803,7 +817,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>
@@ -812,10 +826,9 @@
           <valueInteger value="1"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="CodeableConcept"/>
+          <valueString value="code"/>
         </extension>
         <linkId value="ObservationDefinition.qualifiedInterval.category"/>
-        <text value="The category or type of interval"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -829,20 +842,13 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The category or type of interval."/>
+          <text value="The category of interval of values for continuous or ordinal observations conforming to this ObservationDefinition."/>
           <type value="display"/>
         </item>
         <item>
-          <linkId value="ObservationDefinition.qualifiedInterval.category.coding"/>
-          <text value="code:"/>
-          <type value="open-choice"/>
-          <required value="false"/>
-          <repeats value="false"/>
-        </item>
-        <item>
-          <linkId value="ObservationDefinition.qualifiedInterval.category.text"/>
-          <text value="text:"/>
-          <type value="string"/>
+          <linkId value="ObservationDefinition.qualifiedInterval.category.value"/>
+          <text value="category"/>
+          <type value="choice"/>
           <required value="false"/>
           <repeats value="false"/>
         </item>
@@ -855,7 +861,7 @@
           <valueString value="Range"/>
         </extension>
         <linkId value="ObservationDefinition.qualifiedInterval.range"/>
-        <text value="The range of the interval"/>
+        <text value="The interval itself, for continuous or ordinal observations"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -869,7 +875,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The range of the interval."/>
+          <text value="The low and high values determining the interval. There may be only one of the two."/>
           <type value="display"/>
         </item>
         <item>
@@ -901,8 +907,8 @@
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
           <valueString value="CodeableConcept"/>
         </extension>
-        <linkId value="ObservationDefinition.qualifiedInterval.type"/>
-        <text value="Reference range qualifier"/>
+        <linkId value="ObservationDefinition.qualifiedInterval.context"/>
+        <text value="Range context qualifier"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -916,18 +922,18 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="Codes to indicate what part of the targeted reference population it applies to. For example, the normal or therapeutic range. normal range is the default."/>
+          <text value="Codes to indicate the health context the range applies to. For example, the normal or therapeutic range."/>
           <type value="display"/>
         </item>
         <item>
-          <linkId value="ObservationDefinition.qualifiedInterval.type.coding"/>
+          <linkId value="ObservationDefinition.qualifiedInterval.context.coding"/>
           <text value="code:"/>
           <type value="open-choice"/>
           <required value="false"/>
           <repeats value="false"/>
         </item>
         <item>
-          <linkId value="ObservationDefinition.qualifiedInterval.type.text"/>
+          <linkId value="ObservationDefinition.qualifiedInterval.context.text"/>
           <text value="text:"/>
           <type value="string"/>
           <required value="false"/>
@@ -939,7 +945,7 @@
           <valueString value="CodeableConcept"/>
         </extension>
         <linkId value="ObservationDefinition.qualifiedInterval.appliesTo"/>
-        <text value="Reference range population"/>
+        <text value="Targetted population of the range"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -976,6 +982,38 @@
           <valueInteger value="1"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="code"/>
+        </extension>
+        <linkId value="ObservationDefinition.qualifiedInterval.gender"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Sex of the population the range applies to."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="ObservationDefinition.qualifiedInterval.gender.value"/>
+          <text value="gender"/>
+          <type value="choice"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
           <valueString value="Range"/>
         </extension>
         <linkId value="ObservationDefinition.qualifiedInterval.age"/>
@@ -993,7 +1031,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so."/>
+          <text value="The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so. Some analytes vary greatly over age."/>
           <type value="display"/>
         </item>
         <item>
@@ -1040,7 +1078,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The gestational age at which this reference range is applicable, in the context of pregnancy."/>
+          <text value="The gestational age to which this reference range is applicable, in the context of pregnancy."/>
           <type value="display"/>
         </item>
         <item>
@@ -1103,7 +1141,7 @@
         <valueInteger value="1"/>
       </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="uri"/>
+        <valueString value="Reference"/>
       </extension>
       <linkId value="ObservationDefinition.validCodedValueSet"/>
       <type value="group"/>
@@ -1119,13 +1157,19 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The set of valid coded results for the observation."/>
+        <text value="The set of valid coded results for the observations  conforming to this ObservationDefinition."/>
         <type value="display"/>
       </item>
       <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+          <valueCode value="ValueSet"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+        </extension>
         <linkId value="ObservationDefinition.validCodedValueSet.value"/>
-        <text value="Value set of valid coded values for the observation"/>
-        <type value="string"/>
+        <text value="Value set of valid coded values for the observations conforming to this ObservationDefinition"/>
+        <type value="reference"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
@@ -1135,7 +1179,7 @@
         <valueInteger value="1"/>
       </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="uri"/>
+        <valueString value="Reference"/>
       </extension>
       <linkId value="ObservationDefinition.normalCodedValueSet"/>
       <type value="group"/>
@@ -1151,13 +1195,19 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The set of normal coded results for the observation."/>
+        <text value="The set of normal coded results for the observations conforming to this ObservationDefinition."/>
         <type value="display"/>
       </item>
       <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+          <valueCode value="ValueSet"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+        </extension>
         <linkId value="ObservationDefinition.normalCodedValueSet.value"/>
-        <text value="Value set of normal coded values for the observation"/>
-        <type value="string"/>
+        <text value="Value set of normal coded values for the observations conforming to this ObservationDefinition"/>
+        <type value="reference"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
@@ -1167,7 +1217,7 @@
         <valueInteger value="1"/>
       </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="uri"/>
+        <valueString value="Reference"/>
       </extension>
       <linkId value="ObservationDefinition.abnormalCodedValueSet"/>
       <type value="group"/>
@@ -1183,13 +1233,19 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The set of abnormal coded results for the observation."/>
+        <text value="The set of abnormal coded results for the observation conforming to this ObservationDefinition."/>
         <type value="display"/>
       </item>
       <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+          <valueCode value="ValueSet"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+        </extension>
         <linkId value="ObservationDefinition.abnormalCodedValueSet.value"/>
-        <text value="Value set of abnormal coded values for the observation"/>
-        <type value="string"/>
+        <text value="Value set of abnormal coded values for the observations conforming to this ObservationDefinition"/>
+        <type value="reference"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
@@ -1199,7 +1255,7 @@
         <valueInteger value="1"/>
       </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="uri"/>
+        <valueString value="Reference"/>
       </extension>
       <linkId value="ObservationDefinition.criticalCodedValueSet"/>
       <type value="group"/>
@@ -1215,13 +1271,19 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The set of critical coded results for the observation."/>
+        <text value="The set of critical coded results for the observation conforming to this ObservationDefinition."/>
         <type value="display"/>
       </item>
       <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+          <valueCode value="ValueSet"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+        </extension>
         <linkId value="ObservationDefinition.criticalCodedValueSet.value"/>
-        <text value="Value set of critical coded values for the observation"/>
-        <type value="string"/>
+        <text value="Value set of critical coded values for the observations conforming to this ObservationDefinition"/>
+        <type value="reference"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>

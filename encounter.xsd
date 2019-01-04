@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -109,7 +109,7 @@
               <xs:documentation xml:lang="en">The list of people responsible for providing the service.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="appointment" minOccurs="0" maxOccurs="1" type="Reference">
+          <xs:element name="appointment" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">The appointment that scheduled this encounter.</xs:documentation>
            </xs:annotation>
@@ -124,7 +124,12 @@
               <xs:documentation xml:lang="en">Quantity of time the encounter lasted. This excludes the time during leaves of absence.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="reason" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
+          <xs:element name="reasonCode" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Reason the encounter takes place, expressed as a code. For admissions, this can be used for a coded admission diagnosis.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="reasonReference" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">Reason the encounter takes place, expressed as a code. For admissions, this can be used for a coded admission diagnosis.</xs:documentation>
            </xs:annotation>
@@ -243,7 +248,7 @@
               <xs:documentation xml:lang="en">Reason the encounter takes place, as specified using information from another resource. For admissions, this is the admission diagnosis. The indication will typically be a Condition (with other resources referenced in the evidence.detail), or a Procedure.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="role" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="use" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">Role that this diagnosis has within the encounter (e.g. admission, billing, discharge …).</xs:documentation>
            </xs:annotation>
@@ -327,7 +332,12 @@
           </xs:element>
           <xs:element name="status" minOccurs="0" maxOccurs="1" type="EncounterLocationStatus">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The status of the participants' presence at the specified location during the period specified. If the participant is is no longer at the location, then the period will have an end date/time.</xs:documentation>
+              <xs:documentation xml:lang="en">The status of the participants' presence at the specified location during the period specified. If the participant is no longer at the location, then the period will have an end date/time.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="physicalType" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">This will be used to specifiy the required levels (bed/ward/room/etc) desired to be recorded to simplify either messaging or query.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="period" minOccurs="0" maxOccurs="1" type="Period">

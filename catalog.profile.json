@@ -15,9 +15,10 @@
   },
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-    "valueString" : "Trial Use"
+    "valueCode" : "trial-use"
   }],
   "url" : "http://hl7.org/fhir/StructureDefinition/catalog",
+  "version" : "3.6.0",
   "name" : "Profile for Catalog",
   "status" : "draft",
   "experimental" : false,
@@ -26,11 +27,11 @@
   "contact" : [{
     "telecom" : [{
       "system" : "url",
-      "value" : "http://wiki.hl7.org/index.php?title=MeasureReportProfile"
+      "value" : "http://www.hl7.org/Special/committees/cqi/index.cfm"
     }]
   }],
   "description" : "A set of resources composed into a single coherent clinical statement with clinical attestation",
-  "fhirVersion" : "3.5.0",
+  "fhirVersion" : "3.6.0",
   "mapping" : [{
     "identity" : "workflow",
     "uri" : "http://hl7.org/fhir/workflow",
@@ -54,7 +55,7 @@
   {
     "identity" : "w5",
     "uri" : "http://hl7.org/fhir/fivews",
-    "name" : "FiveWs Pattern"
+    "name" : "FiveWs Pattern Mapping"
   }],
   "kind" : "resource",
   "abstract" : false,
@@ -106,7 +107,7 @@
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/elementdefinition-bestpractice-explanation",
-          "valueMarkdown" : "When a resource has no narrative, only systems that fully understand the data can display the resource to a human safely. Including a guman readable representation in the resource makes for a much more robust eco-system and cheaper handling of resources by intermediary systems. Some ecosystems restrict distribution of resources to only those systems that do fully understand the resources, and as a consequence implementers may believe that the narrative is superfluous. However experience shows that such eco-systems often open up to new participants over time."
+          "valueMarkdown" : "When a resource has no narrative, only systems that fully understand the data can display the resource to a human safely. Including a human readable representation in the resource makes for a much more robust eco-system and cheaper handling of resources by intermediary systems. Some ecosystems restrict distribution of resources to only those systems that do fully understand the resources, and as a consequence implementers may believe that the narrative is superfluous. However experience shows that such eco-systems often open up to new participants over time."
         }],
         "key" : "dom-6",
         "severity" : "warning",
@@ -321,6 +322,14 @@
     },
     {
       "id" : "Composition.extension:ValidityPeriod",
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+        "valueCode" : "normative"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
+        "valueCode" : "4.0.0"
+      }],
       "path" : "Composition.extension",
       "sliceName" : "ValidityPeriod",
       "short" : "The validity of the catalog",
@@ -359,8 +368,9 @@
       "id" : "Composition.modifierExtension",
       "path" : "Composition.modifierExtension",
       "short" : "Extensions that cannot be ignored",
-      "definition" : "May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+      "definition" : "May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
       "comment" : "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+      "requirements" : "Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).",
       "alias" : ["extensions",
       "user content"],
       "min" : 0,
@@ -854,7 +864,7 @@
       "id" : "Composition.attester.id",
       "path" : "Composition.attester.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -901,9 +911,10 @@
     {
       "id" : "Composition.attester.modifierExtension",
       "path" : "Composition.attester.modifierExtension",
-      "short" : "Extensions that cannot be ignored if unrecognized",
-      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+      "short" : "Extensions that cannot be ignored even if unrecognized",
+      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
       "comment" : "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+      "requirements" : "Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).",
       "alias" : ["extensions",
       "user content",
       "modifiers"],
@@ -1100,7 +1111,7 @@
       "id" : "Composition.relatesTo.id",
       "path" : "Composition.relatesTo.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -1147,9 +1158,10 @@
     {
       "id" : "Composition.relatesTo.modifierExtension",
       "path" : "Composition.relatesTo.modifierExtension",
-      "short" : "Extensions that cannot be ignored if unrecognized",
-      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+      "short" : "Extensions that cannot be ignored even if unrecognized",
+      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
       "comment" : "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+      "requirements" : "Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).",
       "alias" : ["extensions",
       "user content",
       "modifiers"],
@@ -1289,7 +1301,7 @@
       "id" : "Composition.event.id",
       "path" : "Composition.event.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -1336,9 +1348,10 @@
     {
       "id" : "Composition.event.modifierExtension",
       "path" : "Composition.event.modifierExtension",
-      "short" : "Extensions that cannot be ignored if unrecognized",
-      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+      "short" : "Extensions that cannot be ignored even if unrecognized",
+      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
       "comment" : "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+      "requirements" : "Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).",
       "alias" : ["extensions",
       "user content",
       "modifiers"],
@@ -1515,7 +1528,7 @@
       "id" : "Composition.section.id",
       "path" : "Composition.section.id",
       "representation" : ["xmlAttr"],
-      "short" : "xml:id (or equivalent in JSON)",
+      "short" : "Unique id for inter-element referencing",
       "definition" : "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
       "min" : 0,
       "max" : "1",
@@ -1562,9 +1575,10 @@
     {
       "id" : "Composition.section.modifierExtension",
       "path" : "Composition.section.modifierExtension",
-      "short" : "Extensions that cannot be ignored if unrecognized",
-      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+      "short" : "Extensions that cannot be ignored even if unrecognized",
+      "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
       "comment" : "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
+      "requirements" : "Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).",
       "alias" : ["extensions",
       "user content",
       "modifiers"],
@@ -1692,6 +1706,30 @@
       }]
     },
     {
+      "id" : "Composition.section.focus",
+      "path" : "Composition.section.focus",
+      "short" : "Who/what the section is about, when it is not about the subject of composition",
+      "definition" : "The actual focus of the section when it is not the subject of the composition, but instead represents something or someone associated with the subject such as (for a patient subject) a spouse, parent, fetus, or donor. If not focus is specified, the focus is assumed to be focus of the parent section, or, for a section in the Composition itself, the subject of the composition. Sections with a focus SHALL only include resources where the logical subject (patient, subject, focus, etc.) matches the section focus, or the resources have no logical subject (few resources).",
+      "comment" : "Typically, sections in a doument are about the subject of the document, whether that is a  patient, or group of patients, location, or device, or whatever. For some kind of documents, some sections actually contain data about related entities. Typical examples are  a section in a newborn discharge summary concerning the mother, or family history documents, with a section about each family member, though there are many other examples.",
+      "min" : 0,
+      "max" : "1",
+      "base" : {
+        "path" : "Composition.section.focus",
+        "min" : 0,
+        "max" : "1"
+      },
+      "type" : [{
+        "code" : "Reference",
+        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Resource"]
+      }],
+      "isModifier" : false,
+      "isSummary" : false,
+      "mapping" : [{
+        "identity" : "cda",
+        "map" : ".subject? (CDA did not differentiate between subject and focus)"
+      }]
+    },
+    {
       "id" : "Composition.section.text",
       "path" : "Composition.section.text",
       "short" : "Text summary of the section, for human interpretation",
@@ -1812,7 +1850,7 @@
       },
       "type" : [{
         "code" : "Reference",
-        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Resource"]
+        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/CatalogEntry"]
       }],
       "condition" : ["cmp-2"],
       "isModifier" : false,
@@ -1987,7 +2025,7 @@
       "max" : "*",
       "type" : [{
         "code" : "Reference",
-        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Resource"]
+        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/CatalogEntry"]
       }]
     }]
   }

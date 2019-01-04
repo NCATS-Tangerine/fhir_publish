@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -154,7 +154,7 @@
   </xs:simpleType>
   <xs:complexType name="canonical">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A URI that is a reference to a canonical URI on a FHIR resource</xs:documentation>
+      <xs:documentation xml:lang="en">A URI that is a reference to a canonical URL on a FHIR resource</xs:documentation>
       <xs:documentation xml:lang="en">see [Canonical References](references.html#canonical)</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id referenced from the Narrative, or extensions</xs:documentation>
     </xs:annotation>
@@ -357,7 +357,7 @@
   <xs:complexType name="decimal">
     <xs:annotation>
       <xs:documentation xml:lang="en">A rational number with implicit precision</xs:documentation>
-      <xs:documentation xml:lang="en">Do not use a IEEE type floating point type, instead use something that works like a true decimal, with inbuilt precision (e.g. Java BigInteger)</xs:documentation>
+      <xs:documentation xml:lang="en">Do not use an IEEE type floating point type, instead use something that works like a true decimal, with inbuilt precision (e.g. Java BigInteger)</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -384,6 +384,7 @@
       <xs:element ref="CapabilityStatement"/>
       <xs:element ref="CarePlan"/>
       <xs:element ref="CareTeam"/>
+      <xs:element ref="CatalogEntry"/>
       <xs:element ref="ChargeItem"/>
       <xs:element ref="ChargeItemDefinition"/>
       <xs:element ref="Claim"/>
@@ -411,13 +412,15 @@
       <xs:element ref="DiagnosticReport"/>
       <xs:element ref="DocumentManifest"/>
       <xs:element ref="DocumentReference"/>
+      <xs:element ref="EffectEvidenceSynthesis"/>
       <xs:element ref="Encounter"/>
       <xs:element ref="Endpoint"/>
       <xs:element ref="EnrollmentRequest"/>
       <xs:element ref="EnrollmentResponse"/>
-      <xs:element ref="EntryDefinition"/>
       <xs:element ref="EpisodeOfCare"/>
       <xs:element ref="EventDefinition"/>
+      <xs:element ref="Evidence"/>
+      <xs:element ref="EvidenceVariable"/>
       <xs:element ref="ExampleScenario"/>
       <xs:element ref="ExplanationOfBenefit"/>
       <xs:element ref="FamilyMemberHistory"/>
@@ -450,9 +453,7 @@
       <xs:element ref="MedicationStatement"/>
       <xs:element ref="MedicinalProduct"/>
       <xs:element ref="MedicinalProductAuthorization"/>
-      <xs:element ref="MedicinalProductClinicals"/>
       <xs:element ref="MedicinalProductContraindication"/>
-      <xs:element ref="MedicinalProductDeviceSpec"/>
       <xs:element ref="MedicinalProductIndication"/>
       <xs:element ref="MedicinalProductIngredient"/>
       <xs:element ref="MedicinalProductInteraction"/>
@@ -462,6 +463,7 @@
       <xs:element ref="MedicinalProductUndesirableEffect"/>
       <xs:element ref="MessageDefinition"/>
       <xs:element ref="MessageHeader"/>
+      <xs:element ref="MolecularSequence"/>
       <xs:element ref="NamingSystem"/>
       <xs:element ref="NutritionOrder"/>
       <xs:element ref="Observation"/>
@@ -478,19 +480,19 @@
       <xs:element ref="Practitioner"/>
       <xs:element ref="PractitionerRole"/>
       <xs:element ref="Procedure"/>
-      <xs:element ref="ProcessRequest"/>
-      <xs:element ref="ProcessResponse"/>
       <xs:element ref="Provenance"/>
       <xs:element ref="Questionnaire"/>
       <xs:element ref="QuestionnaireResponse"/>
       <xs:element ref="RelatedPerson"/>
       <xs:element ref="RequestGroup"/>
+      <xs:element ref="ResearchDefinition"/>
+      <xs:element ref="ResearchElementDefinition"/>
       <xs:element ref="ResearchStudy"/>
       <xs:element ref="ResearchSubject"/>
       <xs:element ref="RiskAssessment"/>
+      <xs:element ref="RiskEvidenceSynthesis"/>
       <xs:element ref="Schedule"/>
       <xs:element ref="SearchParameter"/>
-      <xs:element ref="Sequence"/>
       <xs:element ref="ServiceRequest"/>
       <xs:element ref="Slot"/>
       <xs:element ref="Specimen"/>
@@ -499,8 +501,11 @@
       <xs:element ref="StructureMap"/>
       <xs:element ref="Subscription"/>
       <xs:element ref="Substance"/>
+      <xs:element ref="SubstanceNucleicAcid"/>
       <xs:element ref="SubstancePolymer"/>
+      <xs:element ref="SubstanceProtein"/>
       <xs:element ref="SubstanceReferenceInformation"/>
+      <xs:element ref="SubstanceSourceMaterial"/>
       <xs:element ref="SubstanceSpecification"/>
       <xs:element ref="SupplyDelivery"/>
       <xs:element ref="SupplyRequest"/>
@@ -508,7 +513,6 @@
       <xs:element ref="TerminologyCapabilities"/>
       <xs:element ref="TestReport"/>
       <xs:element ref="TestScript"/>
-      <xs:element ref="UserSession"/>
       <xs:element ref="ValueSet"/>
       <xs:element ref="VerificationResult"/>
       <xs:element ref="VisionPrescription"/>
@@ -525,7 +529,7 @@
         <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="1">
            <xs:annotation>
-             <xs:documentation xml:lang="en">Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).</xs:documentation>
+             <xs:documentation xml:lang="en">Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).</xs:documentation>
            </xs:annotation>
            <xs:element name="valueBase64Binary" type="base64Binary"/>
            <xs:element name="valueBoolean" type="boolean"/>
@@ -567,13 +571,13 @@
            <xs:element name="valueSampledData" type="SampledData"/>
            <xs:element name="valueSignature" type="Signature"/>
            <xs:element name="valueTiming" type="Timing"/>
-           <xs:element name="valueParameterDefinition" type="ParameterDefinition"/>
-           <xs:element name="valueDataRequirement" type="DataRequirement"/>
-           <xs:element name="valueRelatedArtifact" type="RelatedArtifact"/>
            <xs:element name="valueContactDetail" type="ContactDetail"/>
            <xs:element name="valueContributor" type="Contributor"/>
-           <xs:element name="valueTriggerDefinition" type="TriggerDefinition"/>
+           <xs:element name="valueDataRequirement" type="DataRequirement"/>
            <xs:element name="valueExpression" type="Expression"/>
+           <xs:element name="valueParameterDefinition" type="ParameterDefinition"/>
+           <xs:element name="valueRelatedArtifact" type="RelatedArtifact"/>
+           <xs:element name="valueTriggerDefinition" type="TriggerDefinition"/>
            <xs:element name="valueUsageContext" type="UsageContext"/>
            <xs:element name="valueDosage" type="Dosage"/>
          </xs:choice>
@@ -592,7 +596,7 @@
         <xs:sequence>
           <xs:element name="modifierExtension" type="Extension" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
+              <xs:documentation xml:lang="en">May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
 
 Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).</xs:documentation>
             </xs:annotation>
@@ -603,7 +607,7 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
   </xs:complexType>
   <xs:complexType name="Narrative">
     <xs:annotation>
-      <xs:documentation xml:lang="en">A human-readable formatted text, including images.</xs:documentation>
+      <xs:documentation xml:lang="en">A human-readable summary of the resource conveying the essential clinical and business information for the resource.</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1224,7 +1228,7 @@ The value of mustSupport SHALL be a FHIRPath resolveable on the type of the Data
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="type" type="CodeableConcept" minOccurs="1" maxOccurs="1">
+          <xs:element name="type" type="CodeableConcept" minOccurs="0" maxOccurs="1">
             <xs:annotation>
               <xs:documentation xml:lang="en">The kind of dose or rate specified, for example, ordered or calculated.</xs:documentation>
             </xs:annotation>
@@ -1494,6 +1498,43 @@ The value of mustSupport SHALL be a FHIRPath resolveable on the type of the Data
        </xs:extension>
      </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="MarketingStatus">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="country" type="CodeableConcept" minOccurs="1" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The country in which the marketing authorisation has been granted shall be specified It should be specified using the ISO 3166 ‑ 1 alpha-2 code elements.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="jurisdiction" type="CodeableConcept" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where a Medicines Regulatory Agency has granted a marketing authorisation for which specific provisions within a jurisdiction apply, the jurisdiction can be specified using an appropriate controlled terminology The controlled term and the controlled term identifier shall be specified.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="status" type="CodeableConcept" minOccurs="1" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">This attribute provides information on the status of the marketing of the medicinal product See ISO/TS 20443 for more information and examples.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="dateRange" type="Period" minOccurs="1" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The date when the Medicinal Product is placed on the market by the Marketing Authorisation Holder (or where applicable, the manufacturer/distributor) in a country and/or jurisdiction shall be provided A complete date consisting of day, month and year shall be specified using the ISO 8601 date format NOTE “Placed on the market” refers to the release of the Medicinal Product into the distribution chain.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="restoreDate" type="dateTime" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The date when the Medicinal Product is placed on the market by the Marketing Authorisation Holder (or where applicable, the manufacturer/distributor) in a country and/or jurisdiction shall be provided A complete date consisting of day, month and year shall be specified using the ISO 8601 date format NOTE “Placed on the market” refers to the release of the Medicinal Product into the distribution chain.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="Identifier">
     <xs:annotation>
       <xs:documentation xml:lang="en">An identifier - identifies some entity uniquely and unambiguously. Typically this is used for business identifiers.</xs:documentation>
@@ -1575,6 +1616,63 @@ The value of mustSupport SHALL be a FHIRPath resolveable on the type of the Data
          <xs:attribute name="value" type="IdentifierUse-list" use="optional"/>
        </xs:extension>
      </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SubstanceAmount">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Used to capture quantitative values for a variety of elements. If only limits are given, the arithmetic mean would be the average. If only a single definite value for a given element is given, it would be captured in this field.</xs:documentation>
+            </xs:annotation>
+           <xs:element name="amountQuantity" type="Quantity"  maxOccurs="1"/>
+           <xs:element name="amountRange" type="Range"  maxOccurs="1"/>
+           <xs:element name="amountString" type="string"  maxOccurs="1"/>
+          </xs:choice>
+          <xs:element name="amountType" type="CodeableConcept" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Most elements that require a quantitative value will also have a field called amount type. Amount type should always be specified because the actual value of the amount is often dependent on it. EXAMPLE: In capturing the actual relative amounts of substances or molecular fragments it is essential to indicate whether the amount refers to a mole ratio or weight ratio. For any given element an effort should be made to use same the amount type for all related definitional elements.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="amountText" type="string" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A textual comment on a numeric value.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="referenceRange" type="SubstanceAmount.ReferenceRange" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Reference range of possible or expected values.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SubstanceAmount.ReferenceRange">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="lowLimit" type="Quantity" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Lower limit possible or expected.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="highLimit" type="Quantity" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Upper limit possible or expected.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Coding">
     <xs:annotation>
@@ -1673,6 +1771,40 @@ The value of mustSupport SHALL be a FHIRPath resolveable on the type of the Data
       </xs:complexContent>
     </xs:complexType>
 
+  <xs:complexType name="Population">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A populatioof people with some set of grouping criteria.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The age of the specific population.</xs:documentation>
+            </xs:annotation>
+           <xs:element name="ageRange" type="Range"  maxOccurs="1"/>
+           <xs:element name="ageCodeableConcept" type="CodeableConcept"  maxOccurs="1"/>
+          </xs:choice>
+          <xs:element name="gender" type="CodeableConcept" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The gender of the specific population.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="race" type="CodeableConcept" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Race of the specific population.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="physiologicalCondition" type="CodeableConcept" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The existing physiological conditions of the specific population to which this applies.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="Ratio">
     <xs:annotation>
       <xs:documentation xml:lang="en">A relationship of two Quantity values - expressed as a numerator and a denominator.</xs:documentation>
@@ -1780,9 +1912,9 @@ The type is the Canonical URL of Resource Definition that is the type this refer
            <xs:element name="timingDate" type="date"  maxOccurs="1"/>
            <xs:element name="timingDateTime" type="dateTime"  maxOccurs="1"/>
           </xs:choice>
-          <xs:element name="data" type="DataRequirement" minOccurs="0" maxOccurs="1">
+          <xs:element name="data" type="DataRequirement" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The triggering data of the event (if this is a data trigger).</xs:documentation>
+              <xs:documentation xml:lang="en">The triggering data of the event (if this is a data trigger). If more than one data is requirement is specified, then all the data requirements must be true.</xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name="condition" type="Expression" minOccurs="0" maxOccurs="1">
@@ -1990,12 +2122,17 @@ The type is the Canonical URL of Resource Definition that is the type this refer
               <xs:documentation xml:lang="en">The type of relationship to the related artifact.</xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element name="label" type="string" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A short label that can be used to reference the citation from elsewhere in the containing artifact, such as a footnote index.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:element name="display" type="string" minOccurs="0" maxOccurs="1">
             <xs:annotation>
               <xs:documentation xml:lang="en">A brief description of the document or knowledge resource being referenced, suitable for display to a consumer.</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name="citation" type="string" minOccurs="0" maxOccurs="1">
+          <xs:element name="citation" type="markdown" minOccurs="0" maxOccurs="1">
             <xs:annotation>
               <xs:documentation xml:lang="en">A bibliographic citation for the related artifact. This text SHOULD be formatted according to an accepted citation format.</xs:documentation>
             </xs:annotation>
@@ -2103,6 +2240,38 @@ The type is the Canonical URL of Resource Definition that is the type this refer
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="ProductShelfLife">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The shelf-life and storage information for a medicinal product item or container can be described using this class.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Unique identifier for the packaged Medicinal Product.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="type" type="CodeableConcept" minOccurs="1" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">This describes the shelf life, taking into account various scenarios such as shelf life of the packaged Medicinal Product itself, shelf life after transformation where necessary and shelf life after the first opening of a bottle, etc. The shelf life type shall be specified using an appropriate controlled vocabulary The controlled term and the controlled term identifier shall be specified.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="period" type="Quantity" minOccurs="1" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The shelf life time period can be specified using a numerical value for the period of time and its unit of time measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="specialPrecautionsForStorage" type="CodeableConcept" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Special precautions for storage, if any, can be specified using an appropriate controlled vocabulary The controlled term and the controlled term identifier shall be specified.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="ContactDetail">
     <xs:annotation>
       <xs:documentation xml:lang="en">Specifies contact information for a person or organization.</xs:documentation>
@@ -2145,6 +2314,7 @@ The type is the Canonical URL of Resource Definition that is the type this refer
            <xs:element name="valueCodeableConcept" type="CodeableConcept"  maxOccurs="1"/>
            <xs:element name="valueQuantity" type="Quantity"  maxOccurs="1"/>
            <xs:element name="valueRange" type="Range"  maxOccurs="1"/>
+           <xs:element name="valueReference" type="Reference"  maxOccurs="1"/>
           </xs:choice>
         </xs:sequence>
       </xs:extension>
@@ -2576,6 +2746,73 @@ The type is the Canonical URL of Resource Definition that is the type this refer
        </xs:extension>
      </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="ProdCharacteristic">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="height" type="Quantity" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the height can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="width" type="Quantity" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the width can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="depth" type="Quantity" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the depth can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="weight" type="Quantity" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the weight can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="nominalVolume" type="Quantity" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the nominal volume can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="externalDiameter" type="Quantity" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the external diameter can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="shape" type="string" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the shape can be specified An appropriate controlled vocabulary shall be used The term and the term identifier shall be used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="color" type="string" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the color can be specified An appropriate controlled vocabulary shall be used The term and the term identifier shall be used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="imprint" type="string" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the imprint can be specified as text.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="image" type="Attachment" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the image can be provided The format of the image attachment shall be specified by regional implementations.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="scoring" type="CodeableConcept" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Where applicable, the scoring can be specified An appropriate controlled vocabulary shall be used The term and the term identifier shall be used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="CodeableConcept">
     <xs:annotation>
       <xs:documentation xml:lang="en">A concept that may be defined by a formal reference to a terminology or ontology or may be provided by text.</xs:documentation>
@@ -2639,100 +2876,6 @@ The type is the Canonical URL of Resource Definition that is the type this refer
           <xs:element name="profile" type="canonical" minOccurs="0" maxOccurs="1">
             <xs:annotation>
               <xs:documentation xml:lang="en">If specified, this indicates a profile that the input data must conform to, or that the output data will conform to.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="MarketingStatus">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="country" type="CodeableConcept" minOccurs="1" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The country in which the marketing authorisation has been granted shall be specified It should be specified using the ISO 3166 ‑ 1 alpha-2 code elements.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="jurisdiction" type="CodeableConcept" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where a Medicines Regulatory Agency has granted a marketing authorisation for which specific provisions within a jurisdiction apply, the jurisdiction can be specified using an appropriate controlled terminology The controlled term and the controlled term identifier shall be specified.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="status" type="CodeableConcept" minOccurs="1" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">This attribute provides information on the status of the marketing of the medicinal product See ISO/TS 20443 for more information and examples.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="dateRange" type="Period" minOccurs="1" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The date when the Medicinal Product is placed on the market by the Marketing Authorisation Holder (or where applicable, the manufacturer/distributor) in a country and/or jurisdiction shall be provided A complete date consisting of day, month and year shall be specified using the ISO 8601 date format NOTE “Placed on the market” refers to the release of the Medicinal Product into the distribution chain.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="restoreDate" type="dateTime" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The date when the Medicinal Product is placed on the market by the Marketing Authorisation Holder (or where applicable, the manufacturer/distributor) in a country and/or jurisdiction shall be provided A complete date consisting of day, month and year shall be specified using the ISO 8601 date format NOTE “Placed on the market” refers to the release of the Medicinal Product into the distribution chain.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="SubstanceAmount">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:choice minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Used to capture quantitative values for a variety of elements. If only limits are given, the arithmetic mean would be the average. If only a single definite value for a given element is given, it would be captured in this field.</xs:documentation>
-            </xs:annotation>
-           <xs:element name="amountQuantity" type="Quantity"  maxOccurs="1"/>
-           <xs:element name="amountRange" type="Range"  maxOccurs="1"/>
-           <xs:element name="amountString" type="string"  maxOccurs="1"/>
-          </xs:choice>
-          <xs:element name="amountType" type="CodeableConcept" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Most elements that require a quantitative value will also have a field called amount type. Amount type should always be specified because the actual value of the amount is often dependent on it. EXAMPLE: In capturing the actual relative amounts of substances or molecular fragments it is essential to indicate whether the amount refers to a mole ratio or weight ratio. For any given element an effort should be made to use same the amount type for all related definitional elements.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="amountText" type="string" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A textual comment on a numeric value.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="referenceRange" type="SubstanceAmount.ReferenceRange" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Reference range of possible or expected values.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="SubstanceAmount.ReferenceRange">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="lowLimit" type="Quantity" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Lower limit possible or expected.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="highLimit" type="Quantity" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Upper limit possible or expected.</xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -2876,13 +3019,13 @@ The type is the Canonical URL of Resource Definition that is the type this refer
            <xs:element name="defaultValueSampledData" type="SampledData"/>
            <xs:element name="defaultValueSignature" type="Signature"/>
            <xs:element name="defaultValueTiming" type="Timing"/>
-           <xs:element name="defaultValueParameterDefinition" type="ParameterDefinition"/>
-           <xs:element name="defaultValueDataRequirement" type="DataRequirement"/>
-           <xs:element name="defaultValueRelatedArtifact" type="RelatedArtifact"/>
            <xs:element name="defaultValueContactDetail" type="ContactDetail"/>
            <xs:element name="defaultValueContributor" type="Contributor"/>
-           <xs:element name="defaultValueTriggerDefinition" type="TriggerDefinition"/>
+           <xs:element name="defaultValueDataRequirement" type="DataRequirement"/>
            <xs:element name="defaultValueExpression" type="Expression"/>
+           <xs:element name="defaultValueParameterDefinition" type="ParameterDefinition"/>
+           <xs:element name="defaultValueRelatedArtifact" type="RelatedArtifact"/>
+           <xs:element name="defaultValueTriggerDefinition" type="TriggerDefinition"/>
            <xs:element name="defaultValueUsageContext" type="UsageContext"/>
            <xs:element name="defaultValueDosage" type="Dosage"/>
          </xs:choice>
@@ -2940,19 +3083,29 @@ The type is the Canonical URL of Resource Definition that is the type this refer
            <xs:element name="fixedSampledData" type="SampledData"/>
            <xs:element name="fixedSignature" type="Signature"/>
            <xs:element name="fixedTiming" type="Timing"/>
-           <xs:element name="fixedParameterDefinition" type="ParameterDefinition"/>
-           <xs:element name="fixedDataRequirement" type="DataRequirement"/>
-           <xs:element name="fixedRelatedArtifact" type="RelatedArtifact"/>
            <xs:element name="fixedContactDetail" type="ContactDetail"/>
            <xs:element name="fixedContributor" type="Contributor"/>
-           <xs:element name="fixedTriggerDefinition" type="TriggerDefinition"/>
+           <xs:element name="fixedDataRequirement" type="DataRequirement"/>
            <xs:element name="fixedExpression" type="Expression"/>
+           <xs:element name="fixedParameterDefinition" type="ParameterDefinition"/>
+           <xs:element name="fixedRelatedArtifact" type="RelatedArtifact"/>
+           <xs:element name="fixedTriggerDefinition" type="TriggerDefinition"/>
            <xs:element name="fixedUsageContext" type="UsageContext"/>
            <xs:element name="fixedDosage" type="Dosage"/>
          </xs:choice>
         <xs:choice minOccurs="0" maxOccurs="1">
            <xs:annotation>
-             <xs:documentation xml:lang="en">Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).</xs:documentation>
+             <xs:documentation xml:lang="en">Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  
+
+When pattern[x] is used to constrain a primitive, it means that the value provided in the pattern[x] must match the instance value exactly.
+
+When pattern[x] is used to constrain an array, it means that each element provided in the pattern[x] array must (recursively) match at least one element from the instance array.
+
+When pattern[x] is used to constrain a complex object, it means that each property in the pattern must be present in the complex object, and its value must recursively match -- i.e.,
+
+1. If primitive: it must match exactly the pattern value
+2. If a complex object: it must match (recursively) the pattern value
+3. If an array: it must match (recursively) the pattern value.</xs:documentation>
            </xs:annotation>
            <xs:element name="patternBase64Binary" type="base64Binary"/>
            <xs:element name="patternBoolean" type="boolean"/>
@@ -2994,13 +3147,13 @@ The type is the Canonical URL of Resource Definition that is the type this refer
            <xs:element name="patternSampledData" type="SampledData"/>
            <xs:element name="patternSignature" type="Signature"/>
            <xs:element name="patternTiming" type="Timing"/>
-           <xs:element name="patternParameterDefinition" type="ParameterDefinition"/>
-           <xs:element name="patternDataRequirement" type="DataRequirement"/>
-           <xs:element name="patternRelatedArtifact" type="RelatedArtifact"/>
            <xs:element name="patternContactDetail" type="ContactDetail"/>
            <xs:element name="patternContributor" type="Contributor"/>
-           <xs:element name="patternTriggerDefinition" type="TriggerDefinition"/>
+           <xs:element name="patternDataRequirement" type="DataRequirement"/>
            <xs:element name="patternExpression" type="Expression"/>
+           <xs:element name="patternParameterDefinition" type="ParameterDefinition"/>
+           <xs:element name="patternRelatedArtifact" type="RelatedArtifact"/>
+           <xs:element name="patternTriggerDefinition" type="TriggerDefinition"/>
            <xs:element name="patternUsageContext" type="UsageContext"/>
            <xs:element name="patternDosage" type="Dosage"/>
          </xs:choice>
@@ -3286,13 +3439,13 @@ The type is the Canonical URL of Resource Definition that is the type this refer
            <xs:element name="valueSampledData" type="SampledData"/>
            <xs:element name="valueSignature" type="Signature"/>
            <xs:element name="valueTiming" type="Timing"/>
-           <xs:element name="valueParameterDefinition" type="ParameterDefinition"/>
-           <xs:element name="valueDataRequirement" type="DataRequirement"/>
-           <xs:element name="valueRelatedArtifact" type="RelatedArtifact"/>
            <xs:element name="valueContactDetail" type="ContactDetail"/>
            <xs:element name="valueContributor" type="Contributor"/>
-           <xs:element name="valueTriggerDefinition" type="TriggerDefinition"/>
+           <xs:element name="valueDataRequirement" type="DataRequirement"/>
            <xs:element name="valueExpression" type="Expression"/>
+           <xs:element name="valueParameterDefinition" type="ParameterDefinition"/>
+           <xs:element name="valueRelatedArtifact" type="RelatedArtifact"/>
+           <xs:element name="valueTriggerDefinition" type="TriggerDefinition"/>
            <xs:element name="valueUsageContext" type="UsageContext"/>
            <xs:element name="valueDosage" type="Dosage"/>
          </xs:choice>
@@ -3611,152 +3764,6 @@ The type is the Canonical URL of Resource Definition that is the type this refer
        </xs:extension>
      </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="SubstanceMoiety">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="role" type="CodeableConcept" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The role of the moiety should be specified if there is a specific role the moiety is playing.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The unique identifier assigned to the substance representing the moiety based on the ISO 11238 substance controlled vocabulary.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="name" type="string" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The name of the moiety shall be provided.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="stereochemistry" type="CodeableConcept" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Stereochemistry shall be captured as described in 4.7.1.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="opticalActivity" type="CodeableConcept" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Optical activity shall be captured as described in 4.7.2.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="molecularFormula" type="string" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Molecular formula shall be captured as described in 4.7.3.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="amount" type="SubstanceAmount" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Used to capture quantitative values for a variety of elements. If only limits are given, the arithmetic mean would be the average. If only a single definite value for a given element is given, it would be captured in this field.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="ProductShelfLife">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">The shelf-life and storage information for a medicinal product item or container can be described using this class.</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Unique identifier for the packaged Medicinal Product.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="type" type="CodeableConcept" minOccurs="1" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">This describes the shelf life, taking into account various scenarios such as shelf life of the packaged Medicinal Product itself, shelf life after transformation where necessary and shelf life after the first opening of a bottle, etc. The shelf life type shall be specified using an appropriate controlled vocabulary The controlled term and the controlled term identifier shall be specified.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="period" type="Quantity" minOccurs="1" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The shelf life time period can be specified using a numerical value for the period of time and its unit of time measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="specialPrecautionsForStorage" type="CodeableConcept" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Special precautions for storage, if any, can be specified using an appropriate controlled vocabulary The controlled term and the controlled term identifier shall be specified.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="ProdCharacteristic">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have a value for at least one of the defined elements, an @id referenced from the Narrative, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="height" type="Quantity" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the height can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="width" type="Quantity" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the width can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="depth" type="Quantity" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the depth can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="weight" type="Quantity" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the weight can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="nominalVolume" type="Quantity" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the nominal volume can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="externalDiameter" type="Quantity" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the external diameter can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="shape" type="string" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the shape can be specified An appropriate controlled vocabulary shall be used The term and the term identifier shall be used.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="color" type="string" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the color can be specified An appropriate controlled vocabulary shall be used The term and the term identifier shall be used.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="imprint" type="string" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the imprint can be specified as text.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="image" type="Attachment" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the image can be provided The format of the image attachment shall be specified by regional implementations.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element name="scoring" type="CodeableConcept" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Where applicable, the scoring can be specified An appropriate controlled vocabulary shall be used The term and the term identifier shall be used.</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
   <xs:complexType name="DomainResource">
     <xs:annotation>
       <xs:documentation xml:lang="en">A resource that includes narrative, extensions, and contained resources.</xs:documentation>
@@ -3781,7 +3788,7 @@ The type is the Canonical URL of Resource Definition that is the type this refer
           </xs:element>
           <xs:element name="modifierExtension" type="Extension" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
+              <xs:documentation xml:lang="en">May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
 
 Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).</xs:documentation>
             </xs:annotation>
@@ -3953,6 +3960,161 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
        </xs:extension>
      </xs:complexContent>
   </xs:complexType>
+  <xs:simpleType name="FHIRVersion-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="0.01">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">0.01</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0.05">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">0.05</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0.06">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">0.06</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0.11">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">0.11</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0.0.80">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">0.0.80</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0.0.81">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">0.0.81</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0.0.82">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">0.0.82</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0.4.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">0.4.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0.5.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">0.5.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1.0.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">1.0.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1.0.1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">1.0.1</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1.0.2">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">1.0.2</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1.1.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">1.1.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1.4.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">1.4.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1.6.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">1.6.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1.8.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">1.8.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3.0.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">3.0.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3.0.1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">3.0.1</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3.3.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">3.3.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3.5.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">3.5.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3.6.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">3.6.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="4.0.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">4.0.0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="FHIRVersion">
+    <xs:annotation>
+      <xs:documentation xml:lang="en"></xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+       <xs:extension base="Element">
+         <xs:attribute name="value" type="FHIRVersion-list" use="optional"/>
+       </xs:extension>
+     </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="NoteType-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="display">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Display</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="print">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Print (Form)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="printoper">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Print (Operator)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="NoteType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en"></xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+       <xs:extension base="Element">
+         <xs:attribute name="value" type="NoteType-list" use="optional"/>
+       </xs:extension>
+     </xs:complexContent>
+  </xs:complexType>
   <xs:simpleType name="RemittanceOutcome-list">
     <xs:restriction base="code-primitive">
       <xs:enumeration value="queued">
@@ -3985,36 +4147,6 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
     <xs:complexContent>
        <xs:extension base="Element">
          <xs:attribute name="value" type="RemittanceOutcome-list" use="optional"/>
-       </xs:extension>
-     </xs:complexContent>
-  </xs:complexType>
-  <xs:simpleType name="NoteType-list">
-    <xs:restriction base="code-primitive">
-      <xs:enumeration value="display">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Display</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="print">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Print (Form)</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="printoper">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Print (Operator)</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="NoteType">
-    <xs:annotation>
-      <xs:documentation xml:lang="en"></xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-       <xs:extension base="Element">
-         <xs:attribute name="value" type="NoteType-list" use="optional"/>
        </xs:extension>
      </xs:complexContent>
   </xs:complexType>

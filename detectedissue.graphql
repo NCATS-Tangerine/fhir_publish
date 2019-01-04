@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type DetectedIssue {
   id: ID
@@ -11,15 +11,25 @@ type DetectedIssue {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
-  category: CodeableConcept
+  code: CodeableConcept
   severity: code  _severity: ElementBase
   patient: Reference
-  date: dateTime  _date: ElementBase
+  identifiedDateTime: dateTime  _identifiedDateTime: ElementBase
+  identifiedPeriod: Period
   author: Reference
   implicated: [Reference]
+  evidence: [DetectedIssueEvidence]
   detail: String  _detail: ElementBase
   reference: uri  _reference: ElementBase
   mitigation: [DetectedIssueMitigation]
+}
+
+type DetectedIssueEvidence {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: [CodeableConcept]
+  detail: [Reference]
 }
 
 type DetectedIssueMitigation {
@@ -42,15 +52,25 @@ input DetectedIssue {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
-  category: CodeableConcept
+  code: CodeableConcept
   severity: code  _severity: ElementBase
   patient: Reference
-  date: dateTime  _date: ElementBase
+  identifiedDateTime: dateTime  _identifiedDateTime: ElementBase
+  identifiedPeriod: Period
   author: Reference
   implicated: [Reference]
+  evidence: [DetectedIssueEvidence]
   detail: String  _detail: ElementBase
   reference: uri  _reference: ElementBase
   mitigation: [DetectedIssueMitigation]
+}
+
+input DetectedIssueEvidence {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: [CodeableConcept]
+  detail: [Reference]
 }
 
 input DetectedIssueMitigation {
@@ -69,8 +89,8 @@ type DetectedIssueReadType {
 type DetectedIssueListType {
   DetectedIssueList(_filter : String
     author : [reference]
-    category : [token]
-    date : [date]
+    code : [token]
+    identified : [date]
     identifier : [token]
     implicated : [reference]
     patient : [reference]
@@ -91,8 +111,8 @@ type DetectedIssueListType {
 type DetectedIssueConnectionType {
   DetectedIssueConection(_filter : String
     author : [reference]
-    category : [token]
-    date : [date]
+    code : [token]
+    identified : [date]
     identifier : [token]
     implicated : [reference]
     patient : [reference]

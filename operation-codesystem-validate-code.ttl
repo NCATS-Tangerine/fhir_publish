@@ -15,13 +15,18 @@
   ], [
      fhir:index 1;
      fhir:Extension.url [ fhir:value "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status" ];
-     fhir:Extension.value [ fhir:value "Normative" ]
+     fhir:Extension.value [ fhir:value "normative" ]
+  ], [
+     fhir:index 2;
+     fhir:Extension.url [ fhir:value "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version" ];
+     fhir:Extension.value [ fhir:value "4.0.0" ]
   ];
   fhir:OperationDefinition.url [ fhir:value "http://hl7.org/fhir/OperationDefinition/CodeSystem-validate-code"];
+  fhir:OperationDefinition.version [ fhir:value "3.6.0"];
   fhir:OperationDefinition.name [ fhir:value "Code System based Validation"];
   fhir:OperationDefinition.status [ fhir:value "draft"];
   fhir:OperationDefinition.kind [ fhir:value "operation"];
-  fhir:OperationDefinition.date [ fhir:value "2018-09-14T07:16:19-05:00"];
+  fhir:OperationDefinition.date [ fhir:value "2018-12-13T14:23:07-06:00"];
   fhir:OperationDefinition.publisher [ fhir:value "HL7 (FHIR Project)"];
   fhir:OperationDefinition.contact [
      fhir:index 0;
@@ -35,7 +40,7 @@
        fhir:ContactPoint.value [ fhir:value "fhir@lists.hl7.org" ]
      ]
   ];
-  fhir:OperationDefinition.description [ fhir:value "Validate that a coded value is in the code system. If the operation is not called at the instance level, one of the parameters \"url\" or \"codeSystem\" must be provided.  One (and only one) of the in parameters (code, coding, codeableConcept) must be provided.  The operation returns a result (true / false), an error message, and the recommended display for the code"];
+  fhir:OperationDefinition.description [ fhir:value "Validate that a coded value is in the code system. If the operation is not called at the instance level, one of the parameters \"url\" or \"codeSystem\" must be provided. The operation returns a result (true / false), an error message, and the recommended display for the code.\n\nWhen invoking this operation, a client SHALL provide one (and only one) of the parameters (code+system, coding, or codeableConcept). Other parameters (including version and display) are optional"];
   fhir:OperationDefinition.code [ fhir:value "validate-code"];
   fhir:OperationDefinition.resource [
      fhir:value "CodeSystem";
@@ -114,7 +119,7 @@
      fhir:OperationDefinition.use [ fhir:value "in" ];
      fhir:OperationDefinition.min [ fhir:value "0" ];
      fhir:OperationDefinition.max [ fhir:value "1" ];
-     fhir:OperationDefinition.documentation [ fhir:value "If this parameter has a value of true, the client is stating that the validation is being performed in a context where a concept designated as 'abstract' is appropriate/allowed to be used, and the server should regard abstract codes as valid. If this parameter is fase, abstract codes are not considered to be valid.\n\nNote that. 'abstract' is a property defined by many HL7 code systems that indicates that the concept is a logical grouping concept that is not intended to be used asa 'concrete' concept to in a actual patient/care/process record. This language is borrowed from Object Orienated theory where 'asbtract' objects are never instantiated. However in the general record and terminology eco-system, there are many contexts where it is appropraite to use these codes e.g. as decision making criterion, or when editing value sets themselves. This parameter allows a client to indicate to the server that it is working in such a context." ];
+     fhir:OperationDefinition.documentation [ fhir:value "If this parameter has a value of true, the client is stating that the validation is being performed in a context where a concept designated as 'abstract' is appropriate/allowed to be used, and the server should regard abstract codes as valid. If this parameter is false, abstract codes are not considered to be valid.\n\nNote that. 'abstract' is a property defined by many HL7 code systems that indicates that the concept is a logical grouping concept that is not intended to be used asa 'concrete' concept to in an actual patient/care/process record. This language is borrowed from Object Orienated theory where 'asbtract' objects are never instantiated. However in the general record and terminology eco-system, there are many contexts where it is appropraite to use these codes e.g. as decision making criterion, or when editing value sets themselves. This parameter allows a client to indicate to the server that it is working in such a context." ];
      fhir:OperationDefinition.type [ fhir:value "boolean" ]
   ], [
      fhir:index 9;

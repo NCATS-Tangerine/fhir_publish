@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
   <!-- template-version-maps.html --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Condition - FHIR v3.5.0</title>
+  <title>Condition - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -38,7 +38,7 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <ul class="nav nav-tabs"><li><a href="condition.html">Content</a></li><li><a href="condition-examples.html">Examples</a></li><li><a href="condition-definitions.html">Detailed Descriptions</a></li><li><a href="condition-mappings.html">Mappings</a></li><li><a href="condition-profiles.html">Profiles &amp; Extensions</a></li><li class="active"><a href="#">R3 Conversions</a></li></ul>
 
 <h2 class="self-link-parent"><span class="sectioncount">9.2.2<a name="9.2.2"> </a></span> Resource Condition - R3/R4 Conversions <a href="condition-version-maps.html#9.2.2" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h2>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/patientcare/index.cfm">Patient Care <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative  <!-- !ns! --></td><td><a href="compartmentdefinition.html">Compartments</a>: <a href="compartmentdefinition-encounter.html">Encounter</a>, <a href="compartmentdefinition-patient.html">Patient</a>, <a href="compartmentdefinition-practitioner.html">Practitioner</a>, <a href="compartmentdefinition-relatedperson.html">RelatedPerson</a></td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/patientcare/index.cfm">Patient Care <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative<td><a href="security.html#SecPrivConsiderations">Security Category</a>: Patient</td>  <!-- !ns! --></td><td><a href="compartmentdefinition.html">Compartments</a>: <a href="compartmentdefinition-encounter.html">Encounter</a>, <a href="compartmentdefinition-patient.html">Patient</a>, <a href="compartmentdefinition-practitioner.html">Practitioner</a>, <a href="compartmentdefinition-relatedperson.html">RelatedPerson</a></td></tr></table>
 
 <p>R3 : R4 Conversion maps for Condition.</p>
 
@@ -119,49 +119,43 @@
 <pre>
 map "http://hl7.org/fhir/StructureMap/Condition3to4" = "R3 to R4 Conversions for Condition"
 
-
 uses "http://hl7.org/fhir/3.0/StructureDefinition/Condition" alias ConditionR3 as source
 uses "http://hl7.org/fhir/StructureDefinition/Condition" alias Condition as target
 
 imports "http://hl7.org/fhir/StructureMap/*3to4"
 
-
-
-group Condition extends DomainResource
-  input src : ConditionR3 as source
-  input tgt : Condition as target
-
-  "Condition.identifier" : for src.identifier as vs make tgt.identifier as vt
-  "Condition.clinicalStatus" : for src.clinicalStatus as vs make tgt.clinicalStatus as vt
-  "Condition.verificationStatus" : for src.verificationStatus as vs make tgt.verificationStatus as vt
-  "Condition.category" : for src.category as vs make tgt.category as vt
-  "Condition.severity" : for src.severity as vs make tgt.severity as vt
-  "Condition.code" : for src.code as vs make tgt.code as vt
-  "Condition.bodySite" : for src.bodySite as vs make tgt.bodySite as vt
-  "Condition.subject" : for src.subject as vs make tgt.subject as vt
-  "Condition.context" : for src.context as vs make tgt.context as vt
-  "Condition.onset-dateTime" : for src.onset  : dateTime as vs make tgt.onset = create("dateTime") as vt then dateTime(vs,vt)
-  "Condition.onset-Age" : for src.onset  : Age as vs make tgt.onset = create("Age") as vt then Age(vs,vt)
-  "Condition.onset-Period" : for src.onset  : Period as vs make tgt.onset = create("Period") as vt then Period(vs,vt)
-  "Condition.onset-Range" : for src.onset  : Range as vs make tgt.onset = create("Range") as vt then Range(vs,vt)
-  "Condition.onset-string" : for src.onset  : string as vs make tgt.onset = create("string") as vt then string(vs,vt)
-  "Condition.abatement-dateTime" : for src.abatement  : dateTime as vs make tgt.abatement = create("dateTime") as vt then dateTime(vs,vt)
-  "Condition.abatement-Age" : for src.abatement  : Age as vs make tgt.abatement = create("Age") as vt then Age(vs,vt)
-  "Condition.abatement-Period" : for src.abatement  : Period as vs make tgt.abatement = create("Period") as vt then Period(vs,vt)
-  "Condition.abatement-Range" : for src.abatement  : Range as vs make tgt.abatement = create("Range") as vt then Range(vs,vt)
-  "Condition.abatement-string" : for src.abatement  : string as vs make tgt.abatement = create("string") as vt then string(vs,vt)
-  "Condition.recordedDate" : for src.assertedDate as vs make tgt.recordedDate as vt
-  "Condition.asserter" : for src.asserter as vs make tgt.asserter as vt
-  "Condition.stage" : for src.stage as vs0 make tgt.stage as vt0 then {
-    "Condition.stage.summary" : for vs0.summary as vs make vt0.summary as vt
-    "Condition.stage.assessment" : for vs0.assessment as vs make vt0.assessment as vt
-  }
-  "Condition.evidence" : for src.evidence as vs0 make tgt.evidence as vt0 then {
-    "Condition.evidence.code" : for vs0.code as vs make vt0.code as vt
-    "Condition.evidence.detail" : for vs0.detail as vs make vt0.detail as vt
-  }
-  "Condition.note" : for src.note as vs make tgt.note as vt
-endgroup
+group Condition(source src : ConditionR3, target tgt : Condition) extends DomainResource &lt;&lt;type+&gt;&gt; {
+  src.identifier -&gt; tgt.identifier;
+  src.clinicalStatus -&gt; tgt.clinicalStatus;
+  src.verificationStatus -&gt; tgt.verificationStatus;
+  src.category -&gt; tgt.category;
+  src.severity -&gt; tgt.severity;
+  src.code -&gt; tgt.code;
+  src.bodySite -&gt; tgt.bodySite;
+  src.subject -&gt; tgt.subject;
+  src.context -&gt; tgt.context;
+  src.onset : dateTime as vs -&gt; tgt.onset = create("dateTime") as vt then dateTime(vs, vt);
+  src.onset : Age as vs -&gt; tgt.onset = create("Age") as vt then Age(vs, vt);
+  src.onset : Period as vs -&gt; tgt.onset = create("Period") as vt then Period(vs, vt);
+  src.onset : Range as vs -&gt; tgt.onset = create("Range") as vt then Range(vs, vt);
+  src.onset : string as vs -&gt; tgt.onset = create("string") as vt then string(vs, vt);
+  src.abatement : dateTime as vs -&gt; tgt.abatement = create("dateTime") as vt then dateTime(vs, vt);
+  src.abatement : Age as vs -&gt; tgt.abatement = create("Age") as vt then Age(vs, vt);
+  src.abatement : Period as vs -&gt; tgt.abatement = create("Period") as vt then Period(vs, vt);
+  src.abatement : Range as vs -&gt; tgt.abatement = create("Range") as vt then Range(vs, vt);
+  src.abatement : string as vs -&gt; tgt.abatement = create("string") as vt then string(vs, vt);
+  src.assertedDate -&gt; tgt.recordedDate "recordedDate";
+  src.asserter -&gt; tgt.asserter;
+  src.stage as vs0 -&gt; tgt.stage as vt0 then {
+    vs0.summary -&gt; vt0.summary;
+    vs0.assessment -&gt; vt0.assessment;
+  };
+  src.evidence as vs0 -&gt; tgt.evidence as vt0 then {
+    vs0.code -&gt; vt0.code;
+    vs0.detail -&gt; vt0.detail;
+  };
+  src.note -&gt; tgt.note;
+}
 
 
 </pre>
@@ -175,53 +169,42 @@ endgroup
 <pre>
 map "http://hl7.org/fhir/StructureMap/Condition4to3" = "R4 to R3 Conversion for Condition"
 
-
 uses "http://hl7.org/fhir/StructureDefinition/Condition" alias Condition as source
 uses "http://hl7.org/fhir/3.0/StructureDefinition/Condition" alias ConditionR3 as target
 
 imports "http://hl7.org/fhir/StructureMap/*4to3"
 
+group Condition(source src : ConditionR3, target tgt : Condition) extends DomainResource &lt;&lt;type+&gt;&gt; {
+  src.identifier -&gt; tgt.identifier;
+  src.clinicalStatus -&gt; tgt.clinicalStatus;
+  src.verificationStatus -&gt; tgt.verificationStatus;
+  src.category -&gt; tgt.category;
+  src.severity -&gt; tgt.severity;
+  src.code -&gt; tgt.code;
+  src.bodySite -&gt; tgt.bodySite;
+  src.subject -&gt; tgt.subject;
+  src.context -&gt; tgt.context;
+  src.onset -&gt; tgt.onset;
+  src.abatement -&gt; tgt.abatement;
+  src.recordedDate -&gt; tgt.recordedDate;
+  src.recorder -&gt; tgt.recorder;
+  src.asserter -&gt; tgt.asserter;
+  src.stage as s -&gt; tgt.stage as t then ConditionStage(s, t);
+  src.evidence as s -&gt; tgt.evidence as t then ConditionEvidence(s, t);
+  src.note -&gt; tgt.note;
+}
 
+group ConditionStage(source src : ConditionR3, target tgt : Condition) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.summary -&gt; tgt.summary;
+  src.assessment -&gt; tgt.assessment;
+  src.type -&gt; tgt.type;
+}
 
-group Condition extends DomainResource
-  input src : ConditionR3 as source
-  input tgt : Condition as target
+group ConditionEvidence(source src : ConditionR3, target tgt : Condition) extends BackboneElement &lt;&lt;type+&gt;&gt; {
+  src.code -&gt; tgt.code;
+  src.detail -&gt; tgt.detail;
+}
 
-  "Condition.identifier": for src.identifier make tgt.identifier
-  "Condition.clinicalStatus": for src.clinicalStatus make tgt.clinicalStatus
-  "Condition.verificationStatus": for src.verificationStatus make tgt.verificationStatus
-  "Condition.category": for src.category make tgt.category
-  "Condition.severity": for src.severity make tgt.severity
-  "Condition.code": for src.code make tgt.code
-  "Condition.bodySite": for src.bodySite make tgt.bodySite
-  "Condition.subject": for src.subject make tgt.subject
-  "Condition.context": for src.context make tgt.context
-  "Condition.onset": for src.onset make tgt.onset
-  "Condition.abatement": for src.abatement make tgt.abatement
-  "Condition.recordedDate": for src.recordedDate make tgt.recordedDate
-  "Condition.recorder": for src.recorder make tgt.recorder
-  "Condition.asserter": for src.asserter make tgt.asserter
-  "Condition.stage": for src.stage as s make tgt.stage as t then ConditionStage(s,t)
-  "Condition.evidence": for src.evidence as s make tgt.evidence as t then ConditionEvidence(s,t)
-  "Condition.note": for src.note make tgt.note
-endgroup
-
-group ConditionStage extends BackboneElement
-  input src : ConditionR3 as source
-  input tgt : Condition as target
-
-  "Condition.stage.summary": for src.summary make tgt.summary
-  "Condition.stage.assessment": for src.assessment make tgt.assessment
-  "Condition.stage.type": for src.type make tgt.type
-endgroup
-
-group ConditionEvidence extends BackboneElement
-  input src : ConditionR3 as source
-  input tgt : Condition as target
-
-  "Condition.evidence.code": for src.code make tgt.code
-  "Condition.evidence.detail": for src.detail make tgt.detail
-endgroup
 
 </pre>
 </div>
@@ -230,6 +213,7 @@ endgroup
 
 <h3 class="self-link-parent"><span class="sectioncount">9.2.2.3<a name="9.2.2.3"> </a></span> R4 Validation Errors <a href="condition-version-maps.html#9.2.2.3" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 
+&lt;p&gt;No validation errors - all conversions are clean&lt;/p&gt;
 
 
 </div>
@@ -246,7 +230,7 @@ endgroup
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:25-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:26-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -256,7 +240,7 @@ endgroup
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fcondition-version-maps.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fcondition-version-maps.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fcondition-version-maps.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fcondition-version-maps.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

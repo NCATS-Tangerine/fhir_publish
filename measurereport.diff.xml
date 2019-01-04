@@ -2,9 +2,20 @@
 <difference>
    <type name="MeasureReport" status="changed">
       <element new-max="*" old-max="1" path="MeasureReport.identifier"/>
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               path="MeasureReport.type">
+         <removed-code code="patient-list"/>
+         <added-code code="subject-list"/>
+         <added-code code="data-collection"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/measure-report-type"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/measure-report-type"
+                      strength="required"/>
+      </element>
       <element path="MeasureReport.measure">
          <removed-type name="Reference(Measure)"/>
-         <added-type name="canonical"/>
+         <added-type name="canonical(Measure)"/>
       </element>
       <element path="MeasureReport.subject" status="new"/>
       <element path="MeasureReport.reporter" status="new"/>
@@ -16,10 +27,17 @@
          <added-type name="Quantity"/>
       </element>
       <element path="MeasureReport.group.stratifier.code" status="new"/>
-      <element path="MeasureReport.group.stratifier.stratum.value">
+      <element new-min="0"
+               old-min="1"
+               path="MeasureReport.group.stratifier.stratum.value">
          <removed-type name="string"/>
          <added-type name="CodeableConcept"/>
       </element>
+      <element path="MeasureReport.group.stratifier.stratum.component" status="new"/>
+      <element path="MeasureReport.group.stratifier.stratum.component.code"
+               status="new"/>
+      <element path="MeasureReport.group.stratifier.stratum.component.value"
+               status="new"/>
       <element path="MeasureReport.group.stratifier.stratum.population.subjectResults"
                status="new"/>
       <element path="MeasureReport.group.stratifier.stratum.measureScore">

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Iso-21090 - FHIR v3.5.0</title>
+  <title>Iso-21090 - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -41,7 +41,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -108,7 +108,7 @@
 <div class="col-12">
 
 <h2>ISO 21090 Data Type Extensions</h2>
-<table class="colsi"><tr><td><a _target="blank" href="http://www.hl7.org/Special/committees/fiwg/index.cfm">FHIR Infrastructure</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#levels">Ballot Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
+<table class="colsi"><tr><td><a _target="blank" href="http://www.hl7.org/Special/committees/fiwg/index.cfm">FHIR Infrastructure</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#levels">Standards Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
 
 <div>
 <h2>Scope and Usage</h2>
@@ -148,16 +148,6 @@ included.
 <p>Where null flavors are not supported as part of the core specification, extensions can be defined that expose only those null flavors that are relevant.
 This approach is preferred over referencing the full null flavor specification.  (Note that the null flavor code system can be referenced in any value sets.)
 </p>
-<h4><a href="extension-iso21090-ordinal-value.html">ordinal-value</a></h4>
-<p>
-A numeric value that allows the comparison (less than, greater than) or other numerical 
-manipulation of a concept (e.g. Adding up components of a score). Assigning a value to a
-concept should generally be done in a formal code system that defines the value, or in 
-an applicable value set for the concept, but some concepts do not have a formal definition 
-(or are not even represented as a concept formally, especially in <a href="questionnaire.html">Questionnaires</a>), 
-so this extension is allowed to appear ouside those preferred contexts. The value may be constrained to an 
-integer in some contexts of use.
-</p>
 
 </div>
 
@@ -166,16 +156,23 @@ integer in some contexts of use.
 <h3>Entity Name (EN)</h3>
 <p>These extensions apply to the <a href="datatypes.html#humanname">HumanName</a> data type.</p>
 <ul>
-  <li><a href="extension-iso21090-en-qualifier.html"><b>name-qualifier</b></a> - This extension to <code><a href="datatypes.html#humanname">HumanName</a>.part</code> allows distinguishing initials, middle names, call-me names and other types of names</li>
+  <li><a href="extension-iso21090-en-use.html"><b>EN-use</b></a> - allows a more refined statement of the intended use of a particular name</li>
+  <li><a href="extension-iso21090-en-representation.html"><b>EN-representation</b></a> - is for a subset of <code>EN-use</code> and indicates the representation form of the name (this has specific use in east Asian countries)</li>
 </ul>
 <p>
-Note, however, that implementer experience has led to a new set of extensions being defined for 
+This extension applies to <a href="datatypes.html#humanname">HumanName</a> parts - e.g. <code>family</code> and <code>given</code>: 
+</p>
+<ul>
+  <li><a href="extension-iso21090-en-qualifier.html"><b>EN-qualifier</b></a> - allows distinguishing initials, middle names, call-me names and other types of names</li>
+</ul>
+<p>
+Note, however, that subsequent implementer experience has led to a new set of extensions being defined for 
 most of the human name issues (see <a href="extension-humanname-own-name.html">own-name</a>, 
 <a href="extension-humanname-own-prefix.html">own-prefix</a>, 
 <a href="extension-humanname-partner-name.html">partner-name</a>, 
 <a href="extension-humanname-partner-prefix.html">partner-prefix</a>, 
 <a href="extension-humanname-fathers-family.html">fathers-family</a> and
-<a href="extension-humanname-mothers-family.html">mothers-family</a>), and these should be used in preference to the ISO 21090 extensions.</p>
+<a href="extension-humanname-mothers-family.html">mothers-family</a>), and these should be used in preference to the ISO 21090 extensions, which are defined only for backwards compatibility.</p>
 </div>
 
 <div>
@@ -233,6 +230,7 @@ These additional elements of Address will be ignored by applications that do not
 
 <table class="lines"><tr><td colspan="2"><b>Extensions</b>: </td></tr><tr><td><a name="extension-iso21090-nullFlavor"> </a><a href="extension-iso21090-nullflavor.html">iso21090-nullFlavor</a></td><td><b>nullFlavor</b> : <p>If the value is not a proper value, indicates the reason.</p>
 </td></tr><tr><td><a name="extension-iso21090-EN-qualifier"> </a><a href="extension-iso21090-en-qualifier.html">iso21090-EN-qualifier</a></td><td><b>EN-qualifier</b> : <p>A set of codes each of which specifies a certain subcategory of the name part in addition to the main name part type.</p>
+</td></tr><tr><td><a name="extension-iso21090-EN-use"> </a><a href="extension-iso21090-en-use.html">iso21090-EN-use</a></td><td><b>EN-use</b> : <p>A set of codes advising a system or user which name in a set of names to select for a given purpose.</p>
 </td></tr><tr><td><a name="extension-iso21090-EN-representation"> </a><a href="extension-iso21090-en-representation.html">iso21090-EN-representation</a></td><td><b>EN-representation</b> : <p>Name Representation.</p>
 </td></tr><tr><td><a name="extension-iso21090-uncertainty"> </a><a href="extension-iso21090-uncertainty.html">iso21090-uncertainty</a></td><td><b>uncertainty</b> : <p>The primary measure of variance/uncertainty of the value (the square root of the sum of the squares of the differences between all data points and the mean).</p>
 </td></tr><tr><td><a name="extension-iso21090-uncertaintyType"> </a><a href="extension-iso21090-uncertaintytype.html">iso21090-uncertaintyType</a></td><td><b>uncertaintyType</b> : <p>A code specifying the type of probability distribution for the uncertainty.</p>
@@ -261,9 +259,7 @@ These additional elements of Address will be ignored by applications that do not
 </td></tr><tr><td><a name="extension-iso21090-ADXP-precinct"> </a><a href="extension-iso21090-adxp-precinct.html">iso21090-ADXP-precinct</a></td><td><b>ADXP-precinct</b> : <p>A subsection of a municipality.</p>
 </td></tr><tr><td><a name="extension-iso21090-SC-coding"> </a><a href="extension-iso21090-sc-coding.html">iso21090-SC-coding</a></td><td><b>SC-coding</b> : <p>Provides a coded expression for the content represented in a string.</p>
 </td></tr><tr><td><a name="extension-iso21090-preferred"> </a><a href="extension-iso21090-preferred.html">iso21090-preferred</a></td><td><b>preferred</b> : <p>Flag denoting whether parent item is preferred - e.g., a preferred address or telephone number.</p>
-</td></tr><tr><td><a name="extension-iso21090-verification"> </a><a href="extension-iso21090-verification.html">iso21090-verification</a></td><td><b>verification</b> : <p>Method value was verified.</p>
 </td></tr><tr><td><a name="extension-iso21090-TEL-address"> </a><a href="extension-iso21090-tel-address.html">iso21090-TEL-address</a></td><td><b>TEL-address</b> : <p>A V3 compliant, RFC 3966 conformant URI version of the telephone or fax number.</p>
-</td></tr><tr><td><a name="extension-iso21090-ordinal-value"> </a><a href="extension-iso21090-ordinal-value.html">iso21090-ordinal-value</a></td><td><b>ordinal-value</b> : <p>A numeric value that allows the comparison (less than, greater than) or other numerical manipulation of a concept (e.g. Adding up components of a score).</p>
 </td></tr><tr><td><a name="extension-iso21090-PQ-translation"> </a><a href="extension-iso21090-pq-translation.html">iso21090-PQ-translation</a></td><td><b>PQ-translation</b> : <p>An alternative representation of the same physical quantity expressed in a different unit from a different unit code system and possibly with a different value.</p>
 </td></tr></table>
 
@@ -283,7 +279,7 @@ These additional elements of Address will be ignored by applications that do not
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -293,7 +289,7 @@ These additional elements of Address will be ignored by applications that do not
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fiso-21090&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fiso-21090">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fiso-21090&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fiso-21090">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

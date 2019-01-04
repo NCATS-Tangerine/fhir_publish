@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Operation-valueset-expand - FHIR v3.5.0</title>
+  <title>Operation-valueset-expand - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -41,7 +41,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -108,7 +108,7 @@
 <div class="col-12">
 
 <h1>Operation-valueset-expand</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/Vocab/index.cfm">Vocabulary</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
 
 <p>
 
@@ -118,11 +118,16 @@ This is the narrative for the resource. See also the <a href="operation-valueset
 <hr/>
 <div xmlns="http://www.w3.org/1999/xhtml"><h2>Value Set Expansion</h2><p>OPERATION: Value Set Expansion</p><p>The official URL for this operation definition is: </p><pre>http://hl7.org/fhir/OperationDefinition/ValueSet-expand</pre><div><p>The definition of a value set is used to create a simple collection of codes suitable for use for data entry or validation.</p>
 <p>If the operation is not called at the instance level, one of the in parameters url, context or valueSet must be provided.  An expanded value set will be returned, or an OperationOutcome with an error message.</p>
-</div><p>URL: [base]/ValueSet/$expand</p><p>URL: [base]/ValueSet/[id]/$expand</p><p>Parameters</p><table class="grid"><tr><td><b>Use</b></td><td><b>Name</b></td><td><b>Cardinality</b></td><td><b>Type</b></td><td><b>Binding</b></td><td><b>Documentation</b></td></tr><tr><td>IN</td><td>url</td><td>0..1</td><td><a href="datatypes.html#uri">uri</a></td><td></td><td><div><p>A canonical url for a value set. The server must know the value set (e.g. it is defined explicitly in the server's value sets, or it is defined implicitly by some code system known to the server</p>
+</div><p>URL: [base]/ValueSet/$expand</p><p>URL: [base]/ValueSet/[id]/$expand</p><p>Parameters</p><table class="grid"><tr><td><b>Use</b></td><td><b>Name</b></td><td><b>Cardinality</b></td><td><b>Type</b></td><td><b>Binding</b></td><td><b>Documentation</b></td></tr><tr><td>IN</td><td>url</td><td>0..1</td><td><a href="datatypes.html#uri">uri</a></td><td></td><td><div><p>A canonical reference to a value set. The server must know the value set (e.g. it is defined explicitly in the server's value sets, or it is defined implicitly by some code system known to the server</p>
 </div></td></tr><tr><td>IN</td><td>valueSet</td><td>0..1</td><td><a href="valueset.html">ValueSet</a></td><td></td><td><div><p>The value set is provided directly as part of the request. Servers may choose not to accept value sets in this fashion</p>
 </div></td></tr><tr><td>IN</td><td>valueSetVersion</td><td>0..1</td><td><a href="datatypes.html#string">string</a></td><td></td><td><div><p>The identifier that is used to identify a specific version of the value set to be used when generating the expansion. This is an arbitrary value managed by the value set author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available.</p>
 </div></td></tr><tr><td>IN</td><td>context</td><td>0..1</td><td><a href="datatypes.html#uri">uri</a></td><td></td><td><div><p>The context of the value set, so that the server can resolve this to a value set to expand. The recommended format for this URI is [Structure Definition URL]#[name or path into structure definition] e.g. http://hl7.org/fhir/StructureDefinition/observation-hspc-height-hspcheight#Observation.interpretation. Other forms may be used but are not defined. This form is only usable if the terminology server also has access to the conformance registry that the server is using, but can be used to delegate the mapping from an application context to a binding at run-time</p>
-</div></td></tr><tr><td>IN</td><td>contextDirection</td><td>0..1</td><td><a href="datatypes.html#code">code</a></td><td></td><td><div><p>If a context is provided, a context direction may also be provided. Valid values are 'incoming' and 'outgoing'. The purpose is to inform the server whether to use the value set associated with the context for reading or writing purposes (note: for most elements, this is the same value set, but there are a few elements where the reading and writing value sets are different)</p>
+</div></td></tr><tr><td>IN</td><td>contextDirection</td><td>0..1</td><td><a href="datatypes.html#code">code</a></td><td></td><td><div><p>If a context is provided, a context direction may also be provided. Valid values are:</p>
+<ul>
+<li>'incoming': the codes a client can use for PUT/POST operations,  and</li>
+<li>'outgoing', the codes a client might receive from the server.</li>
+</ul>
+<p>The purpose is to inform the server whether to use the value set associated with the context for reading or writing purposes (note: for most elements, this is the same value set, but there are a few elements where the reading and writing value sets are different)</p>
 </div></td></tr><tr><td>IN</td><td>filter</td><td>0..1</td><td><a href="datatypes.html#string">string</a></td><td></td><td><div><p>A text filter that is applied to restrict the codes that are returned (this is useful in a UI context). The interpretation of this is delegated to the server in order to allow to determine the most optimal search approach for the context. The server can document the way this parameter works in <a href="terminologycapabilities.html">TerminologyCapabilities</a>..expansion.textFilter. Typical usage of this parameter includes functionality like:</p>
 <ul>
 <li>using left matching e.g. "acut ast"</li>
@@ -193,7 +198,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:20-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:25-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -203,7 +208,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Foperation-valueset-expand.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperation-valueset-expand.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Foperation-valueset-expand.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperation-valueset-expand.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

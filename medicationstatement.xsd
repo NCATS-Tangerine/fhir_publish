@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -51,7 +51,7 @@
         <xs:sequence>
           <xs:element name="identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier">
             <xs:annotation>
-              <xs:documentation xml:lang="en">External identifier - FHIR will generate its own internal identifiers (probably URLs) which do not need to be explicitly managed by the resource.  The identifier here is one that would be used by another non-FHIR system - for example an automated medication pump would provide a record each time it operated; an administration while the patient was off the ward might be made with a different system and entered after the event.  Particularly important if these records have to be updated.</xs:documentation>
+              <xs:documentation xml:lang="en">Identifiers associated with this Medication Statement that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate. They are business identifiers assigned to this resource by the performer or other systems and remain constant as the resource is updated and propagates from server to server.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="basedOn" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -64,7 +64,7 @@
               <xs:documentation xml:lang="en">A larger event of which this particular event is a component or step.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="1" maxOccurs="1" type="MedicationStatementStatus">
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="MedicationStatusCodes">
             <xs:annotation>
               <xs:documentation xml:lang="en">A code representing the patient or other source's judgment about the state of the medication used that this statement is about.  Generally this will be active or completed.</xs:documentation>
            </xs:annotation>
@@ -139,61 +139,6 @@
            </xs:annotation>
           </xs:element>
         </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:simpleType name="MedicationStatementStatus-list">
-    <xs:restriction base="code-primitive">
-      <xs:enumeration value="active">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Active</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="completed">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Completed</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="entered-in-error">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Entered in Error</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="intended">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Intended</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="stopped">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Stopped</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="on-hold">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">On Hold</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="unknown">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Unknown</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="not-taken">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Not Taken</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="MedicationStatementStatus">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A coded concept indicating the current status of a MedicationStatement.</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="Element">
-        <xs:attribute name="value" type="MedicationStatementStatus-list" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

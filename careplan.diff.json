@@ -12,6 +12,15 @@
       },
       "CarePlan.status": {
         "binding-valueset-changed": true,
+        "binding-codes-changed": true,
+        "removed-codes": [
+          "suspended",
+          "cancelled"
+        ],
+        "added-codes": [
+          "on-hold",
+          "revoked"
+        ],
         "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/care-plan-status",
@@ -22,6 +31,33 @@
           "strength": "required"
         }
       },
+      "CarePlan.intent": {
+        "binding-codes-changed": true,
+        "removed-codes": [
+          "proposal",
+          "plan",
+          "order",
+          "option"
+        ],
+        "added-codes": [
+          "proposal",
+          "plan",
+          "order",
+          "option"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/care-plan-intent",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/care-plan-intent",
+          "strength": "required"
+        }
+      },
+      "CarePlan.encounter": {
+        "status": "new"
+      },
       "CarePlan.created": {
         "status": "new"
       },
@@ -29,10 +65,10 @@
         "old-max": "*",
         "new-max": "1",
         "removed-types": [
-          "Reference(Patient|Practitioner|RelatedPerson|Organization|CareTeam)"
+          "Reference(Patient | Practitioner | RelatedPerson | Organization | CareTeam)"
         ],
         "added-types": [
-          "Reference(Patient|Practitioner|PractitionerRole|Device|RelatedPerson|Organization|CareTeam)"
+          "Reference(Patient | Practitioner | PractitionerRole | Device | RelatedPerson | Organization | CareTeam)"
         ]
       },
       "CarePlan.contributor": {
@@ -40,14 +76,25 @@
       },
       "CarePlan.activity.reference": {
         "removed-types": [
-          "Reference(Appointment|CommunicationRequest|DeviceRequest|MedicationRequest|NutritionOrder|Task|ProcedureRequest|ReferralRequest|VisionPrescription|RequestGroup)"
+          "Reference(Appointment | CommunicationRequest | DeviceRequest | MedicationRequest | NutritionOrder | Task | ProcedureRequest | ReferralRequest | VisionPrescription | RequestGroup)"
         ],
         "added-types": [
-          "Reference(Appointment|CommunicationRequest|DeviceRequest|MedicationRequest|NutritionOrder|Task|ServiceRequest|VisionPrescription|RequestGroup)"
+          "Reference(Appointment | CommunicationRequest | DeviceRequest | MedicationRequest | NutritionOrder | Task | ServiceRequest | VisionPrescription | RequestGroup)"
         ]
       },
       "CarePlan.activity.detail.kind": {
-        "status": "new"
+        "old-name": "category",
+        "removed-types": [
+          "CodeableConcept"
+        ],
+        "added-types": [
+          "code"
+        ],
+        "binding-status": "added",
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/care-plan-activity-kind",
+          "strength": "required"
+        }
       },
       "CarePlan.activity.detail.instantiatesCanonical": {
         "status": "new"
@@ -60,8 +107,24 @@
           "Reference(Condition)"
         ],
         "added-types": [
-          "Reference(Condition|Observation|DiagnosticReport|DocumentReference)"
+          "Reference(Condition | Observation | DiagnosticReport | DocumentReference)"
         ]
+      },
+      "CarePlan.activity.detail.status": {
+        "binding-codes-changed": true,
+        "added-codes": [
+          "stopped",
+          "entered-in-error"
+        ],
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/care-plan-activity-status",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/care-plan-activity-status",
+          "strength": "required"
+        }
       },
       "CarePlan.activity.detail.statusReason": {
         "removed-types": [
@@ -72,34 +135,25 @@
         ]
       },
       "CarePlan.activity.detail.doNotPerform": {
-        "status": "new"
+        "old-name": "prohibited",
+        "default": "removed",
+        "old-default": "\"false\""
       },
       "CarePlan.activity.detail.performer": {
         "removed-types": [
-          "Reference(Practitioner|Organization|RelatedPerson|Patient|CareTeam)"
+          "Reference(Practitioner | Organization | RelatedPerson | Patient | CareTeam)"
         ],
         "added-types": [
-          "Reference(Practitioner|PractitionerRole|Organization|RelatedPerson|Patient|CareTeam|HealthcareService|Device)"
-        ]
-      },
-      "CarePlan.activity.detail.product[x]": {
-        "removed-types": [
-          "Reference(Medication|Substance)"
-        ],
-        "added-types": [
-          "Reference(Medication|Substance)"
+          "Reference(Practitioner | PractitionerRole | Organization | RelatedPerson | Patient | CareTeam | HealthcareService | Device)"
         ]
       },
       "CarePlan.definition": {
         "status": "deleted"
       },
-      "CarePlan.activity.detail.category": {
+      "CarePlan.context": {
         "status": "deleted"
       },
       "CarePlan.activity.detail.definition": {
-        "status": "deleted"
-      },
-      "CarePlan.activity.detail.prohibited": {
         "status": "deleted"
       }
     },

@@ -3,14 +3,77 @@
    <type name="Questionnaire" status="changed">
       <element path="Questionnaire.derivedFrom" status="new"/>
       <element modifier="removed" path="Questionnaire.experimental"/>
+      <element binding-codes-changed="true"
+               binding-status="changed"
+               path="Questionnaire.subjectType">
+         <removed-code code="BodySite"/>
+         <removed-code code="DataElement"/>
+         <removed-code code="DeviceComponent"/>
+         <removed-code code="EligibilityRequest"/>
+         <removed-code code="EligibilityResponse"/>
+         <removed-code code="ExpansionProfile"/>
+         <removed-code code="ImagingManifest"/>
+         <removed-code code="ProcedureRequest"/>
+         <removed-code code="ProcessRequest"/>
+         <removed-code code="ProcessResponse"/>
+         <removed-code code="ReferralRequest"/>
+         <removed-code code="Sequence"/>
+         <removed-code code="ServiceDefinition"/>
+         <added-code code="BiologicallyDerivedProduct"/>
+         <added-code code="BodyStructure"/>
+         <added-code code="CatalogEntry"/>
+         <added-code code="ChargeItemDefinition"/>
+         <added-code code="ClinicalProfile"/>
+         <added-code code="CoverageEligibilityRequest"/>
+         <added-code code="CoverageEligibilityResponse"/>
+         <added-code code="DeviceDefinition"/>
+         <added-code code="EffectEvidenceSynthesis"/>
+         <added-code code="EventDefinition"/>
+         <added-code code="Evidence"/>
+         <added-code code="EvidenceVariable"/>
+         <added-code code="ExampleScenario"/>
+         <added-code code="ImmunizationEvaluation"/>
+         <added-code code="InsurancePlan"/>
+         <added-code code="Invoice"/>
+         <added-code code="ItemInstance"/>
+         <added-code code="MedicationKnowledge"/>
+         <added-code code="MedicinalProduct"/>
+         <added-code code="MedicinalProductAuthorization"/>
+         <added-code code="MedicinalProductContraindication"/>
+         <added-code code="MedicinalProductIndication"/>
+         <added-code code="MedicinalProductIngredient"/>
+         <added-code code="MedicinalProductInteraction"/>
+         <added-code code="MedicinalProductManufactured"/>
+         <added-code code="MedicinalProductPackaged"/>
+         <added-code code="MedicinalProductPharmaceutical"/>
+         <added-code code="MedicinalProductUndesirableEffect"/>
+         <added-code code="MolecularSequence"/>
+         <added-code code="ObservationDefinition"/>
+         <added-code code="OrganizationAffiliation"/>
+         <added-code code="ResearchDefinition"/>
+         <added-code code="ResearchElementDefinition"/>
+         <added-code code="RiskEvidenceSynthesis"/>
+         <added-code code="ServiceRequest"/>
+         <added-code code="SpecimenDefinition"/>
+         <added-code code="SubstanceNucleicAcid"/>
+         <added-code code="SubstancePolymer"/>
+         <added-code code="SubstanceProtein"/>
+         <added-code code="SubstanceReferenceInformation"/>
+         <added-code code="SubstanceSourceMaterial"/>
+         <added-code code="SubstanceSpecification"/>
+         <added-code code="TerminologyCapabilities"/>
+         <added-code code="VerificationResult"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/resource-types"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/resource-types"
+                      strength="required"/>
+      </element>
       <element path="Questionnaire.item.enableWhen.operator" status="new"/>
       <element new-min="1"
                old-min="0"
                path="Questionnaire.item.enableWhen.answer[x]">
          <removed-type name="uri"/>
          <removed-type name="Attachment"/>
-         <removed-type name="Reference(Resource)"/>
-         <added-type name="Reference(Resource)"/>
       </element>
       <element path="Questionnaire.item.enableBehavior" status="new"/>
       <element default="removed"
@@ -19,9 +82,14 @@
       <element default="removed"
                old-default="&#34;false&#34;"
                path="Questionnaire.item.repeats"/>
-      <element path="Questionnaire.item.answerValueSet" status="new"/>
-      <element path="Questionnaire.item.answerOption" status="new"/>
-      <element path="Questionnaire.item.answerOption.value[x]" status="new"/>
+      <element old-name="options" path="Questionnaire.item.answerValueSet">
+         <removed-type name="Reference(ValueSet)"/>
+         <added-type name="canonical(ValueSet)"/>
+      </element>
+      <element old-name="option" path="Questionnaire.item.answerOption"/>
+      <element path="Questionnaire.item.answerOption.value[x]">
+         <added-type name="Reference(Resource)"/>
+      </element>
       <element path="Questionnaire.item.answerOption.initialSelected" status="new"/>
       <element new-max="*"
                old-max="1"
@@ -42,7 +110,5 @@
       </element>
       <element path="Questionnaire.item.initial.value[x]" status="new"/>
       <element path="Questionnaire.item.enableWhen.hasAnswer" status="deleted"/>
-      <element path="Questionnaire.item.options" status="deleted"/>
-      <element path="Questionnaire.item.option" status="deleted"/>
    </type>
 </difference>

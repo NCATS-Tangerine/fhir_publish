@@ -1133,13 +1133,16 @@ Members of the OO WG have recently attempted to contact members of RCRIM regardi
     </div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-    <valueString value="Normative"/>
+    <valueCode value="normative"/>
   </extension>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
     <valueInteger value="5"/>
   </extension>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-wg">
     <valueCode value="oo"/>
+  </extension>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
+    <valueCode value="4.0.0"/>
   </extension>
   <url value="http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"/>
   <identifier>
@@ -1181,6 +1184,12 @@ Members of the OO WG have recently attempted to contact members of RCRIM regardi
     <uri value="http://hl7.org/fhir/concept-properties#deprecationDate"/>
     <description value="The date at which a concept was deprecated. Concepts that are deprecated but not inactive can still be used, but their use is discouraged"/>
     <type value="dateTime"/>
+  </property>
+  <property>
+    <code value="child"/>
+    <uri value="http://hl7.org/fhir/concept-properties#child"/>
+    <description value="The concept identified in this property is a child of the concept on which it is a property. The property type will be &#39;code&#39;. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute"/>
+    <type value="code"/>
   </property>
   <concept>
     <code value="_GeneticObservationInterpretation"/>
@@ -1333,9 +1342,6 @@ Members of the OO WG have recently attempted to contact members of RCRIM regardi
         <display value="High"/>
         <definition value="The result for a quantitative observation is above the upper limit of the reference range (as defined for the respective test procedure).&#xD;&#xA;&#xA;                        Synonym: Above high normal"/>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="HH"/>
-          </extension>
           <code value="H&gt;"/>
           <display value="Significantly high"/>
           <definition value="A test result that is significantly higher than the reference (normal) or therapeutic interval, but has not reached the critically high value and might need special attention, as defined by the laboratory or the clinician.[Note: This level is situated between &#39;H&#39; and &#39;HH&#39;.]&#xD;&#xA;&#xA;                        &#xA;                           Deprecation Comment: The code &#39;H&gt;&#39; is being deprecated in order to align with the use of the code &#39;HU&#39; for &quot;Very high&quot; in V2 Table 0078 &quot;Interpretation Codes&quot;.&#xD;&#xA;&#xA;                        [Note: The use of code &#39;H&gt;&#39; is non-preferred, as this code is deprecated and on track to be retired; use code &#39;HU&#39; instead."/>
@@ -1347,14 +1353,19 @@ Members of the OO WG have recently attempted to contact members of RCRIM regardi
             <code value="deprecationDate"/>
             <valueDateTime value="2015-03-23"/>
           </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="HH"/>
+          </property>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="HH"/>
-          </extension>
           <code value="HU"/>
           <display value="Significantly high"/>
           <definition value="A test result that is significantly higher than the reference (normal) or therapeutic interval, but has not reached the critically high value and might need special attention, as defined by the laboratory or the clinician."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="HH"/>
+          </property>
         </concept>
       </concept>
       <concept>
@@ -1362,9 +1373,6 @@ Members of the OO WG have recently attempted to contact members of RCRIM regardi
         <display value="Low"/>
         <definition value="The result for a quantitative observation is below the lower limit of the reference range (as defined for the respective test procedure).&#xD;&#xA;&#xA;                        Synonym: Below low normal"/>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="LL"/>
-          </extension>
           <code value="L&lt;"/>
           <display value="Significantly low"/>
           <definition value="A test result that is significantly lower than the reference (normal) or therapeutic interval, but has not reached the critically low value and might need special attention, as defined by the laboratory or the clinician.[Note: This level is situated between &#39;L&#39; and &#39;LL&#39;.]&#xD;&#xA;&#xA;                        &#xA;                           Deprecation Comment: The code &#39;L&lt;&#39; is being deprecated in order to align with the use of the code &#39;LU&#39; for &quot;Very low&quot; in V2 Table 0078 &quot;Interpretation Codes&quot;.&#xD;&#xA;&#xA;                        [Note: The use of code &#39;L&lt;&#39; is non-preferred, as this code is deprecated and on track to be retired; use code &#39;LU&#39; instead."/>
@@ -1376,14 +1384,19 @@ Members of the OO WG have recently attempted to contact members of RCRIM regardi
             <code value="deprecationDate"/>
             <valueDateTime value="2015-03-23"/>
           </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="LL"/>
+          </property>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="LL"/>
-          </extension>
           <code value="LU"/>
           <display value="Significantly low"/>
           <definition value="A test result that is significantly lower than the reference (normal) or therapeutic interval, but has not reached the critically low value and might need special attention, as defined by the laboratory or the clinician."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="LL"/>
+          </property>
         </concept>
       </concept>
     </concept>
@@ -1394,15 +1407,16 @@ Members of the OO WG have recently attempted to contact members of RCRIM regardi
     </concept>
   </concept>
   <concept>
-    <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-      <valueCode value="IE"/>
-    </extension>
     <code value="_ObservationInterpretationSusceptibility"/>
     <display value="ObservationInterpretationSusceptibility"/>
     <definition value="Interpretations of anti-microbial susceptibility testing results (microbiology). At most one allowed."/>
     <property>
       <code value="notSelectable"/>
       <valueBoolean value="true"/>
+    </property>
+    <property>
+      <code value="child"/>
+      <valueCode value="IE"/>
     </property>
     <concept>
       <code value="I"/>

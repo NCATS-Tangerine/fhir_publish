@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type TestScript {
   id: ID
@@ -30,8 +30,6 @@ type TestScript {
   fixture: [TestScriptFixture]
   profile: [Reference]
   variable: [TestScriptVariable]
-  rule: [TestScriptRule]
-  ruleset: [TestScriptRuleset]
   setup: TestScriptSetup
   test: [TestScriptTest]
   teardown: TestScriptTeardown
@@ -105,46 +103,6 @@ type TestScriptVariable {
   sourceId: ID  _sourceId: ElementBase
 }
 
-type TestScriptRule {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  resource: Reference!
-  param: [TestScriptRuleParam]
-}
-
-type TestScriptRuleParam {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  name: String  _name: ElementBase
-  value: String  _value: ElementBase
-}
-
-type TestScriptRuleset {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  resource: Reference!
-  rule: [TestScriptRulesetRule]!
-}
-
-type TestScriptRulesetRule {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  ruleId: ID  _ruleId: ElementBase
-  param: [TestScriptRulesetRuleParam]
-}
-
-type TestScriptRulesetRuleParam {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  name: String  _name: ElementBase
-  value: String  _value: ElementBase
-}
-
 type TestScriptSetup {
   id: String
   extension: [Extension]
@@ -172,6 +130,7 @@ type TestScriptSetupActionOperation {
   contentType: code  _contentType: ElementBase
   destination: Int  _destination: ElementBase
   encodeRequestUrl: Boolean  _encodeRequestUrl: ElementBase
+  method: code  _method: ElementBase
   origin: Int  _origin: ElementBase
   params: String  _params: ElementBase
   requestHeader: [TestScriptSetupActionOperationRequestHeader]
@@ -212,52 +171,10 @@ type TestScriptSetupActionAssert {
   resource: code  _resource: ElementBase
   response: code  _response: ElementBase
   responseCode: String  _responseCode: ElementBase
-  rule: TestScriptSetupActionAssertRule
-  ruleset: TestScriptSetupActionAssertRuleset
   sourceId: ID  _sourceId: ElementBase
   validateProfileId: ID  _validateProfileId: ElementBase
   value: String  _value: ElementBase
   warningOnly: Boolean  _warningOnly: ElementBase
-}
-
-type TestScriptSetupActionAssertRule {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  ruleId: ID  _ruleId: ElementBase
-  param: [TestScriptSetupActionAssertRuleParam]
-}
-
-type TestScriptSetupActionAssertRuleParam {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  name: String  _name: ElementBase
-  value: String  _value: ElementBase
-}
-
-type TestScriptSetupActionAssertRuleset {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  rulesetId: ID  _rulesetId: ElementBase
-  rule: [TestScriptSetupActionAssertRulesetRule]
-}
-
-type TestScriptSetupActionAssertRulesetRule {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  ruleId: ID  _ruleId: ElementBase
-  param: [TestScriptSetupActionAssertRulesetRuleParam]
-}
-
-type TestScriptSetupActionAssertRulesetRuleParam {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  name: String  _name: ElementBase
-  value: String  _value: ElementBase
 }
 
 type TestScriptTest {
@@ -321,8 +238,6 @@ input TestScript {
   fixture: [TestScriptFixture]
   profile: [Reference]
   variable: [TestScriptVariable]
-  rule: [TestScriptRule]
-  ruleset: [TestScriptRuleset]
   setup: TestScriptSetup
   test: [TestScriptTest]
   teardown: TestScriptTeardown
@@ -396,46 +311,6 @@ input TestScriptVariable {
   sourceId: ID  _sourceId: ElementBase
 }
 
-input TestScriptRule {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  resource: Reference!
-  param: [TestScriptRuleParam]
-}
-
-input TestScriptRuleParam {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  name: String  _name: ElementBase
-  value: String  _value: ElementBase
-}
-
-input TestScriptRuleset {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  resource: Reference!
-  rule: [TestScriptRulesetRule]!
-}
-
-input TestScriptRulesetRule {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  ruleId: ID  _ruleId: ElementBase
-  param: [TestScriptRulesetRuleParam]
-}
-
-input TestScriptRulesetRuleParam {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  name: String  _name: ElementBase
-  value: String  _value: ElementBase
-}
-
 input TestScriptSetup {
   id: String
   extension: [Extension]
@@ -463,6 +338,7 @@ input TestScriptSetupActionOperation {
   contentType: code  _contentType: ElementBase
   destination: Int  _destination: ElementBase
   encodeRequestUrl: Boolean  _encodeRequestUrl: ElementBase
+  method: code  _method: ElementBase
   origin: Int  _origin: ElementBase
   params: String  _params: ElementBase
   requestHeader: [TestScriptSetupActionOperationRequestHeader]
@@ -503,52 +379,10 @@ input TestScriptSetupActionAssert {
   resource: code  _resource: ElementBase
   response: code  _response: ElementBase
   responseCode: String  _responseCode: ElementBase
-  rule: TestScriptSetupActionAssertRule
-  ruleset: TestScriptSetupActionAssertRuleset
   sourceId: ID  _sourceId: ElementBase
   validateProfileId: ID  _validateProfileId: ElementBase
   value: String  _value: ElementBase
   warningOnly: Boolean  _warningOnly: ElementBase
-}
-
-input TestScriptSetupActionAssertRule {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  ruleId: ID  _ruleId: ElementBase
-  param: [TestScriptSetupActionAssertRuleParam]
-}
-
-input TestScriptSetupActionAssertRuleParam {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  name: String  _name: ElementBase
-  value: String  _value: ElementBase
-}
-
-input TestScriptSetupActionAssertRuleset {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  rulesetId: ID  _rulesetId: ElementBase
-  rule: [TestScriptSetupActionAssertRulesetRule]
-}
-
-input TestScriptSetupActionAssertRulesetRule {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  ruleId: ID  _ruleId: ElementBase
-  param: [TestScriptSetupActionAssertRulesetRuleParam]
-}
-
-input TestScriptSetupActionAssertRulesetRuleParam {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  name: String  _name: ElementBase
-  value: String  _value: ElementBase
 }
 
 input TestScriptTest {

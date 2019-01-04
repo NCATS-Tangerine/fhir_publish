@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type ClaimResponse {
   id: ID
@@ -11,28 +11,31 @@ type ClaimResponse {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
-  type: CodeableConcept
+  type: CodeableConcept!
   subType: CodeableConcept
   use: code  _use: ElementBase
-  patient: Reference
+  patient: Reference!
   created: dateTime  _created: ElementBase
-  insurer: Reference
-  requestProvider: Reference
+  insurer: Reference!
+  requestor: Reference
   request: Reference
   outcome: code  _outcome: ElementBase
   disposition: String  _disposition: ElementBase
   preAuthRef: String  _preAuthRef: ElementBase
+  preAuthPeriod: Period
   payeeType: CodeableConcept
   item: [ClaimResponseItem]
   addItem: [ClaimResponseAddItem]
-  error: [ClaimResponseError]
+  adjudication: [ClaimResponseItemAdjudication]
   total: [ClaimResponseTotal]
   payment: ClaimResponsePayment
-  reserved: Coding
-  form: CodeableConcept
+  fundsReserve: CodeableConcept
+  formCode: CodeableConcept
+  form: Attachment
   processNote: [ClaimResponseProcessNote]
   communicationRequest: [Reference]
   insurance: [ClaimResponseInsurance]
+  error: [ClaimResponseError]
 }
 
 type ClaimResponseItem {
@@ -41,7 +44,7 @@ type ClaimResponseItem {
   modifierExtension: [Extension]
   itemSequence: positiveInt  _itemSequence: ElementBase
   noteNumber: positiveInt  _noteNumber: [ElementBase]
-  adjudication: [ClaimResponseItemAdjudication]
+  adjudication: [ClaimResponseItemAdjudication]!
   detail: [ClaimResponseItemDetail]
 }
 
@@ -61,7 +64,7 @@ type ClaimResponseItemDetail {
   modifierExtension: [Extension]
   detailSequence: positiveInt  _detailSequence: ElementBase
   noteNumber: positiveInt  _noteNumber: [ElementBase]
-  adjudication: [ClaimResponseItemAdjudication]
+  adjudication: [ClaimResponseItemAdjudication]!
   subDetail: [ClaimResponseItemDetailSubDetail]
 }
 
@@ -82,7 +85,7 @@ type ClaimResponseAddItem {
   detailSequence: positiveInt  _detailSequence: [ElementBase]
   subdetailSequence: positiveInt  _subdetailSequence: [ElementBase]
   provider: [Reference]
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   programCode: [CodeableConcept]
   servicedDate: date  _servicedDate: ElementBase
@@ -97,7 +100,7 @@ type ClaimResponseAddItem {
   bodySite: CodeableConcept
   subSite: [CodeableConcept]
   noteNumber: positiveInt  _noteNumber: [ElementBase]
-  adjudication: [ClaimResponseItemAdjudication]
+  adjudication: [ClaimResponseItemAdjudication]!
   detail: [ClaimResponseAddItemDetail]
 }
 
@@ -105,14 +108,14 @@ type ClaimResponseAddItemDetail {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   quantity: Quantity
   unitPrice: Money
   factor: decimal  _factor: ElementBase
   net: Money
   noteNumber: positiveInt  _noteNumber: [ElementBase]
-  adjudication: [ClaimResponseItemAdjudication]
+  adjudication: [ClaimResponseItemAdjudication]!
   subDetail: [ClaimResponseAddItemDetailSubDetail]
 }
 
@@ -120,24 +123,14 @@ type ClaimResponseAddItemDetailSubDetail {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   quantity: Quantity
   unitPrice: Money
   factor: decimal  _factor: ElementBase
   net: Money
   noteNumber: positiveInt  _noteNumber: [ElementBase]
-  adjudication: [ClaimResponseItemAdjudication]
-}
-
-type ClaimResponseError {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  itemSequence: positiveInt  _itemSequence: ElementBase
-  detailSequence: positiveInt  _detailSequence: ElementBase
-  subDetailSequence: positiveInt  _subDetailSequence: ElementBase
-  code: CodeableConcept!
+  adjudication: [ClaimResponseItemAdjudication]!
 }
 
 type ClaimResponseTotal {
@@ -152,11 +145,11 @@ type ClaimResponsePayment {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  type: CodeableConcept
+  type: CodeableConcept!
   adjustment: Money
   adjustmentReason: CodeableConcept
   date: date  _date: ElementBase
-  amount: Money
+  amount: Money!
   identifier: Identifier
 }
 
@@ -181,6 +174,16 @@ type ClaimResponseInsurance {
   claimResponse: Reference
 }
 
+type ClaimResponseError {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  itemSequence: positiveInt  _itemSequence: ElementBase
+  detailSequence: positiveInt  _detailSequence: ElementBase
+  subDetailSequence: positiveInt  _subDetailSequence: ElementBase
+  code: CodeableConcept!
+}
+
 input ClaimResponse {
   id: ID
   meta: Meta
@@ -192,28 +195,31 @@ input ClaimResponse {
   modifierExtension: [Extension]
   identifier: [Identifier]
   status: code  _status: ElementBase
-  type: CodeableConcept
+  type: CodeableConcept!
   subType: CodeableConcept
   use: code  _use: ElementBase
-  patient: Reference
+  patient: Reference!
   created: dateTime  _created: ElementBase
-  insurer: Reference
-  requestProvider: Reference
+  insurer: Reference!
+  requestor: Reference
   request: Reference
   outcome: code  _outcome: ElementBase
   disposition: String  _disposition: ElementBase
   preAuthRef: String  _preAuthRef: ElementBase
+  preAuthPeriod: Period
   payeeType: CodeableConcept
   item: [ClaimResponseItem]
   addItem: [ClaimResponseAddItem]
-  error: [ClaimResponseError]
+  adjudication: [ClaimResponseItemAdjudication]
   total: [ClaimResponseTotal]
   payment: ClaimResponsePayment
-  reserved: Coding
-  form: CodeableConcept
+  fundsReserve: CodeableConcept
+  formCode: CodeableConcept
+  form: Attachment
   processNote: [ClaimResponseProcessNote]
   communicationRequest: [Reference]
   insurance: [ClaimResponseInsurance]
+  error: [ClaimResponseError]
 }
 
 input ClaimResponseItem {
@@ -222,7 +228,7 @@ input ClaimResponseItem {
   modifierExtension: [Extension]
   itemSequence: positiveInt  _itemSequence: ElementBase
   noteNumber: positiveInt  _noteNumber: [ElementBase]
-  adjudication: [ClaimResponseItemAdjudication]
+  adjudication: [ClaimResponseItemAdjudication]!
   detail: [ClaimResponseItemDetail]
 }
 
@@ -242,7 +248,7 @@ input ClaimResponseItemDetail {
   modifierExtension: [Extension]
   detailSequence: positiveInt  _detailSequence: ElementBase
   noteNumber: positiveInt  _noteNumber: [ElementBase]
-  adjudication: [ClaimResponseItemAdjudication]
+  adjudication: [ClaimResponseItemAdjudication]!
   subDetail: [ClaimResponseItemDetailSubDetail]
 }
 
@@ -263,7 +269,7 @@ input ClaimResponseAddItem {
   detailSequence: positiveInt  _detailSequence: [ElementBase]
   subdetailSequence: positiveInt  _subdetailSequence: [ElementBase]
   provider: [Reference]
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   programCode: [CodeableConcept]
   servicedDate: date  _servicedDate: ElementBase
@@ -278,7 +284,7 @@ input ClaimResponseAddItem {
   bodySite: CodeableConcept
   subSite: [CodeableConcept]
   noteNumber: positiveInt  _noteNumber: [ElementBase]
-  adjudication: [ClaimResponseItemAdjudication]
+  adjudication: [ClaimResponseItemAdjudication]!
   detail: [ClaimResponseAddItemDetail]
 }
 
@@ -286,14 +292,14 @@ input ClaimResponseAddItemDetail {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   quantity: Quantity
   unitPrice: Money
   factor: decimal  _factor: ElementBase
   net: Money
   noteNumber: positiveInt  _noteNumber: [ElementBase]
-  adjudication: [ClaimResponseItemAdjudication]
+  adjudication: [ClaimResponseItemAdjudication]!
   subDetail: [ClaimResponseAddItemDetailSubDetail]
 }
 
@@ -301,24 +307,14 @@ input ClaimResponseAddItemDetailSubDetail {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  billcode: CodeableConcept
+  productOrService: CodeableConcept!
   modifier: [CodeableConcept]
   quantity: Quantity
   unitPrice: Money
   factor: decimal  _factor: ElementBase
   net: Money
   noteNumber: positiveInt  _noteNumber: [ElementBase]
-  adjudication: [ClaimResponseItemAdjudication]
-}
-
-input ClaimResponseError {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  itemSequence: positiveInt  _itemSequence: ElementBase
-  detailSequence: positiveInt  _detailSequence: ElementBase
-  subDetailSequence: positiveInt  _subDetailSequence: ElementBase
-  code: CodeableConcept!
+  adjudication: [ClaimResponseItemAdjudication]!
 }
 
 input ClaimResponseTotal {
@@ -333,11 +329,11 @@ input ClaimResponsePayment {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  type: CodeableConcept
+  type: CodeableConcept!
   adjustment: Money
   adjustmentReason: CodeableConcept
   date: date  _date: ElementBase
-  amount: Money
+  amount: Money!
   identifier: Identifier
 }
 
@@ -362,6 +358,16 @@ input ClaimResponseInsurance {
   claimResponse: Reference
 }
 
+input ClaimResponseError {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  itemSequence: positiveInt  _itemSequence: ElementBase
+  detailSequence: positiveInt  _detailSequence: ElementBase
+  subDetailSequence: positiveInt  _subDetailSequence: ElementBase
+  code: CodeableConcept!
+}
+
 type ClaimResponseReadType {
   ClaimResponse(id : ID!) : ClaimResponse
 }
@@ -376,8 +382,9 @@ type ClaimResponseListType {
     patient : [reference]
     payment_date : [date]
     request : [reference]
-    request_provider : [reference]
+    requestor : [reference]
     status : [token]
+    use : [token]
     _text : [String]
     _content : [String]
     _id : [token]
@@ -402,8 +409,9 @@ type ClaimResponseConnectionType {
     patient : [reference]
     payment_date : [date]
     request : [reference]
-    request_provider : [reference]
+    requestor : [reference]
     status : [token]
+    use : [token]
     _text : [String]
     _content : [String]
     _id : [token]

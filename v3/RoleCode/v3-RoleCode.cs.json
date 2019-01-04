@@ -10,7 +10,7 @@
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-    "valueString" : "External"
+    "valueCode" : "external"
   },
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
@@ -56,6 +56,12 @@
     "uri" : "http://hl7.org/fhir/concept-properties#deprecationDate",
     "description" : "The date at which a concept was deprecated. Concepts that are deprecated but not inactive can still be used, but their use is discouraged",
     "type" : "dateTime"
+  },
+  {
+    "code" : "child",
+    "uri" : "http://hl7.org/fhir/concept-properties#child",
+    "description" : "The concept identified in this property is a child of the concept on which it is a property. The property type will be 'code'. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute",
+    "type" : "code"
   }],
   "concept" : [{
     "code" : "_AffiliationRoleType",
@@ -626,17 +632,17 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "DAUADOPT"
-          },
-          {
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "DAUFOST"
-          }],
           "code" : "DAUC",
           "display" : "daughter",
           "definition" : "Description: The player of the role is a female child (of any type) of scoping entity (parent)",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "DAUADOPT"
+          },
+          {
+            "code" : "child",
+            "valueCode" : "DAUFOST"
+          }],
           "concept" : [{
             "code" : "DAU",
             "display" : "natural daughter",
@@ -649,13 +655,13 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "DAU"
-          }],
           "code" : "NCHILD",
           "display" : "natural child",
           "definition" : "The player of the role is an offspring of the scoping entity as determined by birth.",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "DAU"
+          }],
           "concept" : [{
             "code" : "SON",
             "display" : "natural son",
@@ -663,21 +669,21 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "SONADOPT"
-          },
-          {
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "SONFOST"
-          },
-          {
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "SON"
-          }],
           "code" : "SONC",
           "display" : "son",
           "definition" : "Description: The player of the role is a male child (of any type) of scoping entity (parent)",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "SONADOPT"
+          },
+          {
+            "code" : "child",
+            "valueCode" : "SONFOST"
+          },
+          {
+            "code" : "child",
+            "valueCode" : "SON"
+          }],
           "concept" : [{
             "code" : "STPSON",
             "display" : "stepson",
@@ -685,17 +691,17 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+          "code" : "STPCHLD",
+          "display" : "step child",
+          "definition" : "The player of the role is a child of the scoping person's spouse by a previous union.",
+          "property" : [{
+            "code" : "child",
             "valueCode" : "STPDAU"
           },
           {
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+            "code" : "child",
             "valueCode" : "STPSON"
-          }],
-          "code" : "STPCHLD",
-          "display" : "step child",
-          "definition" : "The player of the role is a child of the scoping person's spouse by a previous union."
+          }]
         }]
       },
       {
@@ -767,30 +773,30 @@
             }]
           },
           {
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+            "code" : "MGGRPRN",
+            "display" : "maternal great-grandparent",
+            "definition" : "Description:The player of the role is a biological parent of the scoping person's biological mother's parent.",
+            "property" : [{
+              "code" : "child",
               "valueCode" : "MGGRFTH"
             },
             {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+              "code" : "child",
               "valueCode" : "MGGRMTH"
-            }],
-            "code" : "MGGRPRN",
-            "display" : "maternal great-grandparent",
-            "definition" : "Description:The player of the role is a biological parent of the scoping person's biological mother's parent."
+            }]
           },
           {
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+            "code" : "PGGRPRN",
+            "display" : "paternal great-grandparent",
+            "definition" : "Description:The player of the role is a biological parent of the scoping person's biological father's parent.",
+            "property" : [{
+              "code" : "child",
               "valueCode" : "PGGRFTH"
             },
             {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+              "code" : "child",
               "valueCode" : "PGGRMTH"
-            }],
-            "code" : "PGGRPRN",
-            "display" : "paternal great-grandparent",
-            "definition" : "Description:The player of the role is a biological parent of the scoping person's biological father's parent."
+            }]
           }]
         },
         {
@@ -843,30 +849,30 @@
             }]
           },
           {
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+            "code" : "MGRPRN",
+            "display" : "maternal grandparent",
+            "definition" : "Description:The player of the role is the biological parent of the scoping person's biological mother.",
+            "property" : [{
+              "code" : "child",
               "valueCode" : "MGRFTH"
             },
             {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+              "code" : "child",
               "valueCode" : "MGRMTH"
-            }],
-            "code" : "MGRPRN",
-            "display" : "maternal grandparent",
-            "definition" : "Description:The player of the role is the biological parent of the scoping person's biological mother."
+            }]
           },
           {
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+            "code" : "PGRPRN",
+            "display" : "paternal grandparent",
+            "definition" : "Description:The player of the role is the biological parent of the scoping person's biological father.",
+            "property" : [{
+              "code" : "child",
               "valueCode" : "PGRFTH"
             },
             {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+              "code" : "child",
               "valueCode" : "PGRMTH"
-            }],
-            "code" : "PGRPRN",
-            "display" : "paternal grandparent",
-            "definition" : "Description:The player of the role is the biological parent of the scoping person's biological father."
+            }]
           }]
         },
         {
@@ -970,13 +976,13 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "ADOPTF"
-          }],
           "code" : "FTH",
           "display" : "father",
           "definition" : "The player of the role is a male who begets or raises or nurtures the scoping entity (child).",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "ADOPTF"
+          }],
           "concept" : [{
             "code" : "FTHFOST",
             "display" : "foster father",
@@ -999,13 +1005,13 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "ADOPTM"
-          }],
           "code" : "MTH",
           "display" : "mother",
           "definition" : "The player of the role is a female who conceives, gives birth to, or raises and nurtures the scoping entity (child).",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "ADOPTM"
+          }],
           "concept" : [{
             "code" : "GESTM",
             "display" : "gestational mother",
@@ -1033,43 +1039,43 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+          "code" : "NPRN",
+          "display" : "natural parent",
+          "definition" : "natural parent",
+          "property" : [{
+            "code" : "child",
             "valueCode" : "NFTH"
           },
           {
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+            "code" : "child",
             "valueCode" : "NMTH"
-          }],
-          "code" : "NPRN",
-          "display" : "natural parent",
-          "definition" : "natural parent"
+          }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+          "code" : "PRNFOST",
+          "display" : "foster parent",
+          "definition" : "The player of the role (parent) who is a state-certified caregiver responsible for the scoper (child) who has been placed in the parent's care. The placement of the child is usually arranged through the government or a social-service agency, and temporary.\r\n\n                        The state, via a jurisdiction recognized child protection agency, stands as in loco parentis to the child, making all legal decisions while the foster parent is responsible for the day-to-day care of the specified child.",
+          "property" : [{
+            "code" : "child",
             "valueCode" : "FTHFOST"
           },
           {
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+            "code" : "child",
             "valueCode" : "MTHFOST"
-          }],
-          "code" : "PRNFOST",
-          "display" : "foster parent",
-          "definition" : "The player of the role (parent) who is a state-certified caregiver responsible for the scoper (child) who has been placed in the parent's care. The placement of the child is usually arranged through the government or a social-service agency, and temporary.\r\n\n                        The state, via a jurisdiction recognized child protection agency, stands as in loco parentis to the child, making all legal decisions while the foster parent is responsible for the day-to-day care of the specified child."
+          }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+          "code" : "STPPRN",
+          "display" : "step parent",
+          "definition" : "The player of the role is the spouse of the scoping person's parent and not the scoping person's natural parent.",
+          "property" : [{
+            "code" : "child",
             "valueCode" : "STPFTH"
           },
           {
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+            "code" : "child",
             "valueCode" : "STPMTH"
-          }],
-          "code" : "STPPRN",
-          "display" : "step parent",
-          "definition" : "The player of the role is the spouse of the scoping person's parent and not the scoping person's natural parent."
+          }]
         }]
       },
       {
@@ -1112,13 +1118,13 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "HBRO"
-          }],
           "code" : "HSIB",
           "display" : "half-sibling",
           "definition" : "The player of the role is related to the scoping entity by sharing only one biological parent.",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "HBRO"
+          }],
           "concept" : [{
             "code" : "HSIS",
             "display" : "half-sister",
@@ -1126,13 +1132,13 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "NBRO"
-          }],
           "code" : "NSIB",
           "display" : "natural sibling",
           "definition" : "The player of the role has both biological parents in common with the scoping entity.",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "NBRO"
+          }],
           "concept" : [{
             "code" : "NSIS",
             "display" : "natural sister",
@@ -1154,57 +1160,57 @@
             }]
           },
           {
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "TWINBRO"
-            },
-            {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "TWINSIS"
-            }],
             "code" : "TWIN",
             "display" : "twin",
             "definition" : "The scoper and player were carried in the same womb and shared common biological parents.",
+            "property" : [{
+              "code" : "child",
+              "valueCode" : "TWINBRO"
+            },
+            {
+              "code" : "child",
+              "valueCode" : "TWINSIS"
+            }],
             "concept" : [{
-              "extension" : [{
-                "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+              "code" : "FTWIN",
+              "display" : "fraternal twin",
+              "definition" : "The scoper and player were carried in the same womb and share common biological parents but are the product of distinct egg/sperm pairs.",
+              "property" : [{
+                "code" : "child",
                 "valueCode" : "FTWINBRO"
               },
               {
-                "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+                "code" : "child",
                 "valueCode" : "FTWINSIS"
-              }],
-              "code" : "FTWIN",
-              "display" : "fraternal twin",
-              "definition" : "The scoper and player were carried in the same womb and share common biological parents but are the product of distinct egg/sperm pairs."
+              }]
             },
             {
-              "extension" : [{
-                "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+              "code" : "ITWIN",
+              "display" : "identical twin",
+              "definition" : "The scoper and player are offspring of the same egg-sperm pair.",
+              "property" : [{
+                "code" : "child",
                 "valueCode" : "ITWINBRO"
               },
               {
-                "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+                "code" : "child",
                 "valueCode" : "ITWINSIS"
-              }],
-              "code" : "ITWIN",
-              "display" : "identical twin",
-              "definition" : "The scoper and player are offspring of the same egg-sperm pair."
+              }]
             }]
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "HSIS"
-          },
-          {
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-            "valueCode" : "NSIS"
-          }],
           "code" : "SIS",
           "display" : "sister",
           "definition" : "The player of the role is a female sharing one or both parents in common with the scoping entity.",
+          "property" : [{
+            "code" : "child",
+            "valueCode" : "HSIS"
+          },
+          {
+            "code" : "child",
+            "valueCode" : "NSIS"
+          }],
           "concept" : [{
             "code" : "STPSIS",
             "display" : "stepsister",
@@ -1212,17 +1218,17 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+          "code" : "STPSIB",
+          "display" : "step sibling",
+          "definition" : "The player of the role is a child of the scoping person's stepparent.",
+          "property" : [{
+            "code" : "child",
             "valueCode" : "STPBRO"
           },
           {
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+            "code" : "child",
             "valueCode" : "STPSIS"
-          }],
-          "code" : "STPSIB",
-          "display" : "step sibling",
-          "definition" : "The player of the role is a child of the scoping person's stepparent."
+          }]
         }]
       },
       {
@@ -1458,16 +1464,16 @@
         }]
       },
       {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-          "valueCode" : "COCBEN"
-        }],
         "code" : "_IndividualInsuredPartyRoleType",
         "display" : "IndividualInsuredPartyRoleType",
         "definition" : "A role recognized through the eligibility of a party to play an individual insured for benefits covered or provided under an insurance policy where the party is also the policy holder.",
         "property" : [{
           "code" : "notSelectable",
           "valueBoolean" : true
+        },
+        {
+          "code" : "child",
+          "valueCode" : "COCBEN"
         }],
         "concept" : [{
           "code" : "RETIREE",
@@ -1476,28 +1482,28 @@
         }]
       },
       {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-          "valueCode" : "CRIMEVIC"
-        },
-        {
-          "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-          "valueCode" : "INJWKR"
-        },
-        {
-          "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-          "valueCode" : "DIFFABL"
-        },
-        {
-          "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-          "valueCode" : "WARD"
-        }],
         "code" : "_ProgramEligiblePartyRoleType",
         "display" : "ProgramEligiblePartyRoleType",
         "definition" : "Description:A role recognized through the eligibility of a party to play a program eligible for benefits covered or provided under a program.",
         "property" : [{
           "code" : "notSelectable",
           "valueBoolean" : true
+        },
+        {
+          "code" : "child",
+          "valueCode" : "CRIMEVIC"
+        },
+        {
+          "code" : "child",
+          "valueCode" : "INJWKR"
+        },
+        {
+          "code" : "child",
+          "valueCode" : "DIFFABL"
+        },
+        {
+          "code" : "child",
+          "valueCode" : "WARD"
         }],
         "concept" : [{
           "code" : "INDIG",
@@ -1526,24 +1532,24 @@
         }]
       },
       {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-          "valueCode" : "COCBEN"
-        },
-        {
-          "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-          "valueCode" : "RETIREE"
-        },
-        {
-          "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-          "valueCode" : "MIL"
-        }],
         "code" : "_SubscriberCoveredPartyRoleType",
         "display" : "SubscriberCoveredPartyRoleType",
         "definition" : "Description: A role recognized through the eligibility of a party to play a subscriber for benefits covered or provided under a health insurance policy.",
         "property" : [{
           "code" : "notSelectable",
           "valueBoolean" : true
+        },
+        {
+          "code" : "child",
+          "valueCode" : "COCBEN"
+        },
+        {
+          "code" : "child",
+          "valueCode" : "RETIREE"
+        },
+        {
+          "code" : "child",
+          "valueCode" : "MIL"
         }]
       }]
     }]
@@ -1811,13 +1817,13 @@
             "definition" : "Description: A location that plays the role of delivering services which may include providing judicious, safe, efficacious, appropriate and cost effective use of medicines for treatment of patients for outpatient visits and may also be used for discharge prescriptions."
           },
           {
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "PEDICU"
-            }],
             "code" : "PEDU",
             "display" : "Pediatric unit",
-            "definition" : "Pediatric unit"
+            "definition" : "Pediatric unit",
+            "property" : [{
+              "code" : "child",
+              "valueCode" : "PEDICU"
+            }]
           },
           {
             "code" : "PHU",
@@ -2055,37 +2061,37 @@
             "definition" : "(X12N 261QP2300N)"
           },
           {
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "PEDCARD"
-            },
-            {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "PEDE"
-            },
-            {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "PEDGI"
-            },
-            {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "PEDHEM"
-            },
-            {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "PEDID"
-            },
-            {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "PEDNEPH"
-            },
-            {
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "PEDHO"
-            }],
             "code" : "PEDC",
             "display" : "Pediatrics clinic",
             "definition" : "Pediatrics clinic",
+            "property" : [{
+              "code" : "child",
+              "valueCode" : "PEDCARD"
+            },
+            {
+              "code" : "child",
+              "valueCode" : "PEDE"
+            },
+            {
+              "code" : "child",
+              "valueCode" : "PEDGI"
+            },
+            {
+              "code" : "child",
+              "valueCode" : "PEDHEM"
+            },
+            {
+              "code" : "child",
+              "valueCode" : "PEDID"
+            },
+            {
+              "code" : "child",
+              "valueCode" : "PEDNEPH"
+            },
+            {
+              "code" : "child",
+              "valueCode" : "PEDHO"
+            }],
             "concept" : [{
               "code" : "PEDRHEUM",
               "display" : "Pediatric rheumatology clinic",
@@ -2128,13 +2134,13 @@
             "definition" : "Psychiatry clinic"
           },
           {
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
-              "valueCode" : "PEDRHEUM"
-            }],
             "code" : "RHEUM",
             "display" : "Rheumatology clinic",
-            "definition" : "Rheumatology clinic"
+            "definition" : "Rheumatology clinic",
+            "property" : [{
+              "code" : "child",
+              "valueCode" : "PEDRHEUM"
+            }]
           },
           {
             "code" : "SPMED",
@@ -2212,17 +2218,17 @@
           }]
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+          "code" : "PHARM",
+          "display" : "Pharmacy",
+          "definition" : "Location where healthcare service was delivered, identified as a pharmacy.",
+          "property" : [{
+            "code" : "child",
             "valueCode" : "INPHARM"
           },
           {
-            "url" : "http://hl7.org/fhir/StructureDefinition/codesystem-subsumes",
+            "code" : "child",
             "valueCode" : "OUTPHARM"
-          }],
-          "code" : "PHARM",
-          "display" : "Pharmacy",
-          "definition" : "Location where healthcare service was delivered, identified as a pharmacy."
+          }]
         }]
       }]
     },

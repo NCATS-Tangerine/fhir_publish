@@ -6082,7 +6082,7 @@
     </div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-    <valueString value="External"/>
+    <valueCode value="external"/>
   </extension>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
     <valueInteger value="0"/>
@@ -6127,6 +6127,12 @@
     <uri value="http://hl7.org/fhir/concept-properties#deprecationDate"/>
     <description value="The date at which a concept was deprecated. Concepts that are deprecated but not inactive can still be used, but their use is discouraged"/>
     <type value="dateTime"/>
+  </property>
+  <property>
+    <code value="child"/>
+    <uri value="http://hl7.org/fhir/concept-properties#child"/>
+    <description value="The concept identified in this property is a child of the concept on which it is a property. The property type will be &#39;code&#39;. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute"/>
+    <type value="code"/>
   </property>
   <concept>
     <code value="_AffiliationRoleType"/>
@@ -6697,15 +6703,17 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="DAUADOPT"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="DAUFOST"/>
-          </extension>
           <code value="DAUC"/>
           <display value="daughter"/>
           <definition value="Description: The player of the role is a female child (of any type) of scoping entity (parent)"/>
+          <property>
+            <code value="child"/>
+            <valueCode value="DAUADOPT"/>
+          </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="DAUFOST"/>
+          </property>
           <concept>
             <code value="DAU"/>
             <display value="natural daughter"/>
@@ -6718,12 +6726,13 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="DAU"/>
-          </extension>
           <code value="NCHILD"/>
           <display value="natural child"/>
           <definition value="The player of the role is an offspring of the scoping entity as determined by birth."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="DAU"/>
+          </property>
           <concept>
             <code value="SON"/>
             <display value="natural son"/>
@@ -6731,18 +6740,21 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="SONADOPT"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="SONFOST"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="SON"/>
-          </extension>
           <code value="SONC"/>
           <display value="son"/>
           <definition value="Description: The player of the role is a male child (of any type) of scoping entity (parent)"/>
+          <property>
+            <code value="child"/>
+            <valueCode value="SONADOPT"/>
+          </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="SONFOST"/>
+          </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="SON"/>
+          </property>
           <concept>
             <code value="STPSON"/>
             <display value="stepson"/>
@@ -6750,15 +6762,17 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="STPDAU"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="STPSON"/>
-          </extension>
           <code value="STPCHLD"/>
           <display value="step child"/>
           <definition value="The player of the role is a child of the scoping person&#39;s spouse by a previous union."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="STPDAU"/>
+          </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="STPSON"/>
+          </property>
         </concept>
       </concept>
       <concept>
@@ -6830,26 +6844,30 @@
             </concept>
           </concept>
           <concept>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="MGGRFTH"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="MGGRMTH"/>
-            </extension>
             <code value="MGGRPRN"/>
             <display value="maternal great-grandparent"/>
             <definition value="Description:The player of the role is a biological parent of the scoping person&#39;s biological mother&#39;s parent."/>
+            <property>
+              <code value="child"/>
+              <valueCode value="MGGRFTH"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="MGGRMTH"/>
+            </property>
           </concept>
           <concept>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PGGRFTH"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PGGRMTH"/>
-            </extension>
             <code value="PGGRPRN"/>
             <display value="paternal great-grandparent"/>
             <definition value="Description:The player of the role is a biological parent of the scoping person&#39;s biological father&#39;s parent."/>
+            <property>
+              <code value="child"/>
+              <valueCode value="PGGRFTH"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="PGGRMTH"/>
+            </property>
           </concept>
         </concept>
         <concept>
@@ -6902,26 +6920,30 @@
             </concept>
           </concept>
           <concept>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="MGRFTH"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="MGRMTH"/>
-            </extension>
             <code value="MGRPRN"/>
             <display value="maternal grandparent"/>
             <definition value="Description:The player of the role is the biological parent of the scoping person&#39;s biological mother."/>
+            <property>
+              <code value="child"/>
+              <valueCode value="MGRFTH"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="MGRMTH"/>
+            </property>
           </concept>
           <concept>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PGRFTH"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PGRMTH"/>
-            </extension>
             <code value="PGRPRN"/>
             <display value="paternal grandparent"/>
             <definition value="Description:The player of the role is the biological parent of the scoping person&#39;s biological father."/>
+            <property>
+              <code value="child"/>
+              <valueCode value="PGRFTH"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="PGRMTH"/>
+            </property>
           </concept>
         </concept>
         <concept>
@@ -7025,12 +7047,13 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="ADOPTF"/>
-          </extension>
           <code value="FTH"/>
           <display value="father"/>
           <definition value="The player of the role is a male who begets or raises or nurtures the scoping entity (child)."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="ADOPTF"/>
+          </property>
           <concept>
             <code value="FTHFOST"/>
             <display value="foster father"/>
@@ -7053,12 +7076,13 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="ADOPTM"/>
-          </extension>
           <code value="MTH"/>
           <display value="mother"/>
           <definition value="The player of the role is a female who conceives, gives birth to, or raises and nurtures the scoping entity (child)."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="ADOPTM"/>
+          </property>
           <concept>
             <code value="GESTM"/>
             <display value="gestational mother"/>
@@ -7086,37 +7110,43 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="NFTH"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="NMTH"/>
-          </extension>
           <code value="NPRN"/>
           <display value="natural parent"/>
           <definition value="natural parent"/>
+          <property>
+            <code value="child"/>
+            <valueCode value="NFTH"/>
+          </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="NMTH"/>
+          </property>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="FTHFOST"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="MTHFOST"/>
-          </extension>
           <code value="PRNFOST"/>
           <display value="foster parent"/>
           <definition value="The player of the role (parent) who is a state-certified caregiver responsible for the scoper (child) who has been placed in the parent&#39;s care. The placement of the child is usually arranged through the government or a social-service agency, and temporary.&#xD;&#xA;&#xA;                        The state, via a jurisdiction recognized child protection agency, stands as in loco parentis to the child, making all legal decisions while the foster parent is responsible for the day-to-day care of the specified child."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="FTHFOST"/>
+          </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="MTHFOST"/>
+          </property>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="STPFTH"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="STPMTH"/>
-          </extension>
           <code value="STPPRN"/>
           <display value="step parent"/>
           <definition value="The player of the role is the spouse of the scoping person&#39;s parent and not the scoping person&#39;s natural parent."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="STPFTH"/>
+          </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="STPMTH"/>
+          </property>
         </concept>
       </concept>
       <concept>
@@ -7159,12 +7189,13 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="HBRO"/>
-          </extension>
           <code value="HSIB"/>
           <display value="half-sibling"/>
           <definition value="The player of the role is related to the scoping entity by sharing only one biological parent."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="HBRO"/>
+          </property>
           <concept>
             <code value="HSIS"/>
             <display value="half-sister"/>
@@ -7172,12 +7203,13 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="NBRO"/>
-          </extension>
           <code value="NSIB"/>
           <display value="natural sibling"/>
           <definition value="The player of the role has both biological parents in common with the scoping entity."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="NBRO"/>
+          </property>
           <concept>
             <code value="NSIS"/>
             <display value="natural sister"/>
@@ -7199,49 +7231,57 @@
             </concept>
           </concept>
           <concept>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="TWINBRO"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="TWINSIS"/>
-            </extension>
             <code value="TWIN"/>
             <display value="twin"/>
             <definition value="The scoper and player were carried in the same womb and shared common biological parents."/>
+            <property>
+              <code value="child"/>
+              <valueCode value="TWINBRO"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="TWINSIS"/>
+            </property>
             <concept>
-              <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-                <valueCode value="FTWINBRO"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-                <valueCode value="FTWINSIS"/>
-              </extension>
               <code value="FTWIN"/>
               <display value="fraternal twin"/>
               <definition value="The scoper and player were carried in the same womb and share common biological parents but are the product of distinct egg/sperm pairs."/>
+              <property>
+                <code value="child"/>
+                <valueCode value="FTWINBRO"/>
+              </property>
+              <property>
+                <code value="child"/>
+                <valueCode value="FTWINSIS"/>
+              </property>
             </concept>
             <concept>
-              <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-                <valueCode value="ITWINBRO"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-                <valueCode value="ITWINSIS"/>
-              </extension>
               <code value="ITWIN"/>
               <display value="identical twin"/>
               <definition value="The scoper and player are offspring of the same egg-sperm pair."/>
+              <property>
+                <code value="child"/>
+                <valueCode value="ITWINBRO"/>
+              </property>
+              <property>
+                <code value="child"/>
+                <valueCode value="ITWINSIS"/>
+              </property>
             </concept>
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="HSIS"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="NSIS"/>
-          </extension>
           <code value="SIS"/>
           <display value="sister"/>
           <definition value="The player of the role is a female sharing one or both parents in common with the scoping entity."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="HSIS"/>
+          </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="NSIS"/>
+          </property>
           <concept>
             <code value="STPSIS"/>
             <display value="stepsister"/>
@@ -7249,15 +7289,17 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="STPBRO"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="STPSIS"/>
-          </extension>
           <code value="STPSIB"/>
           <display value="step sibling"/>
           <definition value="The player of the role is a child of the scoping person&#39;s stepparent."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="STPBRO"/>
+          </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="STPSIS"/>
+          </property>
         </concept>
       </concept>
       <concept>
@@ -7493,15 +7535,16 @@
         </concept>
       </concept>
       <concept>
-        <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-          <valueCode value="COCBEN"/>
-        </extension>
         <code value="_IndividualInsuredPartyRoleType"/>
         <display value="IndividualInsuredPartyRoleType"/>
         <definition value="A role recognized through the eligibility of a party to play an individual insured for benefits covered or provided under an insurance policy where the party is also the policy holder."/>
         <property>
           <code value="notSelectable"/>
           <valueBoolean value="true"/>
+        </property>
+        <property>
+          <code value="child"/>
+          <valueCode value="COCBEN"/>
         </property>
         <concept>
           <code value="RETIREE"/>
@@ -7510,24 +7553,28 @@
         </concept>
       </concept>
       <concept>
-        <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-          <valueCode value="CRIMEVIC"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-          <valueCode value="INJWKR"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-          <valueCode value="DIFFABL"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-          <valueCode value="WARD"/>
-        </extension>
         <code value="_ProgramEligiblePartyRoleType"/>
         <display value="ProgramEligiblePartyRoleType"/>
         <definition value="Description:A role recognized through the eligibility of a party to play a program eligible for benefits covered or provided under a program."/>
         <property>
           <code value="notSelectable"/>
           <valueBoolean value="true"/>
+        </property>
+        <property>
+          <code value="child"/>
+          <valueCode value="CRIMEVIC"/>
+        </property>
+        <property>
+          <code value="child"/>
+          <valueCode value="INJWKR"/>
+        </property>
+        <property>
+          <code value="child"/>
+          <valueCode value="DIFFABL"/>
+        </property>
+        <property>
+          <code value="child"/>
+          <valueCode value="WARD"/>
         </property>
         <concept>
           <code value="INDIG"/>
@@ -7556,21 +7603,24 @@
         </concept>
       </concept>
       <concept>
-        <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-          <valueCode value="COCBEN"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-          <valueCode value="RETIREE"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-          <valueCode value="MIL"/>
-        </extension>
         <code value="_SubscriberCoveredPartyRoleType"/>
         <display value="SubscriberCoveredPartyRoleType"/>
         <definition value="Description: A role recognized through the eligibility of a party to play a subscriber for benefits covered or provided under a health insurance policy."/>
         <property>
           <code value="notSelectable"/>
           <valueBoolean value="true"/>
+        </property>
+        <property>
+          <code value="child"/>
+          <valueCode value="COCBEN"/>
+        </property>
+        <property>
+          <code value="child"/>
+          <valueCode value="RETIREE"/>
+        </property>
+        <property>
+          <code value="child"/>
+          <valueCode value="MIL"/>
         </property>
       </concept>
     </concept>
@@ -7838,12 +7888,13 @@
             <definition value="Description: A location that plays the role of delivering services which may include providing judicious, safe, efficacious, appropriate and cost effective use of medicines for treatment of patients for outpatient visits and may also be used for discharge prescriptions."/>
           </concept>
           <concept>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PEDICU"/>
-            </extension>
             <code value="PEDU"/>
             <display value="Pediatric unit"/>
             <definition value="Pediatric unit"/>
+            <property>
+              <code value="child"/>
+              <valueCode value="PEDICU"/>
+            </property>
           </concept>
           <concept>
             <code value="PHU"/>
@@ -8081,30 +8132,37 @@
             <definition value="(X12N 261QP2300N)"/>
           </concept>
           <concept>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PEDCARD"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PEDE"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PEDGI"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PEDHEM"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PEDID"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PEDNEPH"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PEDHO"/>
-            </extension>
             <code value="PEDC"/>
             <display value="Pediatrics clinic"/>
             <definition value="Pediatrics clinic"/>
+            <property>
+              <code value="child"/>
+              <valueCode value="PEDCARD"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="PEDE"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="PEDGI"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="PEDHEM"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="PEDID"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="PEDNEPH"/>
+            </property>
+            <property>
+              <code value="child"/>
+              <valueCode value="PEDHO"/>
+            </property>
             <concept>
               <code value="PEDRHEUM"/>
               <display value="Pediatric rheumatology clinic"/>
@@ -8147,12 +8205,13 @@
             <definition value="Psychiatry clinic"/>
           </concept>
           <concept>
-            <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-              <valueCode value="PEDRHEUM"/>
-            </extension>
             <code value="RHEUM"/>
             <display value="Rheumatology clinic"/>
             <definition value="Rheumatology clinic"/>
+            <property>
+              <code value="child"/>
+              <valueCode value="PEDRHEUM"/>
+            </property>
           </concept>
           <concept>
             <code value="SPMED"/>
@@ -8230,15 +8289,17 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="INPHARM"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="OUTPHARM"/>
-          </extension>
           <code value="PHARM"/>
           <display value="Pharmacy"/>
           <definition value="Location where healthcare service was delivered, identified as a pharmacy."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="INPHARM"/>
+          </property>
+          <property>
+            <code value="child"/>
+            <valueCode value="OUTPHARM"/>
+          </property>
         </concept>
       </concept>
     </concept>

@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Request.json - FHIR v3.5.0</title>
+  <title>Request.json - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>Request.json</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm">FHIR Infrastructure</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm">FHIR Infrastructure</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td></td></tr></table>
 
 <p>
 <a href="request.json">Raw JSON</a> (<a href="request.canonical.json">canonical form</a> + also see <a href="json.html">JSON Format Specification</a>)
@@ -125,13 +125,14 @@
   },
   &quot;extension&quot; : [{
     &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status&quot;,
-    &quot;valueString&quot; : &quot;Informative&quot;
+    &quot;valueCode&quot; : &quot;informative&quot;
   }],
   &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/Request&quot;,
+  &quot;version&quot; : &quot;3.6.0&quot;,
   &quot;name&quot; : &quot;Request&quot;,
   &quot;title&quot; : &quot;request&quot;,
   &quot;status&quot; : &quot;draft&quot;,
-  &quot;date&quot; : &quot;2018-09-15T09:06:56-05:00&quot;,
+  &quot;date&quot; : &quot;2018-12-13T14:23:07-06:00&quot;,
   &quot;publisher&quot; : &quot;Health Level Seven International fhir&quot;,
   &quot;contact&quot; : [{
     &quot;telecom&quot; : [{
@@ -140,7 +141,7 @@
     }]
   }],
   &quot;description&quot; : &quot;Logical Model: A pattern to be followed by resources that represent a specific proposal, plan and/or order for some sort of action or service.&quot;,
-  &quot;fhirVersion&quot; : &quot;3.5.0&quot;,
+  &quot;fhirVersion&quot; : &quot;3.6.0&quot;,
   &quot;mapping&quot; : [{
     &quot;identity&quot; : &quot;v2&quot;,
     &quot;uri&quot; : &quot;http://hl7.org/v2&quot;,
@@ -154,7 +155,7 @@
   {
     &quot;identity&quot; : &quot;w5&quot;,
     &quot;uri&quot; : &quot;http://hl7.org/fhir/fivews&quot;,
-    &quot;name&quot; : &quot;FiveWs Pattern&quot;
+    &quot;name&quot; : &quot;FiveWs Pattern Mapping&quot;
   }],
   &quot;kind&quot; : &quot;logical&quot;,
   &quot;abstract&quot; : false,
@@ -582,7 +583,7 @@
     {
       &quot;id&quot; : &quot;Request.subject&quot;,
       &quot;path&quot; : &quot;Request.subject&quot;,
-      &quot;short&quot; : &quot;Individual the service is ordered for&quot;,
+      &quot;short&quot; : &quot;Individual the service is ordered/prohibited for&quot;,
       &quot;definition&quot; : &quot;The individual or set of individuals the action is to be performed/not performed on or for.&quot;,
       &quot;comment&quot; : &quot;[For resources that aren't patient-specific, the set of allowed resources may be extended to include other things.  Group should generally be retained unless there's certainty this resource won't be used for veterinary, research or public health settings where Group may be necessary (e.g. this cage of rats/crate of chickens, group of people in a 5 mile radious of the incident, etc.)].&quot;,
       &quot;requirements&quot; : &quot;Links the request to the Patient context.&quot;,
@@ -615,24 +616,23 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;Request.context&quot;,
-      &quot;path&quot; : &quot;Request.context&quot;,
-      &quot;short&quot; : &quot;Encounter / Episode associated with request&quot;,
-      &quot;definition&quot; : &quot;The encounter or episode of care that establishes the context for making this request.&quot;,
-      &quot;comment&quot; : &quot;This will typically be the encounter the request was created during, but some requests may be initiated prior to or after the official completion of an encounter or episode but still be tied to the context of the encounter or episode (e.g. pre-admission lab tests).&quot;,
-      &quot;requirements&quot; : &quot;Links the request to the Encounter context.&quot;,
-      &quot;alias&quot; : [&quot;encounter&quot;],
+      &quot;id&quot; : &quot;Request.encounter&quot;,
+      &quot;path&quot; : &quot;Request.encounter&quot;,
+      &quot;short&quot; : &quot;Encounter created as part of&quot;,
+      &quot;definition&quot; : &quot;The Encounter during which this {{title}} was created or to which the creation of this record is tightly associated.&quot;,
+      &quot;comment&quot; : &quot;This will typically be the encounter the request was created during, but some requests may be initiated prior to or after the official completion of an encounter but still be tied to the context of the encounter (e.g. pre-admission lab tests).&quot;,
+      &quot;requirements&quot; : &quot;Links the {{title}} to the Encounter context.&quot;,
+      &quot;alias&quot; : [&quot;context&quot;],
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
       &quot;base&quot; : {
-        &quot;path&quot; : &quot;Request.context&quot;,
+        &quot;path&quot; : &quot;Request.encounter&quot;,
         &quot;min&quot; : 0,
         &quot;max&quot; : &quot;1&quot;
       },
       &quot;type&quot; : [{
         &quot;code&quot; : &quot;Reference&quot;,
-        &quot;targetProfile&quot; : [&quot;http://hl7.org/fhir/StructureDefinition/Encounter&quot;,
-        &quot;http://hl7.org/fhir/StructureDefinition/EpisodeOfCare&quot;]
+        &quot;targetProfile&quot; : [&quot;http://hl7.org/fhir/StructureDefinition/Encounter&quot;]
       }],
       &quot;isModifier&quot; : false,
       &quot;isSummary&quot; : true,
@@ -652,7 +652,7 @@
     {
       &quot;id&quot; : &quot;Request.occurrence[x]&quot;,
       &quot;path&quot; : &quot;Request.occurrence[x]&quot;,
-      &quot;short&quot; : &quot;When service should occur&quot;,
+      &quot;short&quot; : &quot;When service should (not) occur&quot;,
       &quot;definition&quot; : &quot;The date or time(s) at which the activity or service is desired to occur or not occur.&quot;,
       &quot;comment&quot; : &quot;[The list of types may be constrained as appropriate for the type of event].&quot;,
       &quot;alias&quot; : [&quot;timing&quot;],
@@ -690,7 +690,7 @@
     {
       &quot;id&quot; : &quot;Request.authoredOn&quot;,
       &quot;path&quot; : &quot;Request.authoredOn&quot;,
-      &quot;short&quot; : &quot;When request transitioned to being actionable&quot;,
+      &quot;short&quot; : &quot;When request was created/transitioned to active&quot;,
       &quot;definition&quot; : &quot;For draft {{title}}s, indicates the date of initial creation.  For requests with other statuses, indicates the date of activation.&quot;,
       &quot;alias&quot; : [&quot;createdOn&quot;,
       &quot;signedOn&quot;],
@@ -755,6 +755,42 @@
       {
         &quot;identity&quot; : &quot;w5&quot;,
         &quot;map&quot; : &quot;FiveWs.author&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;Request.reported[x]&quot;,
+      &quot;path&quot; : &quot;Request.reported[x]&quot;,
+      &quot;short&quot; : &quot;Reported rather than primary record&quot;,
+      &quot;definition&quot; : &quot;Indicates if this record was captured as a secondary 'reported' record rather than as an original primary source-of-truth record.  It may also indicate the source of the report.&quot;,
+      &quot;requirements&quot; : &quot;Reported data may have different rules on editing and may be visually distinguished from primary data.&quot;,
+      &quot;alias&quot; : [&quot;informer&quot;],
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;Request.reported[x]&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;boolean&quot;
+      },
+      {
+        &quot;code&quot; : &quot;Reference&quot;,
+        &quot;targetProfile&quot; : [&quot;http://hl7.org/fhir/StructureDefinition/Patient&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/RelatedPerson&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/Practitioner&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/PractitionerRole&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/Organization&quot;]
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : true,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;.participation[typeCode=RPT].role&quot;
+      },
+      {
+        &quot;identity&quot; : &quot;w5&quot;,
+        &quot;map&quot; : &quot;FiveWs.source&quot;
       }]
     },
     {
@@ -1044,7 +1080,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Sat, Sep 15, 2018 09:08-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:25-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -1054,7 +1090,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Frequest.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Frequest.json.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Frequest.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Frequest.json.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

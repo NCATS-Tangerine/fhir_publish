@@ -3,7 +3,7 @@
 <!-- template-example-ttl.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Plandefinition-example-cardiology-os.ttl - FHIR v3.5.0</title>
+  <title>Plandefinition-example-cardiology-os.ttl - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>Plandefinition-example-cardiology-os.ttl</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/dss/index.cfm">Clinical Decision Support</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/dss/index.cfm">Clinical Decision Support</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
 
 </tbody></table>
 <p>
@@ -116,7 +116,7 @@
 
 <div class="example">
 <p>Chest Pain Coronary Artery Disease Order Set KNART</p>
-<pre class="json">
+<pre class="rdf">
 @prefix fhir: &lt;http://hl7.org/fhir/&gt; .
 @prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
@@ -248,7 +248,7 @@
        fhir:Medication.ingredient.itemReference [
          fhir:Reference.reference [ fhir:value &quot;#metoprololTartrate25Substance&quot; ]
        ];
-       fhir:Medication.ingredient.amount [
+       fhir:Medication.ingredient.strength [
          fhir:Ratio.numerator [
            fhir:Quantity.value [ fhir:value &quot;25&quot;^^xsd:decimal ];
            fhir:Quantity.unit [ fhir:value &quot;mg&quot; ]
@@ -349,7 +349,7 @@
        fhir:Medication.ingredient.itemReference [
          fhir:Reference.reference [ fhir:value &quot;#metoprololTartrate50Substance&quot; ]
        ];
-       fhir:Medication.ingredient.amount [
+       fhir:Medication.ingredient.strength [
          fhir:Ratio.numerator [
            fhir:Quantity.value [ fhir:value &quot;50&quot;^^xsd:decimal ];
            fhir:Quantity.unit [ fhir:value &quot;mg&quot; ]
@@ -446,7 +446,7 @@
        fhir:Medication.ingredient.itemReference [
          fhir:Reference.reference [ fhir:value &quot;#nitroglycerinSubstance&quot; ]
        ];
-       fhir:Medication.ingredient.amount [
+       fhir:Medication.ingredient.strength [
          fhir:Ratio.numerator [
            fhir:Quantity.value [ fhir:value &quot;0.4&quot;^^xsd:decimal ];
            fhir:Quantity.unit [ fhir:value &quot;mg&quot; ]
@@ -639,7 +639,7 @@
        fhir:PlanDefinition.action.action [
          fhir:index 0;
          fhir:PlanDefinition.action.textEquivalent [ fhir:value &quot;Referral to cardiology to evaluate chest pain (routine)&quot; ];
-         fhir:PlanDefinition.action.definition [ fhir:value &quot;#referralToCardiologyConsult&quot; ];
+         fhir:PlanDefinition.action.definitionCanonical [ fhir:value &quot;#referralToCardiologyConsult&quot; ];
          fhir:PlanDefinition.action.dynamicValue [
            fhir:index 0;
            fhir:PlanDefinition.action.dynamicValue.path [ fhir:value &quot;timing.event&quot; ];
@@ -693,11 +693,11 @@
        ], [
          fhir:index 1;
          fhir:PlanDefinition.action.title [ fhir:value &quot;Reason for cardiology consultation&quot; ];
-         fhir:PlanDefinition.action.definition [ fhir:value &quot;#CollectReferralReason&quot; ]
+         fhir:PlanDefinition.action.definitionCanonical [ fhir:value &quot;#CollectReferralReason&quot; ]
        ], [
          fhir:index 2;
          fhir:PlanDefinition.action.title [ fhir:value &quot;Goal of cardiology consultation&quot; ];
-         fhir:PlanDefinition.action.definition [ fhir:value &quot;#CardiologyConsultationGoal&quot; ]
+         fhir:PlanDefinition.action.definitionCanonical [ fhir:value &quot;#CardiologyConsultationGoal&quot; ]
        ]
      ], [
        fhir:index 1;
@@ -715,7 +715,7 @@
          fhir:PlanDefinition.action.action [
            fhir:index 0;
            fhir:PlanDefinition.action.textEquivalent [ fhir:value &quot;metoprolol tartrate 25 mg tablet 1 tablet oral 2 time daily&quot; ];
-           fhir:PlanDefinition.action.definition [ fhir:value &quot;#metoprololTartrate25Prescription&quot; ];
+           fhir:PlanDefinition.action.definitionCanonical [ fhir:value &quot;#metoprololTartrate25Prescription&quot; ];
            fhir:PlanDefinition.action.dynamicValue [
              fhir:index 0;
              fhir:PlanDefinition.action.dynamicValue.path [ fhir:value &quot;status&quot; ];
@@ -741,7 +741,7 @@
          ], [
            fhir:index 1;
            fhir:PlanDefinition.action.textEquivalent [ fhir:value &quot;metoprolol tartrate 50 mg tablet 1 tablet oral 2 time daily&quot; ];
-           fhir:PlanDefinition.action.definition [ fhir:value &quot;#metoprololTartrate50Prescription&quot; ];
+           fhir:PlanDefinition.action.definitionCanonical [ fhir:value &quot;#metoprololTartrate50Prescription&quot; ];
            fhir:PlanDefinition.action.dynamicValue [
              fhir:index 0;
              fhir:PlanDefinition.action.dynamicValue.path [ fhir:value &quot;status&quot; ];
@@ -767,7 +767,7 @@
          ], [
            fhir:index 2;
            fhir:PlanDefinition.action.textEquivalent [ fhir:value &quot;amlodipine 5  tablet 1 tablet oral  daily&quot; ];
-           fhir:PlanDefinition.action.definition [ fhir:value &quot;#amlodipinePrescription&quot; ];
+           fhir:PlanDefinition.action.definitionCanonical [ fhir:value &quot;#amlodipinePrescription&quot; ];
            fhir:PlanDefinition.action.dynamicValue [
              fhir:index 0;
              fhir:PlanDefinition.action.dynamicValue.path [ fhir:value &quot;status&quot; ];
@@ -799,7 +799,7 @@
          fhir:PlanDefinition.action.action [
            fhir:index 0;
            fhir:PlanDefinition.action.textEquivalent [ fhir:value &quot;nitroglycerin 0.4 mg tablet sub-lingual every 5 minutes as needed for chest pain; maximum 3 tablets&quot; ];
-           fhir:PlanDefinition.action.definition [ fhir:value &quot;#nitroglycerinPrescription&quot; ];
+           fhir:PlanDefinition.action.definitionCanonical [ fhir:value &quot;#nitroglycerinPrescription&quot; ];
            fhir:PlanDefinition.action.dynamicValue [
              fhir:index 0;
              fhir:PlanDefinition.action.dynamicValue.path [ fhir:value &quot;status&quot; ];
@@ -860,7 +860,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:27-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -870,7 +870,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fplandefinition-example-cardiology-os.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fplandefinition-example-cardiology-os.ttl.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fplandefinition-example-cardiology-os.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fplandefinition-example-cardiology-os.ttl.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

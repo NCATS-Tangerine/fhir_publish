@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -96,7 +96,7 @@
           </xs:element>
           <xs:element name="useContext" minOccurs="0" maxOccurs="unbounded" type="UsageContext">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate example scenario instances.</xs:documentation>
+              <xs:documentation xml:lang="en">The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate example scenario instances.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="jurisdiction" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
@@ -310,9 +310,9 @@
               <xs:documentation xml:lang="en">Each interaction or action.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="alternative" type="ExampleScenario.Alternative" minOccurs="0" maxOccurs="1">
+          <xs:element name="alternative" type="ExampleScenario.Alternative" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Each interaction in the workflow.</xs:documentation>
+              <xs:documentation xml:lang="en">Indicates an alternative step that can be taken instead of the operations on the base step in exceptional/atypical circumstances.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -387,40 +387,19 @@
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="name" minOccurs="0" maxOccurs="1" type="string">
+          <xs:element name="title" minOccurs="1" maxOccurs="1" type="string">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The name of each alternative.</xs:documentation>
+              <xs:documentation xml:lang="en">The label to display for the alternative that gives a sense of the circumstance in which the alternative should be invoked.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="option" type="ExampleScenario.Option" minOccurs="1" maxOccurs="unbounded">
+          <xs:element name="description" minOccurs="0" maxOccurs="1" type="markdown">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Each of the possible options in an alternative.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="ExampleScenario.Option">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">Example of workflow instance.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="description" minOccurs="1" maxOccurs="1" type="markdown">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">A human-readable description of each option.</xs:documentation>
+              <xs:documentation xml:lang="en">A human-readable description of the alternative explaining when the alternative should occur rather than the base step.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="step" type="ExampleScenario.Step" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
               <xs:documentation xml:lang="en">What happens in each alternative option.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="pause" minOccurs="0" maxOccurs="unbounded" type="boolean">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">If there is a pause in the flow.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -589,6 +568,14 @@
           <xs:documentation xml:lang="zh">照护团队</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="CatalogEntry">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">CatalogEntry</xs:documentation>
+          <xs:documentation xml:lang="en">CatalogEntry</xs:documentation>
+          <xs:documentation xml:lang="es">EntradaDeCatalogo</xs:documentation>
+          <xs:documentation xml:lang="zh">条目定义</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="ChargeItem">
         <xs:annotation>
           <xs:documentation xml:lang="en">ChargeItem</xs:documentation>
@@ -634,10 +621,6 @@
         <xs:annotation>
           <xs:documentation xml:lang="en">ClinicalProfile</xs:documentation>
           <xs:documentation xml:lang="en">ClinicalProfile</xs:documentation>
-          <xs:documentation xml:lang="it">ClinicalProfile(it)</xs:documentation>
-          <xs:documentation xml:lang="fr">ClinicalProfile(fr)</xs:documentation>
-          <xs:documentation xml:lang="es">ClinicalProfile(es)</xs:documentation>
-          <xs:documentation xml:lang="zh">ClinicalProfile(zh)</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="CodeSystem">
@@ -846,6 +829,12 @@
           <xs:documentation xml:lang="zh">领域资源</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="EffectEvidenceSynthesis">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">EffectEvidenceSynthesis</xs:documentation>
+          <xs:documentation xml:lang="en">EffectEvidenceSynthesis</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="Encounter">
         <xs:annotation>
           <xs:documentation xml:lang="en">Encounter</xs:documentation>
@@ -883,14 +872,6 @@
           <xs:documentation xml:lang="zh">保险注册响应</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="EntryDefinition">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">EntryDefinition</xs:documentation>
-          <xs:documentation xml:lang="en">EntryDefinition</xs:documentation>
-          <xs:documentation xml:lang="es">DefinicionDeEntrada</xs:documentation>
-          <xs:documentation xml:lang="zh">条目定义</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value="EpisodeOfCare">
         <xs:annotation>
           <xs:documentation xml:lang="en">EpisodeOfCare</xs:documentation>
@@ -908,6 +889,18 @@
           <xs:documentation xml:lang="it">DefinizioneEvento</xs:documentation>
           <xs:documentation xml:lang="es">DefinitionDeEvento</xs:documentation>
           <xs:documentation xml:lang="zh">事件定义</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Evidence">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Evidence</xs:documentation>
+          <xs:documentation xml:lang="en">Evidence</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EvidenceVariable">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">EvidenceVariable</xs:documentation>
+          <xs:documentation xml:lang="en">EvidenceVariable</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="ExampleScenario">
@@ -1177,22 +1170,10 @@
           <xs:documentation xml:lang="it">AutorizzazioneProdottoMedicinale</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="MedicinalProductClinicals">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">MedicinalProductClinicals</xs:documentation>
-          <xs:documentation xml:lang="en">MedicinalProductClinicals</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value="MedicinalProductContraindication">
         <xs:annotation>
           <xs:documentation xml:lang="en">MedicinalProductContraindication</xs:documentation>
           <xs:documentation xml:lang="en">MedicinalProductContraindication</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="MedicinalProductDeviceSpec">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">MedicinalProductDeviceSpec</xs:documentation>
-          <xs:documentation xml:lang="en">MedicinalProductDeviceSpec</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="MedicinalProductIndication">
@@ -1254,6 +1235,14 @@
           <xs:documentation xml:lang="fr">EntêteMessage</xs:documentation>
           <xs:documentation xml:lang="zh">消息标头</xs:documentation>
           <xs:documentation xml:lang="es">CabeceraMensaje</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MolecularSequence">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">MolecularSequence</xs:documentation>
+          <xs:documentation xml:lang="en">MolecularSequence</xs:documentation>
+          <xs:documentation xml:lang="es">SecuenciaMolecular</xs:documentation>
+          <xs:documentation xml:lang="zh">分子序列</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="NamingSystem">
@@ -1412,26 +1401,6 @@
           <xs:documentation xml:lang="es">Procedimiento</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="ProcessRequest">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">ProcessRequest</xs:documentation>
-          <xs:documentation xml:lang="en">ProcessRequest</xs:documentation>
-          <xs:documentation xml:lang="it">RichiestaProcesso</xs:documentation>
-          <xs:documentation xml:lang="fr">DemandeProcessus</xs:documentation>
-          <xs:documentation xml:lang="es">SolicitudDeProceso</xs:documentation>
-          <xs:documentation xml:lang="zh">处理请求</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ProcessResponse">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">ProcessResponse</xs:documentation>
-          <xs:documentation xml:lang="en">ProcessResponse</xs:documentation>
-          <xs:documentation xml:lang="it">RispostaProcesso</xs:documentation>
-          <xs:documentation xml:lang="fr">RéponseProcessus</xs:documentation>
-          <xs:documentation xml:lang="es">RespuestaDeProceso</xs:documentation>
-          <xs:documentation xml:lang="zh">处理响应</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value="Provenance">
         <xs:annotation>
           <xs:documentation xml:lang="en">Provenance</xs:documentation>
@@ -1481,6 +1450,18 @@
           <xs:documentation xml:lang="zh">请求分组</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="ResearchDefinition">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">ResearchDefinition</xs:documentation>
+          <xs:documentation xml:lang="en">ResearchDefinition</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ResearchElementDefinition">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">ResearchElementDefinition</xs:documentation>
+          <xs:documentation xml:lang="en">ResearchElementDefinition</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="ResearchStudy">
         <xs:annotation>
           <xs:documentation xml:lang="en">ResearchStudy</xs:documentation>
@@ -1514,6 +1495,12 @@
           <xs:documentation xml:lang="zh">风险评估</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="RiskEvidenceSynthesis">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">RiskEvidenceSynthesis</xs:documentation>
+          <xs:documentation xml:lang="en">RiskEvidenceSynthesis</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="Schedule">
         <xs:annotation>
           <xs:documentation xml:lang="en">Schedule</xs:documentation>
@@ -1530,14 +1517,6 @@
           <xs:documentation xml:lang="fr">ParamètreRecherche</xs:documentation>
           <xs:documentation xml:lang="es">ParametroDeBusqueda</xs:documentation>
           <xs:documentation xml:lang="zh">搜索参数</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Sequence">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Sequence</xs:documentation>
-          <xs:documentation xml:lang="en">Sequence</xs:documentation>
-          <xs:documentation xml:lang="es">Secuencia</xs:documentation>
-          <xs:documentation xml:lang="zh">序列</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="ServiceRequest">
@@ -1616,16 +1595,34 @@
           <xs:documentation xml:lang="es">Sustancia</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="SubstanceNucleicAcid">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">SubstanceNucleicAcid</xs:documentation>
+          <xs:documentation xml:lang="en">SubstanceNucleicAcid</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="SubstancePolymer">
         <xs:annotation>
           <xs:documentation xml:lang="en">SubstancePolymer</xs:documentation>
           <xs:documentation xml:lang="en">SubstancePolymer</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="SubstanceProtein">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">SubstanceProtein</xs:documentation>
+          <xs:documentation xml:lang="en">SubstanceProtein</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="SubstanceReferenceInformation">
         <xs:annotation>
           <xs:documentation xml:lang="en">SubstanceReferenceInformation</xs:documentation>
           <xs:documentation xml:lang="en">SubstanceReferenceInformation</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SubstanceSourceMaterial">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">SubstanceSourceMaterial</xs:documentation>
+          <xs:documentation xml:lang="en">SubstanceSourceMaterial</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="SubstanceSpecification">
@@ -1684,15 +1681,6 @@
           <xs:documentation xml:lang="fr">ScriptTest</xs:documentation>
           <xs:documentation xml:lang="es">ScriptDePrueba</xs:documentation>
           <xs:documentation xml:lang="zh">测试脚本</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="UserSession">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">UserSession</xs:documentation>
-          <xs:documentation xml:lang="en">UserSession</xs:documentation>
-          <xs:documentation xml:lang="it">SessioneUtente</xs:documentation>
-          <xs:documentation xml:lang="es">SesionDeUsuario</xs:documentation>
-          <xs:documentation xml:lang="zh">用户会话</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="ValueSet">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-  <title>Operations - FHIR v3.5.0</title>
+  <title>Operations - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -39,7 +39,7 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -108,18 +108,14 @@
 
 <a name="base"></a>
 <h2 class="self-link-parent"><span class="sectioncount">3.2.0<a name="3.2.0"> </a></span> Extended Operations on the RESTful API <a href="operations.html#3.2.0" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h2>
-<table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: 5</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
-<p style="border: 1px black solid; background-color: #e6ffe6; padding: 5px">
-Normative Candidate Note: This page is candidate normative content for R4 in the <a href="ballot-intro.html#infrastructure">Infrastructure Package</a>.
-Once normative, it will lose it's Maturity Level, and <a href="versions.html#change">breaking changes</a> will no longer be made.
-</p>
+<table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: Normative</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
 
 
 <p>
 The <a href="http.html">RESTful API</a> defines a set of common interactions (read, update, search, etc.)
 performed on a repository of typed resources. These interactions follow
 the RESTful paradigm of managing state by <b>C</b>reate/<b>R</b>ead/<b>U</b>pdate/<b>D</b>elete actions on a set of identified
-resources. While this approach solves many use cases, there is some specific
+resources. While this approach solves many use cases, there is some 
 functionality that can be met more efficiently using an RPC-like paradigm,
 where named operations are performed with inputs and outputs (<b>E</b>xecute).
 </p>
@@ -128,7 +124,7 @@ Operations are appropriately used where:
 </p>
 <ul>
  <li>the server needs to play an active role in formulating the content of the response, not merely return existing information</li>
- <li>the intended purpose is to cause side effects such as the modification of existing resources, or creation of new resources, or other changes out of scope of the RESTful interface (e.g. merging patient records)</li>
+ <li>the intended purpose is to cause side effects such as the modification of existing resources or creation of new resources, or other changes out of scope of the RESTful interface (e.g. merging patient records)</li>
  <li>The task involves business rules to be enforced across multiple different resources and/or</li>
  <li>the task involves updating several resources in a coordinated manner (note: this can also be done by a <a href="http.html#transaction">Transaction</a>, but an operation can be more focused on the task</li>
 </ul>
@@ -145,7 +141,7 @@ Operations have the following general properties:
  <li>Parameters are either resources, data types, or search parameters</li>
  <li>Operations are subject to the same security constraints and requirements as the RESTful API</li>
  <li>The URIs for the operation end-points are based on the existing RESTful API address scheme</li>
- <li>Operations may make use of the existing repository of resources in their definitions</li>
+ <li>Operations may make use of all types of resources existing in the repository</li>
  <li>Operations may be performed on a specific resource, a resource type, or a whole system</li>
 </ul>
 
@@ -153,7 +149,7 @@ Operations have the following general properties:
 <h3 class="self-link-parent"><span class="sectioncount">3.2.0.1</span> Executing an Operation <a href="operations.html#executing" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 
 <p>
-Operations are executed using a URL derived from the FHIR endpoint, where the name of the operations is prefixed by a "dollar sign" ('$') character. For example:
+Operations are executed using a URL derived from the FHIR endpoint, where the name of the operation is prefixed by a "dollar sign" ('$') character. For example:
 </p>
 <pre>
  POST http://fhir.someserver.org/fhir/Patient/1/$everything
@@ -262,8 +258,8 @@ For each parameter, the following information is needed:
  <li>Name - the name of the parameter. For implementer convenience, the name should be a valid token in common implementation languages</li>
  <li>Use - In | Out | Both</li>
  <li>Type - a data type or a Resource type</li>
- <li>Search Type - for string search parameters, what kind of search parameter they are (&amp; and what kind of modifiers they have)</li>
- <li>Profile - a <a href="structuredefinition.html">StructureDefinition</a> that applies additional restrictions about the resource</li>
+ <li>Search Type - for string search parameters, what kind of search parameter they are (and what kind of modifiers they have)</li>
+ <li>Profile - a <a href="structuredefinition.html">StructureDefinition</a>  that describes additional restrictions about the parameter - only used if the parameter type is a resource or data type</li>
  <li>Documentation - a description of the parameter's use</li>
  <li>(Optional) Search Type - if the type is a string, and the parameter is being used like a search parameter, which kind of search type applies</li>
 </ul>
@@ -317,21 +313,21 @@ The URL for an operation end-point depends on its context:
 An operation is generally invoked by performing an HTTP POST to the operation's end-point.
 The submitted content is the special <a href="parameters.html">Parameters</a> format (the "in" parameters) - a list of named parameters.
 For an example, see <a href="op-example-request.html">the value set expansion request example</a>.
-Note that when parameters have a search type, the search modifiers are available, and are used on the parameter name in the Parameters resource (e.g. "code:in").
+Note that when parameters have a search type, the search modifiers are available and are used on the parameter name in the Parameters resource (e.g. "code:in").
 </p>
 <p>
 Note that the same arrangement as for the RESTful interface applies
 with respect to <a href="http.html#mime-type">content types</a>.
 </p>
 <p>
-If all the parameters for the operation are <a href="datatypes.html#primitive">primitive types</a>, and the operation
-has <code>affectsState</code> = false (see <a href="https://tools.ietf.org/html/rfc7231#section-4.2.2">HTTP specification
-definition of idempotent <img src="external.png" style="text-align: baseline"/></a>), the operation may be invoked by performing an HTTP GET operation where
-all of the values of the parameters are appended to the URL in the search portion of the URL (e.g. after the '?' character).
-Servers SHALL support this method of invocation. E.g.
+If all the parameters for the operation are <a href="datatypes.html#primitive">primitive types</a> and the operation
+has <a href="operationdefinition-definitions.html#OperationDefinition.affectsState"><code>affectsState</code></a> = false, 
+the operation may be invoked by performing an HTTP GET operation where all of the values of the parameters are appended 
+to the URL in the search portion of the URL (e.g. after the '?' character). Servers SHALL support this method of invocation. 
+E.g.
 </p>
 <pre>
-GET [base]/ValueSet/$expand?url=http://hl7.org/fhir/ValueSet/body-sit&amp;filter=abdo
+GET [base]/ValueSet/$expand?url=http://hl7.org/fhir/ValueSet/body-site&amp;filter=abdo
 </pre>
 <p>
 When using the HTTP GET operation, if there is a repeating parameter for the extended operation the values for that parameter
@@ -416,7 +412,7 @@ Asynchronous pattern</a> to execute operations asynchronously.
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:28-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
@@ -426,7 +422,7 @@ Asynchronous pattern</a> to execute operations asynchronously.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Foperations.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperations.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Foperations.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperations.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
-               <a style="color: #b8dcf9" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>
         </p>
 			</div>  <!-- /inner-wrapper -->

@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Sat, Sep 15, 2018 09:06-0500 for FHIR v3.5.0 
+  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -106,7 +106,7 @@
           </xs:element>
           <xs:element name="useContext" minOccurs="0" maxOccurs="unbounded" type="UsageContext">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate test script instances.</xs:documentation>
+              <xs:documentation xml:lang="en">The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate test script instances.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="jurisdiction" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
@@ -152,16 +152,6 @@
           <xs:element name="variable" type="TestScript.Variable" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
               <xs:documentation xml:lang="en">Variable is set based either on element value in response body or on header field value in the response headers.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="rule" type="TestScript.Rule" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Assert rule to be used in one or more asserts within the test script.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="ruleset" type="TestScript.Ruleset" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Contains one or more rules.  Offers a way to group rules so assertions could reference the group of rules and have them all applied.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="setup" type="TestScript.Setup" minOccurs="0" maxOccurs="1">
@@ -390,111 +380,6 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="TestScript.Rule">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="resource" minOccurs="1" maxOccurs="1" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Reference to the resource (containing the contents of the rule needed for assertions).</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="param" type="TestScript.Param" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Each rule template can take one or more parameters for rule evaluation.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="TestScript.Param">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="name" minOccurs="1" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Descriptive name for this parameter that matches the external assert rule parameter name.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="value" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The explicit or dynamic value for the parameter that will be passed on to the external rule template.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="TestScript.Ruleset">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="resource" minOccurs="1" maxOccurs="1" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Reference to the resource (containing the contents of the ruleset needed for assertions).</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="rule" type="TestScript.Rule1" minOccurs="1" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The referenced rule within the external ruleset template.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="TestScript.Rule1">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="ruleId" minOccurs="1" maxOccurs="1" type="id">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Id of the referenced rule within the external ruleset template.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="param" type="TestScript.Param1" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Each rule template can take one or more parameters for rule evaluation.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="TestScript.Param1">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="name" minOccurs="1" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Descriptive name for this parameter that matches the external assert ruleset rule parameter name.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="value" minOccurs="0" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The value for the parameter that will be passed on to the external ruleset rule template.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
   <xs:complexType name="TestScript.Setup">
     <xs:annotation>
       <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
@@ -577,6 +462,11 @@
           <xs:element name="encodeRequestUrl" minOccurs="1" maxOccurs="1" type="boolean">
             <xs:annotation>
               <xs:documentation xml:lang="en">Whether or not to implicitly send the request url in encoded format. The default is true to match the standard RESTful client behavior. Set to false when communicating with a server that does not support encoded url paths.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="method" minOccurs="0" maxOccurs="1" type="TestScriptRequestMethodCode">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The HTTP method the test engine MUST use for this operation regardless of any other operation details.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="origin" minOccurs="0" maxOccurs="1" type="integer">
@@ -741,16 +631,6 @@
               <xs:documentation xml:lang="en">The value of the HTTP response code to be tested.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="rule" type="TestScript.Rule2" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The TestScript.rule this assert will evaluate.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="ruleset" type="TestScript.Ruleset1" minOccurs="0" maxOccurs="1">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The TestScript.ruleset this assert will evaluate.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
           <xs:element name="sourceId" minOccurs="0" maxOccurs="1" type="id">
             <xs:annotation>
               <xs:documentation xml:lang="en">Fixture to evaluate the XPath/JSONPath expression or the headerField  against.</xs:documentation>
@@ -769,111 +649,6 @@
           <xs:element name="warningOnly" minOccurs="1" maxOccurs="1" type="boolean">
             <xs:annotation>
               <xs:documentation xml:lang="en">Whether or not the test execution will produce a warning only on error for this assert.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="TestScript.Rule2">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="ruleId" minOccurs="1" maxOccurs="1" type="id">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The TestScript.rule id value this assert will evaluate.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="param" type="TestScript.Param2" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Each rule template can take one or more parameters for rule evaluation.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="TestScript.Param2">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="name" minOccurs="1" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Descriptive name for this parameter that matches the external assert rule parameter name.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="value" minOccurs="1" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The value for the parameter that will be passed on to the external rule template.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="TestScript.Ruleset1">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="rulesetId" minOccurs="1" maxOccurs="1" type="id">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The TestScript.ruleset id value this assert will evaluate.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="rule" type="TestScript.Rule3" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The referenced rule within the external ruleset template.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="TestScript.Rule3">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="ruleId" minOccurs="1" maxOccurs="1" type="id">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Id of the referenced rule within the external ruleset template.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="param" type="TestScript.Param3" minOccurs="0" maxOccurs="unbounded">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Each rule template can take one or more parameters for rule evaluation.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="TestScript.Param3">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="BackboneElement">
-        <xs:sequence>
-          <xs:element name="name" minOccurs="1" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Descriptive name for this parameter that matches the external assert ruleset rule parameter name.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="value" minOccurs="1" maxOccurs="1" type="string">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">The value for the parameter that will be passed on to the external ruleset rule template.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -1159,6 +934,11 @@
       <xs:enumeration value="put">
         <xs:annotation>
           <xs:documentation xml:lang="en">PUT</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="head">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">HEAD</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>

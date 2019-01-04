@@ -2111,7 +2111,7 @@
     </div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-    <valueString value="External"/>
+    <valueCode value="external"/>
   </extension>
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
     <valueInteger value="0"/>
@@ -2144,6 +2144,12 @@
     <uri value="http://hl7.org/fhir/concept-properties#notSelectable"/>
     <description value="Indicates that the code is abstract - only intended to be used as a selector for other concepts"/>
     <type value="boolean"/>
+  </property>
+  <property>
+    <code value="child"/>
+    <uri value="http://hl7.org/fhir/concept-properties#child"/>
+    <description value="The concept identified in this property is a child of the concept on which it is a property. The property type will be &#39;code&#39;. The meaning of parent/child relationships is defined by the hierarchyMeaning attribute"/>
+    <type value="code"/>
   </property>
   <property>
     <code value="status"/>
@@ -2338,12 +2344,13 @@
           </concept>
         </concept>
         <concept>
-          <extension url="http://hl7.org/fhir/StructureDefinition/codesystem-subsumes">
-            <valueCode value="BLSTRPK"/>
-          </extension>
           <code value="COMPPKG"/>
           <display value="Compliance Package"/>
           <definition value="A container intended to contain sufficient material for more than one use, but grouped or organized to provide individual access to sufficient material for a single use.  Often used to ensure that the proper type and amount of material is consumed/expended for each use."/>
+          <property>
+            <code value="child"/>
+            <valueCode value="BLSTRPK"/>
+          </property>
           <concept>
             <code value="DIALPK"/>
             <display value="Dial Pack"/>

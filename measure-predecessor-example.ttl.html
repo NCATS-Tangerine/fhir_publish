@@ -3,7 +3,7 @@
 <!-- template-example-ttl.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Measure-predecessor-example.ttl - FHIR v3.5.0</title>
+  <title>Measure-predecessor-example.ttl - FHIR v3.6.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,7 +40,7 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<div id="hl7-status">
-				<b>Custom NCATS Translator JHU Build</b><br /> <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a> <a href="https://www.hopkinsmedicine.org/"><img src="/jhulogo.png" height="100" /></a>
+				<b>Current Build</b>
 			</div>       	
 			
 			<div id="hl7-nav">
@@ -107,7 +107,7 @@
 <div class="col-12">
 
 <h1>Measure-predecessor-example.ttl</h1>
-<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/cqi/index.cfm">Clinical Quality Information</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="ballot-intro.html#process">Ballot Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
+<table class="colsi"><tr><td><a href="http://www.hl7.org/Special/committees/cqi/index.cfm">Clinical Quality Information</a> Work Group</td><td><a href="versions.html#maturity">Maturity Level</a>: N/A</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>: Informative</td><!--!ns!--><td><a href="compartmentdefinition.html">Compartments</a>: Not linked to any defined compartments</td></tr></table>
 
 </tbody></table>
 <p>
@@ -116,7 +116,7 @@
 
 <div class="example">
 <p>Predecessor example - Exclusive Breastfeeding</p>
-<pre class="json">
+<pre class="rdf">
 @prefix fhir: &lt;http://hl7.org/fhir/&gt; .
 @prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
@@ -136,7 +136,7 @@
      fhir:Identifier.use [ fhir:value &quot;official&quot; ];
      fhir:Identifier.value [ fhir:value &quot;exclusive-breastfeeding-measure&quot; ]
   ];
-  fhir:Measure.version [ fhir:value &quot;3.5.0&quot;];
+  fhir:Measure.version [ fhir:value &quot;3.6.0&quot;];
   fhir:Measure.title [ fhir:value &quot;Exclusive Breastfeeding Measure&quot;];
   fhir:Measure.status [ fhir:value &quot;active&quot;];
   fhir:Measure.date [ fhir:value &quot;2014-03-08&quot;^^xsd:date];
@@ -223,7 +223,13 @@
   ];
   fhir:Measure.rationale [ fhir:value &quot;Exclusive breast milk feeding for the first 6 months of neonatal life has long been the expressed goal of World Health Organization (WHO), Department of Health and Human Services (DHHS), American Academy of Pediatrics (AAP) and American College of Obstetricians and Gynecologists (ACOG). ACOG has recently reiterated its position (ACOG, 2007). A recent Cochrane review substantiates the benefits (Kramer et al., 2002). Much evidence has now focused on the prenatal and intrapartum period as critical for the success of exclusive (or any) BF (Centers for Disease Control and Prevention [CDC], 2007; Petrova et al., 2007; Shealy et al., 2005; Taveras et al., 2004). Exclusive breast milk feeding rate during birth hospital stay has been calculated by the California Department of Public Health for the last several years using newborn genetic disease testing data. Healthy People 2010 and the CDC have also been active in promoting this goal.&quot;];
   fhir:Measure.clinicalRecommendationStatement [ fhir:value &quot;Exclusive breast milk feeding for the first 6 months of neonatal life can result in numerous long-term health benefits for both mother and newborn and is recommended by a number of national and international organizations. Evidence suggests that the prenatal and intrapartum period is critical for the success of exclusive (or any) breast feeding. Therefore, it is recommended that newborns are fed breast milk only from birth to discharge.&quot;];
-  fhir:Measure.improvementNotation [ fhir:value &quot;increase&quot;];
+  fhir:Measure.improvementNotation [
+     fhir:CodeableConcept.coding [
+       fhir:index 0;
+       fhir:Coding.system [ fhir:value &quot;http://terminology.hl7.org/CodeSystem/measure-improvement-notation&quot; ];
+       fhir:Coding.code [ fhir:value &quot;increase&quot; ]
+     ]
+  ];
   fhir:Measure.guidance [ fhir:value &quot;A discharge to a designated cancer center or children's hospital should be captured as a discharge to an acute care facility. It is acceptable to calculate Gestational Age using the American College of Obstetricians and Gynecologists ReVITALize guidelines, which define Gestational Age as calculated using the best obstetrical Estimated Due Date (EDD) based on the formula: Gestational Age= (280-(EDD-Reference Date))/7 where Reference Date is the date on which you are trying to determine gestational age. For PC-05, Reference Date is the Birth Date. Note however that the calculation may yield a non-whole number and gestational age should be rounded off to the nearest completed week. For example, an infant born on the 5th day of the 36th week (35 weeks and 5/7 days) is at a gestational age of 35 weeks, not 36 weeks.&quot;];
   fhir:Measure.group [
      fhir:index 0;
@@ -364,7 +370,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.5.0-????) generated on Fri, Sep 14, 2018 07:26-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:26-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
@@ -374,7 +380,7 @@ of the specification.
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fmeasure-predecessor-example.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmeasure-predecessor-example.ttl.html">Compare to DSTU3</a> |                
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fmeasure-predecessor-example.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmeasure-predecessor-example.ttl.html">Ballot Comparison</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
-               <a style="color: #b8dcf9" target="_blank" href="http://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemAdd&amp;tracker_id=677">Propose a change</a>   
+               <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>
         </p>
 			</div><!-- /inner-wrapper -->

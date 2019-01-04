@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.5.0-14906
+# FHIR GraphQL Schema. Version 3.6.0
 
 type MeasureReport {
   id: ID
@@ -17,7 +17,7 @@ type MeasureReport {
   date: dateTime  _date: ElementBase
   reporter: Reference
   period: Period!
-  improvementNotation: code  _improvementNotation: ElementBase
+  improvementNotation: CodeableConcept
   group: [MeasureReportGroup]
   evaluatedResource: [Reference]
 }
@@ -45,7 +45,7 @@ type MeasureReportGroupStratifier {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  code: CodeableConcept
+  code: [CodeableConcept]
   stratum: [MeasureReportGroupStratifierStratum]
 }
 
@@ -53,9 +53,18 @@ type MeasureReportGroupStratifierStratum {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  value: CodeableConcept!
+  value: CodeableConcept
+  component: [MeasureReportGroupStratifierStratumComponent]
   population: [MeasureReportGroupStratifierStratumPopulation]
   measureScore: Quantity
+}
+
+type MeasureReportGroupStratifierStratumComponent {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  value: CodeableConcept!
 }
 
 type MeasureReportGroupStratifierStratumPopulation {
@@ -84,7 +93,7 @@ input MeasureReport {
   date: dateTime  _date: ElementBase
   reporter: Reference
   period: Period!
-  improvementNotation: code  _improvementNotation: ElementBase
+  improvementNotation: CodeableConcept
   group: [MeasureReportGroup]
   evaluatedResource: [Reference]
 }
@@ -112,7 +121,7 @@ input MeasureReportGroupStratifier {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  code: CodeableConcept
+  code: [CodeableConcept]
   stratum: [MeasureReportGroupStratifierStratum]
 }
 
@@ -120,9 +129,18 @@ input MeasureReportGroupStratifierStratum {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  value: CodeableConcept!
+  value: CodeableConcept
+  component: [MeasureReportGroupStratifierStratumComponent]
   population: [MeasureReportGroupStratifierStratumPopulation]
   measureScore: Quantity
+}
+
+input MeasureReportGroupStratifierStratumComponent {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  value: CodeableConcept!
 }
 
 input MeasureReportGroupStratifierStratumPopulation {

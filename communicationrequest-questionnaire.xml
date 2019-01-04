@@ -9,8 +9,8 @@
       <status value="active"/>
       <description value="Type options for CommunicationRequest.payload.content[x]"/>
       <expansion>
-        <identifier value="urn:uuid:8da1bdb8-b3d7-4042-8a32-aa6b305b5cb0"/>
-        <timestamp value="2018-09-14T07:25:42-05:00"/>
+        <identifier value="urn:uuid:a128d82c-9ad2-42d8-9688-100284a1c34e"/>
+        <timestamp value="2018-12-13T14:26:30-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="string"/>
@@ -36,8 +36,8 @@
       <status value="active"/>
       <description value="Type options for CommunicationRequest.occurrence[x]"/>
       <expansion>
-        <identifier value="urn:uuid:524e17bb-6539-40ac-b618-be0d359754ca"/>
-        <timestamp value="2018-09-14T07:25:42-05:00"/>
+        <identifier value="urn:uuid:8d415673-db8e-4699-bdcf-692426455fed"/>
+        <timestamp value="2018-12-13T14:26:30-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="dateTime"/>
@@ -54,8 +54,9 @@
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
+  <version value="3.6.0"/>
   <status value="draft"/>
-  <date value="2018-09-14T07:16:19-05:00"/>
+  <date value="2018-12-13T14:23:07-06:00"/>
   <publisher value="Health Level Seven International (Patient Care)"/>
   <item>
     <linkId value="CommunicationRequest"/>
@@ -240,7 +241,7 @@
     </item>
     <item>
       <linkId value="CommunicationRequest.extension"/>
-      <text value="Additional Content defined by implementations"/>
+      <text value="Additional content defined by implementations"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -274,7 +275,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="May be used to represent additional information that is not part of the basic definition of the resource, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+        <text value="May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
         <type value="display"/>
       </item>
     </item>
@@ -732,7 +733,7 @@
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
         <valueString value="Reference"/>
       </extension>
-      <linkId value="CommunicationRequest.context"/>
+      <linkId value="CommunicationRequest.encounter"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -746,18 +747,18 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The encounter or episode of care within which the communication request was created."/>
+        <text value="The Encounter during which this CommunicationRequest was created or to which the creation of this record is tightly associated. This will typically be the encounter the event occurred within, but some activities may be initiated prior to or after the official completion of an encounter but still be tied to the context of the encounter."/>
         <type value="display"/>
       </item>
       <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-          <valueCode value="Encounter, EpisodeOfCare"/>
+          <valueCode value="Encounter"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
           <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
         </extension>
-        <linkId value="CommunicationRequest.context.value"/>
-        <text value="Encounter or episode leading to message"/>
+        <linkId value="CommunicationRequest.encounter.value"/>
+        <text value="Encounter created as part of"/>
         <type value="reference"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -808,7 +809,7 @@
         </item>
         <item>
           <linkId value="CommunicationRequest.payload.id.value"/>
-          <text value="xml:id (or equivalent in JSON)"/>
+          <text value="Unique id for inter-element referencing"/>
           <type value="string"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -836,7 +837,7 @@
       </item>
       <item>
         <linkId value="CommunicationRequest.payload.modifierExtension"/>
-        <text value="Extensions that cannot be ignored if unrecognized"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="true"/>
@@ -850,7 +851,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
         </item>
       </item>
