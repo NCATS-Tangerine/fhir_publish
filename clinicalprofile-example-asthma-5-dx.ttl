@@ -1,0 +1,80 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://hl7.org/fhir/ClinicalProfile/jhu-asthma-5-diagnoses> a fhir:ClinicalProfile;
+  fhir:nodeRole fhir:treeRoot;
+  fhir:Resource.id [ fhir:value "jhu-asthma-5-diagnoses"];
+  fhir:DomainResource.text [
+     fhir:Narrative.status [ fhir:value "generated" ];
+     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n            <p>Selected diagnoses for male black or african american patients aged 35-64 seen as either outpatients\n                or inpatients at Johns Hopkins Hospital, JHCP, and Bayview\n                between 3/1/2016 and 3/1/2018 having a diagnosis of asthma recorded on the problem list or as an\n                encounter diagnosis.\n            </p>\n        </div>"
+  ];
+  fhir:ClinicalProfile.identifier [
+     fhir:index 0;
+     fhir:Identifier.value [ fhir:value "urn:uuid:BD5EDAD0-C777-9185-7BB7094FA4A6353C" ]
+  ];
+  fhir:ClinicalProfile.status [ fhir:value "draft"];
+  fhir:ClinicalProfile.population [
+     fhir:link <http://hl7.org/fhir/Group/asthma-population-jhu1>;
+     fhir:Reference.reference [ fhir:value "Group/asthma-population-jhu1" ];
+     fhir:Reference.display [ fhir:value "Outpatients or inpatients at Johns Hopkins Hospital, JHCP, and Bayview between 3/1/2016 and 3/1/2018 having a diagnosis of asthma recorded on the problem list or as an encounter diagnosis." ]
+  ];
+  fhir:ClinicalProfile.cohort [
+     fhir:link <http://hl7.org/fhir/Group/asthma-sample-5-cohort-jhu1>;
+     fhir:Reference.reference [ fhir:value "Group/asthma-sample-5-cohort-jhu1" ];
+     fhir:Reference.display [ fhir:value "Black or african american males aged 35-64" ]
+  ];
+  fhir:ClinicalProfile.date [ fhir:value "2018-09-03T00:27:17Z"^^xsd:dateTime];
+  fhir:ClinicalProfile.source [
+     fhir:index 0;
+     fhir:Identifier.value [ fhir:value "http://ictrweb.johnshopkins.edu/ictr/synthetic/includes/clinical_profiles.cfm" ]
+  ];
+  fhir:ClinicalProfile.reporter [
+     fhir:link <http://hl7.org/fhir/Organization/JHM>;
+     fhir:Reference.reference [ fhir:value "Organization/JHM" ];
+     fhir:Reference.type [ fhir:value "Organization" ];
+     fhir:Reference.display [ fhir:value "Johns Hopkins School of Medicine" ]
+  ];
+  fhir:ClinicalProfile.diagnosis [
+     fhir:index 0;
+     fhir:ClinicalProfile.diagnosis.code [
+       fhir:index 0;
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.system [ fhir:value "http://hl7.org/fhir/sid/icd-10" ];
+         fhir:Coding.code [ fhir:value "J45.909" ];
+         fhir:Coding.display [ fhir:value "Asthma" ]
+       ]
+     ];
+     fhir:ClinicalProfile.diagnosis.count [ fhir:value "1262"^^xsd:integer ]
+  ], [
+     fhir:index 1;
+     fhir:ClinicalProfile.diagnosis.code [
+       fhir:index 0;
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.system [ fhir:value "http://hl7.org/fhir/sid/icd-10" ];
+         fhir:Coding.code [ fhir:value "J30.9" ];
+         fhir:Coding.display [ fhir:value "Allergic rhinitis, cause unspecified" ]
+       ]
+     ];
+     fhir:ClinicalProfile.diagnosis.count [ fhir:value "380"^^xsd:integer ]
+  ] .
+
+<http://hl7.org/fhir/Group/asthma-population-jhu1> a fhir:Group .
+
+<http://hl7.org/fhir/Group/asthma-sample-5-cohort-jhu1> a fhir:Group .
+
+<http://hl7.org/fhir/Organization/JHM> a fhir:Organization .
+
+# - ontology header ------------------------------------------------------------
+
+<http://hl7.org/fhir/ClinicalProfile/jhu-asthma-5-diagnoses.ttl> a owl:Ontology;
+  owl:imports fhir:fhir.ttl;
+  owl:versionIRI <http://build.fhir.org/ClinicalProfile/jhu-asthma-5-diagnoses.ttl> .
+
+# -------------------------------------------------------------------------------------
+
