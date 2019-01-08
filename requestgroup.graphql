@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.6.0
+# FHIR GraphQL Schema. Version 4.0.0
 
 type RequestGroup {
   id: ID
@@ -20,7 +20,7 @@ type RequestGroup {
   priority: code  _priority: ElementBase
   code: CodeableConcept
   subject: Reference
-  context: Reference
+  encounter: Reference
   authoredOn: dateTime  _authoredOn: ElementBase
   author: Reference
   reasonCode: [CodeableConcept]
@@ -64,9 +64,7 @@ type RequestGroupActionCondition {
   extension: [Extension]
   modifierExtension: [Extension]
   kind: code  _kind: ElementBase
-  description: String  _description: ElementBase
-  language: String  _language: ElementBase
-  expression: String  _expression: ElementBase
+  expression: Expression
 }
 
 type RequestGroupActionRelatedAction {
@@ -99,7 +97,7 @@ input RequestGroup {
   priority: code  _priority: ElementBase
   code: CodeableConcept
   subject: Reference
-  context: Reference
+  encounter: Reference
   authoredOn: dateTime  _authoredOn: ElementBase
   author: Reference
   reasonCode: [CodeableConcept]
@@ -143,9 +141,7 @@ input RequestGroupActionCondition {
   extension: [Extension]
   modifierExtension: [Extension]
   kind: code  _kind: ElementBase
-  description: String  _description: ElementBase
-  language: String  _language: ElementBase
-  expression: String  _expression: ElementBase
+  expression: Expression
 }
 
 input RequestGroupActionRelatedAction {
@@ -167,7 +163,6 @@ type RequestGroupListType {
     author : [reference]
     authored : [date]
     code : [token]
-    context : [reference]
     encounter : [reference]
     group_identifier : [token]
     identifier : [token]
@@ -198,7 +193,6 @@ type RequestGroupConnectionType {
     author : [reference]
     authored : [date]
     code : [token]
-    context : [reference]
     encounter : [reference]
     group_identifier : [token]
     identifier : [token]

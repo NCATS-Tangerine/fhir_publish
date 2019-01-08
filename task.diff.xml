@@ -3,13 +3,29 @@
    <type name="Task" status="changed">
       <element path="Task.instantiatesCanonical" status="new"/>
       <element path="Task.instantiatesUri" status="new"/>
-      <element modifier="added" path="Task.status"/>
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               modifier="added"
+               path="Task.status">
+         <old-binding reference="http://hl7.org/fhir/ValueSet/task-status"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/task-status|4.0.0"
+                      strength="required"/>
+      </element>
       <element binding-status="changed"
                binding-valueset-changed="true"
                path="Task.intent">
          <old-binding reference="http://hl7.org/fhir/ValueSet/request-intent"
                       strength="required"/>
-         <new-binding reference="http://hl7.org/fhir/ValueSet/task-intent"
+         <new-binding reference="http://hl7.org/fhir/ValueSet/task-intent|4.0.0"
+                      strength="required"/>
+      </element>
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               path="Task.priority">
+         <old-binding reference="http://hl7.org/fhir/ValueSet/request-priority"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/request-priority|4.0.0"
                       strength="required"/>
       </element>
       <element path="Task.encounter" status="new"/>
@@ -25,6 +41,10 @@
       <element path="Task.reasonCode" status="new"/>
       <element path="Task.reasonReference" status="new"/>
       <element path="Task.insurance" status="new"/>
+      <element path="Task.restriction.recipient">
+         <removed-type name="Reference(Patient | Practitioner | RelatedPerson | Group | Organization)"/>
+         <added-type name="Reference(Patient | Practitioner | PractitionerRole | RelatedPerson | Group | Organization)"/>
+      </element>
       <element path="Task.input.value[x]">
          <removed-type name="Meta"/>
          <added-type name="canonical"/>

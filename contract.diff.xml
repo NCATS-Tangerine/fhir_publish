@@ -4,6 +4,14 @@
       <element new-max="*" old-max="1" path="Contract.identifier"/>
       <element path="Contract.url" status="new"/>
       <element path="Contract.version" status="new"/>
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               path="Contract.status">
+         <old-binding reference="http://hl7.org/fhir/ValueSet/contract-status"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/contract-status|4.0.0"
+                      strength="required"/>
+      </element>
       <element path="Contract.legalState" status="new"/>
       <element path="Contract.instantiatesCanonical" status="new"/>
       <element path="Contract.instantiatesUri" status="new"/>
@@ -120,6 +128,10 @@
       <element path="Contract.term.action.securityLabelNumber" status="new"/>
       <element path="Contract.supportingInfo" status="new"/>
       <element path="Contract.relevantHistory" status="new"/>
+      <element path="Contract.signer.party">
+         <removed-type name="Reference(Organization | Patient | Practitioner | RelatedPerson)"/>
+         <added-type name="Reference(Organization | Patient | Practitioner | PractitionerRole | RelatedPerson)"/>
+      </element>
       <element path="Contract.legallyBinding[x]" status="new"/>
       <element path="Contract.action" status="deleted"/>
       <element path="Contract.actionReason" status="deleted"/>

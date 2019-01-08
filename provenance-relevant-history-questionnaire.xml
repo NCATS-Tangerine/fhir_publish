@@ -2,32 +2,10 @@
 
 <Questionnaire xmlns="http://hl7.org/fhir">
   <id value="qs1"/>
-  <contained>
-    <ValueSet>
-      <id value="vs2"/>
-      <name value="Type options for Provenance.occurred[x]"/>
-      <status value="active"/>
-      <description value="Type options for Provenance.occurred[x]"/>
-      <expansion>
-        <identifier value="urn:uuid:3bb7b1e5-2a5c-40f1-937a-1999668c4de2"/>
-        <timestamp value="2018-12-13T14:27:25-06:00"/>
-        <contains>
-          <system value="http://hl7.org/fhir/data-types"/>
-          <code value="Period"/>
-          <display value="Period"/>
-        </contains>
-        <contains>
-          <system value="http://hl7.org/fhir/data-types"/>
-          <code value="dateTime"/>
-          <display value="dateTime"/>
-        </contains>
-      </expansion>
-    </ValueSet>
-  </contained>
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
-  <version value="3.6.0"/>
+  <version value="4.0.0"/>
   <status value="draft"/>
   <date value="2013-12-03T00:00:00-06:00"/>
   <publisher value="Health Level Seven International"/>
@@ -301,8 +279,10 @@
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
         <valueInteger value="1"/>
       </extension>
-      <linkId value="Provenance.occurred[x]"/>
-      <text value="When the activity occurred"/>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="datetime"/>
+      </extension>
+      <linkId value="Provenance.occurredDateTime"/>
       <type value="group"/>
       <required value="true"/>
       <repeats value="true"/>
@@ -320,46 +300,11 @@
         <type value="display"/>
       </item>
       <item>
-        <linkId value="Provenance.occurred[x]._type"/>
-        <text value="type"/>
-        <type value="choice"/>
+        <linkId value="Provenance.occurredDateTime.value"/>
+        <text value="When the activity occurred"/>
+        <type value="dateTime"/>
         <required value="false"/>
         <repeats value="false"/>
-        <answerValueSet value="#vs2"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="Period"/>
-          </extension>
-          <linkId value="Provenance.occurred[x]._null"/>
-          <type value="group"/>
-          <item>
-            <linkId value="Provenance.occurred[x]._null.low"/>
-            <text value="start:"/>
-            <type value="dateTime"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-          <item>
-            <linkId value="Provenance.occurred[x]._null.end"/>
-            <text value="end:"/>
-            <type value="dateTime"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="datetime"/>
-          </extension>
-          <linkId value="Provenance.occurred[x]._null"/>
-          <type value="group"/>
-          <item>
-            <linkId value="Provenance.occurred[x]._null.value"/>
-            <type value="dateTime"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
       </item>
     </item>
     <item>

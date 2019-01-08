@@ -5,29 +5,19 @@
          <removed-type name="Reference(MedicationRequest | CarePlan | ProcedureRequest | ReferralRequest)"/>
          <added-type name="Reference(MedicationRequest | CarePlan | ServiceRequest)"/>
       </element>
-      <element binding-codes-changed="true"
-               binding-status="changed"
+      <element binding-status="changed"
+               binding-valueset-changed="true"
                path="MedicationStatement.status">
-         <removed-code code="active"/>
-         <removed-code code="completed"/>
-         <removed-code code="entered-in-error"/>
-         <removed-code code="intended"/>
-         <removed-code code="stopped"/>
-         <removed-code code="on-hold"/>
-         <added-code code="active"/>
-         <added-code code="completed"/>
-         <added-code code="entered-in-error"/>
-         <added-code code="intended"/>
-         <added-code code="stopped"/>
-         <added-code code="on-hold"/>
-         <added-code code="unknown"/>
-         <added-code code="not-taken"/>
          <old-binding reference="http://hl7.org/fhir/ValueSet/medication-statement-status"
                       strength="required"/>
-         <new-binding reference="http://hl7.org/fhir/ValueSet/medication-statement-status"
+         <new-binding reference="http://hl7.org/fhir/ValueSet/medication-statement-status|4.0.0"
                       strength="required"/>
       </element>
       <element path="MedicationStatement.statusReason" status="new"/>
+      <element path="MedicationStatement.informationSource">
+         <removed-type name="Reference(Patient | Practitioner | RelatedPerson | Organization)"/>
+         <added-type name="Reference(Patient | Practitioner | PractitionerRole | RelatedPerson | Organization)"/>
+      </element>
       <element path="MedicationStatement.reasonReference">
          <removed-type name="Reference(Condition | Observation)"/>
          <added-type name="Reference(Condition | Observation | DiagnosticReport)"/>

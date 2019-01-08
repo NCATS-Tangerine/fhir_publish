@@ -8,8 +8,8 @@
     "status" : "active",
     "description" : "Type options for ChargeItem.occurrence[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:f467982c-2568-42f3-935a-22048ae66daa",
-      "timestamp" : "2018-12-13T14:26:25-06:00",
+      "identifier" : "urn:uuid:0cb6be41-425b-4392-a609-8ef18e296c82",
+      "timestamp" : "2019-01-08T15:29:25-06:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "dateTime",
@@ -34,8 +34,8 @@
     "status" : "active",
     "description" : "Type options for ChargeItem.product[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:fff46826-f608-47e4-93ca-ca74550fab6a",
-      "timestamp" : "2018-12-13T14:26:25-06:00",
+      "identifier" : "urn:uuid:80bdbd11-046c-4e26-8587-ec2697866440",
+      "timestamp" : "2019-01-08T15:29:25-06:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/resource-types",
         "code" : "Device",
@@ -61,9 +61,9 @@
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
-  "version" : "3.6.0",
+  "version" : "4.0.0",
   "status" : "draft",
-  "date" : "2018-12-13T14:23:07-06:00",
+  "date" : "2019-01-08T15:26:24-06:00",
   "publisher" : "Health Level Seven International (Patient Administration)",
   "item" : [{
     "linkId" : "ChargeItem",
@@ -858,7 +858,7 @@
               }]
             }
           }],
-          "text" : "Describes the type of performance or participation(e.g. primary surgeon, anaesthesiologiest, etc.).",
+          "text" : "Describes the type of performance or participation(e.g. primary surgeon, anesthesiologiest, etc.).",
           "type" : "display"
         },
         {
@@ -961,7 +961,7 @@
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
         "linkId" : "ChargeItem.performingOrganization.value",
-        "text" : "Organization providing the charged sevice",
+        "text" : "Organization providing the charged service",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -991,7 +991,7 @@
             }]
           }
         }],
-        "text" : "The organization performing the service. The rendered Service might not be associated with a Request. It has to be made clear, ob which Organization's Request, the services have been rendered. (In many cases, this may just be the Department associated with the Encounter.location).",
+        "text" : "The organization performing the service. The rendered Service might not be associated with a Request. This property indicates which Organization requested the services to be rendered. (In many cases, this may just be the Department associated with the Encounter.location).",
         "type" : "display"
       },
       {
@@ -1180,7 +1180,7 @@
             }]
           }
         }],
-        "text" : "Factor overriding the factor determined by the rules associated with the code. There is no reason to carry the factor in the instance of a ChargeItem unless special circumstances require a manual override. The factors are usually defined by a set of rules in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overriden.",
+        "text" : "Factor overriding the factor determined by the rules associated with the code. There is no reason to carry the factor in the instance of a ChargeItem unless special circumstances require a manual override. The factors are usually defined by a set of rules in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overridden.",
         "type" : "display"
       },
       {
@@ -1216,7 +1216,7 @@
             }]
           }
         }],
-        "text" : "Total price of the charge overriding the list price associated with the code. There is no reason to carry the price in the instance of a ChargeItem unless circumstances require a manual override. The list prices or are usually defined in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overriden.",
+        "text" : "Total price of the charge overriding the list price associated with the code. There is no reason to carry the price in the instance of a ChargeItem unless circumstances require a manual override. The list prices or are usually defined in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overridden.",
         "type" : "display"
       },
       {
@@ -1279,7 +1279,7 @@
             }]
           }
         }],
-        "text" : "If the list price or the rule based factor associated with the code is overridden, this attribute can capture a text to indicate the  reason for this action. Derived Profiles may chose to add invariants requiring this field to be populated if either priceOverride or factorOverride have been filled.",
+        "text" : "If the list price or the rule-based factor associated with the code is overridden, this attribute can capture a text to indicate the  reason for this action. Derived Profiles may choose to add invariants requiring this field to be populated if either priceOverride or factorOverride have been filled.",
         "type" : "display"
       },
       {
@@ -1314,13 +1314,13 @@
             }]
           }
         }],
-        "text" : "The device, practitioner, etc. who entered the charge item. The enterer is also te person considered responsible for factor/priceOverrides if applicable.",
+        "text" : "The device, practitioner, etc. who entered the charge item. The enterer is also the person considered responsible for factor/price overrides if applicable.",
         "type" : "display"
       },
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "Practitioner, Organization, Patient, Device, RelatedPerson"
+          "valueCode" : "Practitioner, PractitionerRole, Organization, Patient, Device, RelatedPerson"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
@@ -1543,7 +1543,7 @@
             }]
           }
         }],
-        "text" : "Account into which this ChargeItems belongs. Systems posting the ChargeItems might not always be able to determine, which accounts the Items need to be places into. It is up to the potprocessing Financial System to apply internal rules to decide based on the Encounter/EpisodeOfCare/Patient/Coverage context and the type of ChargeItem, which Account is appropriate.",
+        "text" : "Account into which this ChargeItems belongs. Systems posting the ChargeItems might not always be able to determine, which accounts the Items need to be places into. It is up to the postprocessing Financial System to apply internal rules to decide based on the Encounter/EpisodeOfCare/Patient/Coverage context and the type of ChargeItem, which Account is appropriate.",
         "type" : "display"
       },
       {

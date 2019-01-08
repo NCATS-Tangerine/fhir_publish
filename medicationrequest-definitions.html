@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
   <!-- template-definitions.html --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>MedicationRequest - FHIR v3.6.0</title>
+  <title>MedicationRequest - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -127,7 +127,7 @@
   <tr><td>Note</td><td>This is a business identifier, not a resource identifier (see <a href="resource.html#identifiers">discussion</a>)</td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..*</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#Identifier">Identifier</a></td></tr>
-  <tr><td>Comments</td><td><p>This is a business identifier, not a resource identifer.</p>
+  <tr><td>Comments</td><td><p>This is a business identifier, not a resource identifier.</p>
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="MedicationRequest.status"> </a><b>MedicationRequest.status</b></td></tr>
   <tr><td>Element Id</td><td>MedicationRequest.status</td></tr>
@@ -154,7 +154,7 @@
   <tr><td>Definition</td><td><p>Whether the request is a proposal, plan, or an original order.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>1..1</td></tr>
-  <tr><td><a href="terminologies.html">Terminology Binding</a></td><td><a href="valueset-medicationrequest-intent.html">Medication request  status</a> (<a href="terminologies.html#required">Required</a>)</td></tr>
+  <tr><td><a href="terminologies.html">Terminology Binding</a></td><td><a href="valueset-medicationrequest-intent.html">Medication request  intent</a> (<a href="terminologies.html#required">Required</a>)</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#code">code</a></td></tr>
   <tr><td><a href="conformance-rules.html#ismodifier">Is Modifier</a></td><td>true (Reason: This element changes the interpretation of all descriptive attributes. For example "the time the request is recommended to occur" vs. "the time the request is authorized to occur" or "who is recommended to perform the request" vs. "who is authorized to perform the request)</td></tr>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
@@ -194,7 +194,7 @@
   <tr><td>Definition</td><td><p>Indicates if this record was captured as a secondary 'reported' record rather than as an original primary source-of-truth record.  It may also indicate the source of the report.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
-  <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#boolean">boolean</a>|<a href="references.html#Reference">Reference</a>(<a href="patient.html">Patient</a> | <a href="practitioner.html">Practitioner</a> | <a href="relatedperson.html">RelatedPerson</a> | <a href="organization.html">Organization</a>)</td></tr>
+  <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#boolean">boolean</a>|<a href="references.html#Reference">Reference</a>(<a href="patient.html">Patient</a> | <a href="practitioner.html">Practitioner</a> | <a href="practitionerrole.html">PractitionerRole</a> | <a href="relatedperson.html">RelatedPerson</a> | <a href="organization.html">Organization</a>)</td></tr>
   <tr><td>[x] Note</td><td>See <a href="formats.html#choice">Choice of Data Types</a> for further information about how to use [x]</td></tr>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
   <tr><td colspan="2" class="structure"><a name="MedicationRequest.medication_x_"> </a><b>MedicationRequest.medication[x]</b></td></tr>
@@ -266,7 +266,7 @@
   <tr><td>Definition</td><td><p>The person who entered the order on behalf of another individual for example in the case of a verbal or a telephone order.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
-  <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="practitioner.html">Practitioner</a>)</td></tr>
+  <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="practitioner.html">Practitioner</a> | <a href="practitionerrole.html">PractitionerRole</a>)</td></tr>
   <tr><td colspan="2" class="structure"><a name="MedicationRequest.reasonCode"> </a><b>MedicationRequest.reasonCode</b></td></tr>
   <tr><td>Element Id</td><td>MedicationRequest.reasonCode</td></tr>
   <tr><td>Definition</td><td><p>The reason or the indication for ordering or not ordering the medication.</p>
@@ -413,7 +413,7 @@
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="organization.html">Organization</a>)</td></tr>
   <tr><td colspan="2" class="structure"><a name="MedicationRequest.substitution"> </a><b>MedicationRequest.substitution</b></td></tr>
   <tr><td>Element Id</td><td>MedicationRequest.substitution</td></tr>
-  <tr><td>Definition</td><td><p>Indicates whether or not substitution can or should be part of the dispense. In some cases substitution must happen, in other cases substitution must not happen. This block explains the prescriber's intent. If nothing is specified substitution may be done.</p>
+  <tr><td>Definition</td><td><p>Indicates whether or not substitution can or should be part of the dispense. In some cases, substitution must happen, in other cases substitution must not happen. This block explains the prescriber's intent. If nothing is specified substitution may be done.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
   <tr><td colspan="2" class="structure"><a name="MedicationRequest.substitution.allowed_x_"> </a><b>MedicationRequest.substitution.allowed[x]</b></td></tr>
@@ -424,7 +424,7 @@
   <tr><td><a href="terminologies.html">Terminology Binding</a></td><td><a href="v3/ActSubstanceAdminSubstitutionCode/vs.html">V3 Value SetActSubstanceAdminSubstitutionCode</a> (<a href="terminologies.html#example">Example</a>)</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#boolean">boolean</a>|<a href="datatypes.html#CodeableConcept">CodeableConcept</a></td></tr>
   <tr><td>[x] Note</td><td>See <a href="formats.html#choice">Choice of Data Types</a> for further information about how to use [x]</td></tr>
-  <tr><td>Comments</td><td><p>This element is labeled as a modifer because whether substitution is allow or not cannot be ignored.</p>
+  <tr><td>Comments</td><td><p>This element is labeled as a modifier because whether substitution is allow or not, it cannot be ignored.</p>
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="MedicationRequest.substitution.reason"> </a><b>MedicationRequest.substitution.reason</b></td></tr>
   <tr><td>Element Id</td><td>MedicationRequest.substitution.reason</td></tr>
@@ -474,15 +474,14 @@
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:30-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fmedicationrequest-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmedicationrequest-definitions.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fmedicationrequest-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmedicationrequest-definitions.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fmedicationrequest-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmedicationrequest-definitions.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

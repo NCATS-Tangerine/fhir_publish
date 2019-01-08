@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
   <!-- template-definitions.html --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>RequestGroup - FHIR v3.6.0</title>
+  <title>RequestGroup - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -220,12 +220,12 @@
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="patient.html">Patient</a> | <a href="group.html">Group</a>)</td></tr>
-  <tr><td colspan="2" class="structure"><a name="RequestGroup.context"> </a><b>RequestGroup.context</b></td></tr>
-  <tr><td>Element Id</td><td>RequestGroup.context</td></tr>
+  <tr><td colspan="2" class="structure"><a name="RequestGroup.encounter"> </a><b>RequestGroup.encounter</b></td></tr>
+  <tr><td>Element Id</td><td>RequestGroup.encounter</td></tr>
   <tr><td>Definition</td><td><p>Describes the context of the request group, if any.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
-  <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="encounter.html">Encounter</a> | <a href="episodeofcare.html">EpisodeOfCare</a>)</td></tr>
+  <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="encounter.html">Encounter</a>)</td></tr>
   <tr><td colspan="2" class="structure"><a name="RequestGroup.authoredOn"> </a><b>RequestGroup.authoredOn</b></td></tr>
   <tr><td>Element Id</td><td>RequestGroup.authoredOn</td></tr>
   <tr><td>Definition</td><td><p>Indicates when the request group was created.</p>
@@ -237,7 +237,7 @@
   <tr><td>Definition</td><td><p>Provides a reference to the author of the request group.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
-  <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="device.html">Device</a> | <a href="practitioner.html">Practitioner</a>)</td></tr>
+  <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="device.html">Device</a> | <a href="practitioner.html">Practitioner</a> | <a href="practitionerrole.html">PractitionerRole</a>)</td></tr>
   <tr><td colspan="2" class="structure"><a name="RequestGroup.reasonCode"> </a><b>RequestGroup.reasonCode</b></td></tr>
   <tr><td>Element Id</td><td>RequestGroup.reasonCode</td></tr>
   <tr><td>Definition</td><td><p>Describes the reason for the request group in coded or textual form.</p>
@@ -326,24 +326,12 @@
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#code">code</a></td></tr>
   <tr><td>Comments</td><td><p>Applicability criteria are used to determine immediate applicability when a plan definition is applied to a given context. Start and stop criteria are carried through application and used to describe enter/exit criteria for an action.</p>
 </td></tr>
-  <tr><td colspan="2" class="structure"><a name="RequestGroup.action.condition.description"> </a><b>RequestGroup.action.condition.description</b></td></tr>
-  <tr><td>Element Id</td><td>RequestGroup.action.condition.description</td></tr>
-  <tr><td>Definition</td><td><p>A brief, natural language description of the condition that effectively communicates the intended semantics.</p>
-</td></tr>
-  <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
-  <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#string">string</a></td></tr>
-  <tr><td colspan="2" class="structure"><a name="RequestGroup.action.condition.language"> </a><b>RequestGroup.action.condition.language</b></td></tr>
-  <tr><td>Element Id</td><td>RequestGroup.action.condition.language</td></tr>
-  <tr><td>Definition</td><td><p>The media type of the language for the expression.</p>
-</td></tr>
-  <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
-  <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#string">string</a></td></tr>
   <tr><td colspan="2" class="structure"><a name="RequestGroup.action.condition.expression"> </a><b>RequestGroup.action.condition.expression</b></td></tr>
   <tr><td>Element Id</td><td>RequestGroup.action.condition.expression</td></tr>
   <tr><td>Definition</td><td><p>An expression that returns true or false, indicating whether or not the condition is satisfied.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
-  <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#string">string</a></td></tr>
+  <tr><td><a href="datatypes.html">Type</a></td><td><a href="metadatatypes.html#Expression">Expression</a></td></tr>
   <tr><td>Comments</td><td><p>The expression may be inlined, or may be a reference to a named expression within a logic library referenced by the library element.</p>
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="RequestGroup.action.relatedAction"> </a><b>RequestGroup.action.relatedAction</b></td></tr>
@@ -383,7 +371,7 @@
   <tr><td>Definition</td><td><p>The participant that should perform or be responsible for this action.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..*</td></tr>
-  <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="patient.html">Patient</a> | <a href="practitioner.html">Practitioner</a> | <a href="relatedperson.html">RelatedPerson</a>)</td></tr>
+  <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="patient.html">Patient</a> | <a href="practitioner.html">Practitioner</a> | <a href="practitionerrole.html">PractitionerRole</a> | <a href="relatedperson.html">RelatedPerson</a> | <a href="device.html">Device</a>)</td></tr>
   <tr><td colspan="2" class="structure"><a name="RequestGroup.action.type"> </a><b>RequestGroup.action.type</b></td></tr>
   <tr><td>Element Id</td><td>RequestGroup.action.type</td></tr>
   <tr><td>Definition</td><td><p>The type of action to perform (create, update, remove).</p>
@@ -466,15 +454,14 @@
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Frequestgroup-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Frequestgroup-definitions.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Frequestgroup-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Frequestgroup-definitions.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Frequestgroup-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Frequestgroup-definitions.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

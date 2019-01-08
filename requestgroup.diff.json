@@ -11,42 +11,54 @@
         "status": "new"
       },
       "RequestGroup.status": {
-        "binding-codes-changed": true,
-        "removed-codes": [
-          "suspended",
-          "cancelled"
-        ],
-        "added-codes": [
-          "on-hold",
-          "revoked"
-        ],
+        "binding-valueset-changed": true,
         "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/request-status",
           "strength": "required"
         },
         "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/request-status",
+          "reference": "http://hl7.org/fhir/ValueSet/request-status|4.0.0",
           "strength": "required"
         }
       },
       "RequestGroup.intent": {
-        "binding-codes-changed": true,
-        "added-codes": [
-          "directive"
-        ],
+        "binding-valueset-changed": true,
         "binding-status": "changed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/request-intent",
           "strength": "required"
         },
         "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/request-intent",
+          "reference": "http://hl7.org/fhir/ValueSet/request-intent|4.0.0",
+          "strength": "required"
+        }
+      },
+      "RequestGroup.priority": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-priority",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/request-priority|4.0.0",
           "strength": "required"
         }
       },
       "RequestGroup.code": {
         "status": "new"
+      },
+      "RequestGroup.encounter": {
+        "status": "new"
+      },
+      "RequestGroup.author": {
+        "removed-types": [
+          "Reference(Device | Practitioner)"
+        ],
+        "added-types": [
+          "Reference(Device | Practitioner | PractitionerRole)"
+        ]
       },
       "RequestGroup.reasonCode": {
         "status": "new"
@@ -60,6 +72,38 @@
       "RequestGroup.action.priority": {
         "status": "new"
       },
+      "RequestGroup.action.condition.kind": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-condition-kind",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-condition-kind|4.0.0",
+          "strength": "required"
+        }
+      },
+      "RequestGroup.action.condition.expression": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "Expression"
+        ]
+      },
+      "RequestGroup.action.relatedAction.relationship": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-relationship-type",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-relationship-type|4.0.0",
+          "strength": "required"
+        }
+      },
       "RequestGroup.action.timing[x]": {
         "added-types": [
           "Age"
@@ -70,7 +114,7 @@
           "Reference(Patient | Person | Practitioner | RelatedPerson)"
         ],
         "added-types": [
-          "Reference(Patient | Practitioner | RelatedPerson)"
+          "Reference(Patient | Practitioner | PractitionerRole | RelatedPerson | Device)"
         ]
       },
       "RequestGroup.action.type": {
@@ -81,13 +125,82 @@
           "CodeableConcept"
         ]
       },
+      "RequestGroup.action.groupingBehavior": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-grouping-behavior",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-grouping-behavior|4.0.0",
+          "strength": "required"
+        }
+      },
+      "RequestGroup.action.selectionBehavior": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-selection-behavior",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-selection-behavior|4.0.0",
+          "strength": "required"
+        }
+      },
+      "RequestGroup.action.requiredBehavior": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-required-behavior",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-required-behavior|4.0.0",
+          "strength": "required"
+        }
+      },
+      "RequestGroup.action.precheckBehavior": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-precheck-behavior",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-precheck-behavior|4.0.0",
+          "strength": "required"
+        }
+      },
+      "RequestGroup.action.cardinalityBehavior": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-cardinality-behavior",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/action-cardinality-behavior|4.0.0",
+          "strength": "required"
+        }
+      },
       "RequestGroup.definition": {
+        "status": "deleted"
+      },
+      "RequestGroup.context": {
         "status": "deleted"
       },
       "RequestGroup.reason[x]": {
         "status": "deleted"
       },
       "RequestGroup.action.label": {
+        "status": "deleted"
+      },
+      "RequestGroup.action.condition.description": {
+        "status": "deleted"
+      },
+      "RequestGroup.action.condition.language": {
         "status": "deleted"
       }
     },

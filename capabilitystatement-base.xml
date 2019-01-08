@@ -1018,20 +1018,6 @@
           <td>y</td>
         </tr>
         <tr>
-          <td>ItemInstance</td>
-          <td>
-            <a href="http://hl7.org/fhir/StructureDefinition/ItemInstance">http://hl7.org/fhir/StructureDefinition/ItemInstance</a>
-          </td>
-          <td>y</td>
-          <td>y</td>
-          <td>y</td>
-          <td>y</td>
-          <td>y</td>
-          <td>y</td>
-          <td>y</td>
-          <td>y</td>
-        </tr>
-        <tr>
           <td>Library</td>
           <td>
             <a href="http://hl7.org/fhir/StructureDefinition/Library">http://hl7.org/fhir/StructureDefinition/Library</a>
@@ -2127,11 +2113,11 @@
     </div>
   </text>
   <url value="http://hl7.org/fhir/CapabilityStatement/base"/>
-  <version value="3.6.0"/>
+  <version value="4.0.0"/>
   <name value="Base FHIR Capability Statement (Full)"/>
   <status value="draft"/>
   <experimental value="true"/>
-  <date value="2018-12-13T14:23:07-06:00"/>
+  <date value="2019-01-08T15:26:24-06:00"/>
   <publisher value="FHIR Project Team"/>
   <contact>
     <telecom>
@@ -2144,7 +2130,7 @@
   <software>
     <name value="Insert your software name here..."/>
   </software>
-  <fhirVersion value="3.6.0"/>
+  <fhirVersion value="4.0.0"/>
   <format value="xml"/>
   <format value="json"/>
   <rest>
@@ -2306,6 +2292,7 @@
       <searchRevInclude value="Communication.instantiates-canonical"/>
       <searchRevInclude value="DeviceRequest.instantiates-canonical"/>
       <searchRevInclude value="FamilyMemberHistory.instantiates-canonical"/>
+      <searchRevInclude value="MessageDefinition.parent"/>
       <searchRevInclude value="NutritionOrder.instantiates-canonical"/>
       <searchRevInclude value="PlanDefinition.definition"/>
       <searchRevInclude value="Procedure.instantiates-canonical"/>
@@ -3975,7 +3962,7 @@
         <name value="performing-organization"/>
         <definition value="http://hl7.org/fhir/SearchParameter/ChargeItem-performing-organization"/>
         <type value="reference"/>
-        <documentation value="Organization providing the charged sevice"/>
+        <documentation value="Organization providing the charged service"/>
       </searchParam>
       <searchParam>
         <name value="code"/>
@@ -4317,7 +4304,7 @@
         <name value="detail-udi"/>
         <definition value="http://hl7.org/fhir/SearchParameter/Claim-detail-udi"/>
         <type value="reference"/>
-        <documentation value="UDI associated with a line item detail product or service"/>
+        <documentation value="UDI associated with a line item, detail product or service"/>
       </searchParam>
       <searchParam>
         <name value="enterer"/>
@@ -4335,13 +4322,13 @@
         <name value="subdetail-udi"/>
         <definition value="http://hl7.org/fhir/SearchParameter/Claim-subdetail-udi"/>
         <type value="reference"/>
-        <documentation value="UDI associated with a line item detail subdetail product or service"/>
+        <documentation value="UDI associated with a line item, detail, subdetail product or service"/>
       </searchParam>
       <searchParam>
         <name value="facility"/>
         <definition value="http://hl7.org/fhir/SearchParameter/Claim-facility"/>
         <type value="reference"/>
-        <documentation value="Facility where the products or services were/are to be provided"/>
+        <documentation value="Facility where the products or services have been or will be provided"/>
       </searchParam>
       <searchParam>
         <name value="item-udi"/>
@@ -4423,7 +4410,7 @@
         <name value="insurer"/>
         <definition value="http://hl7.org/fhir/SearchParameter/ClaimResponse-insurer"/>
         <type value="reference"/>
-        <documentation value="The organization who generated this resource"/>
+        <documentation value="The organization which generated this resource"/>
       </searchParam>
       <searchParam>
         <name value="created"/>
@@ -6540,6 +6527,7 @@
       <searchRevInclude value="Provenance.agent"/>
       <searchRevInclude value="QuestionnaireResponse.author"/>
       <searchRevInclude value="RequestGroup.author"/>
+      <searchRevInclude value="RequestGroup.participant"/>
       <searchRevInclude value="RiskAssessment.performer"/>
       <searchRevInclude value="Schedule.actor"/>
       <searchRevInclude value="ServiceRequest.requester"/>
@@ -7685,7 +7673,6 @@
       <searchRevInclude value="Procedure.encounter"/>
       <searchRevInclude value="QuestionnaireResponse.encounter"/>
       <searchRevInclude value="RequestGroup.encounter"/>
-      <searchRevInclude value="RequestGroup.context"/>
       <searchRevInclude value="RiskAssessment.encounter"/>
       <searchRevInclude value="ServiceRequest.encounter"/>
       <searchRevInclude value="Task.encounter"/>
@@ -7979,7 +7966,7 @@
         <name value="status"/>
         <definition value="http://hl7.org/fhir/SearchParameter/EnrollmentRequest-status"/>
         <type value="token"/>
-        <documentation value="The status fo the enrollment"/>
+        <documentation value="The status of the enrollment"/>
       </searchParam>
     </resource>
     <resource>
@@ -8093,9 +8080,6 @@
       <searchRevInclude value="MedicationAdministration.context"/>
       <searchRevInclude value="MedicationDispense.context"/>
       <searchRevInclude value="MedicationStatement.context"/>
-      <searchRevInclude value="RequestGroup.encounter"/>
-      <searchRevInclude value="RequestGroup.context"/>
-      <searchRevInclude value="RiskAssessment.encounter"/>
       <searchParam>
         <name value="date"/>
         <definition value="http://hl7.org/fhir/SearchParameter/clinical-date"/>
@@ -9022,16 +9006,16 @@
         <documentation value="A search by a condition code"/>
       </searchParam>
       <searchParam>
-        <name value="gender"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/FamilyMemberHistory-gender"/>
-        <type value="token"/>
-        <documentation value="A search by a gender code of a family member"/>
-      </searchParam>
-      <searchParam>
         <name value="patient"/>
         <definition value="http://hl7.org/fhir/SearchParameter/clinical-patient"/>
         <type value="reference"/>
         <documentation value="The identity of a subject to list family member history items for"/>
+      </searchParam>
+      <searchParam>
+        <name value="sex"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/FamilyMemberHistory-sex"/>
+        <type value="token"/>
+        <documentation value="A search by a sex code of a family member"/>
       </searchParam>
       <searchParam>
         <name value="instantiates-canonical"/>
@@ -9776,7 +9760,9 @@
       <referencePolicy value="logical"/>
       <searchInclude value="ImagingStudy.performer"/>
       <searchInclude value="ImagingStudy.subject"/>
+      <searchInclude value="ImagingStudy.interpreter"/>
       <searchInclude value="ImagingStudy.encounter"/>
+      <searchInclude value="ImagingStudy.referrer"/>
       <searchInclude value="ImagingStudy.endpoint"/>
       <searchInclude value="ImagingStudy.patient"/>
       <searchInclude value="ImagingStudy.basedon"/>
@@ -9839,10 +9825,22 @@
         <documentation value="When the study was started"/>
       </searchParam>
       <searchParam>
+        <name value="interpreter"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ImagingStudy-interpreter"/>
+        <type value="reference"/>
+        <documentation value="Who interpreted the images"/>
+      </searchParam>
+      <searchParam>
         <name value="encounter"/>
         <definition value="http://hl7.org/fhir/SearchParameter/ImagingStudy-encounter"/>
         <type value="reference"/>
         <documentation value="The context of the study"/>
+      </searchParam>
+      <searchParam>
+        <name value="referrer"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ImagingStudy-referrer"/>
+        <type value="reference"/>
+        <documentation value="The referring physician"/>
       </searchParam>
       <searchParam>
         <name value="endpoint"/>
@@ -10561,7 +10559,7 @@
         <name value="participant-role"/>
         <definition value="http://hl7.org/fhir/SearchParameter/Invoice-participant-role"/>
         <type value="token"/>
-        <documentation value="Type of involevent in creation of this Invoice"/>
+        <documentation value="Type of involvement in creation of this Invoice"/>
       </searchParam>
       <searchParam>
         <name value="type"/>
@@ -10610,54 +10608,6 @@
         <definition value="http://hl7.org/fhir/SearchParameter/Invoice-status"/>
         <type value="token"/>
         <documentation value="draft | issued | balanced | cancelled | entered-in-error"/>
-      </searchParam>
-    </resource>
-    <resource>
-      <type value="ItemInstance"/>
-      <profile value="http://hl7.org/fhir/StructureDefinition/ItemInstance"/>
-      <interaction>
-        <code value="read"/>
-        <documentation value="Implemented per the specification (or Insert other doco here)"/>
-      </interaction>
-      <interaction>
-        <code value="vread"/>
-        <documentation value="Implemented per the specification (or Insert other doco here)"/>
-      </interaction>
-      <interaction>
-        <code value="update"/>
-        <documentation value="Implemented per the specification (or Insert other doco here)"/>
-      </interaction>
-      <interaction>
-        <code value="delete"/>
-        <documentation value="Implemented per the specification (or Insert other doco here)"/>
-      </interaction>
-      <interaction>
-        <code value="history-instance"/>
-        <documentation value="Implemented per the specification (or Insert other doco here)"/>
-      </interaction>
-      <interaction>
-        <code value="history-type"/>
-        <documentation value="Implemented per the specification (or Insert other doco here)"/>
-      </interaction>
-      <interaction>
-        <code value="create"/>
-        <documentation value="Implemented per the specification (or Insert other doco here)"/>
-      </interaction>
-      <interaction>
-        <code value="search-type"/>
-        <documentation value="Implemented per the specification (or Insert other doco here)"/>
-      </interaction>
-      <conditionalCreate value="true"/>
-      <conditionalUpdate value="true"/>
-      <conditionalDelete value="multiple"/>
-      <referencePolicy value="literal"/>
-      <referencePolicy value="logical"/>
-      <searchInclude value="ItemInstance.subject"/>
-      <searchParam>
-        <name value="subject"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ItemInstance-subject"/>
-        <type value="reference"/>
-        <documentation value="The identifier of the patient who has devices assigned to"/>
       </searchParam>
     </resource>
     <resource>
@@ -11203,7 +11153,7 @@
         <name value="near"/>
         <definition value="http://hl7.org/fhir/SearchParameter/Location-near"/>
         <type value="special"/>
-        <documentation value="Search for locations where the location.position is near to, or within a specified distance of, the provided coordinates expressed as [latitude]|[longitude]|[distance]|[units] (using the WGS84 datum, see notes).&#xA;If the units are omitted, then kms should be assumed. If the distance is omitted, then the server can use its own discression as to what distances should be considered near (and units are irrelevant)&#xA;&#xA;Servers may search using various techniques that might have differing accuracies, depending on implementation efficiency.&#xA;&#xA;Requires the near-distance parameter to be provided also"/>
+        <documentation value="Search for locations where the location.position is near to, or within a specified distance of, the provided coordinates expressed as [latitude]|[longitude]|[distance]|[units] (using the WGS84 datum, see notes).&#xA;If the units are omitted, then kms should be assumed. If the distance is omitted, then the server can use its own discretion as to what distances should be considered near (and units are irrelevant)&#xA;&#xA;Servers may search using various techniques that might have differing accuracies, depending on implementation efficiency.&#xA;&#xA;Requires the near-distance parameter to be provided also"/>
       </searchParam>
       <searchParam>
         <name value="address-city"/>
@@ -11837,7 +11787,7 @@
       </searchParam>
       <searchParam>
         <name value="patient"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/MedicationAdministration-patient"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/clinical-patient"/>
         <type value="reference"/>
         <documentation value="The identity of a patient to list administrations  for"/>
       </searchParam>
@@ -11998,7 +11948,7 @@
       </searchParam>
       <searchParam>
         <name value="patient"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/MedicationDispense-patient"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/clinical-patient"/>
         <type value="reference"/>
         <documentation value="The identity of a patient to list dispenses  for"/>
       </searchParam>
@@ -12258,7 +12208,7 @@
       </searchParam>
       <searchParam>
         <name value="patient"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/MedicationRequest-patient"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/clinical-patient"/>
         <type value="reference"/>
         <documentation value="Returns prescriptions for a specific patient"/>
       </searchParam>
@@ -12362,7 +12312,7 @@
       </searchParam>
       <searchParam>
         <name value="patient"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/MedicationStatement-patient"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/clinical-patient"/>
         <type value="reference"/>
         <documentation value="Returns statements for a specific patient."/>
       </searchParam>
@@ -12969,6 +12919,7 @@
       <conditionalDelete value="multiple"/>
       <referencePolicy value="literal"/>
       <referencePolicy value="logical"/>
+      <searchInclude value="MessageDefinition.parent"/>
       <searchParam>
         <name value="date"/>
         <definition value="http://hl7.org/fhir/SearchParameter/conformance-date"/>
@@ -12984,7 +12935,7 @@
       <searchParam>
         <name value="parent"/>
         <definition value="http://hl7.org/fhir/SearchParameter/MessageDefinition-parent"/>
-        <type value="token"/>
+        <type value="reference"/>
         <documentation value="A resource that is the parent of the definition"/>
       </searchParam>
       <searchParam>
@@ -13266,16 +13217,10 @@
         <documentation value="The unique identity for a particular sequence"/>
       </searchParam>
       <searchParam>
-        <name value="referenceseqid-coordinate"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-referenceseqid-coordinate"/>
+        <name value="referenceseqid-variant-coordinate"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-referenceseqid-variant-coordinate"/>
         <type value="composite"/>
-        <documentation value="Search parameter for region of the reference sequence. This will refer to part of a locus or part of a gene where search region will be represented in 1-based system. Since the coordinateSystem can either be 0-based or 1-based, this search query will include the result of both coordinateSystem that contains the equivalent segment of the gene or whole genome sequence. For example, a search for sequence can be represented as `referenceSeqId-coordinate=NC_000001.11$lt345$gt123`, this means it will search for the MolecularSequence resource on NC_000001.11 and with position &gt;123 and &lt;345, where in 1-based system resource, all strings within region NC_000001.11:124-344 will be revealed, while in 0-based system resource, all strings within region NC_000001.11:123-344 will be revealed. You may want to check detail about 0-based v.s. 1-based above."/>
-      </searchParam>
-      <searchParam>
-        <name value="patient"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-patient"/>
-        <type value="reference"/>
-        <documentation value="The subject that the observation is about"/>
+        <documentation value="Search parameter by reference sequence and variant coordinate. This will refer to part of a locus or part of a gene where search region will be represented in 1-based system. Since the coordinateSystem can either be 0-based or 1-based, this search query will include the result of both coordinateSystem that contains the equivalent segment of the gene or whole genome sequence. For example, a search for sequence can be represented as `referenceSeqId-variant-coordinate=NC_000001.11$lt345$gt123`, this means it will search for the MolecularSequence resource with variants on NC_000001.11 and with position &gt;123 and &lt;345, where in 1-based system resource, all strings within region NC_000001.11:124-344 will be revealed, while in 0-based system resource, all strings within region NC_000001.11:123-344 will be revealed. You may want to check detail about 0-based v.s. 1-based above."/>
       </searchParam>
       <searchParam>
         <name value="chromosome"/>
@@ -13284,22 +13229,10 @@
         <documentation value="Chromosome number of the reference sequence"/>
       </searchParam>
       <searchParam>
-        <name value="start"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-start"/>
-        <type value="number"/>
-        <documentation value="Start position (0-based inclusive, 1-based inclusive, that means the nucleic acid or amino acid at this position will be included) of the reference sequence."/>
-      </searchParam>
-      <searchParam>
-        <name value="end"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-end"/>
+        <name value="window-end"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-window-end"/>
         <type value="number"/>
         <documentation value="End position (0-based exclusive, which menas the acid at this position will not be included, 1-based inclusive, which means the acid at this position will be included) of the reference sequence."/>
-      </searchParam>
-      <searchParam>
-        <name value="referenceseqid"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-referenceseqid"/>
-        <type value="token"/>
-        <documentation value="Reference Sequence of the sequence"/>
       </searchParam>
       <searchParam>
         <name value="type"/>
@@ -13308,10 +13241,52 @@
         <documentation value="Amino Acid Sequence/ DNA Sequence / RNA Sequence"/>
       </searchParam>
       <searchParam>
-        <name value="chromosome-coordinate"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-chromosome-coordinate"/>
+        <name value="window-start"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-window-start"/>
+        <type value="number"/>
+        <documentation value="Start position (0-based inclusive, 1-based inclusive, that means the nucleic acid or amino acid at this position will be included) of the reference sequence."/>
+      </searchParam>
+      <searchParam>
+        <name value="variant-end"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-variant-end"/>
+        <type value="number"/>
+        <documentation value="End position (0-based exclusive, which menas the acid at this position will not be included, 1-based inclusive, which means the acid at this position will be included) of the variant."/>
+      </searchParam>
+      <searchParam>
+        <name value="chromosome-variant-coordinate"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-chromosome-variant-coordinate"/>
         <type value="composite"/>
-        <documentation value="Search parameter for region of the chromosome sequence string. This will refer to part of a locus or part of a gene where search region will be represented in 1-based system. Since the coordinateSystem can either be 0-based or 1-based, this search query will include the result of both coordinateSystem that contains the equivalent segment of the gene or whole genome sequence. For example, a search for sequence can be represented as `chromosome-coordinate=1$lt345$gt123`, this means it will search for the MolecularSequence resource on chromosome 1 and with position &gt;123 and &lt;345, where in 1-based system resource, all strings within region 1:124-344 will be revealed, while in 0-based system resource, all strings within region 1:123-344 will be revealed. You may want to check detail about 0-based v.s. 1-based above."/>
+        <documentation value="Search parameter by chromosome and variant coordinate. This will refer to part of a locus or part of a gene where search region will be represented in 1-based system. Since the coordinateSystem can either be 0-based or 1-based, this search query will include the result of both coordinateSystem that contains the equivalent segment of the gene or whole genome sequence. For example, a search for sequence can be represented as `chromosome-variant-coordinate=1$lt345$gt123`, this means it will search for the MolecularSequence resource with variants on chromosome 1 and with position &gt;123 and &lt;345, where in 1-based system resource, all strings within region 1:124-344 will be revealed, while in 0-based system resource, all strings within region 1:123-344 will be revealed. You may want to check detail about 0-based v.s. 1-based above."/>
+      </searchParam>
+      <searchParam>
+        <name value="patient"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-patient"/>
+        <type value="reference"/>
+        <documentation value="The subject that the observation is about"/>
+      </searchParam>
+      <searchParam>
+        <name value="variant-start"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-variant-start"/>
+        <type value="number"/>
+        <documentation value="Start position (0-based inclusive, 1-based inclusive, that means the nucleic acid or amino acid at this position will be included) of the variant."/>
+      </searchParam>
+      <searchParam>
+        <name value="chromosome-window-coordinate"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-chromosome-window-coordinate"/>
+        <type value="composite"/>
+        <documentation value="Search parameter by chromosome and window. This will refer to part of a locus or part of a gene where search region will be represented in 1-based system. Since the coordinateSystem can either be 0-based or 1-based, this search query will include the result of both coordinateSystem that contains the equivalent segment of the gene or whole genome sequence. For example, a search for sequence can be represented as `chromosome-window-coordinate=1$lt345$gt123`, this means it will search for the MolecularSequence resource with a window on chromosome 1 and with position &gt;123 and &lt;345, where in 1-based system resource, all strings within region 1:124-344 will be revealed, while in 0-based system resource, all strings within region 1:123-344 will be revealed. You may want to check detail about 0-based v.s. 1-based above."/>
+      </searchParam>
+      <searchParam>
+        <name value="referenceseqid-window-coordinate"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-referenceseqid-window-coordinate"/>
+        <type value="composite"/>
+        <documentation value="Search parameter by reference sequence and window. This will refer to part of a locus or part of a gene where search region will be represented in 1-based system. Since the coordinateSystem can either be 0-based or 1-based, this search query will include the result of both coordinateSystem that contains the equivalent segment of the gene or whole genome sequence. For example, a search for sequence can be represented as `referenceSeqId-window-coordinate=NC_000001.11$lt345$gt123`, this means it will search for the MolecularSequence resource with a window on NC_000001.11 and with position &gt;123 and &lt;345, where in 1-based system resource, all strings within region NC_000001.11:124-344 will be revealed, while in 0-based system resource, all strings within region NC_000001.11:123-344 will be revealed. You may want to check detail about 0-based v.s. 1-based above."/>
+      </searchParam>
+      <searchParam>
+        <name value="referenceseqid"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/MolecularSequence-referenceseqid"/>
+        <type value="token"/>
+        <documentation value="Reference Sequence of the sequence"/>
       </searchParam>
     </resource>
     <resource>
@@ -14650,7 +14625,6 @@
       <searchRevInclude value="Invoice.participant"/>
       <searchRevInclude value="Invoice.patient"/>
       <searchRevInclude value="Invoice.recipient"/>
-      <searchRevInclude value="ItemInstance.subject"/>
       <searchRevInclude value="List.subject"/>
       <searchRevInclude value="List.patient"/>
       <searchRevInclude value="List.source"/>
@@ -15243,6 +15217,7 @@
       <searchRevInclude value="FamilyMemberHistory.instantiates-canonical"/>
       <searchRevInclude value="Flag.subject"/>
       <searchRevInclude value="Flag.patient"/>
+      <searchRevInclude value="MessageDefinition.parent"/>
       <searchRevInclude value="NutritionOrder.instantiates-canonical"/>
       <searchRevInclude value="PlanDefinition.definition"/>
       <searchRevInclude value="Procedure.instantiates-canonical"/>
@@ -15502,6 +15477,8 @@
       <searchRevInclude value="Group.managing-entity"/>
       <searchRevInclude value="Group.member"/>
       <searchRevInclude value="ImagingStudy.performer"/>
+      <searchRevInclude value="ImagingStudy.interpreter"/>
+      <searchRevInclude value="ImagingStudy.referrer"/>
       <searchRevInclude value="Immunization.performer"/>
       <searchRevInclude value="Invoice.participant"/>
       <searchRevInclude value="Linkage.author"/>
@@ -15700,21 +15677,33 @@
       <searchInclude value="PractitionerRole.service"/>
       <searchInclude value="PractitionerRole.organization"/>
       <searchInclude value="PractitionerRole.location"/>
+      <searchRevInclude value="Account.subject"/>
+      <searchRevInclude value="Account.patient"/>
+      <searchRevInclude value="AdverseEvent.recorder"/>
+      <searchRevInclude value="AllergyIntolerance.recorder"/>
+      <searchRevInclude value="AllergyIntolerance.asserter"/>
       <searchRevInclude value="Appointment.practitioner"/>
       <searchRevInclude value="Appointment.actor"/>
       <searchRevInclude value="Appointment.patient"/>
       <searchRevInclude value="Appointment.location"/>
+      <searchRevInclude value="AppointmentResponse.actor"/>
+      <searchRevInclude value="AppointmentResponse.practitioner"/>
+      <searchRevInclude value="AppointmentResponse.patient"/>
+      <searchRevInclude value="AppointmentResponse.location"/>
       <searchRevInclude value="AuditEvent.agent"/>
       <searchRevInclude value="AuditEvent.source"/>
       <searchRevInclude value="AuditEvent.patient"/>
+      <searchRevInclude value="Basic.author"/>
       <searchRevInclude value="CarePlan.performer"/>
       <searchRevInclude value="CareTeam.participant"/>
+      <searchRevInclude value="ChargeItem.enterer"/>
       <searchRevInclude value="ChargeItem.performer-actor"/>
       <searchRevInclude value="Claim.care-team"/>
       <searchRevInclude value="Claim.payee"/>
       <searchRevInclude value="Claim.provider"/>
       <searchRevInclude value="Claim.enterer"/>
       <searchRevInclude value="ClaimResponse.requestor"/>
+      <searchRevInclude value="ClinicalImpression.assessor"/>
       <searchRevInclude value="ClinicalProfile.reporter"/>
       <searchRevInclude value="Communication.sender"/>
       <searchRevInclude value="Communication.recipient"/>
@@ -15726,35 +15715,53 @@
       <searchRevInclude value="Condition.asserter"/>
       <searchRevInclude value="Consent.actor"/>
       <searchRevInclude value="Consent.consentor"/>
+      <searchRevInclude value="Contract.signer"/>
       <searchRevInclude value="CoverageEligibilityRequest.provider"/>
       <searchRevInclude value="CoverageEligibilityRequest.enterer"/>
       <searchRevInclude value="CoverageEligibilityResponse.requestor"/>
+      <searchRevInclude value="DetectedIssue.author"/>
       <searchRevInclude value="DeviceRequest.requester"/>
       <searchRevInclude value="DeviceRequest.performer"/>
       <searchRevInclude value="DiagnosticReport.performer"/>
       <searchRevInclude value="DiagnosticReport.results-interpreter"/>
       <searchRevInclude value="DocumentManifest.author"/>
       <searchRevInclude value="DocumentManifest.recipient"/>
+      <searchRevInclude value="DocumentReference.authenticator"/>
       <searchRevInclude value="DocumentReference.author"/>
       <searchRevInclude value="Encounter.practitioner"/>
       <searchRevInclude value="Encounter.participant"/>
+      <searchRevInclude value="EpisodeOfCare.care-manager"/>
       <searchRevInclude value="ExplanationOfBenefit.care-team"/>
       <searchRevInclude value="ExplanationOfBenefit.payee"/>
       <searchRevInclude value="ExplanationOfBenefit.provider"/>
       <searchRevInclude value="ExplanationOfBenefit.enterer"/>
+      <searchRevInclude value="Flag.author"/>
       <searchRevInclude value="Group.managing-entity"/>
       <searchRevInclude value="Group.member"/>
       <searchRevInclude value="ImagingStudy.performer"/>
+      <searchRevInclude value="ImagingStudy.interpreter"/>
+      <searchRevInclude value="ImagingStudy.referrer"/>
       <searchRevInclude value="Immunization.performer"/>
+      <searchRevInclude value="Invoice.participant"/>
+      <searchRevInclude value="Linkage.author"/>
       <searchRevInclude value="List.source"/>
       <searchRevInclude value="MeasureReport.patient"/>
       <searchRevInclude value="MeasureReport.subject"/>
       <searchRevInclude value="MeasureReport.reporter"/>
+      <searchRevInclude value="Media.subject"/>
       <searchRevInclude value="Media.operator"/>
+      <searchRevInclude value="Media.patient"/>
       <searchRevInclude value="MedicationAdministration.performer"/>
       <searchRevInclude value="MedicationDispense.performer"/>
+      <searchRevInclude value="MedicationDispense.responsibleparty"/>
       <searchRevInclude value="MedicationRequest.requester"/>
       <searchRevInclude value="MedicationRequest.intended-performer"/>
+      <searchRevInclude value="MedicationStatement.source"/>
+      <searchRevInclude value="MessageHeader.receiver"/>
+      <searchRevInclude value="MessageHeader.author"/>
+      <searchRevInclude value="MessageHeader.sender"/>
+      <searchRevInclude value="MessageHeader.responsible"/>
+      <searchRevInclude value="MessageHeader.enterer"/>
       <searchRevInclude value="NutritionOrder.provider"/>
       <searchRevInclude value="Observation.performer"/>
       <searchRevInclude value="Patient.general-practitioner"/>
@@ -15763,9 +15770,16 @@
       <searchRevInclude value="Procedure.performer"/>
       <searchRevInclude value="Provenance.agent"/>
       <searchRevInclude value="QuestionnaireResponse.author"/>
+      <searchRevInclude value="QuestionnaireResponse.source"/>
+      <searchRevInclude value="RequestGroup.author"/>
+      <searchRevInclude value="RequestGroup.participant"/>
+      <searchRevInclude value="ResearchStudy.principalinvestigator"/>
+      <searchRevInclude value="RiskAssessment.performer"/>
       <searchRevInclude value="Schedule.actor"/>
       <searchRevInclude value="ServiceRequest.requester"/>
       <searchRevInclude value="ServiceRequest.performer"/>
+      <searchRevInclude value="Specimen.collector"/>
+      <searchRevInclude value="SupplyDelivery.receiver"/>
       <searchRevInclude value="SupplyDelivery.supplier"/>
       <searchRevInclude value="SupplyRequest.requester"/>
       <searchRevInclude value="Task.owner"/>
@@ -16655,7 +16669,6 @@
       <searchInclude value="RequestGroup.encounter"/>
       <searchInclude value="RequestGroup.participant"/>
       <searchInclude value="RequestGroup.patient"/>
-      <searchInclude value="RequestGroup.context"/>
       <searchRevInclude value="CarePlan.activity-reference"/>
       <searchParam>
         <name value="authored"/>
@@ -16728,12 +16741,6 @@
         <definition value="http://hl7.org/fhir/SearchParameter/RequestGroup-patient"/>
         <type value="reference"/>
         <documentation value="The identity of a patient to search for request groups"/>
-      </searchParam>
-      <searchParam>
-        <name value="context"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/RequestGroup-context"/>
-        <type value="reference"/>
-        <documentation value="The context the request group applies to"/>
       </searchParam>
       <searchParam>
         <name value="instantiates-uri"/>
@@ -18647,12 +18654,6 @@
         <definition value="http://hl7.org/fhir/SearchParameter/Subscription-criteria"/>
         <type value="string"/>
         <documentation value="The search rules used to determine when to send a notification"/>
-      </searchParam>
-      <searchParam>
-        <name value="add-tag"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/Subscription-add-tag"/>
-        <type value="token"/>
-        <documentation value="A tag to be added to the resource matching the criteria"/>
       </searchParam>
       <searchParam>
         <name value="contact"/>

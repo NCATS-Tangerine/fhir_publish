@@ -88,6 +88,31 @@ start=@<CapabilityStatement> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# If the endpoint is a RESTful one
+<CapabilityStatement.rest> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:CapabilityStatement.rest.mode @<code> AND
+    	{fhir:value @fhirvs:restful-capability-mode};  # client | server
+    fhir:CapabilityStatement.rest.documentation @<markdown>?;  # General description of 
+                                            # implementation 
+    fhir:CapabilityStatement.rest.security @<CapabilityStatement.rest.security>?;  # Information about security of 
+                                            # implementation 
+    fhir:CapabilityStatement.rest.resource @<CapabilityStatement.rest.resource>*;  # Resource served on the REST 
+                                            # interface 
+    fhir:CapabilityStatement.rest.interaction @<CapabilityStatement.rest.interaction>*;  # What operations are supported?
+    fhir:CapabilityStatement.rest.searchParam @<CapabilityStatement.rest.resource.searchParam>*;  # Search parameters for searching 
+                                            # all resources 
+    fhir:CapabilityStatement.rest.operation @<CapabilityStatement.rest.resource.operation>*;  # Definition of a system level 
+                                            # operation 
+    fhir:CapabilityStatement.rest.compartment @<canonical>*;  # Compartments served/used by system
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # If messaging is supported
 <CapabilityStatement.messaging> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -134,42 +159,33 @@ start=@<CapabilityStatement> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# If the endpoint is a RESTful one
-<CapabilityStatement.rest> CLOSED {
+# What operations are supported?
+<CapabilityStatement.rest.interaction> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
                                             # even if unrecognized 
-    fhir:CapabilityStatement.rest.mode @<code> AND
-    	{fhir:value @fhirvs:restful-capability-mode};  # client | server
-    fhir:CapabilityStatement.rest.documentation @<markdown>?;  # General description of 
-                                            # implementation 
-    fhir:CapabilityStatement.rest.security @<CapabilityStatement.rest.security>?;  # Information about security of 
-                                            # implementation 
-    fhir:CapabilityStatement.rest.resource @<CapabilityStatement.rest.resource>*;  # Resource served on the REST 
-                                            # interface 
-    fhir:CapabilityStatement.rest.interaction @<CapabilityStatement.rest.interaction>*;  # What operations are supported?
-    fhir:CapabilityStatement.rest.searchParam @<CapabilityStatement.rest.resource.searchParam>*;  # Search parameters for searching 
-                                            # all resources 
-    fhir:CapabilityStatement.rest.operation @<CapabilityStatement.rest.resource.operation>*;  # Definition of a system level 
-                                            # operation 
-    fhir:CapabilityStatement.rest.compartment @<canonical>*;  # Compartments served/used by system
+    fhir:CapabilityStatement.rest.interaction.code @<code> AND
+    	{fhir:value @fhirvs:system-restful-interaction};  # transaction | batch | 
+                                            # search-system | history-system 
+    fhir:CapabilityStatement.rest.interaction.documentation @<markdown>?;  # Anything special about operation 
+                                            # behavior 
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Messages supported by this system
-<CapabilityStatement.messaging.supportedMessage> CLOSED {
+# Where messages should be sent
+<CapabilityStatement.messaging.endpoint> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
                                             # even if unrecognized 
-    fhir:CapabilityStatement.messaging.supportedMessage.mode @<code> AND
-    	{fhir:value @fhirvs:event-capability-mode};  # sender | receiver
-    fhir:CapabilityStatement.messaging.supportedMessage.definition @<canonical>;  # Message supported by this system
+    fhir:CapabilityStatement.messaging.endpoint.protocol @<Coding>;  # http | ftp | mllp +
+    fhir:CapabilityStatement.messaging.endpoint.address @<url>;  # Network address or identifier of 
+                                            # the end-point 
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -187,20 +203,6 @@ start=@<CapabilityStatement> AND {fhir:nodeRole [fhir:treeRoot]}
                                             # Basic | Kerberos | Certificates 
     fhir:CapabilityStatement.rest.security.description @<markdown>?;  # General description of how 
                                             # security works 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Where messages should be sent
-<CapabilityStatement.messaging.endpoint> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:CapabilityStatement.messaging.endpoint.protocol @<Coding>;  # http | ftp | mllp +
-    fhir:CapabilityStatement.messaging.endpoint.address @<url>;  # Network address or identifier of 
-                                            # the end-point 
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -249,18 +251,34 @@ start=@<CapabilityStatement> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What operations are supported?
-<CapabilityStatement.rest.interaction> CLOSED {
+# Messages supported by this system
+<CapabilityStatement.messaging.supportedMessage> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
                                             # even if unrecognized 
-    fhir:CapabilityStatement.rest.interaction.code @<code> AND
-    	{fhir:value @fhirvs:system-restful-interaction};  # transaction | batch | 
-                                            # search-system | history-system 
-    fhir:CapabilityStatement.rest.interaction.documentation @<markdown>?;  # Anything special about operation 
+    fhir:CapabilityStatement.messaging.supportedMessage.mode @<code> AND
+    	{fhir:value @fhirvs:event-capability-mode};  # sender | receiver
+    fhir:CapabilityStatement.messaging.supportedMessage.definition @<canonical>;  # Message supported by this system
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# What operations are supported?
+<CapabilityStatement.rest.resource.interaction> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:CapabilityStatement.rest.resource.interaction.code @<code> AND
+    	{fhir:value @fhirvs:type-restful-interaction};  # read | vread | update | patch | 
+                                            # delete | history-instance | 
+                                            # history-type | create | 
+                                            # search-type 
+    fhir:CapabilityStatement.rest.resource.interaction.documentation @<markdown>?;  # Anything special about operation 
                                             # behavior 
     fhir:index xsd:integer?                 # Relative position in a list
 }
@@ -295,24 +313,6 @@ start=@<CapabilityStatement> AND {fhir:nodeRole [fhir:treeRoot]}
                                             # is invoked 
     fhir:CapabilityStatement.rest.resource.operation.definition @<canonical>;  # The defined operation/query
     fhir:CapabilityStatement.rest.resource.operation.documentation @<markdown>?;  # Specific details about operation 
-                                            # behavior 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# What operations are supported?
-<CapabilityStatement.rest.resource.interaction> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:CapabilityStatement.rest.resource.interaction.code @<code> AND
-    	{fhir:value @fhirvs:type-restful-interaction};  # read | vread | update | patch | 
-                                            # delete | history-instance | 
-                                            # history-type | create | 
-                                            # search-type 
-    fhir:CapabilityStatement.rest.resource.interaction.documentation @<markdown>?;  # Anything special about operation 
                                             # behavior 
     fhir:index xsd:integer?                 # Relative position in a list
 }
@@ -1161,18 +1161,23 @@ start=@<CapabilityStatement> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What codes are expected
-<DataRequirement.codeFilter> CLOSED {
+# What dates/date ranges are expected
+<DataRequirement.dateFilter> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
-    fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
+    fhir:DataRequirement.dateFilter.path @<string>?;  # A date-valued attribute to filter 
                                             # on 
-    fhir:DataRequirement.codeFilter.searchParam @<string>?;  # A coded (token) parameter to 
-                                            # search on 
-    fhir:DataRequirement.codeFilter.valueSet @<canonical>?;  # Valueset for the filter
-    fhir:DataRequirement.codeFilter.code @<Coding>*;  # What code is expected
+    fhir:DataRequirement.dateFilter.searchParam @<string>?;  # A date valued parameter to search 
+                                            # on 
+    (                                       # The value of the filter, as a 
+                                            # Period, DateTime, or Duration 
+                                            # value 
+        fhir:DataRequirement.dateFilter.valueDateTime @<dateTime>  |
+        fhir:DataRequirement.dateFilter.valuePeriod @<Period>  |
+        fhir:DataRequirement.dateFilter.valueDuration @<Duration> 
+    )?;
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1216,26 +1221,6 @@ start=@<CapabilityStatement> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What dates/date ranges are expected
-<DataRequirement.dateFilter> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.dateFilter.path @<string>?;  # A date-valued attribute to filter 
-                                            # on 
-    fhir:DataRequirement.dateFilter.searchParam @<string>?;  # A date valued parameter to search 
-                                            # on 
-    (                                       # The value of the filter, as a 
-                                            # Period, DateTime, or Duration 
-                                            # value 
-        fhir:DataRequirement.dateFilter.valueDateTime @<dateTime>  |
-        fhir:DataRequirement.dateFilter.valuePeriod @<Period>  |
-        fhir:DataRequirement.dateFilter.valueDuration @<Duration> 
-    )?;
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # Order of the results
 <DataRequirement.sort> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -1246,6 +1231,21 @@ start=@<CapabilityStatement> AND {fhir:nodeRole [fhir:treeRoot]}
                                             # perform the sort 
     fhir:DataRequirement.sort.direction @<code> AND
     	{fhir:value @fhirvs:sort-direction};  # ascending | descending
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# What codes are expected
+<DataRequirement.codeFilter> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
+                                            # on 
+    fhir:DataRequirement.codeFilter.searchParam @<string>?;  # A coded (token) parameter to 
+                                            # search on 
+    fhir:DataRequirement.codeFilter.valueSet @<canonical>?;  # Valueset for the filter
+    fhir:DataRequirement.codeFilter.code @<Coding>*;  # What code is expected
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1273,14 +1273,53 @@ start=@<CapabilityStatement> AND {fhir:nodeRole [fhir:treeRoot]}
 
 #---------------------- Value Sets ------------------------
 
+# All published FHIR Versions.
+fhirvs:FHIR-version ["0.01" "0.05" "0.06" "0.11" "0.0.80" "0.0.81" "0.0.82" "0.4.0" "0.5.0" "1.0.0" "1.0.1" "1.0.2" "1.1.0" "1.4.0" "1.6.0" "1.8.0" "3.0.0" "3.0.1" "3.3.0" "3.5.0" "4.0.0"]
+
+# One of the resource types defined as part of this version of FHIR.
+fhirvs:resource-types ["Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription"]
+
+# A set of flags that defines how references are supported.
+fhirvs:reference-handling-policy ["literal" "logical" "resolves" "enforced" "local"]
+
 # A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
-fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "ItemInstance" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
+fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
+
+# The days of the week.
+fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
+
+# The use of an address.
+fhirvs:address-use ["home" "work" "temp" "old" "billing"]
+
+# A code that indicates how the server supports conditional delete.
+fhirvs:conditional-delete-status ["not-supported" "single" "multiple"]
 
 # The status of a resource narrative.
 fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
 
-# A unit of time (units from UCUM).
-fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
+# Real world event relating to the schedule.
+fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
+
+# How the Quantity should be understood and represented.
+fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
+
+# Operations supported by REST at the type or instance level.
+fhirvs:type-restful-interaction ["read" "vread" "update" "patch" "delete" "history-instance" "history-type" "create" "search-type"]
+
+# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
+fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "BAM" "BBD" "BDT" "BGN" "BHD" "BIF" "BMD" "BND" "BOB" "BOV" "BRL" "BSD" "BTN" "BWP" "BYN" "BZD" "CAD" "CDF" "CHE" "CHF" "CHW" "CLF" "CLP" "CNY" "COP" "COU" "CRC" "CUC" "CUP" "CVE" "CZK" "DJF" "DKK" "DOP" "DZD" "EGP" "ERN" "ETB" "EUR" "FJD" "FKP" "GBP" "GEL" "GGP" "GHS" "GIP" "GMD" "GNF" "GTQ" "GYD" "HKD" "HNL" "HRK" "HTG" "HUF" "IDR" "ILS" "IMP" "INR" "IQD" "IRR" "ISK" "JEP" "JMD" "JOD" "JPY" "KES" "KGS" "KHR" "KMF" "KPW" "KRW" "KWD" "KYD" "KZT" "LAK" "LBP" "LKR" "LRD" "LSL" "LYD" "MAD" "MDL" "MGA" "MKD" "MMK" "MNT" "MOP" "MRU" "MUR" "MVR" "MWK" "MXN" "MXV" "MYR" "MZN" "NAD" "NGN" "NIO" "NOK" "NPR" "NZD" "OMR" "PAB" "PEN" "PGK" "PHP" "PKR" "PLN" "PYG" "QAR" "RON" "RSD" "RUB" "RWF" "SAR" "SBD" "SCR" "SDG" "SEK" "SGD" "SHP" "SLL" "SOS" "SRD" "SSP" "STN" "SVC" "SYP" "SZL" "THB" "TJS" "TMT" "TND" "TOP" "TRY" "TTD" "TVD" "TWD" "TZS" "UAH" "UGX" "USD" "USN" "UYI" "UYU" "UZS" "VEF" "VND" "VUV" "WST" "XAF" "XAG" "XAU" "XBA" "XBB" "XBC" "XBD" "XCD" "XDR" "XOF" "XPD" "XPF" "XPT" "XSU" "XTS" "XUA" "XXX" "YER" "ZAR" "ZMW" "ZWL"]
+
+# Telecommunications form for contact point.
+fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
+
+# The mode of a message capability statement.
+fhirvs:event-capability-mode ["sender" "receiver"]
+
+# The possible sort directions, ascending or descending.
+fhirvs:sort-direction ["ascending" "descending"]
+
+# How the system supports versioning for a resource.
+fhirvs:versioning-policy ["no-version" "versioned" "versioned-update"]
 
 # Operations supported by REST at the system level.
 fhirvs:system-restful-interaction ["transaction" "batch" "search-system" "history-system"]
@@ -1288,86 +1327,47 @@ fhirvs:system-restful-interaction ["transaction" "batch" "search-system" "histor
 # The type of relationship to the related artifact.
 fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
 
-# The days of the week.
-fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
-
-# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
-fhirvs:mimetypes EXTERNAL
-
-# A set of flags that defines how references are supported.
-fhirvs:reference-handling-policy ["literal" "logical" "resolves" "enforced" "local"]
-
-# A code that indicates how the server supports conditional delete.
-fhirvs:conditional-delete-status ["not-supported" "single" "multiple"]
-
-# The mode of a message capability statement.
-fhirvs:event-capability-mode ["sender" "receiver"]
-
 # How a capability statement is intended to be used.
 fhirvs:capability-statement-kind ["instance" "capability" "requirements"]
-
-# Use of contact point.
-fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
-
-# How the system supports versioning for a resource.
-fhirvs:versioning-policy ["no-version" "versioned" "versioned-update"]
-
-# The use of an address.
-fhirvs:address-use ["home" "work" "temp" "old" "billing"]
 
 # Whether the application produces or consumes documents.
 fhirvs:document-mode ["producer" "consumer"]
 
-# The possible sort directions, ascending or descending.
-fhirvs:sort-direction ["ascending" "descending"]
-
-# The type of an address (physical / postal).
-fhirvs:address-type ["postal" "physical" "both"]
+# Whether an operation parameter is an input or an output parameter.
+fhirvs:operation-parameter-use ["in" "out"]
 
 # The lifecycle status of an artifact.
 fhirvs:publication-status ["draft" "active" "retired" "unknown"]
 
-# A code that indicates how the server supports conditional read.
-fhirvs:conditional-read-status ["not-supported" "modified-since" "not-match" "full-support"]
+# The type of contributor.
+fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
 
-# Operations supported by REST at the type or instance level.
-fhirvs:type-restful-interaction ["read" "vread" "update" "patch" "delete" "history-instance" "history-type" "create" "search-type"]
-
-# The type of trigger.
-fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
+# The type of an address (physical / postal).
+fhirvs:address-type ["postal" "physical" "both"]
 
 # The mode of a RESTful capability statement.
 fhirvs:restful-capability-mode ["client" "server"]
 
-# All published FHIR Versions.
-fhirvs:FHIR-version ["0.01" "0.05" "0.06" "0.11" "0.0.80" "0.0.81" "0.0.82" "0.4.0" "0.5.0" "1.0.0" "1.0.1" "1.0.2" "1.1.0" "1.4.0" "1.6.0" "1.8.0" "3.0.0" "3.0.1" "3.3.0" "3.5.0" "3.6.0" "4.0.0"]
+# Data types allowed to be used for search parameters.
+fhirvs:search-param-type ["number" "date" "string" "token" "reference" "composite" "quantity" "uri" "special"]
 
-# Whether an operation parameter is an input or an output parameter.
-fhirvs:operation-parameter-use ["in" "out"]
+# A unit of time (units from UCUM).
+fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
 
-# Telecommunications form for contact point.
-fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
+# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
+fhirvs:mimetypes EXTERNAL
+
+# Use of contact point.
+fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
+
+# The type of trigger.
+fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
+
+# A code that indicates how the server supports conditional read.
+fhirvs:conditional-read-status ["not-supported" "modified-since" "not-match" "full-support"]
 
 # Identifies the purpose for this identifier, if known .
 fhirvs:identifier-use ["usual" "official" "temp" "secondary" "old"]
 
-# How the Quantity should be understood and represented.
-fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
-
-# Real world event relating to the schedule.
-fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
-
-# One of the resource types defined as part of this version of FHIR.
-fhirvs:resource-types ["Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "ItemInstance" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription"]
-
 # The use of a human name.
 fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
-
-# Data types allowed to be used for search parameters.
-fhirvs:search-param-type ["number" "date" "string" "token" "reference" "composite" "quantity" "uri" "special"]
-
-# The type of contributor.
-fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
-
-# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
-fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "BAM" "BBD" "BDT" "BGN" "BHD" "BIF" "BMD" "BND" "BOB" "BOV" "BRL" "BSD" "BTN" "BWP" "BYN" "BZD" "CAD" "CDF" "CHE" "CHF" "CHW" "CLF" "CLP" "CNY" "COP" "COU" "CRC" "CUC" "CUP" "CVE" "CZK" "DJF" "DKK" "DOP" "DZD" "EGP" "ERN" "ETB" "EUR" "FJD" "FKP" "GBP" "GEL" "GGP" "GHS" "GIP" "GMD" "GNF" "GTQ" "GYD" "HKD" "HNL" "HRK" "HTG" "HUF" "IDR" "ILS" "IMP" "INR" "IQD" "IRR" "ISK" "JEP" "JMD" "JOD" "JPY" "KES" "KGS" "KHR" "KMF" "KPW" "KRW" "KWD" "KYD" "KZT" "LAK" "LBP" "LKR" "LRD" "LSL" "LYD" "MAD" "MDL" "MGA" "MKD" "MMK" "MNT" "MOP" "MRU" "MUR" "MVR" "MWK" "MXN" "MXV" "MYR" "MZN" "NAD" "NGN" "NIO" "NOK" "NPR" "NZD" "OMR" "PAB" "PEN" "PGK" "PHP" "PKR" "PLN" "PYG" "QAR" "RON" "RSD" "RUB" "RWF" "SAR" "SBD" "SCR" "SDG" "SEK" "SGD" "SHP" "SLL" "SOS" "SRD" "SSP" "STN" "SVC" "SYP" "SZL" "THB" "TJS" "TMT" "TND" "TOP" "TRY" "TTD" "TVD" "TWD" "TZS" "UAH" "UGX" "USD" "USN" "UYI" "UYU" "UZS" "VEF" "VND" "VUV" "WST" "XAF" "XAG" "XAU" "XBA" "XBB" "XBC" "XBD" "XCD" "XDR" "XOF" "XPD" "XPF" "XPT" "XSU" "XTS" "XUA" "XXX" "YER" "ZAR" "ZMW" "ZWL"]

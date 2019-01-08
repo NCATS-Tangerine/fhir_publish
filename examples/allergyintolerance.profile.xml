@@ -3,7 +3,7 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
   <id value="AllergyIntolerance"/>
   <meta>
-    <lastUpdated value="2018-12-13T14:23:07.677-06:00"/>
+    <lastUpdated value="2019-01-08T15:26:24.615-06:00"/>
   </meta>
   <text>
     <status value="generated"/>
@@ -170,7 +170,7 @@
           </td>
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">food | medication | environment | biologic
             <br/>
-            <a href="valueset-allergy-intolerance-category.html" title="Category of an identified substance.">AllergyIntoleranceCategory</a> (
+            <a href="valueset-allergy-intolerance-category.html" title="Category of an identified substance associated with allergies or intolerances.">AllergyIntoleranceCategory</a> (
             <a href="terminologies.html#required" title="To be conformant, the concept in this element SHALL be from the specified value set.">Required</a>)
             <br/>
           </td>
@@ -379,6 +379,7 @@
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">
             <a href="references.html#Reference">Reference</a>(
             <a href="practitioner.html">Practitioner</a> | 
+            <a href="practitionerrole.html">PractitionerRole</a> | 
             <a href="patient.html">Patient</a> | 
             <a href="relatedperson.html">RelatedPerson</a>)
           </td>
@@ -401,7 +402,8 @@
             <a href="references.html#Reference">Reference</a>(
             <a href="patient.html">Patient</a> | 
             <a href="relatedperson.html">RelatedPerson</a> | 
-            <a href="practitioner.html">Practitioner</a>)
+            <a href="practitioner.html">Practitioner</a> | 
+            <a href="practitionerrole.html">PractitionerRole</a>)
           </td>
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">Source of the information about the allergy</td>
         </tr>
@@ -623,10 +625,10 @@
     <valueCode value="pc"/>
   </extension>
   <url value="http://hl7.org/fhir/StructureDefinition/AllergyIntolerance"/>
-  <version value="3.6.0"/>
+  <version value="4.0.0"/>
   <name value="AllergyIntolerance"/>
   <status value="draft"/>
-  <date value="2018-12-13T14:23:07-06:00"/>
+  <date value="2019-01-08T15:26:24-06:00"/>
   <publisher value="Health Level Seven International (Patient Care)"/>
   <contact>
     <telecom>
@@ -642,7 +644,7 @@
   </contact>
   <description value="Risk of harmful or undesirable, physiological response which is unique to an individual and associated with exposure to a substance."/>
   <purpose value="To record a clinical assessment of a propensity, or potential risk to an individual, of an adverse reaction upon future exposure to the specified substance, or class of substance."/>
-  <fhirVersion value="3.6.0"/>
+  <fhirVersion value="4.0.0"/>
   <mapping>
     <identity value="rim"/>
     <uri value="http://hl7.org/v3"/>
@@ -994,7 +996,7 @@
         </extension>
         <strength value="required"/>
         <description value="The clinical status of the allergy or intolerance."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/allergyintolerance-clinical"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/allergyintolerance-clinical|4.0.0"/>
       </binding>
       <mapping>
         <identity value="w5"/>
@@ -1031,7 +1033,7 @@
         </extension>
         <strength value="required"/>
         <description value="Assertion about certainty associated with a propensity, or potential risk, of a reaction to the identified substance."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/allergyintolerance-verification"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/allergyintolerance-verification|4.0.0"/>
       </binding>
       <mapping>
         <identity value="w5"/>
@@ -1067,7 +1069,7 @@
         </extension>
         <strength value="required"/>
         <description value="Identification of the underlying physiological mechanism for a Reaction Risk."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-type"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-type|4.0.0"/>
       </binding>
       <mapping>
         <identity value="w5"/>
@@ -1108,8 +1110,8 @@
           <valueString value="AllergyIntoleranceCategory"/>
         </extension>
         <strength value="required"/>
-        <description value="Category of an identified substance."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-category"/>
+        <description value="Category of an identified substance associated with allergies or intolerances."/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-category|4.0.0"/>
       </binding>
       <mapping>
         <identity value="w5"/>
@@ -1151,7 +1153,7 @@
         </extension>
         <strength value="required"/>
         <description value="Estimate of the potential clinical harm, or seriousness, of a reaction to an identified substance."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-criticality"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-criticality|4.0.0"/>
       </binding>
       <mapping>
         <identity value="w5"/>
@@ -1347,6 +1349,7 @@
       <type>
         <code value="Reference"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Practitioner"/>
+        <targetProfile value="http://hl7.org/fhir/StructureDefinition/PractitionerRole"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Patient"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/RelatedPerson"/>
       </type>
@@ -1380,6 +1383,7 @@
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Patient"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/RelatedPerson"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Practitioner"/>
+        <targetProfile value="http://hl7.org/fhir/StructureDefinition/PractitionerRole"/>
       </type>
       <isModifier value="false"/>
       <isSummary value="true"/>
@@ -1680,7 +1684,7 @@
         </extension>
         <strength value="required"/>
         <description value="Clinical assessment of the severity of a reaction event as a whole, potentially considering multiple different manifestations."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/reaction-event-severity"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/reaction-event-severity|4.0.0"/>
       </binding>
       <mapping>
         <identity value="rim"/>
@@ -1816,7 +1820,7 @@
         </extension>
         <strength value="required"/>
         <description value="The clinical status of the allergy or intolerance."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/allergyintolerance-clinical"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/allergyintolerance-clinical|4.0.0"/>
       </binding>
       <mapping>
         <identity value="w5"/>
@@ -1848,7 +1852,7 @@
         </extension>
         <strength value="required"/>
         <description value="Assertion about certainty associated with a propensity, or potential risk, of a reaction to the identified substance."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/allergyintolerance-verification"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/allergyintolerance-verification|4.0.0"/>
       </binding>
       <mapping>
         <identity value="w5"/>
@@ -1878,7 +1882,7 @@
         </extension>
         <strength value="required"/>
         <description value="Identification of the underlying physiological mechanism for a Reaction Risk."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-type"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-type|4.0.0"/>
       </binding>
       <mapping>
         <identity value="w5"/>
@@ -1913,8 +1917,8 @@
           <valueString value="AllergyIntoleranceCategory"/>
         </extension>
         <strength value="required"/>
-        <description value="Category of an identified substance."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-category"/>
+        <description value="Category of an identified substance associated with allergies or intolerances."/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-category|4.0.0"/>
       </binding>
       <mapping>
         <identity value="w5"/>
@@ -1950,7 +1954,7 @@
         </extension>
         <strength value="required"/>
         <description value="Estimate of the potential clinical harm, or seriousness, of a reaction to an identified substance."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-criticality"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/allergy-intolerance-criticality|4.0.0"/>
       </binding>
       <mapping>
         <identity value="w5"/>
@@ -2108,6 +2112,7 @@
       <type>
         <code value="Reference"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Practitioner"/>
+        <targetProfile value="http://hl7.org/fhir/StructureDefinition/PractitionerRole"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Patient"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/RelatedPerson"/>
       </type>
@@ -2134,6 +2139,7 @@
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Patient"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/RelatedPerson"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Practitioner"/>
+        <targetProfile value="http://hl7.org/fhir/StructureDefinition/PractitionerRole"/>
       </type>
       <isSummary value="true"/>
       <mapping>
@@ -2296,7 +2302,7 @@
         </extension>
         <strength value="required"/>
         <description value="Clinical assessment of the severity of a reaction event as a whole, potentially considering multiple different manifestations."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/reaction-event-severity"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/reaction-event-severity|4.0.0"/>
       </binding>
       <mapping>
         <identity value="rim"/>

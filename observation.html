@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Observation - FHIR v3.6.0</title>
+  <title>Observation - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -552,6 +552,14 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
       </ul>
     </td>
   </tr>
+  <tr class="diff-entry">
+    <td class="diff-left">Observation.status</td>
+    <td class="diff-right">
+      <ul>
+        <li>Change value set from http://hl7.org/fhir/ValueSet/observation-status to http://hl7.org/fhir/ValueSet/observation-status|4.0.0</li>
+      </ul>
+    </td>
+  </tr>
   <tr class="diff-new">
     <td class="diff-left">Observation.focus</td>
     <td class="diff-right">
@@ -690,7 +698,7 @@ Remove Binding <code>http://hl7.org/fhir/ValueSet/referencerange-meaning</code> 
   <p>
   This analysis is available as <a href="observation.diff.xml">XML</a> or <a href="observation.diff.json">JSON</a>.
   </p>
-  <p>See <a href="observation-version-maps.html">R3 &lt;--&gt; R4 Conversion Maps</a> (status = 48 tests that all execute ok. All tests pass round-trip testing  and all r3 resources are valid.)</p>
+  <p>See <a href="observation-version-maps.html">R3 &lt;--&gt; R4 Conversion Maps</a> (status = 48 tests that all execute ok. All tests pass round-trip testing  and <span style="background-color: #E0B0FF">23 r3 resources are invalid (0 errors).</span>)</p>
 
  </div>
 </div>
@@ -1039,6 +1047,14 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
       </ul>
     </td>
   </tr>
+  <tr class="diff-entry">
+    <td class="diff-left">Observation.status</td>
+    <td class="diff-right">
+      <ul>
+        <li>Change value set from http://hl7.org/fhir/ValueSet/observation-status to http://hl7.org/fhir/ValueSet/observation-status|4.0.0</li>
+      </ul>
+    </td>
+  </tr>
   <tr class="diff-new">
     <td class="diff-left">Observation.focus</td>
     <td class="diff-right">
@@ -1177,7 +1193,7 @@ Remove Binding <code>http://hl7.org/fhir/ValueSet/referencerange-meaning</code> 
   <p>
   This analysis is available as <a href="observation.diff.xml">XML</a> or <a href="observation.diff.json">JSON</a>.
   </p>
-  <p>See <a href="observation-version-maps.html">R3 &lt;--&gt; R4 Conversion Maps</a> (status = 48 tests that all execute ok. All tests pass round-trip testing  and all r3 resources are valid.)</p>
+  <p>See <a href="observation-version-maps.html">R3 &lt;--&gt; R4 Conversion Maps</a> (status = 48 tests that all execute ok. All tests pass round-trip testing  and <span style="background-color: #E0B0FF">23 r3 resources are invalid (0 errors).</span>)</p>
 
  </div>
 </div>
@@ -1605,13 +1621,13 @@ If the value was "NaN"  (i.e. an error)  the <code>valueCodeableConcept</code> e
 <tr><td><a name="sp-combo-code-value-quantity"> </a>combo-code-value-quantity <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#composite">composite</a></td><td>Code and quantity value parameter pair, including in components</td><td>On Observation | Observation.component:<br/>&nbsp;&nbsp;combo-code: code<br/>&nbsp;&nbsp;combo-value-quantity: value.as(Quantity)</td><td></td></tr>
 <tr><td><a name="sp-combo-data-absent-reason"> </a>combo-data-absent-reason <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>The reason why the expected value in the element Observation.value[x] or Observation.component.value[x] is missing.</td><td>Observation.dataAbsentReason | Observation.component.dataAbsentReason</td><td></td></tr>
 <tr><td><a name="sp-combo-value-concept"> </a>combo-value-concept <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>The value or component value of the observation, if the value is a CodeableConcept</td><td>(Observation.value as CodeableConcept) | (Observation.component.value as CodeableConcept)</td><td></td></tr>
-<tr><td><a name="sp-combo-value-quantity"> </a>combo-value-quantity <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#quantity">quantity</a></td><td>The value or component value of the observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data)</td><td>Observation.value as Quantity | Observation.value as SampledData | Observation.component.value as Quantity | Observation.component.value as SampledData</td><td></td></tr>
+<tr><td><a name="sp-combo-value-quantity"> </a>combo-value-quantity <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#quantity">quantity</a></td><td>The value or component value of the observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data)</td><td>(Observation.value as Quantity) | (Observation.value as SampledData) | (Observation.component.value as Quantity) | (Observation.component.value as SampledData)</td><td></td></tr>
 <tr><td><a name="sp-component-code"> </a>component-code <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>The component code of the observation type</td><td>Observation.component.code</td><td></td></tr>
 <tr><td><a name="sp-component-code-value-concept"> </a>component-code-value-concept <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#composite">composite</a></td><td>Component code and component coded value parameter pair</td><td>On Observation.component:<br/>&nbsp;&nbsp;component-code: code<br/>&nbsp;&nbsp;component-value-concept: value.as(CodeableConcept)</td><td></td></tr>
 <tr><td><a name="sp-component-code-value-quantity"> </a>component-code-value-quantity <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#composite">composite</a></td><td>Component code and component quantity value parameter pair</td><td>On Observation.component:<br/>&nbsp;&nbsp;component-code: code<br/>&nbsp;&nbsp;component-value-quantity: value.as(Quantity)</td><td></td></tr>
 <tr><td><a name="sp-component-data-absent-reason"> </a>component-data-absent-reason <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>The reason why the expected value in the element Observation.component.value[x] is missing.</td><td>Observation.component.dataAbsentReason</td><td></td></tr>
 <tr><td><a name="sp-component-value-concept"> </a>component-value-concept <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>The value of the component observation, if the value is a CodeableConcept</td><td>(Observation.component.value as CodeableConcept)</td><td></td></tr>
-<tr><td><a name="sp-component-value-quantity"> </a>component-value-quantity <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#quantity">quantity</a></td><td>The value of the component observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data)</td><td>Observation.component.value as Quantity | Observation.component.value as SampledData</td><td></td></tr>
+<tr><td><a name="sp-component-value-quantity"> </a>component-value-quantity <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#quantity">quantity</a></td><td>The value of the component observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data)</td><td>(Observation.component.value as Quantity) | (Observation.component.value as SampledData)</td><td></td></tr>
 <tr><td><a name="sp-data-absent-reason"> </a>data-absent-reason <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>The reason why the expected value in the element Observation.value[x] is missing.</td><td>Observation.dataAbsentReason</td><td></td></tr>
 <tr><td><a name="sp-date"> </a>date <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#date">date</a></td><td>Obtained date/time. If the obtained element is a period, a date that falls in the period</td><td>Observation.effective</td><td><a href="searchparameter-registry.html#clinical-date">17 Resources</a></td></tr>
 <tr><td><a name="sp-derived-from"> </a>derived-from <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#reference">reference</a></td><td>Related measurements the observation is made from</td><td>Observation.derivedFrom<br/>(<a href="media.html">Media</a>, <a href="observation.html">Observation</a>, <a href="imagingstudy.html">ImagingStudy</a>, <a href="molecularsequence.html">MolecularSequence</a>, <a href="questionnaireresponse.html">QuestionnaireResponse</a>, <a href="documentreference.html">DocumentReference</a>)</td><td></td></tr>
@@ -1622,15 +1638,15 @@ If the value was "NaN"  (i.e. an error)  the <code>valueCodeableConcept</code> e
 <tr><td><a name="sp-identifier"> </a>identifier <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>The unique id for a particular observation</td><td>Observation.identifier</td><td><a href="searchparameter-registry.html#clinical-identifier">30 Resources</a></td></tr>
 <tr><td><a name="sp-method"> </a>method <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>The method used for the observation</td><td>Observation.method</td><td></td></tr>
 <tr><td><a name="sp-part-of"> </a>part-of <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#reference">reference</a></td><td>Part of referenced event</td><td>Observation.partOf<br/>(<a href="immunization.html">Immunization</a>, <a href="medicationdispense.html">MedicationDispense</a>, <a href="medicationadministration.html">MedicationAdministration</a>, <a href="procedure.html">Procedure</a>, <a href="imagingstudy.html">ImagingStudy</a>, <a href="medicationstatement.html">MedicationStatement</a>)</td><td></td></tr>
-<tr><td><a name="sp-patient"> </a>patient <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#reference">reference</a></td><td>The subject that the observation is about (if patient)</td><td>Observation.subject.where(resolve() is Patient)<br/>(<a href="patient.html">Patient</a>)</td><td><a href="searchparameter-registry.html#clinical-patient">29 Resources</a></td></tr>
+<tr><td><a name="sp-patient"> </a>patient <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#reference">reference</a></td><td>The subject that the observation is about (if patient)</td><td>Observation.subject.where(resolve() is Patient)<br/>(<a href="patient.html">Patient</a>)</td><td><a href="searchparameter-registry.html#clinical-patient">33 Resources</a></td></tr>
 <tr><td><a name="sp-performer"> </a>performer <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#reference">reference</a></td><td>Who performed the observation</td><td>Observation.performer<br/>(<a href="practitioner.html">Practitioner</a>, <a href="organization.html">Organization</a>, <a href="careteam.html">CareTeam</a>, <a href="patient.html">Patient</a>, <a href="practitionerrole.html">PractitionerRole</a>, <a href="relatedperson.html">RelatedPerson</a>)</td><td></td></tr>
 <tr><td><a name="sp-specimen"> </a>specimen <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#reference">reference</a></td><td>Specimen used for this observation</td><td>Observation.specimen<br/>(<a href="specimen.html">Specimen</a>)</td><td></td></tr>
 <tr><td><a name="sp-status"> </a>status <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>The status of the observation</td><td>Observation.status</td><td></td></tr>
 <tr><td><a name="sp-subject"> </a>subject <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#reference">reference</a></td><td>The subject that the observation is about</td><td>Observation.subject<br/>(<a href="group.html">Group</a>, <a href="device.html">Device</a>, <a href="patient.html">Patient</a>, <a href="location.html">Location</a>)</td><td></td></tr>
 <tr><td><a name="sp-value-concept"> </a>value-concept <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>The value of the observation, if the value is a CodeableConcept</td><td>(Observation.value as CodeableConcept)</td><td></td></tr>
 <tr><td><a name="sp-value-date"> </a>value-date <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#date">date</a></td><td>The value of the observation, if the value is a date or period of time</td><td>(Observation.value as dateTime) | (Observation.value as Period)</td><td></td></tr>
-<tr><td><a name="sp-value-quantity"> </a>value-quantity <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#quantity">quantity</a></td><td>The value of the observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data)</td><td>Observation.value as Quantity | Observation.value as SampledData</td><td></td></tr>
-<tr><td><a name="sp-value-string"> </a>value-string <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#string">string</a></td><td>The value of the observation, if the value is a string, and also searches in CodeableConcept.text</td><td>Observation.value as string | (Observation.value as CodeableConcept).text</td><td></td></tr>
+<tr><td><a name="sp-value-quantity"> </a>value-quantity <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#quantity">quantity</a></td><td>The value of the observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data)</td><td>(Observation.value as Quantity) | (Observation.value as SampledData)</td><td></td></tr>
+<tr><td><a name="sp-value-string"> </a>value-string <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#string">string</a></td><td>The value of the observation, if the value is a string, and also searches in CodeableConcept.text</td><td>(Observation.value as string) | (Observation.value as CodeableConcept).text</td><td></td></tr>
 </table>
 
 
@@ -1649,15 +1665,14 @@ If the value was "NaN"  (i.e. an error)  the <code>valueCodeableConcept</code> e
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:30-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fobservation.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fobservation.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fobservation.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fobservation.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fobservation.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fobservation.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

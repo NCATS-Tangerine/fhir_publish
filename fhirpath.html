@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-  <title>Fhirpath - FHIR v3.6.0</title>
+  <title>Fhirpath - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -110,12 +110,8 @@
 <table class="colsn"><tr><td id="wg"><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm" _target="blank">FHIR Infrastructure <img src="external.png" style="text-align: baseline"/></a> Work Group</td><td id="fmm"><a href="versions.html#maturity">Maturity Level</a>: Normative</td><td id="ballot"><a href="versions.html#std-process">Standards Status</a>:  <!-- !ns! --><a href="versions.html#std-process">Normative</a></td></tr></table>
 
 <p>
-FHIRPath is a separate specification published at <a href="http://hl7.org/fhirpath">http://hl7.org/fhirpath <img src="external.png" style="text-align: baseline"/></a> in order to support wider re-use across multiple specifications.
-</p>
-<p>
-FHIRPath is a path-based navigation and extraction language, somewhat like XPath. Operations
-are expressed in terms of the logical content of hierarchical data models, and support traversal, 
-selection and filtering of data.
+The FHIR Specification uses <a href="http://hl7.org/fhirpath/r2">FHIRPath (release 2) <img src="external.png" style="text-align: baseline"/></a> for path-based navigation and extraction.
+FHIRPath is a separate specification published at <a href="http://hl7.org/fhirpath/r2">http://hl7.org/fhirpath <img src="external.png" style="text-align: baseline"/></a> in order to support wider re-use across multiple specifications.
 </p>
 <p>
 FHIRPath is used in several places in the FHIR and related specifications:
@@ -129,14 +125,18 @@ FHIRPath is used in several places in the FHIR and related specifications:
 <li><a href="testscript-definitions.html#TestScript.setup.action.assert.expression">Invariants in the TestScript resource</a></li>
 </ul>
 <p>
-In addition, FHIRPath is used in <a href="http://cds-hooks.hl7.org/ballots/2018May/specification/1.0/#prefetch-template">pre-fetch templates in Smart on FHIR’s cds-hooks <img src="external.png" style="text-align: baseline"/></a>.
+In addition, FHIRPath is used in <a href="http://cds-hooks.hl7.org/ballots/2018May/specification/1.0/#prefetch-template">pre-fetch templates in Smart on FHIR's CDS-Hooks <img src="external.png" style="text-align: baseline"/></a>.
 </p>
 
 <a name="rules"></a>
 <h3 class="self-link-parent"><span class="sectioncount">2.9.1</span> Using FHIRPath with Resources <a href="fhirpath.html#rules" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 
 <p>
-FHIRPath uses a tree model that abstracts away the actual underlying datamodel of the 
+In FHIRPath, like XPath, operations are expressed in terms of the logical content of hierarchical data models, and support traversal, 
+selection and filtering of data.
+</p>
+<p>
+FHIRPath uses a tree model that abstracts away the actual underlying data model of the 
 data being queried. For FHIR, this means that the contents of the resources and data 
 types as described in the Logical views (or the UML diagrams) are used as the model, 
 rather than the JSON and XML formats, so specific xml or json features are not 
@@ -252,7 +252,7 @@ Patient.name.given.is(System.string).not();
 Patient.name.given.getValue().is(System.string);
 </pre>
 <p>
-As shown, all FHIR primitives have the operation .getValue() defined (see below)
+As shown, all FHIR primitives have the operation <code>getValue()</code> defined (see below)
 for the few edge cases where the automatic conversion isn't appropriate. Note 
 that as() does not have such restrictions - both of the following are valid:
 </p>
@@ -285,7 +285,7 @@ The resource is very often the context, such that %resource = %context.
 <p>Returns true if the input collection contains a single value which is a FHIR primitive, and it has a primitive value (e.g. as opposed to not having a value and just having extensions).</p>
 
 <blockquote>
-<p><strong>Note to implementers</strong>: The FHIR conceptual model talks about "primitives" as subclasses of the type Element that also have id and extensions. What this actually means is that a FHIR primitive is not a primitive in an implementation language. The introduction (section 2 above) describes the navigation tree as if the the FHIR model applies - primitives are both primitives and elements with children.</p>
+<p><strong>Note to implementers</strong>: The FHIR conceptual model talks about "primitives" as subclasses of the type Element that also have id and extensions. What this actually means is that a FHIR primitive is not a primitive in an implementation language. The introduction (section 2 above) describes the navigation tree as if the FHIR model applies - primitives are both primitives and elements with children.</p>
 
 <p>In FHIRPath, this means that FHIR primitives have a <code>value</code> child, but, as described above, they are automatically cast to FHIRPath primitives when comparisons are made, and that the primitive value will be included in the set returned by <code>children()</code> or <code>descendants()</code>.</p>
 </blockquote>
@@ -414,7 +414,7 @@ Implementation Guides are allowed to define their own externals, and implementer
 
 <p>Authors of Implementation Guides should be aware that adding specific environment variables restricts the use of the FHIRPath to their particular context.</p>
 
-<p>Note that these tokens are not restricted to simple types, and they may have fixed values that are not known before evaluation at run-time, though there is no way to define these kind of values in implementation guides.</p>
+<p>Note that these tokens are not restricted to simple types, and they may have fixed values that are not known before evaluation at run-time, though there is no way to define these kinds of values in implementation guides.</p>
 
 
 <a name="simple"></a>
@@ -613,15 +613,14 @@ Parameters:
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Ffhirpath.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Ffhirpath.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Ffhirpath.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Ffhirpath.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Ffhirpath.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Ffhirpath.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

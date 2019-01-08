@@ -13,7 +13,7 @@
     <valueCode value="trial-use"/>
   </extension>
   <url value="http://hl7.org/fhir/StructureDefinition/elementdefinition-de"/>
-  <version value="3.6.0"/>
+  <version value="4.0.0"/>
   <name value="DataElement constraint on ElementDefinition data type"/>
   <status value="draft"/>
   <experimental value="false"/>
@@ -26,7 +26,7 @@
     </telecom>
   </contact>
   <description value="Identifies how the ElementDefinition data type is used when it appears within a data element"/>
-  <fhirVersion value="3.6.0"/>
+  <fhirVersion value="4.0.0"/>
   <mapping>
     <identity value="v2"/>
     <uri value="http://hl7.org/v2"/>
@@ -79,8 +79,8 @@
         <key value="eld-19"/>
         <severity value="error"/>
         <human value="Element names cannot include some special characters"/>
-        <expression value="path.matches(&#39;[^\\s#\\/]+&#39;)"/>
-        <xpath value="matches(path/@value, &#39;[^\s#\/]+&#39;)"/>
+        <expression value="path.matches(&#39;[^\\s\\.,:;\\\&#39;&quot;\\/|?!@#$%&amp;*()\\[\\]{}]{1,64}(\\.[^\\s\\.,:;\\\&#39;&quot;\\/|?!@#$%&amp;*()\\[\\]{}]{1,64}(\\[x\\])?(\\:[^\\s\\.]+)?)*&#39;)"/>
+        <xpath value="matches(path/@value, &#39;[^\s\.,:;\&#39;&amp;quot;\/|?!@#$%&amp;amp;*()\[\]{}]{1,64}(\.[^\s\.,:;\&#39;&amp;quot;\/|?!@#$%&amp;amp;*()\[\]{}]{1,64}(\[x\])?(\:[^\s\.]+)?)*&#39;)"/>
         <source value="ElementDefinition"/>
       </constraint>
       <constraint>
@@ -182,7 +182,7 @@
       <constraint>
         <key value="eld-20"/>
         <severity value="warning"/>
-        <human value="Element names should be simple alphanumerics, or code generation tools may be broken"/>
+        <human value="Element names should be simple alphanumerics with a max of 64 characters, or code generation tools may be broken"/>
         <expression value="path.matches(&#39;[A-Za-z][A-Za-z0-9]*(\\.[a-z][A-Za-z0-9]*(\\[x])?)*&#39;)"/>
         <xpath value="matches(path/@value, &#39;[A-Za-z][A-Za-z0-9]*(\.[a-z][A-Za-z0-9]*(\[x])?)*&#39;)"/>
         <source value="ElementDefinition"/>
@@ -504,7 +504,7 @@
         </extension>
         <strength value="required"/>
         <description value="Units of measure allowed for an element."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/ucum-units"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/ucum-units|4.0.0"/>
       </binding>
       <mapping>
         <identity value="rim"/>
@@ -590,7 +590,7 @@
         </extension>
         <strength value="required"/>
         <description value="How a property is represented when serialized."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/property-representation"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/property-representation|4.0.0"/>
       </binding>
       <mapping>
         <identity value="v2"/>
@@ -948,7 +948,7 @@
         </extension>
         <strength value="required"/>
         <description value="How an element value is interpreted when discrimination is evaluated."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/discriminator-type"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/discriminator-type|4.0.0"/>
       </binding>
       <mapping>
         <identity value="rim"/>
@@ -1057,7 +1057,7 @@
         </extension>
         <strength value="required"/>
         <description value="How slices are interpreted when evaluating an instance."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/resource-slicing-rules"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/resource-slicing-rules|4.0.0"/>
       </binding>
       <mapping>
         <identity value="rim"/>
@@ -1734,7 +1734,7 @@
         </extension>
         <strength value="required"/>
         <description value="How resource references can be aggregated."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/resource-aggregation-mode"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/resource-aggregation-mode|4.0.0"/>
       </binding>
       <mapping>
         <identity value="rim"/>
@@ -1768,7 +1768,7 @@
         </extension>
         <strength value="required"/>
         <description value="Whether a reference needs to be version specific or version independent, or whether either can be used."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/reference-version-rules"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/reference-version-rules|4.0.0"/>
       </binding>
       <mapping>
         <identity value="rim"/>
@@ -2918,7 +2918,7 @@
         </extension>
         <strength value="required"/>
         <description value="SHALL applications comply with this constraint?"/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/constraint-severity"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/constraint-severity|4.0.0"/>
       </binding>
       <mapping>
         <identity value="rim"/>
@@ -3262,7 +3262,7 @@
         </extension>
         <strength value="required"/>
         <description value="Indication of the degree of conformance expectations associated with a binding."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/binding-strength"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/binding-strength|4.0.0"/>
       </binding>
       <mapping>
         <identity value="v2"/>
@@ -3481,7 +3481,7 @@
         </extension>
         <strength value="required"/>
         <description value="The mime type of an attachment. Any valid mime type is allowed."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/mimetypes"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/mimetypes|4.0.0"/>
       </binding>
       <mapping>
         <identity value="rim"/>

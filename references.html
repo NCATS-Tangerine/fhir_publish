@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>References - FHIR v3.6.0</title>
+  <title>References - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -122,7 +122,7 @@ Many of the defined elements in a resource are references to other resources. Us
 references, the resources combine to build a web of information about healthcare.
 </p>
 <p>
-References are always defined and represented in one particular direction - from one resource (source) to another (target).
+References are always defined and represented in one direction - from one resource (source) to another (target).
 The corresponding reverse relationship from the target to the source exists in a logical sense, but is
 not typically represented explicitly in the target resource. For external references, navigating these reverse relationships requires some
 external infrastructure to track the relationship between resources (the <a href="http.html">REST API</a> provides one such
@@ -131,7 +131,7 @@ search parameters for the references and by providing support for <a href="searc
 </p>
 <p>
 Because resources are processed independently, relationships are not considered to be transitive.
-For example, if a <a href="procedure.html">Procedure</a> resource references a particular <a href="patient.html">Patient</a> as its subject, and has a 
+For example, if a <a href="procedure.html">Procedure</a> resource references a <a href="patient.html">Patient</a> as its subject, and has a 
 <a href="procedure.html">Procedure</a> resource as its reason, there is no automatic rule or implication that the condition 
 has the same patient for its subject. Instead, the subject of the condition must be established 
 directly in the Condition resource itself. Another way to state this is that the context of the 
@@ -161,7 +161,7 @@ Resources contain two types of references to other resources:
 For canonical references, see below. The general references are handled by the <code>Reference</code> type.
 which contains at least one of a <code>reference</code> (literal reference),
 an <code>identifier</code> (logical reference), and a <code>display</code> (text description of target).
-In addition, it may a contain a target <code>type</code>.
+In addition, it may contain a target <code>type</code>.
 </p>
 
 <div id="tabs-Reference">
@@ -194,16 +194,16 @@ The type is the Canonical URL of Resource Definition that is the type this refer
   <div id="uml">
    <p><b>UML Diagram</b> (<a href="formats.html#uml">Legend</a>)</p>
    <div id="uml-inner">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="349.6" id="n15" version="1.1" height="112.0">  <defs>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="489.6" id="n15" version="1.1" height="112.0">  <defs>
     <filter x="0" width="200%" y="0" id="shadow1" height="200%">
       <feOffset result="offOut" dx="3" in="SourceGraphic" dy="3"></feOffset>
       <feColorMatrix result="matrixOut" in="offOut" values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" type="matrix"></feColorMatrix>
       <feGaussianBlur result="blurOut" stdDeviation="2" in="matrixOut"></feGaussianBlur>
       <feBlend mode="normal" in="SourceGraphic" in2="blurOut"></feBlend>
     </filter>
-  </defs><g id="n16"><rect filter="url(#shadow1)" rx="4" ry="4" x="70.0" width="114.4" y="50.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n17" height="46.0"></rect><text x="127.2" y="70.0" id="n18" fill="black" class="diagram-class-title"><a id="n19" xlink:href="element.html#Element">Element</a></text><line y1="78.0" x1="70.0" y2="78.0" x2="184.4" style="stroke:dimgrey;stroke-width:1" id="n20"></line><text x="76.0" y="92.0" fill="black" class="diagram-class-detail"><a id="n21" xlink:href="extensibility.html"><title id="n22">Extensions - as described for all elements: additional information that is not part of the basic definition of the resource / type</title>extension</a> : <a id="n23" xlink:href="extensibility.html">Extension</a> 0..*</text></g><g id="n24"><rect filter="url(#shadow1)" rx="4" ry="4" x="0.0" width="149.60000000000002" y="0.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n25" height="92.0"></rect><line y1="28.0" x1="0.0" y2="28.0" x2="149.60000000000002" style="stroke:dimgrey;stroke-width:1" id="n26"></line><text x="74.80000000000001" y="20.0" id="n27" fill="black" class="diagram-class-title"><a id="n28" xlink:href="references.html#Reference">Reference</a></text><text x="6.0" y="42.0" id="n29" fill="black" class="diagram-class-detail"><a id="n30" xlink:href="references-definitions.html#Reference.reference"><title>A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources</title>reference</a> : <a id="n31" xlink:href="#string">string</a> [0..1]</text><text x="6.0" y="56.0" id="n35" fill="black" class="diagram-class-detail"><a id="n36" xlink:href="references-definitions.html#Reference.type"><title>The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.
+  </defs><g id="n16"><rect filter="url(#shadow1)" rx="4" ry="4" x="0.0" width="114.4" y="50.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n17" height="46.0"></rect><text x="57.2" y="70.0" id="n18" fill="black" class="diagram-class-title"><a id="n19" xlink:href="element.html#Element">Element</a></text><line y1="78.0" x1="0.0" y2="78.0" x2="114.4" style="stroke:dimgrey;stroke-width:1" id="n20"></line><text x="6.0" y="92.0" fill="black" class="diagram-class-detail"><a id="n21" xlink:href="extensibility.html"><title id="n22">Extensions - as described for all elements: additional information that is not part of the basic definition of the resource / type</title>extension</a> : <a id="n23" xlink:href="extensibility.html">Extension</a> 0..*</text></g><g id="n24"><rect filter="url(#shadow1)" rx="4" ry="4" x="140.0" width="149.60000000000002" y="0.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n25" height="92.0"></rect><line y1="28.0" x1="140.0" y2="28.0" x2="289.6" style="stroke:dimgrey;stroke-width:1" id="n26"></line><text x="214.8" y="20.0" id="n27" fill="black" class="diagram-class-title"><a id="n28" xlink:href="references.html#Reference">Reference</a></text><text x="146.0" y="42.0" id="n29" fill="black" class="diagram-class-detail"><a id="n30" xlink:href="references-definitions.html#Reference.reference"><title>A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources</title>reference</a> : <a id="n31" xlink:href="#string">string</a> [0..1]</text><text x="146.0" y="56.0" id="n35" fill="black" class="diagram-class-detail"><a id="n36" xlink:href="references-definitions.html#Reference.type"><title>The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.
 
-The type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. "Patient" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources)</title>type</a> : <a id="n37" xlink:href="#uri">uri</a> [0..1] « <a id="n38" xlink:href="valueset-resource-types.html"><title id="n39">Aa resource (or, for logical models, the URI of the logical model). (Strength=Extensible)</title>ResourceType</a>+ »</text><text x="6.0" y="70.0" id="n45" fill="black" class="diagram-class-detail"><a id="n46" xlink:href="references-definitions.html#Reference.identifier"><title>An identifier for the target resource. This is used when there is no way to reference the other resource directly, either because the entity it represents is not available through a FHIR server, or because there is no way for the author of the resource to convert a known identifier to an actual location. There is no requirement that a Reference.identifier point to something that is actually exposed as a FHIR instance, but it SHALL point to a business concept that would be expected to be exposed as a FHIR instance, and that instance would need to be of a FHIR resource type allowed by the reference</title>identifier</a> : <a id="n47" xlink:href="#Identifier">Identifier</a> [0..1]</text><text x="6.0" y="84.0" id="n51" fill="black" class="diagram-class-detail"><a id="n52" xlink:href="references-definitions.html#Reference.display"><title>Plain text narrative that identifies the resource in addition to the resource reference</title>display</a> : <a id="n53" xlink:href="#string">string</a> [0..1]</text></g></svg>
+The type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. "Patient" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources)</title>type</a> : <a id="n37" xlink:href="#uri">uri</a> [0..1] « <a id="n38" xlink:href="valueset-resource-types.html"><title id="n39">Aa resource (or, for logical models, the URI of the logical model). (Strength=Extensible)</title>ResourceType</a>+ »</text><text x="146.0" y="70.0" id="n45" fill="black" class="diagram-class-detail"><a id="n46" xlink:href="references-definitions.html#Reference.identifier"><title>An identifier for the target resource. This is used when there is no way to reference the other resource directly, either because the entity it represents is not available through a FHIR server, or because there is no way for the author of the resource to convert a known identifier to an actual location. There is no requirement that a Reference.identifier point to something that is actually exposed as a FHIR instance, but it SHALL point to a business concept that would be expected to be exposed as a FHIR instance, and that instance would need to be of a FHIR resource type allowed by the reference</title>identifier</a> : <a id="n47" xlink:href="#Identifier">Identifier</a> [0..1]</text><text x="146.0" y="84.0" id="n51" fill="black" class="diagram-class-detail"><a id="n52" xlink:href="references-definitions.html#Reference.display"><title>Plain text narrative that identifies the resource in addition to the resource reference</title>display</a> : <a id="n53" xlink:href="#string">string</a> [0..1]</text></g><line y1="63.20050761421319" x1="114.4" y2="58.81472081218273" x2="140.0" style="stroke:navy;stroke-width:1" id="n57"></line><polygon transform="rotate(-9.721524048481587 114.4 63.20050761421319)" style="fill:white;stroke:navy;stroke-width:1" id="n58" points="114.4,63.20050761421319 122.4,69.2005076142132 122.4,57.20050761421319 114.4,63.20050761421319"></polygon></svg>
    </div>
   </div>
  </div>
@@ -320,16 +320,16 @@ The type is the Canonical URL of Resource Definition that is the type this refer
    <a name="uml-Reference"> </a>
    <p><b>UML Diagram</b> (<a href="formats.html#uml">Legend</a>)</p>
    <div id="uml-inner">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="349.6" id="n15" version="1.1" height="112.0">  <defs>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="489.6" id="n15" version="1.1" height="112.0">  <defs>
     <filter x="0" width="200%" y="0" id="shadow1b" height="200%">
       <feOffset result="offOut" dx="3" in="SourceGraphic" dy="3"></feOffset>
       <feColorMatrix result="matrixOut" in="offOut" values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" type="matrix"></feColorMatrix>
       <feGaussianBlur result="blurOut" stdDeviation="2" in="matrixOut"></feGaussianBlur>
       <feBlend mode="normal" in="SourceGraphic" in2="blurOut"></feBlend>
     </filter>
-  </defs><g id="n16"><rect filter="url(#shadow1b)" rx="4" ry="4" x="70.0" width="114.4" y="50.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n17" height="46.0"></rect><text x="127.2" y="70.0" id="n18" fill="black" class="diagram-class-title"><a id="n19" xlink:href="element.html#Element">Element</a></text><line y1="78.0" x1="70.0" y2="78.0" x2="184.4" style="stroke:dimgrey;stroke-width:1" id="n20"></line><text x="76.0" y="92.0" fill="black" class="diagram-class-detail"><a id="n21" xlink:href="extensibility.html"><title id="n22">Extensions - as described for all elements: additional information that is not part of the basic definition of the resource / type</title>extension</a> : <a id="n23" xlink:href="extensibility.html">Extension</a> 0..*</text></g><g id="n24"><rect filter="url(#shadow1b)" rx="4" ry="4" x="0.0" width="149.60000000000002" y="0.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n25" height="92.0"></rect><line y1="28.0" x1="0.0" y2="28.0" x2="149.60000000000002" style="stroke:dimgrey;stroke-width:1" id="n26"></line><text x="74.80000000000001" y="20.0" id="n27" fill="black" class="diagram-class-title"><a id="n28" xlink:href="references.html#Reference">Reference</a></text><text x="6.0" y="42.0" id="n29" fill="black" class="diagram-class-detail"><a id="n30" xlink:href="references-definitions.html#Reference.reference"><title>A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources</title>reference</a> : <a id="n31" xlink:href="#string">string</a> [0..1]</text><text x="6.0" y="56.0" id="n35" fill="black" class="diagram-class-detail"><a id="n36" xlink:href="references-definitions.html#Reference.type"><title>The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.
+  </defs><g id="n16"><rect filter="url(#shadow1b)" rx="4" ry="4" x="0.0" width="114.4" y="50.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n17" height="46.0"></rect><text x="57.2" y="70.0" id="n18" fill="black" class="diagram-class-title"><a id="n19" xlink:href="element.html#Element">Element</a></text><line y1="78.0" x1="0.0" y2="78.0" x2="114.4" style="stroke:dimgrey;stroke-width:1" id="n20"></line><text x="6.0" y="92.0" fill="black" class="diagram-class-detail"><a id="n21" xlink:href="extensibility.html"><title id="n22">Extensions - as described for all elements: additional information that is not part of the basic definition of the resource / type</title>extension</a> : <a id="n23" xlink:href="extensibility.html">Extension</a> 0..*</text></g><g id="n24"><rect filter="url(#shadow1b)" rx="4" ry="4" x="140.0" width="149.60000000000002" y="0.0" style="fill:#ecffec;stroke:black;stroke-width:1" id="n25" height="92.0"></rect><line y1="28.0" x1="140.0" y2="28.0" x2="289.6" style="stroke:dimgrey;stroke-width:1" id="n26"></line><text x="214.8" y="20.0" id="n27" fill="black" class="diagram-class-title"><a id="n28" xlink:href="references.html#Reference">Reference</a></text><text x="146.0" y="42.0" id="n29" fill="black" class="diagram-class-detail"><a id="n30" xlink:href="references-definitions.html#Reference.reference"><title>A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources</title>reference</a> : <a id="n31" xlink:href="#string">string</a> [0..1]</text><text x="146.0" y="56.0" id="n35" fill="black" class="diagram-class-detail"><a id="n36" xlink:href="references-definitions.html#Reference.type"><title>The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.
 
-The type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. "Patient" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources)</title>type</a> : <a id="n37" xlink:href="#uri">uri</a> [0..1] « <a id="n38" xlink:href="valueset-resource-types.html"><title id="n39">Aa resource (or, for logical models, the URI of the logical model). (Strength=Extensible)</title>ResourceType</a>+ »</text><text x="6.0" y="70.0" id="n45" fill="black" class="diagram-class-detail"><a id="n46" xlink:href="references-definitions.html#Reference.identifier"><title>An identifier for the target resource. This is used when there is no way to reference the other resource directly, either because the entity it represents is not available through a FHIR server, or because there is no way for the author of the resource to convert a known identifier to an actual location. There is no requirement that a Reference.identifier point to something that is actually exposed as a FHIR instance, but it SHALL point to a business concept that would be expected to be exposed as a FHIR instance, and that instance would need to be of a FHIR resource type allowed by the reference</title>identifier</a> : <a id="n47" xlink:href="#Identifier">Identifier</a> [0..1]</text><text x="6.0" y="84.0" id="n51" fill="black" class="diagram-class-detail"><a id="n52" xlink:href="references-definitions.html#Reference.display"><title>Plain text narrative that identifies the resource in addition to the resource reference</title>display</a> : <a id="n53" xlink:href="#string">string</a> [0..1]</text></g></svg>
+The type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. "Patient" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources)</title>type</a> : <a id="n37" xlink:href="#uri">uri</a> [0..1] « <a id="n38" xlink:href="valueset-resource-types.html"><title id="n39">Aa resource (or, for logical models, the URI of the logical model). (Strength=Extensible)</title>ResourceType</a>+ »</text><text x="146.0" y="70.0" id="n45" fill="black" class="diagram-class-detail"><a id="n46" xlink:href="references-definitions.html#Reference.identifier"><title>An identifier for the target resource. This is used when there is no way to reference the other resource directly, either because the entity it represents is not available through a FHIR server, or because there is no way for the author of the resource to convert a known identifier to an actual location. There is no requirement that a Reference.identifier point to something that is actually exposed as a FHIR instance, but it SHALL point to a business concept that would be expected to be exposed as a FHIR instance, and that instance would need to be of a FHIR resource type allowed by the reference</title>identifier</a> : <a id="n47" xlink:href="#Identifier">Identifier</a> [0..1]</text><text x="146.0" y="84.0" id="n51" fill="black" class="diagram-class-detail"><a id="n52" xlink:href="references-definitions.html#Reference.display"><title>Plain text narrative that identifies the resource in addition to the resource reference</title>display</a> : <a id="n53" xlink:href="#string">string</a> [0..1]</text></g><line y1="63.20050761421319" x1="114.4" y2="58.81472081218273" x2="140.0" style="stroke:navy;stroke-width:1" id="n57"></line><polygon transform="rotate(-9.721524048481587 114.4 63.20050761421319)" style="fill:white;stroke:navy;stroke-width:1" id="n58" points="114.4,63.20050761421319 122.4,69.2005076142132 122.4,57.20050761421319 114.4,63.20050761421319"></polygon></svg>
    </div>
   </div>
 
@@ -443,8 +443,8 @@ In resources, a <code>Reference</code> always point to another resource, which h
 a fixed and known type. If appropriate, this type can be specified in the reference
 itself. In principle, the type of the target reference can be determined by resolving 
 the reference (using the approaches described below), and examining the content 
-returned to determine the type; for this reason specifying the type is almost always 
-duplication of information. However resolving references may be a very slow 
+returned to determine the type; for this reason, specifying the type is almost always 
+duplication of information. However, resolving references may be a very slow 
 operation, or impossible in practice due to various practical concerns. For this 
 reason, the reference may indicate directly the target resource type:
 </p>
@@ -495,14 +495,14 @@ Notes:
    Whether or not the reference is to a FHIR RESTful server, the reference SHALL point to a Resource as defined by this specification.
    <br/>Note that This regex is true if the reference to a resource is consistent with a FHIR API:
    <pre>
-   ((http|https):\/\/([A-Za-z0-9\-\\\.\:\%\$]*\/)+)?(Account|ActivityDefinition|AdverseEvent|AllergyIntolerance|Appointment|AppointmentResponse|AuditEvent|Basic|Binary|BiologicallyDerivedProduct|BodyStructure|Bundle|CapabilityStatement|CarePlan|CareTeam|CatalogEntry|ChargeItem|ChargeItemDefinition|Claim|ClaimResponse|ClinicalImpression|ClinicalProfile|CodeSystem|Communication|CommunicationRequest|CompartmentDefinition|Composition|ConceptMap|Condition|Consent|Contract|Coverage|CoverageEligibilityRequest|CoverageEligibilityResponse|DetectedIssue|Device|DeviceDefinition|DeviceMetric|DeviceRequest|DeviceUseStatement|DiagnosticReport|DocumentManifest|DocumentReference|EffectEvidenceSynthesis|Encounter|Endpoint|EnrollmentRequest|EnrollmentResponse|EpisodeOfCare|EventDefinition|Evidence|EvidenceVariable|ExampleScenario|ExplanationOfBenefit|FamilyMemberHistory|Flag|Goal|GraphDefinition|Group|GuidanceResponse|HealthcareService|ImagingStudy|Immunization|ImmunizationEvaluation|ImmunizationRecommendation|ImplementationGuide|InsurancePlan|Invoice|ItemInstance|Library|Linkage|List|Location|Measure|MeasureReport|Media|Medication|MedicationAdministration|MedicationDispense|MedicationKnowledge|MedicationRequest|MedicationStatement|MedicinalProduct|MedicinalProductAuthorization|MedicinalProductContraindication|MedicinalProductIndication|MedicinalProductIngredient|MedicinalProductInteraction|MedicinalProductManufactured|MedicinalProductPackaged|MedicinalProductPharmaceutical|MedicinalProductUndesirableEffect|MessageDefinition|MessageHeader|MolecularSequence|NamingSystem|NutritionOrder|Observation|ObservationDefinition|OperationDefinition|OperationOutcome|Organization|OrganizationAffiliation|Patient|PaymentNotice|PaymentReconciliation|Person|PlanDefinition|Practitioner|PractitionerRole|Procedure|Provenance|Questionnaire|QuestionnaireResponse|RelatedPerson|RequestGroup|ResearchDefinition|ResearchElementDefinition|ResearchStudy|ResearchSubject|RiskAssessment|RiskEvidenceSynthesis|Schedule|SearchParameter|ServiceRequest|Slot|Specimen|SpecimenDefinition|StructureDefinition|StructureMap|Subscription|Substance|SubstanceNucleicAcid|SubstancePolymer|SubstanceProtein|SubstanceReferenceInformation|SubstanceSourceMaterial|SubstanceSpecification|SupplyDelivery|SupplyRequest|Task|TerminologyCapabilities|TestReport|TestScript|ValueSet|VerificationResult|VisionPrescription)\/[A-Za-z0-9\-\.]{1,64}(\/_history\/[A-Za-z0-9\-\.]{1,64})?
+   ((http|https):\/\/([A-Za-z0-9\-\\\.\:\%\$]*\/)+)?(Account|ActivityDefinition|AdverseEvent|AllergyIntolerance|Appointment|AppointmentResponse|AuditEvent|Basic|Binary|BiologicallyDerivedProduct|BodyStructure|Bundle|CapabilityStatement|CarePlan|CareTeam|CatalogEntry|ChargeItem|ChargeItemDefinition|Claim|ClaimResponse|ClinicalImpression|ClinicalProfile|CodeSystem|Communication|CommunicationRequest|CompartmentDefinition|Composition|ConceptMap|Condition|Consent|Contract|Coverage|CoverageEligibilityRequest|CoverageEligibilityResponse|DetectedIssue|Device|DeviceDefinition|DeviceMetric|DeviceRequest|DeviceUseStatement|DiagnosticReport|DocumentManifest|DocumentReference|EffectEvidenceSynthesis|Encounter|Endpoint|EnrollmentRequest|EnrollmentResponse|EpisodeOfCare|EventDefinition|Evidence|EvidenceVariable|ExampleScenario|ExplanationOfBenefit|FamilyMemberHistory|Flag|Goal|GraphDefinition|Group|GuidanceResponse|HealthcareService|ImagingStudy|Immunization|ImmunizationEvaluation|ImmunizationRecommendation|ImplementationGuide|InsurancePlan|Invoice|Library|Linkage|List|Location|Measure|MeasureReport|Media|Medication|MedicationAdministration|MedicationDispense|MedicationKnowledge|MedicationRequest|MedicationStatement|MedicinalProduct|MedicinalProductAuthorization|MedicinalProductContraindication|MedicinalProductIndication|MedicinalProductIngredient|MedicinalProductInteraction|MedicinalProductManufactured|MedicinalProductPackaged|MedicinalProductPharmaceutical|MedicinalProductUndesirableEffect|MessageDefinition|MessageHeader|MolecularSequence|NamingSystem|NutritionOrder|Observation|ObservationDefinition|OperationDefinition|OperationOutcome|Organization|OrganizationAffiliation|Patient|PaymentNotice|PaymentReconciliation|Person|PlanDefinition|Practitioner|PractitionerRole|Procedure|Provenance|Questionnaire|QuestionnaireResponse|RelatedPerson|RequestGroup|ResearchDefinition|ResearchElementDefinition|ResearchStudy|ResearchSubject|RiskAssessment|RiskEvidenceSynthesis|Schedule|SearchParameter|ServiceRequest|Slot|Specimen|SpecimenDefinition|StructureDefinition|StructureMap|Subscription|Substance|SubstanceNucleicAcid|SubstancePolymer|SubstanceProtein|SubstanceReferenceInformation|SubstanceSourceMaterial|SubstanceSpecification|SupplyDelivery|SupplyRequest|Task|TerminologyCapabilities|TestReport|TestScript|ValueSet|VerificationResult|VisionPrescription)\/[A-Za-z0-9\-\.]{1,64}(\/_history\/[A-Za-z0-9\-\.]{1,64})?
    </pre>
    <br/>
-   However conformance with this regex is no guarantee that the end-point is a FHIR server
+   However, conformance with this regex is no guarantee that the end-point is a FHIR server
    </li>
  <li>URLs are always considered to be case-sensitive</li>
  <li>The URL may contain a reference to a canonical URL (see below) and applications can use the canonical URL resolution methods they support when resolving references, though the <code>|[version]</code> syntax part of the canonical reference is not supported</li>
- <li>References SHALL be a reference to an actual FHIR resource, and SHALL be resolveable (given that access control works, there is no temporary unavailability, etc). Resolution can be either by retrieval from the URL, or, where applicable by resource type, by treating an absolute reference as a canonical URL (<a href="#canonical">see below</a>) and looking it up in a local registry/repository</li>
+ <li>References SHALL be a reference to an actual FHIR resource, and SHALL be resolvable (given that access control works, there is no temporary unavailability, etc.). Resolution can be either by retrieval from the URL, or, where applicable by resource type, by treating an absolute reference as a canonical URL (<a href="#canonical">see below</a>) and looking it up in a local registry/repository</li>
 </ul>
 <div class="example">
 <p>A relative reference to the <a href="patient.html">Patient</a> "034AB16" in an element named <code>subject</code> on a FHIR RESTful server:</p>
@@ -528,7 +528,7 @@ replaces the logical URL with what is the correct literal URL at the completion 
 </p>
 
 <p>
-<a name="versions"></a>References are allowed to be version specific - that is, a reference may point to a specific version of a resource. e.g. :
+<a name="versions"></a>References can be version specific - that is, a reference may point to a specific version of a resource. e.g.:
 </p>
 <pre fragment="Reference" class="xml">
   &lt;target&gt;
@@ -537,7 +537,7 @@ replaces the logical URL with what is the correct literal URL at the completion 
 </pre>
 <p>
 This is usually associated with audit trail or provenance information where it is important to 
-reference a particular version of a record, not the most current information. 
+reference a specific version of a record, not the most current information. 
 </p>
 
 <a name="logical"></a>
@@ -607,7 +607,7 @@ matches the literal reference, if they understand how to resolve the logical ref
 </p>
 <p>
 Applications converting a logical reference to a literal reference may choose to leave the
-logical reference present, or remove it.
+logical reference present; or may remove it.
 </p>
 
 <a name="display"></a>
@@ -628,7 +628,7 @@ target resource.
 <p>
 This text can be used by any application that cannot resolve the reference
 to fill out the text portion of a hyperlink referring to the target resource, for instance.
-It can also save time fetching a target resource, and determining how to convert it to
+It can also save time fetching a target resource and determining how to convert it to
 a very short textual description.
 </p>
 </div>
@@ -734,7 +734,7 @@ which is shown as canonical(Any) in this specification. Such references SHALL on
 <a name="canonical-fragments"></a>
 <h3 class="self-link-parent"><span class="sectioncount">2.3.0.6</span> Canonical Reference and Fragments <a href="references.html#canonical-fragments" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 <p>
-Canonical references may include a fragment when the reference is to a contained Contained Resources.
+Canonical references may include a fragment when the reference is to a contained resource.
 When the target of a canonical reference is a contained resource, the 
 canonical reference will have a fragment as part of the URL:
 </p>
@@ -755,7 +755,7 @@ Which is the form for references to the contained value set inside the above exa
 <a name="rendering"></a>
 <h3 class="self-link-parent"><span class="sectioncount">2.3.0.7</span> Rendering References in Resource Narratives <a href="references.html#rendering" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 <p>
-References between resources create a particular challenge when rendering resource
+References between resources create a challenge when rendering resource
 narratives: the narrative includes information from the target resources. As an example,
 consider an Observation with a patient reference:
 </p>
@@ -810,7 +810,7 @@ be generated like this:
 </pre>
 </div>
 <p>
-However users generally prefer a more informative narrative, so this 
+However, users generally prefer a more informative narrative, so this 
 is not always acceptable. 
 </p>
 <p>
@@ -930,7 +930,7 @@ Some notes about use and interpretation of contained resources:
   <li>Both <code>Reference</code> and <code>canonical</code> types may refer to contained resources</li>
   <li>Contained resources SHALL NOT contain additional contained resources.</li>
   <li>Contained resources SHALL NOT contain <code>meta.versionId</code>, <code>meta.lastUpdated</code>, or <code>meta.security</code>.</li>
-  <li>Contained resources MAY contain <code>meta.tag</code>, though there are many tags that do not make sense on a contained resources.</li>
+  <li>Contained resources MAY contain <code>meta.tag</code>, though there are many tags that do not make sense on contained resources.</li>
   <li>A contained resource SHALL only be included in a resource if something in that resource (potentially another contained resource) has a reference to it.</li>
 </ul>
 
@@ -997,7 +997,7 @@ There are several reasons why a resource may refer to other resources of the sam
  <li>part-of: the resources describe a complex hierarchy composed of parts e.g. an organization structure</li>
  <li>builds-on: resources may add additional content to another resource by deriving from it e.g. extending type declarations</li>
  <li>replaces: one resource may be replaced by another due to changes over time e.g. replacing a prescription or to support patient merging </li>
- <li>uses/re-uses: a resource may use another resource in some kind of modular arrangement e.g. library references or value sets including other value sets</li>
+ <li>uses/re-uses: a resource may use another resource in a modular arrangement e.g. library references or value sets including other value sets</li>
 </ul>
 <p>
 For parameters where the relationship is a strict hierarchy (i.e. where it would be wrong to have circular
@@ -1037,15 +1037,14 @@ References for which the hierarchical behavior is not specified:
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Freferences.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Freferences.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Freferences.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Freferences.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Freferences.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Freferences.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

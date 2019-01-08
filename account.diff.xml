@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <difference>
    <type name="Account" status="changed">
-      <element binding-codes-changed="true"
-               binding-status="changed"
+      <element binding-status="changed"
+               binding-valueset-changed="true"
                new-min="1"
                old-min="0"
                path="Account.status">
-         <added-code code="on-hold"/>
-         <added-code code="unknown"/>
          <old-binding reference="http://hl7.org/fhir/ValueSet/account-status"
                       strength="required"/>
-         <new-binding reference="http://hl7.org/fhir/ValueSet/account-status"
+         <new-binding reference="http://hl7.org/fhir/ValueSet/account-status|4.0.0"
                       strength="required"/>
       </element>
-      <element new-max="*" old-max="1" path="Account.subject"/>
+      <element new-max="*" old-max="1" path="Account.subject">
+         <removed-type name="Reference(Patient | Device | Practitioner | Location | HealthcareService | Organization)"/>
+         <added-type name="Reference(Patient | Device | Practitioner | PractitionerRole | Location | HealthcareService | Organization)"/>
+      </element>
       <element old-name="period" path="Account.servicePeriod"/>
       <element path="Account.partOf" status="new"/>
       <element path="Account.active" status="deleted"/>

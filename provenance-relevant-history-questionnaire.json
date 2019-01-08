@@ -1,31 +1,10 @@
 {
   "resourceType" : "Questionnaire",
   "id" : "qs1",
-  "contained" : [{
-    "resourceType" : "ValueSet",
-    "id" : "vs2",
-    "name" : "Type options for Provenance.occurred[x]",
-    "status" : "active",
-    "description" : "Type options for Provenance.occurred[x]",
-    "expansion" : {
-      "identifier" : "urn:uuid:3bb7b1e5-2a5c-40f1-937a-1999668c4de2",
-      "timestamp" : "2018-12-13T14:27:25-06:00",
-      "contains" : [{
-        "system" : "http://hl7.org/fhir/data-types",
-        "code" : "Period",
-        "display" : "Period"
-      },
-      {
-        "system" : "http://hl7.org/fhir/data-types",
-        "code" : "dateTime",
-        "display" : "dateTime"
-      }]
-    }
-  }],
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
-  "version" : "3.6.0",
+  "version" : "4.0.0",
   "status" : "draft",
   "date" : "2013-12-03T00:00:00-06:00",
   "publisher" : "Health Level Seven International",
@@ -322,9 +301,12 @@
       {
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
         "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "datetime"
       }],
-      "linkId" : "Provenance.occurred[x]",
-      "text" : "When the activity occurred",
+      "linkId" : "Provenance.occurredDateTime",
       "type" : "group",
       "required" : true,
       "repeats" : true,
@@ -343,48 +325,11 @@
         "type" : "display"
       },
       {
-        "linkId" : "Provenance.occurred[x]._type",
-        "text" : "type",
-        "type" : "choice",
+        "linkId" : "Provenance.occurredDateTime.value",
+        "text" : "When the activity occurred",
+        "type" : "dateTime",
         "required" : false,
-        "repeats" : false,
-        "answerValueSet" : "#vs2",
-        "item" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "Period"
-          }],
-          "linkId" : "Provenance.occurred[x]._null",
-          "type" : "group",
-          "item" : [{
-            "linkId" : "Provenance.occurred[x]._null.low",
-            "text" : "start:",
-            "type" : "dateTime",
-            "required" : false,
-            "repeats" : false
-          },
-          {
-            "linkId" : "Provenance.occurred[x]._null.end",
-            "text" : "end:",
-            "type" : "dateTime",
-            "required" : false,
-            "repeats" : false
-          }]
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "datetime"
-          }],
-          "linkId" : "Provenance.occurred[x]._null",
-          "type" : "group",
-          "item" : [{
-            "linkId" : "Provenance.occurred[x]._null.value",
-            "type" : "dateTime",
-            "required" : false,
-            "repeats" : false
-          }]
-        }]
+        "repeats" : false
       }]
     },
     {

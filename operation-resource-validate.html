@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Operation-resource-validate - FHIR v3.6.0</title>
+  <title>Operation-resource-validate - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -126,7 +126,7 @@ This is the narrative for the resource. See also the <a href="operation-resource
 <p>Modes update and delete can only be used when the operation is invoked at the resource instance level.   The return from this operation is an <a href="operationoutcome.html">OperationOutcome</a></p>
 <p>Note that this operation is not the only way to validate resources - see <a href="validation.html">Validating Resources</a> for further information.</p>
 </div><p>URL: [base]/Resource/$validate</p><p>URL: [base]/Resource/[id]/$validate</p><p>Parameters</p><table class="grid"><tr><td><b>Use</b></td><td><b>Name</b></td><td><b>Cardinality</b></td><td><b>Type</b></td><td><b>Binding</b></td><td><b>Documentation</b></td></tr><tr><td>IN</td><td>resource</td><td>0..1</td><td><a href="resource.html">Resource</a></td><td></td><td><div><p>Must be present unless the mode is "delete"</p>
-</div></td></tr><tr><td>IN</td><td>mode</td><td>0..1</td><td><a href="datatypes.html#code">code</a></td><td><a href="valueset-resource-validation-mode.html">http://hl7.org/fhir/ValueSet/resource-validation-mode</a> (Required)</td><td><div><p>Default is 'no action'; (e.g. general validation)</p>
+</div></td></tr><tr><td>IN</td><td>mode</td><td>0..1</td><td><a href="datatypes.html#code">code</a></td><td><a href="valueset-resource-validation-mode.html">http://hl7.org/fhir/ValueSet/resource-validation-mode|4.0.0</a> (Required)</td><td><div><p>Default is 'no action'; (e.g. general validation)</p>
 </div></td></tr><tr><td>IN</td><td>profile</td><td>0..1</td><td><a href="datatypes.html#uri">uri</a></td><td></td><td><div><p>If this is nominated, then the resource is validated against this specific profile. If a profile is nominated, and the server cannot validate against the nominated profile, it SHALL return an error</p>
 </div></td></tr><tr><td>OUT</td><td>return</td><td>1..1</td><td><a href="operationoutcome.html">OperationOutcome</a></td><td></td><td><div><p>If the operation outcome does not list any errors, and a mode was specified, then this is an indication that the operation would be expected to succeed (excepting for transactional integrity issues, see below)</p>
 </div></td></tr></table><div><p>This operation may be used during design and development to validate application design. It can also be used at run-time. One possible use might be that a client asks the server whether a proposed update is valid as the user is editing a dialog and displays an updated error to the user. The operation can be used as part of a light-weight two phase commit protocol but there is no expectation that the server will hold the content of the resource after this operation is used, or that the server guarantees to successfully perform an actual create, update or delete after the validation operation completes.</p>
@@ -170,15 +170,14 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:26-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:29-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Foperation-resource-validate.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperation-resource-validate.html">Compare to DSTU3</a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Foperation-resource-validate.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperation-resource-validate.html">Ballot Comparison</a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Foperation-resource-validate.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Foperation-resource-validate.html">Compare to R3</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
                <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>

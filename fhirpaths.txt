@@ -37,7 +37,7 @@ DomainResource (ElementDefinition): defaultValue.empty() or meaningWhenMissing.e
 DomainResource (ElementDefinition): sliceName.empty() or sliceName.matches('^[a-zA-Z0-9\\/\\-_\\[\\]\\@]+$')
 DomainResource (ElementDefinition.type): (code='Reference' or code = 'canonical') or targetProfile.empty()
 DomainResource (ElementDefinition): isModifier implies isModifierReason.exists()
-DomainResource (ElementDefinition): path.matches('[^\\s#\\/]+')
+DomainResource (ElementDefinition): path.matches('[^\\s\\.,:;\\\'"\\/|?!@#$%&*()\\[\\]{}]{1,64}(\\.[^\\s\\.,:;\\\'"\\/|?!@#$%&*()\\[\\]{}]{1,64}(\\[x\\])?(\\:[^\\s\\.]+)?)*')
 DomainResource (ElementDefinition.slicing): discriminator.exists() or description.exists()
 DomainResource (ElementDefinition): min.empty() or max.empty() or (max = '*') or iif(max != '*', min <= max.toInteger())
 DomainResource (ElementDefinition.max): empty() or ($this = '*') or (toInteger() >= 0)
@@ -160,7 +160,7 @@ StructureDefinition (StructureDefinition): snapshot.element.all(id) and snapshot
 StructureDefinition (StructureDefinition): differential.element.all(id) and differential.element.id.trace('ids').isDistinct()
 StructureDefinition (StructureDefinition): contextInvariant.exists() implies type = 'Extension'
 StructureDefinition (StructureDefinition): url.startsWith('http://hl7.org/fhir/StructureDefinition') implies (differential.element.type.code.all(hasValue() implies matches('^[a-zA-Z0-9]+$')) and snapshot.element.type.code.all(hasValue() implies matches('^[a-zA-Z0-9]+$')))
-StructureDefinition (StructureDefinition.differential): element.first().path.startsWith(%resource.type) and (element.tail().not() or element.tail().all(path.startsWith(%resource.type&'.')))
+StructureDefinition (StructureDefinition.differential): (%resource.kind = 'logical' or element.first().path.startsWith(%resource.type)) and (element.tail().not() or  element.tail().all(path.startsWith(%resource.differential.element.first().path.replaceMatches('\\..*','')&'.')))
 StructureDefinition (StructureDefinition.snapshot): element.all(base.exists())
 StructureDefinition (StructureDefinition): derivation = 'constraint' or snapshot.element.select(path).isDistinct()
 StructureDefinition (StructureDefinition.mapping): name.exists() or uri.exists()
@@ -168,7 +168,7 @@ StructureDefinition (StructureDefinition.snapshot): element.all(definition.exist
 StructureDefinition (StructureDefinition): abstract = true or baseDefinition.exists()
 StructureDefinition (StructureDefinition): type != 'Extension' or derivation = 'specialization' or (context.exists())
 StructureDefinition (StructureDefinition): snapshot.exists() or differential.exists()
-StructureDefinition (StructureDefinition.snapshot): element.first().path = %resource.type and element.tail().all(path.startsWith(%resource.type&'.'))
+StructureDefinition (StructureDefinition.snapshot): (%resource.kind = 'logical' or element.first().path = %resource.type) and element.tail().all(path.startsWith(%resource.snapshot.element.first().path&'.'))
 StructureDefinition (StructureDefinition): children().element.where(path.contains('.').not()).label.empty() and children().element.where(path.contains('.').not()).code.empty() and children().element.where(path.contains('.').not()).requirements.empty()
 StructureDefinition (StructureDefinition): (kind!='logical'  and differential.element.first().path.contains('.').not()) implies differential.element.first().type.empty()
 StructureDefinition (StructureDefinition.differential): element.where(path.contains('.').not()).slicing.empty()
@@ -209,7 +209,7 @@ TerminologyCapabilities (TerminologyCapabilities): (kind != 'instance') or imple
 TerminologyCapabilities (TerminologyCapabilities): (kind != 'capability') or (implementation.exists().not() and software.exists())
 TerminologyCapabilities (TerminologyCapabilities): (kind!='requirements') or (implementation.exists().not() and software.exists().not())
 InsurancePlan (InsurancePlan): (identifier.count() + name.count()) > 0
-Account (Account): Account.owner.where(resolve() is Organization)
+Account (Account): Account.owner
 Account (Account): Account.identifier
 Account (Account): Account.servicePeriod
 Account (Account): Account.subject
@@ -278,7 +278,7 @@ Appointment (Appointment): Appointment.serviceType
 Appointment (Appointment): Appointment.slot
 Appointment (Appointment): Appointment.reasonCode
 Appointment (Appointment): Appointment.participant.actor
-Appointment (Appointment): Appointment.basedOn.where(resolve() is ServiceRequest)
+Appointment (Appointment): Appointment.basedOn
 Appointment (Appointment): Appointment.participant.actor.where(resolve() is Patient)
 Appointment (Appointment): Appointment.reasonReference
 Appointment (Appointment): Appointment.supportingInformation
@@ -450,9 +450,9 @@ ClinicalImpression (ClinicalImpression): ClinicalImpression.investigation.item
 ClinicalImpression (ClinicalImpression): ClinicalImpression.status
 ClinicalProfile (ClinicalProfile): ClinicalProfile.date
 ClinicalProfile (ClinicalProfile): ClinicalProfile.identifier
-ClinicalProfile (ClinicalProfile): ClinicalProfile.cohort.where(resolve() is Group)
+ClinicalProfile (ClinicalProfile): ClinicalProfile.cohort
 ClinicalProfile (ClinicalProfile): ClinicalProfile.reporter
-ClinicalProfile (ClinicalProfile): ClinicalProfile.population.where(resolve() is Group)
+ClinicalProfile (ClinicalProfile): ClinicalProfile.population
 ClinicalProfile (ClinicalProfile): ClinicalProfile.status
 CodeSystem (CodeSystem): CodeSystem.date
 CodeSystem (CodeSystem): CodeSystem.identifier
@@ -589,7 +589,7 @@ Consent (Consent): Consent.identifier
 Consent (Consent): Consent.provision.period
 Consent (Consent): Consent.provision.data.reference
 Consent (Consent): Consent.provision.purpose
-Consent (Consent): Consent.source.where(resolve() is Consent or resolve() is Contract or resolve() is QuestionnaireResponse or resolve() is DocumentReference)
+Consent (Consent): Consent.source
 Consent (Consent): Consent.provision.actor.reference
 Consent (Consent): Consent.provision.securityLabel
 Consent (Consent): Consent.patient
@@ -760,26 +760,26 @@ Encounter (Encounter): Encounter.participant.type
 Encounter (Encounter): Encounter.participant.individual.where(resolve() is Practitioner)
 Encounter (Encounter): Encounter.subject
 Encounter (Encounter): Encounter.length
-Encounter (Encounter): Encounter.episodeOfCare.where(resolve() is EpisodeOfCare)
+Encounter (Encounter): Encounter.episodeOfCare
 Encounter (Encounter): Encounter.diagnosis.condition
-Encounter (Encounter): Encounter.appointment.where(resolve() is Appointment)
-Encounter (Encounter): Encounter.partOf.where(resolve() is Encounter)
+Encounter (Encounter): Encounter.appointment
+Encounter (Encounter): Encounter.partOf
 Encounter (Encounter): Encounter.type
 Encounter (Encounter): Encounter.reasonCode
 Encounter (Encounter): Encounter.participant.individual
-Encounter (Encounter): Encounter.basedOn.where(resolve() is ServiceRequest)
+Encounter (Encounter): Encounter.basedOn
 Encounter (Encounter): Encounter.subject.where(resolve() is Patient)
 Encounter (Encounter): Encounter.reasonReference
 Encounter (Encounter): Encounter.location.period
-Encounter (Encounter): Encounter.location.location.where(resolve() is Location)
-Encounter (Encounter): Encounter.serviceProvider.where(resolve() is Organization)
+Encounter (Encounter): Encounter.location.location
+Encounter (Encounter): Encounter.serviceProvider
 Encounter (Encounter): Encounter.hospitalization.specialArrangement
 Encounter (Encounter): Encounter.class
-Encounter (Encounter): Encounter.account.where(resolve() is Account)
+Encounter (Encounter): Encounter.account
 Encounter (Encounter): Encounter.status
 Endpoint (Endpoint): Endpoint.payloadType
 Endpoint (Endpoint): Endpoint.identifier
-Endpoint (Endpoint): Endpoint.managingOrganization.where(resolve() is Organization)
+Endpoint (Endpoint): Endpoint.managingOrganization
 Endpoint (Endpoint): Endpoint.connectionType
 Endpoint (Endpoint): Endpoint.name
 Endpoint (Endpoint): Endpoint.status
@@ -792,13 +792,13 @@ EnrollmentResponse (EnrollmentResponse): EnrollmentResponse.request
 EnrollmentResponse (EnrollmentResponse): EnrollmentResponse.status
 EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.period
 EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.identifier
-EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.diagnosis.condition.where(resolve() is Condition)
-EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.patient.where(resolve() is Patient)
-EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.managingOrganization.where(resolve() is Organization)
+EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.diagnosis.condition
+EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.patient
+EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.managingOrganization
 EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.type
 EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.careManager.where(resolve() is Practitioner)
 EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.status
-EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.referralRequest.where(resolve() is ServiceRequest)
+EpisodeOfCare (EpisodeOfCare): EpisodeOfCare.referralRequest
 EventDefinition (EventDefinition): EventDefinition.date
 EventDefinition (EventDefinition): EventDefinition.identifier
 EventDefinition (EventDefinition): EventDefinition.relatedArtifact.where(type='successor').resource
@@ -898,7 +898,8 @@ ExplanationOfBenefit (ExplanationOfBenefit): ExplanationOfBenefit.status
 FamilyMemberHistory (FamilyMemberHistory): FamilyMemberHistory.date
 FamilyMemberHistory (FamilyMemberHistory): FamilyMemberHistory.identifier
 FamilyMemberHistory (FamilyMemberHistory): FamilyMemberHistory.condition.code
-FamilyMemberHistory (FamilyMemberHistory): FamilyMemberHistory.patient.where(resolve() is Patient)
+FamilyMemberHistory (FamilyMemberHistory): FamilyMemberHistory.patient
+FamilyMemberHistory (FamilyMemberHistory): FamilyMemberHistory.sex
 FamilyMemberHistory (FamilyMemberHistory): FamilyMemberHistory.instantiatesCanonical
 FamilyMemberHistory (FamilyMemberHistory): FamilyMemberHistory.instantiatesUri
 FamilyMemberHistory (FamilyMemberHistory): FamilyMemberHistory.relationship
@@ -939,7 +940,7 @@ Group (Group): Group.code
 Group (Group): Group.member.entity
 Group (Group): Group.characteristic.exclude
 Group (Group): Group.type
-Group (Group): Group.characteristic.value as CodeableConcept | Group.characteristic.value as boolean
+Group (Group): (Group.characteristic.value as CodeableConcept) | (Group.characteristic.value as boolean)
 Group (Group): Group.characteristic.code
 GuidanceResponse (GuidanceResponse): GuidanceResponse.requestIdentifier
 GuidanceResponse (GuidanceResponse): GuidanceResponse.identifier
@@ -966,7 +967,9 @@ ImagingStudy (ImagingStudy): ImagingStudy.series.instance.uid
 ImagingStudy (ImagingStudy): ImagingStudy.series.performer.actor
 ImagingStudy (ImagingStudy): ImagingStudy.subject
 ImagingStudy (ImagingStudy): ImagingStudy.started
+ImagingStudy (ImagingStudy): ImagingStudy.interpreter
 ImagingStudy (ImagingStudy): ImagingStudy.encounter
+ImagingStudy (ImagingStudy): ImagingStudy.referrer
 ImagingStudy (ImagingStudy): ImagingStudy.endpoint | ImagingStudy.series.endpoint
 ImagingStudy (ImagingStudy): ImagingStudy.subject.where(resolve() is Patient)
 ImagingStudy (ImagingStudy): ImagingStudy.series.uid
@@ -1048,7 +1051,6 @@ Invoice (Invoice): Invoice.subject.where(resolve() is Patient)
 Invoice (Invoice): Invoice.recipient
 Invoice (Invoice): Invoice.account
 Invoice (Invoice): Invoice.status
-ItemInstance (ItemInstance): ItemInstance.subject
 Library (Library): Library.date
 Library (Library): Library.identifier
 Library (Library): Library.relatedArtifact.where(type='successor').resource
@@ -1243,6 +1245,7 @@ MedicinalProductPharmaceutical (MedicinalProductPharmaceutical): MedicinalProduc
 MedicinalProductUndesirableEffect (MedicinalProductUndesirableEffect): MedicinalProductUndesirableEffect.subject
 MessageDefinition (MessageDefinition): MessageDefinition.date
 MessageDefinition (MessageDefinition): MessageDefinition.identifier
+MessageDefinition (MessageDefinition): MessageDefinition.parent
 MessageDefinition (MessageDefinition): MessageDefinition.useContext
 MessageDefinition (MessageDefinition): MessageDefinition.jurisdiction
 MessageDefinition (MessageDefinition): MessageDefinition.description
@@ -1274,14 +1277,18 @@ MessageHeader (MessageHeader): MessageHeader.enterer
 MessageHeader (MessageHeader): MessageHeader.response.identifier
 MessageHeader (MessageHeader): MessageHeader.event
 MolecularSequence (MolecularSequence): MolecularSequence.identifier
-MolecularSequence (MolecularSequence): MolecularSequence
-MolecularSequence (MolecularSequence): MolecularSequence.patient
+MolecularSequence (MolecularSequence): MolecularSequence.variant
 MolecularSequence (MolecularSequence): MolecularSequence.referenceSeq.chromosome
-MolecularSequence (MolecularSequence): MolecularSequence.referenceSeq.windowStart
 MolecularSequence (MolecularSequence): MolecularSequence.referenceSeq.windowEnd
-MolecularSequence (MolecularSequence): MolecularSequence.referenceSeq.referenceSeqId
 MolecularSequence (MolecularSequence): MolecularSequence.type
-MolecularSequence (MolecularSequence): MolecularSequence
+MolecularSequence (MolecularSequence): MolecularSequence.referenceSeq.windowStart
+MolecularSequence (MolecularSequence): MolecularSequence.variant.end
+MolecularSequence (MolecularSequence): MolecularSequence.variant
+MolecularSequence (MolecularSequence): MolecularSequence.patient
+MolecularSequence (MolecularSequence): MolecularSequence.variant.start
+MolecularSequence (MolecularSequence): MolecularSequence.referenceSeq
+MolecularSequence (MolecularSequence): MolecularSequence.referenceSeq
+MolecularSequence (MolecularSequence): MolecularSequence.referenceSeq.referenceSeqId
 NamingSystem (NamingSystem): NamingSystem.date
 NamingSystem (NamingSystem): NamingSystem.uniqueId.period
 NamingSystem (NamingSystem): NamingSystem.useContext
@@ -1334,15 +1341,15 @@ Observation (Observation): Observation.specimen
 Observation (Observation): Observation.component.code
 Observation (Observation): Observation
 Observation (Observation): Observation | Observation.component
-Observation (Observation): Observation.value as string | (Observation.value as CodeableConcept).text
+Observation (Observation): (Observation.value as string) | (Observation.value as CodeableConcept).text
 Observation (Observation): Observation.identifier
 Observation (Observation): Observation.performer
 Observation (Observation): Observation.code | Observation.component.code
 Observation (Observation): Observation.method
-Observation (Observation): Observation.value as Quantity | Observation.value as SampledData
-Observation (Observation): Observation.component.value as Quantity | Observation.component.value as SampledData
+Observation (Observation): (Observation.value as Quantity) | (Observation.value as SampledData)
+Observation (Observation): (Observation.component.value as Quantity) | (Observation.component.value as SampledData)
 Observation (Observation): Observation.dataAbsentReason
-Observation (Observation): Observation.value as Quantity | Observation.value as SampledData | Observation.component.value as Quantity | Observation.component.value as SampledData
+Observation (Observation): (Observation.value as Quantity) | (Observation.value as SampledData) | (Observation.component.value as Quantity) | (Observation.component.value as SampledData)
 Observation (Observation): Observation.encounter
 Observation (Observation): Observation
 Observation (Observation): Observation.component
@@ -1590,13 +1597,12 @@ RequestGroup (RequestGroup): RequestGroup.code
 RequestGroup (RequestGroup): RequestGroup.subject
 RequestGroup (RequestGroup): RequestGroup.author
 RequestGroup (RequestGroup): RequestGroup.instantiatesCanonical
-RequestGroup (RequestGroup): RequestGroup.context.where(resolve() is Encounter)
+RequestGroup (RequestGroup): RequestGroup.encounter
 RequestGroup (RequestGroup): RequestGroup.priority
 RequestGroup (RequestGroup): RequestGroup.intent
 RequestGroup (RequestGroup): RequestGroup.action.participant
 RequestGroup (RequestGroup): RequestGroup.groupIdentifier
 RequestGroup (RequestGroup): RequestGroup.subject.where(resolve() is Patient)
-RequestGroup (RequestGroup): RequestGroup.context
 RequestGroup (RequestGroup): RequestGroup.instantiatesUri
 RequestGroup (RequestGroup): RequestGroup.status
 ResearchDefinition (ResearchDefinition): ResearchDefinition.date
@@ -1671,7 +1677,7 @@ RiskAssessment (RiskAssessment): RiskAssessment.subject
 RiskAssessment (RiskAssessment): RiskAssessment.subject.where(resolve() is Patient)
 RiskAssessment (RiskAssessment): RiskAssessment.prediction.probability
 RiskAssessment (RiskAssessment): RiskAssessment.prediction.qualitativeRisk
-RiskAssessment (RiskAssessment): RiskAssessment.context.where(resolve() is Encounter)
+RiskAssessment (RiskAssessment): RiskAssessment.encounter
 RiskEvidenceSynthesis (RiskEvidenceSynthesis): RiskEvidenceSynthesis.date
 RiskEvidenceSynthesis (RiskEvidenceSynthesis): RiskEvidenceSynthesis.identifier
 RiskEvidenceSynthesis (RiskEvidenceSynthesis): RiskEvidenceSynthesis.useContext

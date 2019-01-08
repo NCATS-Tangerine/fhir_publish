@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>List - FHIR v3.6.0</title>
+  <title>List - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -152,7 +152,7 @@ Note that the presence of an item in a List resource SHALL NOT change the meanin
 understood by looking at the item outside the context of the List, because items may be accessed directly outside 
 the List by RESTful means or after a document is processed. For example, a List with a code that means 
 "refuted conditions" cannot have items that are <a href="condition.html">Condition</a> resources that do not have a 
-<code>Condition.clinicalStatus</code> of <a href="valueset-condition-clinical.html#refuted">refuted</a>.
+<code>verificationStatus</code> of <a href="valueset-condition-clinical.html#refuted">refuted</a>.
 </p>
 </div>
 
@@ -387,6 +387,22 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
     <td class="diff-right"></td>
   </tr>
   <tr class="diff-entry">
+    <td class="diff-left">List.status</td>
+    <td class="diff-right">
+      <ul>
+        <li>Change value set from http://hl7.org/fhir/ValueSet/list-status to http://hl7.org/fhir/ValueSet/list-status|4.0.0</li>
+      </ul>
+    </td>
+  </tr>
+  <tr class="diff-entry">
+    <td class="diff-left">List.mode</td>
+    <td class="diff-right">
+      <ul>
+        <li>Change value set from http://hl7.org/fhir/ValueSet/list-mode to http://hl7.org/fhir/ValueSet/list-mode|4.0.0</li>
+      </ul>
+    </td>
+  </tr>
+  <tr class="diff-entry">
     <td class="diff-left">List.source</td>
     <td class="diff-right">
       <ul>
@@ -409,7 +425,7 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
   <p>
   This analysis is available as <a href="list.diff.xml">XML</a> or <a href="list.diff.json">JSON</a>.
   </p>
-  <p>See <a href="list-version-maps.html">R3 &lt;--&gt; R4 Conversion Maps</a> (status = 9 tests that all execute ok. All tests pass round-trip testing  and all r3 resources are valid.)</p>
+  <p>See <a href="list-version-maps.html">R3 &lt;--&gt; R4 Conversion Maps</a> (status = 9 tests that all execute ok. All tests pass round-trip testing  and <span style="background-color: #E0B0FF">5 r3 resources are invalid (0 errors).</span>)</p>
 
  </div>
 </div>
@@ -574,6 +590,22 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
     <td class="diff-right"></td>
   </tr>
   <tr class="diff-entry">
+    <td class="diff-left">List.status</td>
+    <td class="diff-right">
+      <ul>
+        <li>Change value set from http://hl7.org/fhir/ValueSet/list-status to http://hl7.org/fhir/ValueSet/list-status|4.0.0</li>
+      </ul>
+    </td>
+  </tr>
+  <tr class="diff-entry">
+    <td class="diff-left">List.mode</td>
+    <td class="diff-right">
+      <ul>
+        <li>Change value set from http://hl7.org/fhir/ValueSet/list-mode to http://hl7.org/fhir/ValueSet/list-mode|4.0.0</li>
+      </ul>
+    </td>
+  </tr>
+  <tr class="diff-entry">
     <td class="diff-left">List.source</td>
     <td class="diff-right">
       <ul>
@@ -596,7 +628,7 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
   <p>
   This analysis is available as <a href="list.diff.xml">XML</a> or <a href="list.diff.json">JSON</a>.
   </p>
-  <p>See <a href="list-version-maps.html">R3 &lt;--&gt; R4 Conversion Maps</a> (status = 9 tests that all execute ok. All tests pass round-trip testing  and all r3 resources are valid.)</p>
+  <p>See <a href="list-version-maps.html">R3 &lt;--&gt; R4 Conversion Maps</a> (status = 9 tests that all execute ok. All tests pass round-trip testing  and <span style="background-color: #E0B0FF">5 r3 resources are invalid (0 errors).</span>)</p>
 
  </div>
 </div>
@@ -854,7 +886,7 @@ empty reason (<a href="list-example-simple-empty.html">example</a>)
 <tr><td><a name="sp-identifier"> </a>identifier</td><td><a href="search.html#token">token</a></td><td>Business identifier</td><td>List.identifier</td><td><a href="searchparameter-registry.html#clinical-identifier">30 Resources</a></td></tr>
 <tr><td><a name="sp-item"> </a>item</td><td><a href="search.html#reference">reference</a></td><td>Actual entry</td><td>List.entry.item<br/>(Any)</td><td></td></tr>
 <tr><td><a name="sp-notes"> </a>notes</td><td><a href="search.html#string">string</a></td><td>The annotation  - text content (as markdown)</td><td>List.note.text</td><td></td></tr>
-<tr><td><a name="sp-patient"> </a>patient</td><td><a href="search.html#reference">reference</a></td><td>If all resources have the same subject</td><td>List.subject.where(resolve() is Patient)<br/>(<a href="patient.html">Patient</a>)</td><td><a href="searchparameter-registry.html#clinical-patient">29 Resources</a></td></tr>
+<tr><td><a name="sp-patient"> </a>patient</td><td><a href="search.html#reference">reference</a></td><td>If all resources have the same subject</td><td>List.subject.where(resolve() is Patient)<br/>(<a href="patient.html">Patient</a>)</td><td><a href="searchparameter-registry.html#clinical-patient">33 Resources</a></td></tr>
 <tr><td><a name="sp-source"> </a>source</td><td><a href="search.html#reference">reference</a></td><td>Who and/or what defined the list contents (aka Author)</td><td>List.source<br/>(<a href="practitioner.html">Practitioner</a>, <a href="device.html">Device</a>, <a href="patient.html">Patient</a>, <a href="practitionerrole.html">PractitionerRole</a>)</td><td></td></tr>
 <tr><td><a name="sp-status"> </a>status</td><td><a href="search.html#token">token</a></td><td>current | retired | entered-in-error</td><td>List.status</td><td></td></tr>
 <tr><td><a name="sp-subject"> </a>subject</td><td><a href="search.html#reference">reference</a></td><td>If all resources have the same subject</td><td>List.subject<br/>(<a href="group.html">Group</a>, <a href="device.html">Device</a>, <a href="patient.html">Patient</a>, <a href="location.html">Location</a>)</td><td></td></tr>
@@ -877,15 +909,14 @@ empty reason (<a href="list-example-simple-empty.html">example</a>)
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:26-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:30-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Flist.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Flist.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Flist.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Flist.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Flist.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Flist.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

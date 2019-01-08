@@ -3,7 +3,7 @@
 in order to support consistent definitions for schema and UML derived code. --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-      <title>Workflow-ad-hoc - FHIR v3.6.0</title>
+      <title>Workflow-ad-hoc - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -195,7 +195,7 @@ in order to support consistent definitions for schema and UML derived code. --><
         <img src="workflow-optionc.png" alt="Diagram showing POST of request to placer/queue server system, receiver uses polling workflow"/>
         <h4 class="self-link-parent"><span class="sectioncount">12.7.3.1<a name="12.7.3.1"> </a></span> Steps <a href="workflow-ad-hoc.html#12.7.3.1" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
         <ol>
-            <li>Placer system creates a 'request' resource (e.g. ServiceRequest etc.) by a system action or a POST on either its own system or a third party queue server system and places an "actionable" tag on the resource
+            <li>Placer system creates a 'request' resource (e.g. ServiceRequest etc.) by a system action or a POST on either its own system or a third-party queue server system and places an "actionable" tag on the resource
                 that indicates the request is intended to be acted upon. The request explicitly identifies the intended fullfiller</li>
             <li>The filler system uses polling (or a subscription) at the placer or queue server system to see if there are any "new" requests that: are tagged as "actionable", have the filler identified as the intended performer, and are a type of request
                 "of interest" to the filler.</li>
@@ -278,7 +278,7 @@ in order to support consistent definitions for schema and UML derived code. --><
         <ul>
             <li>Reduced number of communications</li>
             <li>All relevant data sent in one package</li>
-            <li>Responses can be asynchronous and content may be routed</li>
+            <li>Responses can be asynchronous, and content may be routed</li>
             <li>There's an ability to negotiate fulfillment - i.e. the ability to say "no"</li>
             <li>Can request things other than just fulfillment (e.g. please suspend)</li>
             <li>Explicit acknowledgement that filler has received and agreed to act on the request (though no need for the placer to check)</li>
@@ -341,14 +341,14 @@ in order to support consistent definitions for schema and UML derived code. --><
 
         <h4 class="self-link-parent"><span class="sectioncount">12.7.6.3<a name="12.7.6.3"> </a></span> Cancellation of a Task using REST - placer owns <a href="workflow-ad-hoc.html#12.7.6.3" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
         <ol>
-            <li>Placer sends an update to the Task setting the status to "cancelled" signalling they are no longer concerned about the outcome of the task</li>
+            <li>Placer sends an update to the Task setting the status to "cancelled" signaling they are no longer concerned about the outcome of the task</li>
             <li>Filler receives notification of the update (because the task is on their system, or because they poll it, or are subscribed to it) and ceases work if they are able</li>
         </ol>
 
         <h4 class="self-link-parent"><span class="sectioncount">12.7.6.4<a name="12.7.6.4"> </a></span> Cancellation of a Task using REST - filler owns <a href="workflow-ad-hoc.html#12.7.6.4" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
         <ol>
             <li>Placer creates a new task requesting cancellation of the original fulfillment task<br/> Fulfillment of the "cancellation task" can be requested using any of the mechanisms above</li>
-            <li>Filler decides whether they are able to cancel the task and update the "cancellation" task to indicate either cancellation is complete or has been refused</li>
+            <li>Filler decides whether they can cancel the task and update the "cancellation" task to indicate either cancellation is complete or has been refused</li>
         </ol>
 
     </div>
@@ -365,15 +365,14 @@ in order to support consistent definitions for schema and UML derived code. --><
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fworkflow-ad-hoc.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fworkflow-ad-hoc.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fworkflow-ad-hoc.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fworkflow-ad-hoc.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fworkflow-ad-hoc.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fworkflow-ad-hoc.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

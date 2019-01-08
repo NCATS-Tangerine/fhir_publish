@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Provenance-relevant-history-questionnaire.xml - FHIR v3.6.0</title>
+  <title>Provenance-relevant-history-questionnaire.xml - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -122,32 +122,10 @@
 
 &lt;Questionnaire xmlns=&quot;http://hl7.org/fhir&quot;&gt;
   &lt;id value=&quot;qs1&quot;/&gt;
-  &lt;contained&gt;
-    &lt;ValueSet&gt;
-      &lt;id value=&quot;vs2&quot;/&gt;
-      &lt;name value=&quot;Type options for Provenance.occurred[x]&quot;/&gt;
-      &lt;status value=&quot;active&quot;/&gt;
-      &lt;description value=&quot;Type options for Provenance.occurred[x]&quot;/&gt;
-      &lt;expansion&gt;
-        &lt;identifier value=&quot;urn:uuid:3bb7b1e5-2a5c-40f1-937a-1999668c4de2&quot;/&gt;
-        &lt;timestamp value=&quot;2018-12-13T14:27:25-06:00&quot;/&gt;
-        &lt;contains&gt;
-          &lt;system value=&quot;http://hl7.org/fhir/data-types&quot;/&gt;
-          &lt;code value=&quot;Period&quot;/&gt;
-          &lt;display value=&quot;Period&quot;/&gt;
-        &lt;/contains&gt;
-        &lt;contains&gt;
-          &lt;system value=&quot;http://hl7.org/fhir/data-types&quot;/&gt;
-          &lt;code value=&quot;dateTime&quot;/&gt;
-          &lt;display value=&quot;dateTime&quot;/&gt;
-        &lt;/contains&gt;
-      &lt;/expansion&gt;
-    &lt;/ValueSet&gt;
-  &lt;/contained&gt;
   &lt;identifier&gt;
     &lt;system value=&quot;urn:ietf:rfc:3986&quot;/&gt;
   &lt;/identifier&gt;
-  &lt;version value=&quot;3.6.0&quot;/&gt;
+  &lt;version value=&quot;4.0.0&quot;/&gt;
   &lt;status value=&quot;draft&quot;/&gt;
   &lt;date value=&quot;2013-12-03T00:00:00-06:00&quot;/&gt;
   &lt;publisher value=&quot;Health Level Seven International&quot;/&gt;
@@ -421,8 +399,10 @@
       &lt;extension url=&quot;http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs&quot;&gt;
         &lt;valueInteger value=&quot;1&quot;/&gt;
       &lt;/extension&gt;
-      &lt;linkId value=&quot;Provenance.occurred[x]&quot;/&gt;
-      &lt;text value=&quot;When the activity occurred&quot;/&gt;
+      &lt;extension url=&quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;&gt;
+        &lt;valueString value=&quot;datetime&quot;/&gt;
+      &lt;/extension&gt;
+      &lt;linkId value=&quot;Provenance.occurredDateTime&quot;/&gt;
       &lt;type value=&quot;group&quot;/&gt;
       &lt;required value=&quot;true&quot;/&gt;
       &lt;repeats value=&quot;true&quot;/&gt;
@@ -440,46 +420,11 @@
         &lt;type value=&quot;display&quot;/&gt;
       &lt;/item&gt;
       &lt;item&gt;
-        &lt;linkId value=&quot;Provenance.occurred[x]._type&quot;/&gt;
-        &lt;text value=&quot;type&quot;/&gt;
-        &lt;type value=&quot;choice&quot;/&gt;
+        &lt;linkId value=&quot;Provenance.occurredDateTime.value&quot;/&gt;
+        &lt;text value=&quot;When the activity occurred&quot;/&gt;
+        &lt;type value=&quot;dateTime&quot;/&gt;
         &lt;required value=&quot;false&quot;/&gt;
         &lt;repeats value=&quot;false&quot;/&gt;
-        &lt;answerValueSet value=&quot;#vs2&quot;/&gt;
-        &lt;item&gt;
-          &lt;extension url=&quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;&gt;
-            &lt;valueString value=&quot;Period&quot;/&gt;
-          &lt;/extension&gt;
-          &lt;linkId value=&quot;Provenance.occurred[x]._null&quot;/&gt;
-          &lt;type value=&quot;group&quot;/&gt;
-          &lt;item&gt;
-            &lt;linkId value=&quot;Provenance.occurred[x]._null.low&quot;/&gt;
-            &lt;text value=&quot;start:&quot;/&gt;
-            &lt;type value=&quot;dateTime&quot;/&gt;
-            &lt;required value=&quot;false&quot;/&gt;
-            &lt;repeats value=&quot;false&quot;/&gt;
-          &lt;/item&gt;
-          &lt;item&gt;
-            &lt;linkId value=&quot;Provenance.occurred[x]._null.end&quot;/&gt;
-            &lt;text value=&quot;end:&quot;/&gt;
-            &lt;type value=&quot;dateTime&quot;/&gt;
-            &lt;required value=&quot;false&quot;/&gt;
-            &lt;repeats value=&quot;false&quot;/&gt;
-          &lt;/item&gt;
-        &lt;/item&gt;
-        &lt;item&gt;
-          &lt;extension url=&quot;http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType&quot;&gt;
-            &lt;valueString value=&quot;datetime&quot;/&gt;
-          &lt;/extension&gt;
-          &lt;linkId value=&quot;Provenance.occurred[x]._null&quot;/&gt;
-          &lt;type value=&quot;group&quot;/&gt;
-          &lt;item&gt;
-            &lt;linkId value=&quot;Provenance.occurred[x]._null.value&quot;/&gt;
-            &lt;type value=&quot;dateTime&quot;/&gt;
-            &lt;required value=&quot;false&quot;/&gt;
-            &lt;repeats value=&quot;false&quot;/&gt;
-          &lt;/item&gt;
-        &lt;/item&gt;
       &lt;/item&gt;
     &lt;/item&gt;
     &lt;item&gt;
@@ -1418,15 +1363,14 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fprovenance-relevant-history-questionnaire.xml.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fprovenance-relevant-history-questionnaire.xml.html">Compare to DSTU3</a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fprovenance-relevant-history-questionnaire.xml.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fprovenance-relevant-history-questionnaire.xml.html">Ballot Comparison</a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fprovenance-relevant-history-questionnaire.xml.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fprovenance-relevant-history-questionnaire.xml.html">Compare to R3</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
                <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Profiling - FHIR v3.6.0</title>
+  <title>Profiling - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -266,7 +266,7 @@ Beyond these requirements, a producer of resources SHOULD ensure that any resour
 to conform to the declared profiles SHOULD be published in this form.
 </p>
 
-<blockquote><p> <b>Implementation Note:</b> 
+<blockquote class="stu-note"><p><b>Trial-Use Note:</b>
 <a name="dstu"></a>
 There are many uninvestigated issues associated with this use of profiles.
 HL7 is actively seeking feedback from users who experiment in this area, and users
@@ -350,7 +350,7 @@ Patient.name which has a cardinality of 0..*. In an unprofiled Patient, this wil
 }
 </pre>
 <p>
-Even if a profile is created on the resource that narrows tha cardinality to 1..1, applications will still process
+Even if a profile is created on the resource that narrows the cardinality to 1..1, applications will still process
 the resource without knowledge of the profile. For this reason the representation will still be the same. 
 </p>
 
@@ -454,7 +454,7 @@ StructureDefinitions may contain a differential statement, a snapshot
 statement or both.
 </p>
 <p>Differential statements describe only the differences that they make
-relative to the structure definition the constrain (which is most often the base FHIR resource or data type).
+relative to the structure definition they constrain (which is most often the base FHIR resource or data type).
 For example, a profile may make a single element mandatory (cardinality 1..1).
 In the example of a differential structure, it will contain a single element
 with the path of the element being made mandatory, and a cardinality statement.
@@ -495,7 +495,7 @@ systems should always have the snapshot view populated.
 <h3 class="self-link-parent"><span class="sectioncount">5.1.0.10</span> Slicing <a href="profiling.html#slicing" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 <p>
 One common feature of constraining StructureDefinitions is to take an element that may occur more than once (e.g. in a list),
-and then split the list into a series of sublists, each with different restrictions on the elements in the sublist with associated
+and then split the list into a series of sub-lists, each with different restrictions on the elements in the sub-list with associated
 additional meaning. In FHIR, this operation is known as "Slicing" a list. It is common to
 "slice" a list into sub-lists with each containing just one element, effectively putting constraints on each element in the list.
 </p>
@@ -516,7 +516,7 @@ is shown as just a code not a full CodeableConcept).
 </p>
 <p>
 The structure definition for Blood Pressure splits the component list into
-two sublists of one element each: a systolic element, and a diastolic element. Each of these
+two sub-lists of one element each: a systolic element, and a diastolic element. Each of these
 elements has a fixed value for the code element (a fixed LOINC code for
 the name), and both have a value of type Quantity. This process
 is known as "slicing" and the Systolic and Diastolic elements are called "slices".
@@ -597,7 +597,11 @@ discriminator is based is a restricted FHIRPath statement that is allowed to inc
  <li>Element selections (e.g. FHIRPath statements without "()" such as <code>component.value</code>)</li>
  <li>The function <code>extension(url)</code> to allow selection of a particular extension</li>
  <li>The function <code>resolve()</code> to allow slicing across resource boundaries</li>
+ <li>The function <code>ofType()</code> to allow choosing a type in a polymorphic element</li>
 </ul>
+<p>
+See the <a href="fhirpath.html#simple">full details about the restricted FHIRPath statement</a>.
+</p>
 <p>
 Further notes about the use of the different discriminator types:
 </p>
@@ -683,7 +687,7 @@ These entries together form a "slice group" that is:
 		<b>or</b>, if there are any intervening elements, those
 		elements must be "compatible with" the group. Concretely, this
 		means that any intervening elements must have a
-		<i>path</i> that starts with the slice groups's
+		<i>path</i> that starts with the slice group's
 		<i>path</i>.  For example, an <i>element</i> with a
 		<i>path</i> of <i>Observation.name.extension</i>
 		would be compatible with (and thus, would not "break up") a
@@ -752,7 +756,7 @@ but fixes the cardinality of type to 1..1 in the @default slice.
 <a name="reslicing"></a>
 <h3 class="self-link-parent"><span class="sectioncount">5.1.0.14</span> Re-profiling and Re-slicing <a href="profiling.html#reslicing" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 <p>
-Profiles can be based on other profiles, and can apply further constraints to those already
+Profiles can be based on other profiles and can apply further constraints to those already
 specified. This is a useful technique, but implementers should be wary of over-use - humans
 have trouble understanding the implications of deep stacks of constraining profiles.
 </p>
@@ -762,7 +766,7 @@ extending the discriminator, adding new slices (if the slices are not already cl
 slicing inside the existing slices.
 </p>
 <p>
-The rules for constraining ElementDefinition.slicing are as follows::
+The rules for constraining ElementDefinition.slicing are as follows:
 </p>
 <ul>
  <li><code>ElementDefinition.slicing.rule</code> can be constrained from <code>open</code> to <code>closed</code></li>
@@ -812,7 +816,7 @@ This pattern applies to @default too: @default/@default.
 <h3 class="self-link-parent"><span class="sectioncount">5.1.0.15</span> Extension Definitions <a href="profiling.html#extensions" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
 <p>
 An extension definition defines the URL that identifies the extension
-and which is used to refer to the extension definition when it is used
+and is used to refer to the extension definition when it is used
 in a resource.
 </p>
 <p>
@@ -835,12 +839,12 @@ without any Profile declaring that it can, should or must be, but
 Profiles can be used to describe how an extension is used.
 </p>
 <p>
-To actually prescribe the use of an extension in an instance, the extension list
+To prescribe the use of an extension in an instance, the extension list
 on the resource needs to be sliced. This is shown in <a href="extensibility-examples.html#sliceextensions">the extensibility
 examples</a></p>
 <p>
 Note that the minimum cardinality of an extension SHALL be a valid restriction
-on the minimum cardinality in the definition of the extension. if the minimum
+on the minimum cardinality in the definition of the extension. If the minimum
 cardinality of the extension is 1 when it is defined, it can only be mandatory
 when it is added to a profile. This is not recommended - the minimum cardinality
 of an extension should usually be 0.
@@ -930,7 +934,7 @@ exactly what kind of "support" is required. Examples include:
   <li>etc.</li>
 </ul>
 <p>
-The specific meaning of "Must Support" for the purposes of a particular profile SHALL be described in the <code>ElementDefinition.definition</code>,
+The specific meaning of "Must Support" for the purposes of a profile SHALL be described in the <code>ElementDefinition.definition</code>,
 the general <code>StructureDefinition.description</code> or in other documentation for the implementation guide that includes the profile.
 </p>
 <p>
@@ -948,8 +952,8 @@ Search criteria fall into one of four categories:
 </p>
 <ol>
   <li>Enabling search on core elements that don't have standard search criteria defined (e.g. searching Observation by normal range)</li>
-  <li>Enabling search on elements that already have a standard search criteria defined, but with custom matching rules; e.g. a sounds-like search on Practitioner name</li>
-  <li>Enabling search on a particular extension</li>
+  <li>Enabling search on elements that already have standard search criteria defined, but with custom matching rules; e.g. a sounds-like search on Practitioner name</li>
+  <li>Enabling search on an extension</li>
   <li>Enabling search that doesn't correspond to a single element but rather a combination of elements or computation on an element; e.g. searching for patients by age</li>
 </ol>
 <p>
@@ -1007,7 +1011,7 @@ Each profile can be thought of in terms of the set of instances that conform to 
 </ol>
 <p>
 Profiles can be compared to determine their compatibility.
-One such comparison can be found (no - todo: bring this into the build)
+One such comparison can be found (Todo: bring this into the build)
 between <a href="http://hl7.org/fhir/us/daf">DAF <img src="external.png" style="text-align: baseline"/></a> and <a href="http://hl7.org/fhir/us/qicore">QICore <img src="external.png" style="text-align: baseline"/></a>.
 Note that this comparison is generated by tooling under ongoing development, and is purely draft
 content to demonstrate the idea of profile comparison.
@@ -1027,15 +1031,14 @@ content to demonstrate the idea of profile comparison.
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fprofiling.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fprofiling.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fprofiling.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fprofiling.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fprofiling.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fprofiling.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

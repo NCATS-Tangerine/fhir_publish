@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Clinicalprofile.profile.json - FHIR v3.6.0</title>
+  <title>Clinicalprofile.profile.json - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -120,7 +120,7 @@
   &quot;resourceType&quot; : &quot;StructureDefinition&quot;,
   &quot;id&quot; : &quot;ClinicalProfile&quot;,
   &quot;meta&quot; : {
-    &quot;lastUpdated&quot; : &quot;2018-12-13T14:23:07.677-06:00&quot;
+    &quot;lastUpdated&quot; : &quot;2019-01-08T15:26:24.615-06:00&quot;
   },
   &quot;text&quot; : {
     &quot;status&quot; : &quot;generated&quot;,
@@ -147,10 +147,10 @@
     &quot;valueCode&quot; : &quot;cds&quot;
   }],
   &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/ClinicalProfile&quot;,
-  &quot;version&quot; : &quot;3.6.0&quot;,
+  &quot;version&quot; : &quot;4.0.0&quot;,
   &quot;name&quot; : &quot;ClinicalProfile&quot;,
   &quot;status&quot; : &quot;draft&quot;,
-  &quot;date&quot; : &quot;2018-12-13T14:23:07-06:00&quot;,
+  &quot;date&quot; : &quot;2019-01-08T15:26:24-06:00&quot;,
   &quot;publisher&quot; : &quot;Health Level Seven International (Clinical Decision Support)&quot;,
   &quot;contact&quot; : [{
     &quot;telecom&quot; : [{
@@ -165,7 +165,7 @@
     }]
   }],
   &quot;description&quot; : &quot;Clinical Profiles summarize and demonstrate the features of a population.&quot;,
-  &quot;fhirVersion&quot; : &quot;3.6.0&quot;,
+  &quot;fhirVersion&quot; : &quot;4.0.0&quot;,
   &quot;mapping&quot; : [{
     &quot;identity&quot; : &quot;workflow&quot;,
     &quot;uri&quot; : &quot;http://hl7.org/fhir/workflow&quot;,
@@ -510,7 +510,7 @@
         }],
         &quot;strength&quot; : &quot;required&quot;,
         &quot;description&quot; : &quot;The status of the clinical profile.&quot;,
-        &quot;valueSet&quot; : &quot;http://hl7.org/fhir/ValueSet/clinical-profile-status&quot;
+        &quot;valueSet&quot; : &quot;http://hl7.org/fhir/ValueSet/clinical-profile-status|4.0.0&quot;
       },
       &quot;mapping&quot; : [{
         &quot;identity&quot; : &quot;workflow&quot;,
@@ -2779,6 +2779,420 @@
       }],
       &quot;isModifier&quot; : false,
       &quot;isSummary&quot; : true
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo&quot;,
+      &quot;short&quot; : &quot;Procedure profile entry&quot;,
+      &quot;definition&quot; : &quot;Procedure profile entry.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;ClinicalProfile.hpo&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;*&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;BackboneElement&quot;
+      }],
+      &quot;constraint&quot; : [{
+        &quot;key&quot; : &quot;ele-1&quot;,
+        &quot;severity&quot; : &quot;error&quot;,
+        &quot;human&quot; : &quot;All FHIR elements must have a @value or children&quot;,
+        &quot;expression&quot; : &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+        &quot;xpath&quot; : &quot;@value|f:*|h:div&quot;,
+        &quot;source&quot; : &quot;Element&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.id&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.id&quot;,
+      &quot;representation&quot; : [&quot;xmlAttr&quot;],
+      &quot;short&quot; : &quot;Unique id for inter-element referencing&quot;,
+      &quot;definition&quot; : &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;Element.id&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;string&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;n/a&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.extension&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.extension&quot;,
+      &quot;short&quot; : &quot;Additional content defined by implementations&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+      &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;alias&quot; : [&quot;extensions&quot;,
+      &quot;user content&quot;],
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;Element.extension&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;*&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;Extension&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;n/a&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.modifierExtension&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.modifierExtension&quot;,
+      &quot;short&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
+      &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;requirements&quot; : &quot;Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).&quot;,
+      &quot;alias&quot; : [&quot;extensions&quot;,
+      &quot;user content&quot;,
+      &quot;modifiers&quot;],
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;BackboneElement.modifierExtension&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;*&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;Extension&quot;
+      }],
+      &quot;isModifier&quot; : true,
+      &quot;isModifierReason&quot; : &quot;Modifier extensions are expected to modify the meaning or interpretation of the element that contains them&quot;,
+      &quot;isSummary&quot; : true,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;N/A&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.code&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.code&quot;,
+      &quot;short&quot; : &quot;HPO code&quot;,
+      &quot;definition&quot; : &quot;HPO code.&quot;,
+      &quot;min&quot; : 1,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;ClinicalProfile.hpo.code&quot;,
+        &quot;min&quot; : 1,
+        &quot;max&quot; : &quot;*&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;CodeableConcept&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : true
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.fractionOfSubjects&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.fractionOfSubjects&quot;,
+      &quot;short&quot; : &quot;Fraction of patients with this procedure per year&quot;,
+      &quot;definition&quot; : &quot;Fraction of patients with this procedure per year.&quot;,
+      &quot;min&quot; : 1,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;ClinicalProfile.hpo.fractionOfSubjects&quot;,
+        &quot;min&quot; : 1,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;decimal&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : true
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes&quot;,
+      &quot;short&quot; : &quot;The to N most closely correlated HPO codes&quot;,
+      &quot;definition&quot; : &quot;The to N most closely correlated HPO codes.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;BackboneElement&quot;
+      }],
+      &quot;constraint&quot; : [{
+        &quot;key&quot; : &quot;ele-1&quot;,
+        &quot;severity&quot; : &quot;error&quot;,
+        &quot;human&quot; : &quot;All FHIR elements must have a @value or children&quot;,
+        &quot;expression&quot; : &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+        &quot;xpath&quot; : &quot;@value|f:*|h:div&quot;,
+        &quot;source&quot; : &quot;Element&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.id&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.id&quot;,
+      &quot;representation&quot; : [&quot;xmlAttr&quot;],
+      &quot;short&quot; : &quot;Unique id for inter-element referencing&quot;,
+      &quot;definition&quot; : &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;Element.id&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;string&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;n/a&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.extension&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.extension&quot;,
+      &quot;short&quot; : &quot;Additional content defined by implementations&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+      &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;alias&quot; : [&quot;extensions&quot;,
+      &quot;user content&quot;],
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;Element.extension&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;*&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;Extension&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;n/a&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.modifierExtension&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.modifierExtension&quot;,
+      &quot;short&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
+      &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;requirements&quot; : &quot;Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).&quot;,
+      &quot;alias&quot; : [&quot;extensions&quot;,
+      &quot;user content&quot;,
+      &quot;modifiers&quot;],
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;BackboneElement.modifierExtension&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;*&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;Extension&quot;
+      }],
+      &quot;isModifier&quot; : true,
+      &quot;isModifierReason&quot; : &quot;Modifier extensions are expected to modify the meaning or interpretation of the element that contains them&quot;,
+      &quot;isSummary&quot; : true,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;N/A&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.topn&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.topn&quot;,
+      &quot;short&quot; : &quot;Number of phenotypes cutoff (e.g. top 10)&quot;,
+      &quot;definition&quot; : &quot;Number of phenotypes cutoff (e.g. top 10).&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.topn&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;integer&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.abscorrelation&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.abscorrelation&quot;,
+      &quot;short&quot; : &quot;Minimum absolute value of correlation coefficient&quot;,
+      &quot;definition&quot; : &quot;Minimum absolute value of correlation coefficient.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.abscorrelation&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;decimal&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry&quot;,
+      &quot;short&quot; : &quot;Correlation entry&quot;,
+      &quot;definition&quot; : &quot;Correlation entry.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;BackboneElement&quot;
+      }],
+      &quot;constraint&quot; : [{
+        &quot;key&quot; : &quot;ele-1&quot;,
+        &quot;severity&quot; : &quot;error&quot;,
+        &quot;human&quot; : &quot;All FHIR elements must have a @value or children&quot;,
+        &quot;expression&quot; : &quot;hasValue() or (children().count() &gt; id.count())&quot;,
+        &quot;xpath&quot; : &quot;@value|f:*|h:div&quot;,
+        &quot;source&quot; : &quot;Element&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.id&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.id&quot;,
+      &quot;representation&quot; : [&quot;xmlAttr&quot;],
+      &quot;short&quot; : &quot;Unique id for inter-element referencing&quot;,
+      &quot;definition&quot; : &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;Element.id&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;string&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;n/a&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.extension&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.extension&quot;,
+      &quot;short&quot; : &quot;Additional content defined by implementations&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
+      &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;alias&quot; : [&quot;extensions&quot;,
+      &quot;user content&quot;],
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;Element.extension&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;*&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;Extension&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : false,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;n/a&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.modifierExtension&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.modifierExtension&quot;,
+      &quot;short&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
+      &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
+      &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
+      &quot;requirements&quot; : &quot;Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension).&quot;,
+      &quot;alias&quot; : [&quot;extensions&quot;,
+      &quot;user content&quot;,
+      &quot;modifiers&quot;],
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;BackboneElement.modifierExtension&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;*&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;Extension&quot;
+      }],
+      &quot;isModifier&quot; : true,
+      &quot;isModifierReason&quot; : &quot;Modifier extensions are expected to modify the meaning or interpretation of the element that contains them&quot;,
+      &quot;isSummary&quot; : true,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;rim&quot;,
+        &quot;map&quot; : &quot;N/A&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.code&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.code&quot;,
+      &quot;short&quot; : &quot;Phenotype codes&quot;,
+      &quot;definition&quot; : &quot;Phenotype codes.&quot;,
+      &quot;min&quot; : 1,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.code&quot;,
+        &quot;min&quot; : 1,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;CodeableConcept&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : true
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.coefficient&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.coefficient&quot;,
+      &quot;short&quot; : &quot;Correlation coefficient&quot;,
+      &quot;definition&quot; : &quot;Correlation coefficient.&quot;,
+      &quot;min&quot; : 1,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.coefficient&quot;,
+        &quot;min&quot; : 1,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;decimal&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : true
     }]
   },
   &quot;differential&quot; : {
@@ -2837,7 +3251,7 @@
         }],
         &quot;strength&quot; : &quot;required&quot;,
         &quot;description&quot; : &quot;The status of the clinical profile.&quot;,
-        &quot;valueSet&quot; : &quot;http://hl7.org/fhir/ValueSet/clinical-profile-status&quot;
+        &quot;valueSet&quot; : &quot;http://hl7.org/fhir/ValueSet/clinical-profile-status|4.0.0&quot;
       },
       &quot;mapping&quot; : [{
         &quot;identity&quot; : &quot;workflow&quot;,
@@ -3619,6 +4033,109 @@
         &quot;code&quot; : &quot;decimal&quot;
       }],
       &quot;isSummary&quot; : true
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo&quot;,
+      &quot;short&quot; : &quot;Procedure profile entry&quot;,
+      &quot;definition&quot; : &quot;Procedure profile entry.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;BackboneElement&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.code&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.code&quot;,
+      &quot;short&quot; : &quot;HPO code&quot;,
+      &quot;definition&quot; : &quot;HPO code.&quot;,
+      &quot;min&quot; : 1,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;CodeableConcept&quot;
+      }],
+      &quot;isSummary&quot; : true
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.fractionOfSubjects&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.fractionOfSubjects&quot;,
+      &quot;short&quot; : &quot;Fraction of patients with this procedure per year&quot;,
+      &quot;definition&quot; : &quot;Fraction of patients with this procedure per year.&quot;,
+      &quot;min&quot; : 1,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;decimal&quot;
+      }],
+      &quot;isSummary&quot; : true
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes&quot;,
+      &quot;short&quot; : &quot;The to N most closely correlated HPO codes&quot;,
+      &quot;definition&quot; : &quot;The to N most closely correlated HPO codes.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;BackboneElement&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.topn&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.topn&quot;,
+      &quot;short&quot; : &quot;Number of phenotypes cutoff (e.g. top 10)&quot;,
+      &quot;definition&quot; : &quot;Number of phenotypes cutoff (e.g. top 10).&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;integer&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.abscorrelation&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.abscorrelation&quot;,
+      &quot;short&quot; : &quot;Minimum absolute value of correlation coefficient&quot;,
+      &quot;definition&quot; : &quot;Minimum absolute value of correlation coefficient.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;decimal&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry&quot;,
+      &quot;short&quot; : &quot;Correlation entry&quot;,
+      &quot;definition&quot; : &quot;Correlation entry.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;BackboneElement&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.code&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.code&quot;,
+      &quot;short&quot; : &quot;Phenotype codes&quot;,
+      &quot;definition&quot; : &quot;Phenotype codes.&quot;,
+      &quot;min&quot; : 1,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;CodeableConcept&quot;
+      }],
+      &quot;isSummary&quot; : true
+    },
+    {
+      &quot;id&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.coefficient&quot;,
+      &quot;path&quot; : &quot;ClinicalProfile.hpo.correlatedPhenotypes.entry.coefficient&quot;,
+      &quot;short&quot; : &quot;Correlation coefficient&quot;,
+      &quot;definition&quot; : &quot;Correlation coefficient.&quot;,
+      &quot;min&quot; : 1,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;decimal&quot;
+      }],
+      &quot;isSummary&quot; : true
     }]
   }
 }
@@ -3646,15 +4163,14 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:26-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:30-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fclinicalprofile.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fclinicalprofile.profile.json.html">Compare to DSTU3</a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fclinicalprofile.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fclinicalprofile.profile.json.html">Ballot Comparison</a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fclinicalprofile.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fclinicalprofile.profile.json.html">Compare to R3</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
                <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>

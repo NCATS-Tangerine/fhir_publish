@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
   <!-- template-definitions.html --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>MedicationStatement - FHIR v3.6.0</title>
+  <title>MedicationStatement - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -115,7 +115,7 @@
 <table class="dict">
   <tr><td colspan="2" class="structure"><a name="MedicationStatement"> </a><b>MedicationStatement</b></td></tr>
   <tr><td>Element Id</td><td>MedicationStatement</td></tr>
-  <tr><td>Definition</td><td><p>A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now, or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains.</p>
+  <tr><td>Definition</td><td><p>A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains.</p>
 <p>The primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..*</td></tr>
@@ -161,7 +161,7 @@ Status=In Error + NotTaken=N/A = In Error.</p>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
   <tr><td colspan="2" class="structure"><a name="MedicationStatement.status"> </a><b>MedicationStatement.status</b></td></tr>
   <tr><td>Element Id</td><td>MedicationStatement.status</td></tr>
-  <tr><td>Definition</td><td><p>A code representing the patient or other source's judgment about the state of the medication used that this statement is about.  Generally this will be active or completed.</p>
+  <tr><td>Definition</td><td><p>A code representing the patient or other source's judgment about the state of the medication used that this statement is about.  Generally, this will be active or completed.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>1..1</td></tr>
   <tr><td><a href="terminologies.html">Terminology Binding</a></td><td><a href="valueset-medication-statement-status.html">Medication  status  codes</a> (<a href="terminologies.html#required">Required</a>)</td></tr>
@@ -197,7 +197,7 @@ Status=In Error + NotTaken=N/A = In Error.</p>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#CodeableConcept">CodeableConcept</a>|<a href="references.html#Reference">Reference</a>(<a href="medication.html">Medication</a>)</td></tr>
   <tr><td>[x] Note</td><td>See <a href="formats.html#choice">Choice of Data Types</a> for further information about how to use [x]</td></tr>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
-  <tr><td>Comments</td><td><p>If only a code is specified, then it needs to be a code for a specific product. If more information is required, then the use of the medication resource is recommended.  For example if you require form or lot number, then you must reference the Medication resource.</p>
+  <tr><td>Comments</td><td><p>If only a code is specified, then it needs to be a code for a specific product. If more information is required, then the use of the medication resource is recommended.  For example, if you require form or lot number, then you must reference the Medication resource.</p>
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="MedicationStatement.subject"> </a><b>MedicationStatement.subject</b></td></tr>
   <tr><td>Element Id</td><td>MedicationStatement.subject</td></tr>
@@ -215,7 +215,7 @@ Status=In Error + NotTaken=N/A = In Error.</p>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
   <tr><td colspan="2" class="structure"><a name="MedicationStatement.effective_x_"> </a><b>MedicationStatement.effective[x]</b></td></tr>
   <tr><td>Element Id</td><td>MedicationStatement.effective[x]</td></tr>
-  <tr><td>Definition</td><td><p>The interval of time during which it is being asserted that the patient is/was/will be taking the medication ( or was not taking, when the MedicationStatement.taken element is No).</p>
+  <tr><td>Definition</td><td><p>The interval of time during which it is being asserted that the patient is/was/will be taking the medication (or was not taking, when the MedicationStatement.taken element is No).</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#dateTime">dateTime</a>|<a href="datatypes.html#Period">Period</a></td></tr>
@@ -235,7 +235,7 @@ Status=In Error + NotTaken=N/A = In Error.</p>
   <tr><td>Definition</td><td><p>The person or organization that provided the information about the taking of this medication. Note: Use derivedFrom when a MedicationStatement is derived from other resources, e.g. Claim or MedicationRequest.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
-  <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="patient.html">Patient</a> | <a href="practitioner.html">Practitioner</a> | <a href="relatedperson.html">RelatedPerson</a> | <a href="organization.html">Organization</a>)</td></tr>
+  <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="patient.html">Patient</a> | <a href="practitioner.html">Practitioner</a> | <a href="practitionerrole.html">PractitionerRole</a> | <a href="relatedperson.html">RelatedPerson</a> | <a href="organization.html">Organization</a>)</td></tr>
   <tr><td colspan="2" class="structure"><a name="MedicationStatement.derivedFrom"> </a><b>MedicationStatement.derivedFrom</b></td></tr>
   <tr><td>Element Id</td><td>MedicationStatement.derivedFrom</td></tr>
   <tr><td>Definition</td><td><p>Allows linking the MedicationStatement to the underlying MedicationRequest, or to other information that supports or is used to derive the MedicationStatement.</p>
@@ -293,15 +293,14 @@ Status=In Error + NotTaken=N/A = In Error.</p>
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:30-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fmedicationstatement-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmedicationstatement-definitions.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fmedicationstatement-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmedicationstatement-definitions.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fmedicationstatement-definitions.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmedicationstatement-definitions.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

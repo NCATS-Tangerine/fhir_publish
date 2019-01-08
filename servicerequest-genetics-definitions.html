@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
   <!-- template-profile-definitions.html --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>StructureDefinition: ServiceRequest-Genetics - FHIR v3.6.0</title>
+  <title>StructureDefinition: ServiceRequest-Genetics - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -413,7 +413,7 @@
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="location.html" title="http://hl7.org/fhir/StructureDefinition/Location">Location</a>)</td></tr>
   <tr><td colspan="2" class="structure"><a name="servicerequest-genetics.ServiceRequest.reasonCode"> </a><b>ServiceRequest.reasonCode</b></td></tr>
   <tr><td>Element Id</td><td>ServiceRequest.reasonCode</td></tr>
-  <tr><td>Definition</td><td><p>An explanation or justification for why this service is being requested in coded or textual form.   This is often for billing purposes.  May relate to the resources referred to in supportingInformation.</p>
+  <tr><td>Definition</td><td><p>An explanation or justification for why this service is being requested in coded or textual form.   This is often for billing purposes.  May relate to the resources referred to in <code>supportingInfo</code>.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..*</td></tr>
   <tr><td><a href="terminologies.html">Terminology Binding</a></td><td>Diagnosis or problem codes justifying the reason for requesting the service investigation.<br/>For example codes, see <a href="valueset-procedure-reason.html">Procedure Reason Codes</a></td></tr>
@@ -422,11 +422,11 @@
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="servicerequest-genetics.ServiceRequest.reasonReference"> </a><b>ServiceRequest.reasonReference</b></td></tr>
   <tr><td>Element Id</td><td>ServiceRequest.reasonReference</td></tr>
-  <tr><td>Definition</td><td><p>Indicates another resource that provides a justification for why this service is being requested.   May relate to the resources referred to in supportingInformation.</p>
+  <tr><td>Definition</td><td><p>Indicates another resource that provides a justification for why this service is being requested.   May relate to the resources referred to in <code>supportingInfo</code>.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..*</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="condition.html" title="http://hl7.org/fhir/StructureDefinition/Condition">Condition</a>)</td></tr>
-  <tr><td>Comments</td><td><p>This element represents why the referral is being made and may be used to decide how the service will be performed, or even if it will be performed at all.    To be as specific as possible,  a reference to  <em>Observation</em> or <em>Condition</em> should be used if available.  Otherwise when referencing  <em>DiagnosticReport</em>  it should contain a finding  in <code>DiagnosticReport.conclusion</code> and/or <code>DiagnosticReport.conclusionCode</code>.   When using a  reference to <em>DocumentReference</em>, the target document should contain clear findings language providing the relevant reason for this service request .  Use  the CodeableConcept text element in <code>ServiceRequest.reasonCode</code> if the data is free (uncoded) text as shown in the <a href="servicerequest-example-di.html">CT Scan example</a>.</p>
+  <tr><td>Comments</td><td><p>This element represents why the referral is being made and may be used to decide how the service will be performed, or even if it will be performed at all.    To be as specific as possible,  a reference to  <em>Observation</em> or <em>Condition</em> should be used if available.  Otherwise when referencing  <em>DiagnosticReport</em>  it should contain a finding  in <code>DiagnosticReport.conclusion</code> and/or <code>DiagnosticReport.conclusionCode</code>.   When using a reference to <em>DocumentReference</em>, the target document should contain clear findings language providing the relevant reason for this service request.  Use  the CodeableConcept text element in <code>ServiceRequest.reasonCode</code> if the data is free (uncoded) text as shown in the <a href="servicerequest-example-di.html">CT Scan example</a>.</p>
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="servicerequest-genetics.ServiceRequest.insurance"> </a><b>ServiceRequest.insurance</b></td></tr>
   <tr><td>Element Id</td><td>ServiceRequest.insurance</td></tr>
@@ -441,7 +441,7 @@
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..*</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="resource.html">Resource</a>)</td></tr>
   <tr><td title="Other names by which this resource/element may be known">Alternate Names</td><td>Ask at order entry question, AOE</td></tr>
-  <tr><td>Comments</td><td><p>For information how the services are to be delivered. use the <code>instructions</code> element.</p>
+  <tr><td>Comments</td><td><p>To represent information about how the services are to be delivered use the <code>instructions</code> element.</p>
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="servicerequest-genetics.ServiceRequest.specimen"> </a><b>ServiceRequest.specimen</b></td></tr>
   <tr><td>Element Id</td><td>ServiceRequest.specimen</td></tr>
@@ -449,7 +449,7 @@
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..*</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="references.html#Reference">Reference</a>(<a href="specimen.html" title="http://hl7.org/fhir/StructureDefinition/Specimen">Specimen</a>)</td></tr>
-  <tr><td>Comments</td><td><p>Many diagnostic procedures need a specimen, but the request itself is not actually about the specimen. This element is for when the diagnostic is requested on already existing specimens and the request points to the specimen it applies to.    Conversely, If the request is entered first with an unknown specimen, The <a href="specimen.html">Specimen</a> resource references to the ServiceRequest.</p>
+  <tr><td>Comments</td><td><p>Many diagnostic procedures need a specimen, but the request itself is not actually about the specimen. This element is for when the diagnostic is requested on already existing specimens and the request points to the specimen it applies to.    Conversely, if the request is entered first with an unknown specimen, then the <a href="specimen.html">Specimen</a> resource points to the ServiceRequest.</p>
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="servicerequest-genetics.ServiceRequest.bodySite"> </a><b>ServiceRequest.bodySite</b></td></tr>
   <tr><td>Element Id</td><td>ServiceRequest.bodySite</td></tr>
@@ -502,15 +502,14 @@ All Provenances should have some historical version of this Request as their sub
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fservicerequest-genetics&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fservicerequest-genetics">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fservicerequest-genetics&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fservicerequest-genetics">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fservicerequest-genetics&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fservicerequest-genetics">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

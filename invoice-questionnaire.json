@@ -8,8 +8,8 @@
     "status" : "active",
     "description" : "Type options for Invoice.lineItem.chargeItem[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:818a96af-4c80-4675-bf15-c25f2d903ff8",
-      "timestamp" : "2018-12-13T14:26:54-06:00",
+      "identifier" : "urn:uuid:671d7844-beca-4357-aeef-e2848b7219fc",
+      "timestamp" : "2019-01-08T15:30:38-06:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/resource-types",
         "code" : "ChargeItem",
@@ -25,9 +25,9 @@
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
-  "version" : "3.6.0",
+  "version" : "4.0.0",
   "status" : "draft",
-  "date" : "2018-12-13T14:23:07-06:00",
+  "date" : "2019-01-08T15:26:24-06:00",
   "publisher" : "Health Level Seven International (Financial Management)",
   "item" : [{
     "linkId" : "Invoice",
@@ -288,7 +288,7 @@
             }]
           }
         }],
-        "text" : "Identifier of this Invoice, often used for reference in corresponcence about this invoice or for tracking of payments.",
+        "text" : "Identifier of this Invoice, often used for reference in correspondence about this invoice or for tracking of payments.",
         "type" : "display"
       },
       {
@@ -376,7 +376,7 @@
             }]
           }
         }],
-        "text" : "In case of Invoice cancellation a reason must be given (entered in error, superseded by corrected invoice etc.). Derived Profiles may chose to add invariants requiring this field to be populated if either priceOverride or factorOverride have been filled.",
+        "text" : "In case of Invoice cancellation a reason must be given (entered in error, superseded by corrected invoice etc.). Derived Profiles may choose to add invariants requiring this field to be populated if either priceOverride or factorOverride have been filled.",
         "type" : "display"
       },
       {
@@ -412,7 +412,7 @@
             }]
           }
         }],
-        "text" : "Type of Invoice depending on domain, realm an usage (eg. internal/external, dental, preliminary).",
+        "text" : "Type of Invoice depending on domain, realm an usage (e.g. internal/external, dental, preliminary).",
         "type" : "display"
       },
       {
@@ -658,7 +658,7 @@
           "valueString" : "CodeableConcept"
         }],
         "linkId" : "Invoice.participant.role",
-        "text" : "Type of involevent in creation of this Invoice",
+        "text" : "Type of involvement in creation of this Invoice",
         "type" : "group",
         "required" : false,
         "repeats" : true,
@@ -725,7 +725,7 @@
         {
           "extension" : [{
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-            "valueCode" : "Practitioner, Organization, Patient, Device, RelatedPerson"
+            "valueCode" : "Practitioner, Organization, Patient, PractitionerRole, Device, RelatedPerson"
           },
           {
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
@@ -842,7 +842,7 @@
             }]
           }
         }],
-        "text" : "Each line item represents one charge for goods ond services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.",
+        "text" : "Each line item represents one charge for goods and services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.",
         "type" : "display"
       },
       {
@@ -982,7 +982,7 @@
               }]
             }
           }],
-          "text" : "The ChargeItem contains information such as the billing code, date, amount etc. Of no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.",
+          "text" : "The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.",
           "type" : "display"
         },
         {
@@ -1055,7 +1055,7 @@
               }]
             }
           }],
-          "text" : "The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under developement. The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the prices have been calculated.",
+          "text" : "The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice as to how the prices have been calculated.",
           "type" : "display"
         },
         {
@@ -1241,7 +1241,7 @@
                 }]
               }
             }],
-            "text" : "The factor that has been applied on the base price for calculating this component. There is no reason to carry the price in the instance of a ChargeItem unless circumstances require a manual override. The list prices or are usually defined in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overriden.",
+            "text" : "The factor that has been applied on the base price for calculating this component. There is no reason to carry the price in the instance of a ChargeItem unless circumstances require a manual override. The list prices or are usually defined in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overridden.",
             "type" : "display"
           },
           {
@@ -1277,7 +1277,7 @@
                 }]
               }
             }],
-            "text" : "The amount calculated for this component. There is no reason to carry the price in the instance of a ChargeItem unless circumstances require a manual override. The list prices or are usually defined in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overriden.",
+            "text" : "The amount calculated for this component. There is no reason to carry the price in the instance of a ChargeItem unless circumstances require a manual override. The list prices or are usually defined in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overridden.",
             "type" : "display"
           },
           {
@@ -1364,7 +1364,7 @@
             }]
           }
         }],
-        "text" : "Invoice total , taxes excluded. There is no reason to carry the price in the instance of a ChargeItem unless circumstances require a manual override. The list prices or are usually defined in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overriden.",
+        "text" : "Invoice total , taxes excluded. There is no reason to carry the price in the instance of a ChargeItem unless circumstances require a manual override. The list prices or are usually defined in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overridden.",
         "type" : "display"
       },
       {
@@ -1428,7 +1428,7 @@
             }]
           }
         }],
-        "text" : "Invoice total, tax included. There is no reason to carry the price in the instance of a ChargeItem unless circumstances require a manual override. The list prices or are usually defined in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overriden.",
+        "text" : "Invoice total, tax included. There is no reason to carry the price in the instance of a ChargeItem unless circumstances require a manual override. The list prices or are usually defined in a back catalogue of the billing codes  (see ChargeItem.definition). Derived profiles may require a ChargeItem.overrideReason to be provided if either factor or price are manually overridden.",
         "type" : "display"
       },
       {
@@ -1491,7 +1491,7 @@
             }]
           }
         }],
-        "text" : "Payment details such as banking details, period of payment, deductables, methods of payment. Derived Profiles may chose to add invariants requiring this field to be populated if either priceOverride or factorOverride have been filled.",
+        "text" : "Payment details such as banking details, period of payment, deductibles, methods of payment. Derived Profiles may chose to add invariants requiring this field to be populated if either priceOverride or factorOverride have been filled.",
         "type" : "display"
       },
       {
@@ -1523,7 +1523,7 @@
             }]
           }
         }],
-        "text" : "Comments made about the invoice by the issuer, subject or other participants.",
+        "text" : "Comments made about the invoice by the issuer, subject, or other participants.",
         "type" : "display"
       }]
     }]

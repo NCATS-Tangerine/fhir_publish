@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
+  Generated on Tue, Jan 8, 2019 15:26-0600 for FHIR v4.0.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -54,7 +54,7 @@
               <xs:documentation xml:lang="en">Unique identifier for this copy of the Consent Statement.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="status" minOccurs="1" maxOccurs="1" type="EventStatus">
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="ConsentState">
             <xs:annotation>
               <xs:documentation xml:lang="en">Indicates the current state of this consent.</xs:documentation>
            </xs:annotation>
@@ -332,6 +332,51 @@
     <xs:complexContent>
       <xs:extension base="Element">
         <xs:attribute name="value" type="ConsentDataMeaning-list" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ConsentState-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="draft">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Pending</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="proposed">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Proposed</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="active">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Active</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rejected">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Rejected</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="inactive">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Inactive</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="entered-in-error">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Entered in Error</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ConsentState">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Indicates the state of the consent.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Element">
+        <xs:attribute name="value" type="ConsentState-list" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

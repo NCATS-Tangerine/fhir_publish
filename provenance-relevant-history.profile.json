@@ -18,7 +18,7 @@
     "valueCode" : "trial-use"
   }],
   "url" : "http://hl7.org/fhir/StructureDefinition/provenance-relevant-history",
-  "version" : "3.6.0",
+  "version" : "4.0.0",
   "name" : "Provenance Relevant History",
   "status" : "draft",
   "experimental" : false,
@@ -31,7 +31,7 @@
     }]
   }],
   "description" : "Guidance on using Provenance for related history elements",
-  "fhirVersion" : "3.6.0",
+  "fhirVersion" : "4.0.0",
   "mapping" : [{
     "identity" : "workflow",
     "uri" : "http://hl7.org/fhir/workflow",
@@ -382,8 +382,8 @@
       }]
     },
     {
-      "id" : "Provenance.occurred[x]",
-      "path" : "Provenance.occurred[x]",
+      "id" : "Provenance.occurredDateTime",
+      "path" : "Provenance.occurredDateTime",
       "short" : "When the activity occurred",
       "definition" : "This indicates the time the resource action (creation, revision, deletion, etc.) occurred.",
       "comment" : "Both low and high will be set to the time the record event occurred.  (In a future version, this element will likely be a choice with dateTime so that multiple values aren't needed.).",
@@ -395,9 +395,6 @@
         "max" : "1"
       },
       "type" : [{
-        "code" : "Period"
-      },
-      {
         "code" : "dateTime"
       }],
       "mustSupport" : true,
@@ -1313,7 +1310,7 @@
         }],
         "strength" : "required",
         "description" : "How an entity was used in an activity.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/provenance-entity-role"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/provenance-entity-role|4.0.0"
       },
       "mapping" : [{
         "identity" : "rim",
@@ -1420,12 +1417,15 @@
       "mustSupport" : true
     },
     {
-      "id" : "Provenance.occurredDateTime",
-      "path" : "Provenance.occurredDateTime",
+      "id" : "Provenance.occurred[x]",
+      "path" : "Provenance.occurred[x]",
       "definition" : "This indicates the time the resource action (creation, revision, deletion, etc.) occurred.",
       "comment" : "Both low and high will be set to the time the record event occurred.  (In a future version, this element will likely be a choice with dateTime so that multiple values aren't needed.).",
       "min" : 1,
       "max" : "1",
+      "type" : [{
+        "code" : "dateTime"
+      }],
       "mustSupport" : true
     },
     {

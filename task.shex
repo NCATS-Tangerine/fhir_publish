@@ -79,6 +79,69 @@ start=@<Task> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# Information produced as part of task
+<Task.output> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:Task.output.type @<CodeableConcept>;  # Label for output
+    (                                       # Result of output
+        fhir:Task.output.valueBase64Binary @<base64Binary>  |
+        fhir:Task.output.valueBoolean @<boolean>  |
+        fhir:Task.output.valueCanonical @<canonical>  |
+        fhir:Task.output.valueCode @<code>  |
+        fhir:Task.output.valueDate @<date>  |
+        fhir:Task.output.valueDateTime @<dateTime>  |
+        fhir:Task.output.valueDecimal @<decimal>  |
+        fhir:Task.output.valueId @<id>  |
+        fhir:Task.output.valueInstant @<instant>  |
+        fhir:Task.output.valueInteger @<integer>  |
+        fhir:Task.output.valueMarkdown @<markdown>  |
+        fhir:Task.output.valueOid @<oid>  |
+        fhir:Task.output.valuePositiveInt @<positiveInt>  |
+        fhir:Task.output.valueString @<string>  |
+        fhir:Task.output.valueTime @<time>  |
+        fhir:Task.output.valueUnsignedInt @<unsignedInt>  |
+        fhir:Task.output.valueUri @<uri>  |
+        fhir:Task.output.valueUrl @<url>  |
+        fhir:Task.output.valueUuid @<uuid>  |
+        fhir:Task.output.valueAddress @<Address>  |
+        fhir:Task.output.valueAge @<Age>  |
+        fhir:Task.output.valueAnnotation @<Annotation>  |
+        fhir:Task.output.valueAttachment @<Attachment>  |
+        fhir:Task.output.valueCodeableConcept @<CodeableConcept>  |
+        fhir:Task.output.valueCoding @<Coding>  |
+        fhir:Task.output.valueContactPoint @<ContactPoint>  |
+        fhir:Task.output.valueCount @<Count>  |
+        fhir:Task.output.valueDistance @<Distance>  |
+        fhir:Task.output.valueDuration @<Duration>  |
+        fhir:Task.output.valueHumanName @<HumanName>  |
+        fhir:Task.output.valueIdentifier @<Identifier>  |
+        fhir:Task.output.valueMoney @<Money>  |
+        fhir:Task.output.valuePeriod @<Period>  |
+        fhir:Task.output.valueQuantity @<Quantity>  |
+        fhir:Task.output.valueRange @<Range>  |
+        fhir:Task.output.valueRatio @<Ratio>  |
+        fhir:Task.output.valueReference @<Reference>  |
+        fhir:Task.output.valueSampledData @<SampledData>  |
+        fhir:Task.output.valueSignature @<Signature>  |
+        fhir:Task.output.valueTiming @<Timing>  |
+        fhir:Task.output.valueContactDetail @<ContactDetail>  |
+        fhir:Task.output.valueContributor @<Contributor>  |
+        fhir:Task.output.valueDataRequirement @<DataRequirement>  |
+        fhir:Task.output.valueExpression @<Expression>  |
+        fhir:Task.output.valueParameterDefinition @<ParameterDefinition>  |
+        fhir:Task.output.valueRelatedArtifact @<RelatedArtifact>  |
+        fhir:Task.output.valueTriggerDefinition @<TriggerDefinition>  |
+        fhir:Task.output.valueUsageContext @<UsageContext>  |
+        fhir:Task.output.valueDosage @<Dosage> 
+    );
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # Information used to perform task
 <Task.input> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -139,69 +202,6 @@ start=@<Task> AND {fhir:nodeRole [fhir:treeRoot]}
         fhir:Task.input.valueTriggerDefinition @<TriggerDefinition>  |
         fhir:Task.input.valueUsageContext @<UsageContext>  |
         fhir:Task.input.valueDosage @<Dosage> 
-    );
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Information produced as part of task
-<Task.output> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Task.output.type @<CodeableConcept>;  # Label for output
-    (                                       # Result of output
-        fhir:Task.output.valueBase64Binary @<base64Binary>  |
-        fhir:Task.output.valueBoolean @<boolean>  |
-        fhir:Task.output.valueCanonical @<canonical>  |
-        fhir:Task.output.valueCode @<code>  |
-        fhir:Task.output.valueDate @<date>  |
-        fhir:Task.output.valueDateTime @<dateTime>  |
-        fhir:Task.output.valueDecimal @<decimal>  |
-        fhir:Task.output.valueId @<id>  |
-        fhir:Task.output.valueInstant @<instant>  |
-        fhir:Task.output.valueInteger @<integer>  |
-        fhir:Task.output.valueMarkdown @<markdown>  |
-        fhir:Task.output.valueOid @<oid>  |
-        fhir:Task.output.valuePositiveInt @<positiveInt>  |
-        fhir:Task.output.valueString @<string>  |
-        fhir:Task.output.valueTime @<time>  |
-        fhir:Task.output.valueUnsignedInt @<unsignedInt>  |
-        fhir:Task.output.valueUri @<uri>  |
-        fhir:Task.output.valueUrl @<url>  |
-        fhir:Task.output.valueUuid @<uuid>  |
-        fhir:Task.output.valueAddress @<Address>  |
-        fhir:Task.output.valueAge @<Age>  |
-        fhir:Task.output.valueAnnotation @<Annotation>  |
-        fhir:Task.output.valueAttachment @<Attachment>  |
-        fhir:Task.output.valueCodeableConcept @<CodeableConcept>  |
-        fhir:Task.output.valueCoding @<Coding>  |
-        fhir:Task.output.valueContactPoint @<ContactPoint>  |
-        fhir:Task.output.valueCount @<Count>  |
-        fhir:Task.output.valueDistance @<Distance>  |
-        fhir:Task.output.valueDuration @<Duration>  |
-        fhir:Task.output.valueHumanName @<HumanName>  |
-        fhir:Task.output.valueIdentifier @<Identifier>  |
-        fhir:Task.output.valueMoney @<Money>  |
-        fhir:Task.output.valuePeriod @<Period>  |
-        fhir:Task.output.valueQuantity @<Quantity>  |
-        fhir:Task.output.valueRange @<Range>  |
-        fhir:Task.output.valueRatio @<Ratio>  |
-        fhir:Task.output.valueReference @<Reference>  |
-        fhir:Task.output.valueSampledData @<SampledData>  |
-        fhir:Task.output.valueSignature @<Signature>  |
-        fhir:Task.output.valueTiming @<Timing>  |
-        fhir:Task.output.valueContactDetail @<ContactDetail>  |
-        fhir:Task.output.valueContributor @<Contributor>  |
-        fhir:Task.output.valueDataRequirement @<DataRequirement>  |
-        fhir:Task.output.valueExpression @<Expression>  |
-        fhir:Task.output.valueParameterDefinition @<ParameterDefinition>  |
-        fhir:Task.output.valueRelatedArtifact @<RelatedArtifact>  |
-        fhir:Task.output.valueTriggerDefinition @<TriggerDefinition>  |
-        fhir:Task.output.valueUsageContext @<UsageContext>  |
-        fhir:Task.output.valueDosage @<Dosage> 
     );
     fhir:index xsd:integer?                 # Relative position in a list
 }
@@ -1050,21 +1050,6 @@ start=@<Task> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What codes are expected
-<DataRequirement.codeFilter> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
-                                            # on 
-    fhir:DataRequirement.codeFilter.searchParam @<string>?;  # A coded (token) parameter to 
-                                            # search on 
-    fhir:DataRequirement.codeFilter.valueSet @<canonical>?;  # Valueset for the filter
-    fhir:DataRequirement.codeFilter.code @<Coding>*;  # What code is expected
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # What dates/date ranges are expected
 <DataRequirement.dateFilter> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -1081,6 +1066,54 @@ start=@<Task> AND {fhir:nodeRole [fhir:treeRoot]}
         fhir:DataRequirement.dateFilter.valueDateTime @<dateTime>  |
         fhir:DataRequirement.dateFilter.valuePeriod @<Period>  |
         fhir:DataRequirement.dateFilter.valueDuration @<Duration> 
+    )?;
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Order of the results
+<DataRequirement.sort> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
+                                            # perform the sort 
+    fhir:DataRequirement.sort.direction @<code> AND
+    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# What codes are expected
+<DataRequirement.codeFilter> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
+                                            # on 
+    fhir:DataRequirement.codeFilter.searchParam @<string>?;  # A coded (token) parameter to 
+                                            # search on 
+    fhir:DataRequirement.codeFilter.valueSet @<canonical>?;  # Valueset for the filter
+    fhir:DataRequirement.codeFilter.code @<Coding>*;  # What code is expected
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Amount of medication administered
+<Dosage.doseAndRate> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:Dosage.doseAndRate.type @<CodeableConcept>?;  # The kind of dose or rate specified
+    (                                       # Amount of medication per dose
+        fhir:Dosage.doseAndRate.doseRange @<Range>  |
+        fhir:Dosage.doseAndRate.doseQuantity @<SimpleQuantity> 
+    )?;
+    (                                       # Amount of medication per unit of 
+                                            # time 
+        fhir:Dosage.doseAndRate.rateRatio @<Ratio>  |
+        fhir:Dosage.doseAndRate.rateRange @<Range>  |
+        fhir:Dosage.doseAndRate.rateQuantity @<SimpleQuantity> 
     )?;
     fhir:index xsd:integer?                 # Relative position in a list
 }
@@ -1125,105 +1158,72 @@ start=@<Task> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Order of the results
-<DataRequirement.sort> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
-                                            # perform the sort 
-    fhir:DataRequirement.sort.direction @<code> AND
-    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Amount of medication administered
-<Dosage.doseAndRate> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:Dosage.doseAndRate.type @<CodeableConcept>?;  # The kind of dose or rate specified
-    (                                       # Amount of medication per dose
-        fhir:Dosage.doseAndRate.doseRange @<Range>  |
-        fhir:Dosage.doseAndRate.doseQuantity @<SimpleQuantity> 
-    )?;
-    (                                       # Amount of medication per unit of 
-                                            # time 
-        fhir:Dosage.doseAndRate.rateRatio @<Ratio>  |
-        fhir:Dosage.doseAndRate.rateRange @<Range>  |
-        fhir:Dosage.doseAndRate.rateQuantity @<SimpleQuantity> 
-    )?;
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 #---------------------- Reference Types -------------------
 
 #---------------------- Value Sets ------------------------
 
-# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
-fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "ItemInstance" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
-
-# The possible sort directions, ascending or descending.
-fhirvs:sort-direction ["ascending" "descending"]
-
 # The type of an address (physical / postal).
 fhirvs:address-type ["postal" "physical" "both"]
 
-# The status of a resource narrative.
-fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
-
-# A unit of time (units from UCUM).
-fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
-
-# The type of trigger.
-fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
-
-# The type of relationship to the related artifact.
-fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
+# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
+fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
 
 # The days of the week.
 fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
 
-# Whether an operation parameter is an input or an output parameter.
-fhirvs:operation-parameter-use ["in" "out"]
-
-# Telecommunications form for contact point.
-fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
-
-# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
-fhirvs:mimetypes EXTERNAL
-
-# Identifies the purpose for this identifier, if known .
-fhirvs:identifier-use ["usual" "official" "temp" "secondary" "old"]
-
-# How the Quantity should be understood and represented.
-fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
-
-# Real world event relating to the schedule.
-fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
+# The use of an address.
+fhirvs:address-use ["home" "work" "temp" "old" "billing"]
 
 # Distinguishes whether the task is a proposal, plan or full order.
 fhirvs:task-intent ["unknown" "proposal" "plan" "order" "original-order" "reflex-order" "filler-order" "instance-order" "option"]
 
-# The clinical priority of a diagnostic order.
-fhirvs:request-priority ["routine" "urgent" "asap" "stat"]
+# The status of a resource narrative.
+fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
 
-# Use of contact point.
-fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
+# Real world event relating to the schedule.
+fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
 
-# The use of a human name.
-fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
+# A unit of time (units from UCUM).
+fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
 
-# The current status of the task.
-fhirvs:task-status ["draft" "requested" "received" "accepted" "rejected" "ready" "cancelled" "in-progress" "on-hold" "failed" "completed" "entered-in-error"]
+# How the Quantity should be understood and represented.
+fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
 
-# The type of contributor.
-fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
+# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
+fhirvs:mimetypes EXTERNAL
 
 # Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
 fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "BAM" "BBD" "BDT" "BGN" "BHD" "BIF" "BMD" "BND" "BOB" "BOV" "BRL" "BSD" "BTN" "BWP" "BYN" "BZD" "CAD" "CDF" "CHE" "CHF" "CHW" "CLF" "CLP" "CNY" "COP" "COU" "CRC" "CUC" "CUP" "CVE" "CZK" "DJF" "DKK" "DOP" "DZD" "EGP" "ERN" "ETB" "EUR" "FJD" "FKP" "GBP" "GEL" "GGP" "GHS" "GIP" "GMD" "GNF" "GTQ" "GYD" "HKD" "HNL" "HRK" "HTG" "HUF" "IDR" "ILS" "IMP" "INR" "IQD" "IRR" "ISK" "JEP" "JMD" "JOD" "JPY" "KES" "KGS" "KHR" "KMF" "KPW" "KRW" "KWD" "KYD" "KZT" "LAK" "LBP" "LKR" "LRD" "LSL" "LYD" "MAD" "MDL" "MGA" "MKD" "MMK" "MNT" "MOP" "MRU" "MUR" "MVR" "MWK" "MXN" "MXV" "MYR" "MZN" "NAD" "NGN" "NIO" "NOK" "NPR" "NZD" "OMR" "PAB" "PEN" "PGK" "PHP" "PKR" "PLN" "PYG" "QAR" "RON" "RSD" "RUB" "RWF" "SAR" "SBD" "SCR" "SDG" "SEK" "SGD" "SHP" "SLL" "SOS" "SRD" "SSP" "STN" "SVC" "SYP" "SZL" "THB" "TJS" "TMT" "TND" "TOP" "TRY" "TTD" "TVD" "TWD" "TZS" "UAH" "UGX" "USD" "USN" "UYI" "UYU" "UZS" "VEF" "VND" "VUV" "WST" "XAF" "XAG" "XAU" "XBA" "XBB" "XBC" "XBD" "XCD" "XDR" "XOF" "XPD" "XPF" "XPT" "XSU" "XTS" "XUA" "XXX" "YER" "ZAR" "ZMW" "ZWL"]
 
-# The use of an address.
-fhirvs:address-use ["home" "work" "temp" "old" "billing"]
+# Telecommunications form for contact point.
+fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
+
+# The possible sort directions, ascending or descending.
+fhirvs:sort-direction ["ascending" "descending"]
+
+# The current status of the task.
+fhirvs:task-status ["draft" "requested" "received" "accepted" "rejected" "ready" "cancelled" "in-progress" "on-hold" "failed" "completed" "entered-in-error"]
+
+# The type of relationship to the related artifact.
+fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
+
+# Use of contact point.
+fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
+
+# The clinical priority of a diagnostic order.
+fhirvs:request-priority ["routine" "urgent" "asap" "stat"]
+
+# The type of trigger.
+fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
+
+# Whether an operation parameter is an input or an output parameter.
+fhirvs:operation-parameter-use ["in" "out"]
+
+# Identifies the purpose for this identifier, if known .
+fhirvs:identifier-use ["usual" "official" "temp" "secondary" "old"]
+
+# The type of contributor.
+fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
+
+# The use of a human name.
+fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]

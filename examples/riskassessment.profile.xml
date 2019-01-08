@@ -3,7 +3,7 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
   <id value="RiskAssessment"/>
   <meta>
-    <lastUpdated value="2018-12-13T14:23:07.677-06:00"/>
+    <lastUpdated value="2019-01-08T15:26:24.615-06:00"/>
   </meta>
   <text>
     <status value="generated"/>
@@ -195,8 +195,8 @@
             <img src="data: image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAWCAYAAAABxvaqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYeFzIs1vtcMQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAE0lEQVQI12P4//8/AxMDAwNdCABMPwMo2ctnoQAAAABJRU5ErkJggg==" alt="." style="background-color: inherit" class="hierarchy"/>
             <img src="data: image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAWCAYAAADJqhx8AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYeFzI3XJ6V3QAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAANklEQVQ4y+2RsQ0AIAzDav7/2VzQwoCY4iWbZSmo1QGoUgNMghvWaIejPQW/CrrNCylIwcOCDYfLNRcNer4SAAAAAElFTkSuQmCC" alt="." style="background-color: inherit" class="hierarchy"/>
             <img src="data: image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAFxJREFUOE/NjEEOACEIA/0o/38GGw+agoXYeNnDJDCUDnd/gkoFKhWozJiZI3gLwY6rAgxhsPKTPUzycTl8lAryMyMsVQG6TFi6cHULyz8KOjC7OIQKlQpU3uPjAwhX2CCcGsgOAAAAAElFTkSuQmCC" alt="." style="background-color: white; background-color: inherit" title="Reference to another Resource" class="hierarchy"/> 
-            <span title="RiskAssessment.context : The encounter where the assessment was performed.">context</span>
-            <a name="RiskAssessment.context"> </a>
+            <span title="RiskAssessment.encounter : The encounter where the assessment was performed.">encounter</span>
+            <a name="RiskAssessment.encounter"> </a>
           </td>
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">
             <a style="padding-left: 3px; padding-right: 3px; color: black; background-color: white" href="elementdefinition-definitions.html#ElementDefinition.isSummary" title="This element is included in summaries">&#x3A3;</a>
@@ -204,8 +204,7 @@
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">0..1</td>
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">
             <a href="references.html#Reference">Reference</a>(
-            <a href="encounter.html">Encounter</a> | 
-            <a href="episodeofcare.html">EpisodeOfCare</a>)
+            <a href="encounter.html">Encounter</a>)
           </td>
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">Where was assessment performed?</td>
         </tr>
@@ -292,6 +291,7 @@
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">
             <a href="references.html#Reference">Reference</a>(
             <a href="practitioner.html">Practitioner</a> | 
+            <a href="practitionerrole.html">PractitionerRole</a> | 
             <a href="device.html">Device</a>)
           </td>
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">Who did assessment?</td>
@@ -614,10 +614,10 @@
     <valueCode value="cds"/>
   </extension>
   <url value="http://hl7.org/fhir/StructureDefinition/RiskAssessment"/>
-  <version value="3.6.0"/>
+  <version value="4.0.0"/>
   <name value="RiskAssessment"/>
   <status value="draft"/>
-  <date value="2018-12-13T14:23:07-06:00"/>
+  <date value="2019-01-08T15:26:24-06:00"/>
   <publisher value="Health Level Seven International (Clinical Decision Support)"/>
   <contact>
     <telecom>
@@ -632,7 +632,7 @@
     </telecom>
   </contact>
   <description value="An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome."/>
-  <fhirVersion value="3.6.0"/>
+  <fhirVersion value="4.0.0"/>
   <mapping>
     <identity value="workflow"/>
     <uri value="http://hl7.org/fhir/workflow"/>
@@ -1031,7 +1031,7 @@
         </extension>
         <strength value="required"/>
         <description value="The status of the risk assessment; e.g. preliminary, final, amended, etc."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/observation-status"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/observation-status|4.0.0"/>
       </binding>
       <mapping>
         <identity value="workflow"/>
@@ -1139,27 +1139,26 @@
         <map value="FiveWs.subject"/>
       </mapping>
     </element>
-    <element id="RiskAssessment.context">
-      <path value="RiskAssessment.context"/>
+    <element id="RiskAssessment.encounter">
+      <path value="RiskAssessment.encounter"/>
       <short value="Where was assessment performed?"/>
       <definition value="The encounter where the assessment was performed."/>
       <min value="0"/>
       <max value="1"/>
       <base>
-        <path value="RiskAssessment.context"/>
+        <path value="RiskAssessment.encounter"/>
         <min value="0"/>
         <max value="1"/>
       </base>
       <type>
         <code value="Reference"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Encounter"/>
-        <targetProfile value="http://hl7.org/fhir/StructureDefinition/EpisodeOfCare"/>
       </type>
       <isModifier value="false"/>
       <isSummary value="true"/>
       <mapping>
         <identity value="workflow"/>
-        <map value="Event.context"/>
+        <map value="Event.encounter"/>
       </mapping>
       <mapping>
         <identity value="w5"/>
@@ -1239,6 +1238,7 @@
       <type>
         <code value="Reference"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Practitioner"/>
+        <targetProfile value="http://hl7.org/fhir/StructureDefinition/PractitionerRole"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Device"/>
       </type>
       <isModifier value="false"/>
@@ -1757,7 +1757,7 @@
         </extension>
         <strength value="required"/>
         <description value="The status of the risk assessment; e.g. preliminary, final, amended, etc."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/observation-status"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/observation-status|4.0.0"/>
       </binding>
       <mapping>
         <identity value="workflow"/>
@@ -1847,8 +1847,8 @@
         <map value="FiveWs.subject"/>
       </mapping>
     </element>
-    <element id="RiskAssessment.context">
-      <path value="RiskAssessment.context"/>
+    <element id="RiskAssessment.encounter">
+      <path value="RiskAssessment.encounter"/>
       <short value="Where was assessment performed?"/>
       <definition value="The encounter where the assessment was performed."/>
       <min value="0"/>
@@ -1856,12 +1856,11 @@
       <type>
         <code value="Reference"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Encounter"/>
-        <targetProfile value="http://hl7.org/fhir/StructureDefinition/EpisodeOfCare"/>
       </type>
       <isSummary value="true"/>
       <mapping>
         <identity value="workflow"/>
-        <map value="Event.context"/>
+        <map value="Event.encounter"/>
       </mapping>
       <mapping>
         <identity value="w5"/>
@@ -1924,6 +1923,7 @@
       <type>
         <code value="Reference"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Practitioner"/>
+        <targetProfile value="http://hl7.org/fhir/StructureDefinition/PractitionerRole"/>
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Device"/>
       </type>
       <isSummary value="true"/>

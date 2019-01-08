@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Todo - FHIR v3.6.0</title>
+  <title>Todo - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -143,33 +143,21 @@ from implementers:
   <li><a href="clinicalreasoning-module.html#crm-feedback">Clinical Reasoning</a>: Multiple questions about implementation and usage</li>
   <li><a href="composition.html#dstu">Composition</a>: Is title different to type? and open questions about document signatures</li>
   <li><a href="condition.html#dstu-1">Condition</a>: How should "No Known Problems" be represented?</li>
-  <li><a href="device.html#dstu">Device</a>: Questions about instance vs kind, and multiple UDIs</li>
   <li><a href="devicerequest.html#dstu">DeviceRequest</a>: Should this be combined with SupplyRequest?</li>
-  <li><a href="diagnosticreport.html#dstu">DiagnosticReport</a>: Request for comments on Clinical Genomics approach</li>
   <li><a href="exchange-module.html#dstu">Exchange</a>: Should support for ProtocolBuffers be added to the specification?</li>
-  <li><a href="http.html#dstu-2">RESTful API</a>: Consequence of side effects in batches and transactions?</li>
-  <li><a href="http.html#dstu-4">RESTful API</a>: What are the documentation requirements around transaction integrity?</li>
-  <li><a href="immunization.html#dstu">Immunization</a>: Question about doseSequence and several new elements</li>
-  <li><a href="immunizationevaluation.html#dstu">ImmunizationEvaluation</a>: Question about general recommendation design</li>
-  <li><a href="immunizationrecommendation.html#dstu">ImmunizationRecommendation</a>: Question about recommendation cardinality and general recommendation design</li>
-  <li><a href="media.html#dstu">Media</a>: Request for comments on changes, and relationship with Observation</li>
-  <li><a href="narrative.html#dstu">Narrative</a>: Should narrative support multiple languages more directly?</li>
-  <li><a href="observation.html#dstu">Patient</a>: Request for comments on several changes</li>
-  <li><a href="observation.html#cg">Patient</a>: Request for comments on Clinical Genomics approach</li>
+  <li><a href="observation.html#dstu">Observation</a>: What is the best way to group Observations?</li>
   <li><a href="patient.html#dstu">Patient</a>: Should linking/merging affect the RESTful API?</li>
   <li><a href="profiling.html#dstu">Profiling Resources</a>: Need feedback on using system profiles</li>
   <li><a href="references.html#dstu">References between Resources</a>: Do we need to allow contained resources that reference the container?</li>
   <li><a href="safety.html#dstu0">Safety</a>: Request for comments about further development</li>
-  <li><a href="search.html#dstu2">Search</a>: does text search need to be standardized?</li>
-  <li><a href="search.html#dstu-tc">Search</a>: Problems with which elements are marked as 'included in summary'</li>
-  <li><a href="security.html#dstu">Security</a>: Feedback about signatures on RESTful interfaces sought</li>
+  <li><a href="signatures.html#dstu">Security</a>: Feedback about signatures on RESTful interfaces sought</li>
   <li><a href="subscription.html#dstu">Subscription</a>: messaging details still to be resolved</li>
-  <li><a href="servicerequest.html#dstu">ServiceRequest</a>: Various Implementation/Design questions</li>
+
   <li><a href="supplyrequest.html#dstu">SupplyRequest</a>: Should this be combined with DeviceRequest?</li>
   <li><a href="storage.html#dstu">Persistent Store/Database</a>: Is a standard extension required for resolved links?</li>
-  <li><a href="workflow.html#issues">Workflow</a>: several implementation questions</li> --&gt;
+  <li><a href="task.html#dstu">Task</a>: Question about pre-requisites</li>
+  <li><a href="workflow.html#issues">Workflow</a>: several implementation questions</li> 
 </ul>
-
 </div>
 
 
@@ -184,15 +172,14 @@ from implementers:
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Ftodo.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Ftodo.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Ftodo.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Ftodo.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Ftodo.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Ftodo.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

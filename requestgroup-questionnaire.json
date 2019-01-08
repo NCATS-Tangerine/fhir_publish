@@ -8,8 +8,8 @@
     "status" : "active",
     "description" : "Type options for RequestGroup.action.relatedAction.offset[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:b1ae4333-af19-4b55-99af-d4cba019ad42",
-      "timestamp" : "2018-12-13T14:27:28-06:00",
+      "identifier" : "urn:uuid:52c1d6ad-74e0-459a-b044-86bd8c9f4067",
+      "timestamp" : "2019-01-08T15:31:09-06:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "Duration",
@@ -29,8 +29,8 @@
     "status" : "active",
     "description" : "Type options for RequestGroup.action.timing[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:008f51f3-2ac9-4981-b80c-606e37228ee8",
-      "timestamp" : "2018-12-13T14:27:28-06:00",
+      "identifier" : "urn:uuid:6d5ed9d8-0ace-4ecd-8312-8e2d9ef1c7b6",
+      "timestamp" : "2019-01-08T15:31:09-06:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "dateTime",
@@ -66,9 +66,9 @@
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
-  "version" : "3.6.0",
+  "version" : "4.0.0",
   "status" : "draft",
-  "date" : "2018-12-13T14:23:07-06:00",
+  "date" : "2019-01-08T15:26:24-06:00",
   "publisher" : "Health Level Seven International (Clinical Decision Support)",
   "item" : [{
     "linkId" : "RequestGroup",
@@ -752,7 +752,7 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "Reference"
       }],
-      "linkId" : "RequestGroup.context",
+      "linkId" : "RequestGroup.encounter",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -773,14 +773,14 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "Encounter, EpisodeOfCare"
+          "valueCode" : "Encounter"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
-        "linkId" : "RequestGroup.context.value",
-        "text" : "Encounter or Episode for the request group",
+        "linkId" : "RequestGroup.encounter.value",
+        "text" : "Created as part of",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -851,7 +851,7 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "Device, Practitioner"
+          "valueCode" : "Device, Practitioner, PractitionerRole"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
@@ -1443,86 +1443,17 @@
           "extension" : [{
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
             "valueInteger" : 1
-          },
-          {
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "string"
-          }],
-          "linkId" : "RequestGroup.action.condition.description",
-          "type" : "group",
-          "required" : false,
-          "repeats" : true,
-          "item" : [{
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-              "valueCodeableConcept" : {
-                "coding" : [{
-                  "system" : "http://hl7.org/fhir/questionnaire-item-control",
-                  "code" : "flyover",
-                  "display" : "Fly-over"
-                }]
-              }
-            }],
-            "text" : "A brief, natural language description of the condition that effectively communicates the intended semantics.",
-            "type" : "display"
-          },
-          {
-            "linkId" : "RequestGroup.action.condition.description.value",
-            "text" : "Natural language description of the condition",
-            "type" : "string",
-            "required" : false,
-            "repeats" : false
-          }]
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
-            "valueInteger" : 1
-          },
-          {
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "string"
-          }],
-          "linkId" : "RequestGroup.action.condition.language",
-          "type" : "group",
-          "required" : false,
-          "repeats" : true,
-          "item" : [{
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-              "valueCodeableConcept" : {
-                "coding" : [{
-                  "system" : "http://hl7.org/fhir/questionnaire-item-control",
-                  "code" : "flyover",
-                  "display" : "Fly-over"
-                }]
-              }
-            }],
-            "text" : "The media type of the language for the expression.",
-            "type" : "display"
-          },
-          {
-            "linkId" : "RequestGroup.action.condition.language.value",
-            "text" : "Language of the expression",
-            "type" : "string",
-            "required" : false,
-            "repeats" : false
-          }]
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
-            "valueInteger" : 1
-          },
-          {
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "string"
           }],
           "linkId" : "RequestGroup.action.condition.expression",
+          "text" : "Boolean-valued expression",
           "type" : "group",
           "required" : false,
-          "repeats" : true,
+          "repeats" : false,
           "item" : [{
+            "text" : "The expression may be inlined, or may be a reference to a named expression within a logic library referenced by the library element.",
+            "type" : "display"
+          },
+          {
             "extension" : [{
               "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
               "valueCodeableConcept" : {
@@ -1533,15 +1464,8 @@
                 }]
               }
             }],
-            "text" : "An expression that returns true or false, indicating whether or not the condition is satisfied. The expression may be inlined, or may be a reference to a named expression within a logic library referenced by the library element.",
+            "text" : "An expression that returns true or false, indicating whether or not the condition is satisfied.",
             "type" : "display"
-          },
-          {
-            "linkId" : "RequestGroup.action.condition.expression.value",
-            "text" : "Boolean-valued expression",
-            "type" : "string",
-            "required" : false,
-            "repeats" : false
           }]
         }]
       },
@@ -2077,7 +2001,7 @@
         {
           "extension" : [{
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-            "valueCode" : "Patient, Practitioner, RelatedPerson"
+            "valueCode" : "Patient, Practitioner, PractitionerRole, RelatedPerson, Device"
           },
           {
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>StructureDefinition: ShareableValueSet - FHIR v3.6.0</title>
+  <title>StructureDefinition: ShareableValueSet - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -138,14 +138,14 @@
     &quot;valueCode&quot; : &quot;trial-use&quot;
   }],
   &quot;url&quot; : &quot;http://hl7.org/fhir/StructureDefinition/shareablevalueset&quot;,
-  &quot;version&quot; : &quot;3.6.0&quot;,
+  &quot;version&quot; : &quot;4.0.0&quot;,
   &quot;name&quot; : &quot;Shareable ValueSet&quot;,
   &quot;status&quot; : &quot;draft&quot;,
   &quot;experimental&quot; : false,
-  &quot;date&quot; : &quot;2018-12-13T14:23:07-06:00&quot;,
+  &quot;date&quot; : &quot;2019-01-08T15:26:24-06:00&quot;,
   &quot;publisher&quot; : &quot;HL7&quot;,
   &quot;description&quot; : &quot;Enforces the minimum information set for the value set metadata required by HL7 and other organizations that share and publish value sets&quot;,
-  &quot;fhirVersion&quot; : &quot;3.6.0&quot;,
+  &quot;fhirVersion&quot; : &quot;4.0.0&quot;,
   &quot;mapping&quot; : [{
     &quot;identity&quot; : &quot;rim&quot;,
     &quot;uri&quot; : &quot;http://hl7.org/v3&quot;,
@@ -614,7 +614,7 @@
         }],
         &quot;strength&quot; : &quot;required&quot;,
         &quot;description&quot; : &quot;The lifecycle status of an artifact.&quot;,
-        &quot;valueSet&quot; : &quot;http://hl7.org/fhir/ValueSet/publication-status&quot;
+        &quot;valueSet&quot; : &quot;http://hl7.org/fhir/ValueSet/publication-status|4.0.0&quot;
       },
       &quot;mapping&quot; : [{
         &quot;identity&quot; : &quot;workflow&quot;,
@@ -1047,7 +1047,7 @@
       &quot;path&quot; : &quot;ValueSet.compose.inactive&quot;,
       &quot;short&quot; : &quot;Whether inactive codes are in the value set&quot;,
       &quot;definition&quot; : &quot;Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included).&quot;,
-      &quot;comment&quot; : &quot;Note that in the FHIR terminology framework, \&quot;deprecated\&quot; does not mean inactive, but in some code systems (e.g. LOINC, deprecated means inactive). Code systems should define what codes are considered to be inactive. If this is not clearly defined (including in the FHIR code system resource), then all codes are assumed to be active.\n\nThe Value Set Definition specification defines an ActiveOnly eleent, which is the reverse of this element e.g. (ValueSet.compose.inactive=FALSE) is the same as (VSD.ActiveOnly=TRUE).&quot;,
+      &quot;comment&quot; : &quot;Note that in the FHIR terminology framework, \&quot;deprecated\&quot; does not mean inactive, but in some code systems, e.g. LOINC, \&quot;deprecated\&quot; does mean inactive. Code systems should define what codes are considered to be inactive. If this is not clearly defined (including in the FHIR code system resource), then all codes are assumed to be active.\n\nThe Value Set Definition specification defines an ActiveOnly element, which is the reverse of this element e.g. (ValueSet.compose.inactive=FALSE) is the same as (VSD.ActiveOnly=TRUE).&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
       &quot;base&quot; : {
@@ -1222,8 +1222,8 @@
       &quot;id&quot; : &quot;ValueSet.compose.include.version&quot;,
       &quot;path&quot; : &quot;ValueSet.compose.include.version&quot;,
       &quot;short&quot; : &quot;Specific version of the code system referred to&quot;,
-      &quot;definition&quot; : &quot;The version of the code system that the codes are selected from, or the special version \&quot;*\&quot; for all versions.&quot;,
-      &quot;comment&quot; : &quot;This is used when selecting the descendants of a concept - they may change between versions. If no version is specified, then the exact contents of the value set might not be known until a context of use binds it to a particular version. The special value \&quot;*\&quot; means all version; It is at server discrection regarding expansions and which versions must be supported.&quot;,
+      &quot;definition&quot; : &quot;The version of the code system that the codes are selected from, or the special version '*' for all versions.&quot;,
+      &quot;comment&quot; : &quot;This is used when selecting the descendants of a concept - they may change between versions. If no version is specified, then the exact contents of the value set might not be known until a context of use binds it to a particular version. The special value '*' means all versions; It is at server discretion regarding expansions and which versions must be supported.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
       &quot;base&quot; : {
@@ -1739,7 +1739,7 @@
         }],
         &quot;strength&quot; : &quot;required&quot;,
         &quot;description&quot; : &quot;The kind of operation to perform as a part of a property based filter.&quot;,
-        &quot;valueSet&quot; : &quot;http://hl7.org/fhir/ValueSet/filter-operator&quot;
+        &quot;valueSet&quot; : &quot;http://hl7.org/fhir/ValueSet/filter-operator|4.0.0&quot;
       },
       &quot;mapping&quot; : [{
         &quot;identity&quot; : &quot;rim&quot;,
@@ -1821,7 +1821,7 @@
       &quot;path&quot; : &quot;ValueSet.expansion&quot;,
       &quot;short&quot; : &quot;Used when the value set is \&quot;expanded\&quot;&quot;,
       &quot;definition&quot; : &quot;A value set can also be \&quot;expanded\&quot;, where the value set is turned into a simple collection of enumerated codes. This element holds the expansion, if it has been performed.&quot;,
-      &quot;comment&quot; : &quot;Expansion is performed to produce a collection of codes that are ready to use for data entry or validation. Value set expansions are always considered to be stateless - they are a record of the set of codes in the value set at a point in time under a given set of conditions, and are no subject to ongoing maintenance.\n\nExpansion.parameter is  a simplified list of parameters - a subset of the features of the [Parameters](parameters.html) resource.&quot;,
+      &quot;comment&quot; : &quot;Expansion is performed to produce a collection of codes that are ready to use for data entry or validation. Value set expansions are always considered to be stateless - they are a record of the set of codes in the value set at a point in time under a given set of conditions, and are not subject to ongoing maintenance.\n\nExpansion.parameter is  a simplified list of parameters - a subset of the features of the [Parameters](parameters.html) resource.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
       &quot;base&quot; : {
@@ -2527,15 +2527,14 @@
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:25-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:28-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fshareablevalueset.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fshareablevalueset.profile.json.html">Compare to DSTU3</a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fshareablevalueset.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fshareablevalueset.profile.json.html">Ballot Comparison</a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fshareablevalueset.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fshareablevalueset.profile.json.html">Compare to R3</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
                <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>

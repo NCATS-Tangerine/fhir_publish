@@ -16,14 +16,14 @@
     <valueCode value="trial-use"/>
   </extension>
   <url value="http://hl7.org/fhir/StructureDefinition/shareablevalueset"/>
-  <version value="3.6.0"/>
+  <version value="4.0.0"/>
   <name value="Shareable ValueSet"/>
   <status value="draft"/>
   <experimental value="false"/>
-  <date value="2018-12-13T14:23:07-06:00"/>
+  <date value="2019-01-08T15:26:24-06:00"/>
   <publisher value="HL7"/>
   <description value="Enforces the minimum information set for the value set metadata required by HL7 and other organizations that share and publish value sets"/>
-  <fhirVersion value="3.6.0"/>
+  <fhirVersion value="4.0.0"/>
   <mapping>
     <identity value="rim"/>
     <uri value="http://hl7.org/v3"/>
@@ -470,7 +470,7 @@
         </extension>
         <strength value="required"/>
         <description value="The lifecycle status of an artifact."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/publication-status"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/publication-status|4.0.0"/>
       </binding>
       <mapping>
         <identity value="workflow"/>
@@ -884,7 +884,7 @@
       <path value="ValueSet.compose.inactive"/>
       <short value="Whether inactive codes are in the value set"/>
       <definition value="Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included)."/>
-      <comment value="Note that in the FHIR terminology framework, &quot;deprecated&quot; does not mean inactive, but in some code systems (e.g. LOINC, deprecated means inactive). Code systems should define what codes are considered to be inactive. If this is not clearly defined (including in the FHIR code system resource), then all codes are assumed to be active.&#xA;&#xA;The Value Set Definition specification defines an ActiveOnly eleent, which is the reverse of this element e.g. (ValueSet.compose.inactive=FALSE) is the same as (VSD.ActiveOnly=TRUE)."/>
+      <comment value="Note that in the FHIR terminology framework, &quot;deprecated&quot; does not mean inactive, but in some code systems, e.g. LOINC, &quot;deprecated&quot; does mean inactive. Code systems should define what codes are considered to be inactive. If this is not clearly defined (including in the FHIR code system resource), then all codes are assumed to be active.&#xA;&#xA;The Value Set Definition specification defines an ActiveOnly element, which is the reverse of this element e.g. (ValueSet.compose.inactive=FALSE) is the same as (VSD.ActiveOnly=TRUE)."/>
       <min value="0"/>
       <max value="1"/>
       <base>
@@ -1052,8 +1052,8 @@
     <element id="ValueSet.compose.include.version">
       <path value="ValueSet.compose.include.version"/>
       <short value="Specific version of the code system referred to"/>
-      <definition value="The version of the code system that the codes are selected from, or the special version &quot;*&quot; for all versions."/>
-      <comment value="This is used when selecting the descendants of a concept - they may change between versions. If no version is specified, then the exact contents of the value set might not be known until a context of use binds it to a particular version. The special value &quot;*&quot; means all version; It is at server discrection regarding expansions and which versions must be supported."/>
+      <definition value="The version of the code system that the codes are selected from, or the special version &#39;*&#39; for all versions."/>
+      <comment value="This is used when selecting the descendants of a concept - they may change between versions. If no version is specified, then the exact contents of the value set might not be known until a context of use binds it to a particular version. The special value &#39;*&#39; means all versions; It is at server discretion regarding expansions and which versions must be supported."/>
       <min value="0"/>
       <max value="1"/>
       <base>
@@ -1544,7 +1544,7 @@
         </extension>
         <strength value="required"/>
         <description value="The kind of operation to perform as a part of a property based filter."/>
-        <valueSet value="http://hl7.org/fhir/ValueSet/filter-operator"/>
+        <valueSet value="http://hl7.org/fhir/ValueSet/filter-operator|4.0.0"/>
       </binding>
       <mapping>
         <identity value="rim"/>
@@ -1622,7 +1622,7 @@
       <path value="ValueSet.expansion"/>
       <short value="Used when the value set is &quot;expanded&quot;"/>
       <definition value="A value set can also be &quot;expanded&quot;, where the value set is turned into a simple collection of enumerated codes. This element holds the expansion, if it has been performed."/>
-      <comment value="Expansion is performed to produce a collection of codes that are ready to use for data entry or validation. Value set expansions are always considered to be stateless - they are a record of the set of codes in the value set at a point in time under a given set of conditions, and are no subject to ongoing maintenance.&#xA;&#xA;Expansion.parameter is  a simplified list of parameters - a subset of the features of the [Parameters](parameters.html) resource."/>
+      <comment value="Expansion is performed to produce a collection of codes that are ready to use for data entry or validation. Value set expansions are always considered to be stateless - they are a record of the set of codes in the value set at a point in time under a given set of conditions, and are not subject to ongoing maintenance.&#xA;&#xA;Expansion.parameter is  a simplified list of parameters - a subset of the features of the [Parameters](parameters.html) resource."/>
       <min value="0"/>
       <max value="1"/>
       <base>

@@ -9,8 +9,8 @@
       <status value="active"/>
       <description value="Type options for ServiceRequest.quantity[x]"/>
       <expansion>
-        <identifier value="urn:uuid:f8e0c813-c636-49a8-aa6a-9700d6121277"/>
-        <timestamp value="2018-12-13T14:27:31-06:00"/>
+        <identifier value="urn:uuid:605ce3ca-a6e6-4860-b6c0-053071f33903"/>
+        <timestamp value="2019-01-08T15:31:12-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="Quantity"/>
@@ -36,8 +36,8 @@
       <status value="active"/>
       <description value="Type options for ServiceRequest.occurrence[x]"/>
       <expansion>
-        <identifier value="urn:uuid:96068265-2026-4a53-9adf-ba4bf6712df1"/>
-        <timestamp value="2018-12-13T14:27:31-06:00"/>
+        <identifier value="urn:uuid:64a686c2-d0d4-4381-bec9-099e13fe7110"/>
+        <timestamp value="2019-01-08T15:31:12-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="dateTime"/>
@@ -63,8 +63,8 @@
       <status value="active"/>
       <description value="Type options for ServiceRequest.asNeeded[x]"/>
       <expansion>
-        <identifier value="urn:uuid:c8ede82c-3bb0-4daa-8bf5-28ba1e4a7931"/>
-        <timestamp value="2018-12-13T14:27:31-06:00"/>
+        <identifier value="urn:uuid:47329c9e-594f-4dbf-8c53-d23940046895"/>
+        <timestamp value="2019-01-08T15:31:12-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="boolean"/>
@@ -81,9 +81,9 @@
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
-  <version value="3.6.0"/>
+  <version value="4.0.0"/>
   <status value="draft"/>
-  <date value="2018-12-13T14:23:07-06:00"/>
+  <date value="2019-01-08T15:26:24-06:00"/>
   <publisher value="Health Level Seven International (Orders and Observations)"/>
   <item>
     <linkId value="ServiceRequest"/>
@@ -1384,7 +1384,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="An explanation or justification for why this service is being requested in coded or textual form.   This is often for billing purposes.  May relate to the resources referred to in supportingInformation. This element represents why the referral is being made and may be used to decide how the service will be performed, or even if it will be performed at all.   Use `CodeableConcept.text` element if the data is free (uncoded) text as shown in the [CT Scan example](servicerequest-example-di.html)."/>
+        <text value="An explanation or justification for why this service is being requested in coded or textual form.   This is often for billing purposes.  May relate to the resources referred to in `supportingInfo`. This element represents why the referral is being made and may be used to decide how the service will be performed, or even if it will be performed at all.   Use `CodeableConcept.text` element if the data is free (uncoded) text as shown in the [CT Scan example](servicerequest-example-di.html)."/>
         <type value="display"/>
       </item>
       <item>
@@ -1420,7 +1420,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Indicates another resource that provides a justification for why this service is being requested.   May relate to the resources referred to in supportingInformation. This element represents why the referral is being made and may be used to decide how the service will be performed, or even if it will be performed at all.    To be as specific as possible,  a reference to  *Observation* or *Condition* should be used if available.  Otherwise when referencing  *DiagnosticReport*  it should contain a finding  in `DiagnosticReport.conclusion` and/or `DiagnosticReport.conclusionCode`.   When using a  reference to *DocumentReference*, the target document should contain clear findings language providing the relevant reason for this service request .  Use  the CodeableConcept text element in `ServiceRequest.reasonCode` if the data is free (uncoded) text as shown in the [CT Scan example](servicerequest-example-di.html)."/>
+        <text value="Indicates another resource that provides a justification for why this service is being requested.   May relate to the resources referred to in `supportingInfo`. This element represents why the referral is being made and may be used to decide how the service will be performed, or even if it will be performed at all.    To be as specific as possible,  a reference to  *Observation* or *Condition* should be used if available.  Otherwise when referencing  *DiagnosticReport*  it should contain a finding  in `DiagnosticReport.conclusion` and/or `DiagnosticReport.conclusionCode`.   When using a reference to *DocumentReference*, the target document should contain clear findings language providing the relevant reason for this service request.  Use  the CodeableConcept text element in `ServiceRequest.reasonCode` if the data is free (uncoded) text as shown in the [CT Scan example](servicerequest-example-di.html)."/>
         <type value="display"/>
       </item>
       <item>
@@ -1490,7 +1490,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Additional clinical information about the patient or specimen that may influence the services or their interpretations.     This information includes diagnosis, clinical findings and other observations.  In laboratory ordering these are typically referred to as &quot;ask at order entry questions (AOEs)&quot;.  This includes observations explicitly requested by the producer (filler) to provide context or supporting information needed to complete the order. For example,  reporting the amount of inspired oxygen for blood gas measurements. For information how the services are to be delivered. use the `instructions` element."/>
+        <text value="Additional clinical information about the patient or specimen that may influence the services or their interpretations.     This information includes diagnosis, clinical findings and other observations.  In laboratory ordering these are typically referred to as &quot;ask at order entry questions (AOEs)&quot;.  This includes observations explicitly requested by the producer (filler) to provide context or supporting information needed to complete the order. For example,  reporting the amount of inspired oxygen for blood gas measurements. To represent information about how the services are to be delivered use the `instructions` element."/>
         <type value="display"/>
       </item>
       <item>
@@ -1525,7 +1525,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="One or more specimens that the laboratory procedure will use. Many diagnostic procedures need a specimen, but the request itself is not actually about the specimen. This element is for when the diagnostic is requested on already existing specimens and the request points to the specimen it applies to.    Conversely, If the request is entered first with an unknown specimen, The [Specimen](specimen.html) resource references to the ServiceRequest."/>
+        <text value="One or more specimens that the laboratory procedure will use. Many diagnostic procedures need a specimen, but the request itself is not actually about the specimen. This element is for when the diagnostic is requested on already existing specimens and the request points to the specimen it applies to.    Conversely, if the request is entered first with an unknown specimen, then the [Specimen](specimen.html) resource points to the ServiceRequest."/>
         <type value="display"/>
       </item>
       <item>

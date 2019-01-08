@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Datatypes-version-maps - FHIR v3.6.0</title>
+  <title>Datatypes-version-maps - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -320,12 +320,36 @@ group uri2url(source src : uriR3, target tgt : url) extends Element &lt;&lt;type
   src.value as v -&gt; tgt.value = v "code2uri-value";
 }
 
-group id2string(source src : idR3, target tgt : string) extends Element &lt;&lt;types&gt;&gt; {
-  src.value as v -&gt; tgt.value = v "code2uri-value";
+group id2string(source src : idR3, target tgt : string) extends Element &lt;&lt;type+&gt;&gt; {
+  src.value as v -&gt; tgt.value = v;
 }
 
 group uri2string(source src : uriR3, target tgt : string) extends Element &lt;&lt;types&gt;&gt; {
   src.value as v -&gt; tgt.value = v "code2uri-value";
+}
+
+group unsignedInt2decimal(source src : unsignedIntR3, target tgt : decimal) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v "unsignedInt2decimal-value";
+}
+
+group oid2string(source src : oidR3, target tgt : string) extends Element &lt;&lt;type+&gt;&gt; {
+  src.value as v -&gt; tgt.value = v;
+}
+
+group oid2id(source src : oidR3, target tgt : id) extends Element &lt;&lt;type+&gt;&gt; {
+  src.value as v -&gt; tgt.value = v;
+}
+
+group positiveInt2integer(source src : positiveIntR3, target tgt : integer) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v "unsignedInt2decimal-value";
+}
+
+group integer2positiveInt(source src : integerR3, target tgt : positiveInt) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v "unsignedInt2decimal-value";
+}
+
+group positiveInt2unsignedInt(source src : positiveIntR3, target tgt : unsignedInt) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v;
 }
 
 
@@ -491,12 +515,52 @@ group url2uri(source src : url, target tgt : uriR3) extends Element &lt;&lt;type
   src.value as v -&gt; tgt.value = v "code2uri-value";
 }
 
-group string2id(source src : stringR3, target tgt : id) extends Element &lt;&lt;types&gt;&gt; {
+group string2id(source src : string, target tgt : idR3) extends Element &lt;&lt;types&gt;&gt; {
   src.value as v -&gt; tgt.value = v "uri2code-value";
 }
 
 group string2uri(source src : string, target tgt : uriR3) extends Element &lt;&lt;types&gt;&gt; {
   src.value as v -&gt; tgt.value = v "code2uri-value";
+}
+
+group decimal2unsignedInt(source src : decimal, target tgt : unsignedIntR3) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v "unsignedInt2decimal-value";
+}
+
+group canonical2string(source src : canonical, target tgt : stringR3) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v "code2uri-value";
+}
+
+group oid2string(source src : string, target tgt : oidR3) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v;
+}
+
+group id2oid(source src : id, target tgt : oidR3) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v;
+}
+
+group id2string(source src : id, target tgt : stringR3) extends Element &lt;&lt;type+&gt;&gt; {
+  src.value as v -&gt; tgt.value = v;
+}
+
+group code2oid(source src : code, target tgt : oidR3) extends Element &lt;&lt;type+&gt;&gt; {
+  src.value as v -&gt; tgt.value = v;
+}
+
+group integer2positiveInt(source src : integer, target tgt : positiveIntR3) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v "unsignedInt2decimal-value";
+}
+
+group positiveInt2integer(source src : positiveInt, target tgt : integerR3) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v "unsignedInt2decimal-value";
+}
+
+group unsignedInt2positiveInt(source src : unsignedInt, target tgt : positiveIntR3) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v;
+}
+
+group code2uri(source src : code, target tgt : uriR3) extends Element &lt;&lt;types&gt;&gt; {
+  src.value as v -&gt; tgt.value = v;
 }
 
 
@@ -601,6 +665,13 @@ group Identifier(source src : IdentifierR3, target tgt : Identifier) extends Ele
   src.assigner -&gt; tgt.assigner;
 }
 
+group Identifier2Codeable(source src, target tgt) extends Element {
+  src -&gt; tgt.coding as c then {
+    src.system -&gt; c.system;
+    src.value -&gt; c.code;
+  } "coding";
+}
+
 
 </pre>
 </div>
@@ -625,6 +696,13 @@ group Identifier(source src : Identifier, target tgt : IdentifierR3) extends Ele
   src.value -&gt; tgt.value;
   src.period -&gt; tgt.period;
   src.assigner -&gt; tgt.assigner;
+}
+
+group Codeable2Identifier(source src, target tgt) extends Element {
+  src.coding as c then {
+    c.system -&gt; tgt.system;
+    c.code -&gt; tgt.value;
+  };
 }
 
 
@@ -687,6 +765,10 @@ group Coding(source src : Coding, target tgt : CodingR3) extends Element &lt;&lt
   src.userSelected -&gt; tgt.userSelected;
 }
 
+group Coding2code(source src : Coding, target tgt : codeR3) extends Element &lt;&lt;types&gt;&gt; {
+  src.code as vs0 then code(vs0, tgt);
+}
+
 
 </pre>
 </div>
@@ -721,7 +803,7 @@ group CodeableConcept(source src : CodeableConceptR3, target tgt : CodeableConce
 }
 
 group Coding2CodeableConcept(source src : CodingR3, target tgt : CodeableConcept) extends Element &lt;&lt;types&gt;&gt; {
-  src -&gt; tgt.coding as vt0 then Coding(src, vt0);
+  src -&gt; tgt.coding as vt0 then Coding(src, vt0) "coding";
 }
 
 
@@ -752,8 +834,12 @@ group CodeableConceptNoExtensions(source src : CodeableConcept, target tgt : Cod
   src.text -&gt; tgt.text;
 }
 
-group CodeableConcept2Coding(source src : CodeableConcept, target tgt : CodingR3) extends Element &lt;&lt;type+&gt;&gt; {
+group CodeableConcept2Coding(source src : CodeableConcept, target tgt : CodingR3) extends Element &lt;&lt;types&gt;&gt; {
   src.coding first as vs0 then Coding(vs0, tgt);
+}
+
+group CodeableConcept2code(source src : CodeableConcept, target tgt : codeR3) extends Element &lt;&lt;types&gt;&gt; {
+  src.coding first as vs0 -&gt; tgt.code = create('code') as vt then Coding2code(vs0, vt) "CodeableConcept2code-coding";
 }
 
 
@@ -855,7 +941,7 @@ imports "http://hl7.org/fhir/StructureMap/*3to4"
 
 group Money(source src : MoneyR3, target tgt : Money) extends Element &lt;&lt;type+&gt;&gt; {
   src.value -&gt; tgt.value;
-  src.code -&gt; tgt.currency "currency";
+  src.code -&gt; tgt.currency;
 }
 
 
@@ -878,7 +964,8 @@ imports "http://hl7.org/fhir/StructureMap/*4to3"
 group Money(source src : Money, target tgt : MoneyR3) extends Element &lt;&lt;type+&gt;&gt; {
   src.value -&gt; tgt.value;
   src.currency -&gt; tgt.code "code";
-  src -&gt; tgt.system as vt, vt.value = "urn:iso:std:iso:4217";
+  src.currency as s -&gt;  tgt.unit as t,  t.value = s;
+  src -&gt;  tgt.system as vt,  vt.value = 'urn:iso:std:iso:4217' "code";
 }
 
 
@@ -1330,24 +1417,28 @@ imports "http://hl7.org/fhir/StructureMap/*3to4"
 
 group Timing(source src : TimingR3, target tgt : Timing) extends BackboneElement &lt;&lt;type+&gt;&gt; {
   src.event -&gt; tgt.event;
-  src.repeat as vs0 -&gt; tgt.repeat as vt0 then {
-    vs0.bounds : Duration as vs -&gt; vt0.bounds = create("Duration") as vt then Duration(vs, vt);
-    vs0.bounds : Range as vs -&gt; vt0.bounds = create("Range") as vt then Range(vs, vt);
-    vs0.bounds : Period as vs -&gt; vt0.bounds = create("Period") as vt then Period(vs, vt);
-    vs0.count -&gt; vt0.count;
-    vs0.countMax -&gt; vt0.countMax;
-    vs0.duration -&gt; vt0.duration;
-    vs0.durationMax -&gt; vt0.durationMax;
-    vs0.durationUnit -&gt; vt0.durationUnit;
-    vs0.frequency -&gt; vt0.frequency;
-    vs0.frequencyMax -&gt; vt0.frequencyMax;
-    vs0.period -&gt; vt0.period;
-    vs0.periodMax -&gt; vt0.periodMax;
-    vs0.periodUnit -&gt; vt0.periodUnit;
-    vs0.timeOfDay -&gt; vt0.timeOfDay;
-    vs0.offset -&gt; vt0.offset;
-  };
+  src.repeat as vs0 -&gt; tgt.repeat as vt0 then repeat(vs0, vt0);
   src.code -&gt; tgt.code;
+}
+
+group repeat(source src, target tgt) extends Element {
+  src.bounds : Duration as vs -&gt; tgt.bounds = create('Duration') as vt then Duration(vs, vt);
+  src.bounds : Range as vs -&gt; tgt.bounds = create('Range') as vt then Range(vs, vt);
+  src.bounds : Period as vs -&gt; tgt.bounds = create('Period') as vt then Period(vs, vt);
+  src.count -&gt; tgt.count;
+  src.countMax -&gt; tgt.countMax;
+  src.duration -&gt; tgt.duration;
+  src.durationMax -&gt; tgt.durationMax;
+  src.durationUnit -&gt; tgt.durationUnit;
+  src.frequency -&gt; tgt.frequency;
+  src.frequencyMax -&gt; tgt.frequencyMax;
+  src.period -&gt; tgt.period;
+  src.periodMax -&gt; tgt.periodMax;
+  src.periodUnit -&gt; tgt.periodUnit;
+  src.dayOfWeek -&gt; tgt.dayOfWeek;
+  src.timeOfDay -&gt; tgt.timeOfDay;
+  src.when -&gt; tgt.when;
+  src.offset -&gt; tgt.offset;
 }
 
 
@@ -1369,24 +1460,28 @@ imports "http://hl7.org/fhir/StructureMap/*4to3"
 
 group Timing(source src : Timing, target tgt : TimingR3) extends BackboneElement &lt;&lt;type+&gt;&gt; {
   src.event -&gt; tgt.event;
-  src.repeat as vs0 -&gt; tgt.repeat as vt0 then {
-    vs0.bounds : Duration as vs -&gt; vt0.bounds = create("Duration") as vt then Duration(vs, vt);
-    vs0.bounds : Range as vs -&gt; vt0.bounds = create("Range") as vt then Range(vs, vt);
-    vs0.bounds : Period as vs -&gt; vt0.bounds = create("Period") as vt then Period(vs, vt);
-    vs0.count -&gt; vt0.count;
-    vs0.countMax -&gt; vt0.countMax;
-    vs0.duration -&gt; vt0.duration;
-    vs0.durationMax -&gt; vt0.durationMax;
-    vs0.durationUnit -&gt; vt0.durationUnit;
-    vs0.frequency -&gt; vt0.frequency;
-    vs0.frequencyMax -&gt; vt0.frequencyMax;
-    vs0.period -&gt; vt0.period;
-    vs0.periodMax -&gt; vt0.periodMax;
-    vs0.periodUnit -&gt; vt0.periodUnit;
-    vs0.timeOfDay -&gt; vt0.timeOfDay;
-    vs0.offset -&gt; vt0.offset;
-  };
+  src.repeat as vs0 -&gt; tgt.repeat as vt0 then repeat(vs0, vt0);
   src.code -&gt; tgt.code;
+}
+
+group repeat(source src, target tgt) extends Element {
+  src.bounds : Duration as vs -&gt; tgt.bounds = create('Duration') as vt then Duration(vs, vt);
+  src.bounds : Range as vs -&gt; tgt.bounds = create('Range') as vt then Range(vs, vt);
+  src.bounds : Period as vs -&gt; tgt.bounds = create('Period') as vt then Period(vs, vt);
+  src.count -&gt; tgt.count;
+  src.countMax -&gt; tgt.countMax;
+  src.duration -&gt; tgt.duration;
+  src.durationMax -&gt; tgt.durationMax;
+  src.durationUnit -&gt; tgt.durationUnit;
+  src.frequency -&gt; tgt.frequency;
+  src.frequencyMax -&gt; tgt.frequencyMax;
+  src.period -&gt; tgt.period;
+  src.periodMax -&gt; tgt.periodMax;
+  src.periodUnit -&gt; tgt.periodUnit;
+  src.dayOfWeek -&gt; tgt.dayOfWeek;
+  src.timeOfDay -&gt; tgt.timeOfDay;
+  src.when -&gt; tgt.when;
+  src.offset -&gt; tgt.offset;
 }
 
 
@@ -1419,9 +1514,9 @@ imports "http://hl7.org/fhir/StructureMap/*3to4"
 group Signature(source src : SignatureR3, target tgt : Signature) extends Element &lt;&lt;type+&gt;&gt; {
   src.type -&gt; tgt.type;
   src.when -&gt; tgt.when;
-  src.who : uri as vs -&gt; tgt.who as ref,  ref.reference = vs,  ref.extension as ext,  ext.url = "http://hl7.org/fhir/StructureDefinition/X34-basetype",  ext.value = "uri";
+  src.who : uri as vs -&gt;  tgt.who as ref,  ref.reference = vs,  ref.extension as ext,  ext.url = 'http://hl7.org/fhir/3.0/StructureDefinition/BaseType',  ext.value = 'uri';
   src.who : Reference as vs0 -&gt; tgt.who as vt0 then Reference(vs0, vt0);
-  src.onBehalfOf : uri as vs -&gt; tgt.onBehalfOf as ref,  ref.reference = vs,  ref.extension as ext,  ext.url = "http://hl7.org/fhir/StructureDefinition/X34-basetype",  ext.value = "uri";
+  src.onBehalfOf : uri as vs -&gt;  tgt.onBehalfOf as ref,  ref.reference = vs,  ref.extension as ext,  ext.url = 'http://hl7.org/fhir/3.0/StructureDefinition/BaseType',  ext.value = 'uri';
   src.onBehalfOf : Reference as vs0 -&gt; tgt.onBehalfOf as vt0 then Reference(vs0, vt0);
   src.contentType -&gt; tgt.sigFormat;
   src.blob -&gt; tgt.data;
@@ -1447,12 +1542,12 @@ imports "http://hl7.org/fhir/StructureMap/*4to3"
 group Signature(source src : SignatureR3, target tgt : Signature) extends Element &lt;&lt;type+&gt;&gt; {
   src.type -&gt; tgt.type;
   src.when -&gt; tgt.when;
-  src.who as vs0 where extension('http://hl7.org/fhir/StructureDefinition/X34-basetype').empty() -&gt; tgt.who = create("Reference") as vt0 then Reference(vs0, vt0);
-  src.who as vs0 where extension('http://hl7.org/fhir/StructureDefinition/X34-basetype').exists() -&gt; tgt.who = create("uri") as vt0 then {
+  src.who as vs0 where extension('http://hl7.org/fhir/3.0/StructureDefinition/BaseType').empty() -&gt; tgt.who = create('Reference') as vt0 then Reference(vs0, vt0);
+  src.who as vs0 where extension('http://hl7.org/fhir/3.0/StructureDefinition/BaseType').exists() -&gt; tgt.who = create('uri') as vt0 then {
     vs0.reference as vs1 then uri(vs1, vt0);
   };
-  src.onBehalfOf as vs0 where extension('http://hl7.org/fhir/StructureDefinition/X34-basetype').empty() -&gt; tgt.onBehalfOf = create("Reference") as vt0 then Reference(vs0, vt0);
-  src.onBehalfOf as vs0 where extension('http://hl7.org/fhir/StructureDefinition/X34-basetype').exists() -&gt; tgt.onBehalfOf = create("uri") as vt0 then {
+  src.onBehalfOf as vs0 where extension('http://hl7.org/fhir/3.0/StructureDefinition/BaseType').empty() -&gt; tgt.onBehalfOf = create('Reference') as vt0 then Reference(vs0, vt0);
+  src.onBehalfOf as vs0 where extension('http://hl7.org/fhir/3.0/StructureDefinition/BaseType').exists() -&gt; tgt.onBehalfOf = create('uri') as vt0 then {
     vs0.reference as vs1 then uri(vs1, vt0);
   };
   src.sigFormat -&gt; tgt.contentType;
@@ -1488,14 +1583,14 @@ uses "http://hl7.org/fhir/StructureDefinition/Annotation" alias Annotation as ta
 imports "http://hl7.org/fhir/StructureMap/*3to4"
 
 group Annotation(source src : AnnotationR3, target tgt : Annotation) extends Element &lt;&lt;type+&gt;&gt; {
-  src.author : Reference as vs -&gt; tgt.author = create("Reference") as vt then Reference(vs, vt);
-  src.author : string as vs -&gt; tgt.author = create("string") as vt then string(vs, vt);
+  src.author : Reference as vs -&gt; tgt.author = create('Reference') as vt then Reference(vs, vt);
+  src.author : string as vs -&gt; tgt.author = create('string') as vt then string(vs, vt);
   src.time -&gt; tgt.time;
   src.text -&gt; tgt.text;
 }
 
 group string2Annotation(source src : stringR3, target tgt : Annotation) extends Element &lt;&lt;types&gt;&gt; {
-  src -&gt; tgt.text as vt0 then string(src, vt0);
+  src -&gt; tgt.text as vt0 then string(src, vt0) "text";
 }
 
 
@@ -1517,8 +1612,8 @@ uses "http://hl7.org/fhir/3.0/StructureDefinition/string" alias StringR3 as targ
 imports "http://hl7.org/fhir/StructureMap/*4to3"
 
 group Annotation(source src : Annotation, target tgt : AnnotationR3) extends Element &lt;&lt;type+&gt;&gt; {
-  src.author : Reference as vs -&gt; tgt.author = create("Reference") as vt then Reference(vs, vt);
-  src.author : string as vs -&gt; tgt.author = create("string") as vt then string(vs, vt);
+  src.author : Reference as vs -&gt; tgt.author = create('Reference') as vt then Reference(vs, vt);
+  src.author : string as vs -&gt; tgt.author = create('string') as vt then string(vs, vt);
   src.time -&gt; tgt.time;
   src.text -&gt; tgt.text;
 }
@@ -1526,6 +1621,7 @@ group Annotation(source src : Annotation, target tgt : AnnotationR3) extends Ele
 group Annotation2string(source src : Annotation, target tgt : stringR3) extends Element &lt;&lt;types&gt;&gt; {
   src.text as vs0 then string(vs0, tgt);
 }
+
 
 </pre>
 </div>
@@ -1547,15 +1643,14 @@ group Annotation2string(source src : Annotation, target tgt : stringR3) extends 
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fdatatypes-version-maps.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fdatatypes-version-maps.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fdatatypes-version-maps.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fdatatypes-version-maps.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fdatatypes-version-maps.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fdatatypes-version-maps.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

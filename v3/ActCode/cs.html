@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>ActCode - FHIR v3.6.0</title>
+  <title>ActCode - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -135,28 +135,32 @@ This Code system is used in the following value sets:
 <ul>
  <li>ValueSet: <a href="../../v3/RefrainPolicy/vs.html">V3 Value SetRefrainPolicy</a> ( Conveys prohibited actions which an information custodian, receiver, or user is not permitted to perform unless otherwise authorized or permitted under specified circumstances.  Examples:
   prohibit redisclosure without consent directive)</li>
- <li>ValueSet: <a href="../../v3/InformationSensitivityPolicy/vs.html">V3 Value SetInformationSensitivityPolicy</a> ( Sensitivity codes are not useful for interoperability outside of a policy domain because sensitivity policies are typically localized and vary drastically across policy domains even for the same information category because of differing organizational business rules, security policies, and jurisdictional requirements.  For example, an "employee" sensitivity code would make little sense for use outside of a policy domain.   "Taboo" would rarely be useful outside of a policy domain unless there are jurisdictional requirements requiring that a provider disclose sensitive information to a patient directly. Sensitivity codes may be more appropriate in a legacy system's Master Files in order to notify those who access a patient's orders and observations about the sensitivity policies that apply.  Newer systems may have a security engine that uses a sensitivity policy's criteria directly. The specializable Sensitivity Act.code may be useful in some scenarious if used in combination with a sensitivity identifier and/or Act.title.)</li>
  <li>ValueSet: <a href="../../v3/Compartment/vs.html">V3 Value SetCompartment</a> ( A named tag set for metadata used to populate a security category label field that "segments" an IT resource per policy by indicating that access and use is restricted to members of a defined community or project. (HL7 Healthcare Privacy and Security Classification System)  Usage Note:
 This is the healthcare analog to the US Intelligence Community's concept of a Special Access Program.  Compartment codes may be used in as a field value in an initiator's clearance to indicate permission to access and use an IT Resource with a security label having the same compartment value in security category label field. Map: Aligns with ISO 2382-8 definition of Compartment -  "A division of data into isolated blocks with separate security controls for the purpose of reducing risk.")</li>
  <li>ValueSet: <a href="../../v3/ActCode/vs.html">v3 Code System ActCode</a> ( A code specifying the particular kind of Act that the Act-instance represents within its class.  Constraints:
 The kind of Act (e.g. physical examination, serum potassium, inpatient encounter, charge financial transaction, etc.) is specified with a code from one of several, typically external, coding systems.  The coding system will depend on the class of Act, such as LOINC for observations, etc. Conceptually, the Act.code must be a specialization of the Act.classCode. This is why the structure of ActClass domain should be reflected in the superstructure of the ActCode domain and then individual codes or externally referenced vocabularies subordinated under these domains that reflect the ActClass structure. Act.classCode and Act.code are not modifiers of each other but the Act.code concept should really imply the Act.classCode concept. For a negative example, it is not appropriate to use an Act.code "potassium" together with and Act.classCode for "laboratory observation" to somehow mean "potassium laboratory observation" and then use the same Act.code for "potassium" together with Act.classCode for "medication" to mean "substitution of potassium". This mutually modifying use of Act.code and Act.classCode is not permitted.)</li>
  <li>ValueSet: <a href="../../v3/ActInvoiceGroupCode/vs.html">V3 Value SetActInvoiceGroupCode</a> ( Type of invoice element that is used to assist in describing an Invoice that is either submitted for adjudication or for which is returned on adjudication results. Invoice elements of this type signify a grouping of one or more children (detail) invoice elements.  They do not have intrinsic costing associated with them, but merely reflect the sum of all costing for it's immediate children invoice elements.)</li>
- <li>ValueSet: <a href="../../v3/ActPharmacySupplyType/vs.html">V3 Value SetActPharmacySupplyType</a> ( Identifies types of dispensing events)</li>
- <li>ValueSet: <a href="../../v3/ActTaskCode/vs.html">V3 Value SetActTaskCode</a> (  Description:
-A task or action that a user may perform in a clinical information system.)</li>
  <li>ValueSet: <a href="../../v3/ObligationPolicy/vs.html">V3 Value SetObligationPolicy</a> ( Conveys the mandated workflow action that an information custodian, receiver, or user must perform.  Examples:
   encrypt  Usage Note:
 Per OASIS XACML, an obligation is an operation specified in a policy or policy that is performed in conjunction with the enforcement of an access control decision.)</li>
- <li>ValueSet: <a href="../../valueset-account-type.html">Account Types</a> (This examples value set defines the set of codes that can be used to represent the type of an account.)</li>
  <li>ValueSet: <a href="../../v3/ActIncidentCode/vs.html">V3 Value SetActIncidentCode</a> ( Set of codes indicating the type of incident or accident.)</li>
  <li>ValueSet: <a href="../../v3/ActEncounterCode/vs.html">V3 Value SetActEncounterCode</a> ( Domain provides codes that qualify the ActEncounterClass (ENC))</li>
- <li>ValueSet: <a href="../../v3/ObservationType/vs.html">V3 Value SetObservationType</a> ( Identifies the kinds of observations that can be performed)</li>
  <li>ValueSet: <a href="../../valueset-detectedissue-mitigation-action.html">Detected Issue Mitigation Action</a> (Kinds of mitigating actions and observations that can be associated with a detected issue or contraindication, such as 'added concurrent therapy', 'prior therapy documented', etc.)</li>
  <li>ValueSet: <a href="../../valueset-provenance-activity-type.html">Provenance activity type</a> (This value set contains representative Activity Type codes, which includes codes from the HL7 DocumentCompletion, ActStatus, and DataOperations code system, W3C PROV-DM and PROV-N concepts and display names, several HL7 Lifecycle Event codes for which there are agreed upon definitions, and non-duplicated codes from the HL7 Security and Privacy Ontology Operations codes.)</li>
+ <li>ValueSet: <a href="../../v3/InformationSensitivityPolicy/vs.html">V3 Value SetInformationSensitivityPolicy</a> ( Sensitivity codes are not useful for interoperability outside of a policy domain because sensitivity policies are typically localized and vary drastically across policy domains even for the same information category because of differing organizational business rules, security policies, and jurisdictional requirements.  For example, an "employee" sensitivity code would make little sense for use outside of a policy domain.   "Taboo" would rarely be useful outside of a policy domain unless there are jurisdictional requirements requiring that a provider disclose sensitive information to a patient directly. Sensitivity codes may be more appropriate in a legacy system's Master Files in order to notify those who access a patient's orders and observations about the sensitivity policies that apply.  Newer systems may have a security engine that uses a sensitivity policy's criteria directly. The specializable Sensitivity Act.code may be useful in some scenarious if used in combination with a sensitivity identifier and/or Act.title.)</li>
+ <li>ValueSet: <a href="../../v3/ActPharmacySupplyType/vs.html">V3 Value SetActPharmacySupplyType</a> ( Identifies types of dispensing events)</li>
+ <li>ValueSet: <a href="../../valueset-provenance-activity-type.html">Provenance activity type</a> (This value set contains representative Activity Type codes, which includes codes from the HL7 DocumentCompletion, ActStatus, and DataOperations code system, W3C PROV-DM and PROV-N concepts and display names, several HL7 Lifecycle Event codes for which there are agreed upon definitions, and non-duplicated codes from the HL7 Security and Privacy Ontology Operations codes.)</li>
+ <li>ValueSet: <a href="../../v3/ActTaskCode/vs.html">V3 Value SetActTaskCode</a> (  Description:
+A task or action that a user may perform in a clinical information system.)</li>
+ <li>ValueSet: <a href="../../valueset-account-type.html">Account Types</a> (This examples value set defines the set of codes that can be used to represent the type of an account.)</li>
+ <li>ValueSet: <a href="../../v3/ObservationType/vs.html">V3 Value SetObservationType</a> ( Identifies the kinds of observations that can be performed)</li>
+ <li>ValueSet: <a href="../../valueset-detectedissue-category.html">Detected Issue Category</a> (Kinds of issues or contraindications, such as 'drug-drug interaction', 'duplicate therapy', etc.)</li>
+ <li>ValueSet: <a href="../../valueset-account-type.html">Account Types</a> (This examples value set defines the set of codes that can be used to represent the type of an account.)</li>
  <li>ValueSet: <a href="../../v3/ActCoverageTypeCode/vs.html">V3 Value SetActCoverageTypeCode</a> (  Definition:
 Set of codes indicating the type of insurance policy or program that pays for the cost of benefits provided to covered parties.)</li>
  <li>ValueSet: <a href="../../v3/ActConsentType/vs.html">V3 Value SetActConsentType</a> (  Definition:
 The type of consent directive, e.g., to consent or dissent to collect, access, or use in specific ways within an EHRS or for health information exchange; or to disclose  health information  for purposes such as research.)</li>
+ <li>ValueSet: <a href="../../valueset-detectedissue-mitigation-action.html">Detected Issue Mitigation Action</a> (Kinds of mitigating actions and observations that can be associated with a detected issue or contraindication, such as 'added concurrent therapy', 'prior therapy documented', etc.)</li>
  <li>ValueSet: <a href="../../v3/ActConsentDirective/vs.html">V3 Value SetActConsentDirective</a> ( ActConsentDirective codes are used to specify the type of Consent Directive to which a Consent Directive Act conforms.)</li>
  <li>ValueSet: <a href="../../v3/SecurityPolicy/vs.html">V3 Value SetSecurityPolicy</a> ( Types of security policies that further specify the ActClassPolicy value set.  Examples:
   encrypt prohibit redisclosure without consent directive)</li>
@@ -5772,15 +5776,14 @@ the measure population as a narrative description (e.g., all patients seen in th
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:28-0600. <a style="color: #ffffff" href="../../qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a style="color: #ffffff" href="../../qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="../../external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="../../history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="../../toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="../../credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fv3%2FActCode%2Fcs.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fv3%2FActCode%2Fcs.html">Compare to DSTU3 <img src="../../external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fv3%2FActCode%2Fcs.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fv3%2FActCode%2Fcs.html">Ballot Comparison <img src="../../external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fv3%2FActCode%2Fcs.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fv3%2FActCode%2Fcs.html">Compare to R3 <img src="../../external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="../../license.html"><img src="../../cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="../../external.png" style="text-align: baseline"/></a>   
         </span>

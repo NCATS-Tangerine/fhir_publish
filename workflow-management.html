@@ -3,7 +3,7 @@
 in order to support consistent definitions for schema and UML derived code. --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-      <title>Workflow-management - FHIR v3.6.0</title>
+      <title>Workflow-management - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -251,7 +251,7 @@ in order to support consistent definitions for schema and UML derived code. --><
             A patient is suffering from a poison ivy rash and is prescribed a steroid medication to manage the reaction. The provider asks the patient for his preferred pharmacy and creates the Task at the specified pharmacy's system. The patient is running late
             and by the time he arrives at the pharmacy, it is closed. He calls the clinic where the provider practices and requests that the pharmacy where the order is to be fulfilled is changed to one that is open around the clock. The staff at the
             clinic cancels the Task at the original pharmacy and creates a new Task at the requested new one. By the time the patient arrives at the new pharmacy, the medication is ready for pickup. Once the request is fulfilled, the clinic receives
-            the notification that the Task is complete and the prescription is also marked as complete.
+            the notification that the Task is complete, and the prescription is also marked as complete.
         </p>
 
         <a name="optionh"></a>
@@ -366,13 +366,13 @@ in order to support consistent definitions for schema and UML derived code. --><
                 an "event" code saying "please fulfill"</li>
             <li>Filler system sends a response containing the same Task resource, indicating receipt of the message and, optionally, an indication of their intention to fulfill the request</li>
             <li>Filler system may send incremental messages to the placer showing progress (e.g. specimen collected, preliminary results, final results) by including an updated Task resource</li>
-            <li>Placer system may also send messages to the fulfiller containing the Task resource and updating the state of the workflow, for example cancelling the texk</li>
+            <li>Placer system may also send messages to the fulfiller containing the Task resource and updating the state of the workflow, for example cancelling the task</li>
         </ol>
         <h4 class="self-link-parent"><span class="sectioncount">12.8.5.2<a name="12.8.5.2"> </a></span> Benefits <a href="workflow-management.html#12.8.5.2" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
         <ul>
             <li>Reduced number of communications</li>
             <li>All relevant data can be sent in one package</li>
-            <li>Responses can be asynchronous and content may be routed</li>
+            <li>Responses can be asynchronous, and content may be routed</li>
             <li>There's an ability to negotiate fulfillment - i.e. the ability to say "no"</li>
             <li>Can request things other than just fulfillment (e.g. please suspend)</li>
             <li>Explicit acknowledgement that filler has received and agreed to act on the request (though no need for the placer to check)</li>
@@ -425,7 +425,7 @@ in order to support consistent definitions for schema and UML derived code. --><
             <i>TODO: needs review and update. Possibly add options about using messaging and/or services instead of polling/subscription in above scenarios</i>
         </p>
         <h4 class="self-link-parent"><span class="sectioncount">12.8.7.1<a name="12.8.7.1"> </a></span> POST of "request" resource for filler system, response via Task <a href="workflow-management.html#12.8.7.1" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h4>
-        <p>This is a variation of<a href="workflow-management.html#optionh">Option H</a>, where the Workflow broker is essentially merged with the fulfiller. It still allows the placer to only use a POST of the request, and be made aware of the changes to
+        <p>This is a variation of<a href="workflow-management.html#optionh">Option H</a>, where the Workflow broker is essentially merged with the fulfiller. It still allows the placer to only use a POST of the request and be made aware of the changes to
             the other resources via subscription or polling.
         </p>
         <img src="workflow-optionh-a.png" alt="Diagram showing POST of &quot;request&quot; resource for filler system, response via Task workflow"/>
@@ -456,15 +456,14 @@ in order to support consistent definitions for schema and UML derived code. --><
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fworkflow-management.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fworkflow-management.html">Compare to DSTU3 <img src="external.png" style="text-align: baseline"/></a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Fworkflow-management.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fworkflow-management.html">Ballot Comparison <img src="external.png" style="text-align: baseline"/></a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fworkflow-management.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fworkflow-management.html">Compare to R3 <img src="external.png" style="text-align: baseline"/></a> |                
                <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
                <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="text-align: baseline"/></a>   
         </span>

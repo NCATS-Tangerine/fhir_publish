@@ -1,4 +1,4 @@
-# FHIR GraphQL Schema. Version 3.6.0
+# FHIR GraphQL Schema. Version 4.0.0
 
 type ClinicalProfile {
   id: ID
@@ -20,6 +20,7 @@ type ClinicalProfile {
   medication: [ClinicalProfileMedication]
   diagnosis: [ClinicalProfileDiagnosis]
   procedure: [ClinicalProfileProcedure]
+  hpo: [ClinicalProfileHpo]
 }
 
 type ClinicalProfileLab {
@@ -153,6 +154,32 @@ type ClinicalProfileProcedureCorrelatedDiagnosesEntry {
   coefficient: decimal  _coefficient: ElementBase
 }
 
+type ClinicalProfileHpo {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: [CodeableConcept]!
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedPhenotypes: ClinicalProfileHpoCorrelatedPhenotypes
+}
+
+type ClinicalProfileHpoCorrelatedPhenotypes {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: ClinicalProfileHpoCorrelatedPhenotypesEntry
+}
+
+type ClinicalProfileHpoCorrelatedPhenotypesEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
 input ClinicalProfile {
   id: ID
   meta: Meta
@@ -173,6 +200,7 @@ input ClinicalProfile {
   medication: [ClinicalProfileMedication]
   diagnosis: [ClinicalProfileDiagnosis]
   procedure: [ClinicalProfileProcedure]
+  hpo: [ClinicalProfileHpo]
 }
 
 input ClinicalProfileLab {
@@ -299,6 +327,32 @@ input ClinicalProfileProcedureCorrelatedDiagnoses {
 }
 
 input ClinicalProfileProcedureCorrelatedDiagnosesEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+input ClinicalProfileHpo {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: [CodeableConcept]!
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedPhenotypes: ClinicalProfileHpoCorrelatedPhenotypes
+}
+
+input ClinicalProfileHpoCorrelatedPhenotypes {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: ClinicalProfileHpoCorrelatedPhenotypesEntry
+}
+
+input ClinicalProfileHpoCorrelatedPhenotypesEntry {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]

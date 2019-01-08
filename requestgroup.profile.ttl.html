@@ -3,7 +3,7 @@
 <!-- template-example-ttl.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Requestgroup.profile.ttl - FHIR v3.6.0</title>
+  <title>Requestgroup.profile.ttl - FHIR v4.0.0</title>
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -125,7 +125,7 @@
 [] a fhir:StructureDefinition;
   fhir:Resource.id [ fhir:value &quot;RequestGroup&quot;];
   fhir:Resource.meta [
-     fhir:Meta.lastUpdated [ fhir:value &quot;2018-12-13T14:23:07.677-06:00&quot; ]
+     fhir:Meta.lastUpdated [ fhir:value &quot;2019-01-08T15:26:24.615-06:00&quot; ]
   ];
   fhir:DomainResource.text [
      fhir:Narrative.status [ fhir:value &quot;generated&quot; ]
@@ -152,10 +152,10 @@
      fhir:Extension.value [ fhir:value &quot;cds&quot; ]
   ];
   fhir:StructureDefinition.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/RequestGroup&quot;];
-  fhir:StructureDefinition.version [ fhir:value &quot;3.6.0&quot;];
+  fhir:StructureDefinition.version [ fhir:value &quot;4.0.0&quot;];
   fhir:StructureDefinition.name [ fhir:value &quot;RequestGroup&quot;];
   fhir:StructureDefinition.status [ fhir:value &quot;draft&quot;];
-  fhir:StructureDefinition.date [ fhir:value &quot;2018-12-13T14:23:07-06:00&quot;];
+  fhir:StructureDefinition.date [ fhir:value &quot;2019-01-08T15:26:24-06:00&quot;];
   fhir:StructureDefinition.publisher [ fhir:value &quot;Health Level Seven International (Clinical Decision Support)&quot;];
   fhir:StructureDefinition.contact [
      fhir:index 0;
@@ -173,7 +173,7 @@
      ]
   ];
   fhir:StructureDefinition.description [ fhir:value &quot;A group of related requests that can be used to capture intended activities that have inter-dependencies such as \&quot;give this medication after that one\&quot;.&quot;];
-  fhir:StructureDefinition.fhirVersion [ fhir:value &quot;3.6.0&quot;];
+  fhir:StructureDefinition.fhirVersion [ fhir:value &quot;4.0.0&quot;];
   fhir:StructureDefinition.mapping [
      fhir:index 0;
      fhir:StructureDefinition.identity [ fhir:value &quot;workflow&quot; ];
@@ -718,7 +718,7 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Codes identifying the lifecycle stage of a request.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-status&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-status|4.0.0&quot; ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
@@ -762,7 +762,7 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Codes indicating the degree of authority/intentionality associated with a request.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-intent&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-intent|4.0.0&quot; ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
@@ -801,7 +801,7 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Identifies the level of importance to be assigned to actioning the request.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-priority&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-priority|4.0.0&quot; ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
@@ -882,14 +882,14 @@
        ]
      ], [
        fhir:index 20;
-       fhir:Element.id [ fhir:value &quot;RequestGroup.context&quot; ];
-       fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.context&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Encounter or Episode for the request group&quot; ];
+       fhir:Element.id [ fhir:value &quot;RequestGroup.encounter&quot; ];
+       fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.encounter&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;Created as part of&quot; ];
        fhir:ElementDefinition.definition [ fhir:value &quot;Describes the context of the request group, if any.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.base [
-         fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.context&quot; ];
+         fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.encounter&quot; ];
          fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
          fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ]
        ];
@@ -899,9 +899,6 @@
          fhir:ElementDefinition.targetProfile [
            fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Encounter&quot;;
            fhir:index 0
-         ], [
-           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/EpisodeOfCare&quot;;
-           fhir:index 1
          ]
        ];
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
@@ -909,7 +906,7 @@
        fhir:ElementDefinition.mapping [
          fhir:index 0;
          fhir:ElementDefinition.identity [ fhir:value &quot;workflow&quot; ];
-         fhir:ElementDefinition.map [ fhir:value &quot;Request.context&quot; ]
+         fhir:ElementDefinition.map [ fhir:value &quot;Request.encounter&quot; ]
        ], [
          fhir:index 1;
          fhir:ElementDefinition.identity [ fhir:value &quot;w5&quot; ];
@@ -965,6 +962,9 @@
          ], [
            fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Practitioner&quot;;
            fhir:index 1
+         ], [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/PractitionerRole&quot;;
+           fhir:index 2
          ]
        ];
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
@@ -1306,7 +1306,7 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Identifies the level of importance to be assigned to actioning the request.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-priority&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-priority|4.0.0&quot; ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
@@ -1515,48 +1515,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;The kind of condition for the action.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-condition-kind&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-condition-kind|4.0.0&quot; ]
        ]
      ], [
        fhir:index 42;
-       fhir:Element.id [ fhir:value &quot;RequestGroup.action.condition.description&quot; ];
-       fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.condition.description&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Natural language description of the condition&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;A brief, natural language description of the condition that effectively communicates the intended semantics.&quot; ];
-       fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
-       fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
-       fhir:ElementDefinition.base [
-         fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.condition.description&quot; ];
-         fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
-         fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ]
-       ];
-       fhir:ElementDefinition.type [
-         fhir:index 0;
-         fhir:ElementDefinition.code [ fhir:value &quot;string&quot; ]
-       ];
-       fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
-       fhir:ElementDefinition.isSummary [ fhir:value &quot;false&quot; ]
-     ], [
-       fhir:index 43;
-       fhir:Element.id [ fhir:value &quot;RequestGroup.action.condition.language&quot; ];
-       fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.condition.language&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Language of the expression&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;The media type of the language for the expression.&quot; ];
-       fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
-       fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
-       fhir:ElementDefinition.base [
-         fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.condition.language&quot; ];
-         fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
-         fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ]
-       ];
-       fhir:ElementDefinition.type [
-         fhir:index 0;
-         fhir:ElementDefinition.code [ fhir:value &quot;string&quot; ]
-       ];
-       fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
-       fhir:ElementDefinition.isSummary [ fhir:value &quot;false&quot; ]
-     ], [
-       fhir:index 44;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.condition.expression&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.condition.expression&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Boolean-valued expression&quot; ];
@@ -1571,12 +1533,12 @@
        ];
        fhir:ElementDefinition.type [
          fhir:index 0;
-         fhir:ElementDefinition.code [ fhir:value &quot;string&quot; ]
+         fhir:ElementDefinition.code [ fhir:value &quot;Expression&quot; ]
        ];
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
        fhir:ElementDefinition.isSummary [ fhir:value &quot;false&quot; ]
      ], [
-       fhir:index 45;
+       fhir:index 43;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Relationship to another action&quot; ];
@@ -1604,7 +1566,7 @@
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
        fhir:ElementDefinition.isSummary [ fhir:value &quot;false&quot; ]
      ], [
-       fhir:index 46;
+       fhir:index 44;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction.id&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction.id&quot; ];
        fhir:ElementDefinition.representation [
@@ -1632,7 +1594,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 47;
+       fhir:index 45;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction.extension&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction.extension&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Additional content defined by implementations&quot; ];
@@ -1664,7 +1626,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 48;
+       fhir:index 46;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction.modifierExtension&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction.modifierExtension&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Extensions that cannot be ignored even if unrecognized&quot; ];
@@ -1701,7 +1663,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;N/A&quot; ]
        ]
      ], [
-       fhir:index 49;
+       fhir:index 47;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction.actionId&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction.actionId&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;What action this is related to&quot; ];
@@ -1720,7 +1682,7 @@
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
        fhir:ElementDefinition.isSummary [ fhir:value &quot;false&quot; ]
      ], [
-       fhir:index 50;
+       fhir:index 48;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction.relationship&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction.relationship&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;before-start | before | before-end | concurrent-with-start | concurrent | concurrent-with-end | after-start | after | after-end&quot; ];
@@ -1746,10 +1708,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines the types of relationships between actions.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-relationship-type&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-relationship-type|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 51;
+       fhir:index 49;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction.offset[x]&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction.offset[x]&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Time offset for the relationship&quot; ];
@@ -1771,7 +1733,7 @@
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
        fhir:ElementDefinition.isSummary [ fhir:value &quot;false&quot; ]
      ], [
-       fhir:index 52;
+       fhir:index 50;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.timing[x]&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.timing[x]&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;When the action should take place&quot; ];
@@ -1810,7 +1772,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;Request.occurrence[x]&quot; ]
        ]
      ], [
-       fhir:index 53;
+       fhir:index 51;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.participant&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.participant&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Who should perform the action&quot; ];
@@ -1832,8 +1794,14 @@
            fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Practitioner&quot;;
            fhir:index 1
          ], [
-           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/RelatedPerson&quot;;
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/PractitionerRole&quot;;
            fhir:index 2
+         ], [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/RelatedPerson&quot;;
+           fhir:index 3
+         ], [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Device&quot;;
+           fhir:index 4
          ]
        ];
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
@@ -1848,7 +1816,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;FiveWs.actor&quot; ]
        ]
      ], [
-       fhir:index 54;
+       fhir:index 52;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.type&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.type&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;create | update | remove | fire-event&quot; ];
@@ -1877,7 +1845,7 @@
          fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-type&quot; ]
        ]
      ], [
-       fhir:index 55;
+       fhir:index 53;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.groupingBehavior&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.groupingBehavior&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;visual-group | logical-group | sentence-group&quot; ];
@@ -1903,10 +1871,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines organization behavior of a group.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-grouping-behavior&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-grouping-behavior|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 56;
+       fhir:index 54;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.selectionBehavior&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.selectionBehavior&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;any | all | all-or-none | exactly-one | at-most-one | one-or-more&quot; ];
@@ -1932,10 +1900,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines selection behavior of a group.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-selection-behavior&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-selection-behavior|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 57;
+       fhir:index 55;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.requiredBehavior&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.requiredBehavior&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;must | could | must-unless-documented&quot; ];
@@ -1961,10 +1929,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines expectations around whether an action or action group is required.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-required-behavior&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-required-behavior|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 58;
+       fhir:index 56;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.precheckBehavior&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.precheckBehavior&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;yes | no&quot; ];
@@ -1990,10 +1958,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines selection frequency behavior for an action or group.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-precheck-behavior&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-precheck-behavior|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 59;
+       fhir:index 57;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.cardinalityBehavior&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.cardinalityBehavior&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;single | multiple&quot; ];
@@ -2019,10 +1987,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines behavior for an action or a group for how many times that item may be repeated.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-cardinality-behavior&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-cardinality-behavior|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 60;
+       fhir:index 58;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.resource&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.resource&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The target of the action&quot; ];
@@ -2050,7 +2018,7 @@
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
        fhir:ElementDefinition.isSummary [ fhir:value &quot;false&quot; ]
      ], [
-       fhir:index 61;
+       fhir:index 59;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.action&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.action&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Sub action&quot; ];
@@ -2253,7 +2221,7 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Codes identifying the lifecycle stage of a request.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-status&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-status|4.0.0&quot; ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
@@ -2292,7 +2260,7 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Codes indicating the degree of authority/intentionality associated with a request.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-intent&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-intent|4.0.0&quot; ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
@@ -2325,7 +2293,7 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Identifies the level of importance to be assigned to actioning the request.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-priority&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-priority|4.0.0&quot; ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
@@ -2393,9 +2361,9 @@
        ]
      ], [
        fhir:index 12;
-       fhir:Element.id [ fhir:value &quot;RequestGroup.context&quot; ];
-       fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.context&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Encounter or Episode for the request group&quot; ];
+       fhir:Element.id [ fhir:value &quot;RequestGroup.encounter&quot; ];
+       fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.encounter&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;Created as part of&quot; ];
        fhir:ElementDefinition.definition [ fhir:value &quot;Describes the context of the request group, if any.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
@@ -2405,15 +2373,12 @@
          fhir:ElementDefinition.targetProfile [
            fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Encounter&quot;;
            fhir:index 0
-         ], [
-           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/EpisodeOfCare&quot;;
-           fhir:index 1
          ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
          fhir:ElementDefinition.identity [ fhir:value &quot;workflow&quot; ];
-         fhir:ElementDefinition.map [ fhir:value &quot;Request.context&quot; ]
+         fhir:ElementDefinition.map [ fhir:value &quot;Request.encounter&quot; ]
        ], [
          fhir:index 1;
          fhir:ElementDefinition.identity [ fhir:value &quot;w5&quot; ];
@@ -2457,6 +2422,9 @@
          ], [
            fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Practitioner&quot;;
            fhir:index 1
+         ], [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/PractitionerRole&quot;;
+           fhir:index 2
          ]
        ];
        fhir:ElementDefinition.mapping [
@@ -2630,7 +2598,7 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Identifies the level of importance to be assigned to actioning the request.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-priority&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/request-priority|4.0.0&quot; ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
@@ -2705,34 +2673,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;The kind of condition for the action.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-condition-kind&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-condition-kind|4.0.0&quot; ]
        ]
      ], [
        fhir:index 28;
-       fhir:Element.id [ fhir:value &quot;RequestGroup.action.condition.description&quot; ];
-       fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.condition.description&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Natural language description of the condition&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;A brief, natural language description of the condition that effectively communicates the intended semantics.&quot; ];
-       fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
-       fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
-       fhir:ElementDefinition.type [
-         fhir:index 0;
-         fhir:ElementDefinition.code [ fhir:value &quot;string&quot; ]
-       ]
-     ], [
-       fhir:index 29;
-       fhir:Element.id [ fhir:value &quot;RequestGroup.action.condition.language&quot; ];
-       fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.condition.language&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Language of the expression&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;The media type of the language for the expression.&quot; ];
-       fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
-       fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
-       fhir:ElementDefinition.type [
-         fhir:index 0;
-         fhir:ElementDefinition.code [ fhir:value &quot;string&quot; ]
-       ]
-     ], [
-       fhir:index 30;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.condition.expression&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.condition.expression&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Boolean-valued expression&quot; ];
@@ -2742,10 +2686,10 @@
        fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.type [
          fhir:index 0;
-         fhir:ElementDefinition.code [ fhir:value &quot;string&quot; ]
+         fhir:ElementDefinition.code [ fhir:value &quot;Expression&quot; ]
        ]
      ], [
-       fhir:index 31;
+       fhir:index 29;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Relationship to another action&quot; ];
@@ -2757,7 +2701,7 @@
          fhir:ElementDefinition.code [ fhir:value &quot;BackboneElement&quot; ]
        ]
      ], [
-       fhir:index 32;
+       fhir:index 30;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction.actionId&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction.actionId&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;What action this is related to&quot; ];
@@ -2769,7 +2713,7 @@
          fhir:ElementDefinition.code [ fhir:value &quot;id&quot; ]
        ]
      ], [
-       fhir:index 33;
+       fhir:index 31;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction.relationship&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction.relationship&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;before-start | before | before-end | concurrent-with-start | concurrent | concurrent-with-end | after-start | after | after-end&quot; ];
@@ -2788,10 +2732,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines the types of relationships between actions.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-relationship-type&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-relationship-type|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 34;
+       fhir:index 32;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.relatedAction.offset[x]&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.relatedAction.offset[x]&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Time offset for the relationship&quot; ];
@@ -2806,7 +2750,7 @@
          fhir:ElementDefinition.code [ fhir:value &quot;Range&quot; ]
        ]
      ], [
-       fhir:index 35;
+       fhir:index 33;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.timing[x]&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.timing[x]&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;When the action should take place&quot; ];
@@ -2838,7 +2782,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;Request.occurrence[x]&quot; ]
        ]
      ], [
-       fhir:index 36;
+       fhir:index 34;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.participant&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.participant&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Who should perform the action&quot; ];
@@ -2855,8 +2799,14 @@
            fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Practitioner&quot;;
            fhir:index 1
          ], [
-           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/RelatedPerson&quot;;
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/PractitionerRole&quot;;
            fhir:index 2
+         ], [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/RelatedPerson&quot;;
+           fhir:index 3
+         ], [
+           fhir:value &quot;http://hl7.org/fhir/StructureDefinition/Device&quot;;
+           fhir:index 4
          ]
        ];
        fhir:ElementDefinition.mapping [
@@ -2869,7 +2819,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;FiveWs.actor&quot; ]
        ]
      ], [
-       fhir:index 37;
+       fhir:index 35;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.type&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.type&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;create | update | remove | fire-event&quot; ];
@@ -2891,7 +2841,7 @@
          fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-type&quot; ]
        ]
      ], [
-       fhir:index 38;
+       fhir:index 36;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.groupingBehavior&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.groupingBehavior&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;visual-group | logical-group | sentence-group&quot; ];
@@ -2910,10 +2860,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines organization behavior of a group.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-grouping-behavior&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-grouping-behavior|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 39;
+       fhir:index 37;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.selectionBehavior&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.selectionBehavior&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;any | all | all-or-none | exactly-one | at-most-one | one-or-more&quot; ];
@@ -2932,10 +2882,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines selection behavior of a group.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-selection-behavior&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-selection-behavior|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 40;
+       fhir:index 38;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.requiredBehavior&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.requiredBehavior&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;must | could | must-unless-documented&quot; ];
@@ -2954,10 +2904,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines expectations around whether an action or action group is required.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-required-behavior&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-required-behavior|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 41;
+       fhir:index 39;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.precheckBehavior&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.precheckBehavior&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;yes | no&quot; ];
@@ -2976,10 +2926,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines selection frequency behavior for an action or group.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-precheck-behavior&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-precheck-behavior|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 42;
+       fhir:index 40;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.cardinalityBehavior&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.cardinalityBehavior&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;single | multiple&quot; ];
@@ -2998,10 +2948,10 @@
          ];
          fhir:ElementDefinition.strength [ fhir:value &quot;required&quot; ];
          fhir:ElementDefinition.description [ fhir:value &quot;Defines behavior for an action or a group for how many times that item may be repeated.&quot; ];
-         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-cardinality-behavior&quot; ]
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/action-cardinality-behavior|4.0.0&quot; ]
        ]
      ], [
-       fhir:index 43;
+       fhir:index 41;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.resource&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.resource&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The target of the action&quot; ];
@@ -3022,7 +2972,7 @@
          fhir:index 0
        ]
      ], [
-       fhir:index 44;
+       fhir:index 42;
        fhir:Element.id [ fhir:value &quot;RequestGroup.action.action&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;RequestGroup.action.action&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Sub action&quot; ];
@@ -3064,15 +3014,14 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v3.6.0-b4c96c2474) generated on Thu, Dec 13, 2018 14:27-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-d8fb198a85) generated on Tue, Jan 8, 2019 15:31-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
                <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Frequestgroup.profile.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Frequestgroup.profile.ttl.html">Compare to DSTU3</a> |                
-               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2F2018May%2Frequestgroup.profile.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Frequestgroup.profile.ttl.html">Ballot Comparison</a> |                
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Frequestgroup.profile.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Frequestgroup.profile.ttl.html">Compare to R3</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
                <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   
         </span>

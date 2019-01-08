@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Thu, Dec 13, 2018 14:23-0600 for FHIR v3.6.0 
+  Generated on Tue, Jan 8, 2019 15:26-0600 for FHIR v4.0.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -64,7 +64,7 @@
               <xs:documentation xml:lang="en">Captures the reason for the current state of the MedicationRequest.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="intent" minOccurs="1" maxOccurs="1" type="medicationRequestStatus">
+          <xs:element name="intent" minOccurs="1" maxOccurs="1" type="medicationRequestIntent">
             <xs:annotation>
               <xs:documentation xml:lang="en">Whether the request is a proposal, plan, or an original order.</xs:documentation>
            </xs:annotation>
@@ -195,7 +195,7 @@
           </xs:element>
           <xs:element name="substitution" type="MedicationRequest.Substitution" minOccurs="0" maxOccurs="1">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Indicates whether or not substitution can or should be part of the dispense. In some cases substitution must happen, in other cases substitution must not happen. This block explains the prescriber's intent. If nothing is specified substitution may be done.</xs:documentation>
+              <xs:documentation xml:lang="en">Indicates whether or not substitution can or should be part of the dispense. In some cases, substitution must happen, in other cases substitution must not happen. This block explains the prescriber's intent. If nothing is specified substitution may be done.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="priorPrescription" minOccurs="0" maxOccurs="1" type="Reference">
@@ -307,61 +307,6 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="medicationRequestStatus-list">
-    <xs:restriction base="code-primitive">
-      <xs:enumeration value="proposal">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Proposal</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="plan">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Plan</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="original-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Original Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="reflex-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Reflex Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="filler-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Filler Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="instance-order">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Instance Order</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="option">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Option</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="medicationRequestStatus">
-    <xs:annotation>
-      <xs:documentation xml:lang="en">The kind of medication order.</xs:documentation>
-      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="Element">
-        <xs:attribute name="value" type="medicationRequestStatus-list" use="optional"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
   <xs:simpleType name="medicationrequestStatus-list">
     <xs:restriction base="code-primitive">
       <xs:enumeration value="active">
@@ -414,6 +359,61 @@
     <xs:complexContent>
       <xs:extension base="Element">
         <xs:attribute name="value" type="medicationrequestStatus-list" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="medicationRequestIntent-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="proposal">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Proposal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="plan">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Plan</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="order">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Order</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="original-order">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Original Order</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="reflex-order">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Reflex Order</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="filler-order">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Filler Order</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="instance-order">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Instance Order</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="option">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Option</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="medicationRequestIntent">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The kind of medication order.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Element">
+        <xs:attribute name="value" type="medicationRequestIntent-list" use="optional"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

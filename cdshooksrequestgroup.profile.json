@@ -18,14 +18,14 @@
     "valueCode" : "trial-use"
   }],
   "url" : "http://hl7.org/fhir/StructureDefinition/cdshooksrequestgroup",
-  "version" : "3.6.0",
+  "version" : "4.0.0",
   "name" : "CDS Hooks RequestGroup",
   "status" : "draft",
   "experimental" : false,
-  "date" : "2018-12-13T14:23:07-06:00",
+  "date" : "2019-01-08T15:26:24-06:00",
   "publisher" : "HL7",
   "description" : "Defines a RequestGroup that can represent a CDS Hooks response",
-  "fhirVersion" : "3.6.0",
+  "fhirVersion" : "4.0.0",
   "mapping" : [{
     "identity" : "workflow",
     "uri" : "http://hl7.org/fhir/workflow",
@@ -491,7 +491,7 @@
         }],
         "strength" : "required",
         "description" : "Codes identifying the lifecycle stage of a request.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/request-status"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/request-status|4.0.0"
       },
       "mapping" : [{
         "identity" : "workflow",
@@ -529,7 +529,7 @@
         }],
         "strength" : "required",
         "description" : "Codes indicating the degree of authority/intentionality associated with a request.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/request-intent"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/request-intent|4.0.0"
       },
       "mapping" : [{
         "identity" : "workflow",
@@ -566,7 +566,7 @@
         }],
         "strength" : "required",
         "description" : "Identifies the level of importance to be assigned to actioning the request.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/request-priority"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/request-priority|4.0.0"
       },
       "mapping" : [{
         "identity" : "workflow",
@@ -638,27 +638,26 @@
       }]
     },
     {
-      "id" : "RequestGroup.context",
-      "path" : "RequestGroup.context",
-      "short" : "Encounter or Episode for the request group",
+      "id" : "RequestGroup.encounter",
+      "path" : "RequestGroup.encounter",
+      "short" : "Created as part of",
       "definition" : "Describes the context of the request group, if any.",
       "min" : 0,
       "max" : "1",
       "base" : {
-        "path" : "RequestGroup.context",
+        "path" : "RequestGroup.encounter",
         "min" : 0,
         "max" : "1"
       },
       "type" : [{
         "code" : "Reference",
-        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Encounter",
-        "http://hl7.org/fhir/StructureDefinition/EpisodeOfCare"]
+        "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Encounter"]
       }],
       "isModifier" : false,
       "isSummary" : false,
       "mapping" : [{
         "identity" : "workflow",
-        "map" : "Request.context"
+        "map" : "Request.encounter"
       },
       {
         "identity" : "w5",
@@ -707,7 +706,8 @@
       "type" : [{
         "code" : "Reference",
         "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Device",
-        "http://hl7.org/fhir/StructureDefinition/Practitioner"]
+        "http://hl7.org/fhir/StructureDefinition/Practitioner",
+        "http://hl7.org/fhir/StructureDefinition/PractitionerRole"]
       }],
       "mustSupport" : true,
       "isModifier" : false,
@@ -1008,7 +1008,7 @@
         }],
         "strength" : "required",
         "description" : "Identifies the level of importance to be assigned to actioning the request.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/request-priority"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/request-priority|4.0.0"
       },
       "mapping" : [{
         "identity" : "workflow",
@@ -1189,44 +1189,8 @@
         }],
         "strength" : "required",
         "description" : "The kind of condition for the action.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/action-condition-kind"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/action-condition-kind|4.0.0"
       }
-    },
-    {
-      "id" : "RequestGroup.action.condition.description",
-      "path" : "RequestGroup.action.condition.description",
-      "short" : "Natural language description of the condition",
-      "definition" : "A brief, natural language description of the condition that effectively communicates the intended semantics.",
-      "min" : 0,
-      "max" : "1",
-      "base" : {
-        "path" : "RequestGroup.action.condition.description",
-        "min" : 0,
-        "max" : "1"
-      },
-      "type" : [{
-        "code" : "string"
-      }],
-      "isModifier" : false,
-      "isSummary" : false
-    },
-    {
-      "id" : "RequestGroup.action.condition.language",
-      "path" : "RequestGroup.action.condition.language",
-      "short" : "Language of the expression",
-      "definition" : "The media type of the language for the expression.",
-      "min" : 0,
-      "max" : "1",
-      "base" : {
-        "path" : "RequestGroup.action.condition.language",
-        "min" : 0,
-        "max" : "1"
-      },
-      "type" : [{
-        "code" : "string"
-      }],
-      "isModifier" : false,
-      "isSummary" : false
     },
     {
       "id" : "RequestGroup.action.condition.expression",
@@ -1242,7 +1206,7 @@
         "max" : "1"
       },
       "type" : [{
-        "code" : "string"
+        "code" : "Expression"
       }],
       "isModifier" : false,
       "isSummary" : false
@@ -1391,7 +1355,7 @@
         }],
         "strength" : "required",
         "description" : "Defines the types of relationships between actions.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/action-relationship-type"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/action-relationship-type|4.0.0"
       }
     },
     {
@@ -1469,7 +1433,9 @@
         "code" : "Reference",
         "targetProfile" : ["http://hl7.org/fhir/StructureDefinition/Patient",
         "http://hl7.org/fhir/StructureDefinition/Practitioner",
-        "http://hl7.org/fhir/StructureDefinition/RelatedPerson"]
+        "http://hl7.org/fhir/StructureDefinition/PractitionerRole",
+        "http://hl7.org/fhir/StructureDefinition/RelatedPerson",
+        "http://hl7.org/fhir/StructureDefinition/Device"]
       }],
       "mustSupport" : true,
       "isModifier" : false,
@@ -1535,7 +1501,7 @@
         }],
         "strength" : "required",
         "description" : "Defines organization behavior of a group.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/action-grouping-behavior"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/action-grouping-behavior|4.0.0"
       }
     },
     {
@@ -1563,7 +1529,7 @@
         }],
         "strength" : "required",
         "description" : "Defines selection behavior of a group.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/action-selection-behavior"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/action-selection-behavior|4.0.0"
       }
     },
     {
@@ -1590,7 +1556,7 @@
         }],
         "strength" : "required",
         "description" : "Defines expectations around whether an action or action group is required.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/action-required-behavior"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/action-required-behavior|4.0.0"
       }
     },
     {
@@ -1617,7 +1583,7 @@
         }],
         "strength" : "required",
         "description" : "Defines selection frequency behavior for an action or group.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/action-precheck-behavior"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/action-precheck-behavior|4.0.0"
       }
     },
     {
@@ -1644,7 +1610,7 @@
         }],
         "strength" : "required",
         "description" : "Defines behavior for an action or a group for how many times that item may be repeated.",
-        "valueSet" : "http://hl7.org/fhir/ValueSet/action-cardinality-behavior"
+        "valueSet" : "http://hl7.org/fhir/ValueSet/action-cardinality-behavior|4.0.0"
       }
     },
     {

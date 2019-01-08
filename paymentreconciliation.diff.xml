@@ -1,7 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <difference>
    <type name="PaymentReconciliation" status="changed">
-      <element new-min="1" old-min="0" path="PaymentReconciliation.status"/>
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               new-min="1"
+               old-min="0"
+               path="PaymentReconciliation.status">
+         <old-binding reference="http://hl7.org/fhir/ValueSet/fm-status" strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/fm-status|4.0.0"
+                      strength="required"/>
+      </element>
       <element new-min="1" old-min="0" path="PaymentReconciliation.created"/>
       <element old-name="organization" path="PaymentReconciliation.paymentIssuer"/>
       <element path="PaymentReconciliation.request">
@@ -12,15 +20,14 @@
          <removed-type name="Reference(Organization)"/>
          <added-type name="Reference(Practitioner | PractitionerRole | Organization)"/>
       </element>
-      <element binding-codes-changed="true"
-               binding-status="changed"
+      <element binding-status="changed"
+               binding-valueset-changed="true"
                path="PaymentReconciliation.outcome">
          <removed-type name="CodeableConcept"/>
          <added-type name="code"/>
-         <added-code code="queued"/>
          <old-binding reference="http://hl7.org/fhir/ValueSet/remittance-outcome"
                       strength="required"/>
-         <new-binding reference="http://hl7.org/fhir/ValueSet/remittance-outcome"
+         <new-binding reference="http://hl7.org/fhir/ValueSet/remittance-outcome|4.0.0"
                       strength="required"/>
       </element>
       <element path="PaymentReconciliation.paymentDate" status="new"/>
@@ -41,9 +48,14 @@
          <added-type name="Reference(Practitioner | PractitionerRole | Organization)"/>
       </element>
       <element old-name="form" path="PaymentReconciliation.formCode"/>
-      <element path="PaymentReconciliation.processNote.type">
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               path="PaymentReconciliation.processNote.type">
          <removed-type name="CodeableConcept"/>
          <added-type name="code"/>
+         <old-binding reference="http://hl7.org/fhir/ValueSet/note-type" strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/note-type|4.0.0"
+                      strength="required"/>
       </element>
       <element path="PaymentReconciliation.requestProvider" status="deleted"/>
    </type>
