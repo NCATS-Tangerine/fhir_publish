@@ -81,12 +81,17 @@ type ClinicalProfileMedication {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
+  category: CodeableConcept
   medicationCodeableConcept: CodeableConcept
   medicationReference: Reference
   dosage: ClinicalProfileMedicationDosage
   treatementDuration: decimal  _treatementDuration: ElementBase
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
   fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
-  correlatedLabs: ClinicalProfileMedicationCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileMedicationCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileMedicationCorrelatedMedications
+  correlatedProcedures: ClinicalProfileMedicationCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileMedicationCorrelatedPhenotypes
 }
 
 type ClinicalProfileMedicationDosage {
@@ -102,22 +107,74 @@ type ClinicalProfileMedicationDosage {
   rateQuantity: Quantity
 }
 
-type ClinicalProfileMedicationCorrelatedLabs {
+type ClinicalProfileMedicationCorrelatedDiagnoses {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: ClinicalProfileMedicationCorrelatedDiagnosesEntry
+}
+
+type ClinicalProfileMedicationCorrelatedDiagnosesEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+type ClinicalProfileMedicationCorrelatedMedications {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
   topn: Int  _topn: ElementBase
   deviation: decimal  _deviation: ElementBase
-  entry: [ClinicalProfileMedicationCorrelatedLabsEntry]
+  entry: [ClinicalProfileMedicationCorrelatedMedicationsEntry]
 }
 
-type ClinicalProfileMedicationCorrelatedLabsEntry {
+type ClinicalProfileMedicationCorrelatedMedicationsEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  category: CodeableConcept
+  medicationCodeableConcept: [CodeableConcept]
+  medicationReference: [Reference]
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+type ClinicalProfileMedicationCorrelatedProcedures {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: [ClinicalProfileMedicationCorrelatedProceduresEntry]
+}
+
+type ClinicalProfileMedicationCorrelatedProceduresEntry {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
   code: [CodeableConcept]!
-  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
-  deviationRelativeValue: decimal  _deviationRelativeValue: ElementBase
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+type ClinicalProfileMedicationCorrelatedPhenotypes {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: [ClinicalProfileMedicationCorrelatedPhenotypesEntry]
+}
+
+type ClinicalProfileMedicationCorrelatedPhenotypesEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  coefficient: decimal  _coefficient: ElementBase
 }
 
 type ClinicalProfileDiagnosis {
@@ -126,6 +183,12 @@ type ClinicalProfileDiagnosis {
   modifierExtension: [Extension]
   code: [CodeableConcept]!
   count: Int  _count: ElementBase
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedDiagnoses: ClinicalProfileMedicationCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileMedicationCorrelatedMedications
+  correlatedProcedures: ClinicalProfileMedicationCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileMedicationCorrelatedPhenotypes
 }
 
 type ClinicalProfileProcedure {
@@ -133,25 +196,12 @@ type ClinicalProfileProcedure {
   extension: [Extension]
   modifierExtension: [Extension]
   code: [CodeableConcept]!
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
   fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
-  correlatedDiagnoses: ClinicalProfileProcedureCorrelatedDiagnoses
-}
-
-type ClinicalProfileProcedureCorrelatedDiagnoses {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  topn: Int  _topn: ElementBase
-  abscorrelation: decimal  _abscorrelation: ElementBase
-  entry: ClinicalProfileProcedureCorrelatedDiagnosesEntry
-}
-
-type ClinicalProfileProcedureCorrelatedDiagnosesEntry {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  code: CodeableConcept!
-  coefficient: decimal  _coefficient: ElementBase
+  correlatedDiagnoses: ClinicalProfileMedicationCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileMedicationCorrelatedMedications
+  correlatedProcedures: ClinicalProfileMedicationCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileMedicationCorrelatedPhenotypes
 }
 
 type ClinicalProfileHpo {
@@ -159,25 +209,12 @@ type ClinicalProfileHpo {
   extension: [Extension]
   modifierExtension: [Extension]
   code: [CodeableConcept]!
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
   fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
-  correlatedPhenotypes: ClinicalProfileHpoCorrelatedPhenotypes
-}
-
-type ClinicalProfileHpoCorrelatedPhenotypes {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  topn: Int  _topn: ElementBase
-  abscorrelation: decimal  _abscorrelation: ElementBase
-  entry: ClinicalProfileHpoCorrelatedPhenotypesEntry
-}
-
-type ClinicalProfileHpoCorrelatedPhenotypesEntry {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  code: CodeableConcept!
-  coefficient: decimal  _coefficient: ElementBase
+  correlatedDiagnoses: ClinicalProfileMedicationCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileMedicationCorrelatedMedications
+  correlatedProcedures: ClinicalProfileMedicationCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileMedicationCorrelatedPhenotypes
 }
 
 input ClinicalProfile {
@@ -261,12 +298,17 @@ input ClinicalProfileMedication {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
+  category: CodeableConcept
   medicationCodeableConcept: CodeableConcept
   medicationReference: Reference
   dosage: ClinicalProfileMedicationDosage
   treatementDuration: decimal  _treatementDuration: ElementBase
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
   fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
-  correlatedLabs: ClinicalProfileMedicationCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileMedicationCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileMedicationCorrelatedMedications
+  correlatedProcedures: ClinicalProfileMedicationCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileMedicationCorrelatedPhenotypes
 }
 
 input ClinicalProfileMedicationDosage {
@@ -282,22 +324,74 @@ input ClinicalProfileMedicationDosage {
   rateQuantity: Quantity
 }
 
-input ClinicalProfileMedicationCorrelatedLabs {
+input ClinicalProfileMedicationCorrelatedDiagnoses {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: ClinicalProfileMedicationCorrelatedDiagnosesEntry
+}
+
+input ClinicalProfileMedicationCorrelatedDiagnosesEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+input ClinicalProfileMedicationCorrelatedMedications {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
   topn: Int  _topn: ElementBase
   deviation: decimal  _deviation: ElementBase
-  entry: [ClinicalProfileMedicationCorrelatedLabsEntry]
+  entry: [ClinicalProfileMedicationCorrelatedMedicationsEntry]
 }
 
-input ClinicalProfileMedicationCorrelatedLabsEntry {
+input ClinicalProfileMedicationCorrelatedMedicationsEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  category: CodeableConcept
+  medicationCodeableConcept: [CodeableConcept]
+  medicationReference: [Reference]
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+input ClinicalProfileMedicationCorrelatedProcedures {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: [ClinicalProfileMedicationCorrelatedProceduresEntry]
+}
+
+input ClinicalProfileMedicationCorrelatedProceduresEntry {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
   code: [CodeableConcept]!
-  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
-  deviationRelativeValue: decimal  _deviationRelativeValue: ElementBase
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+input ClinicalProfileMedicationCorrelatedPhenotypes {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: [ClinicalProfileMedicationCorrelatedPhenotypesEntry]
+}
+
+input ClinicalProfileMedicationCorrelatedPhenotypesEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  coefficient: decimal  _coefficient: ElementBase
 }
 
 input ClinicalProfileDiagnosis {
@@ -306,6 +400,12 @@ input ClinicalProfileDiagnosis {
   modifierExtension: [Extension]
   code: [CodeableConcept]!
   count: Int  _count: ElementBase
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedDiagnoses: ClinicalProfileMedicationCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileMedicationCorrelatedMedications
+  correlatedProcedures: ClinicalProfileMedicationCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileMedicationCorrelatedPhenotypes
 }
 
 input ClinicalProfileProcedure {
@@ -313,25 +413,12 @@ input ClinicalProfileProcedure {
   extension: [Extension]
   modifierExtension: [Extension]
   code: [CodeableConcept]!
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
   fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
-  correlatedDiagnoses: ClinicalProfileProcedureCorrelatedDiagnoses
-}
-
-input ClinicalProfileProcedureCorrelatedDiagnoses {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  topn: Int  _topn: ElementBase
-  abscorrelation: decimal  _abscorrelation: ElementBase
-  entry: ClinicalProfileProcedureCorrelatedDiagnosesEntry
-}
-
-input ClinicalProfileProcedureCorrelatedDiagnosesEntry {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  code: CodeableConcept!
-  coefficient: decimal  _coefficient: ElementBase
+  correlatedDiagnoses: ClinicalProfileMedicationCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileMedicationCorrelatedMedications
+  correlatedProcedures: ClinicalProfileMedicationCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileMedicationCorrelatedPhenotypes
 }
 
 input ClinicalProfileHpo {
@@ -339,25 +426,12 @@ input ClinicalProfileHpo {
   extension: [Extension]
   modifierExtension: [Extension]
   code: [CodeableConcept]!
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
   fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
-  correlatedPhenotypes: ClinicalProfileHpoCorrelatedPhenotypes
-}
-
-input ClinicalProfileHpoCorrelatedPhenotypes {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  topn: Int  _topn: ElementBase
-  abscorrelation: decimal  _abscorrelation: ElementBase
-  entry: ClinicalProfileHpoCorrelatedPhenotypesEntry
-}
-
-input ClinicalProfileHpoCorrelatedPhenotypesEntry {
-  id: String
-  extension: [Extension]
-  modifierExtension: [Extension]
-  code: CodeableConcept!
-  coefficient: decimal  _coefficient: ElementBase
+  correlatedDiagnoses: ClinicalProfileMedicationCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileMedicationCorrelatedMedications
+  correlatedProcedures: ClinicalProfileMedicationCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileMedicationCorrelatedPhenotypes
 }
 
 type ClinicalProfileReadType {
