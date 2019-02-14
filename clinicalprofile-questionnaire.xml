@@ -9,8 +9,8 @@
       <status value="active"/>
       <description value="Type options for ClinicalProfile.medication.medication[x]"/>
       <expansion>
-        <identifier value="urn:uuid:962220f7-0d95-4cb2-a5c4-ff2822aba1ef"/>
-        <timestamp value="2019-01-15T09:10:37-06:00"/>
+        <identifier value="urn:uuid:5adc821e-e938-4170-9df4-9145fc31e394"/>
+        <timestamp value="2019-02-14T08:54:19-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="CodeableConcept"/>
@@ -31,8 +31,8 @@
       <status value="active"/>
       <description value="Type options for ClinicalProfile.medication.dosage.rate[x]"/>
       <expansion>
-        <identifier value="urn:uuid:54a141f4-6daa-4436-8c12-46aac2946f6a"/>
-        <timestamp value="2019-01-15T09:10:37-06:00"/>
+        <identifier value="urn:uuid:b681c969-67f2-44dc-8a45-faf7f9113a63"/>
+        <timestamp value="2019-02-14T08:54:19-06:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="Ratio"/>
@@ -46,12 +46,34 @@
       </expansion>
     </ValueSet>
   </contained>
+  <contained>
+    <ValueSet>
+      <id value="vs4"/>
+      <name value="Type options for ClinicalProfile.medication.correlatedMedications.entry.medication[x]"/>
+      <status value="active"/>
+      <description value="Type options for ClinicalProfile.medication.correlatedMedications.entry.medication[x]"/>
+      <expansion>
+        <identifier value="urn:uuid:5443d5b3-c488-402c-b20f-4b5b9a15458b"/>
+        <timestamp value="2019-02-14T08:54:19-06:00"/>
+        <contains>
+          <system value="http://hl7.org/fhir/data-types"/>
+          <code value="CodeableConcept"/>
+          <display value="CodeableConcept"/>
+        </contains>
+        <contains>
+          <system value="http://hl7.org/fhir/resource-types"/>
+          <code value="Medication"/>
+          <display value="Medication"/>
+        </contains>
+      </expansion>
+    </ValueSet>
+  </contained>
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
   </identifier>
   <version value="4.0.0"/>
   <status value="draft"/>
-  <date value="2019-01-15T09:07:06-06:00"/>
+  <date value="2019-02-14T08:51:23-06:00"/>
   <publisher value="Health Level Seven International (Clinical Decision Support)"/>
   <item>
     <linkId value="ClinicalProfile"/>
@@ -1410,7 +1432,7 @@
             <valueInteger value="1"/>
           </extension>
           <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedLabs"/>
-          <text value="The top labs with the most significant correlation"/>
+          <text value="Correlated laboratory tests"/>
           <type value="group"/>
           <required value="false"/>
           <repeats value="false"/>
@@ -1424,7 +1446,7 @@
                 </coding>
               </valueCodeableConcept>
             </extension>
-            <text value="An ordered list of the laboratory tests defined in the profile definition that are most closely correlated.  This list can be limited by the top &quot;n&quot; labs and/or a cutoff on the absolute value of the correlation coefficient."/>
+            <text value="An ordered list of the laboratory tests  that are most closely correlated.  This list can be limited by the top &quot;n&quot; labs and/or a cutoff on the absolute value of the correlation coefficient."/>
             <type value="display"/>
           </item>
           <item>
@@ -1822,6 +1844,46 @@
           </extension>
           <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
           <type value="display"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="CodeableConcept"/>
+        </extension>
+        <linkId value="ClinicalProfile.medication.category"/>
+        <text value="Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient))"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient))."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.category.coding"/>
+          <text value="code:"/>
+          <type value="open-choice"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.category.text"/>
+          <text value="text:"/>
+          <type value="string"/>
+          <required value="false"/>
+          <repeats value="false"/>
         </item>
       </item>
       <item>
@@ -2328,6 +2390,38 @@
         </item>
       </item>
       <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="decimal"/>
+        </extension>
+        <linkId value="ClinicalProfile.medication.frequencyPerYear"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Frequency of treatments per patient per year."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.frequencyPerYear.value"/>
+          <text value="Frequency of treatments per patient per year"/>
+          <type value="decimal"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
           <valueInteger value="1"/>
         </extension>
@@ -2366,8 +2460,8 @@
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
           <valueInteger value="1"/>
         </extension>
-        <linkId value="ClinicalProfile.medication.correlatedLabs"/>
-        <text value="The top labs with the most significant deviation relative value"/>
+        <linkId value="ClinicalProfile.medication.correlatedDiagnoses"/>
+        <text value="Correlated diagnosies"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -2381,7 +2475,7 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="An ordered list of the laboratory tests defined in the profile definition that have the most significant deviation relative value.  This list can be limited by the top &quot;n&quot; labs and/or a cutoff on the absolute value of the deviation."/>
+          <text value="An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top &quot;n&quot; diagnoses and/or a cutoff on the absolute value of the correlation coefficient."/>
           <type value="display"/>
         </item>
         <item>
@@ -2391,7 +2485,7 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
             <valueString value="string"/>
           </extension>
-          <linkId value="ClinicalProfile.medication.correlatedLabs.id"/>
+          <linkId value="ClinicalProfile.medication.correlatedDiagnoses.id"/>
           <type value="group"/>
           <required value="false"/>
           <repeats value="true"/>
@@ -2409,7 +2503,7 @@
             <type value="display"/>
           </item>
           <item>
-            <linkId value="ClinicalProfile.medication.correlatedLabs.id.value"/>
+            <linkId value="ClinicalProfile.medication.correlatedDiagnoses.id.value"/>
             <text value="Unique id for inter-element referencing"/>
             <type value="string"/>
             <required value="false"/>
@@ -2417,7 +2511,7 @@
           </item>
         </item>
         <item>
-          <linkId value="ClinicalProfile.medication.correlatedLabs.extension"/>
+          <linkId value="ClinicalProfile.medication.correlatedDiagnoses.extension"/>
           <text value="Additional content defined by implementations"/>
           <type value="group"/>
           <required value="false"/>
@@ -2437,7 +2531,7 @@
           </item>
         </item>
         <item>
-          <linkId value="ClinicalProfile.medication.correlatedLabs.modifierExtension"/>
+          <linkId value="ClinicalProfile.medication.correlatedDiagnoses.modifierExtension"/>
           <text value="Extensions that cannot be ignored even if unrecognized"/>
           <type value="group"/>
           <required value="false"/>
@@ -2463,7 +2557,7 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
             <valueString value="integer"/>
           </extension>
-          <linkId value="ClinicalProfile.medication.correlatedLabs.topn"/>
+          <linkId value="ClinicalProfile.medication.correlatedDiagnoses.topn"/>
           <type value="group"/>
           <required value="false"/>
           <repeats value="true"/>
@@ -2477,12 +2571,12 @@
                 </coding>
               </valueCodeableConcept>
             </extension>
-            <text value="Number of labs cutoff (e.g. top 10)."/>
+            <text value="Number of diagnoses cutoff (e.g. top 10)."/>
             <type value="display"/>
           </item>
           <item>
-            <linkId value="ClinicalProfile.medication.correlatedLabs.topn.value"/>
-            <text value="Number of labs cutoff (e.g. top 10)"/>
+            <linkId value="ClinicalProfile.medication.correlatedDiagnoses.topn.value"/>
+            <text value="Number of diagnoses cutoff (e.g. top 10)"/>
             <type value="integer"/>
             <required value="false"/>
             <repeats value="false"/>
@@ -2495,7 +2589,7 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
             <valueString value="decimal"/>
           </extension>
-          <linkId value="ClinicalProfile.medication.correlatedLabs.deviation"/>
+          <linkId value="ClinicalProfile.medication.correlatedDiagnoses.abscorrelation"/>
           <type value="group"/>
           <required value="false"/>
           <repeats value="true"/>
@@ -2509,23 +2603,26 @@
                 </coding>
               </valueCodeableConcept>
             </extension>
-            <text value="Deviation cutoff."/>
+            <text value="Minimum absolute value of correlation coefficient."/>
             <type value="display"/>
           </item>
           <item>
-            <linkId value="ClinicalProfile.medication.correlatedLabs.deviation.value"/>
-            <text value="Deviation cutoff"/>
+            <linkId value="ClinicalProfile.medication.correlatedDiagnoses.abscorrelation.value"/>
+            <text value="Minimum absolute value of correlation coefficient"/>
             <type value="decimal"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
         </item>
         <item>
-          <linkId value="ClinicalProfile.medication.correlatedLabs.entry"/>
-          <text value="Lab with significant deviation relative value"/>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <linkId value="ClinicalProfile.medication.correlatedDiagnoses.entry"/>
+          <text value="Correlation entry"/>
           <type value="group"/>
           <required value="false"/>
-          <repeats value="true"/>
+          <repeats value="false"/>
           <item>
             <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
               <valueCodeableConcept>
@@ -2536,7 +2633,7 @@
                 </coding>
               </valueCodeableConcept>
             </extension>
-            <text value="Lab with significant deviation relative value."/>
+            <text value="Correlation entry."/>
             <type value="display"/>
           </item>
           <item>
@@ -2546,7 +2643,7 @@
             <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
               <valueString value="string"/>
             </extension>
-            <linkId value="ClinicalProfile.medication.correlatedLabs.entry.id"/>
+            <linkId value="ClinicalProfile.medication.correlatedDiagnoses.entry.id"/>
             <type value="group"/>
             <required value="false"/>
             <repeats value="true"/>
@@ -2564,7 +2661,7 @@
               <type value="display"/>
             </item>
             <item>
-              <linkId value="ClinicalProfile.medication.correlatedLabs.entry.id.value"/>
+              <linkId value="ClinicalProfile.medication.correlatedDiagnoses.entry.id.value"/>
               <text value="Unique id for inter-element referencing"/>
               <type value="string"/>
               <required value="false"/>
@@ -2572,7 +2669,7 @@
             </item>
           </item>
           <item>
-            <linkId value="ClinicalProfile.medication.correlatedLabs.entry.extension"/>
+            <linkId value="ClinicalProfile.medication.correlatedDiagnoses.entry.extension"/>
             <text value="Additional content defined by implementations"/>
             <type value="group"/>
             <required value="false"/>
@@ -2592,7 +2689,736 @@
             </item>
           </item>
           <item>
-            <linkId value="ClinicalProfile.medication.correlatedLabs.entry.modifierExtension"/>
+            <linkId value="ClinicalProfile.medication.correlatedDiagnoses.entry.modifierExtension"/>
+            <text value="Extensions that cannot be ignored even if unrecognized"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+              <type value="display"/>
+            </item>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="CodeableConcept"/>
+            </extension>
+            <linkId value="ClinicalProfile.medication.correlatedDiagnoses.entry.code"/>
+            <text value="Diagnosis code(s)"/>
+            <type value="group"/>
+            <required value="true"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Diagnosis code(s)."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedDiagnoses.entry.code.coding"/>
+              <text value="code:"/>
+              <type value="open-choice"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedDiagnoses.entry.code.text"/>
+              <text value="text:"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="decimal"/>
+            </extension>
+            <linkId value="ClinicalProfile.medication.correlatedDiagnoses.entry.coefficient"/>
+            <type value="group"/>
+            <required value="true"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Correlation coefficient."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedDiagnoses.entry.coefficient.value"/>
+              <text value="Correlation coefficient"/>
+              <type value="decimal"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.medication.correlatedMedications"/>
+        <text value="Correlated medications"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top &quot;n&quot; medications and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="string"/>
+          </extension>
+          <linkId value="ClinicalProfile.medication.correlatedMedications.id"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedMedications.id.value"/>
+            <text value="Unique id for inter-element referencing"/>
+            <type value="string"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.correlatedMedications.extension"/>
+          <text value="Additional content defined by implementations"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+            <type value="display"/>
+          </item>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.correlatedMedications.modifierExtension"/>
+          <text value="Extensions that cannot be ignored even if unrecognized"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+            <type value="display"/>
+          </item>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="integer"/>
+          </extension>
+          <linkId value="ClinicalProfile.medication.correlatedMedications.topn"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="Number of medications cutoff (e.g. top 10)."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedMedications.topn.value"/>
+            <text value="Number of medications cutoff (e.g. top 10)"/>
+            <type value="integer"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="decimal"/>
+          </extension>
+          <linkId value="ClinicalProfile.medication.correlatedMedications.deviation"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="Deviation cutoff."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedMedications.deviation.value"/>
+            <text value="Deviation cutoff"/>
+            <type value="decimal"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.correlatedMedications.entry"/>
+          <text value="Correlation entry"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="Correlation entry."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="string"/>
+            </extension>
+            <linkId value="ClinicalProfile.medication.correlatedMedications.entry.id"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedMedications.entry.id.value"/>
+              <text value="Unique id for inter-element referencing"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedMedications.entry.extension"/>
+            <text value="Additional content defined by implementations"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+              <type value="display"/>
+            </item>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedMedications.entry.modifierExtension"/>
+            <text value="Extensions that cannot be ignored even if unrecognized"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+              <type value="display"/>
+            </item>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="CodeableConcept"/>
+            </extension>
+            <linkId value="ClinicalProfile.medication.correlatedMedications.entry.category"/>
+            <text value="Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient))"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient))."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedMedications.entry.category.coding"/>
+              <text value="code:"/>
+              <type value="open-choice"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedMedications.entry.category.text"/>
+              <text value="text:"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <linkId value="ClinicalProfile.medication.correlatedMedications.entry.medication[x]"/>
+            <text value="Medication code(s)"/>
+            <type value="group"/>
+            <required value="true"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Medication code(s)."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedMedications.entry.medication[x]._type"/>
+              <text value="type"/>
+              <type value="choice"/>
+              <required value="false"/>
+              <repeats value="false"/>
+              <answerValueSet value="#vs4"/>
+              <item>
+                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+                  <valueString value="CodeableConcept"/>
+                </extension>
+                <linkId value="ClinicalProfile.medication.correlatedMedications.entry.medication[x]._null"/>
+                <type value="group"/>
+                <item>
+                  <linkId value="ClinicalProfile.medication.correlatedMedications.entry.medication[x]._null.coding"/>
+                  <text value="code:"/>
+                  <type value="open-choice"/>
+                  <required value="false"/>
+                  <repeats value="false"/>
+                </item>
+                <item>
+                  <linkId value="ClinicalProfile.medication.correlatedMedications.entry.medication[x]._null.text"/>
+                  <text value="text:"/>
+                  <type value="string"/>
+                  <required value="false"/>
+                  <repeats value="false"/>
+                </item>
+              </item>
+              <item>
+                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+                  <valueString value="Reference"/>
+                </extension>
+                <linkId value="ClinicalProfile.medication.correlatedMedications.entry.medication[x]._null"/>
+                <type value="group"/>
+                <item>
+                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+                    <valueCode value="Medication"/>
+                  </extension>
+                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+                    <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+                  </extension>
+                  <linkId value="ClinicalProfile.medication.correlatedMedications.entry.medication[x]._null.value"/>
+                  <type value="reference"/>
+                  <required value="false"/>
+                  <repeats value="false"/>
+                </item>
+              </item>
+            </item>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="decimal"/>
+            </extension>
+            <linkId value="ClinicalProfile.medication.correlatedMedications.entry.coefficient"/>
+            <type value="group"/>
+            <required value="true"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Correlation coefficient."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedMedications.entry.coefficient.value"/>
+              <text value="Correlation coefficient"/>
+              <type value="decimal"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.medication.correlatedProcedures"/>
+        <text value="Correlated procedures"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top &quot;n&quot; procedures and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="string"/>
+          </extension>
+          <linkId value="ClinicalProfile.medication.correlatedProcedures.id"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedProcedures.id.value"/>
+            <text value="Unique id for inter-element referencing"/>
+            <type value="string"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.correlatedProcedures.extension"/>
+          <text value="Additional content defined by implementations"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+            <type value="display"/>
+          </item>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.correlatedProcedures.modifierExtension"/>
+          <text value="Extensions that cannot be ignored even if unrecognized"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+            <type value="display"/>
+          </item>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="integer"/>
+          </extension>
+          <linkId value="ClinicalProfile.medication.correlatedProcedures.topn"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="Number of rocedures cutoff (e.g. top 10)."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedProcedures.topn.value"/>
+            <text value="Number of rocedures cutoff (e.g. top 10)"/>
+            <type value="integer"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="decimal"/>
+          </extension>
+          <linkId value="ClinicalProfile.medication.correlatedProcedures.abscorrelation"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="Minimum absolute value of correlation coefficient."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedProcedures.abscorrelation.value"/>
+            <text value="Minimum absolute value of correlation coefficient"/>
+            <type value="decimal"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.correlatedProcedures.entry"/>
+          <text value="Correlation entry"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="Correlation entry."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="string"/>
+            </extension>
+            <linkId value="ClinicalProfile.medication.correlatedProcedures.entry.id"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedProcedures.entry.id.value"/>
+              <text value="Unique id for inter-element referencing"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedProcedures.entry.extension"/>
+            <text value="Additional content defined by implementations"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+              <type value="display"/>
+            </item>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedProcedures.entry.modifierExtension"/>
             <text value="Extensions that cannot be ignored even if unrecognized"/>
             <type value="group"/>
             <required value="false"/>
@@ -2618,8 +3444,8 @@
             <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
               <valueString value="CodeableConcept"/>
             </extension>
-            <linkId value="ClinicalProfile.medication.correlatedLabs.entry.code"/>
-            <text value="Lab code (LOINC) or Lab Group Code"/>
+            <linkId value="ClinicalProfile.medication.correlatedProcedures.entry.code"/>
+            <text value="Procedure code(s)"/>
             <type value="group"/>
             <required value="true"/>
             <repeats value="true"/>
@@ -2633,18 +3459,18 @@
                   </coding>
                 </valueCodeableConcept>
               </extension>
-              <text value="Lab code (LOINC) or Lab Group Code."/>
+              <text value="Procedure code(s)."/>
               <type value="display"/>
             </item>
             <item>
-              <linkId value="ClinicalProfile.medication.correlatedLabs.entry.code.coding"/>
+              <linkId value="ClinicalProfile.medication.correlatedProcedures.entry.code.coding"/>
               <text value="code:"/>
               <type value="open-choice"/>
               <required value="false"/>
               <repeats value="false"/>
             </item>
             <item>
-              <linkId value="ClinicalProfile.medication.correlatedLabs.entry.code.text"/>
+              <linkId value="ClinicalProfile.medication.correlatedProcedures.entry.code.text"/>
               <text value="text:"/>
               <type value="string"/>
               <required value="false"/>
@@ -2661,7 +3487,7 @@
             <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
               <valueString value="decimal"/>
             </extension>
-            <linkId value="ClinicalProfile.medication.correlatedLabs.entry.fractionOfSubjects"/>
+            <linkId value="ClinicalProfile.medication.correlatedProcedures.entry.coefficient"/>
             <type value="group"/>
             <required value="true"/>
             <repeats value="true"/>
@@ -2675,13 +3501,307 @@
                   </coding>
                 </valueCodeableConcept>
               </extension>
-              <text value="Fraction of subjects with this lab."/>
+              <text value="Correlation coefficient."/>
               <type value="display"/>
             </item>
             <item>
-              <linkId value="ClinicalProfile.medication.correlatedLabs.entry.fractionOfSubjects.value"/>
-              <text value="Fraction of subjects with this lab"/>
+              <linkId value="ClinicalProfile.medication.correlatedProcedures.entry.coefficient.value"/>
+              <text value="Correlation coefficient"/>
               <type value="decimal"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.medication.correlatedPhenotypes"/>
+        <text value="Correlated phenotypes"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top &quot;n&quot; phenotypes and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="string"/>
+          </extension>
+          <linkId value="ClinicalProfile.medication.correlatedPhenotypes.id"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedPhenotypes.id.value"/>
+            <text value="Unique id for inter-element referencing"/>
+            <type value="string"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.correlatedPhenotypes.extension"/>
+          <text value="Additional content defined by implementations"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+            <type value="display"/>
+          </item>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.correlatedPhenotypes.modifierExtension"/>
+          <text value="Extensions that cannot be ignored even if unrecognized"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+            <type value="display"/>
+          </item>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="integer"/>
+          </extension>
+          <linkId value="ClinicalProfile.medication.correlatedPhenotypes.topn"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="The maximum number of significant correlated entries that are in this entry."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedPhenotypes.topn.value"/>
+            <text value="Number of phenotypes cutoff (e.g. top 10)"/>
+            <type value="integer"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+            <valueInteger value="1"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="decimal"/>
+          </extension>
+          <linkId value="ClinicalProfile.medication.correlatedPhenotypes.abscorrelation"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="The cutoff value for correlation coefficients.  Entries with an absolute value less than this are not included in the list."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedPhenotypes.abscorrelation.value"/>
+            <text value="Minimum absolute value of correlation coefficient"/>
+            <type value="decimal"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.medication.correlatedPhenotypes.entry"/>
+          <text value="Correlation entry"/>
+          <type value="group"/>
+          <required value="false"/>
+          <repeats value="true"/>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+              <valueCodeableConcept>
+                <coding>
+                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                  <code value="flyover"/>
+                  <display value="Fly-over"/>
+                </coding>
+              </valueCodeableConcept>
+            </extension>
+            <text value="List of correlated phenotypes in descending order of the absolute value of the correlation coefficient."/>
+            <type value="display"/>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="string"/>
+            </extension>
+            <linkId value="ClinicalProfile.medication.correlatedPhenotypes.entry.id"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedPhenotypes.entry.id.value"/>
+              <text value="Unique id for inter-element referencing"/>
+              <type value="string"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedPhenotypes.entry.extension"/>
+            <text value="Additional content defined by implementations"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+              <type value="display"/>
+            </item>
+          </item>
+          <item>
+            <linkId value="ClinicalProfile.medication.correlatedPhenotypes.entry.modifierExtension"/>
+            <text value="Extensions that cannot be ignored even if unrecognized"/>
+            <type value="group"/>
+            <required value="false"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+              <type value="display"/>
+            </item>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+              <valueInteger value="1"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+              <valueString value="CodeableConcept"/>
+            </extension>
+            <linkId value="ClinicalProfile.medication.correlatedPhenotypes.entry.code"/>
+            <text value="Phenotype codes"/>
+            <type value="group"/>
+            <required value="true"/>
+            <repeats value="true"/>
+            <item>
+              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                <valueCodeableConcept>
+                  <coding>
+                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                    <code value="flyover"/>
+                    <display value="Fly-over"/>
+                  </coding>
+                </valueCodeableConcept>
+              </extension>
+              <text value="Phenotype(s).  More than one code is considered a group or aggregation."/>
+              <type value="display"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedPhenotypes.entry.code.coding"/>
+              <text value="code:"/>
+              <type value="open-choice"/>
+              <required value="false"/>
+              <repeats value="false"/>
+            </item>
+            <item>
+              <linkId value="ClinicalProfile.medication.correlatedPhenotypes.entry.code.text"/>
+              <text value="text:"/>
+              <type value="string"/>
               <required value="false"/>
               <repeats value="false"/>
             </item>
@@ -2696,7 +3816,7 @@
             <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
               <valueString value="decimal"/>
             </extension>
-            <linkId value="ClinicalProfile.medication.correlatedLabs.entry.deviationRelativeValue"/>
+            <linkId value="ClinicalProfile.medication.correlatedPhenotypes.entry.coefficient"/>
             <type value="group"/>
             <required value="true"/>
             <repeats value="true"/>
@@ -2710,12 +3830,12 @@
                   </coding>
                 </valueCodeableConcept>
               </extension>
-              <text value="Value for this subset."/>
+              <text value="Correlation coefficient."/>
               <type value="display"/>
             </item>
             <item>
-              <linkId value="ClinicalProfile.medication.correlatedLabs.entry.deviationRelativeValue.value"/>
-              <text value="Value for this subset"/>
+              <linkId value="ClinicalProfile.medication.correlatedPhenotypes.entry.coefficient.value"/>
+              <text value="Correlation coefficient"/>
               <type value="decimal"/>
               <required value="false"/>
               <repeats value="false"/>
@@ -2890,6 +4010,165 @@
           <repeats value="false"/>
         </item>
       </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="decimal"/>
+        </extension>
+        <linkId value="ClinicalProfile.diagnosis.frequencyPerYear"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Frequency of this diagnosis per patient per year."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.diagnosis.frequencyPerYear.value"/>
+          <text value="Frequency of this diagnosis per patient per year"/>
+          <type value="decimal"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="decimal"/>
+        </extension>
+        <linkId value="ClinicalProfile.diagnosis.fractionOfSubjects"/>
+        <type value="group"/>
+        <required value="true"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Fraction of patients in with this diagnosis."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.diagnosis.fractionOfSubjects.value"/>
+          <text value="Fraction of patients in with this diagnosis"/>
+          <type value="decimal"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.diagnosis.correlatedDiagnoses"/>
+        <text value="Correlated diagnosies"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top &quot;n&quot; diagnoses and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.diagnosis.correlatedMedications"/>
+        <text value="Correlated medications"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top &quot;n&quot; medications and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.diagnosis.correlatedProcedures"/>
+        <text value="Correlated procedures"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top &quot;n&quot; procedures and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.diagnosis.correlatedPhenotypes"/>
+        <text value="Correlated phenotypes"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top &quot;n&quot; phenotypes and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
+        </item>
+      </item>
     </item>
     <item>
       <linkId value="ClinicalProfile.procedure"/>
@@ -3023,6 +4302,38 @@
         </item>
       </item>
       <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="decimal"/>
+        </extension>
+        <linkId value="ClinicalProfile.procedure.frequencyPerYear"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Frequency of procedure per patient per year."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.procedure.frequencyPerYear.value"/>
+          <text value="Frequency of procedure per patient per year"/>
+          <type value="decimal"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
           <valueInteger value="1"/>
         </extension>
@@ -3062,7 +4373,7 @@
           <valueInteger value="1"/>
         </extension>
         <linkId value="ClinicalProfile.procedure.correlatedDiagnoses"/>
-        <text value="The to N most closely correlated ICD10 codes"/>
+        <text value="Correlated diagnosies"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -3076,323 +4387,83 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The to N most closely correlated ICD10 codes."/>
+          <text value="An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top &quot;n&quot; diagnoses and/or a cutoff on the absolute value of the correlation coefficient."/>
           <type value="display"/>
         </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.procedure.correlatedMedications"/>
+        <text value="Correlated medications"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
         <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
           </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="string"/>
-          </extension>
-          <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.id"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.id.value"/>
-            <text value="Unique id for inter-element referencing"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
+          <text value="An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top &quot;n&quot; medications and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
         </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.procedure.correlatedProcedures"/>
+        <text value="Correlated procedures"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
         <item>
-          <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.extension"/>
-          <text value="Additional content defined by implementations"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-            <type value="display"/>
-          </item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top &quot;n&quot; procedures and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
         </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.procedure.correlatedPhenotypes"/>
+        <text value="Correlated phenotypes"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
         <item>
-          <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.modifierExtension"/>
-          <text value="Extensions that cannot be ignored even if unrecognized"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
           </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="integer"/>
-          </extension>
-          <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.topn"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Number of diagnoses cutoff (e.g. top 10)."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.topn.value"/>
-            <text value="Number of diagnoses cutoff (e.g. top 10)"/>
-            <type value="integer"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="decimal"/>
-          </extension>
-          <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.abscorrelation"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Minimum absolute value of correlation coefficient."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.abscorrelation.value"/>
-            <text value="Minimum absolute value of correlation coefficient"/>
-            <type value="decimal"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.entry"/>
-          <text value="Correlation entry"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="false"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Correlation entry."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="string"/>
-            </extension>
-            <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.entry.id"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.entry.id.value"/>
-              <text value="Unique id for inter-element referencing"/>
-              <type value="string"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.entry.extension"/>
-            <text value="Additional content defined by implementations"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-              <type value="display"/>
-            </item>
-          </item>
-          <item>
-            <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.entry.modifierExtension"/>
-            <text value="Extensions that cannot be ignored even if unrecognized"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-              <type value="display"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="CodeableConcept"/>
-            </extension>
-            <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.entry.code"/>
-            <text value="Diagnosis code(s)"/>
-            <type value="group"/>
-            <required value="true"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Diagnosis code(s)."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.entry.code.coding"/>
-              <text value="code:"/>
-              <type value="open-choice"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-            <item>
-              <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.entry.code.text"/>
-              <text value="text:"/>
-              <type value="string"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="decimal"/>
-            </extension>
-            <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.entry.coefficient"/>
-            <type value="group"/>
-            <required value="true"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Correlation coefficient."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="ClinicalProfile.procedure.correlatedDiagnoses.entry.coefficient.value"/>
-              <text value="Correlation coefficient"/>
-              <type value="decimal"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
+          <text value="An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top &quot;n&quot; phenotypes and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
         </item>
       </item>
     </item>
     <item>
       <linkId value="ClinicalProfile.hpo"/>
-      <text value="Procedure profile entry"/>
+      <text value="HPO Profile Entry"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -3406,7 +4477,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Procedure profile entry."/>
+        <text value="Phenotypic description."/>
         <type value="display"/>
       </item>
       <item>
@@ -3522,6 +4593,38 @@
         </item>
       </item>
       <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="decimal"/>
+        </extension>
+        <linkId value="ClinicalProfile.hpo.frequencyPerYear"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Frequency of this code per patient per year."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="ClinicalProfile.hpo.frequencyPerYear.value"/>
+          <text value="Frequency of this code per patient per year"/>
+          <type value="decimal"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
           <valueInteger value="1"/>
         </extension>
@@ -3560,8 +4663,8 @@
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
           <valueInteger value="1"/>
         </extension>
-        <linkId value="ClinicalProfile.hpo.correlatedPhenotypes"/>
-        <text value="The to N most closely correlated HPO codes"/>
+        <linkId value="ClinicalProfile.hpo.correlatedDiagnoses"/>
+        <text value="Correlated diagnosies"/>
         <type value="group"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -3575,317 +4678,77 @@
               </coding>
             </valueCodeableConcept>
           </extension>
-          <text value="The to N most closely correlated HPO codes."/>
+          <text value="An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top &quot;n&quot; diagnoses and/or a cutoff on the absolute value of the correlation coefficient."/>
           <type value="display"/>
         </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.hpo.correlatedMedications"/>
+        <text value="Correlated medications"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
         <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
           </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="string"/>
-          </extension>
-          <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.id"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.id.value"/>
-            <text value="Unique id for inter-element referencing"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
+          <text value="An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top &quot;n&quot; medications and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
         </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.hpo.correlatedProcedures"/>
+        <text value="Correlated procedures"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
         <item>
-          <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.extension"/>
-          <text value="Additional content defined by implementations"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-            <type value="display"/>
-          </item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top &quot;n&quot; procedures and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
         </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <linkId value="ClinicalProfile.hpo.correlatedPhenotypes"/>
+        <text value="Correlated phenotypes"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="false"/>
         <item>
-          <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.modifierExtension"/>
-          <text value="Extensions that cannot be ignored even if unrecognized"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
           </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="integer"/>
-          </extension>
-          <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.topn"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Number of phenotypes cutoff (e.g. top 10)."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.topn.value"/>
-            <text value="Number of phenotypes cutoff (e.g. top 10)"/>
-            <type value="integer"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="decimal"/>
-          </extension>
-          <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.abscorrelation"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Minimum absolute value of correlation coefficient."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.abscorrelation.value"/>
-            <text value="Minimum absolute value of correlation coefficient"/>
-            <type value="decimal"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.entry"/>
-          <text value="Correlation entry"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="false"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Correlation entry."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="string"/>
-            </extension>
-            <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.entry.id"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.entry.id.value"/>
-              <text value="Unique id for inter-element referencing"/>
-              <type value="string"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.entry.extension"/>
-            <text value="Additional content defined by implementations"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-              <type value="display"/>
-            </item>
-          </item>
-          <item>
-            <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.entry.modifierExtension"/>
-            <text value="Extensions that cannot be ignored even if unrecognized"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-              <type value="display"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="CodeableConcept"/>
-            </extension>
-            <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.entry.code"/>
-            <text value="Phenotype codes"/>
-            <type value="group"/>
-            <required value="true"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Phenotype codes."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.entry.code.coding"/>
-              <text value="code:"/>
-              <type value="open-choice"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-            <item>
-              <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.entry.code.text"/>
-              <text value="text:"/>
-              <type value="string"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="decimal"/>
-            </extension>
-            <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.entry.coefficient"/>
-            <type value="group"/>
-            <required value="true"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Correlation coefficient."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="ClinicalProfile.hpo.correlatedPhenotypes.entry.coefficient.value"/>
-              <text value="Correlation coefficient"/>
-              <type value="decimal"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
+          <text value="An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top &quot;n&quot; phenotypes and/or a cutoff on the absolute value of the correlation coefficient."/>
+          <type value="display"/>
         </item>
       </item>
     </item>

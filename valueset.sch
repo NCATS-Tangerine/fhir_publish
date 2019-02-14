@@ -75,7 +75,7 @@
       <sch:assert test="not(exists(f:concept)) or not(exists(f:filter))">vsd-3: Cannot have both concept and filter</sch:assert>
       <sch:assert test="exists(f:valueSet) or exists(f:system)">vsd-1: A value set include/exclude SHALL have a value set or a system</sch:assert>
     </sch:rule>
-    <sch:rule context="f:ValueSet/f:expansion/f:contains">
+    <sch:rule context="f:ValueSet/f:expansion//f:contains">
       <sch:assert test="exists(f:code) or exists(f:display)">vsd-6: SHALL have a code or a display</sch:assert>
       <sch:assert test="exists(f:code) or (f:abstract/@value = true())">vsd-9: Must have a code if not abstract</sch:assert>
       <sch:assert test="exists(f:system) or not(exists(f:code))">vsd-10: Must have a system if a code is present</sch:assert>
