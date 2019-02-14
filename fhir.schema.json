@@ -14313,7 +14313,7 @@
           "type": "array"
         },
         "hpo": {
-          "description": "Procedure profile entry.",
+          "description": "Phenotypic description.",
           "items": {
             "$ref": "#/definitions/ClinicalProfile_Hpo"
           },
@@ -14495,7 +14495,7 @@
           "$ref": "#/definitions/Element"
         },
         "correlatedLabs": {
-          "description": "An ordered list of the laboratory tests defined in the profile definition that are most closely correlated.  This list can be limited by the top \"n\" labs and/or a cutoff on the absolute value of the correlation coefficient.",
+          "description": "An ordered list of the laboratory tests  that are most closely correlated.  This list can be limited by the top \"n\" labs and/or a cutoff on the absolute value of the correlation coefficient.",
           "$ref": "#/definitions/ClinicalProfile_CorrelatedLabs"
         }
       },
@@ -14654,6 +14654,10 @@
           },
           "type": "array"
         },
+        "category": {
+          "description": "Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)).",
+          "$ref": "#/definitions/CodeableConcept"
+        },
         "medicationCodeableConcept": {
           "description": "Medication(s) being profiled.",
           "$ref": "#/definitions/CodeableConcept"
@@ -14674,6 +14678,14 @@
           "description": "Extensions for treatementDuration",
           "$ref": "#/definitions/Element"
         },
+        "frequencyPerYear": {
+          "description": "Frequency of treatments per patient per year.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_frequencyPerYear": {
+          "description": "Extensions for frequencyPerYear",
+          "$ref": "#/definitions/Element"
+        },
         "fractionOfSubjects": {
           "description": "Fraction of patients in cohort treated with this drug.",
           "$ref": "#/definitions/decimal"
@@ -14682,9 +14694,21 @@
           "description": "Extensions for fractionOfSubjects",
           "$ref": "#/definitions/Element"
         },
-        "correlatedLabs": {
-          "description": "An ordered list of the laboratory tests defined in the profile definition that have the most significant deviation relative value.  This list can be limited by the top \"n\" labs and/or a cutoff on the absolute value of the deviation.",
-          "$ref": "#/definitions/ClinicalProfile_CorrelatedLabs1"
+        "correlatedDiagnoses": {
+          "description": "An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top \"n\" diagnoses and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedDiagnoses"
+        },
+        "correlatedMedications": {
+          "description": "An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top \"n\" medications and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedMedications"
+        },
+        "correlatedProcedures": {
+          "description": "An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top \"n\" procedures and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedProcedures"
+        },
+        "correlatedPhenotypes": {
+          "description": "An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top \"n\" phenotypes and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedPhenotypes"
         }
       },
       "additionalProperties": false
@@ -14757,7 +14781,7 @@
       },
       "additionalProperties": false
     },
-    "ClinicalProfile_CorrelatedLabs1": {
+    "ClinicalProfile_CorrelatedDiagnoses": {
       "description": "Clinical Profiles summarize and demonstrate the features of a population.",
       "properties": {
         "id": {
@@ -14779,27 +14803,24 @@
           "type": "array"
         },
         "topn": {
-          "description": "Number of labs cutoff (e.g. top 10).",
+          "description": "Number of diagnoses cutoff (e.g. top 10).",
           "$ref": "#/definitions/integer"
         },
         "_topn": {
           "description": "Extensions for topn",
           "$ref": "#/definitions/Element"
         },
-        "deviation": {
-          "description": "Deviation cutoff.",
+        "abscorrelation": {
+          "description": "Minimum absolute value of correlation coefficient.",
           "$ref": "#/definitions/decimal"
         },
-        "_deviation": {
-          "description": "Extensions for deviation",
+        "_abscorrelation": {
+          "description": "Extensions for abscorrelation",
           "$ref": "#/definitions/Element"
         },
         "entry": {
-          "description": "Lab with significant deviation relative value.",
-          "items": {
-            "$ref": "#/definitions/ClinicalProfile_Entry1"
-          },
-          "type": "array"
+          "description": "Correlation entry.",
+          "$ref": "#/definitions/ClinicalProfile_Entry1"
         }
       },
       "additionalProperties": false
@@ -14826,26 +14847,281 @@
           "type": "array"
         },
         "code": {
-          "description": "Lab code (LOINC) or Lab Group Code.",
+          "description": "Diagnosis code(s).",
+          "$ref": "#/definitions/CodeableConcept"
+        },
+        "coefficient": {
+          "description": "Correlation coefficient.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_coefficient": {
+          "description": "Extensions for coefficient",
+          "$ref": "#/definitions/Element"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "code"
+      ]
+    },
+    "ClinicalProfile_CorrelatedMedications": {
+      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
+      "properties": {
+        "id": {
+          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+          "$ref": "#/definitions/string"
+        },
+        "extension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "modifierExtension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element\u0027s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "topn": {
+          "description": "Number of medications cutoff (e.g. top 10).",
+          "$ref": "#/definitions/integer"
+        },
+        "_topn": {
+          "description": "Extensions for topn",
+          "$ref": "#/definitions/Element"
+        },
+        "deviation": {
+          "description": "Deviation cutoff.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_deviation": {
+          "description": "Extensions for deviation",
+          "$ref": "#/definitions/Element"
+        },
+        "entry": {
+          "description": "Correlation entry.",
+          "items": {
+            "$ref": "#/definitions/ClinicalProfile_Entry2"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ClinicalProfile_Entry2": {
+      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
+      "properties": {
+        "id": {
+          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+          "$ref": "#/definitions/string"
+        },
+        "extension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "modifierExtension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element\u0027s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "category": {
+          "description": "Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)).",
+          "$ref": "#/definitions/CodeableConcept"
+        },
+        "medicationCodeableConcept": {
+          "description": "Medication code(s).",
+          "$ref": "#/definitions/CodeableConcept"
+        },
+        "medicationReference": {
+          "description": "Medication code(s).",
+          "$ref": "#/definitions/Reference"
+        },
+        "coefficient": {
+          "description": "Correlation coefficient.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_coefficient": {
+          "description": "Extensions for coefficient",
+          "$ref": "#/definitions/Element"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ClinicalProfile_CorrelatedProcedures": {
+      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
+      "properties": {
+        "id": {
+          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+          "$ref": "#/definitions/string"
+        },
+        "extension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "modifierExtension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element\u0027s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "topn": {
+          "description": "Number of rocedures cutoff (e.g. top 10).",
+          "$ref": "#/definitions/integer"
+        },
+        "_topn": {
+          "description": "Extensions for topn",
+          "$ref": "#/definitions/Element"
+        },
+        "abscorrelation": {
+          "description": "Minimum absolute value of correlation coefficient.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_abscorrelation": {
+          "description": "Extensions for abscorrelation",
+          "$ref": "#/definitions/Element"
+        },
+        "entry": {
+          "description": "Correlation entry.",
+          "items": {
+            "$ref": "#/definitions/ClinicalProfile_Entry3"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ClinicalProfile_Entry3": {
+      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
+      "properties": {
+        "id": {
+          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+          "$ref": "#/definitions/string"
+        },
+        "extension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "modifierExtension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element\u0027s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "code": {
+          "description": "Procedure code(s).",
           "items": {
             "$ref": "#/definitions/CodeableConcept"
           },
           "type": "array"
         },
-        "fractionOfSubjects": {
-          "description": "Fraction of subjects with this lab.",
+        "coefficient": {
+          "description": "Correlation coefficient.",
           "$ref": "#/definitions/decimal"
         },
-        "_fractionOfSubjects": {
-          "description": "Extensions for fractionOfSubjects",
+        "_coefficient": {
+          "description": "Extensions for coefficient",
+          "$ref": "#/definitions/Element"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "code"
+      ]
+    },
+    "ClinicalProfile_CorrelatedPhenotypes": {
+      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
+      "properties": {
+        "id": {
+          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+          "$ref": "#/definitions/string"
+        },
+        "extension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "modifierExtension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element\u0027s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "topn": {
+          "description": "The maximum number of significant correlated entries that are in this entry.",
+          "$ref": "#/definitions/integer"
+        },
+        "_topn": {
+          "description": "Extensions for topn",
           "$ref": "#/definitions/Element"
         },
-        "deviationRelativeValue": {
-          "description": "Value for this subset.",
+        "abscorrelation": {
+          "description": "The cutoff value for correlation coefficients.  Entries with an absolute value less than this are not included in the list.",
           "$ref": "#/definitions/decimal"
         },
-        "_deviationRelativeValue": {
-          "description": "Extensions for deviationRelativeValue",
+        "_abscorrelation": {
+          "description": "Extensions for abscorrelation",
+          "$ref": "#/definitions/Element"
+        },
+        "entry": {
+          "description": "List of correlated phenotypes in descending order of the absolute value of the correlation coefficient.",
+          "items": {
+            "$ref": "#/definitions/ClinicalProfile_Entry4"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ClinicalProfile_Entry4": {
+      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
+      "properties": {
+        "id": {
+          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+          "$ref": "#/definitions/string"
+        },
+        "extension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "modifierExtension": {
+          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element\u0027s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "type": "array"
+        },
+        "code": {
+          "description": "Phenotype(s).  More than one code is considered a group or aggregation.",
+          "$ref": "#/definitions/CodeableConcept"
+        },
+        "coefficient": {
+          "description": "Correlation coefficient.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_coefficient": {
+          "description": "Extensions for coefficient",
           "$ref": "#/definitions/Element"
         }
       },
@@ -14889,6 +15165,38 @@
         "_count": {
           "description": "Extensions for count",
           "$ref": "#/definitions/Element"
+        },
+        "frequencyPerYear": {
+          "description": "Frequency of this diagnosis per patient per year.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_frequencyPerYear": {
+          "description": "Extensions for frequencyPerYear",
+          "$ref": "#/definitions/Element"
+        },
+        "fractionOfSubjects": {
+          "description": "Fraction of patients in with this diagnosis.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_fractionOfSubjects": {
+          "description": "Extensions for fractionOfSubjects",
+          "$ref": "#/definitions/Element"
+        },
+        "correlatedDiagnoses": {
+          "description": "An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top \"n\" diagnoses and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedDiagnoses"
+        },
+        "correlatedMedications": {
+          "description": "An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top \"n\" medications and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedMedications"
+        },
+        "correlatedProcedures": {
+          "description": "An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top \"n\" procedures and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedProcedures"
+        },
+        "correlatedPhenotypes": {
+          "description": "An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top \"n\" phenotypes and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedPhenotypes"
         }
       },
       "additionalProperties": false,
@@ -14924,6 +15232,14 @@
           },
           "type": "array"
         },
+        "frequencyPerYear": {
+          "description": "Frequency of procedure per patient per year.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_frequencyPerYear": {
+          "description": "Extensions for frequencyPerYear",
+          "$ref": "#/definitions/Element"
+        },
         "fractionOfSubjects": {
           "description": "Fraction of patients with this procedure per year.",
           "$ref": "#/definitions/decimal"
@@ -14933,91 +15249,20 @@
           "$ref": "#/definitions/Element"
         },
         "correlatedDiagnoses": {
-          "description": "The to N most closely correlated ICD10 codes.",
+          "description": "An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top \"n\" diagnoses and/or a cutoff on the absolute value of the correlation coefficient.",
           "$ref": "#/definitions/ClinicalProfile_CorrelatedDiagnoses"
-        }
-      },
-      "additionalProperties": false,
-      "required": [
-        "code"
-      ]
-    },
-    "ClinicalProfile_CorrelatedDiagnoses": {
-      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
-      "properties": {
-        "id": {
-          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
-          "$ref": "#/definitions/string"
         },
-        "extension": {
-          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
-          "items": {
-            "$ref": "#/definitions/Extension"
-          },
-          "type": "array"
+        "correlatedMedications": {
+          "description": "An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top \"n\" medications and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedMedications"
         },
-        "modifierExtension": {
-          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element\u0027s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
-          "items": {
-            "$ref": "#/definitions/Extension"
-          },
-          "type": "array"
+        "correlatedProcedures": {
+          "description": "An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top \"n\" procedures and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedProcedures"
         },
-        "topn": {
-          "description": "Number of diagnoses cutoff (e.g. top 10).",
-          "$ref": "#/definitions/integer"
-        },
-        "_topn": {
-          "description": "Extensions for topn",
-          "$ref": "#/definitions/Element"
-        },
-        "abscorrelation": {
-          "description": "Minimum absolute value of correlation coefficient.",
-          "$ref": "#/definitions/decimal"
-        },
-        "_abscorrelation": {
-          "description": "Extensions for abscorrelation",
-          "$ref": "#/definitions/Element"
-        },
-        "entry": {
-          "description": "Correlation entry.",
-          "$ref": "#/definitions/ClinicalProfile_Entry2"
-        }
-      },
-      "additionalProperties": false
-    },
-    "ClinicalProfile_Entry2": {
-      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
-      "properties": {
-        "id": {
-          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
-          "$ref": "#/definitions/string"
-        },
-        "extension": {
-          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
-          "items": {
-            "$ref": "#/definitions/Extension"
-          },
-          "type": "array"
-        },
-        "modifierExtension": {
-          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element\u0027s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
-          "items": {
-            "$ref": "#/definitions/Extension"
-          },
-          "type": "array"
-        },
-        "code": {
-          "description": "Diagnosis code(s).",
-          "$ref": "#/definitions/CodeableConcept"
-        },
-        "coefficient": {
-          "description": "Correlation coefficient.",
-          "$ref": "#/definitions/decimal"
-        },
-        "_coefficient": {
-          "description": "Extensions for coefficient",
-          "$ref": "#/definitions/Element"
+        "correlatedPhenotypes": {
+          "description": "An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top \"n\" phenotypes and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedPhenotypes"
         }
       },
       "additionalProperties": false,
@@ -15053,6 +15298,14 @@
           },
           "type": "array"
         },
+        "frequencyPerYear": {
+          "description": "Frequency of this code per patient per year.",
+          "$ref": "#/definitions/decimal"
+        },
+        "_frequencyPerYear": {
+          "description": "Extensions for frequencyPerYear",
+          "$ref": "#/definitions/Element"
+        },
         "fractionOfSubjects": {
           "description": "Fraction of patients with this procedure per year.",
           "$ref": "#/definitions/decimal"
@@ -15061,92 +15314,21 @@
           "description": "Extensions for fractionOfSubjects",
           "$ref": "#/definitions/Element"
         },
+        "correlatedDiagnoses": {
+          "description": "An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top \"n\" diagnoses and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedDiagnoses"
+        },
+        "correlatedMedications": {
+          "description": "An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top \"n\" medications and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedMedications"
+        },
+        "correlatedProcedures": {
+          "description": "An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top \"n\" procedures and/or a cutoff on the absolute value of the correlation coefficient.",
+          "$ref": "#/definitions/ClinicalProfile_CorrelatedProcedures"
+        },
         "correlatedPhenotypes": {
-          "description": "The to N most closely correlated HPO codes.",
+          "description": "An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top \"n\" phenotypes and/or a cutoff on the absolute value of the correlation coefficient.",
           "$ref": "#/definitions/ClinicalProfile_CorrelatedPhenotypes"
-        }
-      },
-      "additionalProperties": false,
-      "required": [
-        "code"
-      ]
-    },
-    "ClinicalProfile_CorrelatedPhenotypes": {
-      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
-      "properties": {
-        "id": {
-          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
-          "$ref": "#/definitions/string"
-        },
-        "extension": {
-          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
-          "items": {
-            "$ref": "#/definitions/Extension"
-          },
-          "type": "array"
-        },
-        "modifierExtension": {
-          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element\u0027s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
-          "items": {
-            "$ref": "#/definitions/Extension"
-          },
-          "type": "array"
-        },
-        "topn": {
-          "description": "Number of phenotypes cutoff (e.g. top 10).",
-          "$ref": "#/definitions/integer"
-        },
-        "_topn": {
-          "description": "Extensions for topn",
-          "$ref": "#/definitions/Element"
-        },
-        "abscorrelation": {
-          "description": "Minimum absolute value of correlation coefficient.",
-          "$ref": "#/definitions/decimal"
-        },
-        "_abscorrelation": {
-          "description": "Extensions for abscorrelation",
-          "$ref": "#/definitions/Element"
-        },
-        "entry": {
-          "description": "Correlation entry.",
-          "$ref": "#/definitions/ClinicalProfile_Entry3"
-        }
-      },
-      "additionalProperties": false
-    },
-    "ClinicalProfile_Entry3": {
-      "description": "Clinical Profiles summarize and demonstrate the features of a population.",
-      "properties": {
-        "id": {
-          "description": "Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
-          "$ref": "#/definitions/string"
-        },
-        "extension": {
-          "description": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
-          "items": {
-            "$ref": "#/definitions/Extension"
-          },
-          "type": "array"
-        },
-        "modifierExtension": {
-          "description": "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element\u0027s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
-          "items": {
-            "$ref": "#/definitions/Extension"
-          },
-          "type": "array"
-        },
-        "code": {
-          "description": "Phenotype codes.",
-          "$ref": "#/definitions/CodeableConcept"
-        },
-        "coefficient": {
-          "description": "Correlation coefficient.",
-          "$ref": "#/definitions/decimal"
-        },
-        "_coefficient": {
-          "description": "Extensions for coefficient",
-          "$ref": "#/definitions/Element"
         }
       },
       "additionalProperties": false,
