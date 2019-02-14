@@ -2117,7 +2117,7 @@
   <name value="Base FHIR Capability Statement (Full)"/>
   <status value="draft"/>
   <experimental value="true"/>
-  <date value="2019-02-13T18:27:32-06:00"/>
+  <date value="2019-02-13T20:31:08-06:00"/>
   <publisher value="FHIR Project Team"/>
   <contact>
     <telecom>
@@ -4577,13 +4577,13 @@
       <referencePolicy value="literal"/>
       <referencePolicy value="logical"/>
       <searchInclude value="ClinicalProfile.cohort"/>
-      <searchInclude value="ClinicalProfile.medicationReference"/>
-      <searchInclude value="ClinicalProfile.diagnosiscorrelatedMedref"/>
+      <searchInclude value="ClinicalProfile.diagnosiscorrelatedmedref"/>
+      <searchInclude value="ClinicalProfile.medicationreference"/>
       <searchInclude value="ClinicalProfile.reporter"/>
       <searchInclude value="ClinicalProfile.population"/>
-      <searchInclude value="ClinicalProfile.procedurecorrelatedMedref"/>
-      <searchInclude value="ClinicalProfile.phenotypecorrelatedMedref"/>
-      <searchInclude value="ClinicalProfile.medicationcorrelatedMedref"/>
+      <searchInclude value="ClinicalProfile.phenotypecorrelatedmedref"/>
+      <searchInclude value="ClinicalProfile.procedurecorrelatedmedref"/>
+      <searchInclude value="ClinicalProfile.medicationcorrelatedmedref"/>
       <searchParam>
         <name value="date"/>
         <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-date"/>
@@ -4597,10 +4597,34 @@
         <documentation value="Lab code"/>
       </searchParam>
       <searchParam>
-        <name value="procedurecorrelatedMedCategory"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedMedCategory"/>
+        <name value="medicationcorrelatedphenotype"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedphenotype"/>
         <type value="token"/>
-        <documentation value="Procedure correlated medication category"/>
+        <documentation value="Medication correlated phenotype"/>
+      </searchParam>
+      <searchParam>
+        <name value="phenotypecorrelatedphenotype"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedphenotype"/>
+        <type value="token"/>
+        <documentation value="Phenotype  correlated phenotype"/>
+      </searchParam>
+      <searchParam>
+        <name value="diagnosiscorrelatedmedcode"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedmedcode"/>
+        <type value="token"/>
+        <documentation value="Diagnosis correlated medication code"/>
+      </searchParam>
+      <searchParam>
+        <name value="diagnosiscorrelatedphenotype"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedphenotype"/>
+        <type value="token"/>
+        <documentation value="Diagnosis correlated phenotype"/>
+      </searchParam>
+      <searchParam>
+        <name value="phenotypecorrelatedmedcode"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedmedcode"/>
+        <type value="token"/>
+        <documentation value="Phenotype  correlated medication code"/>
       </searchParam>
       <searchParam>
         <name value="cohort"/>
@@ -4609,22 +4633,16 @@
         <documentation value="The cohort being profiled"/>
       </searchParam>
       <searchParam>
-        <name value="medicationReference"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationReference"/>
-        <type value="reference"/>
-        <documentation value="Medication reference"/>
-      </searchParam>
-      <searchParam>
-        <name value="phenotypecorrelatedMedcode"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedMedcode"/>
+        <name value="procedurecorrelatedphenotype"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedphenotype"/>
         <type value="token"/>
-        <documentation value="Phenotype  correlated medication code"/>
+        <documentation value="Procedure correlated phenotype"/>
       </searchParam>
       <searchParam>
-        <name value="diagnosiscorrelatedMedref"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedMedref"/>
-        <type value="reference"/>
-        <documentation value="Diagnosis correlated medication reference"/>
+        <name value="phenotypecorrelatedprocedure"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedprocedure"/>
+        <type value="token"/>
+        <documentation value="Phenotype  correlated procedure"/>
       </searchParam>
       <searchParam>
         <name value="medicationcategory"/>
@@ -4633,16 +4651,34 @@
         <documentation value="Medication category"/>
       </searchParam>
       <searchParam>
-        <name value="procedurecorrelatedProcedure"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedProcedure"/>
+        <name value="medicationcorrelatedmedcode"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedmedcode"/>
         <type value="token"/>
-        <documentation value="Procedure correlated procedure"/>
+        <documentation value="Medication correlated medication code"/>
       </searchParam>
       <searchParam>
-        <name value="phenotypecorrelatedProcedure"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedProcedure"/>
+        <name value="procedurecorrelatedmedcode"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedmedcode"/>
         <type value="token"/>
-        <documentation value="Phenotype  correlated procedure"/>
+        <documentation value="Procedure correlated medication code"/>
+      </searchParam>
+      <searchParam>
+        <name value="correlatedlabcode"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-correlatedlabcode"/>
+        <type value="token"/>
+        <documentation value="Lab correlated lab code"/>
+      </searchParam>
+      <searchParam>
+        <name value="diagnosiscorrelatedmedref"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedmedref"/>
+        <type value="reference"/>
+        <documentation value="Diagnosis correlated medication reference"/>
+      </searchParam>
+      <searchParam>
+        <name value="procedurecorrelatedmedcategory"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedmedcategory"/>
+        <type value="token"/>
+        <documentation value="Procedure correlated medication category"/>
       </searchParam>
       <searchParam>
         <name value="identifier"/>
@@ -4651,34 +4687,10 @@
         <documentation value="External identifier of the clinical profile to be returned"/>
       </searchParam>
       <searchParam>
-        <name value="procedurecorrelatedPhenotype"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedPhenotype"/>
-        <type value="token"/>
-        <documentation value="Procedure correlated phenotype"/>
-      </searchParam>
-      <searchParam>
-        <name value="diagnosiscorrelatedMedcode"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedMedcode"/>
-        <type value="token"/>
-        <documentation value="Diagnosis correlated medication code"/>
-      </searchParam>
-      <searchParam>
-        <name value="medicationcorrelatedDiagnosis"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedDiagnosis"/>
-        <type value="token"/>
-        <documentation value="Medication correlated phenotype"/>
-      </searchParam>
-      <searchParam>
-        <name value="diagnosiscorrelatedProcedure"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedProcedure"/>
-        <type value="token"/>
-        <documentation value="Diagnosis correlated procedure"/>
-      </searchParam>
-      <searchParam>
-        <name value="medicationcorrelatedProcedure"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedProcedure"/>
-        <type value="token"/>
-        <documentation value="Medication correlated procedure"/>
+        <name value="medicationreference"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationreference"/>
+        <type value="reference"/>
+        <documentation value="Medication reference"/>
       </searchParam>
       <searchParam>
         <name value="reporter"/>
@@ -4687,46 +4699,22 @@
         <documentation value="The reporter to return clinical profile results for"/>
       </searchParam>
       <searchParam>
+        <name value="procedurecorrelatedprocedure"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedprocedure"/>
+        <type value="token"/>
+        <documentation value="Procedure correlated procedure"/>
+      </searchParam>
+      <searchParam>
         <name value="population"/>
         <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-population"/>
         <type value="reference"/>
         <documentation value="The  population being profiled"/>
       </searchParam>
       <searchParam>
-        <name value="procedurecorrelatedMedref"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedMedref"/>
-        <type value="reference"/>
-        <documentation value="Procedure correlated medication reference"/>
-      </searchParam>
-      <searchParam>
-        <name value="phenotypecorrelatedPhenotype"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedPhenotype"/>
+        <name value="medicationcorrelatedmedcategory"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedmedcategory"/>
         <type value="token"/>
-        <documentation value="Phenotype  correlated phenotype"/>
-      </searchParam>
-      <searchParam>
-        <name value="correlatedLabcode"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-correlatedLabcode"/>
-        <type value="token"/>
-        <documentation value="Lab correlated lab code"/>
-      </searchParam>
-      <searchParam>
-        <name value="medicationcorrelatedMedcode"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedMedcode"/>
-        <type value="token"/>
-        <documentation value="Medication correlated medication code"/>
-      </searchParam>
-      <searchParam>
-        <name value="diagnosiscorrelatedMedCategory"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedMedCategory"/>
-        <type value="token"/>
-        <documentation value="Diagnosis correlated medication category"/>
-      </searchParam>
-      <searchParam>
-        <name value="procedurecorrelatedMedcode"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedMedcode"/>
-        <type value="token"/>
-        <documentation value="Procedure correlated medication code"/>
+        <documentation value="Medication correlated medication category"/>
       </searchParam>
       <searchParam>
         <name value="procedurecode"/>
@@ -4735,16 +4723,22 @@
         <documentation value="Procedure  code"/>
       </searchParam>
       <searchParam>
-        <name value="phenotypecorrelatedMedCategory"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedMedCategory"/>
-        <type value="token"/>
-        <documentation value="Phenotype  correlated medication category"/>
+        <name value="phenotypecorrelatedmedref"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedmedref"/>
+        <type value="reference"/>
+        <documentation value="Phenotype  correlated medication reference"/>
       </searchParam>
       <searchParam>
-        <name value="diagnosiscorrelatedPhenotype"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedPhenotype"/>
+        <name value="procedurecorrelatedmedref"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedmedref"/>
+        <type value="reference"/>
+        <documentation value="Procedure correlated medication reference"/>
+      </searchParam>
+      <searchParam>
+        <name value="diagnosiscorrelatedmedcategory"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedmedcategory"/>
         <type value="token"/>
-        <documentation value="Diagnosis correlated phenotype"/>
+        <documentation value="Diagnosis correlated medication category"/>
       </searchParam>
       <searchParam>
         <name value="medicationcode"/>
@@ -4759,28 +4753,34 @@
         <documentation value="Diagnosis code"/>
       </searchParam>
       <searchParam>
-        <name value="phenotypecorrelatedMedref"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedMedref"/>
-        <type value="reference"/>
-        <documentation value="Phenotype  correlated medication reference"/>
-      </searchParam>
-      <searchParam>
-        <name value="medicationcorrelatedMedCategory"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedMedCategory"/>
+        <name value="phenotypecorrelatedmedcategory"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedmedcategory"/>
         <type value="token"/>
-        <documentation value="Medication correlated medication category"/>
+        <documentation value="Phenotype  correlated medication category"/>
       </searchParam>
       <searchParam>
-        <name value="medicationcorrelatedPhenotype"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedPhenotype"/>
+        <name value="medicationcorrelatedprocedure"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedprocedure"/>
+        <type value="token"/>
+        <documentation value="Medication correlated procedure"/>
+      </searchParam>
+      <searchParam>
+        <name value="medicationcorrelatedmedref"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedmedref"/>
+        <type value="reference"/>
+        <documentation value="Medication correlated medication reference"/>
+      </searchParam>
+      <searchParam>
+        <name value="medicationcorrelateddiagnosis"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelateddiagnosis"/>
         <type value="token"/>
         <documentation value="Medication correlated phenotype"/>
       </searchParam>
       <searchParam>
-        <name value="medicationcorrelatedMedref"/>
-        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedMedref"/>
-        <type value="reference"/>
-        <documentation value="Medication correlated medication reference"/>
+        <name value="diagnosiscorrelatedprocedure"/>
+        <definition value="http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedprocedure"/>
+        <type value="token"/>
+        <documentation value="Diagnosis correlated procedure"/>
       </searchParam>
       <searchParam>
         <name value="status"/>
