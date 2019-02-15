@@ -39,12 +39,9 @@
 	<div id="segment-header" class="segment"><!-- segment-header -->	
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
-			<div id="hl7-status">
-        <b>Custom NCATS Translator JHU Build</b><br />
-        <a href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="50" /></a>
-        <a href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100" /></a>
-			</div>       	
-			
+			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
+			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
 			<div id="hl7-nav">
 				 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
 					<img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
@@ -191,6 +188,20 @@ start=@&lt;Contract&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# Contract Signatory
+&lt;Contract.signer&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:Contract.signer.type @&lt;Coding&gt;;    # Contract Signatory Role
+    fhir:Contract.signer.party @&lt;Reference&gt;;  # Contract Signatory Party
+    fhir:Contract.signer.signature @&lt;Signature&gt;+;  # Contract Documentation Signature
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # Computable Contract Language
 &lt;Contract.rule&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
@@ -203,20 +214,6 @@ start=@&lt;Contract&gt; AND {fhir:nodeRole [fhir:treeRoot]}
         fhir:Contract.rule.contentAttachment @&lt;Attachment&gt;  |
         fhir:Contract.rule.contentReference @&lt;Reference&gt; 
     );
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Contract Signatory
-&lt;Contract.signer&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Contract.signer.type @&lt;Coding&gt;;    # Contract Signatory Role
-    fhir:Contract.signer.party @&lt;Reference&gt;;  # Contract Signatory Party
-    fhir:Contract.signer.signature @&lt;Signature&gt;+;  # Contract Documentation Signature
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -297,6 +294,68 @@ start=@&lt;Contract&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# Protection for the Term
+&lt;Contract.term.securityLabel&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:Contract.term.securityLabel.number @&lt;unsignedInt&gt;*;  # Link to Security Labels
+    fhir:Contract.term.securityLabel.classification @&lt;Coding&gt;;  # Confidentiality Protection
+    fhir:Contract.term.securityLabel.category @&lt;Coding&gt;*;  # Applicable Policy
+    fhir:Contract.term.securityLabel.control @&lt;Coding&gt;*;  # Handling Instructions
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Contract Term Asset List
+&lt;Contract.term.asset&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:Contract.term.asset.scope @&lt;CodeableConcept&gt;?;  # Range of asset
+    fhir:Contract.term.asset.type @&lt;CodeableConcept&gt;*;  # Asset category
+    fhir:Contract.term.asset.typeReference @&lt;Reference&gt;*;  # Associated entities
+    fhir:Contract.term.asset.subtype @&lt;CodeableConcept&gt;*;  # Asset sub-category
+    fhir:Contract.term.asset.relationship @&lt;Coding&gt;?;  # Kinship of the asset
+    fhir:Contract.term.asset.context @&lt;Contract.term.asset.context&gt;*;  # Circumstance of the asset
+    fhir:Contract.term.asset.condition @&lt;string&gt;?;  # Quality desctiption of asset
+    fhir:Contract.term.asset.periodType @&lt;CodeableConcept&gt;*;  # Asset availability types
+    fhir:Contract.term.asset.period @&lt;Period&gt;*;  # Time period of the asset
+    fhir:Contract.term.asset.usePeriod @&lt;Period&gt;*;  # Time period
+    fhir:Contract.term.asset.text @&lt;string&gt;?;  # Asset clause or question text
+    fhir:Contract.term.asset.linkId @&lt;string&gt;*;  # Pointer to asset text
+    fhir:Contract.term.asset.answer @&lt;Contract.term.offer.answer&gt;*;  # Response to assets
+    fhir:Contract.term.asset.securityLabelNumber @&lt;unsignedInt&gt;*;  # Asset restriction numbers
+    fhir:Contract.term.asset.valuedItem @&lt;Contract.term.asset.valuedItem&gt;*;  # Contract Valued Item List
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Context of the Contract term
+&lt;Contract.term.offer&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:Contract.term.offer.identifier @&lt;Identifier&gt;*;  # Offer business ID
+    fhir:Contract.term.offer.party @&lt;Contract.term.offer.party&gt;*;  # Offer Recipient
+    fhir:Contract.term.offer.topic @&lt;Reference&gt;?;  # Negotiable offer asset
+    fhir:Contract.term.offer.type @&lt;CodeableConcept&gt;?;  # Contract Offer Type or Form
+    fhir:Contract.term.offer.decision @&lt;CodeableConcept&gt;?;  # Accepting party choice
+    fhir:Contract.term.offer.decisionMode @&lt;CodeableConcept&gt;*;  # How decision is conveyed
+    fhir:Contract.term.offer.answer @&lt;Contract.term.offer.answer&gt;*;  # Response to offer text
+    fhir:Contract.term.offer.text @&lt;string&gt;?;  # Human readable offer text
+    fhir:Contract.term.offer.linkId @&lt;string&gt;*;  # Pointer to text
+    fhir:Contract.term.offer.securityLabelNumber @&lt;unsignedInt&gt;*;  # Offer restriction numbers
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # Entity being ascribed responsibility
 &lt;Contract.term.action&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
@@ -336,82 +395,6 @@ start=@&lt;Contract&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Context of the Contract term
-&lt;Contract.term.offer&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Contract.term.offer.identifier @&lt;Identifier&gt;*;  # Offer business ID
-    fhir:Contract.term.offer.party @&lt;Contract.term.offer.party&gt;*;  # Offer Recipient
-    fhir:Contract.term.offer.topic @&lt;Reference&gt;?;  # Negotiable offer asset
-    fhir:Contract.term.offer.type @&lt;CodeableConcept&gt;?;  # Contract Offer Type or Form
-    fhir:Contract.term.offer.decision @&lt;CodeableConcept&gt;?;  # Accepting party choice
-    fhir:Contract.term.offer.decisionMode @&lt;CodeableConcept&gt;*;  # How decision is conveyed
-    fhir:Contract.term.offer.answer @&lt;Contract.term.offer.answer&gt;*;  # Response to offer text
-    fhir:Contract.term.offer.text @&lt;string&gt;?;  # Human readable offer text
-    fhir:Contract.term.offer.linkId @&lt;string&gt;*;  # Pointer to text
-    fhir:Contract.term.offer.securityLabelNumber @&lt;unsignedInt&gt;*;  # Offer restriction numbers
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Contract Term Asset List
-&lt;Contract.term.asset&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Contract.term.asset.scope @&lt;CodeableConcept&gt;?;  # Range of asset
-    fhir:Contract.term.asset.type @&lt;CodeableConcept&gt;*;  # Asset category
-    fhir:Contract.term.asset.typeReference @&lt;Reference&gt;*;  # Associated entities
-    fhir:Contract.term.asset.subtype @&lt;CodeableConcept&gt;*;  # Asset sub-category
-    fhir:Contract.term.asset.relationship @&lt;Coding&gt;?;  # Kinship of the asset
-    fhir:Contract.term.asset.context @&lt;Contract.term.asset.context&gt;*;  # Circumstance of the asset
-    fhir:Contract.term.asset.condition @&lt;string&gt;?;  # Quality desctiption of asset
-    fhir:Contract.term.asset.periodType @&lt;CodeableConcept&gt;*;  # Asset availability types
-    fhir:Contract.term.asset.period @&lt;Period&gt;*;  # Time period of the asset
-    fhir:Contract.term.asset.usePeriod @&lt;Period&gt;*;  # Time period
-    fhir:Contract.term.asset.text @&lt;string&gt;?;  # Asset clause or question text
-    fhir:Contract.term.asset.linkId @&lt;string&gt;*;  # Pointer to asset text
-    fhir:Contract.term.asset.answer @&lt;Contract.term.offer.answer&gt;*;  # Response to assets
-    fhir:Contract.term.asset.securityLabelNumber @&lt;unsignedInt&gt;*;  # Asset restriction numbers
-    fhir:Contract.term.asset.valuedItem @&lt;Contract.term.asset.valuedItem&gt;*;  # Contract Valued Item List
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Protection for the Term
-&lt;Contract.term.securityLabel&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Contract.term.securityLabel.number @&lt;unsignedInt&gt;*;  # Link to Security Labels
-    fhir:Contract.term.securityLabel.classification @&lt;Coding&gt;;  # Confidentiality Protection
-    fhir:Contract.term.securityLabel.category @&lt;Coding&gt;*;  # Applicable Policy
-    fhir:Contract.term.securityLabel.control @&lt;Coding&gt;*;  # Handling Instructions
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Circumstance of the asset
-&lt;Contract.term.asset.context&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Contract.term.asset.context.reference @&lt;Reference&gt;?;  # Creator,custodian or owner
-    fhir:Contract.term.asset.context.code @&lt;CodeableConcept&gt;*;  # Codeable asset context
-    fhir:Contract.term.asset.context.text @&lt;string&gt;?;  # Context description
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # Offer Recipient
 &lt;Contract.term.offer.party&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
@@ -435,6 +418,45 @@ start=@&lt;Contract&gt; AND {fhir:nodeRole [fhir:treeRoot]}
                                             # even if unrecognized 
     fhir:Contract.term.action.subject.reference @&lt;Reference&gt;+;  # Entity of the action
     fhir:Contract.term.action.subject.role @&lt;CodeableConcept&gt;?;  # Role type of the agent
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Circumstance of the asset
+&lt;Contract.term.asset.context&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:Contract.term.asset.context.reference @&lt;Reference&gt;?;  # Creator,custodian or owner
+    fhir:Contract.term.asset.context.code @&lt;CodeableConcept&gt;*;  # Codeable asset context
+    fhir:Contract.term.asset.context.text @&lt;string&gt;?;  # Context description
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Response to offer text
+&lt;Contract.term.offer.answer&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    (                                       # The actual answer response
+        fhir:Contract.term.offer.answer.valueBoolean @&lt;boolean&gt;  |
+        fhir:Contract.term.offer.answer.valueDecimal @&lt;decimal&gt;  |
+        fhir:Contract.term.offer.answer.valueInteger @&lt;integer&gt;  |
+        fhir:Contract.term.offer.answer.valueDate @&lt;date&gt;  |
+        fhir:Contract.term.offer.answer.valueDateTime @&lt;dateTime&gt;  |
+        fhir:Contract.term.offer.answer.valueTime @&lt;time&gt;  |
+        fhir:Contract.term.offer.answer.valueString @&lt;string&gt;  |
+        fhir:Contract.term.offer.answer.valueUri @&lt;uri&gt;  |
+        fhir:Contract.term.offer.answer.valueAttachment @&lt;Attachment&gt;  |
+        fhir:Contract.term.offer.answer.valueCoding @&lt;Coding&gt;  |
+        fhir:Contract.term.offer.answer.valueQuantity @&lt;Quantity&gt;  |
+        fhir:Contract.term.offer.answer.valueReference @&lt;Reference&gt; 
+    );
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -467,31 +489,6 @@ start=@&lt;Contract&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:Contract.term.asset.valuedItem.linkId @&lt;string&gt;*;  # Pointer to specific item
     fhir:Contract.term.asset.valuedItem.securityLabelNumber @&lt;unsignedInt&gt;*;  # Security Labels that define 
                                             # affected terms 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Response to offer text
-&lt;Contract.term.offer.answer&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    (                                       # The actual answer response
-        fhir:Contract.term.offer.answer.valueBoolean @&lt;boolean&gt;  |
-        fhir:Contract.term.offer.answer.valueDecimal @&lt;decimal&gt;  |
-        fhir:Contract.term.offer.answer.valueInteger @&lt;integer&gt;  |
-        fhir:Contract.term.offer.answer.valueDate @&lt;date&gt;  |
-        fhir:Contract.term.offer.answer.valueDateTime @&lt;dateTime&gt;  |
-        fhir:Contract.term.offer.answer.valueTime @&lt;time&gt;  |
-        fhir:Contract.term.offer.answer.valueString @&lt;string&gt;  |
-        fhir:Contract.term.offer.answer.valueUri @&lt;uri&gt;  |
-        fhir:Contract.term.offer.answer.valueAttachment @&lt;Attachment&gt;  |
-        fhir:Contract.term.offer.answer.valueCoding @&lt;Coding&gt;  |
-        fhir:Contract.term.offer.answer.valueQuantity @&lt;Quantity&gt;  |
-        fhir:Contract.term.offer.answer.valueReference @&lt;Reference&gt; 
-    );
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1339,21 +1336,6 @@ start=@&lt;Contract&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What codes are expected
-&lt;DataRequirement.codeFilter&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.codeFilter.path @&lt;string&gt;?;  # A code-valued attribute to filter 
-                                            # on 
-    fhir:DataRequirement.codeFilter.searchParam @&lt;string&gt;?;  # A coded (token) parameter to 
-                                            # search on 
-    fhir:DataRequirement.codeFilter.valueSet @&lt;canonical&gt;?;  # Valueset for the filter
-    fhir:DataRequirement.codeFilter.code @&lt;Coding&gt;*;  # What code is expected
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # Amount of medication administered
 &lt;Dosage.doseAndRate&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
@@ -1371,6 +1353,21 @@ start=@&lt;Contract&gt; AND {fhir:nodeRole [fhir:treeRoot]}
         fhir:Dosage.doseAndRate.rateRange @&lt;Range&gt;  |
         fhir:Dosage.doseAndRate.rateQuantity @&lt;SimpleQuantity&gt; 
     )?;
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# What codes are expected
+&lt;DataRequirement.codeFilter&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.codeFilter.path @&lt;string&gt;?;  # A code-valued attribute to filter 
+                                            # on 
+    fhir:DataRequirement.codeFilter.searchParam @&lt;string&gt;?;  # A coded (token) parameter to 
+                                            # search on 
+    fhir:DataRequirement.codeFilter.valueSet @&lt;canonical&gt;?;  # Valueset for the filter
+    fhir:DataRequirement.codeFilter.code @&lt;Coding&gt;*;  # What code is expected
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1451,68 +1448,68 @@ start=@&lt;Contract&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 #---------------------- Value Sets ------------------------
 
-# Identifies the purpose for this identifier, if known .
-fhirvs:identifier-use [&quot;usual&quot; &quot;official&quot; &quot;temp&quot; &quot;secondary&quot; &quot;old&quot;]
-
-# The use of an address.
-fhirvs:address-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &quot;old&quot; &quot;billing&quot;]
-
-# A unit of time (units from UCUM).
-fhirvs:units-of-time [&quot;s&quot; &quot;min&quot; &quot;h&quot; &quot;d&quot; &quot;wk&quot; &quot;mo&quot; &quot;a&quot;]
-
-# The type of relationship to the related artifact.
-fhirvs:related-artifact-type [&quot;documentation&quot; &quot;justification&quot; &quot;citation&quot; &quot;predecessor&quot; &quot;successor&quot; &quot;derived-from&quot; &quot;depends-on&quot; &quot;composed-of&quot;]
-
-# The use of a human name.
-fhirvs:name-use [&quot;usual&quot; &quot;official&quot; &quot;temp&quot; &quot;nickname&quot; &quot;anonymous&quot; &quot;old&quot; &quot;maiden&quot;]
-
-# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
-fhirvs:all-types [&quot;Address&quot; &quot;Age&quot; &quot;Annotation&quot; &quot;Attachment&quot; &quot;BackboneElement&quot; &quot;CodeableConcept&quot; &quot;Coding&quot; &quot;ContactDetail&quot; &quot;ContactPoint&quot; &quot;Contributor&quot; &quot;Count&quot; &quot;DataRequirement&quot; &quot;Distance&quot; &quot;Dosage&quot; &quot;Duration&quot; &quot;Element&quot; &quot;ElementDefinition&quot; &quot;Expression&quot; &quot;Extension&quot; &quot;HumanName&quot; &quot;Identifier&quot; &quot;MarketingStatus&quot; &quot;Meta&quot; &quot;Money&quot; &quot;MoneyQuantity&quot; &quot;Narrative&quot; &quot;ParameterDefinition&quot; &quot;Period&quot; &quot;Population&quot; &quot;ProdCharacteristic&quot; &quot;ProductShelfLife&quot; &quot;Quantity&quot; &quot;Range&quot; &quot;Ratio&quot; &quot;Reference&quot; &quot;RelatedArtifact&quot; &quot;SampledData&quot; &quot;Signature&quot; &quot;SimpleQuantity&quot; &quot;SubstanceAmount&quot; &quot;Timing&quot; &quot;TriggerDefinition&quot; &quot;UsageContext&quot; &quot;base64Binary&quot; &quot;boolean&quot; &quot;canonical&quot; &quot;code&quot; &quot;date&quot; &quot;dateTime&quot; &quot;decimal&quot; &quot;id&quot; &quot;instant&quot; &quot;integer&quot; &quot;markdown&quot; &quot;oid&quot; &quot;positiveInt&quot; &quot;string&quot; &quot;time&quot; &quot;unsignedInt&quot; &quot;uri&quot; &quot;url&quot; &quot;uuid&quot; &quot;xhtml&quot; &quot;Account&quot; &quot;ActivityDefinition&quot; &quot;AdverseEvent&quot; &quot;AllergyIntolerance&quot; &quot;Appointment&quot; &quot;AppointmentResponse&quot; &quot;AuditEvent&quot; &quot;Basic&quot; &quot;Binary&quot; &quot;BiologicallyDerivedProduct&quot; &quot;BodyStructure&quot; &quot;Bundle&quot; &quot;CapabilityStatement&quot; &quot;CarePlan&quot; &quot;CareTeam&quot; &quot;CatalogEntry&quot; &quot;ChargeItem&quot; &quot;ChargeItemDefinition&quot; &quot;Claim&quot; &quot;ClaimResponse&quot; &quot;ClinicalImpression&quot; &quot;ClinicalProfile&quot; &quot;CodeSystem&quot; &quot;Communication&quot; &quot;CommunicationRequest&quot; &quot;CompartmentDefinition&quot; &quot;Composition&quot; &quot;ConceptMap&quot; &quot;Condition&quot; &quot;Consent&quot; &quot;Contract&quot; &quot;Coverage&quot; &quot;CoverageEligibilityRequest&quot; &quot;CoverageEligibilityResponse&quot; &quot;DetectedIssue&quot; &quot;Device&quot; &quot;DeviceDefinition&quot; &quot;DeviceMetric&quot; &quot;DeviceRequest&quot; &quot;DeviceUseStatement&quot; &quot;DiagnosticReport&quot; &quot;DocumentManifest&quot; &quot;DocumentReference&quot; &quot;DomainResource&quot; &quot;EffectEvidenceSynthesis&quot; &quot;Encounter&quot; &quot;Endpoint&quot; &quot;EnrollmentRequest&quot; &quot;EnrollmentResponse&quot; &quot;EpisodeOfCare&quot; &quot;EventDefinition&quot; &quot;Evidence&quot; &quot;EvidenceVariable&quot; &quot;ExampleScenario&quot; &quot;ExplanationOfBenefit&quot; &quot;FamilyMemberHistory&quot; &quot;Flag&quot; &quot;Goal&quot; &quot;GraphDefinition&quot; &quot;Group&quot; &quot;GuidanceResponse&quot; &quot;HealthcareService&quot; &quot;ImagingStudy&quot; &quot;Immunization&quot; &quot;ImmunizationEvaluation&quot; &quot;ImmunizationRecommendation&quot; &quot;ImplementationGuide&quot; &quot;InsurancePlan&quot; &quot;Invoice&quot; &quot;Library&quot; &quot;Linkage&quot; &quot;List&quot; &quot;Location&quot; &quot;Measure&quot; &quot;MeasureReport&quot; &quot;Media&quot; &quot;Medication&quot; &quot;MedicationAdministration&quot; &quot;MedicationDispense&quot; &quot;MedicationKnowledge&quot; &quot;MedicationRequest&quot; &quot;MedicationStatement&quot; &quot;MedicinalProduct&quot; &quot;MedicinalProductAuthorization&quot; &quot;MedicinalProductContraindication&quot; &quot;MedicinalProductIndication&quot; &quot;MedicinalProductIngredient&quot; &quot;MedicinalProductInteraction&quot; &quot;MedicinalProductManufactured&quot; &quot;MedicinalProductPackaged&quot; &quot;MedicinalProductPharmaceutical&quot; &quot;MedicinalProductUndesirableEffect&quot; &quot;MessageDefinition&quot; &quot;MessageHeader&quot; &quot;MolecularSequence&quot; &quot;NamingSystem&quot; &quot;NutritionOrder&quot; &quot;Observation&quot; &quot;ObservationDefinition&quot; &quot;OperationDefinition&quot; &quot;OperationOutcome&quot; &quot;Organization&quot; &quot;OrganizationAffiliation&quot; &quot;Parameters&quot; &quot;Patient&quot; &quot;PaymentNotice&quot; &quot;PaymentReconciliation&quot; &quot;Person&quot; &quot;PlanDefinition&quot; &quot;Practitioner&quot; &quot;PractitionerRole&quot; &quot;Procedure&quot; &quot;Provenance&quot; &quot;Questionnaire&quot; &quot;QuestionnaireResponse&quot; &quot;RelatedPerson&quot; &quot;RequestGroup&quot; &quot;ResearchDefinition&quot; &quot;ResearchElementDefinition&quot; &quot;ResearchStudy&quot; &quot;ResearchSubject&quot; &quot;Resource&quot; &quot;RiskAssessment&quot; &quot;RiskEvidenceSynthesis&quot; &quot;Schedule&quot; &quot;SearchParameter&quot; &quot;ServiceRequest&quot; &quot;Slot&quot; &quot;Specimen&quot; &quot;SpecimenDefinition&quot; &quot;StructureDefinition&quot; &quot;StructureMap&quot; &quot;Subscription&quot; &quot;Substance&quot; &quot;SubstanceNucleicAcid&quot; &quot;SubstancePolymer&quot; &quot;SubstanceProtein&quot; &quot;SubstanceReferenceInformation&quot; &quot;SubstanceSourceMaterial&quot; &quot;SubstanceSpecification&quot; &quot;SupplyDelivery&quot; &quot;SupplyRequest&quot; &quot;Task&quot; &quot;TerminologyCapabilities&quot; &quot;TestReport&quot; &quot;TestScript&quot; &quot;ValueSet&quot; &quot;VerificationResult&quot; &quot;VisionPrescription&quot; &quot;Type&quot; &quot;Any&quot;]
-
-# The type of an address (physical / postal).
-fhirvs:address-type [&quot;postal&quot; &quot;physical&quot; &quot;both&quot;]
-
-# Whether an operation parameter is an input or an output parameter.
-fhirvs:operation-parameter-use [&quot;in&quot; &quot;out&quot;]
-
-# Use of contact point.
-fhirvs:contact-point-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &quot;old&quot; &quot;mobile&quot;]
-
-# The possible sort directions, ascending or descending.
-fhirvs:sort-direction [&quot;ascending&quot; &quot;descending&quot;]
-
 # This value set contract specific codes for status.
 fhirvs:contract-publicationstatus [&quot;amended&quot; &quot;appended&quot; &quot;cancelled&quot; &quot;disputed&quot; &quot;entered-in-error&quot; &quot;executable&quot; &quot;executed&quot; &quot;negotiable&quot; &quot;offered&quot; &quot;policy&quot; &quot;rejected&quot; &quot;renewed&quot; &quot;revoked&quot; &quot;resolved&quot; &quot;terminated&quot;]
-
-# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
-fhirvs:currencies [&quot;AED&quot; &quot;AFN&quot; &quot;ALL&quot; &quot;AMD&quot; &quot;ANG&quot; &quot;AOA&quot; &quot;ARS&quot; &quot;AUD&quot; &quot;AWG&quot; &quot;AZN&quot; &quot;BAM&quot; &quot;BBD&quot; &quot;BDT&quot; &quot;BGN&quot; &quot;BHD&quot; &quot;BIF&quot; &quot;BMD&quot; &quot;BND&quot; &quot;BOB&quot; &quot;BOV&quot; &quot;BRL&quot; &quot;BSD&quot; &quot;BTN&quot; &quot;BWP&quot; &quot;BYN&quot; &quot;BZD&quot; &quot;CAD&quot; &quot;CDF&quot; &quot;CHE&quot; &quot;CHF&quot; &quot;CHW&quot; &quot;CLF&quot; &quot;CLP&quot; &quot;CNY&quot; &quot;COP&quot; &quot;COU&quot; &quot;CRC&quot; &quot;CUC&quot; &quot;CUP&quot; &quot;CVE&quot; &quot;CZK&quot; &quot;DJF&quot; &quot;DKK&quot; &quot;DOP&quot; &quot;DZD&quot; &quot;EGP&quot; &quot;ERN&quot; &quot;ETB&quot; &quot;EUR&quot; &quot;FJD&quot; &quot;FKP&quot; &quot;GBP&quot; &quot;GEL&quot; &quot;GGP&quot; &quot;GHS&quot; &quot;GIP&quot; &quot;GMD&quot; &quot;GNF&quot; &quot;GTQ&quot; &quot;GYD&quot; &quot;HKD&quot; &quot;HNL&quot; &quot;HRK&quot; &quot;HTG&quot; &quot;HUF&quot; &quot;IDR&quot; &quot;ILS&quot; &quot;IMP&quot; &quot;INR&quot; &quot;IQD&quot; &quot;IRR&quot; &quot;ISK&quot; &quot;JEP&quot; &quot;JMD&quot; &quot;JOD&quot; &quot;JPY&quot; &quot;KES&quot; &quot;KGS&quot; &quot;KHR&quot; &quot;KMF&quot; &quot;KPW&quot; &quot;KRW&quot; &quot;KWD&quot; &quot;KYD&quot; &quot;KZT&quot; &quot;LAK&quot; &quot;LBP&quot; &quot;LKR&quot; &quot;LRD&quot; &quot;LSL&quot; &quot;LYD&quot; &quot;MAD&quot; &quot;MDL&quot; &quot;MGA&quot; &quot;MKD&quot; &quot;MMK&quot; &quot;MNT&quot; &quot;MOP&quot; &quot;MRU&quot; &quot;MUR&quot; &quot;MVR&quot; &quot;MWK&quot; &quot;MXN&quot; &quot;MXV&quot; &quot;MYR&quot; &quot;MZN&quot; &quot;NAD&quot; &quot;NGN&quot; &quot;NIO&quot; &quot;NOK&quot; &quot;NPR&quot; &quot;NZD&quot; &quot;OMR&quot; &quot;PAB&quot; &quot;PEN&quot; &quot;PGK&quot; &quot;PHP&quot; &quot;PKR&quot; &quot;PLN&quot; &quot;PYG&quot; &quot;QAR&quot; &quot;RON&quot; &quot;RSD&quot; &quot;RUB&quot; &quot;RWF&quot; &quot;SAR&quot; &quot;SBD&quot; &quot;SCR&quot; &quot;SDG&quot; &quot;SEK&quot; &quot;SGD&quot; &quot;SHP&quot; &quot;SLL&quot; &quot;SOS&quot; &quot;SRD&quot; &quot;SSP&quot; &quot;STN&quot; &quot;SVC&quot; &quot;SYP&quot; &quot;SZL&quot; &quot;THB&quot; &quot;TJS&quot; &quot;TMT&quot; &quot;TND&quot; &quot;TOP&quot; &quot;TRY&quot; &quot;TTD&quot; &quot;TVD&quot; &quot;TWD&quot; &quot;TZS&quot; &quot;UAH&quot; &quot;UGX&quot; &quot;USD&quot; &quot;USN&quot; &quot;UYI&quot; &quot;UYU&quot; &quot;UZS&quot; &quot;VEF&quot; &quot;VND&quot; &quot;VUV&quot; &quot;WST&quot; &quot;XAF&quot; &quot;XAG&quot; &quot;XAU&quot; &quot;XBA&quot; &quot;XBB&quot; &quot;XBC&quot; &quot;XBD&quot; &quot;XCD&quot; &quot;XDR&quot; &quot;XOF&quot; &quot;XPD&quot; &quot;XPF&quot; &quot;XPT&quot; &quot;XSU&quot; &quot;XTS&quot; &quot;XUA&quot; &quot;XXX&quot; &quot;YER&quot; &quot;ZAR&quot; &quot;ZMW&quot; &quot;ZWL&quot;]
-
-# The status of a resource narrative.
-fhirvs:narrative-status [&quot;generated&quot; &quot;extensions&quot; &quot;additional&quot; &quot;empty&quot;]
-
-# The type of contributor.
-fhirvs:contributor-type [&quot;author&quot; &quot;editor&quot; &quot;reviewer&quot; &quot;endorser&quot;]
-
-# Telecommunications form for contact point.
-fhirvs:contact-point-system [&quot;phone&quot; &quot;fax&quot; &quot;email&quot; &quot;pager&quot; &quot;url&quot; &quot;sms&quot; &quot;other&quot;]
-
-# Real world event relating to the schedule.
-fhirvs:event-timing [&quot;MORN&quot; &quot;MORN.early&quot; &quot;MORN.late&quot; &quot;NOON&quot; &quot;AFT&quot; &quot;AFT.early&quot; &quot;AFT.late&quot; &quot;EVE&quot; &quot;EVE.early&quot; &quot;EVE.late&quot; &quot;NIGHT&quot; &quot;PHS&quot; &quot;HS&quot; &quot;WAKE&quot; &quot;C&quot; &quot;CM&quot; &quot;CD&quot; &quot;CV&quot; &quot;AC&quot; &quot;ACM&quot; &quot;ACD&quot; &quot;ACV&quot; &quot;PC&quot; &quot;PCM&quot; &quot;PCD&quot; &quot;PCV&quot;]
 
 # This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
 fhirvs:mimetypes EXTERNAL
 
+# Identifies the purpose for this identifier, if known .
+fhirvs:identifier-use [&quot;usual&quot; &quot;official&quot; &quot;temp&quot; &quot;secondary&quot; &quot;old&quot;]
+
+# The use of a human name.
+fhirvs:name-use [&quot;usual&quot; &quot;official&quot; &quot;temp&quot; &quot;nickname&quot; &quot;anonymous&quot; &quot;old&quot; &quot;maiden&quot;]
+
+# The days of the week.
+fhirvs:days-of-week [&quot;mon&quot; &quot;tue&quot; &quot;wed&quot; &quot;thu&quot; &quot;fri&quot; &quot;sat&quot; &quot;sun&quot;]
+
+# The status of a resource narrative.
+fhirvs:narrative-status [&quot;generated&quot; &quot;extensions&quot; &quot;additional&quot; &quot;empty&quot;]
+
+# The use of an address.
+fhirvs:address-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &quot;old&quot; &quot;billing&quot;]
+
+# The possible sort directions, ascending or descending.
+fhirvs:sort-direction [&quot;ascending&quot; &quot;descending&quot;]
+
+# Whether an operation parameter is an input or an output parameter.
+fhirvs:operation-parameter-use [&quot;in&quot; &quot;out&quot;]
+
+# Telecommunications form for contact point.
+fhirvs:contact-point-system [&quot;phone&quot; &quot;fax&quot; &quot;email&quot; &quot;pager&quot; &quot;url&quot; &quot;sms&quot; &quot;other&quot;]
+
+# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
+fhirvs:currencies [&quot;AED&quot; &quot;AFN&quot; &quot;ALL&quot; &quot;AMD&quot; &quot;ANG&quot; &quot;AOA&quot; &quot;ARS&quot; &quot;AUD&quot; &quot;AWG&quot; &quot;AZN&quot; &quot;BAM&quot; &quot;BBD&quot; &quot;BDT&quot; &quot;BGN&quot; &quot;BHD&quot; &quot;BIF&quot; &quot;BMD&quot; &quot;BND&quot; &quot;BOB&quot; &quot;BOV&quot; &quot;BRL&quot; &quot;BSD&quot; &quot;BTN&quot; &quot;BWP&quot; &quot;BYN&quot; &quot;BZD&quot; &quot;CAD&quot; &quot;CDF&quot; &quot;CHE&quot; &quot;CHF&quot; &quot;CHW&quot; &quot;CLF&quot; &quot;CLP&quot; &quot;CNY&quot; &quot;COP&quot; &quot;COU&quot; &quot;CRC&quot; &quot;CUC&quot; &quot;CUP&quot; &quot;CVE&quot; &quot;CZK&quot; &quot;DJF&quot; &quot;DKK&quot; &quot;DOP&quot; &quot;DZD&quot; &quot;EGP&quot; &quot;ERN&quot; &quot;ETB&quot; &quot;EUR&quot; &quot;FJD&quot; &quot;FKP&quot; &quot;GBP&quot; &quot;GEL&quot; &quot;GGP&quot; &quot;GHS&quot; &quot;GIP&quot; &quot;GMD&quot; &quot;GNF&quot; &quot;GTQ&quot; &quot;GYD&quot; &quot;HKD&quot; &quot;HNL&quot; &quot;HRK&quot; &quot;HTG&quot; &quot;HUF&quot; &quot;IDR&quot; &quot;ILS&quot; &quot;IMP&quot; &quot;INR&quot; &quot;IQD&quot; &quot;IRR&quot; &quot;ISK&quot; &quot;JEP&quot; &quot;JMD&quot; &quot;JOD&quot; &quot;JPY&quot; &quot;KES&quot; &quot;KGS&quot; &quot;KHR&quot; &quot;KMF&quot; &quot;KPW&quot; &quot;KRW&quot; &quot;KWD&quot; &quot;KYD&quot; &quot;KZT&quot; &quot;LAK&quot; &quot;LBP&quot; &quot;LKR&quot; &quot;LRD&quot; &quot;LSL&quot; &quot;LYD&quot; &quot;MAD&quot; &quot;MDL&quot; &quot;MGA&quot; &quot;MKD&quot; &quot;MMK&quot; &quot;MNT&quot; &quot;MOP&quot; &quot;MRU&quot; &quot;MUR&quot; &quot;MVR&quot; &quot;MWK&quot; &quot;MXN&quot; &quot;MXV&quot; &quot;MYR&quot; &quot;MZN&quot; &quot;NAD&quot; &quot;NGN&quot; &quot;NIO&quot; &quot;NOK&quot; &quot;NPR&quot; &quot;NZD&quot; &quot;OMR&quot; &quot;PAB&quot; &quot;PEN&quot; &quot;PGK&quot; &quot;PHP&quot; &quot;PKR&quot; &quot;PLN&quot; &quot;PYG&quot; &quot;QAR&quot; &quot;RON&quot; &quot;RSD&quot; &quot;RUB&quot; &quot;RWF&quot; &quot;SAR&quot; &quot;SBD&quot; &quot;SCR&quot; &quot;SDG&quot; &quot;SEK&quot; &quot;SGD&quot; &quot;SHP&quot; &quot;SLL&quot; &quot;SOS&quot; &quot;SRD&quot; &quot;SSP&quot; &quot;STN&quot; &quot;SVC&quot; &quot;SYP&quot; &quot;SZL&quot; &quot;THB&quot; &quot;TJS&quot; &quot;TMT&quot; &quot;TND&quot; &quot;TOP&quot; &quot;TRY&quot; &quot;TTD&quot; &quot;TVD&quot; &quot;TWD&quot; &quot;TZS&quot; &quot;UAH&quot; &quot;UGX&quot; &quot;USD&quot; &quot;USN&quot; &quot;UYI&quot; &quot;UYU&quot; &quot;UZS&quot; &quot;VEF&quot; &quot;VND&quot; &quot;VUV&quot; &quot;WST&quot; &quot;XAF&quot; &quot;XAG&quot; &quot;XAU&quot; &quot;XBA&quot; &quot;XBB&quot; &quot;XBC&quot; &quot;XBD&quot; &quot;XCD&quot; &quot;XDR&quot; &quot;XOF&quot; &quot;XPD&quot; &quot;XPF&quot; &quot;XPT&quot; &quot;XSU&quot; &quot;XTS&quot; &quot;XUA&quot; &quot;XXX&quot; &quot;YER&quot; &quot;ZAR&quot; &quot;ZMW&quot; &quot;ZWL&quot;]
+
+# Use of contact point.
+fhirvs:contact-point-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &quot;old&quot; &quot;mobile&quot;]
+
+# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
+fhirvs:all-types [&quot;Address&quot; &quot;Age&quot; &quot;Annotation&quot; &quot;Attachment&quot; &quot;BackboneElement&quot; &quot;CodeableConcept&quot; &quot;Coding&quot; &quot;ContactDetail&quot; &quot;ContactPoint&quot; &quot;Contributor&quot; &quot;Count&quot; &quot;DataRequirement&quot; &quot;Distance&quot; &quot;Dosage&quot; &quot;Duration&quot; &quot;Element&quot; &quot;ElementDefinition&quot; &quot;Expression&quot; &quot;Extension&quot; &quot;HumanName&quot; &quot;Identifier&quot; &quot;MarketingStatus&quot; &quot;Meta&quot; &quot;Money&quot; &quot;MoneyQuantity&quot; &quot;Narrative&quot; &quot;ParameterDefinition&quot; &quot;Period&quot; &quot;Population&quot; &quot;ProdCharacteristic&quot; &quot;ProductShelfLife&quot; &quot;Quantity&quot; &quot;Range&quot; &quot;Ratio&quot; &quot;Reference&quot; &quot;RelatedArtifact&quot; &quot;SampledData&quot; &quot;Signature&quot; &quot;SimpleQuantity&quot; &quot;SubstanceAmount&quot; &quot;Timing&quot; &quot;TriggerDefinition&quot; &quot;UsageContext&quot; &quot;base64Binary&quot; &quot;boolean&quot; &quot;canonical&quot; &quot;code&quot; &quot;date&quot; &quot;dateTime&quot; &quot;decimal&quot; &quot;id&quot; &quot;instant&quot; &quot;integer&quot; &quot;markdown&quot; &quot;oid&quot; &quot;positiveInt&quot; &quot;string&quot; &quot;time&quot; &quot;unsignedInt&quot; &quot;uri&quot; &quot;url&quot; &quot;uuid&quot; &quot;xhtml&quot; &quot;Account&quot; &quot;ActivityDefinition&quot; &quot;AdverseEvent&quot; &quot;AllergyIntolerance&quot; &quot;Appointment&quot; &quot;AppointmentResponse&quot; &quot;AuditEvent&quot; &quot;Basic&quot; &quot;Binary&quot; &quot;BiologicallyDerivedProduct&quot; &quot;BodyStructure&quot; &quot;Bundle&quot; &quot;CapabilityStatement&quot; &quot;CarePlan&quot; &quot;CareTeam&quot; &quot;CatalogEntry&quot; &quot;ChargeItem&quot; &quot;ChargeItemDefinition&quot; &quot;Claim&quot; &quot;ClaimResponse&quot; &quot;ClinicalImpression&quot; &quot;ClinicalProfile&quot; &quot;CodeSystem&quot; &quot;Communication&quot; &quot;CommunicationRequest&quot; &quot;CompartmentDefinition&quot; &quot;Composition&quot; &quot;ConceptMap&quot; &quot;Condition&quot; &quot;Consent&quot; &quot;Contract&quot; &quot;Coverage&quot; &quot;CoverageEligibilityRequest&quot; &quot;CoverageEligibilityResponse&quot; &quot;DetectedIssue&quot; &quot;Device&quot; &quot;DeviceDefinition&quot; &quot;DeviceMetric&quot; &quot;DeviceRequest&quot; &quot;DeviceUseStatement&quot; &quot;DiagnosticReport&quot; &quot;DocumentManifest&quot; &quot;DocumentReference&quot; &quot;DomainResource&quot; &quot;EffectEvidenceSynthesis&quot; &quot;Encounter&quot; &quot;Endpoint&quot; &quot;EnrollmentRequest&quot; &quot;EnrollmentResponse&quot; &quot;EpisodeOfCare&quot; &quot;EventDefinition&quot; &quot;Evidence&quot; &quot;EvidenceVariable&quot; &quot;ExampleScenario&quot; &quot;ExplanationOfBenefit&quot; &quot;FamilyMemberHistory&quot; &quot;Flag&quot; &quot;Goal&quot; &quot;GraphDefinition&quot; &quot;Group&quot; &quot;GuidanceResponse&quot; &quot;HealthcareService&quot; &quot;ImagingStudy&quot; &quot;Immunization&quot; &quot;ImmunizationEvaluation&quot; &quot;ImmunizationRecommendation&quot; &quot;ImplementationGuide&quot; &quot;InsurancePlan&quot; &quot;Invoice&quot; &quot;Library&quot; &quot;Linkage&quot; &quot;List&quot; &quot;Location&quot; &quot;Measure&quot; &quot;MeasureReport&quot; &quot;Media&quot; &quot;Medication&quot; &quot;MedicationAdministration&quot; &quot;MedicationDispense&quot; &quot;MedicationKnowledge&quot; &quot;MedicationRequest&quot; &quot;MedicationStatement&quot; &quot;MedicinalProduct&quot; &quot;MedicinalProductAuthorization&quot; &quot;MedicinalProductContraindication&quot; &quot;MedicinalProductIndication&quot; &quot;MedicinalProductIngredient&quot; &quot;MedicinalProductInteraction&quot; &quot;MedicinalProductManufactured&quot; &quot;MedicinalProductPackaged&quot; &quot;MedicinalProductPharmaceutical&quot; &quot;MedicinalProductUndesirableEffect&quot; &quot;MessageDefinition&quot; &quot;MessageHeader&quot; &quot;MolecularSequence&quot; &quot;NamingSystem&quot; &quot;NutritionOrder&quot; &quot;Observation&quot; &quot;ObservationDefinition&quot; &quot;OperationDefinition&quot; &quot;OperationOutcome&quot; &quot;Organization&quot; &quot;OrganizationAffiliation&quot; &quot;Parameters&quot; &quot;Patient&quot; &quot;PaymentNotice&quot; &quot;PaymentReconciliation&quot; &quot;Person&quot; &quot;PlanDefinition&quot; &quot;Practitioner&quot; &quot;PractitionerRole&quot; &quot;Procedure&quot; &quot;Provenance&quot; &quot;Questionnaire&quot; &quot;QuestionnaireResponse&quot; &quot;RelatedPerson&quot; &quot;RequestGroup&quot; &quot;ResearchDefinition&quot; &quot;ResearchElementDefinition&quot; &quot;ResearchStudy&quot; &quot;ResearchSubject&quot; &quot;Resource&quot; &quot;RiskAssessment&quot; &quot;RiskEvidenceSynthesis&quot; &quot;Schedule&quot; &quot;SearchParameter&quot; &quot;ServiceRequest&quot; &quot;Slot&quot; &quot;Specimen&quot; &quot;SpecimenDefinition&quot; &quot;StructureDefinition&quot; &quot;StructureMap&quot; &quot;Subscription&quot; &quot;Substance&quot; &quot;SubstanceNucleicAcid&quot; &quot;SubstancePolymer&quot; &quot;SubstanceProtein&quot; &quot;SubstanceReferenceInformation&quot; &quot;SubstanceSourceMaterial&quot; &quot;SubstanceSpecification&quot; &quot;SupplyDelivery&quot; &quot;SupplyRequest&quot; &quot;Task&quot; &quot;TerminologyCapabilities&quot; &quot;TestReport&quot; &quot;TestScript&quot; &quot;ValueSet&quot; &quot;VerificationResult&quot; &quot;VisionPrescription&quot; &quot;Type&quot; &quot;Any&quot;]
+
 # How the Quantity should be understood and represented.
 fhirvs:quantity-comparator [&quot;&lt;&quot; &quot;&lt;=&quot; &quot;&gt;=&quot; &quot;&gt;&quot;]
 
-# The type of trigger.
-fhirvs:trigger-type [&quot;named-event&quot; &quot;periodic&quot; &quot;data-changed&quot; &quot;data-added&quot; &quot;data-modified&quot; &quot;data-removed&quot; &quot;data-accessed&quot; &quot;data-access-ended&quot;]
+# The type of an address (physical / postal).
+fhirvs:address-type [&quot;postal&quot; &quot;physical&quot; &quot;both&quot;]
+
+# The type of relationship to the related artifact.
+fhirvs:related-artifact-type [&quot;documentation&quot; &quot;justification&quot; &quot;citation&quot; &quot;predecessor&quot; &quot;successor&quot; &quot;derived-from&quot; &quot;depends-on&quot; &quot;composed-of&quot;]
+
+# The type of contributor.
+fhirvs:contributor-type [&quot;author&quot; &quot;editor&quot; &quot;reviewer&quot; &quot;endorser&quot;]
 
 # This value set contract specific codes for status.
 fhirvs:contract-status [&quot;amended&quot; &quot;appended&quot; &quot;cancelled&quot; &quot;disputed&quot; &quot;entered-in-error&quot; &quot;executable&quot; &quot;executed&quot; &quot;negotiable&quot; &quot;offered&quot; &quot;policy&quot; &quot;rejected&quot; &quot;renewed&quot; &quot;revoked&quot; &quot;resolved&quot; &quot;terminated&quot;]
 
-# The days of the week.
-fhirvs:days-of-week [&quot;mon&quot; &quot;tue&quot; &quot;wed&quot; &quot;thu&quot; &quot;fri&quot; &quot;sat&quot; &quot;sun&quot;]
+# The type of trigger.
+fhirvs:trigger-type [&quot;named-event&quot; &quot;periodic&quot; &quot;data-changed&quot; &quot;data-added&quot; &quot;data-modified&quot; &quot;data-removed&quot; &quot;data-accessed&quot; &quot;data-access-ended&quot;]
+
+# Real world event relating to the schedule.
+fhirvs:event-timing [&quot;MORN&quot; &quot;MORN.early&quot; &quot;MORN.late&quot; &quot;NOON&quot; &quot;AFT&quot; &quot;AFT.early&quot; &quot;AFT.late&quot; &quot;EVE&quot; &quot;EVE.early&quot; &quot;EVE.late&quot; &quot;NIGHT&quot; &quot;PHS&quot; &quot;HS&quot; &quot;WAKE&quot; &quot;C&quot; &quot;CM&quot; &quot;CD&quot; &quot;CV&quot; &quot;AC&quot; &quot;ACM&quot; &quot;ACD&quot; &quot;ACV&quot; &quot;PC&quot; &quot;PCM&quot; &quot;PCD&quot; &quot;PCV&quot;]
+
+# A unit of time (units from UCUM).
+fhirvs:units-of-time [&quot;s&quot; &quot;min&quot; &quot;h&quot; &quot;d&quot; &quot;wk&quot; &quot;mo&quot; &quot;a&quot;]
 
 </pre>
 </div>
@@ -1538,7 +1535,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-9a13c5160d) generated on Thu, Feb 14, 2019 08:54-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.0.0-9a13c5160d) generated on Thu, Feb 14, 2019 18:01-0600. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 

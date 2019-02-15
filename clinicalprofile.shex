@@ -63,6 +63,26 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# Procedure profile entry
+<ClinicalProfile.procedure> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ClinicalProfile.procedure.code @<CodeableConcept>+;  # ICD-10-PCS or CPT procedure code
+    fhir:ClinicalProfile.procedure.frequencyPerYear @<decimal>?;  # Frequency of procedure per patient 
+                                            # per year 
+    fhir:ClinicalProfile.procedure.fractionOfSubjects @<decimal>;  # Fraction of patients with this 
+                                            # procedure per year 
+    fhir:ClinicalProfile.procedure.correlatedDiagnoses @<ClinicalProfile.medication.correlatedDiagnoses>?;  # Correlated diagnosies
+    fhir:ClinicalProfile.procedure.correlatedMedications @<ClinicalProfile.medication.correlatedMedications>?;  # Correlated medications
+    fhir:ClinicalProfile.procedure.correlatedProcedures @<ClinicalProfile.medication.correlatedProcedures>?;  # Correlated procedures
+    fhir:ClinicalProfile.procedure.correlatedPhenotypes @<ClinicalProfile.medication.correlatedPhenotypes>?;  # Correlated phenotypes
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # Laboratory profile entry
 <ClinicalProfile.lab> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -78,26 +98,6 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
                                             # year 
     fhir:ClinicalProfile.lab.fractionOfSubjects @<decimal>?;  # Fraction of subjects with this lab
     fhir:ClinicalProfile.lab.scalarDistribution @<ClinicalProfile.lab.scalarDistribution>?;  # Scalar sample summary
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# HPO Profile Entry
-<ClinicalProfile.hpo> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:ClinicalProfile.hpo.code @<CodeableConcept>+;  # HPO code
-    fhir:ClinicalProfile.hpo.frequencyPerYear @<decimal>?;  # Frequency of this code per patient 
-                                            # per year 
-    fhir:ClinicalProfile.hpo.fractionOfSubjects @<decimal>;  # Fraction of patients with this 
-                                            # procedure per year 
-    fhir:ClinicalProfile.hpo.correlatedDiagnoses @<ClinicalProfile.medication.correlatedDiagnoses>?;  # Correlated diagnosies
-    fhir:ClinicalProfile.hpo.correlatedMedications @<ClinicalProfile.medication.correlatedMedications>?;  # Correlated medications
-    fhir:ClinicalProfile.hpo.correlatedProcedures @<ClinicalProfile.medication.correlatedProcedures>?;  # Correlated procedures
-    fhir:ClinicalProfile.hpo.correlatedPhenotypes @<ClinicalProfile.medication.correlatedPhenotypes>?;  # Correlated phenotypes
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -131,45 +131,23 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Procedure profile entry
-<ClinicalProfile.procedure> CLOSED {
+# HPO Profile Entry
+<ClinicalProfile.hpo> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
                                             # even if unrecognized 
-    fhir:ClinicalProfile.procedure.code @<CodeableConcept>+;  # ICD-10-PCS or CPT procedure code
-    fhir:ClinicalProfile.procedure.frequencyPerYear @<decimal>?;  # Frequency of procedure per patient 
+    fhir:ClinicalProfile.hpo.code @<CodeableConcept>+;  # HPO code
+    fhir:ClinicalProfile.hpo.frequencyPerYear @<decimal>?;  # Frequency of this code per patient 
                                             # per year 
-    fhir:ClinicalProfile.procedure.fractionOfSubjects @<decimal>;  # Fraction of patients with this 
+    fhir:ClinicalProfile.hpo.fractionOfSubjects @<decimal>;  # Fraction of patients with this 
                                             # procedure per year 
-    fhir:ClinicalProfile.procedure.correlatedDiagnoses @<ClinicalProfile.medication.correlatedDiagnoses>?;  # Correlated diagnosies
-    fhir:ClinicalProfile.procedure.correlatedMedications @<ClinicalProfile.medication.correlatedMedications>?;  # Correlated medications
-    fhir:ClinicalProfile.procedure.correlatedProcedures @<ClinicalProfile.medication.correlatedProcedures>?;  # Correlated procedures
-    fhir:ClinicalProfile.procedure.correlatedPhenotypes @<ClinicalProfile.medication.correlatedPhenotypes>?;  # Correlated phenotypes
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Details of how medication was taken
-<ClinicalProfile.medication.dosage> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:ClinicalProfile.medication.dosage.text @<string>?;  # Free text dosage instructions e.g. 
-                                            # SIG 
-    fhir:ClinicalProfile.medication.dosage.site @<CodeableConcept>*;  # Body site(s) administered to
-    fhir:ClinicalProfile.medication.dosage.route @<CodeableConcept>*;  # Path(s) of substance into body
-    fhir:ClinicalProfile.medication.dosage.method @<CodeableConcept>*;  # How the drug was administered
-    fhir:ClinicalProfile.medication.dosage.dose @<SimpleQuantity>*;  # Average amount of medication per 
-                                            # dose 
-    (                                       # Dose quantity per unit of time
-        fhir:ClinicalProfile.medication.dosage.rateRatio @<Ratio>  |
-        fhir:ClinicalProfile.medication.dosage.rateQuantity @<SimpleQuantity> 
-    )?;
+    fhir:ClinicalProfile.hpo.correlatedDiagnoses @<ClinicalProfile.medication.correlatedDiagnoses>?;  # Correlated diagnosies
+    fhir:ClinicalProfile.hpo.correlatedMedications @<ClinicalProfile.medication.correlatedMedications>?;  # Correlated medications
+    fhir:ClinicalProfile.hpo.correlatedProcedures @<ClinicalProfile.medication.correlatedProcedures>?;  # Correlated procedures
+    fhir:ClinicalProfile.hpo.correlatedPhenotypes @<ClinicalProfile.medication.correlatedPhenotypes>?;  # Correlated phenotypes
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -186,6 +164,37 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:ClinicalProfile.medication.correlatedPhenotypes.abscorrelation @<decimal>?;  # Minimum absolute value of 
                                             # correlation coefficient 
     fhir:ClinicalProfile.medication.correlatedPhenotypes.entry @<ClinicalProfile.medication.correlatedPhenotypes.entry>*;  # Correlation entry
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Correlated diagnosies
+<ClinicalProfile.medication.correlatedDiagnoses> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ClinicalProfile.medication.correlatedDiagnoses.topn @<integer>?;  # Number of diagnoses cutoff (e.g. 
+                                            # top 10) 
+    fhir:ClinicalProfile.medication.correlatedDiagnoses.abscorrelation @<decimal>?;  # Minimum absolute value of 
+                                            # correlation coefficient 
+    fhir:ClinicalProfile.medication.correlatedDiagnoses.entry @<ClinicalProfile.medication.correlatedDiagnoses.entry>?;  # Correlation entry
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Correlated medications
+<ClinicalProfile.medication.correlatedMedications> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ClinicalProfile.medication.correlatedMedications.topn @<integer>?;  # Number of medications cutoff (e.g. 
+                                            # top 10) 
+    fhir:ClinicalProfile.medication.correlatedMedications.deviation @<decimal>?;  # Deviation cutoff
+    fhir:ClinicalProfile.medication.correlatedMedications.entry @<ClinicalProfile.medication.correlatedMedications.entry>*;  # Correlation entry
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -214,18 +223,25 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Correlated medications
-<ClinicalProfile.medication.correlatedMedications> CLOSED {
+# Details of how medication was taken
+<ClinicalProfile.medication.dosage> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
                                             # even if unrecognized 
-    fhir:ClinicalProfile.medication.correlatedMedications.topn @<integer>?;  # Number of medications cutoff (e.g. 
-                                            # top 10) 
-    fhir:ClinicalProfile.medication.correlatedMedications.deviation @<decimal>?;  # Deviation cutoff
-    fhir:ClinicalProfile.medication.correlatedMedications.entry @<ClinicalProfile.medication.correlatedMedications.entry>*;  # Correlation entry
+    fhir:ClinicalProfile.medication.dosage.text @<string>?;  # Free text dosage instructions e.g. 
+                                            # SIG 
+    fhir:ClinicalProfile.medication.dosage.site @<CodeableConcept>*;  # Body site(s) administered to
+    fhir:ClinicalProfile.medication.dosage.route @<CodeableConcept>*;  # Path(s) of substance into body
+    fhir:ClinicalProfile.medication.dosage.method @<CodeableConcept>*;  # How the drug was administered
+    fhir:ClinicalProfile.medication.dosage.dose @<SimpleQuantity>*;  # Average amount of medication per 
+                                            # dose 
+    (                                       # Dose quantity per unit of time
+        fhir:ClinicalProfile.medication.dosage.rateRatio @<Ratio>  |
+        fhir:ClinicalProfile.medication.dosage.rateQuantity @<SimpleQuantity> 
+    )?;
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -245,22 +261,6 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Correlated diagnosies
-<ClinicalProfile.medication.correlatedDiagnoses> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:ClinicalProfile.medication.correlatedDiagnoses.topn @<integer>?;  # Number of diagnoses cutoff (e.g. 
-                                            # top 10) 
-    fhir:ClinicalProfile.medication.correlatedDiagnoses.abscorrelation @<decimal>?;  # Minimum absolute value of 
-                                            # correlation coefficient 
-    fhir:ClinicalProfile.medication.correlatedDiagnoses.entry @<ClinicalProfile.medication.correlatedDiagnoses.entry>?;  # Correlation entry
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # Decile partitions
 <ClinicalProfile.lab.scalarDistribution.decile> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -274,6 +274,22 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# Correlated laboratory tests
+<ClinicalProfile.lab.scalarDistribution.correlatedLabs> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ClinicalProfile.lab.scalarDistribution.correlatedLabs.topn @<integer>?;  # Number of correlations cutoff 
+                                            # (e.g. top 10) 
+    fhir:ClinicalProfile.lab.scalarDistribution.correlatedLabs.abscorrelation @<decimal>?;  # Minimum absolute value of 
+                                            # correlation coefficient 
+    fhir:ClinicalProfile.lab.scalarDistribution.correlatedLabs.entry @<ClinicalProfile.lab.scalarDistribution.correlatedLabs.entry>*;  # Correlated lab
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # Correlation entry
 <ClinicalProfile.medication.correlatedPhenotypes.entry> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -284,6 +300,19 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
                                             # even if unrecognized 
     fhir:ClinicalProfile.medication.correlatedPhenotypes.entry.code @<CodeableConcept>;  # Phenotype codes
     fhir:ClinicalProfile.medication.correlatedPhenotypes.entry.coefficient @<decimal>;  # Correlation coefficient
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Correlation entry
+<ClinicalProfile.medication.correlatedProcedures.entry> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ClinicalProfile.medication.correlatedProcedures.entry.code @<CodeableConcept>+;  # Procedure code(s)
+    fhir:ClinicalProfile.medication.correlatedProcedures.entry.coefficient @<decimal>;  # Correlation coefficient
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -318,35 +347,6 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
                                             # even if unrecognized 
     fhir:ClinicalProfile.medication.correlatedDiagnoses.entry.code @<CodeableConcept>;  # Diagnosis code(s)
     fhir:ClinicalProfile.medication.correlatedDiagnoses.entry.coefficient @<decimal>;  # Correlation coefficient
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Correlated laboratory tests
-<ClinicalProfile.lab.scalarDistribution.correlatedLabs> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:ClinicalProfile.lab.scalarDistribution.correlatedLabs.topn @<integer>?;  # Number of correlations cutoff 
-                                            # (e.g. top 10) 
-    fhir:ClinicalProfile.lab.scalarDistribution.correlatedLabs.abscorrelation @<decimal>?;  # Minimum absolute value of 
-                                            # correlation coefficient 
-    fhir:ClinicalProfile.lab.scalarDistribution.correlatedLabs.entry @<ClinicalProfile.lab.scalarDistribution.correlatedLabs.entry>*;  # Correlated lab
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Correlation entry
-<ClinicalProfile.medication.correlatedProcedures.entry> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:ClinicalProfile.medication.correlatedProcedures.entry.code @<CodeableConcept>+;  # Procedure code(s)
-    fhir:ClinicalProfile.medication.correlatedProcedures.entry.coefficient @<decimal>;  # Correlation coefficient
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1207,21 +1207,6 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What codes are expected
-<DataRequirement.codeFilter> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
-                                            # on 
-    fhir:DataRequirement.codeFilter.searchParam @<string>?;  # A coded (token) parameter to 
-                                            # search on 
-    fhir:DataRequirement.codeFilter.valueSet @<canonical>?;  # Valueset for the filter
-    fhir:DataRequirement.codeFilter.code @<Coding>*;  # What code is expected
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # Amount of medication administered
 <Dosage.doseAndRate> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -1242,16 +1227,18 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Order of the results
-<DataRequirement.sort> CLOSED {
+# What codes are expected
+<DataRequirement.codeFilter> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
-    fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
-                                            # perform the sort 
-    fhir:DataRequirement.sort.direction @<code> AND
-    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
+    fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
+                                            # on 
+    fhir:DataRequirement.codeFilter.searchParam @<string>?;  # A coded (token) parameter to 
+                                            # search on 
+    fhir:DataRequirement.codeFilter.valueSet @<canonical>?;  # Valueset for the filter
+    fhir:DataRequirement.codeFilter.code @<Coding>*;  # What code is expected
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1295,6 +1282,19 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# Order of the results
+<DataRequirement.sort> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
+                                            # perform the sort 
+    fhir:DataRequirement.sort.direction @<code> AND
+    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # What dates/date ranges are expected
 <DataRequirement.dateFilter> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -1319,20 +1319,38 @@ start=@<ClinicalProfile> AND {fhir:nodeRole [fhir:treeRoot]}
 
 #---------------------- Value Sets ------------------------
 
+# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
+fhirvs:mimetypes EXTERNAL
+
 # Identifies the purpose for this identifier, if known .
 fhirvs:identifier-use ["usual" "official" "temp" "secondary" "old"]
+
+# The use of a human name.
+fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
+
+# The days of the week.
+fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
+
+# The status of a resource narrative.
+fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
 
 # The use of an address.
 fhirvs:address-use ["home" "work" "temp" "old" "billing"]
 
-# A unit of time (units from UCUM).
-fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
+# The possible sort directions, ascending or descending.
+fhirvs:sort-direction ["ascending" "descending"]
 
-# The type of relationship to the related artifact.
-fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
+# Whether an operation parameter is an input or an output parameter.
+fhirvs:operation-parameter-use ["in" "out"]
 
-# The use of a human name.
-fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
+# Telecommunications form for contact point.
+fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
+
+# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
+fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "BAM" "BBD" "BDT" "BGN" "BHD" "BIF" "BMD" "BND" "BOB" "BOV" "BRL" "BSD" "BTN" "BWP" "BYN" "BZD" "CAD" "CDF" "CHE" "CHF" "CHW" "CLF" "CLP" "CNY" "COP" "COU" "CRC" "CUC" "CUP" "CVE" "CZK" "DJF" "DKK" "DOP" "DZD" "EGP" "ERN" "ETB" "EUR" "FJD" "FKP" "GBP" "GEL" "GGP" "GHS" "GIP" "GMD" "GNF" "GTQ" "GYD" "HKD" "HNL" "HRK" "HTG" "HUF" "IDR" "ILS" "IMP" "INR" "IQD" "IRR" "ISK" "JEP" "JMD" "JOD" "JPY" "KES" "KGS" "KHR" "KMF" "KPW" "KRW" "KWD" "KYD" "KZT" "LAK" "LBP" "LKR" "LRD" "LSL" "LYD" "MAD" "MDL" "MGA" "MKD" "MMK" "MNT" "MOP" "MRU" "MUR" "MVR" "MWK" "MXN" "MXV" "MYR" "MZN" "NAD" "NGN" "NIO" "NOK" "NPR" "NZD" "OMR" "PAB" "PEN" "PGK" "PHP" "PKR" "PLN" "PYG" "QAR" "RON" "RSD" "RUB" "RWF" "SAR" "SBD" "SCR" "SDG" "SEK" "SGD" "SHP" "SLL" "SOS" "SRD" "SSP" "STN" "SVC" "SYP" "SZL" "THB" "TJS" "TMT" "TND" "TOP" "TRY" "TTD" "TVD" "TWD" "TZS" "UAH" "UGX" "USD" "USN" "UYI" "UYU" "UZS" "VEF" "VND" "VUV" "WST" "XAF" "XAG" "XAU" "XBA" "XBB" "XBC" "XBD" "XCD" "XDR" "XOF" "XPD" "XPF" "XPT" "XSU" "XTS" "XUA" "XXX" "YER" "ZAR" "ZMW" "ZWL"]
+
+# Use of contact point.
+fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
 
 # A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
 fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SubstanceSpecification" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
@@ -1340,41 +1358,23 @@ fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "C
 # The type of an address (physical / postal).
 fhirvs:address-type ["postal" "physical" "both"]
 
-# Whether an operation parameter is an input or an output parameter.
-fhirvs:operation-parameter-use ["in" "out"]
+# How the Quantity should be understood and represented.
+fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
 
-# Use of contact point.
-fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
-
-# The possible sort directions, ascending or descending.
-fhirvs:sort-direction ["ascending" "descending"]
-
-# The status of the clinical profile.
-fhirvs:clinical-profile-status ["complete" "draft" "error"]
-
-# Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
-fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "BAM" "BBD" "BDT" "BGN" "BHD" "BIF" "BMD" "BND" "BOB" "BOV" "BRL" "BSD" "BTN" "BWP" "BYN" "BZD" "CAD" "CDF" "CHE" "CHF" "CHW" "CLF" "CLP" "CNY" "COP" "COU" "CRC" "CUC" "CUP" "CVE" "CZK" "DJF" "DKK" "DOP" "DZD" "EGP" "ERN" "ETB" "EUR" "FJD" "FKP" "GBP" "GEL" "GGP" "GHS" "GIP" "GMD" "GNF" "GTQ" "GYD" "HKD" "HNL" "HRK" "HTG" "HUF" "IDR" "ILS" "IMP" "INR" "IQD" "IRR" "ISK" "JEP" "JMD" "JOD" "JPY" "KES" "KGS" "KHR" "KMF" "KPW" "KRW" "KWD" "KYD" "KZT" "LAK" "LBP" "LKR" "LRD" "LSL" "LYD" "MAD" "MDL" "MGA" "MKD" "MMK" "MNT" "MOP" "MRU" "MUR" "MVR" "MWK" "MXN" "MXV" "MYR" "MZN" "NAD" "NGN" "NIO" "NOK" "NPR" "NZD" "OMR" "PAB" "PEN" "PGK" "PHP" "PKR" "PLN" "PYG" "QAR" "RON" "RSD" "RUB" "RWF" "SAR" "SBD" "SCR" "SDG" "SEK" "SGD" "SHP" "SLL" "SOS" "SRD" "SSP" "STN" "SVC" "SYP" "SZL" "THB" "TJS" "TMT" "TND" "TOP" "TRY" "TTD" "TVD" "TWD" "TZS" "UAH" "UGX" "USD" "USN" "UYI" "UYU" "UZS" "VEF" "VND" "VUV" "WST" "XAF" "XAG" "XAU" "XBA" "XBB" "XBC" "XBD" "XCD" "XDR" "XOF" "XPD" "XPF" "XPT" "XSU" "XTS" "XUA" "XXX" "YER" "ZAR" "ZMW" "ZWL"]
-
-# The status of a resource narrative.
-fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
+# The type of relationship to the related artifact.
+fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
 
 # The type of contributor.
 fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
 
-# Telecommunications form for contact point.
-fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
-
-# Real world event relating to the schedule.
-fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
-
-# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
-fhirvs:mimetypes EXTERNAL
-
-# How the Quantity should be understood and represented.
-fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
+# The status of the clinical profile.
+fhirvs:clinical-profile-status ["complete" "draft" "error"]
 
 # The type of trigger.
 fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
 
-# The days of the week.
-fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
+# Real world event relating to the schedule.
+fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
+
+# A unit of time (units from UCUM).
+fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
