@@ -1,0 +1,590 @@
+# FHIR GraphQL Schema. Version 4.1.0
+
+type ClinicalProfile {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: [Identifier]
+  status: code  _status: ElementBase
+  population: Reference!
+  cohort: Reference!
+  date: dateTime  _date: ElementBase
+  source: [Identifier]
+  reporter: Reference!
+  lab: [ClinicalProfileLab]
+  medication: [ClinicalProfileMedication]
+  diagnosis: [ClinicalProfileDiagnosis]
+  procedure: [ClinicalProfileProcedure]
+  hpo: [ClinicalProfileHpo]
+}
+
+type ClinicalProfileLab {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: [CodeableConcept]!
+  count: Int  _count: ElementBase
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  scalarDistribution: ClinicalProfileLabScalarDistribution
+}
+
+type ClinicalProfileLabScalarDistribution {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  units: Quantity!
+  min: decimal  _min: ElementBase
+  max: decimal  _max: ElementBase
+  mean: decimal  _mean: ElementBase
+  median: decimal  _median: ElementBase
+  stdDev: decimal  _stdDev: ElementBase
+  decile: [ClinicalProfileLabScalarDistributionDecile]
+  normalizedHigh: decimal  _normalizedHigh: ElementBase
+  normalizedLow: decimal  _normalizedLow: ElementBase
+  fractionAboveNormal: decimal  _fractionAboveNormal: ElementBase
+  fractionBelowNormal: decimal  _fractionBelowNormal: ElementBase
+  correlatedLabs: ClinicalProfileLabScalarDistributionCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileLabScalarDistributionCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileLabScalarDistributionCorrelatedMedications
+  correlatedProcedures: ClinicalProfileLabScalarDistributionCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileLabScalarDistributionCorrelatedPhenotypes
+}
+
+type ClinicalProfileLabScalarDistributionDecile {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  nth: Int  _nth: ElementBase
+  value: decimal  _value: ElementBase
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedLabs {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: [ClinicalProfileLabScalarDistributionCorrelatedLabsEntry]
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedLabsEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  labcode: [CodeableConcept]!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedDiagnoses {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: ClinicalProfileLabScalarDistributionCorrelatedDiagnosesEntry
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedDiagnosesEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedMedications {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  deviation: decimal  _deviation: ElementBase
+  entry: [ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntry]
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  category: CodeableConcept
+  labCodeableConcept: CodeableConcept
+  labReference: Reference
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedProcedures {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: [ClinicalProfileLabScalarDistributionCorrelatedProceduresEntry]
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedProceduresEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: [CodeableConcept]!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedPhenotypes {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: [ClinicalProfileLabScalarDistributionCorrelatedPhenotypesEntry]
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedPhenotypesEntry {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+type ClinicalProfileMedication {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  category: CodeableConcept
+  medicationCodeableConcept: CodeableConcept
+  medicationReference: Reference
+  dosage: ClinicalProfileMedicationDosage
+  treatementDuration: decimal  _treatementDuration: ElementBase
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedLabs: ClinicalProfileLabScalarDistributionCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileLabScalarDistributionCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileLabScalarDistributionCorrelatedMedications
+  correlatedProcedures: ClinicalProfileLabScalarDistributionCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileLabScalarDistributionCorrelatedPhenotypes
+}
+
+type ClinicalProfileMedicationDosage {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  text: String  _text: ElementBase
+  site: [CodeableConcept]
+  route: [CodeableConcept]
+  method: [CodeableConcept]
+  dose: [Quantity]
+  rateRatio: Ratio
+  rateQuantity: Quantity
+}
+
+type ClinicalProfileDiagnosis {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: [CodeableConcept]!
+  count: Int  _count: ElementBase
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedLabs: ClinicalProfileLabScalarDistributionCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileLabScalarDistributionCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileLabScalarDistributionCorrelatedMedications
+  correlatedProcedures: ClinicalProfileLabScalarDistributionCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileLabScalarDistributionCorrelatedPhenotypes
+}
+
+type ClinicalProfileProcedure {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: [CodeableConcept]!
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedLabs: ClinicalProfileLabScalarDistributionCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileLabScalarDistributionCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileLabScalarDistributionCorrelatedMedications
+  correlatedProcedures: ClinicalProfileLabScalarDistributionCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileLabScalarDistributionCorrelatedPhenotypes
+}
+
+type ClinicalProfileHpo {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: [CodeableConcept]!
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedLabs: ClinicalProfileLabScalarDistributionCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileLabScalarDistributionCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileLabScalarDistributionCorrelatedMedications
+  correlatedProcedures: ClinicalProfileLabScalarDistributionCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileLabScalarDistributionCorrelatedPhenotypes
+}
+
+input ClinicalProfileInput {
+  id: ID
+  meta: MetaInput
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: NarrativeInput
+  contained: [ResourceInput]
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  identifier: [IdentifierInput]
+  status: code  _status: ElementBase
+  population: ReferenceInput!
+  cohort: ReferenceInput!
+  date: dateTime  _date: ElementBase
+  source: [IdentifierInput]
+  reporter: ReferenceInput!
+  lab: [ClinicalProfileLabInput]
+  medication: [ClinicalProfileMedicationInput]
+  diagnosis: [ClinicalProfileDiagnosisInput]
+  procedure: [ClinicalProfileProcedureInput]
+  hpo: [ClinicalProfileHpoInput]
+}
+
+input ClinicalProfileLabInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: [CodeableConceptInput]!
+  count: Int  _count: ElementBase
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  scalarDistribution: ClinicalProfileLabScalarDistributionInput
+}
+
+input ClinicalProfileLabScalarDistributionInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  units: QuantityInput!
+  min: decimal  _min: ElementBase
+  max: decimal  _max: ElementBase
+  mean: decimal  _mean: ElementBase
+  median: decimal  _median: ElementBase
+  stdDev: decimal  _stdDev: ElementBase
+  decile: [ClinicalProfileLabScalarDistributionDecileInput]
+  normalizedHigh: decimal  _normalizedHigh: ElementBase
+  normalizedLow: decimal  _normalizedLow: ElementBase
+  fractionAboveNormal: decimal  _fractionAboveNormal: ElementBase
+  fractionBelowNormal: decimal  _fractionBelowNormal: ElementBase
+  correlatedLabs: ClinicalProfileLabScalarDistributionCorrelatedLabsInput
+  correlatedDiagnoses: ClinicalProfileLabScalarDistributionCorrelatedDiagnosesInput
+  correlatedMedications: ClinicalProfileLabScalarDistributionCorrelatedMedicationsInput
+  correlatedProcedures: ClinicalProfileLabScalarDistributionCorrelatedProceduresInput
+  correlatedPhenotypes: ClinicalProfileLabScalarDistributionCorrelatedPhenotypesInput
+}
+
+input ClinicalProfileLabScalarDistributionDecileInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  nth: Int  _nth: ElementBase
+  value: decimal  _value: ElementBase
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedLabsInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: [ClinicalProfileLabScalarDistributionCorrelatedLabsEntryInput]
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedLabsEntryInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  labcode: [CodeableConceptInput]!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedDiagnosesInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: ClinicalProfileLabScalarDistributionCorrelatedDiagnosesEntryInput
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedDiagnosesEntryInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: CodeableConceptInput!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedMedicationsInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  topn: Int  _topn: ElementBase
+  deviation: decimal  _deviation: ElementBase
+  entry: [ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntryInput]
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntryInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  category: CodeableConceptInput
+  labCodeableConcept: CodeableConceptInput
+  labReference: ReferenceInput
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedProceduresInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: [ClinicalProfileLabScalarDistributionCorrelatedProceduresEntryInput]
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedProceduresEntryInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: [CodeableConceptInput]!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedPhenotypesInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  topn: Int  _topn: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
+  entry: [ClinicalProfileLabScalarDistributionCorrelatedPhenotypesEntryInput]
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedPhenotypesEntryInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: CodeableConceptInput!
+  coefficient: decimal  _coefficient: ElementBase
+}
+
+input ClinicalProfileMedicationInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  category: CodeableConceptInput
+  medicationCodeableConcept: CodeableConceptInput
+  medicationReference: ReferenceInput
+  dosage: ClinicalProfileMedicationDosageInput
+  treatementDuration: decimal  _treatementDuration: ElementBase
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedLabs: ClinicalProfileLabScalarDistributionCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileLabScalarDistributionCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileLabScalarDistributionCorrelatedMedications
+  correlatedProcedures: ClinicalProfileLabScalarDistributionCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileLabScalarDistributionCorrelatedPhenotypes
+}
+
+input ClinicalProfileMedicationDosageInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  text: String  _text: ElementBase
+  site: [CodeableConceptInput]
+  route: [CodeableConceptInput]
+  method: [CodeableConceptInput]
+  dose: [QuantityInput]
+  rateRatio: RatioInput
+  rateQuantity: QuantityInput
+}
+
+input ClinicalProfileDiagnosisInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: [CodeableConceptInput]!
+  count: Int  _count: ElementBase
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedLabs: ClinicalProfileLabScalarDistributionCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileLabScalarDistributionCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileLabScalarDistributionCorrelatedMedications
+  correlatedProcedures: ClinicalProfileLabScalarDistributionCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileLabScalarDistributionCorrelatedPhenotypes
+}
+
+input ClinicalProfileProcedureInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: [CodeableConceptInput]!
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedLabs: ClinicalProfileLabScalarDistributionCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileLabScalarDistributionCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileLabScalarDistributionCorrelatedMedications
+  correlatedProcedures: ClinicalProfileLabScalarDistributionCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileLabScalarDistributionCorrelatedPhenotypes
+}
+
+input ClinicalProfileHpoInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: [CodeableConceptInput]!
+  frequencyPerYear: decimal  _frequencyPerYear: ElementBase
+  fractionOfSubjects: decimal  _fractionOfSubjects: ElementBase
+  correlatedLabs: ClinicalProfileLabScalarDistributionCorrelatedLabs
+  correlatedDiagnoses: ClinicalProfileLabScalarDistributionCorrelatedDiagnoses
+  correlatedMedications: ClinicalProfileLabScalarDistributionCorrelatedMedications
+  correlatedProcedures: ClinicalProfileLabScalarDistributionCorrelatedProcedures
+  correlatedPhenotypes: ClinicalProfileLabScalarDistributionCorrelatedPhenotypes
+}
+
+type ClinicalProfileReadType {
+  ClinicalProfile(id: ID!): ClinicalProfile
+}
+
+type ClinicalProfileListType {
+  ClinicalProfileList(_filter: String
+    cohort: [reference]
+    correlatedlabcode: [token]
+    date: [date]
+    diagnosiscode: [token]
+    diagnosiscorrelatedmedcategory: [token]
+    diagnosiscorrelatedphenotype: [token]
+    diagnosiscorrelatedprocedure: [token]
+    identifier: [token]
+    labcode: [token]
+    medicationcategory: [token]
+    medicationcode: [token]
+    medicationcorrelateddiagnosis: [token]
+    medicationcorrelatedmedcategory: [token]
+    medicationcorrelatedmedcode: [token]
+    medicationcorrelatedmedref: [reference]
+    medicationcorrelatedphenotype: [token]
+    medicationcorrelatedprocedure: [token]
+    medicationreference: [reference]
+    phenotypecode: [token]
+    phenotypecorrelatedmedcategory: [token]
+    phenotypecorrelatedphenotype: [token]
+    phenotypecorrelatedprocedure: [token]
+    population: [reference]
+    procedurecode: [token]
+    procedurecorrelatedmedcategory: [token]
+    procedurecorrelatedphenotype: [token]
+    procedurecorrelatedprocedure: [token]
+    reporter: [reference]
+    status: [token]
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): [ClinicalProfile]
+}
+
+type ClinicalProfileConnectionType {
+  ClinicalProfileConection(_filter: String
+    cohort: [reference]
+    correlatedlabcode: [token]
+    date: [date]
+    diagnosiscode: [token]
+    diagnosiscorrelatedmedcategory: [token]
+    diagnosiscorrelatedphenotype: [token]
+    diagnosiscorrelatedprocedure: [token]
+    identifier: [token]
+    labcode: [token]
+    medicationcategory: [token]
+    medicationcode: [token]
+    medicationcorrelateddiagnosis: [token]
+    medicationcorrelatedmedcategory: [token]
+    medicationcorrelatedmedcode: [token]
+    medicationcorrelatedmedref: [reference]
+    medicationcorrelatedphenotype: [token]
+    medicationcorrelatedprocedure: [token]
+    medicationreference: [reference]
+    phenotypecode: [token]
+    phenotypecorrelatedmedcategory: [token]
+    phenotypecorrelatedphenotype: [token]
+    phenotypecorrelatedprocedure: [token]
+    population: [reference]
+    procedurecode: [token]
+    procedurecorrelatedmedcategory: [token]
+    procedurecorrelatedphenotype: [token]
+    procedurecorrelatedprocedure: [token]
+    reporter: [reference]
+    status: [token]
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): ClinicalProfileConnection
+}
+
+type ClinicalProfileConnection {
+  count: Int
+  offset: Int
+  pagesize: Int
+  first: ID
+  previous: ID
+  next: ID
+  last: ID
+  edges: [ClinicalProfileEdge]
+}
+
+type ClinicalProfileEdge {
+  mode: String
+  score: Float
+  resource: ClinicalProfile
+}
+
+type ClinicalProfileCreateType {
+  ClinicalProfileCreate(resource: ClinicalProfileInput): ClinicalProfileCreation
+}
+
+type ClinicalProfileCreation {
+  location: String
+  resource: ClinicalProfile
+  information: OperationOutcome
+}
+
+type ClinicalProfileUpdateType {
+  ClinicalProfileUpdate(id: ID, resource: ClinicalProfileInput): ClinicalProfileUpdate
+}
+
+type ClinicalProfileUpdate {
+  resource: ClinicalProfile
+  information: OperationOutcome
+}
+
+type ClinicalProfileDeleteType {
+  ClinicalProfileDelete(id: ID): ClinicalProfileDelete
+}
+
+type ClinicalProfileDelete {
+  information: OperationOutcome
+}
+

@@ -5,12 +5,12 @@
   <contained>
     <ValueSet>
       <id value="vs2"/>
-      <name value="Type options for Procedure.performed[x]"/>
+      <name value="Type options for Procedure.occurrence[x]"/>
       <status value="active"/>
-      <description value="Type options for Procedure.performed[x]"/>
+      <description value="Type options for Procedure.occurrence[x]"/>
       <expansion>
-        <identifier value="urn:uuid:db6cef75-ac7c-4549-8319-5ffe2c8ad337"/>
-        <timestamp value="2019-04-16T10:10:46-05:00"/>
+        <identifier value="urn:uuid:5428b699-535e-4484-b596-0947e1963742"/>
+        <timestamp value="2019-04-16T08:58:03-05:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="dateTime"/>
@@ -36,6 +36,11 @@
           <code value="Range"/>
           <display value="Range"/>
         </contains>
+        <contains>
+          <system value="http://hl7.org/fhir/data-types"/>
+          <code value="Timing"/>
+          <display value="Timing"/>
+        </contains>
       </expansion>
     </ValueSet>
   </contained>
@@ -46,8 +51,8 @@
       <status value="active"/>
       <description value="Type options for Procedure.reported[x]"/>
       <expansion>
-        <identifier value="urn:uuid:0d271e39-0dff-41b8-9edf-f958f5a3aad9"/>
-        <timestamp value="2019-04-16T10:10:46-05:00"/>
+        <identifier value="urn:uuid:f244abe3-b9d0-49dd-986d-8395dca5016d"/>
+        <timestamp value="2019-04-16T08:58:03-05:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="boolean"/>
@@ -86,7 +91,7 @@
   </identifier>
   <version value="4.1.0"/>
   <status value="draft"/>
-  <date value="2019-04-16T10:07:03-05:00"/>
+  <date value="2019-04-16T08:42:31-05:00"/>
   <publisher value="Health Level Seven International (Patient Care)"/>
   <item>
     <linkId value="Procedure"/>
@@ -557,9 +562,6 @@
       </item>
     </item>
     <item>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-        <valueInteger value="1"/>
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
         <valueString value="CodeableConcept"/>
       </extension>
@@ -719,8 +721,8 @@
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
         <valueInteger value="1"/>
       </extension>
-      <linkId value="Procedure.performed[x]"/>
-      <text value="When the procedure was performed"/>
+      <linkId value="Procedure.occurrence[x]"/>
+      <text value="When the procedure occurred or is occurring"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -734,11 +736,11 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured. Age is generally used when the patient reports an age at which the procedure was performed. Range is generally used when the patient reports an age range when the procedure was performed, such as sometime between 20-25 years old.  dateTime supports a range of precision due to some procedures being reported as past procedures that might not have millisecond precision while other procedures performed and documented during the encounter might have more precise UTC timestamps with timezone."/>
+        <text value="Estimated or actual date, date-time, period, or age when the procedure did occur or is occurring.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured. This indicates when the procedure actually occurred or is occurring, not when it was asked/requested/ordered to occur. For the latter, look at the occurence element of the Request this Procedure is &quot;basedOn&quot;. The status code allows differentiation of whether the timing reflects a historic event or an ongoing event. Ongoing events should not include an upper bound in the Period or Timing.bounds.&#xA;&#xA;Age is generally used when the patient reports an age at which the procedure was performed. Range is generally used when the patient reports an age range when the procedure was performed, such as sometime between 20-25 years old.  dateTime supports a range of precision due to some procedures being reported as past procedures that might not have millisecond precision while other procedures performed and documented during the encounter might have more precise UTC timestamps with timezone."/>
         <type value="display"/>
       </item>
       <item>
-        <linkId value="Procedure.performed[x]._type"/>
+        <linkId value="Procedure.occurrence[x]._type"/>
         <text value="type"/>
         <type value="choice"/>
         <required value="false"/>
@@ -748,10 +750,10 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
             <valueString value="datetime"/>
           </extension>
-          <linkId value="Procedure.performed[x]._null"/>
+          <linkId value="Procedure.occurrence[x]._null"/>
           <type value="group"/>
           <item>
-            <linkId value="Procedure.performed[x]._null.value"/>
+            <linkId value="Procedure.occurrence[x]._null.value"/>
             <type value="dateTime"/>
             <required value="false"/>
             <repeats value="false"/>
@@ -761,17 +763,17 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
             <valueString value="Period"/>
           </extension>
-          <linkId value="Procedure.performed[x]._null"/>
+          <linkId value="Procedure.occurrence[x]._null"/>
           <type value="group"/>
           <item>
-            <linkId value="Procedure.performed[x]._null.low"/>
+            <linkId value="Procedure.occurrence[x]._null.low"/>
             <text value="start:"/>
             <type value="dateTime"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
           <item>
-            <linkId value="Procedure.performed[x]._null.end"/>
+            <linkId value="Procedure.occurrence[x]._null.end"/>
             <text value="end:"/>
             <type value="dateTime"/>
             <required value="false"/>
@@ -782,10 +784,10 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
             <valueString value="string"/>
           </extension>
-          <linkId value="Procedure.performed[x]._null"/>
+          <linkId value="Procedure.occurrence[x]._null"/>
           <type value="group"/>
           <item>
-            <linkId value="Procedure.performed[x]._null.value"/>
+            <linkId value="Procedure.occurrence[x]._null.value"/>
             <type value="string"/>
             <required value="false"/>
             <repeats value="false"/>
@@ -795,38 +797,38 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
             <valueString value="Quantity"/>
           </extension>
-          <linkId value="Procedure.performed[x]._null"/>
+          <linkId value="Procedure.occurrence[x]._null"/>
           <type value="group"/>
           <item>
-            <linkId value="Procedure.performed[x]._null.comparator"/>
+            <linkId value="Procedure.occurrence[x]._null.comparator"/>
             <text value="comp:"/>
             <type value="choice"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
           <item>
-            <linkId value="Procedure.performed[x]._null.value"/>
+            <linkId value="Procedure.occurrence[x]._null.value"/>
             <text value="value:"/>
             <type value="decimal"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
           <item>
-            <linkId value="Procedure.performed[x]._null.units"/>
+            <linkId value="Procedure.occurrence[x]._null.units"/>
             <text value="units:"/>
             <type value="string"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
           <item>
-            <linkId value="Procedure.performed[x]._null.code"/>
+            <linkId value="Procedure.occurrence[x]._null.code"/>
             <text value="coded units:"/>
             <type value="string"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
           <item>
-            <linkId value="Procedure.performed[x]._null.system"/>
+            <linkId value="Procedure.occurrence[x]._null.system"/>
             <text value="units system:"/>
             <type value="string"/>
             <required value="false"/>
@@ -837,30 +839,99 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
             <valueString value="Range"/>
           </extension>
-          <linkId value="Procedure.performed[x]._null"/>
+          <linkId value="Procedure.occurrence[x]._null"/>
           <type value="group"/>
           <item>
-            <linkId value="Procedure.performed[x]._null.low"/>
+            <linkId value="Procedure.occurrence[x]._null.low"/>
             <text value="low:"/>
             <type value="decimal"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
           <item>
-            <linkId value="Procedure.performed[x]._null.high"/>
+            <linkId value="Procedure.occurrence[x]._null.high"/>
             <text value="high:"/>
             <type value="decimal"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
           <item>
-            <linkId value="Procedure.performed[x]._null.units"/>
+            <linkId value="Procedure.occurrence[x]._null.units"/>
             <text value="units:"/>
             <type value="string"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
         </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+            <valueString value="Schedule"/>
+          </extension>
+          <linkId value="Procedure.occurrence[x]._null"/>
+          <type value="group"/>
+          <item>
+            <linkId value="Procedure.occurrence[x]._null.text"/>
+            <text value="text:"/>
+            <type value="string"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+          <item>
+            <linkId value="Procedure.occurrence[x]._null.date"/>
+            <text value="date:"/>
+            <type value="dateTime"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+          <item>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+              <valueCode value="Patient"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+              <valueCode value="Practitioner"/>
+            </extension>
+            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+              <valueCode value="RelatedPerson"/>
+            </extension>
+            <linkId value="Procedure.occurrence[x]._null.author"/>
+            <text value="author:"/>
+            <type value="reference"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+        </item>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="datetime"/>
+      </extension>
+      <linkId value="Procedure.recorded"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="The date the occurrence of the procedure was first captured in the record - potentially significantly after the occurrence of the event."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <linkId value="Procedure.recorded.value"/>
+        <text value="When the procedure was first captured in the subject&#39;s record"/>
+        <type value="dateTime"/>
+        <required value="false"/>
+        <repeats value="false"/>
       </item>
     </item>
     <item>

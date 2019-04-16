@@ -38,7 +38,8 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src=".././assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" style="align:top" height="30"/></a>
-			<b><font size="+2">EBMOnFHIR Statistics Model</font></b>
+			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
 			<div id="hl7-nav">
 				 <a no-external="true" id="hl7-logo" href="http://www.hl7.org">
 					<img src=".././assets/images/hl7-logo.png" width="42" alt="visit the hl7 website" height="50"/>
@@ -116,7 +117,7 @@
 <table class="dict">
   <tr><td colspan="2" class="structure"><a name="ehrsrle-auditevent.AuditEvent"> </a><b>AuditEvent</b></td></tr>
   <tr><td>Element Id</td><td>AuditEvent</td></tr>
-  <tr><td>Definition</td><td><p>A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage.</p>
+  <tr><td>Definition</td><td><p>A record of an event relevant for purposes such as operations, privacy, security, maintenance, and performance analysis.</p>
 </td></tr>
   <tr><td><a href="../conformance-rules.html#cardinality">Cardinality</a></td><td>0..*</td></tr>
   <tr><td>Comments</td><td><p>Based on IHE-ATNA.</p>
@@ -270,6 +271,8 @@
   <tr><td><a href="../terminologies.html">Terminology Binding</a></td><td>The reason the activity took place.<br/>The codes SHALL be taken from <a href="../v3/PurposeOfUse/vs.html">V3 Value SetPurposeOfUse</a>; other codes may be used where these codes are not suitable</td></tr>
   <tr><td><a href="../datatypes.html">Type</a></td><td><a href="../datatypes.html#CodeableConcept">CodeableConcept</a></td></tr>
   <tr><td><a href="../conformance-rules.html#mustSupport">Must Support</a></td><td>true</td></tr>
+  <tr><td>Requirements</td><td><p>record of any relevant security context not restricted to purposeOfUse valueSet, may include security compartments or other security tags.</p>
+</td></tr>
   <tr><td>Comments</td><td><p>Use AuditEvent.agent.purposeOfUse when you know that it is specific to the agent, otherwise use AuditEvent.purposeOfEvent. For example, during a machine-to-machine transfer it might not be obvious to the audit system who caused the event, but it does know why.</p>
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="ehrsrle-auditevent.AuditEvent.agent"> </a><b>AuditEvent.agent</b></td></tr>
@@ -324,6 +327,8 @@
   <tr><td><a href="../conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
   <tr><td><a href="../terminologies.html">Terminology Binding</a></td><td>The Participation type of the agent to the event.<br/>The codes SHALL be taken from <a href="../valueset-participation-role-type.html">ParticipationRoleType</a>; other codes may be used where these codes are not suitable</td></tr>
   <tr><td><a href="../datatypes.html">Type</a></td><td><a href="../datatypes.html#CodeableConcept">CodeableConcept</a></td></tr>
+  <tr><td>Comments</td><td><p>The most relevant role code for how the agent participated in the activity.</p>
+</td></tr>
   <tr><td colspan="2" class="structure"><a name="ehrsrle-auditevent.AuditEvent.agent.role"> </a><b>AuditEvent.agent.role</b></td></tr>
   <tr><td>Element Id</td><td>AuditEvent.agent.role</td></tr>
   <tr><td>Definition</td><td><p>The security role that the user was acting under, that come from local codes defined by the access control security system (e.g. RBAC, ABAC) used in the local context.</p>
@@ -334,7 +339,7 @@
   <tr><td><a href="../conformance-rules.html#mustSupport">Must Support</a></td><td>true</td></tr>
   <tr><td>Requirements</td><td><p>This value ties an audited event to a user's role(s). It is an optional value that might be used to group events for analysis by user functional role categories.</p>
 </td></tr>
-  <tr><td>Comments</td><td><p>Should be roles relevant to the event. Should  not be an exhaustive list of roles.</p>
+  <tr><td>Comments</td><td><p>Should be all the relevant roles (Functional and Structural) inclusive of the value in .agent.type.</p>
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="ehrsrle-auditevent.AuditEvent.agent.who"> </a><b>AuditEvent.agent.who</b></td></tr>
   <tr><td>Element Id</td><td>AuditEvent.agent.who</td></tr>
@@ -470,6 +475,8 @@
   <tr><td><a href="../terminologies.html">Terminology Binding</a></td><td>The reason the activity took place.<br/>The codes SHALL be taken from <a href="../v3/PurposeOfUse/vs.html">V3 Value SetPurposeOfUse</a>; other codes may be used where these codes are not suitable</td></tr>
   <tr><td><a href="../datatypes.html">Type</a></td><td><a href="../datatypes.html#CodeableConcept">CodeableConcept</a></td></tr>
   <tr><td><a href="../conformance-rules.html#mustSupport">Must Support</a></td><td>true</td></tr>
+  <tr><td>Requirements</td><td><p>record of any relevant security context not restricted to purposeOfUse valueSet, may include security compartments or other security tags.</p>
+</td></tr>
   <tr><td>Comments</td><td><p>Use AuditEvent.agent.purposeOfUse when you know that is specific to the agent, otherwise use AuditEvent.purposeOfEvent. For example, during a machine-to-machine transfer it might not be obvious to the audit system who caused the event, but it does know why.</p>
 </td></tr>
   <tr><td colspan="2" class="structure"><a name="ehrsrle-auditevent.AuditEvent.source"> </a><b>AuditEvent.source</b></td></tr>
@@ -743,7 +750,7 @@
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-0a3a4eda5b) generated on Tue, Apr 16, 2019 10:11-0500. <a style="color: #ffffff" href="../qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-baa72e6471) generated on Tue, Apr 16, 2019 08:58-0500. <a style="color: #ffffff" href="../qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="../external.png" style="text-align: baseline"/></a> | 

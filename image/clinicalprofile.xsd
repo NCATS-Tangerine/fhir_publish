@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  Copyright (c) 2011+, HL7, Inc.
+  All rights reserved.
+  
+  Redistribution and use in source and binary forms, with or without modification, 
+  are permitted provided that the following conditions are met:
+  
+   * Redistributions of source code must retain the above copyright notice, this 
+     list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright notice, 
+     this list of conditions and the following disclaimer in the documentation 
+     and/or other materials provided with the distribution.
+   * Neither the name of HL7 nor the names of its contributors may be used to 
+     endorse or promote products derived from this software without specific 
+     prior written permission.
+  
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
+  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+  POSSIBILITY OF SUCH DAMAGE.
+  
+
+  Generated on Tue, Apr 16, 2019 08:42-0500 for FHIR v4.1.0 
+
+  Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
+  valid. Implementers will still need to be familiar with the content of the specification and with
+  any profiles that apply to the resources in order to make a conformant implementation.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://hl7.org/fhir" xmlns:xhtml="http://www.w3.org/1999/xhtml" targetNamespace="http://hl7.org/fhir" elementFormDefault="qualified" version="1.0">
+  <xs:include schemaLocation="fhir-base.xsd"/>
+  <xs:element name="ClinicalProfile" type="ClinicalProfile">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="ClinicalProfile">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="DomainResource">
+        <xs:sequence>
+          <xs:element name="identifier" minOccurs="0" maxOccurs="unbounded" type="Identifier">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">A formal identifier that is used to identify this ClinicalProfile when it is represented in other formats or referenced in a specification, model, design or an instance.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="ClinicalProfileStatus">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The ClinicalProfile status.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="population" minOccurs="1" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The base population against which this profile was generated.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="cohort" minOccurs="1" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The cohort within the population that this profile represents.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="date" minOccurs="0" maxOccurs="1" type="dateTime">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">When the profile was generated.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="source" minOccurs="0" maxOccurs="unbounded" type="Identifier">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Identifier(s) from where the profile was acquired.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="reporter" minOccurs="1" maxOccurs="1" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Who is reporting the data.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="lab" type="ClinicalProfile.Lab" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Laboratory profile entry.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="medication" type="ClinicalProfile.Medication" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Medication profile entry.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="diagnosis" type="ClinicalProfile.Diagnosis" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Diagnosis profile entry.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="procedure" type="ClinicalProfile.Procedure" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Procedure profile entry.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="hpo" type="ClinicalProfile.Hpo" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Phenotypic description.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Lab">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="code" minOccurs="1" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Code(s) for the tests that compose this specific sample.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="count" minOccurs="1" maxOccurs="1" type="integer">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Total number of lab tests.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="frequencyPerYear" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The average number of times this test was ordered and reported per patient in the particular cohort per year.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="fractionOfSubjects" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The fraction of the patients in this cohort that have one or more orders for this lab.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="scalarDistribution" type="ClinicalProfile.ScalarDistribution" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Scalar sample summary.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.ScalarDistribution">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="units" minOccurs="1" maxOccurs="1" type="Quantity">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Units of numeric result -- this is not actually a quantity… value is not allowed.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="min" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The minimum value of this lab for all of the patients in this cohort.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="max" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The maximum value of this lab for all of the patients in this cohort.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="mean" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The mean or average value for all of the patients in this cohort.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="median" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The median value for all of the patients in this cohort.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="stdDev" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The standard deviation for all of the patients in this cohort.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="decile" type="ClinicalProfile.Decile" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Decile partitions.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="normalizedHigh" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The normalized high normal range -- for laboratory tests with multiple possible ranges, the normalized normal range is the result of a yet to be specified calculation over this range.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="normalizedLow" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The normalized low normal range -- for laboratory tests with multiple possible ranges, the normalized normal range is the result of a yet to be specified calculation over this range.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="fractionAboveNormal" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Fraction of samples above normalized normal range.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="fractionBelowNormal" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Fraction of samples below normalized normal range.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedLabs" type="ClinicalProfile.CorrelatedLabs" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of the laboratory tests  that are most closely correlated.  This list can be limited by the top &quot;n&quot; labs and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedDiagnoses" type="ClinicalProfile.CorrelatedDiagnoses" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top &quot;n&quot; diagnoses and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedMedications" type="ClinicalProfile.CorrelatedMedications" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top &quot;n&quot; medications and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedProcedures" type="ClinicalProfile.CorrelatedProcedures" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top &quot;n&quot; procedures and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedPhenotypes" type="ClinicalProfile.CorrelatedPhenotypes" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top &quot;n&quot; phenotypes and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Decile">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="nth" minOccurs="1" maxOccurs="1" type="integer">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Particular decile (10, 20, …).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="value" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Cutoff value for this decile.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.CorrelatedLabs">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="topn" minOccurs="0" maxOccurs="1" type="integer">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Number of correlations cutoff (e.g. top 10).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="abscorrelation" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Minimum absolute value of correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="entry" type="ClinicalProfile.Entry" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlated lab.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Entry">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="labcode" minOccurs="1" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Lab code (LOINC) or Lab Group Code.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="coefficient" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.CorrelatedDiagnoses">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="topn" minOccurs="0" maxOccurs="1" type="integer">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Number of diagnoses cutoff (e.g. top 10).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="abscorrelation" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Minimum absolute value of correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="entry" type="ClinicalProfile.Entry1" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlation entry.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Entry1">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="code" minOccurs="1" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Diagnosis code(s).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="coefficient" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.CorrelatedMedications">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="topn" minOccurs="0" maxOccurs="1" type="integer">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Number of medications cutoff (e.g. top 10).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="deviation" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Deviation cutoff.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="entry" type="ClinicalProfile.Entry2" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlation entry.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Entry2">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="category" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:choice minOccurs="1" maxOccurs="1" >
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Medication code(s).</xs:documentation>
+            </xs:annotation>
+            <xs:element name="labCodeableConcept" type="CodeableConcept"/>
+            <xs:element name="labReference" type="Reference"/>
+          </xs:choice>
+          <xs:element name="coefficient" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.CorrelatedProcedures">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="topn" minOccurs="0" maxOccurs="1" type="integer">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Number of rocedures cutoff (e.g. top 10).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="abscorrelation" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Minimum absolute value of correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="entry" type="ClinicalProfile.Entry3" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlation entry.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Entry3">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="code" minOccurs="1" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Procedure code(s).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="coefficient" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.CorrelatedPhenotypes">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="topn" minOccurs="0" maxOccurs="1" type="integer">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The maximum number of significant correlated entries that are in this entry.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="abscorrelation" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The cutoff value for correlation coefficients.  Entries with an absolute value less than this are not included in the list.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="entry" type="ClinicalProfile.Entry4" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">List of correlated phenotypes in descending order of the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Entry4">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="code" minOccurs="1" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Phenotype(s).  More than one code is considered a group or aggregation.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="coefficient" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Medication">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="category" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:choice minOccurs="1" maxOccurs="1" >
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Medication(s) being profiled.</xs:documentation>
+            </xs:annotation>
+            <xs:element name="medicationCodeableConcept" type="CodeableConcept"/>
+            <xs:element name="medicationReference" type="Reference"/>
+          </xs:choice>
+          <xs:element name="dosage" type="ClinicalProfile.Dosage" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Details of how medication was taken.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="treatementDuration" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Needs clarification.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="frequencyPerYear" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Frequency of treatments per patient per year.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="fractionOfSubjects" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Fraction of patients in cohort treated with this drug.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedLabs" type="ClinicalProfile.CorrelatedLabs" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlated labs.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedDiagnoses" type="ClinicalProfile.CorrelatedDiagnoses" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top &quot;n&quot; diagnoses and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedMedications" type="ClinicalProfile.CorrelatedMedications" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top &quot;n&quot; medications and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedProcedures" type="ClinicalProfile.CorrelatedProcedures" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top &quot;n&quot; procedures and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedPhenotypes" type="ClinicalProfile.CorrelatedPhenotypes" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top &quot;n&quot; phenotypes and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Dosage">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="text" minOccurs="0" maxOccurs="1" type="string">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Free text dosage instructions e.g. SIG.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="site" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Body site(s) administered to.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="route" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Path(s) of substance into body.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="method" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">How the drug was administered.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="dose" minOccurs="0" maxOccurs="unbounded" type="Quantity">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Average amount of medication per dose.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:choice minOccurs="0" maxOccurs="1" >
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Dose quantity per unit of time.</xs:documentation>
+            </xs:annotation>
+            <xs:element name="rateRatio" type="Ratio"/>
+            <xs:element name="rateQuantity" type="Quantity"/>
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Diagnosis">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="code" minOccurs="1" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Diagnosis code(s).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="count" minOccurs="1" maxOccurs="1" type="integer">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Number of times listed per patient per hear for each code.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="frequencyPerYear" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Frequency of this diagnosis per patient per year.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="fractionOfSubjects" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Fraction of patients in with this diagnosis.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedLabs" type="ClinicalProfile.CorrelatedLabs" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlated labs.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedDiagnoses" type="ClinicalProfile.CorrelatedDiagnoses" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top &quot;n&quot; diagnoses and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedMedications" type="ClinicalProfile.CorrelatedMedications" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top &quot;n&quot; medications and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedProcedures" type="ClinicalProfile.CorrelatedProcedures" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top &quot;n&quot; procedures and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedPhenotypes" type="ClinicalProfile.CorrelatedPhenotypes" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top &quot;n&quot; phenotypes and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Procedure">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="code" minOccurs="1" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">ICD-10-PCS or CPT procedure code.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="frequencyPerYear" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Frequency of procedure per patient per year.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="fractionOfSubjects" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Fraction of patients with this procedure per year.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedLabs" type="ClinicalProfile.CorrelatedLabs" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlated labs.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedDiagnoses" type="ClinicalProfile.CorrelatedDiagnoses" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top &quot;n&quot; diagnoses and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedMedications" type="ClinicalProfile.CorrelatedMedications" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top &quot;n&quot; medications and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedProcedures" type="ClinicalProfile.CorrelatedProcedures" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top &quot;n&quot; procedures and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedPhenotypes" type="ClinicalProfile.CorrelatedPhenotypes" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top &quot;n&quot; phenotypes and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Hpo">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="code" minOccurs="1" maxOccurs="unbounded" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">HPO code.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="frequencyPerYear" minOccurs="0" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Frequency of this code per patient per year.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="fractionOfSubjects" minOccurs="1" maxOccurs="1" type="decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Fraction of patients with this procedure per year.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedLabs" type="ClinicalProfile.CorrelatedLabs" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Correlated labs.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedDiagnoses" type="ClinicalProfile.CorrelatedDiagnoses" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the diagnoses  that are most closely correlated.  This list can be limited by the top &quot;n&quot; diagnoses and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedMedications" type="ClinicalProfile.CorrelatedMedications" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the medications  that are most closely correlated.  This list can be limited by the top &quot;n&quot; medications and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedProcedures" type="ClinicalProfile.CorrelatedProcedures" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the procedures  that are most closely correlated.  This list can be limited by the top &quot;n&quot; procedures and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="correlatedPhenotypes" type="ClinicalProfile.CorrelatedPhenotypes" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">An ordered list of  the phenotypes  that are most closely correlated.  This list can be limited by the top &quot;n&quot; phenotypes and/or a cutoff on the absolute value of the correlation coefficient.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ClinicalProfileStatus-list">
+    <xs:restriction base="code-primitive">
+      <xs:enumeration value="complete">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Complete</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="draft">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Draft</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="error">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Error</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ClinicalProfileStatus">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The status of the clinical profile.</xs:documentation>
+      <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Element">
+        <xs:attribute name="value" type="ClinicalProfileStatus-list" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

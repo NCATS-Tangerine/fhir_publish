@@ -38,7 +38,8 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" style="align:top" height="30"/></a>
-			<b><font size="+2">EBMOnFHIR Statistics Model</font></b>
+			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
 			<div id="hl7-nav">
 				 <a no-external="true" id="hl7-logo" href="http://www.hl7.org">
 					<img src="./assets/images/hl7-logo.png" width="42" alt="visit the hl7 website" height="50"/>
@@ -190,7 +191,7 @@
   <tr><td>Element Id</td><td>Procedure.category</td></tr>
   <tr><td>Definition</td><td><p>A code that classifies the procedure for searching, sorting and display purposes (e.g. "Surgical Procedure").</p>
 </td></tr>
-  <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
+  <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..*</td></tr>
   <tr><td><a href="terminologies.html">Terminology Binding</a></td><td><a href="valueset-procedure-category.html">Procedure Category Codes (SNOMED CT)</a> (<a href="terminologies.html#example">Example</a>)</td></tr>
   <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#CodeableConcept">CodeableConcept</a></td></tr>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
@@ -222,16 +223,24 @@
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
   <tr><td>Comments</td><td><p>This will typically be the encounter the event occurred within, but some activities may be initiated prior to or after the official completion of an encounter but still be tied to the context of the encounter.</p>
 </td></tr>
-  <tr><td colspan="2" class="structure"><a name="Procedure.performed_x_"> </a><b>Procedure.performed[x]</b></td></tr>
-  <tr><td>Element Id</td><td>Procedure.performed[x]</td></tr>
-  <tr><td>Definition</td><td><p>Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.</p>
+  <tr><td colspan="2" class="structure"><a name="Procedure.occurrence_x_"> </a><b>Procedure.occurrence[x]</b></td></tr>
+  <tr><td>Element Id</td><td>Procedure.occurrence[x]</td></tr>
+  <tr><td>Definition</td><td><p>Estimated or actual date, date-time, period, or age when the procedure did occur or is occurring.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.</p>
 </td></tr>
   <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
-  <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#dateTime">dateTime</a>|<a href="datatypes.html#Period">Period</a>|<a href="datatypes.html#string">string</a>|<a href="datatypes.html#Age">Age</a>|<a href="datatypes.html#Range">Range</a></td></tr>
+  <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#dateTime">dateTime</a>|<a href="datatypes.html#Period">Period</a>|<a href="datatypes.html#string">string</a>|<a href="datatypes.html#Age">Age</a>|<a href="datatypes.html#Range">Range</a>|<a href="datatypes.html#Timing">Timing</a></td></tr>
   <tr><td>[x] Note</td><td>See <a href="formats.html#choice">Choice of Data Types</a> for further information about how to use [x]</td></tr>
   <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
-  <tr><td>Comments</td><td><p>Age is generally used when the patient reports an age at which the procedure was performed. Range is generally used when the patient reports an age range when the procedure was performed, such as sometime between 20-25 years old.  dateTime supports a range of precision due to some procedures being reported as past procedures that might not have millisecond precision while other procedures performed and documented during the encounter might have more precise UTC timestamps with timezone.</p>
+  <tr><td>Comments</td><td><p>This indicates when the procedure actually occurred or is occurring, not when it was asked/requested/ordered to occur. For the latter, look at the occurence element of the Request this Procedure is "basedOn". The status code allows differentiation of whether the timing reflects a historic event or an ongoing event. Ongoing events should not include an upper bound in the Period or Timing.bounds.</p>
+<p>Age is generally used when the patient reports an age at which the procedure was performed. Range is generally used when the patient reports an age range when the procedure was performed, such as sometime between 20-25 years old.  dateTime supports a range of precision due to some procedures being reported as past procedures that might not have millisecond precision while other procedures performed and documented during the encounter might have more precise UTC timestamps with timezone.</p>
 </td></tr>
+  <tr><td colspan="2" class="structure"><a name="Procedure.recorded"> </a><b>Procedure.recorded</b></td></tr>
+  <tr><td>Element Id</td><td>Procedure.recorded</td></tr>
+  <tr><td>Definition</td><td><p>The date the occurrence of the procedure was first captured in the record - potentially significantly after the occurrence of the event.</p>
+</td></tr>
+  <tr><td><a href="conformance-rules.html#cardinality">Cardinality</a></td><td>0..1</td></tr>
+  <tr><td><a href="datatypes.html">Type</a></td><td><a href="datatypes.html#dateTime">dateTime</a></td></tr>
+  <tr><td><a href="search.html#summary">Summary</a></td><td>true</td></tr>
   <tr><td colspan="2" class="structure"><a name="Procedure.recorder"> </a><b>Procedure.recorder</b></td></tr>
   <tr><td>Element Id</td><td>Procedure.recorder</td></tr>
   <tr><td>Definition</td><td><p>Individual who recorded the record and takes responsibility for its content.</p>
@@ -425,7 +434,7 @@ Use Procedure.reasonCode when a code sufficiently describes the reason.  Use Pro
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-0a3a4eda5b) generated on Tue, Apr 16, 2019 10:10-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-baa72e6471) generated on Tue, Apr 16, 2019 08:58-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 

@@ -7,11 +7,11 @@
   </identifier>
   <version value="4.1.0"/>
   <status value="draft"/>
-  <date value="2019-04-16T10:07:03-05:00"/>
+  <date value="2019-04-16T08:42:31-05:00"/>
   <publisher value="Health Level Seven International (Clinical Decision Support)"/>
   <item>
     <linkId value="Evidence"/>
-    <text value="A descriptive and statistical summary of research"/>
+    <text value="A research context or question"/>
     <type value="group"/>
     <required value="false"/>
     <repeats value="true"/>
@@ -25,7 +25,7 @@
           </coding>
         </valueCodeableConcept>
       </extension>
-      <text value="The Evidence resource codifies defintions of the evidence variables, the statistical measures and the certainty of those statistics."/>
+      <text value="The Evidence resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about."/>
       <type value="display"/>
     </item>
     <item>
@@ -256,7 +256,7 @@
       </item>
       <item>
         <linkId value="Evidence.url.value"/>
-        <text value="Canonical identifier for this evidence, represented as a globally unique URI"/>
+        <text value="Canonical identifier for this evidence, represented as a URI (globally unique)"/>
         <type value="string"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -281,7 +281,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="A formal identifier that is used to identify this evidence when it is represented in other formats, or referenced in a specification, model, design or an instance. Typically, this is used for identifiers that can go in an HL7 V3 II (instance identifier) data type, and can then identify this {{title}} outside of FHIR, where it is not possible to use the logical URI."/>
+        <text value="A formal identifier that is used to identify this evidence when it is represented in other formats, or referenced in a specification, model, design or an instance. Typically, this is used for identifiers that can go in an HL7 V3 II (instance identifier) data type, and can then identify this evidence outside of FHIR, where it is not possible to use the logical URI."/>
         <type value="display"/>
       </item>
       <item>
@@ -327,7 +327,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The identifier that is used to identify this version of the evidence when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the evidence author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. There may be different {{title}} instances that have the same identifier but different versions.  The version can be appended to the url in a reference to allow a reference to a particular business version of the {{title}} with the format [url]|[version]."/>
+        <text value="The identifier that is used to identify this version of the evidence when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the evidence author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active artifacts. There may be different evidence instances that have the same identifier but different versions.  The version can be appended to the url in a reference to allow a reference to a particular business version of the evidence with the format [url]|[version]."/>
         <type value="display"/>
       </item>
       <item>
@@ -403,6 +403,70 @@
       </item>
     </item>
     <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="string"/>
+      </extension>
+      <linkId value="Evidence.shortTitle"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="The short title provides an alternate title for use in informal descriptive contexts where the full, formal title is not necessary."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <linkId value="Evidence.shortTitle.value"/>
+        <text value="Title for use in informal contexts"/>
+        <type value="string"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="string"/>
+      </extension>
+      <linkId value="Evidence.subtitle"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="An explanatory or alternate title for the Evidence giving additional information about its content."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <linkId value="Evidence.subtitle.value"/>
+        <text value="Subordinate title of the Evidence"/>
+        <type value="string"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+    </item>
+    <item>
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
         <valueInteger value="1"/>
       </extension>
@@ -426,45 +490,13 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The status of this evidence. Enables tracking the life-cycle of the content. Allows filtering of {{title}}s that are appropriate for use versus not."/>
+        <text value="The status of this evidence. Enables tracking the life-cycle of the content. Allows filtering of evidences that are appropriate for use versus not."/>
         <type value="display"/>
       </item>
       <item>
         <linkId value="Evidence.status.value"/>
         <text value="status"/>
         <type value="choice"/>
-        <required value="false"/>
-        <repeats value="false"/>
-      </item>
-    </item>
-    <item>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-        <valueInteger value="1"/>
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="boolean"/>
-      </extension>
-      <linkId value="Evidence.experimental"/>
-      <type value="group"/>
-      <required value="false"/>
-      <repeats value="true"/>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-          <valueCodeableConcept>
-            <coding>
-              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-              <code value="flyover"/>
-              <display value="Fly-over"/>
-            </coding>
-          </valueCodeableConcept>
-        </extension>
-        <text value="A Boolean value to indicate that this evidence is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage. Allows filtering of {{title}}s that are appropriate for use versus not."/>
-        <type value="display"/>
-      </item>
-      <item>
-        <linkId value="Evidence.experimental.value"/>
-        <text value="For testing purposes, not real usage"/>
-        <type value="boolean"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
@@ -490,7 +522,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The date  (and optionally time) when the evidence was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the evidence changes. Note that this is not the same as the resource last-modified-date, since the resource may be a secondary representation of the {{title}}. Additional specific dates may be added as extensions or be found by consulting Provenances associated with past versions of the resource."/>
+        <text value="The date  (and optionally time) when the evidence was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the evidence changes. Note that this is not the same as the resource last-modified-date, since the resource may be a secondary representation of the evidence. Additional specific dates may be added as extensions or be found by consulting Provenances associated with past versions of the resource."/>
         <type value="display"/>
       </item>
       <item>
@@ -522,7 +554,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The name of the organization or individual that published the evidence. Usually an organization but may be an individual. The publisher (or steward) of the {{title}} is the organization or individual primarily responsible for the maintenance and upkeep of the {{title}}. This is not necessarily the same individual or organization that developed and initially authored the content. The publisher is the primary point of contact for questions or issues with the {{title}}. This item SHOULD be populated unless the information is available from context."/>
+        <text value="The name of the organization or individual that published the evidence. Usually an organization but may be an individual. The publisher (or steward) of the evidence is the organization or individual primarily responsible for the maintenance and upkeep of the evidence. This is not necessarily the same individual or organization that developed and initially authored the content. The publisher is the primary point of contact for questions or issues with the evidence. This item SHOULD be populated unless the information is available from context."/>
         <type value="display"/>
       </item>
       <item>
@@ -578,7 +610,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="A free text natural language description of the evidence from a consumer&#39;s perspective. This description can be used to capture details such as why the {{title}} was built, comments about misuse, instructions for clinical use and interpretation, literature references, examples from the paper world, etc. It is not a rendering of the {{title}} as conveyed in the &#39;text&#39; field of the resource itself. This item SHOULD be populated unless the information is available from context (e.g. the language of the {{title}} is presumed to be the predominant language in the place the {{title}} was created)."/>
+        <text value="A free text natural language description of the evidence from a consumer&#39;s perspective. This description can be used to capture details such as why the evidence was built, comments about misuse, instructions for clinical use and interpretation, literature references, examples from the paper world, etc. It is not a rendering of the evidence as conveyed in the &#39;text&#39; field of the resource itself. This item SHOULD be populated unless the information is available from context (e.g. the language of the evidence is presumed to be the predominant language in the place the evidence was created)."/>
         <type value="display"/>
       </item>
       <item>
@@ -587,6 +619,29 @@
         <type value="string"/>
         <required value="false"/>
         <repeats value="false"/>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="Annotation"/>
+      </extension>
+      <linkId value="Evidence.note"/>
+      <text value="Used for footnotes or explanatory notes"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="A human-readable string to clarify or explain concepts about the resource."/>
+        <type value="display"/>
       </item>
     </item>
     <item>
@@ -632,7 +687,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="A legal or geographic region in which the evidence is intended to be used. It may be possible for the {{title}} to be used in jurisdictions other than those for which it was originally designed or intended."/>
+        <text value="A legal or geographic region in which the evidence is intended to be used. It may be possible for the evidence to be used in jurisdictions other than those for which it was originally designed or intended."/>
         <type value="display"/>
       </item>
       <item>
@@ -645,38 +700,6 @@
       <item>
         <linkId value="Evidence.jurisdiction.text"/>
         <text value="text:"/>
-        <type value="string"/>
-        <required value="false"/>
-        <repeats value="false"/>
-      </item>
-    </item>
-    <item>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-        <valueInteger value="1"/>
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="string"/>
-      </extension>
-      <linkId value="Evidence.purpose"/>
-      <type value="group"/>
-      <required value="false"/>
-      <repeats value="true"/>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-          <valueCodeableConcept>
-            <coding>
-              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-              <code value="flyover"/>
-              <display value="Fly-over"/>
-            </coding>
-          </valueCodeableConcept>
-        </extension>
-        <text value="Explanation of why this evidence is needed and why it has been designed as it has. This element does not describe the usage of the {{title}}. Instead, it provides traceability of &#39;&#39;why&#39;&#39; the resource is either needed or &#39;&#39;why&#39;&#39; it is defined as it is.  This may be used to point to source materials or specifications that drove the structure of this {{title}}."/>
-        <type value="display"/>
-      </item>
-      <item>
-        <linkId value="Evidence.purpose.value"/>
-        <text value="Why this evidence is defined"/>
         <type value="string"/>
         <required value="false"/>
         <repeats value="false"/>
@@ -800,7 +823,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The period during which the evidence content was or is planned to be in active use. The effective period for a {{title}}  determines when the content is applicable for usage and is independent of publication and review dates. For example, a measure intended to be used for the year 2016 might be published in 2015."/>
+        <text value="The period during which the evidence content was or is planned to be in active use. The effective period for a evidence  determines when the content is applicable for usage and is independent of publication and review dates. For example, a measure intended to be used for the year 2016 might be published in 2015."/>
         <type value="display"/>
       </item>
       <item>
@@ -819,8 +842,11 @@
       </item>
     </item>
     <item>
-      <linkId value="Evidence.exposureBackground"/>
-      <text value="The Population or Subpopulation"/>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="CodeableConcept"/>
+      </extension>
+      <linkId value="Evidence.topic"/>
+      <text value="The category of the Evidence, such as Education, Treatment, Assessment, etc."/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -834,2968 +860,237 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="The Population or Subpopulation."/>
+        <text value="Descriptive topics related to the content of the Evidence. Topics provide a high-level categorization grouping types of Evidences that can be useful for filtering and searching."/>
         <type value="display"/>
       </item>
       <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-          <valueInteger value="1"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="string"/>
-        </extension>
-        <linkId value="Evidence.exposureBackground.id"/>
-        <type value="group"/>
-        <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-          <type value="display"/>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.id.value"/>
-          <text value="Unique id for inter-element referencing"/>
-          <type value="string"/>
-          <required value="false"/>
-          <repeats value="false"/>
-        </item>
-      </item>
-      <item>
-        <linkId value="Evidence.exposureBackground.extension"/>
-        <text value="Additional content defined by implementations"/>
-        <type value="group"/>
-        <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-          <type value="display"/>
-        </item>
-      </item>
-      <item>
-        <linkId value="Evidence.exposureBackground.modifierExtension"/>
-        <text value="Extensions that cannot be ignored even if unrecognized"/>
-        <type value="group"/>
-        <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-          <type value="display"/>
-        </item>
-      </item>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-          <valueInteger value="1"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="string"/>
-        </extension>
-        <linkId value="Evidence.exposureBackground.description"/>
-        <type value="group"/>
-        <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="Human-readable summary of the population or subpopulation."/>
-          <type value="display"/>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.description.value"/>
-          <text value="Description of the population or subpopulation"/>
-          <type value="string"/>
-          <required value="false"/>
-          <repeats value="false"/>
-        </item>
-      </item>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-          <valueInteger value="1"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-          <valueInteger value="1"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-          <valueString value="Reference"/>
-        </extension>
-        <linkId value="Evidence.exposureBackground.population"/>
-        <type value="group"/>
-        <required value="true"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="A reference to a Group that defines the population or subpopulation."/>
-          <type value="display"/>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-            <valueCode value="Group"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-            <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.population.value"/>
-          <text value="Definition of the population or subpopulation"/>
-          <type value="reference"/>
-          <required value="false"/>
-          <repeats value="false"/>
-        </item>
-      </item>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-          <valueInteger value="1"/>
-        </extension>
-        <linkId value="Evidence.exposureBackground.populationSampleSize"/>
-        <text value="Population Sample Size"/>
-        <type value="group"/>
+        <linkId value="Evidence.topic.coding"/>
+        <text value="code:"/>
+        <type value="open-choice"/>
         <required value="false"/>
         <repeats value="false"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="Population Sample Size."/>
-          <type value="display"/>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="string"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.populationSampleSize.id"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.populationSampleSize.id.value"/>
-            <text value="Unique id for inter-element referencing"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.populationSampleSize.extension"/>
-          <text value="Additional content defined by implementations"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.populationSampleSize.modifierExtension"/>
-          <text value="Extensions that cannot be ignored even if unrecognized"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="string"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.populationSampleSize.description"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Human-readable summary of population sample size."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.populationSampleSize.description.value"/>
-            <text value="Description of population sample size"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="integer"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.populationSampleSize.numberOfStudies"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Number of studies contributing to this Evidence summary."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.populationSampleSize.numberOfStudies.value"/>
-            <text value="Number of contributing studies"/>
-            <type value="integer"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="integer"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.populationSampleSize.numberOfParticipants"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Number of participants in the population."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.populationSampleSize.numberOfParticipants.value"/>
-            <text value="Cumulative number of participants"/>
-            <type value="integer"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="integer"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.populationSampleSize.knownDataCount"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="TBD."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.populationSampleSize.knownDataCount.value"/>
-            <text value="TBD"/>
-            <type value="integer"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="integer"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.populationSampleSize.numeratorCount"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="TBD."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.populationSampleSize.numeratorCount.value"/>
-            <text value="TBD"/>
-            <type value="integer"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="Annotation"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.populationSampleSize.note"/>
-          <text value="Used for footnotes or explanatory notes"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="A human-readable string to clarify or explain concepts about the sample size."/>
-            <type value="display"/>
-          </item>
-        </item>
       </item>
       <item>
-        <linkId value="Evidence.exposureBackground.exposureVariant"/>
-        <text value="Exposure or Intervention or Exposure State"/>
-        <type value="group"/>
+        <linkId value="Evidence.topic.text"/>
+        <text value="text:"/>
+        <type value="string"/>
         <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="The exposure details. Which could be intervention or comparison/control states."/>
-          <type value="display"/>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="string"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.exposureVariant.id"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.exposureVariant.id.value"/>
-            <text value="Unique id for inter-element referencing"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.exposureVariant.extension"/>
-          <text value="Additional content defined by implementations"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.exposureVariant.modifierExtension"/>
-          <text value="Extensions that cannot be ignored even if unrecognized"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="string"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.exposureVariant.description"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Human-readable summary of the exposure state."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.exposureVariant.description.value"/>
-            <text value="Description of the exposure state"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="Reference"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.exposureVariant.groupByExposure"/>
-          <type value="group"/>
-          <required value="true"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="A reference to a Group that defines the exposure state (subgroup by exposure within the population)."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-              <valueCode value="Group"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-              <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.groupByExposure.value"/>
-            <text value="Defintion of the exposure state"/>
-            <type value="reference"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.exposureVariant.exposureSubsetSampleSize"/>
-          <text value="Sample Size limited to this exposure state"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="false"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Sample Size limited to this exposure state."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable"/>
-          <text value="Outcome or Characteristic that is Measured"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Outcome or Characteristic that is Measured."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="string"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.id"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.id.value"/>
-              <text value="Unique id for inter-element referencing"/>
-              <type value="string"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.extension"/>
-            <text value="Additional content defined by implementations"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-              <type value="display"/>
-            </item>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.modifierExtension"/>
-            <text value="Extensions that cannot be ignored even if unrecognized"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-              <type value="display"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="string"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.description"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Human-readable summary of sample characteristic or outcome definition."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.description.value"/>
-              <text value="Description of sample characteristic or outcome"/>
-              <type value="string"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="Reference"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.measuredVariableDefinition"/>
-            <type value="group"/>
-            <required value="true"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="A reference to an EvidenceVariable."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-                <valueCode value="EvidenceVariable"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-                <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-              </extension>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.measuredVariableDefinition.value"/>
-              <text value="Definition of the outcome or measured variable"/>
-              <type value="reference"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic"/>
-            <text value="Statistic with only 1 variable (non-comparative)"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Statistic with only 1 variable (non-comparative) to be used for summary statistics of a single variable in a single group."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                <valueInteger value="1"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                <valueString value="string"/>
-              </extension>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.id"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-                <type value="display"/>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.id.value"/>
-                <text value="Unique id for inter-element referencing"/>
-                <type value="string"/>
-                <required value="false"/>
-                <repeats value="false"/>
-              </item>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.extension"/>
-              <text value="Additional content defined by implementations"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                <type value="display"/>
-              </item>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.modifierExtension"/>
-              <text value="Extensions that cannot be ignored even if unrecognized"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                <type value="display"/>
-              </item>
-            </item>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                <valueInteger value="1"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                <valueString value="string"/>
-              </extension>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.description"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="A human-readable string to describe the findings."/>
-                <type value="display"/>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.description.value"/>
-                <text value="Description of findings"/>
-                <type value="string"/>
-                <required value="false"/>
-                <repeats value="false"/>
-              </item>
-            </item>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                <valueInteger value="1"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                <valueString value="CodeableConcept"/>
-              </extension>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.synthesisType"/>
-              <text value="Type of synthesis"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="Type of synthesis eg meta-analysis."/>
-                <type value="display"/>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.synthesisType.coding"/>
-                <text value="code:"/>
-                <type value="open-choice"/>
-                <required value="false"/>
-                <repeats value="false"/>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.synthesisType.text"/>
-                <text value="text:"/>
-                <type value="string"/>
-                <required value="false"/>
-                <repeats value="false"/>
-              </item>
-            </item>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                <valueInteger value="1"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                <valueString value="CodeableConcept"/>
-              </extension>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.studyType"/>
-              <text value="Type of study"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="Type of study eg randomized trial."/>
-                <type value="display"/>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.studyType.coding"/>
-                <text value="code:"/>
-                <type value="open-choice"/>
-                <required value="false"/>
-                <repeats value="false"/>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.studyType.text"/>
-                <text value="text:"/>
-                <type value="string"/>
-                <required value="false"/>
-                <repeats value="false"/>
-              </item>
-            </item>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                <valueInteger value="1"/>
-              </extension>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.sampleSize"/>
-              <text value="Sample Size for of the univariate statistic"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="false"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="Sample Size for of the univariate statistic."/>
-                <type value="display"/>
-              </item>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic"/>
-              <text value="TBD"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="TBD."/>
-                <type value="display"/>
-              </item>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                  <valueInteger value="1"/>
-                </extension>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                  <valueString value="string"/>
-                </extension>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.id"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-                  <type value="display"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.id.value"/>
-                  <text value="Unique id for inter-element referencing"/>
-                  <type value="string"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.extension"/>
-                <text value="Additional content defined by implementations"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                  <type value="display"/>
-                </item>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.modifierExtension"/>
-                <text value="Extensions that cannot be ignored even if unrecognized"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                  <type value="display"/>
-                </item>
-              </item>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                  <valueInteger value="1"/>
-                </extension>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                  <valueString value="string"/>
-                </extension>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.description"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="TBD."/>
-                  <type value="display"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.description.value"/>
-                  <text value="TBD"/>
-                  <type value="string"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-              </item>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                  <valueInteger value="1"/>
-                </extension>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                  <valueString value="CodeableConcept"/>
-                </extension>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.type"/>
-                <text value="TBD"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="TBD."/>
-                  <type value="display"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.type.coding"/>
-                  <text value="code:"/>
-                  <type value="open-choice"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.type.text"/>
-                  <text value="text:"/>
-                  <type value="string"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-              </item>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                  <valueInteger value="1"/>
-                </extension>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                  <valueString value="Quantity"/>
-                </extension>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.quantity"/>
-                <text value="TBD"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="TBD."/>
-                  <type value="display"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.quantity.comparator"/>
-                  <text value="comp:"/>
-                  <type value="choice"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.quantity.value"/>
-                  <text value="value:"/>
-                  <type value="decimal"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.quantity.units"/>
-                  <text value="units:"/>
-                  <type value="string"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.quantity.code"/>
-                  <text value="coded units:"/>
-                  <type value="string"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.quantity.system"/>
-                  <text value="units system:"/>
-                  <type value="string"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate"/>
-                <text value="TBD"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="TBD."/>
-                  <type value="display"/>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="string"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.id"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.id.value"/>
-                    <text value="Unique id for inter-element referencing"/>
-                    <type value="string"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.extension"/>
-                  <text value="Additional content defined by implementations"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                    <type value="display"/>
-                  </item>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.modifierExtension"/>
-                  <text value="Extensions that cannot be ignored even if unrecognized"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                    <type value="display"/>
-                  </item>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="CodeableConcept"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.type"/>
-                  <text value="Type of precision estimate"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="Examples include confidence interval and interquartile range."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.type.coding"/>
-                    <text value="code:"/>
-                    <type value="open-choice"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.type.text"/>
-                    <text value="text:"/>
-                    <type value="string"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="decimal"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.level"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="Use 95 for a 95% confidence interval."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.level.value"/>
-                    <text value="Level of confidence interval"/>
-                    <type value="decimal"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="decimal"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.from"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="Lower bound of confidence interval."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.from.value"/>
-                    <text value="Lower bound"/>
-                    <type value="decimal"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="decimal"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.to"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="Upper bound of confidence interval."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.to.value"/>
-                    <text value="Upper bound"/>
-                    <type value="decimal"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue"/>
-                <text value="TBD"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="TBD."/>
-                  <type value="display"/>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="string"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.id"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.id.value"/>
-                    <text value="Unique id for inter-element referencing"/>
-                    <type value="string"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.extension"/>
-                  <text value="Additional content defined by implementations"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                    <type value="display"/>
-                  </item>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.modifierExtension"/>
-                  <text value="Extensions that cannot be ignored even if unrecognized"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                    <type value="display"/>
-                  </item>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="CodeableConcept"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.type"/>
-                  <text value="TBD"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="TBD."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.type.coding"/>
-                    <text value="code:"/>
-                    <type value="open-choice"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.type.text"/>
-                    <text value="text:"/>
-                    <type value="string"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="decimal"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.value"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="TBD."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.value.value"/>
-                    <text value="TBD"/>
-                    <type value="decimal"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="Range"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.range"/>
-                  <text value="TBD"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="TBD."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.range.low"/>
-                    <text value="low:"/>
-                    <type value="decimal"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.range.high"/>
-                    <text value="high:"/>
-                    <type value="decimal"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.range.units"/>
-                    <text value="units:"/>
-                    <type value="string"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-              </item>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                  <valueString value="Annotation"/>
-                </extension>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.note"/>
-                <text value="Footnote or explanatory note about the univariate statistic"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="Footnote or explanatory note about the univariate statistic."/>
-                  <type value="display"/>
-                </item>
-              </item>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty"/>
-              <text value="How certain is the effect"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="A description of the certainty of the effect estimate."/>
-                <type value="display"/>
-              </item>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                  <valueInteger value="1"/>
-                </extension>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                  <valueString value="string"/>
-                </extension>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.id"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-                  <type value="display"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.id.value"/>
-                  <text value="Unique id for inter-element referencing"/>
-                  <type value="string"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.extension"/>
-                <text value="Additional content defined by implementations"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                  <type value="display"/>
-                </item>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.modifierExtension"/>
-                <text value="Extensions that cannot be ignored even if unrecognized"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                  <type value="display"/>
-                </item>
-              </item>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                  <valueString value="CodeableConcept"/>
-                </extension>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.rating"/>
-                <text value="Certainty rating"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="A rating of the certainty of the effect estimate."/>
-                  <type value="display"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.rating.coding"/>
-                  <text value="code:"/>
-                  <type value="open-choice"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.rating.text"/>
-                  <text value="text:"/>
-                  <type value="string"/>
-                  <required value="false"/>
-                  <repeats value="false"/>
-                </item>
-              </item>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                  <valueString value="Annotation"/>
-                </extension>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.note"/>
-                <text value="Footnote or explanatory note about the statistic certainty"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="A human-readable string to clarify or explain concepts about the resource."/>
-                  <type value="display"/>
-                </item>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent"/>
-                <text value="A component that contributes to the overall certainty"/>
-                <type value="group"/>
-                <required value="false"/>
-                <repeats value="true"/>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                    <valueCodeableConcept>
-                      <coding>
-                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                        <code value="flyover"/>
-                        <display value="Fly-over"/>
-                      </coding>
-                    </valueCodeableConcept>
-                  </extension>
-                  <text value="A description of a component of the overall certainty."/>
-                  <type value="display"/>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="string"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.id"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.id.value"/>
-                    <text value="Unique id for inter-element referencing"/>
-                    <type value="string"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.extension"/>
-                  <text value="Additional content defined by implementations"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                    <type value="display"/>
-                  </item>
-                </item>
-                <item>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.modifierExtension"/>
-                  <text value="Extensions that cannot be ignored even if unrecognized"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                    <type value="display"/>
-                  </item>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                    <valueInteger value="1"/>
-                  </extension>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="CodeableConcept"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.type"/>
-                  <text value="Type of subcomponent of certainty rating"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="Type of subcomponent of certainty rating."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.type.coding"/>
-                    <text value="code:"/>
-                    <type value="open-choice"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.type.text"/>
-                    <text value="text:"/>
-                    <type value="string"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="CodeableConcept"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.rating"/>
-                  <text value="Subcomponent certainty rating"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="A rating of a subcomponent of rating certainty."/>
-                    <type value="display"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.rating.coding"/>
-                    <text value="code:"/>
-                    <type value="open-choice"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                  <item>
-                    <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.rating.text"/>
-                    <text value="text:"/>
-                    <type value="string"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                </item>
-                <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="Annotation"/>
-                  </extension>
-                  <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.note"/>
-                  <text value="Footnote or explanatory note about the statistic certainty subcomponent"/>
-                  <type value="group"/>
-                  <required value="false"/>
-                  <repeats value="true"/>
-                  <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                      <valueCodeableConcept>
-                        <coding>
-                          <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                          <code value="flyover"/>
-                          <display value="Fly-over"/>
-                        </coding>
-                      </valueCodeableConcept>
-                    </extension>
-                    <text value="A human-readable string to clarify or explain concepts about the resource."/>
-                    <type value="display"/>
-                  </item>
-                </item>
-              </item>
-            </item>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                <valueString value="Annotation"/>
-              </extension>
-              <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.note"/>
-              <text value="Footnote or esplanatory note about the statistic itself"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="Footnote or esplanatory note about the statistic itself."/>
-                <type value="display"/>
-              </item>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="Annotation"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.measuredVariable.note"/>
-            <text value="Footnote or explanatory note about the measured variable"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Footnote or explanatory note about the measured variable."/>
-              <type value="display"/>
-            </item>
-          </item>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic"/>
-          <text value="Covariant statistic(s)"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Covariant statistic(s)."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="string"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.id"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.id.value"/>
-              <text value="Unique id for inter-element referencing"/>
-              <type value="string"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.extension"/>
-            <text value="Additional content defined by implementations"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-              <type value="display"/>
-            </item>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.modifierExtension"/>
-            <text value="Extensions that cannot be ignored even if unrecognized"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-              <type value="display"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="string"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.description"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Human-readable summary of sample characteristic."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.description.value"/>
-              <text value="Description of sample characteristic"/>
-              <type value="string"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="Reference"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.measuredVariable1"/>
-            <type value="group"/>
-            <required value="true"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="The first variable of the covariant statistic."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-                <valueCode value="EvidenceVariable"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-                <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-              </extension>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.measuredVariable1.value"/>
-              <text value="The first variable of the covariant statistic"/>
-              <type value="reference"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="Reference"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.measuredVariable2"/>
-            <type value="group"/>
-            <required value="true"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="The second variable of the covariant statistic."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-                <valueCode value="EvidenceVariable"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-                <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-              </extension>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.measuredVariable2.value"/>
-              <text value="The second variable of the covariant statistic"/>
-              <type value="reference"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="CodeableConcept"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.synthesisType"/>
-            <text value="Type of synthesis"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Type of synthesis eg meta-analysis."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.synthesisType.coding"/>
-              <text value="code:"/>
-              <type value="open-choice"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.synthesisType.text"/>
-              <text value="text:"/>
-              <type value="string"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="CodeableConcept"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.studyType"/>
-            <text value="Type of study"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Type of study eg randomized trial."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.studyType.coding"/>
-              <text value="code:"/>
-              <type value="open-choice"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.studyType.text"/>
-              <text value="text:"/>
-              <type value="string"/>
-              <required value="false"/>
-              <repeats value="false"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-              <valueInteger value="1"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.sampleSize"/>
-            <text value="Sample size"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="false"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Sample size."/>
-              <type value="display"/>
-            </item>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                <valueInteger value="1"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                <valueString value="string"/>
-              </extension>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.sampleSize.id"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-                <type value="display"/>
-              </item>
-              <item>
-                <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.sampleSize.id.value"/>
-                <text value="Unique id for inter-element referencing"/>
-                <type value="string"/>
-                <required value="false"/>
-                <repeats value="false"/>
-              </item>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.sampleSize.extension"/>
-              <text value="Additional content defined by implementations"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                <type value="display"/>
-              </item>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.sampleSize.modifierExtension"/>
-              <text value="Extensions that cannot be ignored even if unrecognized"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-                <type value="display"/>
-              </item>
-            </item>
-            <item>
-              <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.sampleSize.statistic"/>
-              <text value="Sample size statistic"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="Sample size statistic."/>
-                <type value="display"/>
-              </item>
-            </item>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.certainty"/>
-            <text value="How certain is the effect"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="A description of the certainty of the effect estimate."/>
-              <type value="display"/>
-            </item>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-              <valueString value="Annotation"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.exposureVariant.covariantStatistic.note"/>
-            <text value="Footnote or explanatory note about the exposure variant covariant statistic"/>
-            <type value="group"/>
-            <required value="false"/>
-            <repeats value="true"/>
-            <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                <valueCodeableConcept>
-                  <coding>
-                    <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                    <code value="flyover"/>
-                    <display value="Fly-over"/>
-                  </coding>
-                </valueCodeableConcept>
-              </extension>
-              <text value="Footnote or explanatory note about the exposure variant covariant statistic."/>
-              <type value="display"/>
-            </item>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="Annotation"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.exposureVariant.note"/>
-          <text value="Footnote or explanatory note about the exposure variant"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Footnote or explanatory note about the exposure variant."/>
-            <type value="display"/>
-          </item>
-        </item>
+        <repeats value="false"/>
+      </item>
+    </item>
+    <item>
+      <linkId value="Evidence.author"/>
+      <text value="Who authored the content"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="An individiual or organization primarily involved in the creation and maintenance of the content."/>
+        <type value="display"/>
+      </item>
+    </item>
+    <item>
+      <linkId value="Evidence.editor"/>
+      <text value="Who edited the content"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="An individual or organization primarily responsible for internal coherence of the content."/>
+        <type value="display"/>
+      </item>
+    </item>
+    <item>
+      <linkId value="Evidence.reviewer"/>
+      <text value="Who reviewed the content"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="An individual or organization primarily responsible for review of some aspect of the content."/>
+        <type value="display"/>
+      </item>
+    </item>
+    <item>
+      <linkId value="Evidence.endorser"/>
+      <text value="Who endorsed the content"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="An individual or organization responsible for officially endorsing the content for use in some setting."/>
+        <type value="display"/>
+      </item>
+    </item>
+    <item>
+      <linkId value="Evidence.relatedArtifact"/>
+      <text value="Additional documentation, citations, etc."/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <text value="Each related artifact is either an attachment, or a reference to another resource, but not both."/>
+        <type value="display"/>
       </item>
       <item>
-        <linkId value="Evidence.exposureBackground.comparativeStatistic"/>
-        <text value="TBD"/>
-        <type value="group"/>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="Related artifacts such as additional documentation, justification, or bibliographic references."/>
+        <type value="display"/>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="Reference"/>
+      </extension>
+      <linkId value="Evidence.exposureBackground"/>
+      <type value="group"/>
+      <required value="true"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="A reference to a EvidenceVariable resource that defines the population for the research."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+          <valueCode value="EvidenceVariable"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+        </extension>
+        <linkId value="Evidence.exposureBackground.value"/>
+        <text value="What population?"/>
+        <type value="reference"/>
         <required value="false"/>
-        <repeats value="true"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-            <valueCodeableConcept>
-              <coding>
-                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                <code value="flyover"/>
-                <display value="Fly-over"/>
-              </coding>
-            </valueCodeableConcept>
-          </extension>
-          <text value="TBD."/>
-          <type value="display"/>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="string"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.id"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.comparativeStatistic.id.value"/>
-            <text value="Unique id for inter-element referencing"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.extension"/>
-          <text value="Additional content defined by implementations"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.modifierExtension"/>
-          <text value="Extensions that cannot be ignored even if unrecognized"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="string"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.description"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Human-readable summary of sample characteristic."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.comparativeStatistic.description.value"/>
-            <text value="Description of sample characteristic"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="Reference"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.exposure"/>
-          <type value="group"/>
-          <required value="true"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="TBD."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-              <valueCode value="Group"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-              <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.comparativeStatistic.exposure.value"/>
-            <text value="TBD"/>
-            <type value="reference"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="Reference"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.exposureAlternative"/>
-          <type value="group"/>
-          <required value="true"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="TBD."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-              <valueCode value="Group"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-              <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.comparativeStatistic.exposureAlternative.value"/>
-            <text value="TBD"/>
-            <type value="reference"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="Reference"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.measuredVariable"/>
-          <type value="group"/>
-          <required value="true"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="TBD."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-              <valueCode value="EvidenceVariable"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-              <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-            </extension>
-            <linkId value="Evidence.exposureBackground.comparativeStatistic.measuredVariable.value"/>
-            <text value="TBD"/>
-            <type value="reference"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="CodeableConcept"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.synthesisType"/>
-          <text value="Type of synthesis"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Type of synthesis eg meta-analysis."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.comparativeStatistic.synthesisType.coding"/>
-            <text value="code:"/>
-            <type value="open-choice"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.comparativeStatistic.synthesisType.text"/>
-            <text value="text:"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="CodeableConcept"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.studyType"/>
-          <text value="Type of study"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Type of study eg randomized trial."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.comparativeStatistic.studyType.coding"/>
-            <text value="code:"/>
-            <type value="open-choice"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-          <item>
-            <linkId value="Evidence.exposureBackground.comparativeStatistic.studyType.text"/>
-            <text value="text:"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.sampleSize"/>
-          <text value="TBD"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="false"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="TBD."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.statistic"/>
-          <text value="TBD"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="TBD."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.certainty"/>
-          <text value="How certain is the effect"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="A description of the certainty of the effect estimate."/>
-            <type value="display"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="Annotation"/>
-          </extension>
-          <linkId value="Evidence.exposureBackground.comparativeStatistic.note"/>
-          <text value="Footnote or explanatory note about the compartive statistic"/>
-          <type value="group"/>
-          <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="Footnote or explanatory note about the compartive statistic."/>
-            <type value="display"/>
-          </item>
-        </item>
+        <repeats value="false"/>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="Reference"/>
+      </extension>
+      <linkId value="Evidence.exposureVariant"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="A reference to a EvidenceVariable resource that defines the exposure for the research."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+          <valueCode value="EvidenceVariable"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+        </extension>
+        <linkId value="Evidence.exposureVariant.value"/>
+        <text value="What exposure?"/>
+        <type value="reference"/>
+        <required value="false"/>
+        <repeats value="false"/>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="Reference"/>
+      </extension>
+      <linkId value="Evidence.outcome"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="A reference to a EvidenceVariable resomece that defines the outcome for the research."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+          <valueCode value="EvidenceVariable"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+        </extension>
+        <linkId value="Evidence.outcome.value"/>
+        <text value="What outcome?"/>
+        <type value="reference"/>
+        <required value="false"/>
+        <repeats value="false"/>
       </item>
     </item>
   </item>

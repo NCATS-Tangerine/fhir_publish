@@ -38,7 +38,8 @@
 		<div class="container">  <!-- container -->
 			<a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" style="align:top" height="30"/></a>
-			<b><font size="+2">EBMOnFHIR Statistics Model</font></b>
+			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
 			<div id="hl7-nav">
 				 <a no-external="true" id="hl7-logo" href="http://www.hl7.org">
 					<img src="./assets/images/hl7-logo.png" width="42" alt="visit the hl7 website" height="50"/>
@@ -344,11 +345,11 @@ and <a href="search-parameters.json">JSON</a> source for this page.
 <li><a href="immunization.html">Immunization</a>: Vaccination  (non)-Administration Date</li>
 <li><a href="list.html">List</a>: When the list was prepared</li>
 <li><a href="observation.html">Observation</a>: Obtained date/time. If the obtained element is a period, a date that falls in the period</li>
-<li><a href="procedure.html">Procedure</a>: When the procedure was performed</li>
+<li><a href="procedure.html">Procedure</a>: When the procedure occurred or is occurring</li>
 <li><a href="riskassessment.html">RiskAssessment</a>: When was assessment made?</li>
 <li><a href="supplyrequest.html">SupplyRequest</a>: When the request was made</li>
 </ul>
-</td><td>AllergyIntolerance.​recordedDate | CarePlan.​period | CareTeam.​period | ClinicalImpression.​date | Composition.​date | Consent.​dateTime | DiagnosticReport.​effective | Encounter.​period | EpisodeOfCare.​period | FamilyMemberHistory.​date | Flag.​period | Immunization.​occurrence | List.​date | Observation.​effective | Procedure.​performed | (RiskAssessment.​occurrence as dateTime) | SupplyRequest.​authoredOn</td></tr>
+</td><td>AllergyIntolerance.​recordedDate | CarePlan.​period | CareTeam.​period | ClinicalImpression.​date | Composition.​date | Consent.​dateTime | DiagnosticReport.​effective | Encounter.​period | EpisodeOfCare.​period | FamilyMemberHistory.​date | Flag.​period | Immunization.​occurrence | List.​date | Observation.​effective | Procedure.​occurrence | (RiskAssessment.​occurrence as dateTime) | SupplyRequest.​authoredOn</td></tr>
 <tr><td>description<a name="conformance-description"> </a> <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#string">string</a></td><td>conformance-description</td><td><p>Multiple Resources:</p>
 <ul>
 <li><a href="capabilitystatement.html">CapabilityStatement</a>: The description of the capability statement</li>
@@ -868,6 +869,8 @@ and <a href="search-parameters.json">JSON</a> source for this page.
 </td><td>AuditEvent.​agent.​who.​where(resolve() is Patient) | AuditEvent.​entity.​what.​where(resolve() is Patient)</td></tr>
 <tr><td>policy</td><td><a href="search.html#uri">uri</a></td><td>AuditEvent-policy</td><td><p>Policy that authorized event</p>
 </td><td>AuditEvent.​agent.​policy</td></tr>
+<tr><td>purpose</td><td><a href="search.html#token">token</a></td><td>AuditEvent-purpose</td><td><p>The purposeOfUse of the event</p>
+</td><td>AuditEvent.​purposeOfEvent | AuditEvent.​agent.​purposeOfUse</td></tr>
 <tr><td>site</td><td><a href="search.html#token">token</a></td><td>AuditEvent-site</td><td><p>Logical source location within the enterprise</p>
 </td><td>AuditEvent.​source.​site</td></tr>
 <tr><td>source</td><td><a href="search.html#reference">reference</a></td><td>AuditEvent-source</td><td><p>The identity of source detecting the event</p>
@@ -1178,6 +1181,65 @@ and <a href="search-parameters.json">JSON</a> source for this page.
 </td><td>ClinicalImpression.​subject</td></tr>
 <tr><td>supporting-info</td><td><a href="search.html#reference">reference</a></td><td>ClinicalImpression-supporting-info</td><td><p>Information supporting the clinical impression</p>
 </td><td>ClinicalImpression.​supportingInfo</td></tr>
+<tr><td colspan="5" style="background-color: #dddddd"><b><a href="clinicalprofile.html">ClinicalProfile</a><a name="clinicalprofile"> </a></b> <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td></tr>
+<tr><td>cohort</td><td><a href="search.html#reference">reference</a></td><td>ClinicalProfile-cohort</td><td><p>The cohort being profiled</p>
+</td><td>ClinicalProfile.​cohort</td></tr>
+<tr><td>correlatedlabcode</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-correlatedlabcode</td><td><p>Lab correlated lab code</p>
+</td><td></td></tr>
+<tr><td>date</td><td><a href="search.html#date">date</a></td><td>ClinicalProfile-date</td><td><p>The date of the clinical profile</p>
+</td><td>ClinicalProfile.​date</td></tr>
+<tr><td>diagnosiscode</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-diagnosiscode</td><td><p>Diagnosis code</p>
+</td><td>ClinicalProfile.​diagnosis.​code</td></tr>
+<tr><td>diagnosiscorrelatedmedcategory</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-diagnosiscorrelatedmedcategory</td><td><p>Diagnosis correlated medication category</p>
+</td><td>ClinicalProfile.​diagnosis.​correlatedMedications.​entry.​category</td></tr>
+<tr><td>diagnosiscorrelatedphenotype</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-diagnosiscorrelatedphenotype</td><td><p>Diagnosis correlated phenotype</p>
+</td><td>ClinicalProfile.​diagnosis.​correlatedPhenotypes.​entry.​code</td></tr>
+<tr><td>diagnosiscorrelatedprocedure</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-diagnosiscorrelatedprocedure</td><td><p>Diagnosis correlated procedure</p>
+</td><td>ClinicalProfile.​diagnosis.​correlatedProcedures.​entry.​code</td></tr>
+<tr><td>identifier</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-identifier</td><td><p>External identifier of the clinical profile to be returned</p>
+</td><td>ClinicalProfile.​identifier</td></tr>
+<tr><td>labcode</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-labcode</td><td><p>Lab code</p>
+</td><td>ClinicalProfile.​lab.​code</td></tr>
+<tr><td>medicationcategory</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-medicationcategory</td><td><p>Medication category</p>
+</td><td>ClinicalProfile.​medication.​category</td></tr>
+<tr><td>medicationcode</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-medicationcode</td><td><p>Medication code</p>
+</td><td>(ClinicalProfile.​medication.​medication as CodeableConcept)</td></tr>
+<tr><td>medicationcorrelateddiagnosis</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-medicationcorrelateddiagnosis</td><td><p>Medication correlated phenotype</p>
+</td><td>ClinicalProfile.​medication.​correlatedDiagnoses.​entry.​code</td></tr>
+<tr><td>medicationcorrelatedmedcategory</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-medicationcorrelatedmedcategory</td><td><p>Medication correlated medication category</p>
+</td><td>ClinicalProfile.​medication.​correlatedMedications.​entry.​category</td></tr>
+<tr><td>medicationcorrelatedmedcode</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-medicationcorrelatedmedcode</td><td><p>Medication correlated medication code</p>
+</td><td></td></tr>
+<tr><td>medicationcorrelatedmedref</td><td><a href="search.html#reference">reference</a></td><td>ClinicalProfile-medicationcorrelatedmedref</td><td><p>Medication correlated medication reference</p>
+</td><td></td></tr>
+<tr><td>medicationcorrelatedphenotype</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-medicationcorrelatedphenotype</td><td><p>Medication correlated phenotype</p>
+</td><td>ClinicalProfile.​medication.​correlatedPhenotypes.​entry.​code</td></tr>
+<tr><td>medicationcorrelatedprocedure</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-medicationcorrelatedprocedure</td><td><p>Medication correlated procedure</p>
+</td><td>ClinicalProfile.​medication.​correlatedProcedures.​entry.​code</td></tr>
+<tr><td>medicationreference</td><td><a href="search.html#reference">reference</a></td><td>ClinicalProfile-medicationreference</td><td><p>Medication reference</p>
+</td><td>(ClinicalProfile.​medication.​medication as Reference)</td></tr>
+<tr><td>phenotypecode</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-phenotypecode</td><td><p>Phenotype  code</p>
+</td><td>ClinicalProfile.​hpo.​code</td></tr>
+<tr><td>phenotypecorrelatedmedcategory</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-phenotypecorrelatedmedcategory</td><td><p>Phenotype  correlated medication category</p>
+</td><td>ClinicalProfile.​hpo.​correlatedMedications.​entry.​category</td></tr>
+<tr><td>phenotypecorrelatedphenotype</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-phenotypecorrelatedphenotype</td><td><p>Phenotype  correlated phenotype</p>
+</td><td>ClinicalProfile.​hpo.​correlatedPhenotypes.​entry.​code</td></tr>
+<tr><td>phenotypecorrelatedprocedure</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-phenotypecorrelatedprocedure</td><td><p>Phenotype  correlated procedure</p>
+</td><td>ClinicalProfile.​hpo.​correlatedProcedures.​entry.​code</td></tr>
+<tr><td>population</td><td><a href="search.html#reference">reference</a></td><td>ClinicalProfile-population</td><td><p>The  population being profiled</p>
+</td><td>ClinicalProfile.​population</td></tr>
+<tr><td>procedurecode</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-procedurecode</td><td><p>Procedure  code</p>
+</td><td>ClinicalProfile.​procedure.​code</td></tr>
+<tr><td>procedurecorrelatedmedcategory</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-procedurecorrelatedmedcategory</td><td><p>Procedure correlated medication category</p>
+</td><td>ClinicalProfile.​procedure.​correlatedMedications.​entry.​category</td></tr>
+<tr><td>procedurecorrelatedphenotype</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-procedurecorrelatedphenotype</td><td><p>Procedure correlated phenotype</p>
+</td><td>ClinicalProfile.​procedure.​correlatedPhenotypes.​entry.​code</td></tr>
+<tr><td>procedurecorrelatedprocedure</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-procedurecorrelatedprocedure</td><td><p>Procedure correlated procedure</p>
+</td><td>ClinicalProfile.​procedure.​correlatedProcedures.​entry.​code</td></tr>
+<tr><td>reporter</td><td><a href="search.html#reference">reference</a></td><td>ClinicalProfile-reporter</td><td><p>The reporter to return clinical profile results for</p>
+</td><td>ClinicalProfile.​reporter</td></tr>
+<tr><td>status</td><td><a href="search.html#token">token</a></td><td>ClinicalProfile-status</td><td><p>The status of the profile</p>
+</td><td>ClinicalProfile.​status</td></tr>
 <tr><td colspan="5" style="background-color: #dddddd"><b><a href="codesystem.html">CodeSystem</a><a name="codesystem"> </a></b> <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #e6ffe6" href="versions.html#std-process" title="Normative Content">N</a></td></tr>
 <tr><td>code <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>CodeSystem-code</td><td><p>A code defined in the code system</p>
 </td><td>CodeSystem.​concept.​code</td></tr>
@@ -1941,6 +2003,8 @@ and <a href="search-parameters.json">JSON</a> source for this page.
 <tr><td>version</td><td><a href="search.html#token">token</a></td><td>EventDefinition-version</td><td><p>The business version of the event definition</p>
 </td><td>EventDefinition.​version</td></tr>
 <tr><td colspan="5" style="background-color: #dddddd"><b><a href="evidence.html">Evidence</a><a name="evidence"> </a></b> <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td></tr>
+<tr><td>composed-of</td><td><a href="search.html#reference">reference</a></td><td>Evidence-composed-of</td><td><p>What resource is being referenced</p>
+</td><td>Evidence.​relatedArtifact.​where(type='composed-of').​resource</td></tr>
 <tr><td>context</td><td><a href="search.html#token">token</a></td><td>Evidence-context</td><td><p>A use context assigned to the evidence</p>
 </td><td>(Evidence.​useContext.​value as CodeableConcept)</td></tr>
 <tr><td>context-quantity</td><td><a href="search.html#quantity">quantity</a></td><td>Evidence-context-quantity</td><td><p>A quantity- or range-valued use context assigned to the evidence</p>
@@ -1953,6 +2017,10 @@ and <a href="search-parameters.json">JSON</a> source for this page.
 </td><td>Evidence.​useContext</td></tr>
 <tr><td>date</td><td><a href="search.html#date">date</a></td><td>Evidence-date</td><td><p>The evidence publication date</p>
 </td><td>Evidence.​date</td></tr>
+<tr><td>depends-on</td><td><a href="search.html#reference">reference</a></td><td>Evidence-depends-on</td><td><p>What resource is being referenced</p>
+</td><td>Evidence.​relatedArtifact.​where(type='depends-on').​resource</td></tr>
+<tr><td>derived-from</td><td><a href="search.html#reference">reference</a></td><td>Evidence-derived-from</td><td><p>What resource is being referenced</p>
+</td><td>Evidence.​relatedArtifact.​where(type='derived-from').​resource</td></tr>
 <tr><td>description</td><td><a href="search.html#string">string</a></td><td>Evidence-description</td><td><p>The description of the evidence</p>
 </td><td>Evidence.​description</td></tr>
 <tr><td>effective</td><td><a href="search.html#date">date</a></td><td>Evidence-effective</td><td><p>The time during which the evidence is intended to be in use</p>
@@ -1963,12 +2031,18 @@ and <a href="search-parameters.json">JSON</a> source for this page.
 </td><td>Evidence.​jurisdiction</td></tr>
 <tr><td>name</td><td><a href="search.html#string">string</a></td><td>Evidence-name</td><td><p>Computationally friendly name of the evidence</p>
 </td><td>Evidence.​name</td></tr>
+<tr><td>predecessor</td><td><a href="search.html#reference">reference</a></td><td>Evidence-predecessor</td><td><p>What resource is being referenced</p>
+</td><td>Evidence.​relatedArtifact.​where(type='predecessor').​resource</td></tr>
 <tr><td>publisher</td><td><a href="search.html#string">string</a></td><td>Evidence-publisher</td><td><p>Name of the publisher of the evidence</p>
 </td><td>Evidence.​publisher</td></tr>
 <tr><td>status</td><td><a href="search.html#token">token</a></td><td>Evidence-status</td><td><p>The current status of the evidence</p>
 </td><td>Evidence.​status</td></tr>
+<tr><td>successor</td><td><a href="search.html#reference">reference</a></td><td>Evidence-successor</td><td><p>What resource is being referenced</p>
+</td><td>Evidence.​relatedArtifact.​where(type='successor').​resource</td></tr>
 <tr><td>title</td><td><a href="search.html#string">string</a></td><td>Evidence-title</td><td><p>The human-friendly name of the evidence</p>
 </td><td>Evidence.​title</td></tr>
+<tr><td>topic</td><td><a href="search.html#token">token</a></td><td>Evidence-topic</td><td><p>Topics associated with the Evidence</p>
+</td><td>Evidence.​topic</td></tr>
 <tr><td>url</td><td><a href="search.html#uri">uri</a></td><td>Evidence-url</td><td><p>The uri that identifies the evidence</p>
 </td><td>Evidence.​url</td></tr>
 <tr><td>version</td><td><a href="search.html#token">token</a></td><td>Evidence-version</td><td><p>The business version of the evidence</p>
@@ -3395,8 +3469,8 @@ If the units are omitted, then kms should be assumed. If the distance is omitted
 </td><td>Procedure.​category</td></tr>
 <tr><td>code</td><td><a href="search.html#token">token</a></td><td>clinical-code</td><td><p>A code to identify a  procedure</p>
 </td><td>Procedure.​code</td></tr>
-<tr><td>date</td><td><a href="search.html#date">date</a></td><td>clinical-date</td><td><p>When the procedure was performed</p>
-</td><td>Procedure.​performed</td></tr>
+<tr><td>date</td><td><a href="search.html#date">date</a></td><td>clinical-date</td><td><p>When the procedure occurred or is occurring</p>
+</td><td>Procedure.​occurrence</td></tr>
 <tr><td>encounter</td><td><a href="search.html#reference">reference</a></td><td>clinical-encounter</td><td><p>The Encounter during which this Procedure was created</p>
 </td><td>Procedure.​encounter</td></tr>
 <tr><td>identifier</td><td><a href="search.html#token">token</a></td><td>clinical-identifier</td><td><p>A unique identifier for a procedure</p>
@@ -3417,7 +3491,7 @@ If the units are omitted, then kms should be assumed. If the distance is omitted
 </td><td>Procedure.​reasonCode</td></tr>
 <tr><td>reason-reference</td><td><a href="search.html#reference">reference</a></td><td>Procedure-reason-reference</td><td><p>The justification that the procedure was performed</p>
 </td><td>Procedure.​reasonReference</td></tr>
-<tr><td>status</td><td><a href="search.html#token">token</a></td><td>Procedure-status</td><td><p>preparation | in-progress | not-done | suspended | aborted | completed | entered-in-error | unknown</p>
+<tr><td>status</td><td><a href="search.html#token">token</a></td><td>Procedure-status</td><td><p>preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown</p>
 </td><td>Procedure.​status</td></tr>
 <tr><td>subject</td><td><a href="search.html#reference">reference</a></td><td>Procedure-subject</td><td><p>Search by subject</p>
 </td><td>Procedure.​subject</td></tr>
@@ -3898,33 +3972,6 @@ If the units are omitted, then kms should be assumed. If the distance is omitted
 </td><td>SpecimenDefinition.​identifier</td></tr>
 <tr><td>type</td><td><a href="search.html#token">token</a></td><td>SpecimenDefinition-type</td><td><p>The type of collected specimen</p>
 </td><td>SpecimenDefinition.​typeCollected</td></tr>
-<tr><td colspan="5" style="background-color: #dddddd"><b><a href="statistic.html">Statistic</a><a name="statistic"> </a></b> <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td></tr>
-<tr><td>context</td><td><a href="search.html#token">token</a></td><td>Statistic-context</td><td><p>A use context assigned to the statistic</p>
-</td><td>(Statistic.​useContext.​value as CodeableConcept)</td></tr>
-<tr><td>context-quantity</td><td><a href="search.html#quantity">quantity</a></td><td>Statistic-context-quantity</td><td><p>A quantity- or range-valued use context assigned to the statistic</p>
-</td><td>(Statistic.​useContext.​value as Quantity) | (Statistic.​useContext.​value as Range)</td></tr>
-<tr><td>context-type</td><td><a href="search.html#token">token</a></td><td>Statistic-context-type</td><td><p>A type of use context assigned to the statistic</p>
-</td><td>Statistic.​useContext.​code</td></tr>
-<tr><td>context-type-quantity</td><td><a href="search.html#composite">composite</a></td><td>Statistic-context-type-quantity</td><td><p>A use context type and quantity- or range-based value assigned to the statistic</p>
-</td><td>Statistic.​useContext</td></tr>
-<tr><td>context-type-value</td><td><a href="search.html#composite">composite</a></td><td>Statistic-context-type-value</td><td><p>A use context type and value assigned to the statistic</p>
-</td><td>Statistic.​useContext</td></tr>
-<tr><td>date</td><td><a href="search.html#date">date</a></td><td>Statistic-date</td><td><p>The statistic publication date</p>
-</td><td>Statistic.​date</td></tr>
-<tr><td>description</td><td><a href="search.html#string">string</a></td><td>Statistic-description</td><td><p>The description of the statistic</p>
-</td><td>Statistic.​description</td></tr>
-<tr><td>identifier</td><td><a href="search.html#token">token</a></td><td>Statistic-identifier</td><td><p>External identifier for the statistic</p>
-</td><td>Statistic.​identifier</td></tr>
-<tr><td>publisher</td><td><a href="search.html#string">string</a></td><td>Statistic-publisher</td><td><p>Name of the publisher of the statistic</p>
-</td><td>Statistic.​publisher</td></tr>
-<tr><td>status</td><td><a href="search.html#token">token</a></td><td>Statistic-status</td><td><p>The current status of the statistic</p>
-</td><td>Statistic.​status</td></tr>
-<tr><td>title</td><td><a href="search.html#string">string</a></td><td>Statistic-title</td><td><p>The human-friendly name of the statistic</p>
-</td><td>Statistic.​title</td></tr>
-<tr><td>url</td><td><a href="search.html#uri">uri</a></td><td>Statistic-url</td><td><p>The uri that identifies the statistic</p>
-</td><td>Statistic.​url</td></tr>
-<tr><td>version</td><td><a href="search.html#token">token</a></td><td>Statistic-version</td><td><p>The business version of the statistic</p>
-</td><td>Statistic.​version</td></tr>
 <tr><td colspan="5" style="background-color: #dddddd"><b><a href="structuredefinition.html">StructureDefinition</a><a name="structuredefinition"> </a></b> <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #e6ffe6" href="versions.html#std-process" title="Normative Content">N</a></td></tr>
 <tr><td>abstract <a style="padding-left: 3px; padding-right: 3px; border: 1px grey solid; font-weight: bold; color: black; background-color: #fff5e6" href="versions.html#std-process" title="Trial Use Content">TU</a></td><td><a href="search.html#token">token</a></td><td>StructureDefinition-abstract</td><td><p>Whether the structure is abstract</p>
 </td><td>StructureDefinition.​abstract</td></tr>
@@ -4254,7 +4301,7 @@ If the units are omitted, then kms should be assumed. If the distance is omitted
 		<div class="container">  <!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-0a3a4eda5b) generated on Tue, Apr 16, 2019 10:11-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;&copy; HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-baa72e6471) generated on Tue, Apr 16, 2019 08:58-0500. <a style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="text-align: baseline"/></a> | 

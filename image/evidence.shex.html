@@ -40,7 +40,8 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
-			<b><font size="+2">EBMOnFHIR Statistics Model</font></b>
+			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
 			<div id="hl7-nav">
 				 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
 					<img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
@@ -123,7 +124,7 @@ BASE &lt;http://hl7.org/fhir/shape/&gt;
 start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
 
 
-# A descriptive and statistical summary of research
+# A research context or question
 &lt;Evidence&gt; CLOSED {
     a [fhir:Evidence];
     fhir:nodeRole [fhir:treeRoot]?;
@@ -139,8 +140,8 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
                                             # implementations 
     fhir:DomainResource.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored
     fhir:Evidence.url @&lt;uri&gt;?;              # Canonical identifier for this 
-                                            # evidence, represented as a 
-                                            # globally unique URI 
+                                            # evidence, represented as a URI 
+                                            # (globally unique) 
     fhir:Evidence.identifier @&lt;Identifier&gt;*;  # Additional identifier for the 
                                             # evidence 
     fhir:Evidence.version @&lt;string&gt;?;       # Business version of the evidence
@@ -148,264 +149,40 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
                                             # friendly) 
     fhir:Evidence.title @&lt;string&gt;?;         # Name for this evidence (human 
                                             # friendly) 
+    fhir:Evidence.shortTitle @&lt;string&gt;?;    # Title for use in informal contexts
+    fhir:Evidence.subtitle @&lt;string&gt;?;      # Subordinate title of the Evidence
     fhir:Evidence.status @&lt;code&gt; AND
     	{fhir:value @fhirvs:publication-status};  # draft | active | retired | unknown
-    fhir:Evidence.experimental @&lt;boolean&gt;?;  # For testing purposes, not real 
-                                            # usage 
     fhir:Evidence.date @&lt;dateTime&gt;?;        # Date last changed
     fhir:Evidence.publisher @&lt;string&gt;?;     # Name of the publisher 
                                             # (organization or individual) 
     fhir:Evidence.contact @&lt;ContactDetail&gt;*;  # Contact details for the publisher
     fhir:Evidence.description @&lt;markdown&gt;?;  # Natural language description of 
                                             # the evidence 
+    fhir:Evidence.note @&lt;Annotation&gt;*;      # Used for footnotes or explanatory 
+                                            # notes 
     fhir:Evidence.useContext @&lt;UsageContext&gt;*;  # The context that the content is 
                                             # intended to support 
     fhir:Evidence.jurisdiction @&lt;CodeableConcept&gt;*;  # Intended jurisdiction for evidence 
                                             # (if applicable) 
-    fhir:Evidence.purpose @&lt;markdown&gt;?;     # Why this evidence is defined
     fhir:Evidence.copyright @&lt;markdown&gt;?;   # Use and/or publishing restrictions
     fhir:Evidence.approvalDate @&lt;date&gt;?;    # When the evidence was approved by 
                                             # publisher 
     fhir:Evidence.lastReviewDate @&lt;date&gt;?;  # When the evidence was last reviewed
     fhir:Evidence.effectivePeriod @&lt;Period&gt;?;  # When the evidence is expected to 
                                             # be used 
-    fhir:Evidence.exposureBackground @&lt;Evidence.exposureBackground&gt;*;  # The Population or Subpopulation
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# The Population or Subpopulation
-&lt;Evidence.exposureBackground&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.description @&lt;string&gt;?;  # Description of the population or 
-                                            # subpopulation 
-    fhir:Evidence.exposureBackground.population @&lt;Reference&gt;;  # Definition of the population or 
-                                            # subpopulation 
-    fhir:Evidence.exposureBackground.populationSampleSize @&lt;Evidence.exposureBackground.populationSampleSize&gt;?;  # Population Sample Size
-    fhir:Evidence.exposureBackground.exposureVariant @&lt;Evidence.exposureBackground.exposureVariant&gt;*;  # Exposure or Intervention or 
-                                            # Exposure State 
-    fhir:Evidence.exposureBackground.comparativeStatistic @&lt;Evidence.exposureBackground.comparativeStatistic&gt;*;  # TBD
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Population Sample Size
-&lt;Evidence.exposureBackground.populationSampleSize&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.populationSampleSize.description @&lt;string&gt;?;  # Description of population sample 
-                                            # size 
-    fhir:Evidence.exposureBackground.populationSampleSize.numberOfStudies @&lt;integer&gt;?;  # Number of contributing studies
-    fhir:Evidence.exposureBackground.populationSampleSize.numberOfParticipants @&lt;integer&gt;?;  # Cumulative number of participants
-    fhir:Evidence.exposureBackground.populationSampleSize.knownDataCount @&lt;integer&gt;?;  # TBD
-    fhir:Evidence.exposureBackground.populationSampleSize.numeratorCount @&lt;integer&gt;?;  # TBD
-    fhir:Evidence.exposureBackground.populationSampleSize.note @&lt;Annotation&gt;*;  # Used for footnotes or explanatory 
-                                            # notes 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Exposure or Intervention or Exposure State
-&lt;Evidence.exposureBackground.exposureVariant&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.exposureVariant.description @&lt;string&gt;?;  # Description of the exposure state
-    fhir:Evidence.exposureBackground.exposureVariant.groupByExposure @&lt;Reference&gt;;  # Defintion of the exposure state
-    fhir:Evidence.exposureBackground.exposureVariant.exposureSubsetSampleSize @&lt;Evidence.exposureBackground.populationSampleSize&gt;?;  # Sample Size limited to this 
-                                            # exposure state 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable&gt;*;  # Outcome or Characteristic that is 
-                                            # Measured 
-    fhir:Evidence.exposureBackground.exposureVariant.covariantStatistic @&lt;Evidence.exposureBackground.exposureVariant.covariantStatistic&gt;*;  # Covariant statistic(s)
-    fhir:Evidence.exposureBackground.exposureVariant.note @&lt;Annotation&gt;*;  # Footnote or explanatory note about 
-                                            # the exposure variant 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# TBD
-&lt;Evidence.exposureBackground.comparativeStatistic&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.comparativeStatistic.description @&lt;string&gt;?;  # Description of sample 
-                                            # characteristic 
-    fhir:Evidence.exposureBackground.comparativeStatistic.exposure @&lt;Reference&gt;;  # TBD
-    fhir:Evidence.exposureBackground.comparativeStatistic.exposureAlternative @&lt;Reference&gt;;  # TBD
-    fhir:Evidence.exposureBackground.comparativeStatistic.measuredVariable @&lt;Reference&gt;;  # TBD
-    fhir:Evidence.exposureBackground.comparativeStatistic.synthesisType @&lt;CodeableConcept&gt;?;  # Type of synthesis
-    fhir:Evidence.exposureBackground.comparativeStatistic.studyType @&lt;CodeableConcept&gt;?;  # Type of study
-    fhir:Evidence.exposureBackground.comparativeStatistic.sampleSize @&lt;Evidence.exposureBackground.populationSampleSize&gt;?;  # TBD
-    fhir:Evidence.exposureBackground.comparativeStatistic.statistic @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic&gt;*;  # TBD
-    fhir:Evidence.exposureBackground.comparativeStatistic.certainty @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty&gt;*;  # How certain is the effect
-    fhir:Evidence.exposureBackground.comparativeStatistic.note @&lt;Annotation&gt;*;  # Footnote or explanatory note about 
-                                            # the compartive statistic 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Outcome or Characteristic that is Measured
-&lt;Evidence.exposureBackground.exposureVariant.measuredVariable&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.description @&lt;string&gt;?;  # Description of sample 
-                                            # characteristic or outcome 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.measuredVariableDefinition @&lt;Reference&gt;;  # Definition of the outcome or 
-                                            # measured variable 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic&gt;*;  # Statistic with only 1 variable 
-                                            # (non-comparative) 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.note @&lt;Annotation&gt;*;  # Footnote or explanatory note about 
-                                            # the measured variable 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Covariant statistic(s)
-&lt;Evidence.exposureBackground.exposureVariant.covariantStatistic&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.exposureVariant.covariantStatistic.description @&lt;string&gt;?;  # Description of sample 
-                                            # characteristic 
-    fhir:Evidence.exposureBackground.exposureVariant.covariantStatistic.measuredVariable1 @&lt;Reference&gt;;  # The first variable of the 
-                                            # covariant statistic 
-    fhir:Evidence.exposureBackground.exposureVariant.covariantStatistic.measuredVariable2 @&lt;Reference&gt;;  # The second variable of the 
-                                            # covariant statistic 
-    fhir:Evidence.exposureBackground.exposureVariant.covariantStatistic.synthesisType @&lt;CodeableConcept&gt;?;  # Type of synthesis
-    fhir:Evidence.exposureBackground.exposureVariant.covariantStatistic.studyType @&lt;CodeableConcept&gt;?;  # Type of study
-    fhir:Evidence.exposureBackground.exposureVariant.covariantStatistic.sampleSize @&lt;Evidence.exposureBackground.exposureVariant.covariantStatistic.sampleSize&gt;?;  # Sample size
-    fhir:Evidence.exposureBackground.exposureVariant.covariantStatistic.certainty @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty&gt;*;  # How certain is the effect
-    fhir:Evidence.exposureBackground.exposureVariant.covariantStatistic.note @&lt;Annotation&gt;*;  # Footnote or explanatory note about 
-                                            # the exposure variant covariant 
-                                            # statistic 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Sample size
-&lt;Evidence.exposureBackground.exposureVariant.covariantStatistic.sampleSize&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.exposureVariant.covariantStatistic.sampleSize.statistic @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic&gt;*;  # Sample size statistic
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Statistic with only 1 variable (non-comparative)
-&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.description @&lt;string&gt;?;  # Description of findings
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.synthesisType @&lt;CodeableConcept&gt;?;  # Type of synthesis
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.studyType @&lt;CodeableConcept&gt;?;  # Type of study
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.sampleSize @&lt;Evidence.exposureBackground.populationSampleSize&gt;?;  # Sample Size for of the univariate 
-                                            # statistic 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic&gt;*;  # TBD
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty&gt;*;  # How certain is the effect
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.note @&lt;Annotation&gt;*;  # Footnote or esplanatory note about 
-                                            # the statistic itself 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# TBD
-&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.description @&lt;string&gt;?;  # TBD
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.type @&lt;CodeableConcept&gt;?;  # TBD
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.quantity @&lt;Quantity&gt;?;  # TBD
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate&gt;*;  # TBD
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue&gt;*;  # TBD
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.note @&lt;Annotation&gt;*;  # Footnote or explanatory note about 
-                                            # the univariate statistic 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# How certain is the effect
-&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.rating @&lt;CodeableConcept&gt;*;  # Certainty rating
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.note @&lt;Annotation&gt;*;  # Footnote or explanatory note about 
-                                            # the statistic certainty 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent @&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent&gt;*;  # A component that contributes to 
-                                            # the overall certainty 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# A component that contributes to the overall certainty
-&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.type @&lt;CodeableConcept&gt;?;  # Type of subcomponent of certainty 
-                                            # rating 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.rating @&lt;CodeableConcept&gt;*;  # Subcomponent certainty rating
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.certainty.certaintySubcomponent.note @&lt;Annotation&gt;*;  # Footnote or explanatory note about 
-                                            # the statistic certainty 
-                                            # subcomponent 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# TBD
-&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.type @&lt;CodeableConcept&gt;?;  # TBD
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.value @&lt;decimal&gt;?;  # TBD
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.pValue.range @&lt;Range&gt;?;  # TBD
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# TBD
-&lt;Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @&lt;Extension&gt;*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.type @&lt;CodeableConcept&gt;?;  # Type of precision estimate
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.level @&lt;decimal&gt;?;  # Level of confidence interval
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.from @&lt;decimal&gt;?;  # Lower bound
-    fhir:Evidence.exposureBackground.exposureVariant.measuredVariable.univariateStatistic.statistic.precisionEstimate.to @&lt;decimal&gt;?;  # Upper bound
+    fhir:Evidence.topic @&lt;CodeableConcept&gt;*;  # The category of the Evidence, such 
+                                            # as Education, Treatment, 
+                                            # Assessment, etc. 
+    fhir:Evidence.author @&lt;ContactDetail&gt;*;  # Who authored the content
+    fhir:Evidence.editor @&lt;ContactDetail&gt;*;  # Who edited the content
+    fhir:Evidence.reviewer @&lt;ContactDetail&gt;*;  # Who reviewed the content
+    fhir:Evidence.endorser @&lt;ContactDetail&gt;*;  # Who endorsed the content
+    fhir:Evidence.relatedArtifact @&lt;RelatedArtifact&gt;*;  # Additional documentation, 
+                                            # citations, etc. 
+    fhir:Evidence.exposureBackground @&lt;Reference&gt;;  # What population?
+    fhir:Evidence.exposureVariant @&lt;Reference&gt;*;  # What exposure?
+    fhir:Evidence.outcome @&lt;Reference&gt;*;    # What outcome?
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -506,40 +283,25 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# A measured or measurable amount
-&lt;Quantity&gt; CLOSED {
+# Related artifacts for a knowledge resource
+&lt;RelatedArtifact&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
-    fhir:Quantity.value @&lt;decimal&gt;?;        # Numerical value (with implicit 
-                                            # precision) 
-    fhir:Quantity.comparator @&lt;code&gt; AND
-    	{fhir:value @fhirvs:quantity-comparator}?;  # &lt; | &lt;= | &gt;= | &gt; - how to 
-                                            # understand the value 
-    fhir:Quantity.unit @&lt;string&gt;?;          # Unit representation
-    fhir:Quantity.system @&lt;uri&gt;?;           # System that defines coded unit form
-    fhir:Quantity.code @&lt;code&gt;?;            # Coded form of the unit
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Primitive Type integer
-&lt;integer&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:value xsd:integer MININCLUSIVE -2147483648 MAXINCLUSIVE 2147483647?;  # Primitive value for integer
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Set of values bounded by low and high
-&lt;Range&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:Range.low @&lt;SimpleQuantity&gt;?;      # Low limit
-    fhir:Range.high @&lt;SimpleQuantity&gt;?;     # High limit
+    fhir:RelatedArtifact.type @&lt;code&gt; AND
+    	{fhir:value @fhirvs:related-artifact-type};  # documentation | justification | 
+                                            # citation | predecessor | successor 
+                                            # | derived-from | depends-on | 
+                                            # composed-of 
+    fhir:RelatedArtifact.label @&lt;string&gt;?;  # Short label
+    fhir:RelatedArtifact.display @&lt;string&gt;?;  # Brief description of the related 
+                                            # artifact 
+    fhir:RelatedArtifact.citation @&lt;markdown&gt;?;  # Bibliographic citation for the 
+                                            # artifact 
+    fhir:RelatedArtifact.url @&lt;url&gt;?;       # Where the artifact can be accessed
+    fhir:RelatedArtifact.document @&lt;Attachment&gt;?;  # What document is being referenced
+    fhir:RelatedArtifact.resource @&lt;canonical&gt;?;  # What resource is being referenced
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -660,15 +422,6 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Primitive Type boolean
-&lt;boolean&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:value xsd:boolean?;                # Primitive value for boolean
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # Human-readable summary of the resource (essential clinical and business information)
 &lt;Narrative&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
@@ -713,15 +466,6 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for id
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Primitive Type decimal
-&lt;decimal&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:value xsd:decimal OR xsd:double?;  # Primitive value for decimal
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -784,6 +528,15 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:Attachment.title @&lt;string&gt;?;       # Label to display in place of the 
                                             # data 
     fhir:Attachment.creation @&lt;dateTime&gt;?;  # Date attachment was first created
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Primitive Type integer
+&lt;integer&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:value xsd:integer MININCLUSIVE -2147483648 MAXINCLUSIVE 2147483647?;  # Primitive value for integer
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -966,25 +719,14 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Related artifacts for a knowledge resource
-&lt;RelatedArtifact&gt; CLOSED {
+# Set of values bounded by low and high
+&lt;Range&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
-    fhir:RelatedArtifact.type @&lt;code&gt; AND
-    	{fhir:value @fhirvs:related-artifact-type};  # documentation | justification | 
-                                            # citation | predecessor | successor 
-                                            # | derived-from | depends-on | 
-                                            # composed-of 
-    fhir:RelatedArtifact.label @&lt;string&gt;?;  # Short label
-    fhir:RelatedArtifact.display @&lt;string&gt;?;  # Brief description of the related 
-                                            # artifact 
-    fhir:RelatedArtifact.citation @&lt;markdown&gt;?;  # Bibliographic citation for the 
-                                            # artifact 
-    fhir:RelatedArtifact.url @&lt;url&gt;?;       # Where the artifact can be accessed
-    fhir:RelatedArtifact.document @&lt;Attachment&gt;?;  # What document is being referenced
-    fhir:RelatedArtifact.resource @&lt;canonical&gt;?;  # What resource is being referenced
+    fhir:Range.low @&lt;SimpleQuantity&gt;?;      # Low limit
+    fhir:Range.high @&lt;SimpleQuantity&gt;?;     # High limit
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1009,6 +751,15 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:Timing.repeat @&lt;Timing.repeat&gt;?;   # When the event is to occur
     fhir:Timing.code @&lt;CodeableConcept&gt;?;   # BID | TID | QID | AM | PM | QD | 
                                             # QOD | + 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Primitive Type decimal
+&lt;decimal&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:value xsd:decimal OR xsd:double?;  # Primitive value for decimal
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1173,14 +924,17 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# A fixed quantity (no comparator)
-&lt;SimpleQuantity&gt; CLOSED {
+# A measured or measurable amount
+&lt;Quantity&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:Quantity.value @&lt;decimal&gt;?;        # Numerical value (with implicit 
                                             # precision) 
+    fhir:Quantity.comparator @&lt;code&gt; AND
+    	{fhir:value @fhirvs:quantity-comparator}?;  # &lt; | &lt;= | &gt;= | &gt; - how to 
+                                            # understand the value 
     fhir:Quantity.unit @&lt;string&gt;?;          # Unit representation
     fhir:Quantity.system @&lt;uri&gt;?;           # System that defines coded unit form
     fhir:Quantity.code @&lt;code&gt;?;            # Coded form of the unit
@@ -1193,6 +947,15 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:string?;                 # Primitive value for url
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Primitive Type boolean
+&lt;boolean&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # xml:id (or equivalent in JSON)
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:value xsd:boolean?;                # Primitive value for boolean
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1253,18 +1016,17 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What codes are expected
-&lt;DataRequirement.codeFilter&gt; CLOSED {
+# A fixed quantity (no comparator)
+&lt;SimpleQuantity&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
                                             # implementations 
-    fhir:DataRequirement.codeFilter.path @&lt;string&gt;?;  # A code-valued attribute to filter 
-                                            # on 
-    fhir:DataRequirement.codeFilter.searchParam @&lt;string&gt;?;  # A coded (token) parameter to 
-                                            # search on 
-    fhir:DataRequirement.codeFilter.valueSet @&lt;canonical&gt;?;  # Valueset for the filter
-    fhir:DataRequirement.codeFilter.code @&lt;Coding&gt;*;  # What code is expected
+    fhir:Quantity.value @&lt;decimal&gt;?;        # Numerical value (with implicit 
+                                            # precision) 
+    fhir:Quantity.unit @&lt;string&gt;?;          # Unit representation
+    fhir:Quantity.system @&lt;uri&gt;?;           # System that defines coded unit form
+    fhir:Quantity.code @&lt;code&gt;?;            # Coded form of the unit
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1278,26 +1040,6 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
                                             # perform the sort 
     fhir:DataRequirement.sort.direction @&lt;code&gt; AND
     	{fhir:value @fhirvs:sort-direction};  # ascending | descending
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# What dates/date ranges are expected
-&lt;DataRequirement.dateFilter&gt; CLOSED {
-    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.dateFilter.path @&lt;string&gt;?;  # A date-valued attribute to filter 
-                                            # on 
-    fhir:DataRequirement.dateFilter.searchParam @&lt;string&gt;?;  # A date valued parameter to search 
-                                            # on 
-    (                                       # The value of the filter, as a 
-                                            # Period, DateTime, or Duration 
-                                            # value 
-        fhir:DataRequirement.dateFilter.valueDateTime @&lt;dateTime&gt;  |
-        fhir:DataRequirement.dateFilter.valuePeriod @&lt;Period&gt;  |
-        fhir:DataRequirement.dateFilter.valueDuration @&lt;Duration&gt; 
-    )?;
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1341,6 +1083,26 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# What dates/date ranges are expected
+&lt;DataRequirement.dateFilter&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.dateFilter.path @&lt;string&gt;?;  # A date-valued attribute to filter 
+                                            # on 
+    fhir:DataRequirement.dateFilter.searchParam @&lt;string&gt;?;  # A date valued parameter to search 
+                                            # on 
+    (                                       # The value of the filter, as a 
+                                            # Period, DateTime, or Duration 
+                                            # value 
+        fhir:DataRequirement.dateFilter.valueDateTime @&lt;dateTime&gt;  |
+        fhir:DataRequirement.dateFilter.valuePeriod @&lt;Period&gt;  |
+        fhir:DataRequirement.dateFilter.valueDuration @&lt;Duration&gt; 
+    )?;
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # Amount of medication administered
 &lt;Dosage.doseAndRate&gt; CLOSED {
     fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
@@ -1361,18 +1123,69 @@ start=@&lt;Evidence&gt; AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# What codes are expected
+&lt;DataRequirement.codeFilter&gt; CLOSED {
+    fhir:Element.id @&lt;string&gt;?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @&lt;Extension&gt;*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.codeFilter.path @&lt;string&gt;?;  # A code-valued attribute to filter 
+                                            # on 
+    fhir:DataRequirement.codeFilter.searchParam @&lt;string&gt;?;  # A coded (token) parameter to 
+                                            # search on 
+    fhir:DataRequirement.codeFilter.valueSet @&lt;canonical&gt;?;  # Valueset for the filter
+    fhir:DataRequirement.codeFilter.code @&lt;Coding&gt;*;  # What code is expected
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 #---------------------- Reference Types -------------------
 
 #---------------------- Value Sets ------------------------
 
-# A unit of time (units from UCUM).
-fhirvs:units-of-time [&quot;s&quot; &quot;min&quot; &quot;h&quot; &quot;d&quot; &quot;wk&quot; &quot;mo&quot; &quot;a&quot;]
+# The status of a resource narrative.
+fhirvs:narrative-status [&quot;generated&quot; &quot;extensions&quot; &quot;additional&quot; &quot;empty&quot;]
+
+# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
+fhirvs:all-types [&quot;Address&quot; &quot;Age&quot; &quot;Annotation&quot; &quot;Attachment&quot; &quot;BackboneElement&quot; &quot;CodeableConcept&quot; &quot;Coding&quot; &quot;ContactDetail&quot; &quot;ContactPoint&quot; &quot;Contributor&quot; &quot;Count&quot; &quot;DataRequirement&quot; &quot;Distance&quot; &quot;Dosage&quot; &quot;Duration&quot; &quot;Element&quot; &quot;ElementDefinition&quot; &quot;Expression&quot; &quot;Extension&quot; &quot;HumanName&quot; &quot;Identifier&quot; &quot;MarketingStatus&quot; &quot;Meta&quot; &quot;Money&quot; &quot;MoneyQuantity&quot; &quot;Narrative&quot; &quot;ParameterDefinition&quot; &quot;Period&quot; &quot;Population&quot; &quot;ProdCharacteristic&quot; &quot;ProductShelfLife&quot; &quot;Quantity&quot; &quot;Range&quot; &quot;Ratio&quot; &quot;Reference&quot; &quot;RelatedArtifact&quot; &quot;SampledData&quot; &quot;Signature&quot; &quot;SimpleQuantity&quot; &quot;SubstanceAmount&quot; &quot;Timing&quot; &quot;TriggerDefinition&quot; &quot;UsageContext&quot; &quot;base64Binary&quot; &quot;boolean&quot; &quot;canonical&quot; &quot;code&quot; &quot;date&quot; &quot;dateTime&quot; &quot;decimal&quot; &quot;id&quot; &quot;instant&quot; &quot;integer&quot; &quot;markdown&quot; &quot;oid&quot; &quot;positiveInt&quot; &quot;string&quot; &quot;time&quot; &quot;unsignedInt&quot; &quot;uri&quot; &quot;url&quot; &quot;uuid&quot; &quot;xhtml&quot; &quot;Account&quot; &quot;ActivityDefinition&quot; &quot;AdverseEvent&quot; &quot;AllergyIntolerance&quot; &quot;Appointment&quot; &quot;AppointmentResponse&quot; &quot;AuditEvent&quot; &quot;Basic&quot; &quot;Binary&quot; &quot;BiologicallyDerivedProduct&quot; &quot;BodyStructure&quot; &quot;Bundle&quot; &quot;CapabilityStatement&quot; &quot;CarePlan&quot; &quot;CareTeam&quot; &quot;CatalogEntry&quot; &quot;ChargeItem&quot; &quot;ChargeItemDefinition&quot; &quot;Claim&quot; &quot;ClaimResponse&quot; &quot;ClinicalImpression&quot; &quot;ClinicalProfile&quot; &quot;CodeSystem&quot; &quot;Communication&quot; &quot;CommunicationRequest&quot; &quot;CompartmentDefinition&quot; &quot;Composition&quot; &quot;ConceptMap&quot; &quot;Condition&quot; &quot;Consent&quot; &quot;Contract&quot; &quot;Coverage&quot; &quot;CoverageEligibilityRequest&quot; &quot;CoverageEligibilityResponse&quot; &quot;DetectedIssue&quot; &quot;Device&quot; &quot;DeviceDefinition&quot; &quot;DeviceMetric&quot; &quot;DeviceRequest&quot; &quot;DeviceUseStatement&quot; &quot;DiagnosticReport&quot; &quot;DocumentManifest&quot; &quot;DocumentReference&quot; &quot;DomainResource&quot; &quot;EffectEvidenceSynthesis&quot; &quot;Encounter&quot; &quot;Endpoint&quot; &quot;EnrollmentRequest&quot; &quot;EnrollmentResponse&quot; &quot;EpisodeOfCare&quot; &quot;EventDefinition&quot; &quot;Evidence&quot; &quot;EvidenceVariable&quot; &quot;ExampleScenario&quot; &quot;ExplanationOfBenefit&quot; &quot;FamilyMemberHistory&quot; &quot;Flag&quot; &quot;Goal&quot; &quot;GraphDefinition&quot; &quot;Group&quot; &quot;GuidanceResponse&quot; &quot;HealthcareService&quot; &quot;ImagingStudy&quot; &quot;Immunization&quot; &quot;ImmunizationEvaluation&quot; &quot;ImmunizationRecommendation&quot; &quot;ImplementationGuide&quot; &quot;InsurancePlan&quot; &quot;Invoice&quot; &quot;Library&quot; &quot;Linkage&quot; &quot;List&quot; &quot;Location&quot; &quot;Measure&quot; &quot;MeasureReport&quot; &quot;Media&quot; &quot;Medication&quot; &quot;MedicationAdministration&quot; &quot;MedicationDispense&quot; &quot;MedicationKnowledge&quot; &quot;MedicationRequest&quot; &quot;MedicationStatement&quot; &quot;MedicinalProduct&quot; &quot;MedicinalProductAuthorization&quot; &quot;MedicinalProductContraindication&quot; &quot;MedicinalProductIndication&quot; &quot;MedicinalProductIngredient&quot; &quot;MedicinalProductInteraction&quot; &quot;MedicinalProductManufactured&quot; &quot;MedicinalProductPackaged&quot; &quot;MedicinalProductPharmaceutical&quot; &quot;MedicinalProductUndesirableEffect&quot; &quot;MessageDefinition&quot; &quot;MessageHeader&quot; &quot;MolecularSequence&quot; &quot;NamingSystem&quot; &quot;NutritionOrder&quot; &quot;Observation&quot; &quot;ObservationDefinition&quot; &quot;OperationDefinition&quot; &quot;OperationOutcome&quot; &quot;Organization&quot; &quot;OrganizationAffiliation&quot; &quot;Parameters&quot; &quot;Patient&quot; &quot;PaymentNotice&quot; &quot;PaymentReconciliation&quot; &quot;Person&quot; &quot;PlanDefinition&quot; &quot;Practitioner&quot; &quot;PractitionerRole&quot; &quot;Procedure&quot; &quot;Provenance&quot; &quot;Questionnaire&quot; &quot;QuestionnaireResponse&quot; &quot;RelatedPerson&quot; &quot;RequestGroup&quot; &quot;ResearchDefinition&quot; &quot;ResearchElementDefinition&quot; &quot;ResearchStudy&quot; &quot;ResearchSubject&quot; &quot;Resource&quot; &quot;RiskAssessment&quot; &quot;RiskEvidenceSynthesis&quot; &quot;Schedule&quot; &quot;SearchParameter&quot; &quot;ServiceRequest&quot; &quot;Slot&quot; &quot;Specimen&quot; &quot;SpecimenDefinition&quot; &quot;StructureDefinition&quot; &quot;StructureMap&quot; &quot;Subscription&quot; &quot;Substance&quot; &quot;SubstanceDefinition&quot; &quot;SubstanceNucleicAcid&quot; &quot;SubstancePolymer&quot; &quot;SubstanceProtein&quot; &quot;SubstanceReferenceInformation&quot; &quot;SubstanceSourceMaterial&quot; &quot;SupplyDelivery&quot; &quot;SupplyRequest&quot; &quot;Task&quot; &quot;TerminologyCapabilities&quot; &quot;TestReport&quot; &quot;TestScript&quot; &quot;ValueSet&quot; &quot;VerificationResult&quot; &quot;VisionPrescription&quot; &quot;Type&quot; &quot;Any&quot;]
+
+# The type of contributor.
+fhirvs:contributor-type [&quot;author&quot; &quot;editor&quot; &quot;reviewer&quot; &quot;endorser&quot;]
+
+# The use of an address.
+fhirvs:address-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &quot;old&quot; &quot;billing&quot;]
+
+# The type of an address (physical / postal).
+fhirvs:address-type [&quot;postal&quot; &quot;physical&quot; &quot;both&quot;]
+
+# Real world event relating to the schedule.
+fhirvs:event-timing [&quot;MORN&quot; &quot;MORN.early&quot; &quot;MORN.late&quot; &quot;NOON&quot; &quot;AFT&quot; &quot;AFT.early&quot; &quot;AFT.late&quot; &quot;EVE&quot; &quot;EVE.early&quot; &quot;EVE.late&quot; &quot;NIGHT&quot; &quot;PHS&quot; &quot;HS&quot; &quot;WAKE&quot; &quot;C&quot; &quot;CM&quot; &quot;CD&quot; &quot;CV&quot; &quot;AC&quot; &quot;ACM&quot; &quot;ACD&quot; &quot;ACV&quot; &quot;PC&quot; &quot;PCM&quot; &quot;PCD&quot; &quot;PCV&quot;]
+
+# How the Quantity should be understood and represented.
+fhirvs:quantity-comparator [&quot;&lt;&quot; &quot;&lt;=&quot; &quot;&gt;=&quot; &quot;&gt;&quot;]
+
+# Telecommunications form for contact point.
+fhirvs:contact-point-system [&quot;phone&quot; &quot;fax&quot; &quot;email&quot; &quot;pager&quot; &quot;url&quot; &quot;sms&quot; &quot;other&quot;]
+
+# The days of the week.
+fhirvs:days-of-week [&quot;mon&quot; &quot;tue&quot; &quot;wed&quot; &quot;thu&quot; &quot;fri&quot; &quot;sat&quot; &quot;sun&quot;]
+
+# The type of relationship to the related artifact.
+fhirvs:related-artifact-type [&quot;documentation&quot; &quot;justification&quot; &quot;citation&quot; &quot;predecessor&quot; &quot;successor&quot; &quot;derived-from&quot; &quot;depends-on&quot; &quot;composed-of&quot;]
+
+# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
+fhirvs:mimetypes EXTERNAL
 
 # The use of a human name.
 fhirvs:name-use [&quot;usual&quot; &quot;official&quot; &quot;temp&quot; &quot;nickname&quot; &quot;anonymous&quot; &quot;old&quot; &quot;maiden&quot;]
 
-# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
-fhirvs:all-types [&quot;Address&quot; &quot;Age&quot; &quot;Annotation&quot; &quot;Attachment&quot; &quot;BackboneElement&quot; &quot;CodeableConcept&quot; &quot;Coding&quot; &quot;ContactDetail&quot; &quot;ContactPoint&quot; &quot;Contributor&quot; &quot;Count&quot; &quot;DataRequirement&quot; &quot;Distance&quot; &quot;Dosage&quot; &quot;Duration&quot; &quot;Element&quot; &quot;ElementDefinition&quot; &quot;Expression&quot; &quot;Extension&quot; &quot;HumanName&quot; &quot;Identifier&quot; &quot;MarketingStatus&quot; &quot;Meta&quot; &quot;Money&quot; &quot;MoneyQuantity&quot; &quot;Narrative&quot; &quot;ParameterDefinition&quot; &quot;Period&quot; &quot;Population&quot; &quot;ProdCharacteristic&quot; &quot;ProductShelfLife&quot; &quot;Quantity&quot; &quot;Range&quot; &quot;Ratio&quot; &quot;Reference&quot; &quot;RelatedArtifact&quot; &quot;SampledData&quot; &quot;Signature&quot; &quot;SimpleQuantity&quot; &quot;SubstanceAmount&quot; &quot;Timing&quot; &quot;TriggerDefinition&quot; &quot;UsageContext&quot; &quot;base64Binary&quot; &quot;boolean&quot; &quot;canonical&quot; &quot;code&quot; &quot;date&quot; &quot;dateTime&quot; &quot;decimal&quot; &quot;id&quot; &quot;instant&quot; &quot;integer&quot; &quot;markdown&quot; &quot;oid&quot; &quot;positiveInt&quot; &quot;string&quot; &quot;time&quot; &quot;unsignedInt&quot; &quot;uri&quot; &quot;url&quot; &quot;uuid&quot; &quot;xhtml&quot; &quot;Account&quot; &quot;ActivityDefinition&quot; &quot;AdverseEvent&quot; &quot;AllergyIntolerance&quot; &quot;Appointment&quot; &quot;AppointmentResponse&quot; &quot;AuditEvent&quot; &quot;Basic&quot; &quot;Binary&quot; &quot;BiologicallyDerivedProduct&quot; &quot;BodyStructure&quot; &quot;Bundle&quot; &quot;CapabilityStatement&quot; &quot;CarePlan&quot; &quot;CareTeam&quot; &quot;CatalogEntry&quot; &quot;ChargeItem&quot; &quot;ChargeItemDefinition&quot; &quot;Claim&quot; &quot;ClaimResponse&quot; &quot;ClinicalImpression&quot; &quot;CodeSystem&quot; &quot;Communication&quot; &quot;CommunicationRequest&quot; &quot;CompartmentDefinition&quot; &quot;Composition&quot; &quot;ConceptMap&quot; &quot;Condition&quot; &quot;Consent&quot; &quot;Contract&quot; &quot;Coverage&quot; &quot;CoverageEligibilityRequest&quot; &quot;CoverageEligibilityResponse&quot; &quot;DetectedIssue&quot; &quot;Device&quot; &quot;DeviceDefinition&quot; &quot;DeviceMetric&quot; &quot;DeviceRequest&quot; &quot;DeviceUseStatement&quot; &quot;DiagnosticReport&quot; &quot;DocumentManifest&quot; &quot;DocumentReference&quot; &quot;DomainResource&quot; &quot;EffectEvidenceSynthesis&quot; &quot;Encounter&quot; &quot;Endpoint&quot; &quot;EnrollmentRequest&quot; &quot;EnrollmentResponse&quot; &quot;EpisodeOfCare&quot; &quot;EventDefinition&quot; &quot;Evidence&quot; &quot;EvidenceVariable&quot; &quot;ExampleScenario&quot; &quot;ExplanationOfBenefit&quot; &quot;FamilyMemberHistory&quot; &quot;Flag&quot; &quot;Goal&quot; &quot;GraphDefinition&quot; &quot;Group&quot; &quot;GuidanceResponse&quot; &quot;HealthcareService&quot; &quot;ImagingStudy&quot; &quot;Immunization&quot; &quot;ImmunizationEvaluation&quot; &quot;ImmunizationRecommendation&quot; &quot;ImplementationGuide&quot; &quot;InsurancePlan&quot; &quot;Invoice&quot; &quot;Library&quot; &quot;Linkage&quot; &quot;List&quot; &quot;Location&quot; &quot;Measure&quot; &quot;MeasureReport&quot; &quot;Media&quot; &quot;Medication&quot; &quot;MedicationAdministration&quot; &quot;MedicationDispense&quot; &quot;MedicationKnowledge&quot; &quot;MedicationRequest&quot; &quot;MedicationStatement&quot; &quot;MedicinalProduct&quot; &quot;MedicinalProductAuthorization&quot; &quot;MedicinalProductContraindication&quot; &quot;MedicinalProductIndication&quot; &quot;MedicinalProductIngredient&quot; &quot;MedicinalProductInteraction&quot; &quot;MedicinalProductManufactured&quot; &quot;MedicinalProductPackaged&quot; &quot;MedicinalProductPharmaceutical&quot; &quot;MedicinalProductUndesirableEffect&quot; &quot;MessageDefinition&quot; &quot;MessageHeader&quot; &quot;MolecularSequence&quot; &quot;NamingSystem&quot; &quot;NutritionOrder&quot; &quot;Observation&quot; &quot;ObservationDefinition&quot; &quot;OperationDefinition&quot; &quot;OperationOutcome&quot; &quot;Organization&quot; &quot;OrganizationAffiliation&quot; &quot;Parameters&quot; &quot;Patient&quot; &quot;PaymentNotice&quot; &quot;PaymentReconciliation&quot; &quot;Person&quot; &quot;PlanDefinition&quot; &quot;Practitioner&quot; &quot;PractitionerRole&quot; &quot;Procedure&quot; &quot;Provenance&quot; &quot;Questionnaire&quot; &quot;QuestionnaireResponse&quot; &quot;RelatedPerson&quot; &quot;RequestGroup&quot; &quot;ResearchDefinition&quot; &quot;ResearchElementDefinition&quot; &quot;ResearchStudy&quot; &quot;ResearchSubject&quot; &quot;Resource&quot; &quot;RiskAssessment&quot; &quot;RiskEvidenceSynthesis&quot; &quot;Schedule&quot; &quot;SearchParameter&quot; &quot;ServiceRequest&quot; &quot;Slot&quot; &quot;Specimen&quot; &quot;SpecimenDefinition&quot; &quot;Statistic&quot; &quot;StructureDefinition&quot; &quot;StructureMap&quot; &quot;Subscription&quot; &quot;Substance&quot; &quot;SubstanceDefinition&quot; &quot;SubstanceNucleicAcid&quot; &quot;SubstancePolymer&quot; &quot;SubstanceProtein&quot; &quot;SubstanceReferenceInformation&quot; &quot;SubstanceSourceMaterial&quot; &quot;SupplyDelivery&quot; &quot;SupplyRequest&quot; &quot;Task&quot; &quot;TerminologyCapabilities&quot; &quot;TestReport&quot; &quot;TestScript&quot; &quot;ValueSet&quot; &quot;VerificationResult&quot; &quot;VisionPrescription&quot; &quot;Type&quot; &quot;Any&quot;]
+# Identifies the purpose for this identifier, if known .
+fhirvs:identifier-use [&quot;usual&quot; &quot;official&quot; &quot;temp&quot; &quot;secondary&quot; &quot;old&quot;]
+
+# Whether an operation parameter is an input or an output parameter.
+fhirvs:operation-parameter-use [&quot;in&quot; &quot;out&quot;]
+
+# A unit of time (units from UCUM).
+fhirvs:units-of-time [&quot;s&quot; &quot;min&quot; &quot;h&quot; &quot;d&quot; &quot;wk&quot; &quot;mo&quot; &quot;a&quot;]
 
 # The lifecycle status of an artifact.
 fhirvs:publication-status [&quot;draft&quot; &quot;active&quot; &quot;retired&quot; &quot;unknown&quot;]
@@ -1383,47 +1196,11 @@ fhirvs:contact-point-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &qu
 # The possible sort directions, ascending or descending.
 fhirvs:sort-direction [&quot;ascending&quot; &quot;descending&quot;]
 
-# The type of an address (physical / postal).
-fhirvs:address-type [&quot;postal&quot; &quot;physical&quot; &quot;both&quot;]
-
-# The days of the week.
-fhirvs:days-of-week [&quot;mon&quot; &quot;tue&quot; &quot;wed&quot; &quot;thu&quot; &quot;fri&quot; &quot;sat&quot; &quot;sun&quot;]
-
 # Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
 fhirvs:currencies [&quot;AED&quot; &quot;AFN&quot; &quot;ALL&quot; &quot;AMD&quot; &quot;ANG&quot; &quot;AOA&quot; &quot;ARS&quot; &quot;AUD&quot; &quot;AWG&quot; &quot;AZN&quot; &quot;BAM&quot; &quot;BBD&quot; &quot;BDT&quot; &quot;BGN&quot; &quot;BHD&quot; &quot;BIF&quot; &quot;BMD&quot; &quot;BND&quot; &quot;BOB&quot; &quot;BOV&quot; &quot;BRL&quot; &quot;BSD&quot; &quot;BTN&quot; &quot;BWP&quot; &quot;BYN&quot; &quot;BZD&quot; &quot;CAD&quot; &quot;CDF&quot; &quot;CHE&quot; &quot;CHF&quot; &quot;CHW&quot; &quot;CLF&quot; &quot;CLP&quot; &quot;CNY&quot; &quot;COP&quot; &quot;COU&quot; &quot;CRC&quot; &quot;CUC&quot; &quot;CUP&quot; &quot;CVE&quot; &quot;CZK&quot; &quot;DJF&quot; &quot;DKK&quot; &quot;DOP&quot; &quot;DZD&quot; &quot;EGP&quot; &quot;ERN&quot; &quot;ETB&quot; &quot;EUR&quot; &quot;FJD&quot; &quot;FKP&quot; &quot;GBP&quot; &quot;GEL&quot; &quot;GGP&quot; &quot;GHS&quot; &quot;GIP&quot; &quot;GMD&quot; &quot;GNF&quot; &quot;GTQ&quot; &quot;GYD&quot; &quot;HKD&quot; &quot;HNL&quot; &quot;HRK&quot; &quot;HTG&quot; &quot;HUF&quot; &quot;IDR&quot; &quot;ILS&quot; &quot;IMP&quot; &quot;INR&quot; &quot;IQD&quot; &quot;IRR&quot; &quot;ISK&quot; &quot;JEP&quot; &quot;JMD&quot; &quot;JOD&quot; &quot;JPY&quot; &quot;KES&quot; &quot;KGS&quot; &quot;KHR&quot; &quot;KMF&quot; &quot;KPW&quot; &quot;KRW&quot; &quot;KWD&quot; &quot;KYD&quot; &quot;KZT&quot; &quot;LAK&quot; &quot;LBP&quot; &quot;LKR&quot; &quot;LRD&quot; &quot;LSL&quot; &quot;LYD&quot; &quot;MAD&quot; &quot;MDL&quot; &quot;MGA&quot; &quot;MKD&quot; &quot;MMK&quot; &quot;MNT&quot; &quot;MOP&quot; &quot;MRU&quot; &quot;MUR&quot; &quot;MVR&quot; &quot;MWK&quot; &quot;MXN&quot; &quot;MXV&quot; &quot;MYR&quot; &quot;MZN&quot; &quot;NAD&quot; &quot;NGN&quot; &quot;NIO&quot; &quot;NOK&quot; &quot;NPR&quot; &quot;NZD&quot; &quot;OMR&quot; &quot;PAB&quot; &quot;PEN&quot; &quot;PGK&quot; &quot;PHP&quot; &quot;PKR&quot; &quot;PLN&quot; &quot;PYG&quot; &quot;QAR&quot; &quot;RON&quot; &quot;RSD&quot; &quot;RUB&quot; &quot;RWF&quot; &quot;SAR&quot; &quot;SBD&quot; &quot;SCR&quot; &quot;SDG&quot; &quot;SEK&quot; &quot;SGD&quot; &quot;SHP&quot; &quot;SLL&quot; &quot;SOS&quot; &quot;SRD&quot; &quot;SSP&quot; &quot;STN&quot; &quot;SVC&quot; &quot;SYP&quot; &quot;SZL&quot; &quot;THB&quot; &quot;TJS&quot; &quot;TMT&quot; &quot;TND&quot; &quot;TOP&quot; &quot;TRY&quot; &quot;TTD&quot; &quot;TVD&quot; &quot;TWD&quot; &quot;TZS&quot; &quot;UAH&quot; &quot;UGX&quot; &quot;USD&quot; &quot;USN&quot; &quot;UYI&quot; &quot;UYU&quot; &quot;UZS&quot; &quot;VEF&quot; &quot;VND&quot; &quot;VUV&quot; &quot;WST&quot; &quot;XAF&quot; &quot;XAG&quot; &quot;XAU&quot; &quot;XBA&quot; &quot;XBB&quot; &quot;XBC&quot; &quot;XBD&quot; &quot;XCD&quot; &quot;XDR&quot; &quot;XOF&quot; &quot;XPD&quot; &quot;XPF&quot; &quot;XPT&quot; &quot;XSU&quot; &quot;XTS&quot; &quot;XUA&quot; &quot;XXX&quot; &quot;YER&quot; &quot;ZAR&quot; &quot;ZMW&quot; &quot;ZWL&quot;]
 
-# Real world event relating to the schedule.
-fhirvs:event-timing [&quot;MORN&quot; &quot;MORN.early&quot; &quot;MORN.late&quot; &quot;NOON&quot; &quot;AFT&quot; &quot;AFT.early&quot; &quot;AFT.late&quot; &quot;EVE&quot; &quot;EVE.early&quot; &quot;EVE.late&quot; &quot;NIGHT&quot; &quot;PHS&quot; &quot;HS&quot; &quot;WAKE&quot; &quot;C&quot; &quot;CM&quot; &quot;CD&quot; &quot;CV&quot; &quot;AC&quot; &quot;ACM&quot; &quot;ACD&quot; &quot;ACV&quot; &quot;PC&quot; &quot;PCM&quot; &quot;PCD&quot; &quot;PCV&quot;]
-
-# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
-fhirvs:mimetypes EXTERNAL
-
-# The status of a resource narrative.
-fhirvs:narrative-status [&quot;generated&quot; &quot;extensions&quot; &quot;additional&quot; &quot;empty&quot;]
-
-# The use of an address.
-fhirvs:address-use [&quot;home&quot; &quot;work&quot; &quot;temp&quot; &quot;old&quot; &quot;billing&quot;]
-
-# Telecommunications form for contact point.
-fhirvs:contact-point-system [&quot;phone&quot; &quot;fax&quot; &quot;email&quot; &quot;pager&quot; &quot;url&quot; &quot;sms&quot; &quot;other&quot;]
-
-# Identifies the purpose for this identifier, if known .
-fhirvs:identifier-use [&quot;usual&quot; &quot;official&quot; &quot;temp&quot; &quot;secondary&quot; &quot;old&quot;]
-
-# The type of relationship to the related artifact.
-fhirvs:related-artifact-type [&quot;documentation&quot; &quot;justification&quot; &quot;citation&quot; &quot;predecessor&quot; &quot;successor&quot; &quot;derived-from&quot; &quot;depends-on&quot; &quot;composed-of&quot;]
-
 # The type of trigger.
 fhirvs:trigger-type [&quot;named-event&quot; &quot;periodic&quot; &quot;data-changed&quot; &quot;data-added&quot; &quot;data-modified&quot; &quot;data-removed&quot; &quot;data-accessed&quot; &quot;data-access-ended&quot;]
-
-# Whether an operation parameter is an input or an output parameter.
-fhirvs:operation-parameter-use [&quot;in&quot; &quot;out&quot;]
-
-# How the Quantity should be understood and represented.
-fhirvs:quantity-comparator [&quot;&lt;&quot; &quot;&lt;=&quot; &quot;&gt;=&quot; &quot;&gt;&quot;]
-
-# The type of contributor.
-fhirvs:contributor-type [&quot;author&quot; &quot;editor&quot; &quot;reviewer&quot; &quot;endorser&quot;]
 
 </pre>
 </div>
@@ -1449,7 +1226,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-0a3a4eda5b) generated on Tue, Apr 16, 2019 10:10-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-baa72e6471) generated on Tue, Apr 16, 2019 08:57-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 

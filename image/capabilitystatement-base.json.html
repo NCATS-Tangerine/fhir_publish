@@ -40,7 +40,8 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
-			<b><font size="+2">EBMOnFHIR Statistics Model</font></b>
+			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
 			<div id="hl7-nav">
 				 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
 					<img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
@@ -126,7 +127,7 @@
   &quot;name&quot; : &quot;Base FHIR Capability Statement (Full)&quot;,
   &quot;status&quot; : &quot;draft&quot;,
   &quot;experimental&quot; : true,
-  &quot;date&quot; : &quot;2019-04-16T10:07:03-05:00&quot;,
+  &quot;date&quot; : &quot;2019-04-16T08:42:31-05:00&quot;,
   &quot;publisher&quot; : &quot;FHIR Project Team&quot;,
   &quot;contact&quot; : [{
     &quot;telecom&quot; : [{
@@ -1017,6 +1018,12 @@
         &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/AuditEvent-entity-role&quot;,
         &quot;type&quot; : &quot;token&quot;,
         &quot;documentation&quot; : &quot;What role the entity played&quot;
+      },
+      {
+        &quot;name&quot; : &quot;purpose&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/AuditEvent-purpose&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;The purposeOfUse of the event&quot;
       },
       {
         &quot;name&quot; : &quot;source&quot;,
@@ -2630,6 +2637,226 @@
         &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalImpression-status&quot;,
         &quot;type&quot; : &quot;token&quot;,
         &quot;documentation&quot; : &quot;draft | completed | entered-in-error&quot;
+      }]
+    },
+    {
+      &quot;type&quot; : &quot;ClinicalProfile&quot;,
+      &quot;profile&quot; : &quot;http://hl7.org/fhir/StructureDefinition/ClinicalProfile&quot;,
+      &quot;interaction&quot; : [{
+        &quot;code&quot; : &quot;read&quot;,
+        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
+      },
+      {
+        &quot;code&quot; : &quot;vread&quot;,
+        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
+      },
+      {
+        &quot;code&quot; : &quot;update&quot;,
+        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
+      },
+      {
+        &quot;code&quot; : &quot;delete&quot;,
+        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
+      },
+      {
+        &quot;code&quot; : &quot;history-instance&quot;,
+        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
+      },
+      {
+        &quot;code&quot; : &quot;history-type&quot;,
+        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
+      },
+      {
+        &quot;code&quot; : &quot;create&quot;,
+        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
+      },
+      {
+        &quot;code&quot; : &quot;search-type&quot;,
+        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
+      }],
+      &quot;conditionalCreate&quot; : true,
+      &quot;conditionalUpdate&quot; : true,
+      &quot;conditionalDelete&quot; : &quot;multiple&quot;,
+      &quot;referencePolicy&quot; : [&quot;literal&quot;,
+      &quot;logical&quot;],
+      &quot;searchInclude&quot; : [&quot;ClinicalProfile.cohort&quot;,
+      &quot;ClinicalProfile.medicationreference&quot;,
+      &quot;ClinicalProfile.reporter&quot;,
+      &quot;ClinicalProfile.population&quot;,
+      &quot;ClinicalProfile.medicationcorrelatedmedref&quot;],
+      &quot;searchParam&quot; : [{
+        &quot;name&quot; : &quot;date&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-date&quot;,
+        &quot;type&quot; : &quot;date&quot;,
+        &quot;documentation&quot; : &quot;The date of the clinical profile&quot;
+      },
+      {
+        &quot;name&quot; : &quot;labcode&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-labcode&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Lab code&quot;
+      },
+      {
+        &quot;name&quot; : &quot;medicationcorrelatedphenotype&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedphenotype&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Medication correlated phenotype&quot;
+      },
+      {
+        &quot;name&quot; : &quot;phenotypecorrelatedphenotype&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedphenotype&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Phenotype  correlated phenotype&quot;
+      },
+      {
+        &quot;name&quot; : &quot;diagnosiscorrelatedphenotype&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedphenotype&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Diagnosis correlated phenotype&quot;
+      },
+      {
+        &quot;name&quot; : &quot;cohort&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-cohort&quot;,
+        &quot;type&quot; : &quot;reference&quot;,
+        &quot;documentation&quot; : &quot;The cohort being profiled&quot;
+      },
+      {
+        &quot;name&quot; : &quot;procedurecorrelatedphenotype&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedphenotype&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Procedure correlated phenotype&quot;
+      },
+      {
+        &quot;name&quot; : &quot;phenotypecorrelatedprocedure&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedprocedure&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Phenotype  correlated procedure&quot;
+      },
+      {
+        &quot;name&quot; : &quot;medicationcategory&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcategory&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Medication category&quot;
+      },
+      {
+        &quot;name&quot; : &quot;medicationcorrelatedmedcode&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedmedcode&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Medication correlated medication code&quot;
+      },
+      {
+        &quot;name&quot; : &quot;correlatedlabcode&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-correlatedlabcode&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Lab correlated lab code&quot;
+      },
+      {
+        &quot;name&quot; : &quot;procedurecorrelatedmedcategory&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedmedcategory&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Procedure correlated medication category&quot;
+      },
+      {
+        &quot;name&quot; : &quot;identifier&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-identifier&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;External identifier of the clinical profile to be returned&quot;
+      },
+      {
+        &quot;name&quot; : &quot;medicationreference&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationreference&quot;,
+        &quot;type&quot; : &quot;reference&quot;,
+        &quot;documentation&quot; : &quot;Medication reference&quot;
+      },
+      {
+        &quot;name&quot; : &quot;reporter&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-reporter&quot;,
+        &quot;type&quot; : &quot;reference&quot;,
+        &quot;documentation&quot; : &quot;The reporter to return clinical profile results for&quot;
+      },
+      {
+        &quot;name&quot; : &quot;procedurecorrelatedprocedure&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecorrelatedprocedure&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Procedure correlated procedure&quot;
+      },
+      {
+        &quot;name&quot; : &quot;population&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-population&quot;,
+        &quot;type&quot; : &quot;reference&quot;,
+        &quot;documentation&quot; : &quot;The  population being profiled&quot;
+      },
+      {
+        &quot;name&quot; : &quot;medicationcorrelatedmedcategory&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedmedcategory&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Medication correlated medication category&quot;
+      },
+      {
+        &quot;name&quot; : &quot;procedurecode&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-procedurecode&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Procedure  code&quot;
+      },
+      {
+        &quot;name&quot; : &quot;diagnosiscorrelatedmedcategory&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedmedcategory&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Diagnosis correlated medication category&quot;
+      },
+      {
+        &quot;name&quot; : &quot;medicationcode&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcode&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Medication code&quot;
+      },
+      {
+        &quot;name&quot; : &quot;diagnosiscode&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscode&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Diagnosis code&quot;
+      },
+      {
+        &quot;name&quot; : &quot;phenotypecorrelatedmedcategory&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecorrelatedmedcategory&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Phenotype  correlated medication category&quot;
+      },
+      {
+        &quot;name&quot; : &quot;medicationcorrelatedprocedure&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedprocedure&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Medication correlated procedure&quot;
+      },
+      {
+        &quot;name&quot; : &quot;medicationcorrelatedmedref&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelatedmedref&quot;,
+        &quot;type&quot; : &quot;reference&quot;,
+        &quot;documentation&quot; : &quot;Medication correlated medication reference&quot;
+      },
+      {
+        &quot;name&quot; : &quot;medicationcorrelateddiagnosis&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-medicationcorrelateddiagnosis&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Medication correlated phenotype&quot;
+      },
+      {
+        &quot;name&quot; : &quot;diagnosiscorrelatedprocedure&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-diagnosiscorrelatedprocedure&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Diagnosis correlated procedure&quot;
+      },
+      {
+        &quot;name&quot; : &quot;status&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-status&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;The status of the profile&quot;
+      },
+      {
+        &quot;name&quot; : &quot;phenotypecode&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/ClinicalProfile-phenotypecode&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Phenotype  code&quot;
       }]
     },
     {
@@ -6318,6 +6545,11 @@
       &quot;conditionalDelete&quot; : &quot;multiple&quot;,
       &quot;referencePolicy&quot; : [&quot;literal&quot;,
       &quot;logical&quot;],
+      &quot;searchInclude&quot; : [&quot;Evidence.successor&quot;,
+      &quot;Evidence.derived-from&quot;,
+      &quot;Evidence.predecessor&quot;,
+      &quot;Evidence.composed-of&quot;,
+      &quot;Evidence.depends-on&quot;],
       &quot;searchParam&quot; : [{
         &quot;name&quot; : &quot;date&quot;,
         &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-date&quot;,
@@ -6329,6 +6561,12 @@
         &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-identifier&quot;,
         &quot;type&quot; : &quot;token&quot;,
         &quot;documentation&quot; : &quot;External identifier for the evidence&quot;
+      },
+      {
+        &quot;name&quot; : &quot;successor&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-successor&quot;,
+        &quot;type&quot; : &quot;reference&quot;,
+        &quot;documentation&quot; : &quot;What resource is being referenced&quot;
       },
       {
         &quot;name&quot; : &quot;context-type-value&quot;,
@@ -6349,16 +6587,34 @@
         &quot;documentation&quot; : &quot;The description of the evidence&quot;
       },
       {
+        &quot;name&quot; : &quot;derived-from&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-derived-from&quot;,
+        &quot;type&quot; : &quot;reference&quot;,
+        &quot;documentation&quot; : &quot;What resource is being referenced&quot;
+      },
+      {
         &quot;name&quot; : &quot;context-type&quot;,
         &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-context-type&quot;,
         &quot;type&quot; : &quot;token&quot;,
         &quot;documentation&quot; : &quot;A type of use context assigned to the evidence&quot;
       },
       {
+        &quot;name&quot; : &quot;predecessor&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-predecessor&quot;,
+        &quot;type&quot; : &quot;reference&quot;,
+        &quot;documentation&quot; : &quot;What resource is being referenced&quot;
+      },
+      {
         &quot;name&quot; : &quot;title&quot;,
         &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-title&quot;,
         &quot;type&quot; : &quot;string&quot;,
         &quot;documentation&quot; : &quot;The human-friendly name of the evidence&quot;
+      },
+      {
+        &quot;name&quot; : &quot;composed-of&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-composed-of&quot;,
+        &quot;type&quot; : &quot;reference&quot;,
+        &quot;documentation&quot; : &quot;What resource is being referenced&quot;
       },
       {
         &quot;name&quot; : &quot;version&quot;,
@@ -6385,6 +6641,12 @@
         &quot;documentation&quot; : &quot;The time during which the evidence is intended to be in use&quot;
       },
       {
+        &quot;name&quot; : &quot;depends-on&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-depends-on&quot;,
+        &quot;type&quot; : &quot;reference&quot;,
+        &quot;documentation&quot; : &quot;What resource is being referenced&quot;
+      },
+      {
         &quot;name&quot; : &quot;name&quot;,
         &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-name&quot;,
         &quot;type&quot; : &quot;string&quot;,
@@ -6401,6 +6663,12 @@
         &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-publisher&quot;,
         &quot;type&quot; : &quot;string&quot;,
         &quot;documentation&quot; : &quot;Name of the publisher of the evidence&quot;
+      },
+      {
+        &quot;name&quot; : &quot;topic&quot;,
+        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Evidence-topic&quot;,
+        &quot;type&quot; : &quot;token&quot;,
+        &quot;documentation&quot; : &quot;Topics associated with the Evidence&quot;
       },
       {
         &quot;name&quot; : &quot;context-type-quantity&quot;,
@@ -7314,6 +7582,8 @@
       &quot;ChargeItem.patient&quot;,
       &quot;ClinicalImpression.patient&quot;,
       &quot;ClinicalImpression.subject&quot;,
+      &quot;ClinicalProfile.cohort&quot;,
+      &quot;ClinicalProfile.population&quot;,
       &quot;Communication.subject&quot;,
       &quot;Communication.patient&quot;,
       &quot;Communication.recipient&quot;,
@@ -8963,6 +9233,7 @@
       &quot;AppointmentResponse.location&quot;,
       &quot;CatalogEntry.referenced-item&quot;,
       &quot;Claim.facility&quot;,
+      &quot;ClinicalProfile.reporter&quot;,
       &quot;Contract.domain&quot;,
       &quot;CoverageEligibilityRequest.facility&quot;,
       &quot;Device.location&quot;,
@@ -9546,6 +9817,7 @@
       &quot;searchInclude&quot; : [&quot;Medication.ingredient&quot;,
       &quot;Medication.manufacturer&quot;],
       &quot;searchRevInclude&quot; : [&quot;AdverseEvent.substance&quot;,
+      &quot;ClinicalProfile.medicationreference&quot;,
       &quot;Flag.subject&quot;,
       &quot;Flag.patient&quot;,
       &quot;Group.member&quot;,
@@ -12115,6 +12387,7 @@
       &quot;Claim.insurer&quot;,
       &quot;ClaimResponse.insurer&quot;,
       &quot;ClaimResponse.requestor&quot;,
+      &quot;ClinicalProfile.reporter&quot;,
       &quot;Communication.sender&quot;,
       &quot;Communication.recipient&quot;,
       &quot;CommunicationRequest.requester&quot;,
@@ -13371,6 +13644,7 @@
       &quot;Claim.enterer&quot;,
       &quot;ClaimResponse.requestor&quot;,
       &quot;ClinicalImpression.performer&quot;,
+      &quot;ClinicalProfile.reporter&quot;,
       &quot;Communication.sender&quot;,
       &quot;Communication.recipient&quot;,
       &quot;CommunicationRequest.requester&quot;,
@@ -13639,6 +13913,7 @@
       &quot;Claim.enterer&quot;,
       &quot;ClaimResponse.requestor&quot;,
       &quot;ClinicalImpression.performer&quot;,
+      &quot;ClinicalProfile.reporter&quot;,
       &quot;Communication.sender&quot;,
       &quot;Communication.recipient&quot;,
       &quot;CommunicationRequest.requester&quot;,
@@ -13865,7 +14140,7 @@
         &quot;name&quot; : &quot;date&quot;,
         &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/clinical-date&quot;,
         &quot;type&quot; : &quot;date&quot;,
-        &quot;documentation&quot; : &quot;When the procedure was performed&quot;
+        &quot;documentation&quot; : &quot;When the procedure occurred or is occurring&quot;
       },
       {
         &quot;name&quot; : &quot;identifier&quot;,
@@ -13955,7 +14230,7 @@
         &quot;name&quot; : &quot;status&quot;,
         &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Procedure-status&quot;,
         &quot;type&quot; : &quot;token&quot;,
-        &quot;documentation&quot; : &quot;preparation | in-progress | not-done | suspended | aborted | completed | entered-in-error | unknown&quot;
+        &quot;documentation&quot; : &quot;preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown&quot;
       }]
     },
     {
@@ -16204,125 +16479,6 @@
       }]
     },
     {
-      &quot;type&quot; : &quot;Statistic&quot;,
-      &quot;profile&quot; : &quot;http://hl7.org/fhir/StructureDefinition/Statistic&quot;,
-      &quot;interaction&quot; : [{
-        &quot;code&quot; : &quot;read&quot;,
-        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
-      },
-      {
-        &quot;code&quot; : &quot;vread&quot;,
-        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
-      },
-      {
-        &quot;code&quot; : &quot;update&quot;,
-        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
-      },
-      {
-        &quot;code&quot; : &quot;delete&quot;,
-        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
-      },
-      {
-        &quot;code&quot; : &quot;history-instance&quot;,
-        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
-      },
-      {
-        &quot;code&quot; : &quot;history-type&quot;,
-        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
-      },
-      {
-        &quot;code&quot; : &quot;create&quot;,
-        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
-      },
-      {
-        &quot;code&quot; : &quot;search-type&quot;,
-        &quot;documentation&quot; : &quot;Implemented per the specification (or Insert other doco here)&quot;
-      }],
-      &quot;conditionalCreate&quot; : true,
-      &quot;conditionalUpdate&quot; : true,
-      &quot;conditionalDelete&quot; : &quot;multiple&quot;,
-      &quot;referencePolicy&quot; : [&quot;literal&quot;,
-      &quot;logical&quot;],
-      &quot;searchParam&quot; : [{
-        &quot;name&quot; : &quot;date&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-date&quot;,
-        &quot;type&quot; : &quot;date&quot;,
-        &quot;documentation&quot; : &quot;The statistic publication date&quot;
-      },
-      {
-        &quot;name&quot; : &quot;identifier&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-identifier&quot;,
-        &quot;type&quot; : &quot;token&quot;,
-        &quot;documentation&quot; : &quot;External identifier for the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;context-type-value&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-context-type-value&quot;,
-        &quot;type&quot; : &quot;composite&quot;,
-        &quot;documentation&quot; : &quot;A use context type and value assigned to the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;description&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-description&quot;,
-        &quot;type&quot; : &quot;string&quot;,
-        &quot;documentation&quot; : &quot;The description of the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;context-type&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-context-type&quot;,
-        &quot;type&quot; : &quot;token&quot;,
-        &quot;documentation&quot; : &quot;A type of use context assigned to the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;title&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-title&quot;,
-        &quot;type&quot; : &quot;string&quot;,
-        &quot;documentation&quot; : &quot;The human-friendly name of the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;version&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-version&quot;,
-        &quot;type&quot; : &quot;token&quot;,
-        &quot;documentation&quot; : &quot;The business version of the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;url&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-url&quot;,
-        &quot;type&quot; : &quot;uri&quot;,
-        &quot;documentation&quot; : &quot;The uri that identifies the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;context-quantity&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-context-quantity&quot;,
-        &quot;type&quot; : &quot;quantity&quot;,
-        &quot;documentation&quot; : &quot;A quantity- or range-valued use context assigned to the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;context&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-context&quot;,
-        &quot;type&quot; : &quot;token&quot;,
-        &quot;documentation&quot; : &quot;A use context assigned to the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;publisher&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-publisher&quot;,
-        &quot;type&quot; : &quot;string&quot;,
-        &quot;documentation&quot; : &quot;Name of the publisher of the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;context-type-quantity&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-context-type-quantity&quot;,
-        &quot;type&quot; : &quot;composite&quot;,
-        &quot;documentation&quot; : &quot;A use context type and quantity- or range-based value assigned to the statistic&quot;
-      },
-      {
-        &quot;name&quot; : &quot;status&quot;,
-        &quot;definition&quot; : &quot;http://hl7.org/fhir/SearchParameter/Statistic-status&quot;,
-        &quot;type&quot; : &quot;token&quot;,
-        &quot;documentation&quot; : &quot;The current status of the statistic&quot;
-      }]
-    },
-    {
       &quot;type&quot; : &quot;StructureDefinition&quot;,
       &quot;profile&quot; : &quot;http://hl7.org/fhir/StructureDefinition/StructureDefinition&quot;,
       &quot;interaction&quot; : [{
@@ -18533,7 +18689,7 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-0a3a4eda5b) generated on Tue, Apr 16, 2019 10:09-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-baa72e6471) generated on Tue, Apr 16, 2019 08:49-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 

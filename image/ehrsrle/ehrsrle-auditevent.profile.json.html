@@ -41,7 +41,8 @@
 		<div class="container"><!-- container -->
 			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src=".././assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
 			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
-			<b><font size="+2">EBMOnFHIR Statistics Model</font></b>
+			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
 			<div id="hl7-nav">
 				 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
 					<img src=".././assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
@@ -187,8 +188,8 @@
     &quot;element&quot; : [{
       &quot;id&quot; : &quot;AuditEvent&quot;,
       &quot;path&quot; : &quot;AuditEvent&quot;,
-      &quot;short&quot; : &quot;Event record kept for security purposes&quot;,
-      &quot;definition&quot; : &quot;A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage.&quot;,
+      &quot;short&quot; : &quot;Record of an event&quot;,
+      &quot;definition&quot; : &quot;A record of an event relevant for purposes such as operations, privacy, security, maintenance, and performance analysis.&quot;,
       &quot;comment&quot; : &quot;Based on IHE-ATNA.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
@@ -749,6 +750,7 @@
       &quot;short&quot; : &quot;The purposeOfUse of the event&quot;,
       &quot;definition&quot; : &quot;The purposeOfUse (reason) that was used during the event being recorded.&quot;,
       &quot;comment&quot; : &quot;Use AuditEvent.agent.purposeOfUse when you know that it is specific to the agent, otherwise use AuditEvent.purposeOfEvent. For example, during a machine-to-machine transfer it might not be obvious to the audit system who caused the event, but it does know why.&quot;,
+      &quot;requirements&quot; : &quot;record of any relevant security context not restricted to purposeOfUse valueSet, may include security compartments or other security tags.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;base&quot; : {
@@ -931,6 +933,7 @@
       &quot;path&quot; : &quot;AuditEvent.agent.type&quot;,
       &quot;short&quot; : &quot;How agent participated&quot;,
       &quot;definition&quot; : &quot;Specification of the participation type the user plays when performing the event.&quot;,
+      &quot;comment&quot; : &quot;The most relevant role code for how the agent participated in the activity.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
       &quot;base&quot; : {
@@ -966,7 +969,7 @@
       },
       {
         &quot;identity&quot; : &quot;dicom&quot;,
-        &quot;map&quot; : &quot;RoleIdCode&quot;
+        &quot;map&quot; : &quot;prime RoleIdCode&quot;
       },
       {
         &quot;identity&quot; : &quot;w3c.prov&quot;,
@@ -982,7 +985,7 @@
       &quot;path&quot; : &quot;AuditEvent.agent.role&quot;,
       &quot;short&quot; : &quot;Agent role in the event&quot;,
       &quot;definition&quot; : &quot;The security role that the user was acting under, that come from local codes defined by the access control security system (e.g. RBAC, ABAC) used in the local context.&quot;,
-      &quot;comment&quot; : &quot;Should be roles relevant to the event. Should  not be an exhaustive list of roles.&quot;,
+      &quot;comment&quot; : &quot;Should be all the relevant roles (Functional and Structural) inclusive of the value in .agent.type.&quot;,
       &quot;requirements&quot; : &quot;This value ties an audited event to a user's role(s). It is an optional value that might be used to group events for analysis by user functional role categories.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
@@ -1016,7 +1019,7 @@
       },
       {
         &quot;identity&quot; : &quot;dicom&quot;,
-        &quot;map&quot; : &quot;RoleIdCode&quot;
+        &quot;map&quot; : &quot;all RoleIdCode&quot;
       },
       {
         &quot;identity&quot; : &quot;w3c.prov&quot;,
@@ -1494,6 +1497,7 @@
       &quot;short&quot; : &quot;Reason given for this user&quot;,
       &quot;definition&quot; : &quot;The reason (purpose of use), specific to this agent, that was used during the event being recorded.&quot;,
       &quot;comment&quot; : &quot;Use AuditEvent.agent.purposeOfUse when you know that is specific to the agent, otherwise use AuditEvent.purposeOfEvent. For example, during a machine-to-machine transfer it might not be obvious to the audit system who caused the event, but it does know why.&quot;,
+      &quot;requirements&quot; : &quot;record of any relevant security context not restricted to purposeOfUse valueSet, may include security compartments or other security tags.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;base&quot; : {
@@ -2554,7 +2558,7 @@
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-0a3a4eda5b) generated on Tue, Apr 16, 2019 10:11-0500. <a  style="color: #ffffff" href="../qa.html">QA Page</a>
+        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-baa72e6471) generated on Tue, Apr 16, 2019 08:58-0500. <a  style="color: #ffffff" href="../qa.html">QA Page</a>
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 

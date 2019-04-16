@@ -296,6 +296,7 @@ AuditEvent (AuditEvent): AuditEvent.entity.type
 AuditEvent (AuditEvent): AuditEvent.agent.who
 AuditEvent (AuditEvent): AuditEvent.agent.network.address
 AuditEvent (AuditEvent): AuditEvent.entity.role
+AuditEvent (AuditEvent): AuditEvent.purposeOfEvent | AuditEvent.agent.purposeOfUse
 AuditEvent (AuditEvent): AuditEvent.source.observer
 AuditEvent (AuditEvent): AuditEvent.type
 AuditEvent (AuditEvent): AuditEvent.agent.altId
@@ -454,6 +455,32 @@ ClinicalImpression (ClinicalImpression): ClinicalImpression.supportingInfo
 ClinicalImpression (ClinicalImpression): ClinicalImpression.encounter
 ClinicalImpression (ClinicalImpression): ClinicalImpression.finding.itemReference
 ClinicalImpression (ClinicalImpression): ClinicalImpression.status
+ClinicalProfile (ClinicalProfile): ClinicalProfile.date
+ClinicalProfile (ClinicalProfile): ClinicalProfile.lab.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.medication.correlatedPhenotypes.entry.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.hpo.correlatedPhenotypes.entry.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.diagnosis.correlatedPhenotypes.entry.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.cohort
+ClinicalProfile (ClinicalProfile): ClinicalProfile.procedure.correlatedPhenotypes.entry.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.hpo.correlatedProcedures.entry.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.medication.category
+ClinicalProfile (ClinicalProfile): ClinicalProfile.procedure.correlatedMedications.entry.category
+ClinicalProfile (ClinicalProfile): ClinicalProfile.identifier
+ClinicalProfile (ClinicalProfile): (ClinicalProfile.medication.medication as Reference)
+ClinicalProfile (ClinicalProfile): ClinicalProfile.reporter
+ClinicalProfile (ClinicalProfile): ClinicalProfile.procedure.correlatedProcedures.entry.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.population
+ClinicalProfile (ClinicalProfile): ClinicalProfile.medication.correlatedMedications.entry.category
+ClinicalProfile (ClinicalProfile): ClinicalProfile.procedure.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.diagnosis.correlatedMedications.entry.category
+ClinicalProfile (ClinicalProfile): (ClinicalProfile.medication.medication as CodeableConcept)
+ClinicalProfile (ClinicalProfile): ClinicalProfile.diagnosis.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.hpo.correlatedMedications.entry.category
+ClinicalProfile (ClinicalProfile): ClinicalProfile.medication.correlatedProcedures.entry.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.medication.correlatedDiagnoses.entry.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.diagnosis.correlatedProcedures.entry.code
+ClinicalProfile (ClinicalProfile): ClinicalProfile.status
+ClinicalProfile (ClinicalProfile): ClinicalProfile.hpo.code
 CodeSystem (CodeSystem): CodeSystem.date
 CodeSystem (CodeSystem): CodeSystem.identifier
 CodeSystem (CodeSystem): CodeSystem.concept.code
@@ -823,18 +850,24 @@ EventDefinition (EventDefinition): EventDefinition.useContext
 EventDefinition (EventDefinition): EventDefinition.status
 Evidence (Evidence): Evidence.date
 Evidence (Evidence): Evidence.identifier
+Evidence (Evidence): Evidence.relatedArtifact.where(type='successor').resource
 Evidence (Evidence): Evidence.useContext
 Evidence (Evidence): Evidence.jurisdiction
 Evidence (Evidence): Evidence.description
+Evidence (Evidence): Evidence.relatedArtifact.where(type='derived-from').resource
 Evidence (Evidence): Evidence.useContext.code
+Evidence (Evidence): Evidence.relatedArtifact.where(type='predecessor').resource
 Evidence (Evidence): Evidence.title
+Evidence (Evidence): Evidence.relatedArtifact.where(type='composed-of').resource
 Evidence (Evidence): Evidence.version
 Evidence (Evidence): Evidence.url
 Evidence (Evidence): (Evidence.useContext.value as Quantity) | (Evidence.useContext.value as Range)
 Evidence (Evidence): Evidence.effectivePeriod
+Evidence (Evidence): Evidence.relatedArtifact.where(type='depends-on').resource
 Evidence (Evidence): Evidence.name
 Evidence (Evidence): (Evidence.useContext.value as CodeableConcept)
 Evidence (Evidence): Evidence.publisher
+Evidence (Evidence): Evidence.topic
 Evidence (Evidence): Evidence.useContext
 Evidence (Evidence): Evidence.status
 EvidenceVariable (EvidenceVariable): EvidenceVariable.date
@@ -1513,7 +1546,7 @@ PractitionerRole (PractitionerRole): PractitionerRole.organization
 PractitionerRole (PractitionerRole): PractitionerRole.telecom
 PractitionerRole (PractitionerRole): PractitionerRole.location
 PractitionerRole (PractitionerRole): PractitionerRole.telecom.where(system='email')
-Procedure (Procedure): Procedure.performed
+Procedure (Procedure): Procedure.occurrence
 Procedure (Procedure): Procedure.identifier
 Procedure (Procedure): Procedure.code
 Procedure (Procedure): Procedure.performer.actor
@@ -1759,19 +1792,6 @@ Specimen (Specimen): Specimen.status
 SpecimenDefinition (SpecimenDefinition): SpecimenDefinition.typeTested.container.type
 SpecimenDefinition (SpecimenDefinition): SpecimenDefinition.identifier
 SpecimenDefinition (SpecimenDefinition): SpecimenDefinition.typeCollected
-Statistic (Statistic): Statistic.date
-Statistic (Statistic): Statistic.identifier
-Statistic (Statistic): Statistic.useContext
-Statistic (Statistic): Statistic.description
-Statistic (Statistic): Statistic.useContext.code
-Statistic (Statistic): Statistic.title
-Statistic (Statistic): Statistic.version
-Statistic (Statistic): Statistic.url
-Statistic (Statistic): (Statistic.useContext.value as Quantity) | (Statistic.useContext.value as Range)
-Statistic (Statistic): (Statistic.useContext.value as CodeableConcept)
-Statistic (Statistic): Statistic.publisher
-Statistic (Statistic): Statistic.useContext
-Statistic (Statistic): Statistic.status
 StructureDefinition (StructureDefinition): StructureDefinition.date
 StructureDefinition (StructureDefinition): StructureDefinition.useContext
 StructureDefinition (StructureDefinition): StructureDefinition.jurisdiction
