@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<difference>
+   <type name="MedicationDispense" status="changed">
+      <element binding-status="changed"
+               binding-valueset-changed="true"
+               path="MedicationDispense.status">
+         <old-binding reference="http://hl7.org/fhir/ValueSet/medicationdispense-status|4.0.0"
+                      strength="required"/>
+         <new-binding reference="http://hl7.org/fhir/ValueSet/medicationdispense-status|4.1.0"
+                      strength="required"/>
+      </element>
+      <element new-max="*" old-max="1" path="MedicationDispense.category"/>
+      <element path="MedicationDispense.encounter" status="new"/>
+      <element path="MedicationDispense.receiver">
+         <removed-type name="Reference(Patient | Practitioner)"/>
+         <added-type name="Reference(Patient | Practitioner | RelatedPerson | Location)"/>
+      </element>
+      <element new-max="1"
+               old-max="*"
+               path="MedicationDispense.substitution.responsibleParty">
+         <removed-type name="Reference(Practitioner | PractitionerRole)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Organization)"/>
+      </element>
+      <element path="MedicationDispense.context" status="deleted"/>
+   </type>
+</difference>

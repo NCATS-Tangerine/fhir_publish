@@ -1,0 +1,50 @@
+﻿{
+  "types": [
+    "MedicationDispense"
+  ],
+  "MedicationDispense": {
+    "elements": {
+      "MedicationDispense.status": {
+        "binding-valueset-changed": true,
+        "binding-status": "changed",
+        "old-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medicationdispense-status|4.0.0",
+          "strength": "required"
+        },
+        "new-binding": {
+          "reference": "http://hl7.org/fhir/ValueSet/medicationdispense-status|4.1.0",
+          "strength": "required"
+        }
+      },
+      "MedicationDispense.category": {
+        "old-max": "1",
+        "new-max": "*"
+      },
+      "MedicationDispense.encounter": {
+        "status": "new"
+      },
+      "MedicationDispense.receiver": {
+        "removed-types": [
+          "Reference(Patient | Practitioner)"
+        ],
+        "added-types": [
+          "Reference(Patient | Practitioner | RelatedPerson | Location)"
+        ]
+      },
+      "MedicationDispense.substitution.responsibleParty": {
+        "old-max": "*",
+        "new-max": "1",
+        "removed-types": [
+          "Reference(Practitioner | PractitionerRole)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization)"
+        ]
+      },
+      "MedicationDispense.context": {
+        "status": "deleted"
+      }
+    },
+    "status": "changed"
+  }
+}

@@ -1,0 +1,298 @@
+# FHIR GraphQL Schema. Version 4.1.0
+
+type RiskEvidenceSynthesis {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  url: uri  _url: ElementBase
+  identifier: [Identifier]
+  version: String  _version: ElementBase
+  name: String  _name: ElementBase
+  title: String  _title: ElementBase
+  status: code  _status: ElementBase
+  date: dateTime  _date: ElementBase
+  publisher: String  _publisher: ElementBase
+  contact: [ContactDetail]
+  description: markdown  _description: ElementBase
+  note: [Annotation]
+  useContext: [UsageContext]
+  jurisdiction: [CodeableConcept]
+  copyright: markdown  _copyright: ElementBase
+  approvalDate: date  _approvalDate: ElementBase
+  lastReviewDate: date  _lastReviewDate: ElementBase
+  effectivePeriod: Period
+  topic: [CodeableConcept]
+  author: [ContactDetail]
+  editor: [ContactDetail]
+  reviewer: [ContactDetail]
+  endorser: [ContactDetail]
+  relatedArtifact: [RelatedArtifact]
+  synthesisType: CodeableConcept
+  studyType: CodeableConcept
+  population: Reference!
+  exposure: Reference
+  outcome: Reference!
+  sampleSize: RiskEvidenceSynthesisSampleSize
+  riskEstimate: RiskEvidenceSynthesisRiskEstimate
+  certainty: [RiskEvidenceSynthesisCertainty]
+}
+
+type RiskEvidenceSynthesisSampleSize {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  description: String  _description: ElementBase
+  numberOfStudies: Int  _numberOfStudies: ElementBase
+  numberOfParticipants: Int  _numberOfParticipants: ElementBase
+}
+
+type RiskEvidenceSynthesisRiskEstimate {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  description: String  _description: ElementBase
+  type: CodeableConcept
+  value: decimal  _value: ElementBase
+  unitOfMeasure: CodeableConcept
+  denominatorCount: Int  _denominatorCount: ElementBase
+  numeratorCount: Int  _numeratorCount: ElementBase
+  precisionEstimate: [RiskEvidenceSynthesisRiskEstimatePrecisionEstimate]
+}
+
+type RiskEvidenceSynthesisRiskEstimatePrecisionEstimate {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: CodeableConcept
+  level: decimal  _level: ElementBase
+  from: decimal  _from: ElementBase
+  to: decimal  _to: ElementBase
+}
+
+type RiskEvidenceSynthesisCertainty {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  rating: [CodeableConcept]
+  note: [Annotation]
+  certaintySubcomponent: [RiskEvidenceSynthesisCertaintyCertaintySubcomponent]
+}
+
+type RiskEvidenceSynthesisCertaintyCertaintySubcomponent {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: CodeableConcept
+  rating: [CodeableConcept]
+  note: [Annotation]
+}
+
+input RiskEvidenceSynthesisInput {
+  id: ID
+  meta: MetaInput
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: NarrativeInput
+  contained: [ResourceInput]
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  url: uri  _url: ElementBase
+  identifier: [IdentifierInput]
+  version: String  _version: ElementBase
+  name: String  _name: ElementBase
+  title: String  _title: ElementBase
+  status: code  _status: ElementBase
+  date: dateTime  _date: ElementBase
+  publisher: String  _publisher: ElementBase
+  contact: [ContactDetailInput]
+  description: markdown  _description: ElementBase
+  note: [AnnotationInput]
+  useContext: [UsageContextInput]
+  jurisdiction: [CodeableConceptInput]
+  copyright: markdown  _copyright: ElementBase
+  approvalDate: date  _approvalDate: ElementBase
+  lastReviewDate: date  _lastReviewDate: ElementBase
+  effectivePeriod: PeriodInput
+  topic: [CodeableConceptInput]
+  author: [ContactDetailInput]
+  editor: [ContactDetailInput]
+  reviewer: [ContactDetailInput]
+  endorser: [ContactDetailInput]
+  relatedArtifact: [RelatedArtifactInput]
+  synthesisType: CodeableConceptInput
+  studyType: CodeableConceptInput
+  population: ReferenceInput!
+  exposure: ReferenceInput
+  outcome: ReferenceInput!
+  sampleSize: RiskEvidenceSynthesisSampleSizeInput
+  riskEstimate: RiskEvidenceSynthesisRiskEstimateInput
+  certainty: [RiskEvidenceSynthesisCertaintyInput]
+}
+
+input RiskEvidenceSynthesisSampleSizeInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  description: String  _description: ElementBase
+  numberOfStudies: Int  _numberOfStudies: ElementBase
+  numberOfParticipants: Int  _numberOfParticipants: ElementBase
+}
+
+input RiskEvidenceSynthesisRiskEstimateInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  description: String  _description: ElementBase
+  type: CodeableConceptInput
+  value: decimal  _value: ElementBase
+  unitOfMeasure: CodeableConceptInput
+  denominatorCount: Int  _denominatorCount: ElementBase
+  numeratorCount: Int  _numeratorCount: ElementBase
+  precisionEstimate: [RiskEvidenceSynthesisRiskEstimatePrecisionEstimateInput]
+}
+
+input RiskEvidenceSynthesisRiskEstimatePrecisionEstimateInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  type: CodeableConceptInput
+  level: decimal  _level: ElementBase
+  from: decimal  _from: ElementBase
+  to: decimal  _to: ElementBase
+}
+
+input RiskEvidenceSynthesisCertaintyInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  rating: [CodeableConceptInput]
+  note: [AnnotationInput]
+  certaintySubcomponent: [RiskEvidenceSynthesisCertaintyCertaintySubcomponentInput]
+}
+
+input RiskEvidenceSynthesisCertaintyCertaintySubcomponentInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  type: CodeableConceptInput
+  rating: [CodeableConceptInput]
+  note: [AnnotationInput]
+}
+
+type RiskEvidenceSynthesisReadType {
+  RiskEvidenceSynthesis(id: ID!): RiskEvidenceSynthesis
+}
+
+type RiskEvidenceSynthesisListType {
+  RiskEvidenceSynthesisList(_filter: String
+    context: [token]
+    context_quantity: [quantity]
+    context_type: [token]
+    context_type_quantity: [composite]
+    context_type_value: [composite]
+    date: [date]
+    description: [String]
+    effective: [date]
+    identifier: [token]
+    jurisdiction: [token]
+    name: [String]
+    publisher: [String]
+    status: [token]
+    title: [String]
+    url: [uri]
+    version: [token]
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): [RiskEvidenceSynthesis]
+}
+
+type RiskEvidenceSynthesisConnectionType {
+  RiskEvidenceSynthesisConection(_filter: String
+    context: [token]
+    context_quantity: [quantity]
+    context_type: [token]
+    context_type_quantity: [composite]
+    context_type_value: [composite]
+    date: [date]
+    description: [String]
+    effective: [date]
+    identifier: [token]
+    jurisdiction: [token]
+    name: [String]
+    publisher: [String]
+    status: [token]
+    title: [String]
+    url: [uri]
+    version: [token]
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): RiskEvidenceSynthesisConnection
+}
+
+type RiskEvidenceSynthesisConnection {
+  count: Int
+  offset: Int
+  pagesize: Int
+  first: ID
+  previous: ID
+  next: ID
+  last: ID
+  edges: [RiskEvidenceSynthesisEdge]
+}
+
+type RiskEvidenceSynthesisEdge {
+  mode: String
+  score: Float
+  resource: RiskEvidenceSynthesis
+}
+
+type RiskEvidenceSynthesisCreateType {
+  RiskEvidenceSynthesisCreate(resource: RiskEvidenceSynthesisInput): RiskEvidenceSynthesisCreation
+}
+
+type RiskEvidenceSynthesisCreation {
+  location: String
+  resource: RiskEvidenceSynthesis
+  information: OperationOutcome
+}
+
+type RiskEvidenceSynthesisUpdateType {
+  RiskEvidenceSynthesisUpdate(id: ID, resource: RiskEvidenceSynthesisInput): RiskEvidenceSynthesisUpdate
+}
+
+type RiskEvidenceSynthesisUpdate {
+  resource: RiskEvidenceSynthesis
+  information: OperationOutcome
+}
+
+type RiskEvidenceSynthesisDeleteType {
+  RiskEvidenceSynthesisDelete(id: ID): RiskEvidenceSynthesisDelete
+}
+
+type RiskEvidenceSynthesisDelete {
+  information: OperationOutcome
+}
+

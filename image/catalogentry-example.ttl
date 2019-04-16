@@ -1,0 +1,52 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://hl7.org/fhir/CatalogEntry/example> a fhir:CatalogEntry;
+  fhir:nodeRole fhir:treeRoot;
+  fhir:Resource.id [ fhir:value "example"];
+  fhir:DomainResource.text [
+     fhir:Narrative.status [ fhir:value "generated" ];
+     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\"> </div>"
+  ];
+  fhir:CatalogEntry.identifier [
+     fhir:index 0;
+     fhir:Identifier.system [ fhir:value "http://example.com/identifier" ];
+     fhir:Identifier.value [ fhir:value "456" ]
+  ];
+  fhir:CatalogEntry.name [ fhir:value "Serum electrolyte panel"];
+  fhir:CatalogEntry.type [ fhir:value "ActivityDefinition"];
+  fhir:CatalogEntry.status [ fhir:value "active"];
+  fhir:CatalogEntry.effectivePeriod [
+     fhir:Period.start [ fhir:value "2018-12-16"^^xsd:date ]
+  ];
+  fhir:CatalogEntry.orderable [ fhir:value "true"^^xsd:boolean];
+  fhir:CatalogEntry.referencedItem [
+     fhir:link <http://hl7.org/fhir/ActivityDefinition/789>;
+     fhir:Reference.reference [ fhir:value "ActivityDefinition/789" ]
+  ];
+  fhir:CatalogEntry.updatedBy [
+     fhir:link <http://hl7.org/fhir/Person/2>;
+     fhir:Reference.reference [ fhir:value "Person/2" ]
+  ];
+  fhir:CatalogEntry.note [
+     fhir:index 0;
+     fhir:Annotation.authorString [ fhir:value "Adam Man" ];
+     fhir:Annotation.text [ fhir:value "created as an example" ]
+  ] .
+
+<http://hl7.org/fhir/ActivityDefinition/789> a fhir:ActivityDefinition .
+
+<http://hl7.org/fhir/Person/2> a fhir:Person .
+
+# - ontology header ------------------------------------------------------------
+
+<http://hl7.org/fhir/CatalogEntry/example.ttl> a owl:Ontology;
+  owl:imports fhir:fhir.ttl;
+  owl:versionIRI <http://build.fhir.org/CatalogEntry/example.ttl> .
+
+# -------------------------------------------------------------------------------------
+
