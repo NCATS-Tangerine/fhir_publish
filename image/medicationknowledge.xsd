@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Tue, Apr 16, 2019 08:42-0500 for FHIR v4.1.0 
+  Generated on Mon, Jul 29, 2019 12:28-0500 for FHIR v4.1.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -134,9 +134,9 @@
               <xs:documentation xml:lang="en">The program under which the medication is reviewed.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="administrationGuidelines" type="MedicationKnowledge.AdministrationGuidelines" minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="administrationGuideline" type="MedicationKnowledge.AdministrationGuideline" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Guidelines for the administration of the medication.</xs:documentation>
+              <xs:documentation xml:lang="en">Guidelines or protocols that are applicable for the administration of the medication.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="medicineClassification" type="MedicationKnowledge.MedicineClassification" minOccurs="0" maxOccurs="unbounded">
@@ -154,19 +154,9 @@
               <xs:documentation xml:lang="en">Specifies descriptive properties of the medicine, such as color, shape, imprints, etc.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="contraindication" minOccurs="0" maxOccurs="unbounded" type="Reference">
+          <xs:element name="clinicalUseIssue" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">Potential clinical issue with or between medication(s) (for example, drug-drug interaction, drug-disease contraindication, drug-allergy interaction, etc.).</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="interaction" minOccurs="0" maxOccurs="unbounded" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Interactions associated with the medication (e.g. drug-drug interactions).</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="undesirableEffect" minOccurs="0" maxOccurs="unbounded" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Side effects or adverse effects associated with the medication (e.g. nausea, vomiting).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="regulatory" type="MedicationKnowledge.Regulatory" minOccurs="0" maxOccurs="unbounded">
@@ -174,7 +164,7 @@
               <xs:documentation xml:lang="en">Regulatory information about a medication.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="kinetics" type="MedicationKnowledge.Kinetics" minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="kineticCharacteristic" type="MedicationKnowledge.KineticCharacteristic" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
               <xs:documentation xml:lang="en">The time course of drug absorption, distribution, metabolism and excretion of a medication from the body.</xs:documentation>
            </xs:annotation>
@@ -300,7 +290,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="MedicationKnowledge.AdministrationGuidelines">
+  <xs:complexType name="MedicationKnowledge.AdministrationGuideline">
     <xs:annotation>
       <xs:documentation xml:lang="en">Information about a medication that is used to support knowledge.</xs:documentation>
     </xs:annotation>
@@ -314,12 +304,12 @@
           </xs:element>
           <xs:choice minOccurs="0" maxOccurs="1" >
             <xs:annotation>
-              <xs:documentation xml:lang="en">Indication for use that apply to the specific administration guidelines.</xs:documentation>
+              <xs:documentation xml:lang="en">Indication or reason for use of the medication that applies to the specific administration guidelines.</xs:documentation>
             </xs:annotation>
             <xs:element name="indicationCodeableConcept" type="CodeableConcept"/>
             <xs:element name="indicationReference" type="Reference"/>
           </xs:choice>
-          <xs:element name="patientCharacteristics" type="MedicationKnowledge.PatientCharacteristics" minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="patientCharacteristic" type="MedicationKnowledge.PatientCharacteristic" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
               <xs:documentation xml:lang="en">Characteristics of the patient that are relevant to the administration guidelines (for example, height, weight, gender, etc.).</xs:documentation>
            </xs:annotation>
@@ -337,7 +327,7 @@
         <xs:sequence>
           <xs:element name="type" minOccurs="1" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">The type of dosage (for example, prophylaxis, maintenance, therapeutic, etc.).</xs:documentation>
+              <xs:documentation xml:lang="en">The type or category of dosage for a given medication (for example, prophylaxis, maintenance, therapeutic, etc.).</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="dosage" minOccurs="1" maxOccurs="unbounded" type="Dosage">
@@ -349,7 +339,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="MedicationKnowledge.PatientCharacteristics">
+  <xs:complexType name="MedicationKnowledge.PatientCharacteristic">
     <xs:annotation>
       <xs:documentation xml:lang="en">Information about a medication that is used to support knowledge.</xs:documentation>
     </xs:annotation>
@@ -543,7 +533,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="MedicationKnowledge.Kinetics">
+  <xs:complexType name="MedicationKnowledge.KineticCharacteristic">
     <xs:annotation>
       <xs:documentation xml:lang="en">Information about a medication that is used to support knowledge.</xs:documentation>
     </xs:annotation>

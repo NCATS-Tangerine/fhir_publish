@@ -1,0 +1,120 @@
+# FHIR GraphQL Schema. Version 4.1.0
+
+# import the types from 'types.graphql'
+
+type RegulatedManufacturedItem {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  manufacturedDoseForm: CodeableConcept!
+  unitOfPresentation: CodeableConcept
+  quantity: Quantity!
+  manufacturer: [Reference]
+  ingredient: [Reference]
+  physicalCharacteristics: ProdCharacteristic
+  otherCharacteristics: [CodeableConcept]
+}
+
+input RegulatedManufacturedItemInput {
+  id: ID
+  meta: MetaInput
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: NarrativeInput
+  contained: [ResourceInput]
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  manufacturedDoseForm: CodeableConceptInput!
+  unitOfPresentation: CodeableConceptInput
+  quantity: QuantityInput!
+  manufacturer: [ReferenceInput]
+  ingredient: [ReferenceInput]
+  physicalCharacteristics: ProdCharacteristicInput
+  otherCharacteristics: [CodeableConceptInput]
+}
+
+type RegulatedManufacturedItemReadType {
+  RegulatedManufacturedItem(id: ID!): RegulatedManufacturedItem
+}
+
+type RegulatedManufacturedItemListType {
+  RegulatedManufacturedItemList(_filter: String
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): [RegulatedManufacturedItem]
+}
+
+type RegulatedManufacturedItemConnectionType {
+  RegulatedManufacturedItemConection(_filter: String
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): RegulatedManufacturedItemConnection
+}
+
+type RegulatedManufacturedItemConnection {
+  count: Int
+  offset: Int
+  pagesize: Int
+  first: ID
+  previous: ID
+  next: ID
+  last: ID
+  edges: [RegulatedManufacturedItemEdge]
+}
+
+type RegulatedManufacturedItemEdge {
+  mode: String
+  score: Float
+  resource: RegulatedManufacturedItem
+}
+
+type RegulatedManufacturedItemCreateType {
+  RegulatedManufacturedItemCreate(resource: RegulatedManufacturedItemInput): RegulatedManufacturedItemCreation
+}
+
+type RegulatedManufacturedItemCreation {
+  location: String
+  resource: RegulatedManufacturedItem
+  information: OperationOutcome
+}
+
+type RegulatedManufacturedItemUpdateType {
+  RegulatedManufacturedItemUpdate(id: ID, resource: RegulatedManufacturedItemInput): RegulatedManufacturedItemUpdate
+}
+
+type RegulatedManufacturedItemUpdate {
+  resource: RegulatedManufacturedItem
+  information: OperationOutcome
+}
+
+type RegulatedManufacturedItemDeleteType {
+  RegulatedManufacturedItemDelete(id: ID): RegulatedManufacturedItemDelete
+}
+
+type RegulatedManufacturedItemDelete {
+  information: OperationOutcome
+}
+

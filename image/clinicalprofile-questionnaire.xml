@@ -5,12 +5,12 @@
   <contained>
     <ValueSet>
       <id value="vs2"/>
-      <name value="Type options for ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.lab[x]"/>
+      <name value="Type options for ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.medication[x]"/>
       <status value="active"/>
-      <description value="Type options for ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.lab[x]"/>
+      <description value="Type options for ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.medication[x]"/>
       <expansion>
-        <identifier value="urn:uuid:323ed64d-2f9b-451c-b8b6-519f73b73f52"/>
-        <timestamp value="2019-04-16T08:53:00-05:00"/>
+        <identifier value="urn:uuid:55b59b79-781e-40ba-8243-a270957a1a4a"/>
+        <timestamp value="2019-07-29T11:32:15-05:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="CodeableConcept"/>
@@ -31,8 +31,8 @@
       <status value="active"/>
       <description value="Type options for ClinicalProfile.medication.medication[x]"/>
       <expansion>
-        <identifier value="urn:uuid:2f8314f5-bb85-4be6-8f31-f48111364094"/>
-        <timestamp value="2019-04-16T08:53:00-05:00"/>
+        <identifier value="urn:uuid:317aa83c-a353-4e5b-b16d-b17bf7895f7e"/>
+        <timestamp value="2019-07-29T11:32:15-05:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="CodeableConcept"/>
@@ -53,8 +53,8 @@
       <status value="active"/>
       <description value="Type options for ClinicalProfile.medication.dosage.rate[x]"/>
       <expansion>
-        <identifier value="urn:uuid:99ae9bbf-ac69-41e5-8aee-f0fee971db55"/>
-        <timestamp value="2019-04-16T08:53:00-05:00"/>
+        <identifier value="urn:uuid:e572b917-a1e0-48b1-b6bb-28e1990fd585"/>
+        <timestamp value="2019-07-29T11:32:15-05:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="Ratio"/>
@@ -73,7 +73,7 @@
   </identifier>
   <version value="4.1.0"/>
   <status value="draft"/>
-  <date value="2019-04-16T08:42:31-05:00"/>
+  <date value="2019-07-29T11:29:14-05:00"/>
   <publisher value="Health Level Seven International (Clinical Decision Support)"/>
   <item>
     <linkId value="ClinicalProfile"/>
@@ -2218,7 +2218,7 @@
             <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
               <valueString value="decimal"/>
             </extension>
-            <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.deviation"/>
+            <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.abscorrelation"/>
             <type value="group"/>
             <required value="false"/>
             <repeats value="true"/>
@@ -2236,7 +2236,7 @@
               <type value="display"/>
             </item>
             <item>
-              <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.deviation.value"/>
+              <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.abscorrelation.value"/>
               <text value="Deviation cutoff"/>
               <type value="decimal"/>
               <required value="false"/>
@@ -2335,53 +2335,10 @@
               </item>
             </item>
             <item>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                <valueInteger value="1"/>
-              </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                <valueString value="CodeableConcept"/>
-              </extension>
-              <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.category"/>
-              <text value="Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient))"/>
-              <type value="group"/>
-              <required value="false"/>
-              <repeats value="true"/>
-              <item>
-                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-                  <valueCodeableConcept>
-                    <coding>
-                      <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                      <code value="flyover"/>
-                      <display value="Fly-over"/>
-                    </coding>
-                  </valueCodeableConcept>
-                </extension>
-                <text value="Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient))."/>
-                <type value="display"/>
-              </item>
-              <item>
-                <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.category.coding"/>
-                <text value="code:"/>
-                <type value="open-choice"/>
-                <required value="false"/>
-                <repeats value="false"/>
-              </item>
-              <item>
-                <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.category.text"/>
-                <text value="text:"/>
-                <type value="string"/>
-                <required value="false"/>
-                <repeats value="false"/>
-              </item>
-            </item>
-            <item>
               <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
                 <valueInteger value="1"/>
               </extension>
-              <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-                <valueInteger value="1"/>
-              </extension>
-              <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.lab[x]"/>
+              <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds"/>
               <text value="Medication code(s)"/>
               <type value="group"/>
               <required value="true"/>
@@ -2400,50 +2357,148 @@
                 <type value="display"/>
               </item>
               <item>
-                <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.lab[x]._type"/>
-                <text value="type"/>
-                <type value="choice"/>
+                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+                  <valueInteger value="1"/>
+                </extension>
+                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+                  <valueString value="string"/>
+                </extension>
+                <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.id"/>
+                <type value="group"/>
                 <required value="false"/>
-                <repeats value="false"/>
-                <answerValueSet value="#vs2"/>
+                <repeats value="true"/>
                 <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="CodeableConcept"/>
+                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                    <valueCodeableConcept>
+                      <coding>
+                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                        <code value="flyover"/>
+                        <display value="Fly-over"/>
+                      </coding>
+                    </valueCodeableConcept>
                   </extension>
-                  <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.lab[x]._null"/>
-                  <type value="group"/>
-                  <item>
-                    <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.lab[x]._null.coding"/>
-                    <text value="code:"/>
-                    <type value="open-choice"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
-                  <item>
-                    <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.lab[x]._null.text"/>
-                    <text value="text:"/>
-                    <type value="string"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
-                  </item>
+                  <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+                  <type value="display"/>
                 </item>
                 <item>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-                    <valueString value="Reference"/>
+                  <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.id.value"/>
+                  <text value="Unique id for inter-element referencing"/>
+                  <type value="string"/>
+                  <required value="false"/>
+                  <repeats value="false"/>
+                </item>
+              </item>
+              <item>
+                <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.extension"/>
+                <text value="Additional content defined by implementations"/>
+                <type value="group"/>
+                <required value="false"/>
+                <repeats value="true"/>
+                <item>
+                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                    <valueCodeableConcept>
+                      <coding>
+                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                        <code value="flyover"/>
+                        <display value="Fly-over"/>
+                      </coding>
+                    </valueCodeableConcept>
                   </extension>
-                  <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.lab[x]._null"/>
-                  <type value="group"/>
+                  <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+                  <type value="display"/>
+                </item>
+              </item>
+              <item>
+                <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.modifierExtension"/>
+                <text value="Extensions that cannot be ignored even if unrecognized"/>
+                <type value="group"/>
+                <required value="false"/>
+                <repeats value="true"/>
+                <item>
+                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                    <valueCodeableConcept>
+                      <coding>
+                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                        <code value="flyover"/>
+                        <display value="Fly-over"/>
+                      </coding>
+                    </valueCodeableConcept>
+                  </extension>
+                  <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+                  <type value="display"/>
+                </item>
+              </item>
+              <item>
+                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+                  <valueInteger value="1"/>
+                </extension>
+                <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+                  <valueInteger value="1"/>
+                </extension>
+                <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.medication[x]"/>
+                <text value="Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient))"/>
+                <type value="group"/>
+                <required value="true"/>
+                <repeats value="true"/>
+                <item>
+                  <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+                    <valueCodeableConcept>
+                      <coding>
+                        <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                        <code value="flyover"/>
+                        <display value="Fly-over"/>
+                      </coding>
+                    </valueCodeableConcept>
+                  </extension>
+                  <text value="Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient))."/>
+                  <type value="display"/>
+                </item>
+                <item>
+                  <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.medication[x]._type"/>
+                  <text value="type"/>
+                  <type value="choice"/>
+                  <required value="false"/>
+                  <repeats value="false"/>
+                  <answerValueSet value="#vs2"/>
                   <item>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-                      <valueCode value="Medication"/>
+                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+                      <valueString value="CodeableConcept"/>
                     </extension>
-                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-                      <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+                    <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.medication[x]._null"/>
+                    <type value="group"/>
+                    <item>
+                      <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.medication[x]._null.coding"/>
+                      <text value="code:"/>
+                      <type value="open-choice"/>
+                      <required value="false"/>
+                      <repeats value="false"/>
+                    </item>
+                    <item>
+                      <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.medication[x]._null.text"/>
+                      <text value="text:"/>
+                      <type value="string"/>
+                      <required value="false"/>
+                      <repeats value="false"/>
+                    </item>
+                  </item>
+                  <item>
+                    <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+                      <valueString value="Reference"/>
                     </extension>
-                    <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.lab[x]._null.value"/>
-                    <type value="reference"/>
-                    <required value="false"/>
-                    <repeats value="false"/>
+                    <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.medication[x]._null"/>
+                    <type value="group"/>
+                    <item>
+                      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+                        <valueCode value="Medication"/>
+                      </extension>
+                      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+                        <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+                      </extension>
+                      <linkId value="ClinicalProfile.lab.scalarDistribution.correlatedMedications.entry.meds.medication[x]._null.value"/>
+                      <type value="reference"/>
+                      <required value="false"/>
+                      <repeats value="false"/>
+                    </item>
                   </item>
                 </item>
               </item>

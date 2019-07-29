@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type MedicationKnowledge {
   id: ID
   meta: Meta
@@ -26,15 +28,13 @@ type MedicationKnowledge {
   intendedRoute: [CodeableConcept]
   cost: [MedicationKnowledgeCost]
   monitoringProgram: [MedicationKnowledgeMonitoringProgram]
-  administrationGuidelines: [MedicationKnowledgeAdministrationGuidelines]
+  administrationGuideline: [MedicationKnowledgeAdministrationGuideline]
   medicineClassification: [MedicationKnowledgeMedicineClassification]
   packaging: MedicationKnowledgePackaging
   drugCharacteristic: [MedicationKnowledgeDrugCharacteristic]
-  contraindication: [Reference]
-  interaction: [Reference]
-  undesirableEffect: [Reference]
+  clinicalUseIssue: [Reference]
   regulatory: [MedicationKnowledgeRegulatory]
-  kinetics: [MedicationKnowledgeKinetics]
+  kineticCharacteristic: [MedicationKnowledgeKineticCharacteristic]
 }
 
 type MedicationKnowledgeRelatedMedicationKnowledge {
@@ -80,17 +80,17 @@ type MedicationKnowledgeMonitoringProgram {
   name: String  _name: ElementBase
 }
 
-type MedicationKnowledgeAdministrationGuidelines {
+type MedicationKnowledgeAdministrationGuideline {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  dosage: [MedicationKnowledgeAdministrationGuidelinesDosage]
+  dosage: [MedicationKnowledgeAdministrationGuidelineDosage]
   indicationCodeableConcept: CodeableConcept
   indicationReference: Reference
-  patientCharacteristics: [MedicationKnowledgeAdministrationGuidelinesPatientCharacteristics]
+  patientCharacteristic: [MedicationKnowledgeAdministrationGuidelinePatientCharacteristic]
 }
 
-type MedicationKnowledgeAdministrationGuidelinesDosage {
+type MedicationKnowledgeAdministrationGuidelineDosage {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -98,7 +98,7 @@ type MedicationKnowledgeAdministrationGuidelinesDosage {
   dosage: [Dosage]!
 }
 
-type MedicationKnowledgeAdministrationGuidelinesPatientCharacteristics {
+type MedicationKnowledgeAdministrationGuidelinePatientCharacteristic {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -170,7 +170,7 @@ type MedicationKnowledgeRegulatoryMaxDispense {
   period: Duration
 }
 
-type MedicationKnowledgeKinetics {
+type MedicationKnowledgeKineticCharacteristic {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
@@ -205,15 +205,13 @@ input MedicationKnowledgeInput {
   intendedRoute: [CodeableConceptInput]
   cost: [MedicationKnowledgeCostInput]
   monitoringProgram: [MedicationKnowledgeMonitoringProgramInput]
-  administrationGuidelines: [MedicationKnowledgeAdministrationGuidelinesInput]
+  administrationGuideline: [MedicationKnowledgeAdministrationGuidelineInput]
   medicineClassification: [MedicationKnowledgeMedicineClassificationInput]
   packaging: MedicationKnowledgePackagingInput
   drugCharacteristic: [MedicationKnowledgeDrugCharacteristicInput]
-  contraindication: [ReferenceInput]
-  interaction: [ReferenceInput]
-  undesirableEffect: [ReferenceInput]
+  clinicalUseIssue: [ReferenceInput]
   regulatory: [MedicationKnowledgeRegulatoryInput]
-  kinetics: [MedicationKnowledgeKineticsInput]
+  kineticCharacteristic: [MedicationKnowledgeKineticCharacteristicInput]
 }
 
 input MedicationKnowledgeRelatedMedicationKnowledgeInput {
@@ -259,17 +257,17 @@ input MedicationKnowledgeMonitoringProgramInput {
   name: String  _name: ElementBase
 }
 
-input MedicationKnowledgeAdministrationGuidelinesInput {
+input MedicationKnowledgeAdministrationGuidelineInput {
   id: String
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
-  dosage: [MedicationKnowledgeAdministrationGuidelinesDosageInput]
+  dosage: [MedicationKnowledgeAdministrationGuidelineDosageInput]
   indicationCodeableConcept: CodeableConceptInput
   indicationReference: ReferenceInput
-  patientCharacteristics: [MedicationKnowledgeAdministrationGuidelinesPatientCharacteristicsInput]
+  patientCharacteristic: [MedicationKnowledgeAdministrationGuidelinePatientCharacteristicInput]
 }
 
-input MedicationKnowledgeAdministrationGuidelinesDosageInput {
+input MedicationKnowledgeAdministrationGuidelineDosageInput {
   id: String
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
@@ -277,7 +275,7 @@ input MedicationKnowledgeAdministrationGuidelinesDosageInput {
   dosage: [DosageInput]!
 }
 
-input MedicationKnowledgeAdministrationGuidelinesPatientCharacteristicsInput {
+input MedicationKnowledgeAdministrationGuidelinePatientCharacteristicInput {
   id: String
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
@@ -349,7 +347,7 @@ input MedicationKnowledgeRegulatoryMaxDispenseInput {
   period: DurationInput
 }
 
-input MedicationKnowledgeKineticsInput {
+input MedicationKnowledgeKineticCharacteristicInput {
   id: String
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
@@ -368,6 +366,7 @@ type MedicationKnowledgeListType {
     classification_type: [token]
     code: [token]
     doseform: [token]
+    identifier: [token]
     ingredient: [reference]
     ingredient_code: [token]
     manufacturer: [reference]
@@ -375,6 +374,7 @@ type MedicationKnowledgeListType {
     monitoring_program_type: [token]
     monograph: [reference]
     monograph_type: [token]
+    product_type: [token]
     source_cost: [token]
     status: [token]
     _text: [String]
@@ -397,6 +397,7 @@ type MedicationKnowledgeConnectionType {
     classification_type: [token]
     code: [token]
     doseform: [token]
+    identifier: [token]
     ingredient: [reference]
     ingredient_code: [token]
     manufacturer: [reference]
@@ -404,6 +405,7 @@ type MedicationKnowledgeConnectionType {
     monitoring_program_type: [token]
     monograph: [reference]
     monograph_type: [token]
+    product_type: [token]
     source_cost: [token]
     status: [token]
     _text: [String]

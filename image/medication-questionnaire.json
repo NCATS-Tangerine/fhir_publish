@@ -8,8 +8,8 @@
     "status" : "active",
     "description" : "Type options for Medication.ingredient.item[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:8959ebcd-4958-4b18-befa-2503330f2444",
-      "timestamp" : "2019-04-16T08:57:34-05:00",
+      "identifier" : "urn:uuid:594b45e8-68c1-41a0-8dee-3794d2ddb8bb",
+      "timestamp" : "2019-07-29T11:33:24-05:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "CodeableConcept",
@@ -26,13 +26,34 @@
         "display" : "Medication"
       }]
     }
+  },
+  {
+    "resourceType" : "ValueSet",
+    "id" : "vs3",
+    "name" : "Type options for Medication.ingredient.strength[x]",
+    "status" : "active",
+    "description" : "Type options for Medication.ingredient.strength[x]",
+    "expansion" : {
+      "identifier" : "urn:uuid:2ebbde19-d5d5-4e57-9699-4d737a98915d",
+      "timestamp" : "2019-07-29T11:33:24-05:00",
+      "contains" : [{
+        "system" : "http://hl7.org/fhir/data-types",
+        "code" : "Ratio",
+        "display" : "Ratio"
+      },
+      {
+        "system" : "http://hl7.org/fhir/data-types",
+        "code" : "CodeableConcept",
+        "display" : "CodeableConcept"
+      }]
+    }
   }],
   "identifier" : [{
     "system" : "urn:ietf:rfc:3986"
   }],
   "version" : "4.1.0",
   "status" : "draft",
-  "date" : "2019-04-16T08:42:31-05:00",
+  "date" : "2019-07-29T11:29:14-05:00",
   "publisher" : "Health Level Seven International (Pharmacy)",
   "item" : [{
     "linkId" : "Medication",
@@ -448,7 +469,7 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "CodeableConcept"
       }],
-      "linkId" : "Medication.form",
+      "linkId" : "Medication.doseForm",
       "text" : "powder | tablets | capsule +",
       "type" : "group",
       "required" : false,
@@ -468,14 +489,14 @@
         "type" : "display"
       },
       {
-        "linkId" : "Medication.form.coding",
+        "linkId" : "Medication.doseForm.coding",
         "text" : "code:",
         "type" : "open-choice",
         "required" : false,
         "repeats" : false
       },
       {
-        "linkId" : "Medication.form.text",
+        "linkId" : "Medication.doseForm.text",
         "text" : "text:",
         "type" : "string",
         "required" : false,
@@ -753,12 +774,8 @@
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
           "valueInteger" : 1
-        },
-        {
-          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-          "valueString" : "Ratio"
         }],
-        "linkId" : "Medication.ingredient.strength",
+        "linkId" : "Medication.ingredient.strength[x]",
         "text" : "Quantity of ingredient present",
         "type" : "group",
         "required" : false,
@@ -778,25 +795,63 @@
           "type" : "display"
         },
         {
-          "linkId" : "Medication.ingredient.strength.numerator",
-          "text" : "numerator:",
-          "type" : "decimal",
+          "linkId" : "Medication.ingredient.strength[x]._type",
+          "text" : "type",
+          "type" : "choice",
           "required" : false,
-          "repeats" : false
-        },
-        {
-          "linkId" : "Medication.ingredient.strength.denominator",
-          "text" : "denominator:",
-          "type" : "decimal",
-          "required" : false,
-          "repeats" : false
-        },
-        {
-          "linkId" : "Medication.ingredient.strength.units",
-          "text" : "units:",
-          "type" : "string",
-          "required" : false,
-          "repeats" : false
+          "repeats" : false,
+          "answerValueSet" : "#vs3",
+          "item" : [{
+            "extension" : [{
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+              "valueString" : "Ratio"
+            }],
+            "linkId" : "Medication.ingredient.strength[x]._null",
+            "type" : "group",
+            "item" : [{
+              "linkId" : "Medication.ingredient.strength[x]._null.numerator",
+              "text" : "numerator:",
+              "type" : "decimal",
+              "required" : false,
+              "repeats" : false
+            },
+            {
+              "linkId" : "Medication.ingredient.strength[x]._null.denominator",
+              "text" : "denominator:",
+              "type" : "decimal",
+              "required" : false,
+              "repeats" : false
+            },
+            {
+              "linkId" : "Medication.ingredient.strength[x]._null.units",
+              "text" : "units:",
+              "type" : "string",
+              "required" : false,
+              "repeats" : false
+            }]
+          },
+          {
+            "extension" : [{
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+              "valueString" : "CodeableConcept"
+            }],
+            "linkId" : "Medication.ingredient.strength[x]._null",
+            "type" : "group",
+            "item" : [{
+              "linkId" : "Medication.ingredient.strength[x]._null.coding",
+              "text" : "code:",
+              "type" : "open-choice",
+              "required" : false,
+              "repeats" : false
+            },
+            {
+              "linkId" : "Medication.ingredient.strength[x]._null.text",
+              "text" : "text:",
+              "type" : "string",
+              "required" : false,
+              "repeats" : false
+            }]
+          }]
         }]
       }]
     },

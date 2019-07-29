@@ -65,6 +65,7 @@
     "xhtml",
     "Account",
     "ActivityDefinition",
+    "AdministrableProductDefinition",
     "AdverseEvent",
     "AllergyIntolerance",
     "Appointment",
@@ -76,6 +77,7 @@
     "BodyStructure",
     "Bundle",
     "CapabilityStatement",
+    "CapabilityStatement2",
     "CarePlan",
     "CareTeam",
     "CatalogEntry",
@@ -85,6 +87,7 @@
     "ClaimResponse",
     "ClinicalImpression",
     "ClinicalProfile",
+    "ClinicalUseIssue",
     "CodeSystem",
     "Communication",
     "CommunicationRequest",
@@ -92,6 +95,7 @@
     "Composition",
     "ConceptMap",
     "Condition",
+    "ConditionDefinition",
     "Consent",
     "Contract",
     "Coverage",
@@ -130,12 +134,14 @@
     "ImmunizationEvaluation",
     "ImmunizationRecommendation",
     "ImplementationGuide",
+    "Ingredient",
     "InsurancePlan",
     "Invoice",
     "Library",
     "Linkage",
     "List",
     "Location",
+    "ManufacturedItemDefinition",
     "Measure",
     "MeasureReport",
     "Media",
@@ -144,17 +150,8 @@
     "MedicationDispense",
     "MedicationKnowledge",
     "MedicationRequest",
-    "MedicationStatement",
-    "MedicinalProduct",
-    "MedicinalProductAuthorization",
-    "MedicinalProductContraindication",
-    "MedicinalProductIndication",
-    "MedicinalProductIngredient",
-    "MedicinalProductInteraction",
-    "MedicinalProductManufactured",
-    "MedicinalProductPackaged",
-    "MedicinalProductPharmaceutical",
-    "MedicinalProductUndesirableEffect",
+    "MedicationUsage",
+    "MedicinalProductDefinition",
     "MessageDefinition",
     "MessageHeader",
     "MetadataResource",
@@ -167,6 +164,7 @@
     "OperationOutcome",
     "Organization",
     "OrganizationAffiliation",
+    "PackagedProductDefinition",
     "Parameters",
     "Patient",
     "PaymentNotice",
@@ -179,6 +177,8 @@
     "Provenance",
     "Questionnaire",
     "QuestionnaireResponse",
+    "RegulatedAdministrableProduct",
+    "RegulatedAuthorization",
     "RelatedPerson",
     "RequestGroup",
     "ResearchDefinition",
@@ -194,6 +194,7 @@
     "Slot",
     "Specimen",
     "SpecimenDefinition",
+    "Statistic",
     "StructureDefinition",
     "StructureMap",
     "Subscription",
@@ -213,6 +214,17 @@
     "ValueSet",
     "VerificationResult",
     "VisionPrescription",
+    "MedicationStatement",
+    "MedicinalProduct",
+    "MedicinalProductAuthorization",
+    "MedicinalProductContraindication",
+    "MedicinalProductIndication",
+    "MedicinalProductIngredient",
+    "MedicinalProductInteraction",
+    "MedicinalProductManufactured",
+    "MedicinalProductPackaged",
+    "MedicinalProductPharmaceutical",
+    "MedicinalProductUndesirableEffect",
     "SubstanceSpecification"
   ],
   "Address": {
@@ -908,6 +920,9 @@
     },
     "status": "changed"
   },
+  "AdministrableProductDefinition": {
+    "status": "new"
+  },
   "AdverseEvent": {
     "elements": {
       "AdverseEvent.identifier": {
@@ -925,6 +940,9 @@
           "reference": "http://hl7.org/fhir/ValueSet/adverse-event-actuality|4.1.0",
           "strength": "required"
         }
+      },
+      "AdverseEvent.code": {
+        "status": "new"
       },
       "AdverseEvent.severity": {
         "binding-valueset-changed": true,
@@ -956,7 +974,48 @@
       "AdverseEvent.suspectEntity.instance[x]": {
         "status": "new"
       },
+      "AdverseEvent.suspectEntity.causality.assessmentMethod": {
+        "status": "new"
+      },
+      "AdverseEvent.suspectEntity.causality.entityRelatedness": {
+        "status": "new"
+      },
+      "AdverseEvent.suspectEntity.causality.author": {
+        "removed-types": [
+          "Reference(Practitioner | PractitionerRole)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Patient | RelatedPerson)"
+        ]
+      },
+      "AdverseEvent.supportingInfo": {
+        "status": "new"
+      },
+      "AdverseEvent.supportingInfo.item": {
+        "status": "new"
+      },
+      "AdverseEvent.supportingInfo.contributingFactor": {
+        "status": "new"
+      },
+      "AdverseEvent.event": {
+        "status": "deleted"
+      },
       "AdverseEvent.suspectEntity.instance": {
+        "status": "deleted"
+      },
+      "AdverseEvent.suspectEntity.causality.assessment": {
+        "status": "deleted"
+      },
+      "AdverseEvent.suspectEntity.causality.productRelatedness": {
+        "status": "deleted"
+      },
+      "AdverseEvent.suspectEntity.causality.method": {
+        "status": "deleted"
+      },
+      "AdverseEvent.subjectMedicalHistory": {
+        "status": "deleted"
+      },
+      "AdverseEvent.referenceDocument": {
         "status": "deleted"
       }
     },
@@ -1440,6 +1499,9 @@
     },
     "status": "changed"
   },
+  "CapabilityStatement2": {
+    "status": "new"
+  },
   "CarePlan": {
     "elements": {
       "CarePlan.status": {
@@ -1585,6 +1647,9 @@
         "status": "new"
       },
       "CatalogEntry.note": {
+        "status": "new"
+      },
+      "CatalogEntry.estimatedDuration": {
         "status": "new"
       },
       "CatalogEntry.billingCode": {
@@ -1789,6 +1854,9 @@
   "ClinicalProfile": {
     "status": "new"
   },
+  "ClinicalUseIssue": {
+    "status": "new"
+  },
   "CodeSystem": {
     "elements": {
       "CodeSystem.status": {
@@ -1880,12 +1948,28 @@
           "strength": "required"
         }
       },
+      "Communication.recipient": {
+        "removed-types": [
+          "Reference(Device | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson | Group | CareTeam | HealthcareService)"
+        ],
+        "added-types": [
+          "Reference(CareTeam | Device | Group | HealthcareService | Location | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson)"
+        ]
+      },
       "Communication.reasonReference": {
         "removed-types": [
           "Reference(Condition | Observation | DiagnosticReport | DocumentReference)"
         ],
         "added-types": [
           "Reference(Resource)"
+        ]
+      },
+      "Communication.payload.content[x]": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "CodeableConcept"
         ]
       }
     },
@@ -1917,6 +2001,17 @@
           "strength": "required"
         }
       },
+      "CommunicationRequest.payload.content[x]": {
+        "removed-types": [
+          "string"
+        ],
+        "added-types": [
+          "CodeableConcept"
+        ]
+      },
+      "CommunicationRequest.informationProvider": {
+        "status": "new"
+      },
       "CommunicationRequest.reasonReference": {
         "removed-types": [
           "Reference(Condition | Observation | DiagnosticReport | DocumentReference)"
@@ -1924,6 +2019,9 @@
         "added-types": [
           "Reference(Resource)"
         ]
+      },
+      "CommunicationRequest.sender": {
+        "status": "deleted"
       }
     },
     "status": "changed"
@@ -2100,9 +2198,20 @@
           "reference": "http://hl7.org/fhir/ValueSet/condition-ver-status|4.1.0",
           "strength": "required"
         }
+      },
+      "Condition.asserter": {
+        "removed-types": [
+          "Reference(Practitioner | PractitionerRole | Patient | RelatedPerson)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Patient | RelatedPerson | Device)"
+        ]
       }
     },
     "status": "changed"
+  },
+  "ConditionDefinition": {
+    "status": "new"
   },
   "Consent": {
     "elements": {
@@ -2624,6 +2733,9 @@
           "strength": "required"
         }
       },
+      "Encounter.subjectStatus": {
+        "status": "new"
+      },
       "Encounter.location.status": {
         "binding-valueset-changed": true,
         "binding-status": "changed",
@@ -3006,7 +3118,7 @@
           "Reference(Condition | Observation | MedicationStatement | NutritionOrder | ServiceRequest | RiskAssessment)"
         ],
         "added-types": [
-          "Reference(Condition | Observation | MedicationStatement | MedicationRequest | NutritionOrder | ServiceRequest | RiskAssessment)"
+          "Reference(Condition | Observation | MedicationUsage | MedicationRequest | NutritionOrder | ServiceRequest | RiskAssessment)"
         ]
       }
     },
@@ -3170,6 +3282,12 @@
           "reference": "http://hl7.org/fhir/ValueSet/immunization-status|4.1.0",
           "strength": "required"
         }
+      },
+      "Immunization.informationSource[x]": {
+        "status": "new"
+      },
+      "Immunization.reportOrigin": {
+        "status": "deleted"
       }
     },
     "status": "changed"
@@ -3192,7 +3310,13 @@
     "status": "changed"
   },
   "ImmunizationRecommendation": {
-    "status": "no-change"
+    "elements": {
+      "ImmunizationRecommendation.recommendation.targetDisease": {
+        "old-max": "1",
+        "new-max": "*"
+      }
+    },
+    "status": "changed"
   },
   "ImplementationGuide": {
     "elements": {
@@ -3269,19 +3393,23 @@
         }
       },
       "ImplementationGuide.definition.parameter.code": {
-        "binding-valueset-changed": true,
-        "binding-status": "changed",
+        "removed-types": [
+          "code"
+        ],
+        "added-types": [
+          "string"
+        ],
+        "binding-status": "removed",
         "old-binding": {
           "reference": "http://hl7.org/fhir/ValueSet/guide-parameter-code|4.0.0",
-          "strength": "required"
-        },
-        "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/guide-parameter-code|4.1.0",
           "strength": "required"
         }
       }
     },
     "status": "changed"
+  },
+  "Ingredient": {
+    "status": "new"
   },
   "InsurancePlan": {
     "elements": {
@@ -3445,6 +3573,9 @@
     },
     "status": "changed"
   },
+  "ManufacturedItemDefinition": {
+    "status": "new"
+  },
   "Measure": {
     "elements": {
       "Measure.status": {
@@ -3545,12 +3676,30 @@
           "reference": "http://hl7.org/fhir/ValueSet/medication-status|4.1.0",
           "strength": "required"
         }
+      },
+      "Medication.doseForm": {
+        "status": "new"
+      },
+      "Medication.ingredient.strength[x]": {
+        "status": "new"
+      },
+      "Medication.form": {
+        "status": "deleted"
+      },
+      "Medication.ingredient.strength": {
+        "status": "deleted"
       }
     },
     "status": "changed"
   },
   "MedicationAdministration": {
     "elements": {
+      "MedicationAdministration.instantiatesCanonical": {
+        "status": "new"
+      },
+      "MedicationAdministration.instantiatesUri": {
+        "status": "new"
+      },
       "MedicationAdministration.status": {
         "binding-valueset-changed": true,
         "binding-status": "changed",
@@ -3570,6 +3719,12 @@
       "MedicationAdministration.encounter": {
         "status": "new"
       },
+      "MedicationAdministration.occurence[x]": {
+        "status": "new"
+      },
+      "MedicationAdministration.recorded": {
+        "status": "new"
+      },
       "MedicationAdministration.dosage.rate[x]": {
         "removed-types": [
           "Quantity()"
@@ -3578,7 +3733,13 @@
           "Quantity()"
         ]
       },
+      "MedicationAdministration.instantiates": {
+        "status": "deleted"
+      },
       "MedicationAdministration.context": {
+        "status": "deleted"
+      },
+      "MedicationAdministration.effective[x]": {
         "status": "deleted"
       }
     },
@@ -3610,7 +3771,7 @@
           "Reference(Patient | Practitioner)"
         ],
         "added-types": [
-          "Reference(Patient | Practitioner | RelatedPerson | Location)"
+          "Reference(Patient | Practitioner | RelatedPerson | Location | PractitionerRole)"
         ]
       },
       "MedicationDispense.substitution.responsibleParty": {
@@ -3649,13 +3810,29 @@
       "MedicationKnowledge.device": {
         "status": "new"
       },
-      "MedicationKnowledge.administrationGuidelines.patientCharacteristics.characteristic[x]": {
-        "removed-types": [
-          "Quantity()"
-        ],
-        "added-types": [
-          "Quantity()"
-        ]
+      "MedicationKnowledge.administrationGuideline": {
+        "status": "new"
+      },
+      "MedicationKnowledge.administrationGuideline.dosage": {
+        "status": "new"
+      },
+      "MedicationKnowledge.administrationGuideline.dosage.type": {
+        "status": "new"
+      },
+      "MedicationKnowledge.administrationGuideline.dosage.dosage": {
+        "status": "new"
+      },
+      "MedicationKnowledge.administrationGuideline.indication[x]": {
+        "status": "new"
+      },
+      "MedicationKnowledge.administrationGuideline.patientCharacteristic": {
+        "status": "new"
+      },
+      "MedicationKnowledge.administrationGuideline.patientCharacteristic.characteristic[x]": {
+        "status": "new"
+      },
+      "MedicationKnowledge.administrationGuideline.patientCharacteristic.value": {
+        "status": "new"
       },
       "MedicationKnowledge.packaging.device": {
         "status": "new"
@@ -3674,33 +3851,25 @@
           "Quantity()"
         ]
       },
+      "MedicationKnowledge.clinicalUseIssue": {
+        "status": "new"
+      },
+      "MedicationKnowledge.kineticCharacteristic": {
+        "status": "new"
+      },
+      "MedicationKnowledge.kineticCharacteristic.type": {
+        "status": "new"
+      },
+      "MedicationKnowledge.kineticCharacteristic.value[x]": {
+        "status": "new"
+      },
+      "MedicationKnowledge.administrationGuidelines": {
+        "status": "deleted"
+      },
       "MedicationKnowledge.contraindication": {
-        "removed-types": [
-          "Reference(DetectedIssue)"
-        ],
-        "added-types": [
-          "Reference(MedicinalProductContraindication)"
-        ]
-      },
-      "MedicationKnowledge.interaction": {
-        "status": "new"
-      },
-      "MedicationKnowledge.undesirableEffect": {
-        "status": "new"
-      },
-      "MedicationKnowledge.kinetics.type": {
-        "status": "new"
-      },
-      "MedicationKnowledge.kinetics.value[x]": {
-        "status": "new"
-      },
-      "MedicationKnowledge.kinetics.areaUnderCurve": {
         "status": "deleted"
       },
-      "MedicationKnowledge.kinetics.lethalDose50": {
-        "status": "deleted"
-      },
-      "MedicationKnowledge.kinetics.halfLifePeriod": {
+      "MedicationKnowledge.kinetics": {
         "status": "deleted"
       }
     },
@@ -3743,90 +3912,40 @@
           "reference": "http://hl7.org/fhir/ValueSet/request-priority|4.1.0",
           "strength": "required"
         }
-      }
-    },
-    "status": "changed"
-  },
-  "MedicationStatement": {
-    "elements": {
-      "MedicationStatement.status": {
-        "binding-valueset-changed": true,
-        "binding-status": "changed",
-        "old-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/medication-statement-status|4.0.0",
-          "strength": "required"
-        },
-        "new-binding": {
-          "reference": "http://hl7.org/fhir/ValueSet/medication-statement-status|4.1.0",
-          "strength": "required"
-        }
       },
-      "MedicationStatement.category": {
-        "old-max": "1",
-        "new-max": "*"
-      },
-      "MedicationStatement.encounter": {
+      "MedicationRequest.reported": {
         "status": "new"
       },
-      "MedicationStatement.context": {
+      "MedicationRequest.informationSource": {
+        "status": "new"
+      },
+      "MedicationRequest.performer": {
+        "removed-types": [
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | Device | RelatedPerson | CareTeam)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | Device | RelatedPerson | CareTeam | HealthcareService)"
+        ]
+      },
+      "MedicationRequest.instantiatesCanonical": {
+        "removed-types": [
+          "canonical"
+        ],
+        "added-types": [
+          "canonical(PlanDefinition | ActivityDefinition)"
+        ]
+      },
+      "MedicationRequest.reported[x]": {
         "status": "deleted"
       }
     },
     "status": "changed"
   },
-  "MedicinalProduct": {
-    "elements": {
-      "MedicinalProduct.indication": {
-        "status": "new"
-      },
-      "MedicinalProduct.contact": {
-        "removed-types": [
-          "Reference(Organization | PractitionerRole)"
-        ],
-        "added-types": [
-          "BackboneElement"
-        ]
-      },
-      "MedicinalProduct.contact.type": {
-        "status": "new"
-      },
-      "MedicinalProduct.contact.contact": {
-        "status": "new"
-      }
-    },
-    "status": "changed"
+  "MedicationUsage": {
+    "status": "new"
   },
-  "MedicinalProductAuthorization": {
-    "status": "no-change"
-  },
-  "MedicinalProductContraindication": {
-    "status": "no-change"
-  },
-  "MedicinalProductIndication": {
-    "status": "no-change"
-  },
-  "MedicinalProductIngredient": {
-    "status": "no-change"
-  },
-  "MedicinalProductInteraction": {
-    "status": "no-change"
-  },
-  "MedicinalProductManufactured": {
-    "status": "no-change"
-  },
-  "MedicinalProductPackaged": {
-    "status": "no-change"
-  },
-  "MedicinalProductPharmaceutical": {
-    "elements": {
-      "MedicinalProductPharmaceutical.subject": {
-        "status": "new"
-      }
-    },
-    "status": "changed"
-  },
-  "MedicinalProductUndesirableEffect": {
-    "status": "no-change"
+  "MedicinalProductDefinition": {
+    "status": "new"
   },
   "MessageDefinition": {
     "elements": {
@@ -4072,6 +4191,14 @@
   },
   "Observation": {
     "elements": {
+      "Observation.partOf": {
+        "removed-types": [
+          "Reference(MedicationAdministration | MedicationDispense | MedicationStatement | Procedure | Immunization | ImagingStudy)"
+        ],
+        "added-types": [
+          "Reference(MedicationAdministration | MedicationDispense | MedicationUsage | Procedure | Immunization | ImagingStudy)"
+        ]
+      },
       "Observation.status": {
         "binding-valueset-changed": true,
         "binding-status": "changed",
@@ -4089,6 +4216,70 @@
   },
   "ObservationDefinition": {
     "elements": {
+      "ObservationDefinition.url": {
+        "status": "new"
+      },
+      "ObservationDefinition.identifier": {
+        "old-max": "*",
+        "new-max": "1"
+      },
+      "ObservationDefinition.version": {
+        "status": "new"
+      },
+      "ObservationDefinition.title": {
+        "status": "new"
+      },
+      "ObservationDefinition.derivedFromCanonical": {
+        "status": "new"
+      },
+      "ObservationDefinition.derivedFromUri": {
+        "status": "new"
+      },
+      "ObservationDefinition.status": {
+        "status": "new"
+      },
+      "ObservationDefinition.experimental": {
+        "status": "new"
+      },
+      "ObservationDefinition.subject[x]": {
+        "status": "new"
+      },
+      "ObservationDefinition.date": {
+        "status": "new"
+      },
+      "ObservationDefinition.publisher": {
+        "status": "new"
+      },
+      "ObservationDefinition.contact": {
+        "status": "new"
+      },
+      "ObservationDefinition.description": {
+        "status": "new"
+      },
+      "ObservationDefinition.useContext": {
+        "status": "new"
+      },
+      "ObservationDefinition.jurisdiction": {
+        "status": "new"
+      },
+      "ObservationDefinition.purpose": {
+        "status": "new"
+      },
+      "ObservationDefinition.copyright": {
+        "status": "new"
+      },
+      "ObservationDefinition.approvalDate": {
+        "status": "new"
+      },
+      "ObservationDefinition.lastReviewDate": {
+        "status": "new"
+      },
+      "ObservationDefinition.effectivePeriod": {
+        "status": "new"
+      },
+      "ObservationDefinition.performerType": {
+        "status": "new"
+      },
       "ObservationDefinition.permittedDataType": {
         "binding-valueset-changed": true,
         "binding-status": "changed",
@@ -4100,6 +4291,15 @@
           "reference": "http://hl7.org/fhir/ValueSet/permitted-data-type|4.1.0",
           "strength": "required"
         }
+      },
+      "ObservationDefinition.bodySite": {
+        "status": "new"
+      },
+      "ObservationDefinition.specimen": {
+        "status": "new"
+      },
+      "ObservationDefinition.device": {
+        "status": "new"
       },
       "ObservationDefinition.qualifiedInterval.category": {
         "binding-valueset-changed": true,
@@ -4124,6 +4324,24 @@
           "reference": "http://hl7.org/fhir/ValueSet/administrative-gender|4.1.0",
           "strength": "required"
         }
+      },
+      "ObservationDefinition.hasMember": {
+        "status": "new"
+      },
+      "ObservationDefinition.component": {
+        "status": "new"
+      },
+      "ObservationDefinition.component.code": {
+        "status": "new"
+      },
+      "ObservationDefinition.component.permittedDataType": {
+        "status": "new"
+      },
+      "ObservationDefinition.component.quantitativeDetails": {
+        "status": "new"
+      },
+      "ObservationDefinition.component.qualifiedInterval": {
+        "status": "new"
       }
     },
     "status": "changed"
@@ -4251,6 +4469,9 @@
   },
   "OrganizationAffiliation": {
     "status": "no-change"
+  },
+  "PackagedProductDefinition": {
+    "status": "new"
   },
   "Parameters": {
     "status": "no-change"
@@ -4569,6 +4790,22 @@
       "Procedure.reported[x]": {
         "status": "new"
       },
+      "Procedure.performer.actor": {
+        "removed-types": [
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson | Device)"
+        ],
+        "added-types": [
+          "Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson | Device | CareTeam | HealthcareService)"
+        ]
+      },
+      "Procedure.usedReference": {
+        "removed-types": [
+          "Reference(Device | Medication | Substance)"
+        ],
+        "added-types": [
+          "Reference(Device | Medication | Substance | BiologicallyDerivedProduct)"
+        ]
+      },
       "Procedure.performed[x]": {
         "status": "deleted"
       },
@@ -4676,6 +4913,12 @@
       }
     },
     "status": "changed"
+  },
+  "RegulatedAdministrableProduct": {
+    "status": "new"
+  },
+  "RegulatedAuthorization": {
+    "status": "new"
   },
   "RelatedPerson": {
     "elements": {
@@ -5177,6 +5420,63 @@
   },
   "SpecimenDefinition": {
     "elements": {
+      "SpecimenDefinition.url": {
+        "status": "new"
+      },
+      "SpecimenDefinition.version": {
+        "status": "new"
+      },
+      "SpecimenDefinition.title": {
+        "status": "new"
+      },
+      "SpecimenDefinition.derivedFromCanonical": {
+        "status": "new"
+      },
+      "SpecimenDefinition.derivedFromUri": {
+        "status": "new"
+      },
+      "SpecimenDefinition.status": {
+        "status": "new"
+      },
+      "SpecimenDefinition.experimental": {
+        "status": "new"
+      },
+      "SpecimenDefinition.subject[x]": {
+        "status": "new"
+      },
+      "SpecimenDefinition.date": {
+        "status": "new"
+      },
+      "SpecimenDefinition.publisher": {
+        "status": "new"
+      },
+      "SpecimenDefinition.contact": {
+        "status": "new"
+      },
+      "SpecimenDefinition.description": {
+        "status": "new"
+      },
+      "SpecimenDefinition.useContext": {
+        "status": "new"
+      },
+      "SpecimenDefinition.jurisdiction": {
+        "status": "new"
+      },
+      "SpecimenDefinition.purpose": {
+        "status": "new"
+      },
+      "SpecimenDefinition.copyright": {
+        "status": "new"
+      },
+      "SpecimenDefinition.approvalDate": {
+        "status": "new"
+      },
+      "SpecimenDefinition.lastReviewDate": {
+        "status": "new"
+      },
+      "SpecimenDefinition.effectivePeriod": {
+        "status": "new"
+      },
       "SpecimenDefinition.typeTested.preference": {
         "binding-valueset-changed": true,
         "binding-status": "changed",
@@ -5196,9 +5496,18 @@
         "added-types": [
           "Quantity()"
         ]
+      },
+      "SpecimenDefinition.typeTested.singleUse": {
+        "status": "new"
+      },
+      "SpecimenDefinition.typeTested.testingDestination": {
+        "status": "new"
       }
     },
     "status": "changed"
+  },
+  "Statistic": {
+    "status": "new"
   },
   "StructureDefinition": {
     "elements": {
@@ -5870,6 +6179,39 @@
       }
     },
     "status": "changed"
+  },
+  "MedicationStatement": {
+    "status": "deleted"
+  },
+  "MedicinalProduct": {
+    "status": "deleted"
+  },
+  "MedicinalProductAuthorization": {
+    "status": "deleted"
+  },
+  "MedicinalProductContraindication": {
+    "status": "deleted"
+  },
+  "MedicinalProductIndication": {
+    "status": "deleted"
+  },
+  "MedicinalProductIngredient": {
+    "status": "deleted"
+  },
+  "MedicinalProductInteraction": {
+    "status": "deleted"
+  },
+  "MedicinalProductManufactured": {
+    "status": "deleted"
+  },
+  "MedicinalProductPackaged": {
+    "status": "deleted"
+  },
+  "MedicinalProductPharmaceutical": {
+    "status": "deleted"
+  },
+  "MedicinalProductUndesirableEffect": {
+    "status": "deleted"
   },
   "SubstanceSpecification": {
     "status": "deleted"

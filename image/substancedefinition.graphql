@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type SubstanceDefinition {
   id: ID
   meta: Meta
@@ -10,8 +12,8 @@ type SubstanceDefinition {
   extension: [Extension]
   modifierExtension: [Extension]
   identifier: Identifier
-  type: CodeableConcept
   status: CodeableConcept
+  category: CodeableConcept
   domain: CodeableConcept
   description: String  _description: ElementBase
   source: [Reference]
@@ -42,6 +44,7 @@ type SubstanceDefinitionMoiety {
   molecularFormula: String  _molecularFormula: ElementBase
   amountQuantity: Quantity
   amountString: String  _amountString: ElementBase
+  amountType: CodeableConcept
 }
 
 type SubstanceDefinitionProperty {
@@ -55,6 +58,8 @@ type SubstanceDefinitionProperty {
   definingSubstanceCodeableConcept: CodeableConcept
   amountQuantity: Quantity
   amountString: String  _amountString: ElementBase
+  referenceRange: Range
+  source: [Reference]
 }
 
 type SubstanceDefinitionStructure {
@@ -141,8 +146,8 @@ type SubstanceDefinitionRelationship {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  substanceReference: Reference
-  substanceCodeableConcept: CodeableConcept
+  substanceDefinitionReference: Reference
+  substanceDefinitionCodeableConcept: CodeableConcept
   relationship: CodeableConcept
   isDefining: Boolean  _isDefining: ElementBase
   amountQuantity: Quantity
@@ -164,8 +169,8 @@ input SubstanceDefinitionInput {
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
   identifier: IdentifierInput
-  type: CodeableConceptInput
   status: CodeableConceptInput
+  category: CodeableConceptInput
   domain: CodeableConceptInput
   description: String  _description: ElementBase
   source: [ReferenceInput]
@@ -196,6 +201,7 @@ input SubstanceDefinitionMoietyInput {
   molecularFormula: String  _molecularFormula: ElementBase
   amountQuantity: QuantityInput
   amountString: String  _amountString: ElementBase
+  amountType: CodeableConceptInput
 }
 
 input SubstanceDefinitionPropertyInput {
@@ -209,6 +215,8 @@ input SubstanceDefinitionPropertyInput {
   definingSubstanceCodeableConcept: CodeableConceptInput
   amountQuantity: QuantityInput
   amountString: String  _amountString: ElementBase
+  referenceRange: RangeInput
+  source: [ReferenceInput]
 }
 
 input SubstanceDefinitionStructureInput {
@@ -295,8 +303,8 @@ input SubstanceDefinitionRelationshipInput {
   id: String
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
-  substanceReference: ReferenceInput
-  substanceCodeableConcept: CodeableConceptInput
+  substanceDefinitionReference: ReferenceInput
+  substanceDefinitionCodeableConcept: CodeableConceptInput
   relationship: CodeableConceptInput
   isDefining: Boolean  _isDefining: ElementBase
   amountQuantity: QuantityInput

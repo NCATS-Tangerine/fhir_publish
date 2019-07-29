@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type MedicationAdministration {
   id: ID
   meta: Meta
@@ -10,7 +12,8 @@ type MedicationAdministration {
   extension: [Extension]
   modifierExtension: [Extension]
   identifier: [Identifier]
-  instantiates: uri  _instantiates: [ElementBase]
+  instantiatesCanonical: canonical  _instantiatesCanonical: [ElementBase]
+  instantiatesUri: uri  _instantiatesUri: [ElementBase]
   partOf: [Reference]
   status: code  _status: ElementBase
   statusReason: [CodeableConcept]
@@ -20,8 +23,9 @@ type MedicationAdministration {
   subject: Reference!
   encounter: Reference
   supportingInformation: [Reference]
-  effectiveDateTime: dateTime  _effectiveDateTime: ElementBase
-  effectivePeriod: Period
+  occurenceDateTime: dateTime  _occurenceDateTime: ElementBase
+  occurencePeriod: Period
+  recorded: dateTime  _recorded: ElementBase
   performer: [MedicationAdministrationPerformer]
   reasonCode: [CodeableConcept]
   reasonReference: [Reference]
@@ -63,7 +67,8 @@ input MedicationAdministrationInput {
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
   identifier: [IdentifierInput]
-  instantiates: uri  _instantiates: [ElementBase]
+  instantiatesCanonical: canonical  _instantiatesCanonical: [ElementBase]
+  instantiatesUri: uri  _instantiatesUri: [ElementBase]
   partOf: [ReferenceInput]
   status: code  _status: ElementBase
   statusReason: [CodeableConceptInput]
@@ -73,8 +78,9 @@ input MedicationAdministrationInput {
   subject: ReferenceInput!
   encounter: ReferenceInput
   supportingInformation: [ReferenceInput]
-  effectiveDateTime: dateTime  _effectiveDateTime: ElementBase
-  effectivePeriod: PeriodInput
+  occurenceDateTime: dateTime  _occurenceDateTime: ElementBase
+  occurencePeriod: PeriodInput
+  recorded: dateTime  _recorded: ElementBase
   performer: [MedicationAdministrationPerformerInput]
   reasonCode: [CodeableConceptInput]
   reasonReference: [ReferenceInput]
@@ -113,8 +119,8 @@ type MedicationAdministrationReadType {
 type MedicationAdministrationListType {
   MedicationAdministrationList(_filter: String
     code: [token]
+    date: [date]
     device: [reference]
-    effective_time: [date]
     encounter: [reference]
     identifier: [token]
     medication: [reference]
@@ -142,8 +148,8 @@ type MedicationAdministrationListType {
 type MedicationAdministrationConnectionType {
   MedicationAdministrationConection(_filter: String
     code: [token]
+    date: [date]
     device: [reference]
-    effective_time: [date]
     encounter: [reference]
     identifier: [token]
     medication: [reference]

@@ -3,7 +3,7 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
   <id value="ServiceRequest"/>
   <meta>
-    <lastUpdated value="2019-04-16T08:42:31.781-05:00"/>
+    <lastUpdated value="2019-07-29T11:29:14.002-05:00"/>
   </meta>
   <text>
     <status value="generated"/>
@@ -201,7 +201,7 @@
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">
             <a href="datatypes.html#code">code</a>
           </td>
-          <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">draft | active | suspended | completed | entered-in-error | cancelled
+          <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">draft | active | on-hold | revoked | completed | entered-in-error | unknown
             <br/>
             <a href="valueset-request-status.html" title="The status of a service order.">RequestStatus</a> (
             <a href="terminologies.html#required" title="To be conformant, the concept in this element SHALL be from the specified value set.">Required</a>)
@@ -224,7 +224,7 @@
           <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">
             <a href="datatypes.html#code">code</a>
           </td>
-          <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">proposal | plan | order +
+          <td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">proposal | plan | directive | order +
             <br/>
             <a href="valueset-request-intent.html" title="The kind of service request.">RequestIntent</a> (
             <a href="terminologies.html#required" title="To be conformant, the concept in this element SHALL be from the specified value set.">Required</a>)
@@ -913,7 +913,7 @@
   <version value="4.1.0"/>
   <name value="ServiceRequest"/>
   <status value="draft"/>
-  <date value="2019-04-16T08:42:31-05:00"/>
+  <date value="2019-07-29T11:29:14-05:00"/>
   <publisher value="Health Level Seven International (Orders and Observations)"/>
   <contact>
     <telecom>
@@ -1435,7 +1435,7 @@
     </element>
     <element id="ServiceRequest.status">
       <path value="ServiceRequest.status"/>
-      <short value="draft | active | suspended | completed | entered-in-error | cancelled"/>
+      <short value="draft | active | on-hold | revoked | completed | entered-in-error | unknown"/>
       <definition value="The status of the order."/>
       <comment value="The status is generally fully in the control of the requester - they determine whether the order is draft or active and, after it has been activated, competed, cancelled or suspended. States relating to the activities of the performer are reflected on either the corresponding event (see [Event Pattern](event.html) for general discussion) or using the [Task](task.html) resource."/>
       <min value="1"/>
@@ -1482,7 +1482,7 @@
     </element>
     <element id="ServiceRequest.intent">
       <path value="ServiceRequest.intent"/>
-      <short value="proposal | plan | order +"/>
+      <short value="proposal | plan | directive | order +"/>
       <definition value="Whether the request is a proposal, plan, an original order or a reflex order."/>
       <comment value="This element is labeled as a modifier because the intent alters when and how the resource is actually applicable."/>
       <min value="1"/>
@@ -2642,7 +2642,7 @@
     </element>
     <element id="ServiceRequest.status">
       <path value="ServiceRequest.status"/>
-      <short value="draft | active | suspended | completed | entered-in-error | cancelled"/>
+      <short value="draft | active | on-hold | revoked | completed | entered-in-error | unknown"/>
       <definition value="The status of the order."/>
       <comment value="The status is generally fully in the control of the requester - they determine whether the order is draft or active and, after it has been activated, competed, cancelled or suspended. States relating to the activities of the performer are reflected on either the corresponding event (see [Event Pattern](event.html) for general discussion) or using the [Task](task.html) resource."/>
       <min value="1"/>
@@ -2684,7 +2684,7 @@
     </element>
     <element id="ServiceRequest.intent">
       <path value="ServiceRequest.intent"/>
-      <short value="proposal | plan | order +"/>
+      <short value="proposal | plan | directive | order +"/>
       <definition value="Whether the request is a proposal, plan, an original order or a reflex order."/>
       <comment value="This element is labeled as a modifier because the intent alters when and how the resource is actually applicable."/>
       <min value="1"/>

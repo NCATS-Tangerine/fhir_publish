@@ -1,0 +1,162 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://hl7.org/fhir/PackagedProductDefinition/example> a fhir:PackagedProductDefinition;
+  fhir:nodeRole fhir:treeRoot;
+  fhir:Resource.id [ fhir:value "example"];
+  fhir:DomainResource.text [
+     fhir:Narrative.status [ fhir:value "generated" ];
+     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: example</p><p><b>identifier</b>: {PCID}</p><p><b>description</b>: ALU-PVC/PVDC BLISTERS. CARTONS OF 10 FILM-COATED TABLETS. </p><h3>BatchIdentifiers</h3><table><tr><td>-</td><td><b>OuterPackaging</b></td></tr><tr><td>*</td><td>AAF5699</td></tr></table><blockquote><p><b>packageItem</b></p><p><b>type</b>: Carton <span>(Details : {http://ema.europa.eu/example/packageitemcontainertype code 'Carton' = 'Carton)</span></p><p><b>quantity</b>: 1 1</p><p><b>material</b>: PVC <span>(Details : {http://ema.europa.eu/example/packageItemContainerMaterial code 'PVC' = 'PVC)</span>, PVDC <span>(Details : {http://ema.europa.eu/example/packageItemContainerMaterial code 'PVDC' = 'PVDC)</span>, alu <span>(Details : {http://ema.europa.eu/example/packageItemContainerMaterial code 'alu' = 'alu)</span></p><h3>PackageItems</h3><table><tr><td>-</td></tr><tr><td>*</td></tr></table><p><b>physicalCharacteristics</b>: </p><p><b>manufacturer</b>: <a>Organization/example</a></p></blockquote></div>"
+  ];
+  fhir:PackagedProductDefinition.identifier [
+     fhir:index 0;
+     fhir:Identifier.system [ fhir:value "http://ema.europa.eu/example/pcid" ];
+     fhir:Identifier.value [ fhir:value "{PCID}" ]
+  ];
+  fhir:PackagedProductDefinition.description [ fhir:value "ALU-PVC/PVDC BLISTERS. CARTONS OF 10 FILM-COATED TABLETS. "];
+  fhir:PackagedProductDefinition.batchIdentifier [
+     fhir:index 0;
+     fhir:PackagedProductDefinition.batchIdentifier.outerPackaging [
+       fhir:Identifier.system [ fhir:value "http://ema.europa.eu/example/baid1" ];
+       fhir:Identifier.value [ fhir:value "AAF5699" ];
+       fhir:Identifier.period [
+         fhir:Period.end [ fhir:value "2016-06-06"^^xsd:date ]
+       ]
+     ]
+  ];
+  fhir:PackagedProductDefinition.packageItem [
+     fhir:index 0;
+     fhir:PackagedProductDefinition.packageItem.type [
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/packageitemcontainertype" ];
+         fhir:Coding.code [ fhir:value "Carton" ]
+       ]
+     ];
+     fhir:PackagedProductDefinition.packageItem.quantity [
+       fhir:Quantity.value [ fhir:value "1"^^xsd:decimal ];
+       fhir:Quantity.unit [ fhir:value "1" ]
+     ];
+     fhir:PackagedProductDefinition.packageItem.material [
+       fhir:index 0;
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/packageItemContainerMaterial" ];
+         fhir:Coding.code [ fhir:value "PVC" ]
+       ]
+     ], [
+       fhir:index 1;
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/packageItemContainerMaterial" ];
+         fhir:Coding.code [ fhir:value "PVDC" ]
+       ]
+     ], [
+       fhir:index 2;
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/packageItemContainerMaterial" ];
+         fhir:Coding.code [ fhir:value "alu" ]
+       ]
+     ];
+     fhir:PackagedProductDefinition.packageItem.packageItem [
+       fhir:index 0;
+       fhir:PackagedProductDefinition.packageItem.type [
+         fhir:CodeableConcept.coding [
+           fhir:index 0;
+           fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/packageitemcontainertype" ];
+           fhir:Coding.code [ fhir:value "Blister" ]
+         ]
+       ];
+       fhir:PackagedProductDefinition.packageItem.quantity [
+         fhir:Quantity.value [ fhir:value "1"^^xsd:decimal ];
+         fhir:Quantity.unit [ fhir:value "1" ]
+       ];
+       fhir:PackagedProductDefinition.packageItem.material [
+         fhir:index 0;
+         fhir:CodeableConcept.coding [
+           fhir:index 0;
+           fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/packageItemContainerMaterial" ];
+           fhir:Coding.code [ fhir:value "Paperboard" ]
+         ]
+       ];
+       fhir:PackagedProductDefinition.packageItem.manufacturedItem [
+         fhir:index 0;
+         fhir:link <http://hl7.org/fhir/ManufacturedItemDefinition/example>;
+         fhir:Reference.reference [ fhir:value "ManufacturedItemDefinition/example" ]
+       ];
+       fhir:PackagedProductDefinition.packageItem.physicalCharacteristics [
+         fhir:ProdCharacteristic.height [
+           fhir:Quantity.value [ fhir:value "125"^^xsd:decimal ];
+           fhir:Quantity.unit [ fhir:value "mm" ]
+         ];
+         fhir:ProdCharacteristic.width [
+           fhir:Quantity.value [ fhir:value "45"^^xsd:decimal ];
+           fhir:Quantity.unit [ fhir:value "mm" ]
+         ]
+       ];
+       fhir:PackagedProductDefinition.packageItem.shelfLifeStorage [
+         fhir:index 0;
+         fhir:ProductShelfLife.type [
+           fhir:CodeableConcept.coding [
+             fhir:index 0;
+             fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/shelfLifeTypePlaceHolder" ];
+             fhir:Coding.code [ fhir:value "ShelfLifeofPackagedMedicinalProduct" ]
+           ]
+         ];
+         fhir:ProductShelfLife.period [
+           fhir:Quantity.value [ fhir:value "3"^^xsd:decimal ];
+           fhir:Quantity.unit [ fhir:value "a" ]
+         ];
+         fhir:ProductShelfLife.specialPrecautionsForStorage [
+           fhir:index 0;
+           fhir:CodeableConcept.coding [
+             fhir:index 0;
+             fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/specialprecautionsforstorage" ];
+             fhir:Coding.code [ fhir:value "Thismedicinalproductdoesnotrequireanyspecialstoragecondition." ]
+           ]
+         ]
+       ];
+       fhir:PackagedProductDefinition.packageItem.manufacturer [
+         fhir:index 0;
+         fhir:link <http://hl7.org/fhir/Organization/example>;
+         fhir:Reference.reference [ fhir:value "Organization/example" ]
+       ]
+     ];
+     fhir:PackagedProductDefinition.packageItem.physicalCharacteristics [
+       fhir:ProdCharacteristic.height [
+         fhir:Quantity.value [ fhir:value "50"^^xsd:decimal ];
+         fhir:Quantity.unit [ fhir:value "mm" ]
+       ];
+       fhir:ProdCharacteristic.width [
+         fhir:Quantity.value [ fhir:value "136"^^xsd:decimal ];
+         fhir:Quantity.unit [ fhir:value "mm" ]
+       ];
+       fhir:ProdCharacteristic.depth [
+         fhir:Quantity.value [ fhir:value "23.5"^^xsd:decimal ];
+         fhir:Quantity.unit [ fhir:value "mm" ]
+       ]
+     ];
+     fhir:PackagedProductDefinition.packageItem.manufacturer [
+       fhir:index 0;
+       fhir:link <http://hl7.org/fhir/Organization/example>;
+       fhir:Reference.reference [ fhir:value "Organization/example" ]
+     ]
+  ] .
+
+<http://hl7.org/fhir/ManufacturedItemDefinition/example> a fhir:ManufacturedItemDefinition .
+
+<http://hl7.org/fhir/Organization/example> a fhir:Organization .
+
+# - ontology header ------------------------------------------------------------
+
+<http://hl7.org/fhir/PackagedProductDefinition/example.ttl> a owl:Ontology;
+  owl:imports fhir:fhir.ttl;
+  owl:versionIRI <http://build.fhir.org/PackagedProductDefinition/example.ttl> .
+
+# -------------------------------------------------------------------------------------
+

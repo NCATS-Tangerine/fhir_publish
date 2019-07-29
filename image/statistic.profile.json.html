@@ -36,20 +36,21 @@
 
 </head>
 <body>
-	<div id="segment-header" class="segment"><!-- segment-header -->	
-		<div class="container"><!-- container -->
-			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
-			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
-			<b><font size="+2">EBMOnFHIR Statistics Model</font></b>
-			<div id="hl7-nav">
-				 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
-					<img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
-				</a> 
-			</div>       	
-			<div id="hl7-nav"><a id="hl7-logo" no-external="true" href="http://hl7.org/fhir/search.cfm"><img alt="Search FHIR" src="./assets/images/search.png"/></a></div> 
-		</div>
-		<div class="container"><!-- container -->
-	</div></div><!-- /segment-header -->	
+	<div id="segment-header" class="segment"><!-- segment-header -->
+               <div class="container"><!-- container -->
+                        <a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
+                        <a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
+                        <b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+                        <a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
+                        <div id="hl7-nav">
+                                 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
+                                        <img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
+                                </a>
+                        </div>
+                        <div id="hl7-nav"><a id="hl7-logo" no-external="true" href="http://hl7.org/fhir/search.cfm"><img alt="Search FHIR" src="./assets/images/search.png"/></a></div>
+                </div>
+                <div class="container"><!-- container -->
+        </div></div><!-- /segment-header -->
 
 
 	<div id="segment-navbar" class="segment"><!-- segment-navbar -->
@@ -70,7 +71,8 @@
               <li><a href="./index.html">Home</a></li>
               <li><a href="./modules.html">Getting Started</a></li>
               <li><a href="./documentation.html">Documentation</a></li>
-              <li><a href="./resourcelist.html">Resources</a></li>
+              <li><a href="./patterns.html">Patterns</a></li>
+              <li><a href="./resourcelist.html"><span style="color: yellow">Resource Types</span></a></li>
               <li><a href="./profilelist.html">Profiles</a></li>
               <li><a href="./extensibility-registry.html">Extensions</a></li>
               <li><a href="./operationslist.html">Operations</a></li>
@@ -118,7 +120,7 @@
   &quot;resourceType&quot; : &quot;StructureDefinition&quot;,
   &quot;id&quot; : &quot;Statistic&quot;,
   &quot;meta&quot; : {
-    &quot;lastUpdated&quot; : &quot;2019-04-16T10:07:03.345-05:00&quot;
+    &quot;lastUpdated&quot; : &quot;2019-07-29T11:29:14.002-05:00&quot;
   },
   &quot;text&quot; : {
     &quot;status&quot; : &quot;generated&quot;,
@@ -148,7 +150,7 @@
   &quot;version&quot; : &quot;4.1.0&quot;,
   &quot;name&quot; : &quot;Statistic&quot;,
   &quot;status&quot; : &quot;draft&quot;,
-  &quot;date&quot; : &quot;2019-04-16T10:07:03-05:00&quot;,
+  &quot;date&quot; : &quot;2019-07-29T11:29:14-05:00&quot;,
   &quot;publisher&quot; : &quot;Health Level Seven International (Clinical Decision Support)&quot;,
   &quot;contact&quot; : [{
     &quot;telecom&quot; : [{
@@ -768,16 +770,15 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;Statistic.publisher&quot;,
-      &quot;path&quot; : &quot;Statistic.publisher&quot;,
+      &quot;id&quot; : &quot;Statistic.statisticPublisher&quot;,
+      &quot;path&quot; : &quot;Statistic.statisticPublisher&quot;,
       &quot;short&quot; : &quot;The individual or organization that produced this statistic&quot;,
-      &quot;definition&quot; : &quot;The name of the organization or individual that published the statistic.&quot;,
-      &quot;comment&quot; : &quot;Usually an organization but may be an individual. The publisher (or steward) of the statistic is the organization or individual primarily responsible for the maintenance and upkeep of the statistic. This is not necessarily the same individual or organization that developed and initially authored the content. The publisher is the primary point of contact for questions or issues with the statistic. This item SHOULD be populated unless the information is available from context.&quot;,
-      &quot;requirements&quot; : &quot;Helps establish the \&quot;authority/credibility\&quot; of the statistic.  May also allow for contact.&quot;,
+      &quot;definition&quot; : &quot;The individual or organization that produced this statistic.&quot;,
+      &quot;comment&quot; : &quot;Name changed to statistic-publisher because MetadataResource already defines string publisher.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;base&quot; : {
-        &quot;path&quot; : &quot;Statistic.publisher&quot;,
+        &quot;path&quot; : &quot;Statistic.statisticPublisher&quot;,
         &quot;min&quot; : 0,
         &quot;max&quot; : &quot;*&quot;
       },
@@ -793,19 +794,11 @@
         &quot;source&quot; : &quot;Element&quot;
       }],
       &quot;isModifier&quot; : false,
-      &quot;isSummary&quot; : true,
-      &quot;mapping&quot; : [{
-        &quot;identity&quot; : &quot;workflow&quot;,
-        &quot;map&quot; : &quot;Definition.publisher&quot;
-      },
-      {
-        &quot;identity&quot; : &quot;w5&quot;,
-        &quot;map&quot; : &quot;FiveWs.witness&quot;
-      }]
+      &quot;isSummary&quot; : false
     },
     {
-      &quot;id&quot; : &quot;Statistic.publisher.id&quot;,
-      &quot;path&quot; : &quot;Statistic.publisher.id&quot;,
+      &quot;id&quot; : &quot;Statistic.statisticPublisher.id&quot;,
+      &quot;path&quot; : &quot;Statistic.statisticPublisher.id&quot;,
       &quot;representation&quot; : [&quot;xmlAttr&quot;],
       &quot;short&quot; : &quot;Unique id for inter-element referencing&quot;,
       &quot;definition&quot; : &quot;Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.&quot;,
@@ -827,8 +820,8 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;Statistic.publisher.extension&quot;,
-      &quot;path&quot; : &quot;Statistic.publisher.extension&quot;,
+      &quot;id&quot; : &quot;Statistic.statisticPublisher.extension&quot;,
+      &quot;path&quot; : &quot;Statistic.statisticPublisher.extension&quot;,
       &quot;short&quot; : &quot;Additional content defined by implementations&quot;,
       &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.&quot;,
       &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
@@ -852,8 +845,8 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;Statistic.publisher.modifierExtension&quot;,
-      &quot;path&quot; : &quot;Statistic.publisher.modifierExtension&quot;,
+      &quot;id&quot; : &quot;Statistic.statisticPublisher.modifierExtension&quot;,
+      &quot;path&quot; : &quot;Statistic.statisticPublisher.modifierExtension&quot;,
       &quot;short&quot; : &quot;Extensions that cannot be ignored even if unrecognized&quot;,
       &quot;definition&quot; : &quot;May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).&quot;,
       &quot;comment&quot; : &quot;There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.&quot;,
@@ -880,14 +873,14 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;Statistic.publisher.name&quot;,
-      &quot;path&quot; : &quot;Statistic.publisher.name&quot;,
+      &quot;id&quot; : &quot;Statistic.statisticPublisher.name&quot;,
+      &quot;path&quot; : &quot;Statistic.statisticPublisher.name&quot;,
       &quot;short&quot; : &quot;The name of the publisher&quot;,
       &quot;definition&quot; : &quot;The name of the publisher.&quot;,
       &quot;min&quot; : 1,
       &quot;max&quot; : &quot;1&quot;,
       &quot;base&quot; : {
-        &quot;path&quot; : &quot;Statistic.publisher.name&quot;,
+        &quot;path&quot; : &quot;Statistic.statisticPublisher.name&quot;,
         &quot;min&quot; : 1,
         &quot;max&quot; : &quot;1&quot;
       },
@@ -898,14 +891,14 @@
       &quot;isSummary&quot; : true
     },
     {
-      &quot;id&quot; : &quot;Statistic.publisher.contact&quot;,
-      &quot;path&quot; : &quot;Statistic.publisher.contact&quot;,
+      &quot;id&quot; : &quot;Statistic.statisticPublisher.contact&quot;,
+      &quot;path&quot; : &quot;Statistic.statisticPublisher.contact&quot;,
       &quot;short&quot; : &quot;Contact details for the  publisher&quot;,
       &quot;definition&quot; : &quot;Contact details for the  publisher.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;base&quot; : {
-        &quot;path&quot; : &quot;Statistic.publisher.contact&quot;,
+        &quot;path&quot; : &quot;Statistic.statisticPublisher.contact&quot;,
         &quot;min&quot; : 0,
         &quot;max&quot; : &quot;*&quot;
       },
@@ -2416,30 +2409,20 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;Statistic.publisher&quot;,
-      &quot;path&quot; : &quot;Statistic.publisher&quot;,
+      &quot;id&quot; : &quot;Statistic.statisticPublisher&quot;,
+      &quot;path&quot; : &quot;Statistic.statisticPublisher&quot;,
       &quot;short&quot; : &quot;The individual or organization that produced this statistic&quot;,
-      &quot;definition&quot; : &quot;The name of the organization or individual that published the statistic.&quot;,
-      &quot;comment&quot; : &quot;Usually an organization but may be an individual. The publisher (or steward) of the statistic is the organization or individual primarily responsible for the maintenance and upkeep of the statistic. This is not necessarily the same individual or organization that developed and initially authored the content. The publisher is the primary point of contact for questions or issues with the statistic. This item SHOULD be populated unless the information is available from context.&quot;,
-      &quot;requirements&quot; : &quot;Helps establish the \&quot;authority/credibility\&quot; of the statistic.  May also allow for contact.&quot;,
+      &quot;definition&quot; : &quot;The individual or organization that produced this statistic.&quot;,
+      &quot;comment&quot; : &quot;Name changed to statistic-publisher because MetadataResource already defines string publisher.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;type&quot; : [{
         &quot;code&quot; : &quot;BackboneElement&quot;
-      }],
-      &quot;isSummary&quot; : true,
-      &quot;mapping&quot; : [{
-        &quot;identity&quot; : &quot;workflow&quot;,
-        &quot;map&quot; : &quot;Definition.publisher&quot;
-      },
-      {
-        &quot;identity&quot; : &quot;w5&quot;,
-        &quot;map&quot; : &quot;FiveWs.witness&quot;
       }]
     },
     {
-      &quot;id&quot; : &quot;Statistic.publisher.name&quot;,
-      &quot;path&quot; : &quot;Statistic.publisher.name&quot;,
+      &quot;id&quot; : &quot;Statistic.statisticPublisher.name&quot;,
+      &quot;path&quot; : &quot;Statistic.statisticPublisher.name&quot;,
       &quot;short&quot; : &quot;The name of the publisher&quot;,
       &quot;definition&quot; : &quot;The name of the publisher.&quot;,
       &quot;min&quot; : 1,
@@ -2450,8 +2433,8 @@
       &quot;isSummary&quot; : true
     },
     {
-      &quot;id&quot; : &quot;Statistic.publisher.contact&quot;,
-      &quot;path&quot; : &quot;Statistic.publisher.contact&quot;,
+      &quot;id&quot; : &quot;Statistic.statisticPublisher.contact&quot;,
+      &quot;path&quot; : &quot;Statistic.statisticPublisher.contact&quot;,
       &quot;short&quot; : &quot;Contact details for the  publisher&quot;,
       &quot;definition&quot; : &quot;Contact details for the  publisher.&quot;,
       &quot;min&quot; : 0,
@@ -3019,13 +3002,14 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-0a3a4eda5b) generated on Tue, Apr 16, 2019 10:10-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        FHIR &reg;© HL7.org 2011+. FHIR CI Build hl7.fhir.core#4.1.0 (GitHub 0931132380) generated on Mon, Jul 29, 2019 11:34-0500. 
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
-               <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
+               <a style="color: #ffffff" href="qa.html">QA Page</a> |
+<!--                <a style="color: #b8dcf9" href="credits.html">Credits</a> | -->
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fstatistic.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fstatistic.profile.json.html">Compare to R3</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
                <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   

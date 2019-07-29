@@ -36,21 +36,21 @@
 
 </head>
 <body>
-	<div id="segment-header" class="segment"><!-- segment-header -->	
-		<div class="container"><!-- container -->
-			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
-			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
-			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
-        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
-			<div id="hl7-nav">
-				 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
-					<img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
-				</a> 
-			</div>       	
-			<div id="hl7-nav"><a id="hl7-logo" no-external="true" href="http://hl7.org/fhir/search.cfm"><img alt="Search FHIR" src="./assets/images/search.png"/></a></div> 
-		</div>
-		<div class="container"><!-- container -->
-	</div></div><!-- /segment-header -->	
+	<div id="segment-header" class="segment"><!-- segment-header -->
+               <div class="container"><!-- container -->
+                        <a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
+                        <a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
+                        <b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+                        <a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
+                        <div id="hl7-nav">
+                                 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
+                                        <img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
+                                </a>
+                        </div>
+                        <div id="hl7-nav"><a id="hl7-logo" no-external="true" href="http://hl7.org/fhir/search.cfm"><img alt="Search FHIR" src="./assets/images/search.png"/></a></div>
+                </div>
+                <div class="container"><!-- container -->
+        </div></div><!-- /segment-header -->
 
 
 	<div id="segment-navbar" class="segment"><!-- segment-navbar -->
@@ -71,7 +71,8 @@
               <li><a href="./index.html">Home</a></li>
               <li><a href="./modules.html">Getting Started</a></li>
               <li><a href="./documentation.html">Documentation</a></li>
-              <li><a href="./resourcelist.html">Resources</a></li>
+              <li><a href="./patterns.html">Patterns</a></li>
+              <li><a href="./resourcelist.html"><span style="color: yellow">Resource Types</span></a></li>
               <li><a href="./profilelist.html">Profiles</a></li>
               <li><a href="./extensibility-registry.html">Extensions</a></li>
               <li><a href="./operationslist.html">Operations</a></li>
@@ -119,7 +120,7 @@
   &quot;resourceType&quot; : &quot;StructureDefinition&quot;,
   &quot;id&quot; : &quot;Immunization&quot;,
   &quot;meta&quot; : {
-    &quot;lastUpdated&quot; : &quot;2019-04-16T08:42:31.781-05:00&quot;
+    &quot;lastUpdated&quot; : &quot;2019-07-29T11:29:14.002-05:00&quot;
   },
   &quot;text&quot; : {
     &quot;status&quot; : &quot;generated&quot;,
@@ -149,7 +150,7 @@
   &quot;version&quot; : &quot;4.1.0&quot;,
   &quot;name&quot; : &quot;Immunization&quot;,
   &quot;status&quot; : &quot;draft&quot;,
-  &quot;date&quot; : &quot;2019-04-16T08:42:31-05:00&quot;,
+  &quot;date&quot; : &quot;2019-07-29T11:29:14-05:00&quot;,
   &quot;publisher&quot; : &quot;Health Level Seven International (Public Health and Emergency Response)&quot;,
   &quot;contact&quot; : [{
     &quot;telecom&quot; : [{
@@ -551,7 +552,7 @@
     {
       &quot;id&quot; : &quot;Immunization.statusReason&quot;,
       &quot;path&quot; : &quot;Immunization.statusReason&quot;,
-      &quot;short&quot; : &quot;Reason not done&quot;,
+      &quot;short&quot; : &quot;Reason for current status&quot;,
       &quot;definition&quot; : &quot;Indicates the reason the immunization event was not performed.&quot;,
       &quot;comment&quot; : &quot;This is generally only used for the status of \&quot;not-done\&quot;. The reason for performing the immunization event is captured in reasonCode, not here.&quot;,
       &quot;min&quot; : 0,
@@ -777,7 +778,7 @@
       &quot;id&quot; : &quot;Immunization.primarySource&quot;,
       &quot;path&quot; : &quot;Immunization.primarySource&quot;,
       &quot;short&quot; : &quot;Indicates context the data was recorded in&quot;,
-      &quot;definition&quot; : &quot;An indication that the content of the record is based on information from the person who administered the vaccine. This reflects the context under which the data was originally recorded.&quot;,
+      &quot;definition&quot; : &quot;Indicates if this record was captured as a secondary 'reported' record rather than as an original primary source-of-truth record.&quot;,
       &quot;comment&quot; : &quot;Reflects the “reliability” of the content.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
@@ -792,6 +793,10 @@
       &quot;isModifier&quot; : false,
       &quot;isSummary&quot; : true,
       &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;workflow&quot;,
+        &quot;map&quot; : &quot;Event.reportedBoolean&quot;
+      },
+      {
         &quot;identity&quot; : &quot;w5&quot;,
         &quot;map&quot; : &quot;FiveWs.source&quot;
       },
@@ -805,20 +810,28 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;Immunization.reportOrigin&quot;,
-      &quot;path&quot; : &quot;Immunization.reportOrigin&quot;,
-      &quot;short&quot; : &quot;Indicates the source of a secondarily reported record&quot;,
-      &quot;definition&quot; : &quot;The source of the data when the report of the immunization event is not based on information from the person who administered the vaccine.&quot;,
-      &quot;comment&quot; : &quot;Should not be populated if primarySource = True, not required even if primarySource = False.&quot;,
+      &quot;id&quot; : &quot;Immunization.informationSource[x]&quot;,
+      &quot;path&quot; : &quot;Immunization.informationSource[x]&quot;,
+      &quot;short&quot; : &quot;Indicates the source of a  reported record&quot;,
+      &quot;definition&quot; : &quot;Typically the source of the data when the report of the immunization event is not based on information from the person who administered the vaccine.&quot;,
+      &quot;comment&quot; : &quot;Typically will not be populated if primarySource = True, not required even if primarySource = False.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
       &quot;base&quot; : {
-        &quot;path&quot; : &quot;Immunization.reportOrigin&quot;,
+        &quot;path&quot; : &quot;Immunization.informationSource[x]&quot;,
         &quot;min&quot; : 0,
         &quot;max&quot; : &quot;1&quot;
       },
       &quot;type&quot; : [{
         &quot;code&quot; : &quot;CodeableConcept&quot;
+      },
+      {
+        &quot;code&quot; : &quot;Reference&quot;,
+        &quot;targetProfile&quot; : [&quot;http://hl7.org/fhir/StructureDefinition/Patient&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/Practitioner&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/PractitionerRole&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/RelatedPerson&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/Organization&quot;]
       }],
       &quot;isModifier&quot; : false,
       &quot;isSummary&quot; : false,
@@ -832,6 +845,10 @@
         &quot;valueSet&quot; : &quot;http://hl7.org/fhir/ValueSet/immunization-origin&quot;
       },
       &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;workflow&quot;,
+        &quot;map&quot; : &quot;Event.reportedReference&quot;
+      },
+      {
         &quot;identity&quot; : &quot;w5&quot;,
         &quot;map&quot; : &quot;FiveWs.source&quot;
       },
@@ -1288,7 +1305,7 @@
       &quot;id&quot; : &quot;Immunization.reasonCode&quot;,
       &quot;path&quot; : &quot;Immunization.reasonCode&quot;,
       &quot;short&quot; : &quot;Why immunization occurred&quot;,
-      &quot;definition&quot; : &quot;Reasons why the vaccine was administered.&quot;,
+      &quot;definition&quot; : &quot;Describes why the immunization occurred in coded or textual form.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;base&quot; : {
@@ -1323,7 +1340,7 @@
       &quot;id&quot; : &quot;Immunization.reasonReference&quot;,
       &quot;path&quot; : &quot;Immunization.reasonReference&quot;,
       &quot;short&quot; : &quot;Why immunization occurred&quot;,
-      &quot;definition&quot; : &quot;Condition, Observation or DiagnosticReport that supports why the immunization was administered.&quot;,
+      &quot;definition&quot; : &quot;Indicates another resource (Condition, Observation or DiagnosticReport) whose existence justifies this immunization.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;base&quot; : {
@@ -2199,7 +2216,7 @@
     {
       &quot;id&quot; : &quot;Immunization.statusReason&quot;,
       &quot;path&quot; : &quot;Immunization.statusReason&quot;,
-      &quot;short&quot; : &quot;Reason not done&quot;,
+      &quot;short&quot; : &quot;Reason for current status&quot;,
       &quot;definition&quot; : &quot;Indicates the reason the immunization event was not performed.&quot;,
       &quot;comment&quot; : &quot;This is generally only used for the status of \&quot;not-done\&quot;. The reason for performing the immunization event is captured in reasonCode, not here.&quot;,
       &quot;min&quot; : 0,
@@ -2387,7 +2404,7 @@
       &quot;id&quot; : &quot;Immunization.primarySource&quot;,
       &quot;path&quot; : &quot;Immunization.primarySource&quot;,
       &quot;short&quot; : &quot;Indicates context the data was recorded in&quot;,
-      &quot;definition&quot; : &quot;An indication that the content of the record is based on information from the person who administered the vaccine. This reflects the context under which the data was originally recorded.&quot;,
+      &quot;definition&quot; : &quot;Indicates if this record was captured as a secondary 'reported' record rather than as an original primary source-of-truth record.&quot;,
       &quot;comment&quot; : &quot;Reflects the “reliability” of the content.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
@@ -2396,6 +2413,10 @@
       }],
       &quot;isSummary&quot; : true,
       &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;workflow&quot;,
+        &quot;map&quot; : &quot;Event.reportedBoolean&quot;
+      },
+      {
         &quot;identity&quot; : &quot;w5&quot;,
         &quot;map&quot; : &quot;FiveWs.source&quot;
       },
@@ -2409,15 +2430,23 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;Immunization.reportOrigin&quot;,
-      &quot;path&quot; : &quot;Immunization.reportOrigin&quot;,
-      &quot;short&quot; : &quot;Indicates the source of a secondarily reported record&quot;,
-      &quot;definition&quot; : &quot;The source of the data when the report of the immunization event is not based on information from the person who administered the vaccine.&quot;,
-      &quot;comment&quot; : &quot;Should not be populated if primarySource = True, not required even if primarySource = False.&quot;,
+      &quot;id&quot; : &quot;Immunization.informationSource[x]&quot;,
+      &quot;path&quot; : &quot;Immunization.informationSource[x]&quot;,
+      &quot;short&quot; : &quot;Indicates the source of a  reported record&quot;,
+      &quot;definition&quot; : &quot;Typically the source of the data when the report of the immunization event is not based on information from the person who administered the vaccine.&quot;,
+      &quot;comment&quot; : &quot;Typically will not be populated if primarySource = True, not required even if primarySource = False.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;1&quot;,
       &quot;type&quot; : [{
         &quot;code&quot; : &quot;CodeableConcept&quot;
+      },
+      {
+        &quot;code&quot; : &quot;Reference&quot;,
+        &quot;targetProfile&quot; : [&quot;http://hl7.org/fhir/StructureDefinition/Patient&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/Practitioner&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/PractitionerRole&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/RelatedPerson&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/Organization&quot;]
       }],
       &quot;binding&quot; : {
         &quot;extension&quot; : [{
@@ -2429,6 +2458,10 @@
         &quot;valueSet&quot; : &quot;http://hl7.org/fhir/ValueSet/immunization-origin&quot;
       },
       &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;workflow&quot;,
+        &quot;map&quot; : &quot;Event.reportedReference&quot;
+      },
+      {
         &quot;identity&quot; : &quot;w5&quot;,
         &quot;map&quot; : &quot;FiveWs.source&quot;
       },
@@ -2728,7 +2761,7 @@
       &quot;id&quot; : &quot;Immunization.reasonCode&quot;,
       &quot;path&quot; : &quot;Immunization.reasonCode&quot;,
       &quot;short&quot; : &quot;Why immunization occurred&quot;,
-      &quot;definition&quot; : &quot;Reasons why the vaccine was administered.&quot;,
+      &quot;definition&quot; : &quot;Describes why the immunization occurred in coded or textual form.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;type&quot; : [{
@@ -2756,7 +2789,7 @@
       &quot;id&quot; : &quot;Immunization.reasonReference&quot;,
       &quot;path&quot; : &quot;Immunization.reasonReference&quot;,
       &quot;short&quot; : &quot;Why immunization occurred&quot;,
-      &quot;definition&quot; : &quot;Condition, Observation or DiagnosticReport that supports why the immunization was administered.&quot;,
+      &quot;definition&quot; : &quot;Indicates another resource (Condition, Observation or DiagnosticReport) whose existence justifies this immunization.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;type&quot; : [{
@@ -3180,13 +3213,14 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-baa72e6471) generated on Tue, Apr 16, 2019 08:57-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        FHIR &reg;© HL7.org 2011+. FHIR CI Build hl7.fhir.core#4.1.0 (GitHub 0931132380) generated on Mon, Jul 29, 2019 11:33-0500. 
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
-               <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
+               <a style="color: #ffffff" href="qa.html">QA Page</a> |
+<!--                <a style="color: #b8dcf9" href="credits.html">Credits</a> | -->
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fimmunization.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fimmunization.profile.json.html">Compare to R3</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
                <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   

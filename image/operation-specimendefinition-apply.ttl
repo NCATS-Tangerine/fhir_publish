@@ -1,0 +1,126 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# - resource -------------------------------------------------------------------
+
+[] a fhir:OperationDefinition;
+  fhir:Resource.id [ fhir:value "SpecimenDefinition-apply"];
+  fhir:DomainResource.text [
+     fhir:Narrative.status [ fhir:value "generated" ]
+  ];
+  fhir:DomainResource.extension [
+     fhir:index 0;
+     fhir:Extension.url [ fhir:value "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm" ];
+     fhir:Extension.value [ fhir:value "0" ]
+  ], [
+     fhir:index 1;
+     fhir:Extension.url [ fhir:value "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status" ];
+     fhir:Extension.value [ fhir:value "trial-use" ]
+  ];
+  fhir:OperationDefinition.url [ fhir:value "http://hl7.org/fhir/OperationDefinition/SpecimenDefinition-apply"];
+  fhir:OperationDefinition.version [ fhir:value "4.1.0"];
+  fhir:OperationDefinition.name [ fhir:value "Apply"];
+  fhir:OperationDefinition.status [ fhir:value "draft"];
+  fhir:OperationDefinition.kind [ fhir:value "operation"];
+  fhir:OperationDefinition.date [ fhir:value "2019-07-29T11:29:14-05:00"];
+  fhir:OperationDefinition.publisher [ fhir:value "HL7 (FHIR Project)"];
+  fhir:OperationDefinition.contact [
+     fhir:index 0;
+     fhir:ContactDetail.telecom [
+       fhir:index 0;
+       fhir:ContactPoint.system [ fhir:value "url" ];
+       fhir:ContactPoint.value [ fhir:value "http://hl7.org/fhir" ]
+     ], [
+       fhir:index 1;
+       fhir:ContactPoint.system [ fhir:value "email" ];
+       fhir:ContactPoint.value [ fhir:value "fhir@lists.hl7.org" ]
+     ]
+  ];
+  fhir:OperationDefinition.description [ fhir:value "The apply operation applies a SpecimenDefinition in a given context to create a Specimen resource instance"];
+  fhir:OperationDefinition.code [ fhir:value "apply"];
+  fhir:OperationDefinition.comment [ fhir:value "The result of this operation is a Specimen resource based on the definition of the specimen as described in the SpecimenDefinition resource and the supplied parameters."];
+  fhir:OperationDefinition.resource [
+     fhir:value "SpecimenDefinition";
+     fhir:index 0
+  ];
+  fhir:OperationDefinition.system [ fhir:value "false"];
+  fhir:OperationDefinition.type [ fhir:value "true"];
+  fhir:OperationDefinition.instance [ fhir:value "true"];
+  fhir:OperationDefinition.parameter [
+     fhir:index 0;
+     fhir:OperationDefinition.name [ fhir:value "specimenDefinition" ];
+     fhir:OperationDefinition.use [ fhir:value "in" ];
+     fhir:OperationDefinition.min [ fhir:value "0" ];
+     fhir:OperationDefinition.max [ fhir:value "1" ];
+     fhir:OperationDefinition.documentation [ fhir:value "The specimen definition to be applied. If the operation is invoked at the instance level, this parameter is not allowed; if the operation is invoked at the type level, this parameter is required" ];
+     fhir:OperationDefinition.type [ fhir:value "SpecimenDefinition" ]
+  ], [
+     fhir:index 1;
+     fhir:OperationDefinition.name [ fhir:value "subject" ];
+     fhir:OperationDefinition.use [ fhir:value "in" ];
+     fhir:OperationDefinition.min [ fhir:value "1" ];
+     fhir:OperationDefinition.max [ fhir:value "*" ];
+     fhir:OperationDefinition.documentation [ fhir:value "The subject(s) that is/are the target of the Specimen instance to be created. The subject may be a Patient, Group, Device, Substance or Location. Subjects provided in this parameter will be resolved as the subject of the Specimen based on the type of the subject. If multiple subjects of the same type are provided, the behavior is implementation-defined" ];
+     fhir:OperationDefinition.type [ fhir:value "string" ];
+     fhir:OperationDefinition.searchType [ fhir:value "reference" ]
+  ], [
+     fhir:index 2;
+     fhir:OperationDefinition.name [ fhir:value "collector" ];
+     fhir:OperationDefinition.use [ fhir:value "in" ];
+     fhir:OperationDefinition.min [ fhir:value "0" ];
+     fhir:OperationDefinition.max [ fhir:value "1" ];
+     fhir:OperationDefinition.documentation [ fhir:value "The practitioner (or practitioner role) that is collecting the specimen" ];
+     fhir:OperationDefinition.type [ fhir:value "string" ];
+     fhir:OperationDefinition.searchType [ fhir:value "reference" ]
+  ], [
+     fhir:index 3;
+     fhir:OperationDefinition.name [ fhir:value "userType" ];
+     fhir:OperationDefinition.use [ fhir:value "in" ];
+     fhir:OperationDefinition.min [ fhir:value "0" ];
+     fhir:OperationDefinition.max [ fhir:value "1" ];
+     fhir:OperationDefinition.documentation [ fhir:value "The type of user initiating the request, e.g. patient, healthcare provider, or specific type of healthcare provider (physician, nurse, etc.)" ];
+     fhir:OperationDefinition.type [ fhir:value "CodeableConcept" ]
+  ], [
+     fhir:index 4;
+     fhir:OperationDefinition.name [ fhir:value "userLanguage" ];
+     fhir:OperationDefinition.use [ fhir:value "in" ];
+     fhir:OperationDefinition.min [ fhir:value "0" ];
+     fhir:OperationDefinition.max [ fhir:value "1" ];
+     fhir:OperationDefinition.documentation [ fhir:value "Preferred language of the person using the system" ];
+     fhir:OperationDefinition.type [ fhir:value "CodeableConcept" ]
+  ], [
+     fhir:index 5;
+     fhir:OperationDefinition.name [ fhir:value "userTaskContext" ];
+     fhir:OperationDefinition.use [ fhir:value "in" ];
+     fhir:OperationDefinition.min [ fhir:value "0" ];
+     fhir:OperationDefinition.max [ fhir:value "1" ];
+     fhir:OperationDefinition.documentation [ fhir:value "The task the system user is performing, e.g. laboratory results review, medication list review, etc. This information can be used to tailor decision support outputs, such as recommended information resources" ];
+     fhir:OperationDefinition.type [ fhir:value "CodeableConcept" ]
+  ], [
+     fhir:index 6;
+     fhir:OperationDefinition.name [ fhir:value "setting" ];
+     fhir:OperationDefinition.use [ fhir:value "in" ];
+     fhir:OperationDefinition.min [ fhir:value "0" ];
+     fhir:OperationDefinition.max [ fhir:value "1" ];
+     fhir:OperationDefinition.documentation [ fhir:value "The current setting of the request (inpatient, outpatient, etc.)" ];
+     fhir:OperationDefinition.type [ fhir:value "CodeableConcept" ]
+  ], [
+     fhir:index 7;
+     fhir:OperationDefinition.name [ fhir:value "settingContext" ];
+     fhir:OperationDefinition.use [ fhir:value "in" ];
+     fhir:OperationDefinition.min [ fhir:value "0" ];
+     fhir:OperationDefinition.max [ fhir:value "1" ];
+     fhir:OperationDefinition.documentation [ fhir:value "Additional detail about the setting of the request, if any" ];
+     fhir:OperationDefinition.type [ fhir:value "CodeableConcept" ]
+  ], [
+     fhir:index 8;
+     fhir:OperationDefinition.name [ fhir:value "return" ];
+     fhir:OperationDefinition.use [ fhir:value "out" ];
+     fhir:OperationDefinition.min [ fhir:value "1" ];
+     fhir:OperationDefinition.max [ fhir:value "1" ];
+     fhir:OperationDefinition.documentation [ fhir:value "The Specimen resource that is the result of applying the specimen definition" ];
+     fhir:OperationDefinition.type [ fhir:value "Specimen" ]
+  ] .
+
+# -------------------------------------------------------------------------------------
+

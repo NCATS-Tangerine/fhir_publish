@@ -1,0 +1,484 @@
+﻿<!DOCTYPE HTML>
+  <!-- template-logical-mappings.html --><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>request - FHIR v4.1.0</title>
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="http://hl7.org/fhir"/>
+
+  <link rel="stylesheet" href="fhir.css"/>
+  <link rel="Prev" href="http://hl7.org/fhir/request-analysis.html"/>
+
+    <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="./dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="./assets/css/bootstrap-fhir.css"/>
+
+    <!-- Project extras -->
+  <link rel="stylesheet" href="./assets/css/project.css"/>
+  <link rel="stylesheet" href="./assets/css/pygments-manni.css"/>
+	<link rel="stylesheet" href="jquery-ui.css"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- [if lt IE 9]>
+  <script src="./assets/js/html5shiv.js"></script>
+  <script src="./assets/js/respond.min.js"></script>
+  <![endif] -->
+
+    <!-- Favicons -->
+  <link sizes="144x144" rel="apple-touch-icon-precomposed" href="./assets/ico/apple-touch-icon-144-precomposed.png"/>
+  <link sizes="114x114" rel="apple-touch-icon-precomposed" href="./assets/ico/apple-touch-icon-114-precomposed.png"/>
+  <link sizes="72x72" rel="apple-touch-icon-precomposed" href="./assets/ico/apple-touch-icon-72-precomposed.png"/>
+  <link rel="apple-touch-icon-precomposed" href="./assets/ico/apple-touch-icon-57-precomposed.png"/>
+  <link rel="shortcut icon" href="./assets/ico/favicon.png"/>
+
+</head>
+<body>
+	<div id="segment-header" class="segment">  <!-- segment-header -->
+               <div class="container">  <!-- container -->
+                        <a no-external="true" id="logo" href="http://hl7.org/fhir"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
+                        <a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" style="align:top" height="30"/></a>
+                        <b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+                        <a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
+                        <div id="hl7-nav">
+                                 <a no-external="true" id="hl7-logo" href="http://www.hl7.org">
+                                        <img src="./assets/images/hl7-logo.png" width="42" alt="visit the hl7 website" height="50"/>
+                                </a>
+                        </div>
+                        <div id="hl7-nav"><a no-external="true" id="hl7-logo" href="http://hl7.org/fhir/search.cfm"><img src="./assets/images/search.png" alt="Search FHIR"/></a></div>
+                </div>
+                <div class="container">  <!-- container -->
+        </div></div>  <!-- /segment-header -->
+
+
+	<div id="segment-navbar" class="segment">  <!-- segment-navbar -->
+		<div id="stripe"> </div>
+		<div class="container">  <!-- container -->
+   <!-- HEADER CONTENT -->
+ 	      		 	      		      		
+			<nav class="navbar navbar-inverse">
+				<div class="container">
+					<button data-target=".navbar-inverse-collapse" data-toggle="collapse" type="button" class="navbar-toggle">
+						<span class="icon-bar"> </span>
+						<span class="icon-bar"> </span>
+						<span class="icon-bar"> </span>
+					</button>
+					<a href="index.html" class="navbar-brand hidden">FHIR</a>
+					<div class="nav-collapse collapse navbar-inverse-collapse">
+						<ul class="nav navbar-nav">
+              <li><a href="./index.html">Home</a></li>
+              <li><a href="./modules.html">Getting Started</a></li>
+              <li><a href="./documentation.html">Documentation</a></li>
+              <li><a href="./patterns.html">Patterns</a></li>
+              <li><a href="./resourcelist.html"><span style="color: yellow">Resource Types</span></a></li>
+              <li><a href="./profilelist.html">Profiles</a></li>
+              <li><a href="./extensibility-registry.html">Extensions</a></li>
+              <li><a href="./operationslist.html">Operations</a></li>
+              <li><a href="./terminologies-systems.html">Terminologies</a></li>
+						</ul>
+					</div>  <!-- /.nav-collapse -->
+				</div>  <!-- /.container -->
+			</nav>  <!-- /.navbar -->
+      		
+  <!-- /HEADER CONTENT -->				
+		</div>  <!-- /container -->
+	</div>  <!-- /segment-navbar -->
+	
+
+	<div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
+		<div class="container">  <!-- container -->	
+			<ul class="breadcrumb">
+        <li><a href="workflow-module.html"><img src="workflow.png"/> Workflow</a></li>
+        <li><b>Request Pattern</b></li>          <!-- request.html / res-Analysis / Pattern &lt;%xtitle%&gt; - Analysis -->
+
+			</ul>	
+		</div>  <!-- /container -->
+	</div>  <!-- /segment-breadcrumb -->
+	
+
+	<div id="segment-content" class="segment">  <!-- segment-content -->
+	<div class="container">  <!-- container -->
+            <div class="row">
+            	<div class="inner-wrapper">
+  <!-- CONTENT CONTENT -->
+
+
+<div class="col-12">
+
+<ul class="nav nav-tabs"><li><a href="request.html">Content</a></li><li><a href="request-definitions.html">Detailed Descriptions</a></li><li><a href="request-mappings.html">Mappings</a></li><li><a href="request-implementations.html">Implementations</a></li><li class="active"><a href="#">Detailed Analysis</a></li></ul>
+
+
+<h2 class="self-link-parent"><span class="sectioncount">12.3.2<a name="12.3.2"> </a></span> Pattern request - Analysis <a href="request-analysis.html#12.3.2" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h2>
+
+<table class="colsi">
+ <tr><td><a href="http://www.hl7.org/Special/committees/fiwg/index.cfm">FHIR Infrastructure <img src="external.png" style="vertical-align: baseline"/></a></td><td><a href="versions.html#maturity">Maturity Level</a>: 1</td><td><a href="versions.html#std-process">Informative</a>  <!-- !ns! --></td><td></td></tr>
+</table>
+
+<p>Detailed Cross Analysis for the request.</p>
+
+<a name="mappings"></a><h3 class="self-link-parent"><span class="sectioncount">12.3.2.1</span> Mappings <a href="request-analysis.html#mappings" title="link to here" class="self-link"><svg viewBox="0 0 1792 1792" width="20" class="self-link" height="20"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="navy"></path></svg></a></h3>
+<table class="grid">
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.identifier">Request.identifier</a></b></td></tr>
+<tr><td colspan="6">Request.identifier : Identifier [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="appointmentresponse.html">AppointmentResponse</a></b></td><td><ul><li>AppointmentResponse.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="claim.html">Claim</a></b></td><td><ul><li>Claim.identifier : Identifier [0..*]</li><li>Claim.insurance.identifier : Identifier [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="contract.html">Contract</a></b></td><td><ul><li>Contract.identifier : Identifier [0..*]</li><li>Contract.term.identifier : Identifier [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="coverageeligibilityrequest.html">CoverageEligibilityRequest</a></b></td><td><ul><li>CoverageEligibilityRequest.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="enrollmentrequest.html">EnrollmentRequest</a></b></td><td><ul><li>EnrollmentRequest.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="immunizationrecommendation.html">ImmunizationRecommendation</a></b></td><td><ul><li>ImmunizationRecommendation.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="supplyrequest.html">SupplyRequest</a></b></td><td><ul><li>SupplyRequest.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="visionprescription.html">VisionPrescription</a></b></td><td><ul><li>VisionPrescription.identifier : Identifier [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.instantiatesCanonical">Request.instantiatesCanonical</a></b></td></tr>
+<tr><td colspan="6">Request.instantiatesCanonical : canonical(Definition) [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.instantiatesCanonical : canonical [0..*]</li><li>CarePlan.activity.detail.instantiatesCanonical : canonical [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.instantiatesCanonical : canonical [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.instantiatesCanonical : canonical [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.instantiatesCanonical : canonical [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.instantiatesCanonical : canonical [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.instantiatesCanonical : canonical [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.instantiatesUri">Request.instantiatesUri</a></b></td></tr>
+<tr><td colspan="6">Request.instantiatesUri : uri [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.instantiatesUri : uri [0..*]</li><li>CarePlan.activity.detail.instantiatesUri : uri [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.instantiatesUri : uri [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.instantiatesUri : uri [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.instantiatesUri : uri [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.instantiatesUri : uri [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.basedOn">Request.basedOn</a></b></td></tr>
+<tr><td colspan="6">Request.basedOn : Reference(Request) [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.basedOn : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="appointmentresponse.html">AppointmentResponse</a></b></td><td><ul><li>AppointmentResponse.appointment : Reference [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.basedOn : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.basedOn : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.basedOn : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.basedOn : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.basedOn : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.basedOn : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.basedOn : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.replaces">Request.replaces</a></b></td></tr>
+<tr><td colspan="6">Request.replaces : Reference(Request) [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.replaces : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="claim.html">Claim</a></b></td><td><ul><li>Claim.related.claim : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.replaces : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.priorRequest : Reference [0..*]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.priorPrescription : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.replaces : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.replaces : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffe6"><td><b><a href="task.html">Task</a></b></td><td><ul>Request.replaces : Reference(Request) [0..*] =&gt; Extension task-replaces : Reference [0..*]Request.replaces : Reference(Request) [0..*] =&gt; Extension task-replaces : Reference [0..*]</ul> (as an extension)</td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.groupIdentifier">Request.groupIdentifier</a></b></td></tr>
+<tr><td colspan="6">Request.groupIdentifier : Identifier [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.groupIdentifier : Identifier [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.groupIdentifier : Identifier [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.groupIdentifier : Identifier [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.groupIdentifier : Identifier [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.requisition : Identifier [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.groupIdentifier : Identifier [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.status">Request.status</a></b></td></tr>
+<tr><td colspan="6">Request.status : code [1..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="appointmentresponse.html">AppointmentResponse</a></b></td><td><ul><li>AppointmentResponse.participantStatus : code [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.status : code [1..1]</li><li>CarePlan.activity.detail.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="claim.html">Claim</a></b></td><td><ul><li>Claim.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="contract.html">Contract</a></b></td><td><ul><li>Contract.status : code [0..1]</li> Minimum Cardinality Violation (pattern = 1, resource = 0)</ul></td><td>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="coverageeligibilityrequest.html">CoverageEligibilityRequest</a></b></td><td><ul><li>CoverageEligibilityRequest.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.status : code [0..1]</li> Minimum Cardinality Violation (pattern = 1, resource = 0)</ul></td><td>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="enrollmentrequest.html">EnrollmentRequest</a></b></td><td><ul><li>EnrollmentRequest.status : code [0..1]</li> Minimum Cardinality Violation (pattern = 1, resource = 0)</ul></td><td>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="supplyrequest.html">SupplyRequest</a></b></td><td><ul><li>SupplyRequest.status : code [0..1]</li> Minimum Cardinality Violation (pattern = 1, resource = 0)</ul></td><td>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="visionprescription.html">VisionPrescription</a></b></td><td><ul><li>VisionPrescription.status : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.statusReason">Request.statusReason</a></b></td></tr>
+<tr><td colspan="6">Request.statusReason : CodeableConcept [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.activity.detail.statusReason : CodeableConcept [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.statusReason : CodeableConcept [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.statusReason : CodeableConcept [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.intent">Request.intent</a></b></td></tr>
+<tr><td colspan="6">Request.intent : code [1..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.intent : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.intent : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.intent : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.intent : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.intent : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.intent : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.intent : code [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.priority">Request.priority</a></b></td></tr>
+<tr><td colspan="6">Request.priority : code [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.priority : unsignedInt [0..1]</li> The type 'unsignedInt' is not legal according to the pattern (unsignedInt vs code) </ul></td><td></td><td><a href="https://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemEdit&amp;tracker_item_id=22101">GF#22101 <img src="external.png" style="vertical-align: baseline"/></a></td><td>investigations</td><td>waiting for committee discussion</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="claim.html">Claim</a></b></td><td><ul><li>Claim.priority : CodeableConcept [1..1]</li> The type 'CodeableConcept' is not legal according to the pattern (CodeableConcept vs code) </ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.priority : code [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="coverageeligibilityrequest.html">CoverageEligibilityRequest</a></b></td><td><ul><li>CoverageEligibilityRequest.priority : CodeableConcept [0..1]</li> The type 'CodeableConcept' is not legal according to the pattern (CodeableConcept vs code) </ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.priority : code [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.priority : code [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.priority : code [0..1]</li><li>RequestGroup.action.priority : code [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.priority : code [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="supplyrequest.html">SupplyRequest</a></b></td><td><ul><li>SupplyRequest.priority : code [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.priority : code [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.doNotPerform">Request.doNotPerform</a></b></td></tr>
+<tr><td colspan="6">Request.doNotPerform : boolean [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.activity.detail.doNotPerform : boolean [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.doNotPerform : boolean [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.doNotPerform : boolean [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.code">Request.code</a></b></td></tr>
+<tr><td colspan="6">Request.code : CodeableConcept [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.serviceType : CodeableConcept [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)</ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.activity.detail.code : CodeableConcept [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="contract.html">Contract</a></b></td><td><ul><li>Contract.type : CodeableConcept [0..1]</li><li>Contract.term.type : CodeableConcept [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.code[x] : Reference, CodeableConcept [1..1]</li> The type 'Reference' is not legal according to the pattern (Reference, CodeableConcept vs CodeableConcept) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="immunizationrecommendation.html">ImmunizationRecommendation</a></b></td><td><ul><li>ImmunizationRecommendation.recommendation.vaccineCode : CodeableConcept [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)</ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.medication[x] : CodeableConcept, Reference [1..1]</li> The type 'Reference' is not legal according to the pattern (CodeableConcept, Reference vs CodeableConcept) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.oralDiet.type : CodeableConcept [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)<li>NutritionOrder.oralDiet.nutrient.modifier : CodeableConcept [0..1]</li><li>NutritionOrder.oralDiet.texture.modifier : CodeableConcept [0..1]</li><li>NutritionOrder.oralDiet.texture.foodType : CodeableConcept [0..1]</li><li>NutritionOrder.oralDiet.fluidConsistencyType : CodeableConcept [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)<li>NutritionOrder.supplement.type : CodeableConcept [0..1]</li><li>NutritionOrder.enteralFormula.baseFormulaType : CodeableConcept [0..1]</li><li>NutritionOrder.enteralFormula.additiveType : CodeableConcept [0..1]</li></ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.code : CodeableConcept [0..1]</li><li>RequestGroup.action.code : CodeableConcept [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)</ul></td><td>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.code : CodeableConcept [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="supplyrequest.html">SupplyRequest</a></b></td><td><ul><li>SupplyRequest.item[x] : CodeableConcept, Reference [1..1]</li> The type 'Reference' is not legal according to the pattern (CodeableConcept, Reference vs CodeableConcept) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.code : CodeableConcept [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.subject">Request.subject</a></b></td></tr>
+<tr><td colspan="6">Request.subject : Reference(Patient|Group) [1..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.subject : Reference [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="claim.html">Claim</a></b></td><td><ul><li>Claim.patient : Reference [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.subject : Reference [0..1]</li> Minimum Cardinality Violation (pattern = 1, resource = 0)</ul></td><td>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="contract.html">Contract</a></b></td><td><ul><li>Contract.subject : Reference [0..*]</li> Minimum Cardinality Violation (pattern = 1, resource = 0), Maximum Cardinality Violation (pattern = 1, resource = *)</ul></td><td>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="coverageeligibilityrequest.html">CoverageEligibilityRequest</a></b></td><td><ul><li>CoverageEligibilityRequest.patient : Reference [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.subject : Reference [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="enrollmentrequest.html">EnrollmentRequest</a></b></td><td><ul><li>EnrollmentRequest.candidate : Reference [0..1]</li> Minimum Cardinality Violation (pattern = 1, resource = 0)</ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="immunizationrecommendation.html">ImmunizationRecommendation</a></b></td><td><ul><li>ImmunizationRecommendation.patient : Reference [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.subject : Reference [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.patient : Reference [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.subject : Reference [0..1]</li> Minimum Cardinality Violation (pattern = 1, resource = 0)</ul></td><td>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.subject : Reference [1..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.for : Reference [0..1]</li> Minimum Cardinality Violation (pattern = 1, resource = 0)</ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="visionprescription.html">VisionPrescription</a></b></td><td><ul><li>VisionPrescription.patient : Reference [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.encounter">Request.encounter</a></b></td></tr>
+<tr><td colspan="6">Request.encounter : Reference(Encounter) [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.encounter : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.encounter : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.encounter : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.encounter : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.occurrence[x]">Request.occurrence[x]</a></b></td></tr>
+<tr><td colspan="6">Request.occurrence[x] : dateTime|Period|Timing [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.start : instant [0..1]</li> The type 'instant' is not legal according to the pattern (instant vs dateTime|Period|Timing) <li>Appointment.end : instant [0..1]</li> The type 'instant' is not legal according to the pattern (instant vs dateTime|Period|Timing) <li>Appointment.minutesDuration : positiveInt [0..1]</li> The type 'positiveInt' is not legal according to the pattern (positiveInt vs dateTime|Period|Timing) <li>Appointment.requestedPeriod : Period [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)</ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="appointmentresponse.html">AppointmentResponse</a></b></td><td><ul><li>AppointmentResponse.start : instant [0..1]</li> The type 'instant' is not legal according to the pattern (instant vs dateTime|Period|Timing) <li>AppointmentResponse.end : instant [0..1]</li> The type 'instant' is not legal according to the pattern (instant vs dateTime|Period|Timing) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.period : Period [0..1]</li><li>CarePlan.activity.detail.scheduled[x] : Timing, Period, string [0..1]</li> The type 'string' is not legal according to the pattern (Timing, Period, string vs dateTime|Period|Timing) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.occurrence[x] : dateTime, Period [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="contract.html">Contract</a></b></td><td><ul><li>Contract.applies : Period [0..1]</li><li>Contract.term.applies : Period [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.occurrence[x] : dateTime, Period, Timing [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="immunizationrecommendation.html">ImmunizationRecommendation</a></b></td><td><ul><li>ImmunizationRecommendation.recommendation.dateCriterion : BackboneElement [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *) The type 'BackboneElement' is not legal according to the pattern (BackboneElement vs dateTime|Period|Timing) </ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.dosageInstruction : Dosage [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *) The type 'Dosage' is not legal according to the pattern (Dosage vs dateTime|Period|Timing) </ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.oralDiet.schedule : Timing [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)<li>NutritionOrder.supplement.schedule : Timing [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)<li>NutritionOrder.enteralFormula.administration.schedule : Timing [0..1]</li></ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.action.timing[x] : dateTime, Age, Period, Duration, Range, Timing [0..1]</li> The type 'Age' is not legal according to the pattern (dateTime, Age, Period, Duration, Range, Timing vs dateTime|Period|Timing) , The type 'Duration' is not legal according to the pattern (dateTime, Age, Period, Duration, Range, Timing vs dateTime|Period|Timing) , The type 'Range' is not legal according to the pattern (dateTime, Age, Period, Duration, Range, Timing vs dateTime|Period|Timing) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.occurrence[x] : dateTime, Period, Timing [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="supplyrequest.html">SupplyRequest</a></b></td><td><ul><li>SupplyRequest.occurrence[x] : dateTime, Period, Timing [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.authoredOn">Request.authoredOn</a></b></td></tr>
+<tr><td colspan="6">Request.authoredOn : dateTime [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.created : dateTime [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.created : dateTime [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="claim.html">Claim</a></b></td><td><ul><li>Claim.created : dateTime [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.authoredOn : dateTime [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="contract.html">Contract</a></b></td><td><ul><li>Contract.issued : dateTime [0..1]</li><li>Contract.term.issued : dateTime [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="coverageeligibilityrequest.html">CoverageEligibilityRequest</a></b></td><td><ul><li>CoverageEligibilityRequest.created : dateTime [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.authoredOn : dateTime [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="enrollmentrequest.html">EnrollmentRequest</a></b></td><td><ul><li>EnrollmentRequest.created : dateTime [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="immunizationrecommendation.html">ImmunizationRecommendation</a></b></td><td><ul><li>ImmunizationRecommendation.date : dateTime [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.authoredOn : dateTime [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.dateTime : dateTime [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.authoredOn : dateTime [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.authoredOn : dateTime [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="supplyrequest.html">SupplyRequest</a></b></td><td><ul><li>SupplyRequest.authoredOn : dateTime [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.authoredOn : dateTime [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="visionprescription.html">VisionPrescription</a></b></td><td><ul><li>VisionPrescription.dateWritten : dateTime [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.requester">Request.requester</a></b></td></tr>
+<tr><td colspan="6">Request.requester : Reference(Practitioner|PractitionerRole|Organization|Patient|RelatedPerson|Device) [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.author : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="claim.html">Claim</a></b></td><td><ul><li>Claim.provider : Reference [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.requester : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="contract.html">Contract</a></b></td><td><ul><li>Contract.signer.party : Reference [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="coverageeligibilityrequest.html">CoverageEligibilityRequest</a></b></td><td><ul><li>CoverageEligibilityRequest.provider : Reference [0..1]</li><li>CoverageEligibilityRequest.item.provider : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.requester : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="enrollmentrequest.html">EnrollmentRequest</a></b></td><td><ul><li>EnrollmentRequest.provider : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.requester : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.orderer : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.author : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.requester : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="supplyrequest.html">SupplyRequest</a></b></td><td><ul><li>SupplyRequest.requester : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.requester : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="visionprescription.html">VisionPrescription</a></b></td><td><ul><li>VisionPrescription.prescriber : Reference [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.reported[x]">Request.reported[x]</a></b></td></tr>
+<tr><td colspan="6">Request.reported[x] : boolean|Reference(Patient|RelatedPerson|Practitioner|PractitionerRole|Organization) [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.activity.detail.reported[x] : boolean, Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.performerType">Request.performerType</a></b></td></tr>
+<tr><td colspan="6">Request.performerType : CodeableConcept [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="appointmentresponse.html">AppointmentResponse</a></b></td><td><ul><li>AppointmentResponse.participantType : CodeableConcept [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)</ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.performerType : CodeableConcept [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.performerType : CodeableConcept [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.performerType : CodeableConcept [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.performer">Request.performer</a></b></td></tr>
+<tr><td colspan="6">Request.performer : Reference(Practitioner|PractitionerRole|Organization|CareTeam|HealthcareService|Patient|Device|RelatedPerson) [0..1]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.participant : BackboneElement [1..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *) The type 'BackboneElement' is not legal according to the pattern (BackboneElement vs Reference(Practitioner|PractitionerRole|Organization|CareTeam|HealthcareService|Patient|Device|RelatedPerson)) </ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="appointmentresponse.html">AppointmentResponse</a></b></td><td><ul><li>AppointmentResponse.actor : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.careTeam : Reference [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)<li>CarePlan.activity.detail.performer : Reference [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)</ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="claim.html">Claim</a></b></td><td><ul><li>Claim.insurer : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.recipient : Reference [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)<li>CommunicationRequest.informationProvider : Reference [0..1]</li></ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="contract.html">Contract</a></b></td><td><ul><li>Contract.term.action.type : CodeableConcept [1..1]</li> The type 'CodeableConcept' is not legal according to the pattern (CodeableConcept vs Reference(Practitioner|PractitionerRole|Organization|CareTeam|HealthcareService|Patient|Device|RelatedPerson)) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="coverageeligibilityrequest.html">CoverageEligibilityRequest</a></b></td><td><ul><li>CoverageEligibilityRequest.insurer : Reference [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.performer : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="enrollmentrequest.html">EnrollmentRequest</a></b></td><td><ul><li>EnrollmentRequest.insurer : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.performer : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.action.participant : Reference [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)</ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.performer : Reference [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)</ul></td><td>Cardinality Problem. </td><td></td><td></td></tr>
+<tr style="background-color: #ffebe6"><td><b><a href="supplyrequest.html">SupplyRequest</a></b></td><td><ul><li>SupplyRequest.supplier : Reference [0..*]</li> Maximum Cardinality Violation (pattern = 1, resource = *)</ul></td><td>Names are different. <br/>Cardinality Problem. </td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.reasonCode">Request.reasonCode</a></b></td></tr>
+<tr><td colspan="6">Request.reasonCode : CodeableConcept [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.reasonCode : CodeableConcept [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.addressesCode : CodeableConcept [0..*]</li><li>CarePlan.activity.detail.reasonCode : CodeableConcept [0..*]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.reasonCode : CodeableConcept [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="contract.html">Contract</a></b></td><td><ul><li>Contract.term.action.intent : CodeableConcept [1..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.reasonCode : CodeableConcept [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.reasonCode : CodeableConcept [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.reasonCode : CodeableConcept [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.reasonCode : CodeableConcept [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="supplyrequest.html">SupplyRequest</a></b></td><td><ul><li>SupplyRequest.reasonCode : CodeableConcept [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.location : Reference [0..1]</li> The type 'Reference' is not legal according to the pattern (Reference vs CodeableConcept) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.reasonReference">Request.reasonReference</a></b></td></tr>
+<tr><td colspan="6">Request.reasonReference : Reference(Condition|Observation|DiagnosticReport|DocumentReference) [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.reasonReference : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.addressesReference : Reference [0..*]</li><li>CarePlan.activity.detail.reasonReference : Reference [0..*]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="claim.html">Claim</a></b></td><td><ul><li>Claim.diagnosis : BackboneElement [0..*]</li> The type 'BackboneElement' is not legal according to the pattern (BackboneElement vs Reference(Condition|Observation|DiagnosticReport|DocumentReference)) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.reasonReference : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.reasonReference : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.reasonReference : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.reasonReference : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.reasonReference : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="supplyrequest.html">SupplyRequest</a></b></td><td><ul><li>SupplyRequest.reasonReference : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.reasonReference : Reference [0..1]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.insurance">Request.insurance</a></b></td></tr>
+<tr><td colspan="6">Request.insurance : Reference(Coverage|ClaimResponse) [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.insurance : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="enrollmentrequest.html">EnrollmentRequest</a></b></td><td><ul><li>EnrollmentRequest.coverage : Reference [0..1]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.insurance : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.insurance : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.insurance : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.supportingInfo">Request.supportingInfo</a></b></td></tr>
+<tr><td colspan="6">Request.supportingInfo : Reference(Any) [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.supportingInformation : Reference [0..*]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.supportingInfo : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="claim.html">Claim</a></b></td><td><ul><li>Claim.supportingInfo : BackboneElement [0..*]</li> The type 'BackboneElement' is not legal according to the pattern (BackboneElement vs Reference(Any)) </ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.about : Reference [0..*]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.supportingInfo : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="immunizationrecommendation.html">ImmunizationRecommendation</a></b></td><td><ul><li>ImmunizationRecommendation.recommendation.supportingPatientInformation : Reference [0..*]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.supportingInformation : Reference [0..*]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.oralDiet.instruction : string [0..1]</li> The type 'string' is not legal according to the pattern (string vs Reference(Any)) <li>NutritionOrder.supplement.instruction : string [0..1]</li> The type 'string' is not legal according to the pattern (string vs Reference(Any)) <li>NutritionOrder.enteralFormula.administrationInstruction : string [0..1]</li> The type 'string' is not legal according to the pattern (string vs Reference(Any)) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.action.documentation : RelatedArtifact [0..*]</li> The type 'RelatedArtifact' is not legal according to the pattern (RelatedArtifact vs Reference(Any)) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.supportingInfo : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.note">Request.note</a></b></td></tr>
+<tr><td colspan="6">Request.note : Annotation [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="appointment.html">Appointment</a></b></td><td><ul><li>Appointment.comment : string [0..1]</li> The type 'string' is not legal according to the pattern (string vs Annotation) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="appointmentresponse.html">AppointmentResponse</a></b></td><td><ul><li>AppointmentResponse.comment : string [0..1]</li> The type 'string' is not legal according to the pattern (string vs Annotation) </ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="careplan.html">CarePlan</a></b></td><td><ul><li>CarePlan.note : Annotation [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="communicationrequest.html">CommunicationRequest</a></b></td><td><ul><li>CommunicationRequest.payload.content[x] : Attachment, Reference, CodeableConcept [1..1]</li> The type 'Attachment' is not legal according to the pattern (Attachment, Reference, CodeableConcept vs Annotation) , The type 'Reference' is not legal according to the pattern (Attachment, Reference, CodeableConcept vs Annotation) , The type 'CodeableConcept' is not legal according to the pattern (Attachment, Reference, CodeableConcept vs Annotation) <li>CommunicationRequest.note : Annotation [0..*]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.note : Annotation [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.note : Annotation [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="nutritionorder.html">NutritionOrder</a></b></td><td><ul><li>NutritionOrder.note : Annotation [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="requestgroup.html">RequestGroup</a></b></td><td><ul><li>RequestGroup.note : Annotation [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.note : Annotation [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.note : Annotation [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr><td colspan="6"><b><a href="request-definitions.html#Request.relevantHistory">Request.relevantHistory</a></b></td></tr>
+<tr><td colspan="6">Request.relevantHistory : Reference(Provenance) [0..*]</td></tr>
+<tr><td>Resource</td><td>Matches</td><td>Issues</td><td>Tasks</td><td>Status</td><td>Notes</td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="devicerequest.html">DeviceRequest</a></b></td><td><ul><li>DeviceRequest.relevantHistory : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #e6ffff"><td><b><a href="medicationrequest.html">MedicationRequest</a></b></td><td><ul><li>MedicationRequest.eventHistory : Reference [0..*]</li></ul></td><td>Names are different. </td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="servicerequest.html">ServiceRequest</a></b></td><td><ul><li>ServiceRequest.relevantHistory : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+<tr style="background-color: #ffffff"><td><b><a href="task.html">Task</a></b></td><td><ul><li>Task.relevantHistory : Reference [0..*]</li></ul></td><td></td><td></td><td></td></tr>
+</table>
+
+
+</div>
+
+
+				</div>  <!-- /inner-wrapper -->
+            </div>  <!-- /row -->
+        </div>  <!-- /container -->
+        
+    </div>  <!-- /segment-content -->
+
+
+	<div id="segment-footer" class="segment">  <!-- segment-footer -->
+		<div class="container">  <!-- container -->
+			<div class="inner-wrapper">
+				<p>
+        FHIR &reg;&copy; HL7.org 2011+. FHIR CI Build hl7.fhir.core#4.1.0 (GitHub 0931132380) generated on Mon, Jul 29, 2019 12:29-0500. 
+        <br/>
+        <span style="color: #FFFF77">
+        Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search <img src="external.png" style="vertical-align: baseline"/></a> | 
+               <a style="color: #b8dcf9" href="history.html">Version History</a> | 
+               <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
+               <a style="color: #ffffff" href="qa.html">QA Page</a> |
+  <!-- <a style="color: #b8dcf9" href="credits.html">Credits</a> | -->
+               <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Frequest-analysis.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Frequest-analysis.html">Compare to R3 <img src="external.png" style="vertical-align: baseline"/></a> |                
+               <a rel="license" style="color: #b8dcf9" href="license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a> | 
+               <a style="color: #b8dcf9" href="http://hl7.org/fhir-issues" target="_blank">Propose a change <img src="external.png" style="vertical-align: baseline"/></a>   
+        </span>
+        </p>
+			</div>  <!-- /inner-wrapper -->
+		</div>  <!-- /container -->
+	</div>  <!-- /segment-footer -->
+  <!-- disqus thread -->
+  <!-- disqus -->
+  <!-- end disqus -->        
+	
+	<div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+		<div class="container">  <!-- container -->
+		</div>  <!-- /container -->
+	</div>  <!-- /segment-post-footer -->
+    
+      <!-- JS and analytics only. -->
+      <!-- Bootstrap core JavaScript
+================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+<script src="./assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+<script src="./dist/js/bootstrap.min.js"> </script>
+<script src="./assets/js/respond.min.js"> </script>
+
+<script src="./assets/js/fhir.js"> </script>
+
+  <!-- Analytics Below
+================================================== -->
+
+    
+</body>
+</html>

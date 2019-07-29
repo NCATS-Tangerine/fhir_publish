@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type Medication {
   id: ID
   meta: Meta
@@ -13,7 +15,7 @@ type Medication {
   code: CodeableConcept
   status: code  _status: ElementBase
   manufacturer: Reference
-  form: CodeableConcept
+  doseForm: CodeableConcept
   amount: Ratio
   ingredient: [MedicationIngredient]
   batch: MedicationBatch
@@ -26,7 +28,8 @@ type MedicationIngredient {
   itemCodeableConcept: CodeableConcept
   itemReference: Reference
   isActive: Boolean  _isActive: ElementBase
-  strength: Ratio
+  strengthRatio: Ratio
+  strengthCodeableConcept: CodeableConcept
 }
 
 type MedicationBatch {
@@ -50,7 +53,7 @@ input MedicationInput {
   code: CodeableConceptInput
   status: code  _status: ElementBase
   manufacturer: ReferenceInput
-  form: CodeableConceptInput
+  doseForm: CodeableConceptInput
   amount: RatioInput
   ingredient: [MedicationIngredientInput]
   batch: MedicationBatchInput
@@ -63,7 +66,8 @@ input MedicationIngredientInput {
   itemCodeableConcept: CodeableConceptInput
   itemReference: ReferenceInput
   isActive: Boolean  _isActive: ElementBase
-  strength: RatioInput
+  strengthRatio: RatioInput
+  strengthCodeableConcept: CodeableConceptInput
 }
 
 input MedicationBatchInput {

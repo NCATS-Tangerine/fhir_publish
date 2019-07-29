@@ -8,14 +8,9 @@
     "status" : "active",
     "description" : "Type options for CommunicationRequest.payload.content[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:cce5c0f7-ce78-4c0d-8e58-d62af85edac4",
-      "timestamp" : "2019-04-16T08:53:26-05:00",
+      "identifier" : "urn:uuid:a4fb0a3e-ac93-4c1b-85ff-a560e12f8670",
+      "timestamp" : "2019-07-29T11:32:20-05:00",
       "contains" : [{
-        "system" : "http://hl7.org/fhir/data-types",
-        "code" : "string",
-        "display" : "string"
-      },
-      {
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "Attachment",
         "display" : "Attachment"
@@ -24,6 +19,11 @@
         "system" : "http://hl7.org/fhir/resource-types",
         "code" : "Resource",
         "display" : "Resource"
+      },
+      {
+        "system" : "http://hl7.org/fhir/data-types",
+        "code" : "CodeableConcept",
+        "display" : "CodeableConcept"
       }]
     }
   },
@@ -34,8 +34,8 @@
     "status" : "active",
     "description" : "Type options for CommunicationRequest.occurrence[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:2e10a07d-c7ec-4487-995c-4ffadc6b3257",
-      "timestamp" : "2019-04-16T08:53:26-05:00",
+      "identifier" : "urn:uuid:5c19c747-bbfc-466c-8db8-0e33a54eea0b",
+      "timestamp" : "2019-07-29T11:32:20-05:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "dateTime",
@@ -53,7 +53,7 @@
   }],
   "version" : "4.1.0",
   "status" : "draft",
-  "date" : "2019-04-16T08:42:31-05:00",
+  "date" : "2019-07-29T11:29:14-05:00",
   "publisher" : "Health Level Seven International (Patient Care)",
   "item" : [{
     "linkId" : "CommunicationRequest",
@@ -531,7 +531,7 @@
             }]
           }
         }],
-        "text" : "Captures the reason for the current state of the CommunicationRequest. This is generally only used for \"exception\" statuses such as \"suspended\" or \"cancelled\".  The reason why the CommunicationRequest was created at all is captured in reasonCode, not here.  [distinct reason codes for different statuses can be enforced using invariants if they are universal bindings].",
+        "text" : "Captures the reason for the current state of the CommunicationRequest. This is generally only used for \"exception\" statuses such as \"on-hold\" or \"revoked\".  The reason why the CommunicationRequest was created at all is captured in reasonCode, not here.",
         "type" : "display"
       },
       {
@@ -944,7 +944,7 @@
               }]
             }
           }],
-          "text" : "The communicated content (or for multi-part communications, one portion of the communication).",
+          "text" : "The communicated content (or for multi-part communications, one portion of the communication). When using contentCodeableConcept, the CodeableConcept is what is being communicated and is not a categorization of the content.  If no code is available, contentCodeableConcept.text can be used for non-codified content.",
           "type" : "display"
         },
         {
@@ -955,20 +955,6 @@
           "repeats" : false,
           "answerValueSet" : "#vs2",
           "item" : [{
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-              "valueString" : "string"
-            }],
-            "linkId" : "CommunicationRequest.payload.content[x]._null",
-            "type" : "group",
-            "item" : [{
-              "linkId" : "CommunicationRequest.payload.content[x]._null.value",
-              "type" : "string",
-              "required" : false,
-              "repeats" : false
-            }]
-          },
-          {
             "extension" : [{
               "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
               "valueString" : "Attachment"
@@ -994,6 +980,28 @@
               }],
               "linkId" : "CommunicationRequest.payload.content[x]._null.value",
               "type" : "reference",
+              "required" : false,
+              "repeats" : false
+            }]
+          },
+          {
+            "extension" : [{
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+              "valueString" : "CodeableConcept"
+            }],
+            "linkId" : "CommunicationRequest.payload.content[x]._null",
+            "type" : "group",
+            "item" : [{
+              "linkId" : "CommunicationRequest.payload.content[x]._null.coding",
+              "text" : "code:",
+              "type" : "open-choice",
+              "required" : false,
+              "repeats" : false
+            },
+            {
+              "linkId" : "CommunicationRequest.payload.content[x]._null.text",
+              "text" : "text:",
+              "type" : "string",
               "required" : false,
               "repeats" : false
             }]
@@ -1129,7 +1137,7 @@
             }]
           }
         }],
-        "text" : "The device, individual, or organization who initiated the request and has responsibility for its activation.",
+        "text" : "The device, individual, or organization who asks for the information to be shared.",
         "type" : "display"
       },
       {
@@ -1142,7 +1150,7 @@
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
         "linkId" : "CommunicationRequest.requester.value",
-        "text" : "Who/what is requesting service",
+        "text" : "Who asks for the information to be shared",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -1181,7 +1189,7 @@
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
         "linkId" : "CommunicationRequest.recipient.value",
-        "text" : "Message recipient",
+        "text" : "Who to share the information with",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -1196,7 +1204,7 @@
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
         "valueString" : "Reference"
       }],
-      "linkId" : "CommunicationRequest.sender",
+      "linkId" : "CommunicationRequest.informationProvider",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -1223,8 +1231,8 @@
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
-        "linkId" : "CommunicationRequest.sender.value",
-        "text" : "Message sender",
+        "linkId" : "CommunicationRequest.informationProvider.value",
+        "text" : "Who should share the information",
         "type" : "reference",
         "required" : false,
         "repeats" : false

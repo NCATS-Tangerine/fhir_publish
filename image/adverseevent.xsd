@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Tue, Apr 16, 2019 08:42-0500 for FHIR v4.1.0 
+  Generated on Mon, Jul 29, 2019 12:28-0500 for FHIR v4.1.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -38,12 +38,12 @@
   <xs:include schemaLocation="fhir-base.xsd"/>
   <xs:element name="AdverseEvent" type="AdverseEvent">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death.</xs:documentation>
+      <xs:documentation xml:lang="en">An event (i.e. any change to current patient status) that may be related to unintended effects on a patient or research subject.  The unintended effects may require additional monitoring, treatment or hospitalization or may result in death.  The AdverseEvent resource also extends to potential or avoided events that could have had such effects.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="AdverseEvent">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death.</xs:documentation>
+      <xs:documentation xml:lang="en">An event (i.e. any change to current patient status) that may be related to unintended effects on a patient or research subject.  The unintended effects may require additional monitoring, treatment or hospitalization or may result in death.  The AdverseEvent resource also extends to potential or avoided events that could have had such effects.</xs:documentation>
       <xs:documentation xml:lang="en">If the element is present, it must have either a @value, an @id, or extensions</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -64,9 +64,9 @@
               <xs:documentation xml:lang="en">The overall type of event, intended for search and filtering purposes.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="event" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="code" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">This element defines the specific type of event that occurred or that was prevented from occurring.</xs:documentation>
+              <xs:documentation xml:lang="en">Specific event that occurred or that was averted, such as patient fall, wrong organ removed, or wrong blood transfused.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="subject" minOccurs="1" maxOccurs="1" type="Reference">
@@ -139,19 +139,14 @@
               <xs:documentation xml:lang="en">Describes the entity that is suspected to have caused the adverse event.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="subjectMedicalHistory" minOccurs="0" maxOccurs="unbounded" type="Reference">
+          <xs:element name="supportingInfo" type="AdverseEvent.SupportingInfo" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation xml:lang="en">AdverseEvent.subjectMedicalHistory.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:element name="referenceDocument" minOccurs="0" maxOccurs="unbounded" type="Reference">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">AdverseEvent.referenceDocument.</xs:documentation>
+              <xs:documentation xml:lang="en">Supporting information relevant to the event.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="study" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">AdverseEvent.study.</xs:documentation>
+              <xs:documentation xml:lang="en">The research study that the subject is enrolled in.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -160,7 +155,7 @@
   </xs:complexType>
   <xs:complexType name="AdverseEvent.SuspectEntity">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death.</xs:documentation>
+      <xs:documentation xml:lang="en">An event (i.e. any change to current patient status) that may be related to unintended effects on a patient or research subject.  The unintended effects may require additional monitoring, treatment or hospitalization or may result in death.  The AdverseEvent resource also extends to potential or avoided events that could have had such effects.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
@@ -183,29 +178,46 @@
   </xs:complexType>
   <xs:complexType name="AdverseEvent.Causality">
     <xs:annotation>
-      <xs:documentation xml:lang="en">Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death.</xs:documentation>
+      <xs:documentation xml:lang="en">An event (i.e. any change to current patient status) that may be related to unintended effects on a patient or research subject.  The unintended effects may require additional monitoring, treatment or hospitalization or may result in death.  The AdverseEvent resource also extends to potential or avoided events that could have had such effects.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="assessment" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:element name="assessmentMethod" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Assessment of if the entity caused the event.</xs:documentation>
+              <xs:documentation xml:lang="en">The method of evaluating the relatedness of the suspected entity to the event.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="productRelatedness" minOccurs="0" maxOccurs="1" type="string">
+          <xs:element name="entityRelatedness" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">AdverseEvent.suspectEntity.causalityProductRelatedness.</xs:documentation>
+              <xs:documentation xml:lang="en">The result of the assessment regarding the relatedness of the suspected entity to the event.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="author" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">AdverseEvent.suspectEntity.causalityAuthor.</xs:documentation>
+              <xs:documentation xml:lang="en">The author of the information on the possible cause of the event.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="method" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AdverseEvent.SupportingInfo">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">An event (i.e. any change to current patient status) that may be related to unintended effects on a patient or research subject.  The unintended effects may require additional monitoring, treatment or hospitalization or may result in death.  The AdverseEvent resource also extends to potential or avoided events that could have had such effects.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:element name="item" minOccurs="1" maxOccurs="1" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">ProbabilityScale | Bayesian | Checklist.</xs:documentation>
+              <xs:documentation xml:lang="en">Relevant past history for the subject.  In a clinical care context, an example being a patient had an adverse event following a penciliin administration and the patient had a previously documented penicillin allergy.  In a clinical trials context, an example is a bunion or rash that was present prior to the study.
+Additionally, the supporting item can be a document that is relevant to this instance of the adverse event that is not part of the subject's medical history.  For example, a clinical note, staff list, or material safety data sheet (MSDS).</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="contributingFactor" minOccurs="0" maxOccurs="1" type="boolean">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">If true, the item has been assessed to be a contributing factor of the adverse event.</xs:documentation>
            </xs:annotation>
           </xs:element>
         </xs:sequence>

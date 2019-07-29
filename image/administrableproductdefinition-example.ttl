@@ -1,0 +1,59 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://hl7.org/fhir/RegulatedAdministrableProduct/example> a fhir:RegulatedAdministrableProduct;
+  fhir:nodeRole fhir:treeRoot;
+  fhir:Resource.id [ fhir:value "example"];
+  fhir:DomainResource.text [
+     fhir:Narrative.status [ fhir:value "generated" ];
+     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: example</p><p><b>identifier</b>: {PhPID}</p><p><b>administrableDoseForm</b>: Film-coatedtablet <span>(Details : {http://ema.europa.eu/example/administrabledoseform code 'Film-coatedtablet' = 'Film-coatedtablet)</span></p><p><b>unitOfPresentation</b>: Tablet <span>(Details : {http://ema.europa.eu/example/unitofpresentation code 'Tablet' = 'Tablet)</span></p><p><b>ingredient</b>: <a>Ingredient/example</a></p><h3>RouteOfAdministrations</h3><table><tr><td>-</td><td><b>Code</b></td></tr><tr><td>*</td><td>OralUse <span>(Details : {http://ema.europa.eu/example/routeofadministration code 'OralUse' = 'OralUse)</span></td></tr></table></div>"
+  ];
+  fhir:RegulatedAdministrableProduct.identifier [
+     fhir:index 0;
+     fhir:Identifier.system [ fhir:value "http://ema.europa.eu/example/phpididentifiersets" ];
+     fhir:Identifier.value [ fhir:value "{PhPID}" ]
+  ];
+  fhir:RegulatedAdministrableProduct.administrableDoseForm [
+     fhir:CodeableConcept.coding [
+       fhir:index 0;
+       fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/administrabledoseform" ];
+       fhir:Coding.code [ fhir:value "Film-coatedtablet" ]
+     ]
+  ];
+  fhir:RegulatedAdministrableProduct.unitOfPresentation [
+     fhir:CodeableConcept.coding [
+       fhir:index 0;
+       fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/unitofpresentation" ];
+       fhir:Coding.code [ fhir:value "Tablet" ]
+     ]
+  ];
+  fhir:RegulatedAdministrableProduct.ingredient [
+     fhir:index 0;
+     fhir:link <http://hl7.org/fhir/Ingredient/example>;
+     fhir:Reference.reference [ fhir:value "Ingredient/example" ]
+  ];
+  fhir:RegulatedAdministrableProduct.routeOfAdministration [
+     fhir:index 0;
+     fhir:RegulatedAdministrableProduct.routeOfAdministration.code [
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/routeofadministration" ];
+         fhir:Coding.code [ fhir:value "OralUse" ]
+       ]
+     ]
+  ] .
+
+<http://hl7.org/fhir/Ingredient/example> a fhir:Ingredient .
+
+# - ontology header ------------------------------------------------------------
+
+<http://hl7.org/fhir/RegulatedAdministrableProduct/example.ttl> a owl:Ontology;
+  owl:imports fhir:fhir.ttl;
+  owl:versionIRI <http://build.fhir.org/RegulatedAdministrableProduct/example.ttl> .
+
+# -------------------------------------------------------------------------------------
+

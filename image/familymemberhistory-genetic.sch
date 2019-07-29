@@ -33,12 +33,6 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:title>f:FamilyMemberHistory/f:condition</sch:title>
-    <sch:rule context="f:FamilyMemberHistory/f:condition">
-      <sch:assert test="count(f:note) &lt;= 1">note: maximum cardinality of 'note' is 1</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
     <sch:title>FamilyMemberHistory.condition</sch:title>
     <sch:rule context="f:FamilyMemberHistory/f:condition">
       <sch:assert test="@value|f:*|h:div">All FHIR elements must have a @value or children (inherited)</sch:assert>

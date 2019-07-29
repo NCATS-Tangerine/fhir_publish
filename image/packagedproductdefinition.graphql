@@ -1,0 +1,180 @@
+# FHIR GraphQL Schema. Version 4.1.0
+
+# import the types from 'types.graphql'
+
+type PackagedProductDefinition {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: [Identifier]
+  subject: [Reference]
+  description: String  _description: ElementBase
+  legalStatusOfSupply: CodeableConcept
+  marketingStatus: [MarketingStatus]
+  marketingAuthorization: Reference
+  manufacturer: [Reference]
+  batchIdentifier: [PackagedProductDefinitionBatchIdentifier]
+  packageItem: [PackagedProductDefinitionPackageItem]!
+}
+
+type PackagedProductDefinitionBatchIdentifier {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  outerPackaging: Identifier!
+  immediatePackaging: Identifier
+}
+
+type PackagedProductDefinitionPackageItem {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: [Identifier]
+  type: CodeableConcept!
+  quantity: Quantity!
+  material: [CodeableConcept]
+  alternateMaterial: [CodeableConcept]
+  device: [Reference]
+  manufacturedItem: [Reference]
+  packageItem: [PackagedProductDefinitionPackageItem]
+  physicalCharacteristics: ProdCharacteristic
+  otherCharacteristics: [CodeableConcept]
+  shelfLifeStorage: [ProductShelfLife]
+  manufacturer: [Reference]
+}
+
+input PackagedProductDefinitionInput {
+  id: ID
+  meta: MetaInput
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: NarrativeInput
+  contained: [ResourceInput]
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  identifier: [IdentifierInput]
+  subject: [ReferenceInput]
+  description: String  _description: ElementBase
+  legalStatusOfSupply: CodeableConceptInput
+  marketingStatus: [MarketingStatusInput]
+  marketingAuthorization: ReferenceInput
+  manufacturer: [ReferenceInput]
+  batchIdentifier: [PackagedProductDefinitionBatchIdentifierInput]
+  packageItem: [PackagedProductDefinitionPackageItemInput]!
+}
+
+input PackagedProductDefinitionBatchIdentifierInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  outerPackaging: IdentifierInput!
+  immediatePackaging: IdentifierInput
+}
+
+input PackagedProductDefinitionPackageItemInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  identifier: [IdentifierInput]
+  type: CodeableConceptInput!
+  quantity: QuantityInput!
+  material: [CodeableConceptInput]
+  alternateMaterial: [CodeableConceptInput]
+  device: [ReferenceInput]
+  manufacturedItem: [ReferenceInput]
+  packageItem: [PackagedProductDefinitionPackageItem]
+  physicalCharacteristics: ProdCharacteristicInput
+  otherCharacteristics: [CodeableConceptInput]
+  shelfLifeStorage: [ProductShelfLifeInput]
+  manufacturer: [ReferenceInput]
+}
+
+type PackagedProductDefinitionReadType {
+  PackagedProductDefinition(id: ID!): PackagedProductDefinition
+}
+
+type PackagedProductDefinitionListType {
+  PackagedProductDefinitionList(_filter: String
+    identifier: [token]
+    subject: [reference]
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): [PackagedProductDefinition]
+}
+
+type PackagedProductDefinitionConnectionType {
+  PackagedProductDefinitionConection(_filter: String
+    identifier: [token]
+    subject: [reference]
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): PackagedProductDefinitionConnection
+}
+
+type PackagedProductDefinitionConnection {
+  count: Int
+  offset: Int
+  pagesize: Int
+  first: ID
+  previous: ID
+  next: ID
+  last: ID
+  edges: [PackagedProductDefinitionEdge]
+}
+
+type PackagedProductDefinitionEdge {
+  mode: String
+  score: Float
+  resource: PackagedProductDefinition
+}
+
+type PackagedProductDefinitionCreateType {
+  PackagedProductDefinitionCreate(resource: PackagedProductDefinitionInput): PackagedProductDefinitionCreation
+}
+
+type PackagedProductDefinitionCreation {
+  location: String
+  resource: PackagedProductDefinition
+  information: OperationOutcome
+}
+
+type PackagedProductDefinitionUpdateType {
+  PackagedProductDefinitionUpdate(id: ID, resource: PackagedProductDefinitionInput): PackagedProductDefinitionUpdate
+}
+
+type PackagedProductDefinitionUpdate {
+  resource: PackagedProductDefinition
+  information: OperationOutcome
+}
+
+type PackagedProductDefinitionDeleteType {
+  PackagedProductDefinitionDelete(id: ID): PackagedProductDefinitionDelete
+}
+
+type PackagedProductDefinitionDelete {
+  information: OperationOutcome
+}
+

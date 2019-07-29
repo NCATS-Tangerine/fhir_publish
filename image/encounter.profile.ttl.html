@@ -36,21 +36,21 @@
 
 </head>
 <body>
-	<div id="segment-header" class="segment"><!-- segment-header -->	
-		<div class="container"><!-- container -->
-			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
-			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
-			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
-        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
-			<div id="hl7-nav">
-				 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
-					<img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
-				</a> 
-			</div>       	
-			<div id="hl7-nav"><a id="hl7-logo" no-external="true" href="http://hl7.org/fhir/search.cfm"><img alt="Search FHIR" src="./assets/images/search.png"/></a></div> 
-		</div>
-		<div class="container"><!-- container -->
-	</div></div><!-- /segment-header -->	
+	<div id="segment-header" class="segment"><!-- segment-header -->
+               <div class="container"><!-- container -->
+                        <a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
+                        <a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
+                        <b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+                        <a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
+                        <div id="hl7-nav">
+                                 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
+                                        <img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
+                                </a>
+                        </div>
+                        <div id="hl7-nav"><a id="hl7-logo" no-external="true" href="http://hl7.org/fhir/search.cfm"><img alt="Search FHIR" src="./assets/images/search.png"/></a></div>
+                </div>
+                <div class="container"><!-- container -->
+        </div></div><!-- /segment-header -->
 
 
 	<div id="segment-navbar" class="segment"><!-- segment-navbar -->
@@ -71,7 +71,8 @@
               <li><a href="./index.html">Home</a></li>
               <li><a href="./modules.html">Getting Started</a></li>
               <li><a href="./documentation.html">Documentation</a></li>
-              <li><a href="./resourcelist.html">Resources</a></li>
+              <li><a href="./patterns.html">Patterns</a></li>
+              <li><a href="./resourcelist.html"><span style="color: yellow">Resource Types</span></a></li>
               <li><a href="./profilelist.html">Profiles</a></li>
               <li><a href="./extensibility-registry.html">Extensions</a></li>
               <li><a href="./operationslist.html">Operations</a></li>
@@ -124,7 +125,7 @@
 [] a fhir:StructureDefinition;
   fhir:Resource.id [ fhir:value &quot;Encounter&quot;];
   fhir:Resource.meta [
-     fhir:Meta.lastUpdated [ fhir:value &quot;2019-04-16T08:42:31.781-05:00&quot; ]
+     fhir:Meta.lastUpdated [ fhir:value &quot;2019-07-29T11:29:14.002-05:00&quot; ]
   ];
   fhir:DomainResource.text [
      fhir:Narrative.status [ fhir:value &quot;generated&quot; ]
@@ -154,7 +155,7 @@
   fhir:StructureDefinition.version [ fhir:value &quot;4.1.0&quot;];
   fhir:StructureDefinition.name [ fhir:value &quot;Encounter&quot;];
   fhir:StructureDefinition.status [ fhir:value &quot;draft&quot;];
-  fhir:StructureDefinition.date [ fhir:value &quot;2019-04-16T08:42:31-05:00&quot;];
+  fhir:StructureDefinition.date [ fhir:value &quot;2019-07-29T11:29:14-05:00&quot;];
   fhir:StructureDefinition.publisher [ fhir:value &quot;Health Level Seven International (Patient Administration)&quot;];
   fhir:StructureDefinition.contact [
      fhir:index 0;
@@ -559,8 +560,8 @@
        fhir:index 10;
        fhir:Element.id [ fhir:value &quot;Encounter.status&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.status&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;planned | arrived | triaged | in-progress | onleave | finished | cancelled +&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;planned | arrived | triaged | in-progress | onleave | finished | cancelled +.&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown&quot; ];
+       fhir:ElementDefinition.definition [ fhir:value &quot;planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown.&quot; ];
        fhir:ElementDefinition.comment [ fhir:value &quot;Note that internal business rules will determine the appropriate transitions that may occur between statuses (and also classes).&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
@@ -743,8 +744,8 @@
        fhir:index 15;
        fhir:Element.id [ fhir:value &quot;Encounter.statusHistory.status&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.statusHistory.status&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;planned | arrived | triaged | in-progress | onleave | finished | cancelled +&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;planned | arrived | triaged | in-progress | onleave | finished | cancelled +.&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown&quot; ];
+       fhir:ElementDefinition.definition [ fhir:value &quot;planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.base [
@@ -1217,6 +1218,35 @@
        ]
      ], [
        fhir:index 28;
+       fhir:Element.id [ fhir:value &quot;Encounter.subjectStatus&quot; ];
+       fhir:ElementDefinition.path [ fhir:value &quot;Encounter.subjectStatus&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;The current status of the subject in relation to the Encounter&quot; ];
+       fhir:ElementDefinition.definition [ fhir:value &quot;The subjectStatus value can be used to track the patient's status within the encounter. It details whether the patient has arrived or departed, has been triaged or is currently in a waiting status.&quot; ];
+       fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
+       fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
+       fhir:ElementDefinition.base [
+         fhir:ElementDefinition.path [ fhir:value &quot;Encounter.subjectStatus&quot; ];
+         fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
+         fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ]
+       ];
+       fhir:ElementDefinition.type [
+         fhir:index 0;
+         fhir:ElementDefinition.code [ fhir:value &quot;CodeableConcept&quot; ]
+       ];
+       fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
+       fhir:ElementDefinition.isSummary [ fhir:value &quot;false&quot; ];
+       fhir:ElementDefinition.binding [
+         fhir:Element.extension [
+           fhir:index 0;
+           fhir:Extension.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName&quot; ];
+           fhir:Extension.value [ fhir:value &quot;SubjectStatus&quot; ]
+         ];
+         fhir:ElementDefinition.strength [ fhir:value &quot;extensible&quot; ];
+         fhir:ElementDefinition.description [ fhir:value &quot;Current status of the subject  within the encounter.&quot; ];
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/encounter-subject-status&quot; ]
+       ]
+     ], [
+       fhir:index 29;
        fhir:Element.id [ fhir:value &quot;Encounter.episodeOfCare&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.episodeOfCare&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Episode(s) of care that this encounter should be recorded against&quot; ];
@@ -1256,7 +1286,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 29;
+       fhir:index 30;
        fhir:Element.id [ fhir:value &quot;Encounter.basedOn&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.basedOn&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The ServiceRequest that initiated this encounter&quot; ];
@@ -1292,7 +1322,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.reason.ClinicalDocument&quot; ]
        ]
      ], [
-       fhir:index 30;
+       fhir:index 31;
        fhir:Element.id [ fhir:value &quot;Encounter.participant&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;List of participants involved in the encounter&quot; ];
@@ -1333,7 +1363,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.participation[typeCode=PFM]&quot; ]
        ]
      ], [
-       fhir:index 31;
+       fhir:index 32;
        fhir:Element.id [ fhir:value &quot;Encounter.participant.id&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant.id&quot; ];
        fhir:ElementDefinition.representation [
@@ -1361,7 +1391,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 32;
+       fhir:index 33;
        fhir:Element.id [ fhir:value &quot;Encounter.participant.extension&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant.extension&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Additional content defined by implementations&quot; ];
@@ -1393,7 +1423,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 33;
+       fhir:index 34;
        fhir:Element.id [ fhir:value &quot;Encounter.participant.modifierExtension&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant.modifierExtension&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Extensions that cannot be ignored even if unrecognized&quot; ];
@@ -1430,7 +1460,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;N/A&quot; ]
        ]
      ], [
-       fhir:index 34;
+       fhir:index 35;
        fhir:Element.id [ fhir:value &quot;Encounter.participant.type&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant.type&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Role of participant in encounter&quot; ];
@@ -1473,7 +1503,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.functionCode&quot; ]
        ]
      ], [
-       fhir:index 35;
+       fhir:index 36;
        fhir:Element.id [ fhir:value &quot;Encounter.participant.period&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant.period&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Period of time during the encounter that the participant participated&quot; ];
@@ -1501,7 +1531,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.time&quot; ]
        ]
      ], [
-       fhir:index 36;
+       fhir:index 37;
        fhir:Element.id [ fhir:value &quot;Encounter.participant.individual&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant.individual&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Persons involved in the encounter other than the patient&quot; ];
@@ -1547,7 +1577,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.role&quot; ]
        ]
      ], [
-       fhir:index 37;
+       fhir:index 38;
        fhir:Element.id [ fhir:value &quot;Encounter.appointment&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.appointment&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The appointment that scheduled this encounter&quot; ];
@@ -1583,7 +1613,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=FLFS].target[classCode=ENC, moodCode=APT]&quot; ]
        ]
      ], [
-       fhir:index 38;
+       fhir:index 39;
        fhir:Element.id [ fhir:value &quot;Encounter.period&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.period&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The start and end time of the encounter&quot; ];
@@ -1620,7 +1650,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.effectiveTime (low &amp; high)&quot; ]
        ]
      ], [
-       fhir:index 39;
+       fhir:index 40;
        fhir:Element.id [ fhir:value &quot;Encounter.length&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.length&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Quantity of time the encounter lasted (less time absent)&quot; ];
@@ -1653,7 +1683,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.lengthOfStayQuantity&quot; ]
        ]
      ], [
-       fhir:index 40;
+       fhir:index 41;
        fhir:Element.id [ fhir:value &quot;Encounter.reasonCode&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.reasonCode&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Coded reason the encounter takes place&quot; ];
@@ -1707,7 +1737,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.reasonCode&quot; ]
        ]
      ], [
-       fhir:index 41;
+       fhir:index 42;
        fhir:Element.id [ fhir:value &quot;Encounter.reasonReference&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.reasonReference&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Reason the encounter takes place (reference)&quot; ];
@@ -1764,7 +1794,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.reasonCode&quot; ]
        ]
      ], [
-       fhir:index 42;
+       fhir:index 43;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis&quot; ];
        fhir:Element.extension [
          fhir:index 0;
@@ -1802,7 +1832,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=RSON]&quot; ]
        ]
      ], [
-       fhir:index 43;
+       fhir:index 44;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis.id&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.diagnosis.id&quot; ];
        fhir:ElementDefinition.representation [
@@ -1830,7 +1860,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 44;
+       fhir:index 45;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis.extension&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.diagnosis.extension&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Additional content defined by implementations&quot; ];
@@ -1862,7 +1892,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 45;
+       fhir:index 46;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis.modifierExtension&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.diagnosis.modifierExtension&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Extensions that cannot be ignored even if unrecognized&quot; ];
@@ -1899,7 +1929,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;N/A&quot; ]
        ]
      ], [
-       fhir:index 46;
+       fhir:index 47;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis.condition&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.diagnosis.condition&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The diagnosis or procedure relevant to the encounter&quot; ];
@@ -1953,7 +1983,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=RSON].target&quot; ]
        ]
      ], [
-       fhir:index 47;
+       fhir:index 48;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis.use&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.diagnosis.use&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Role that this diagnosis has within the encounter (e.g. admission, billing, discharge …)&quot; ];
@@ -1991,7 +2021,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 48;
+       fhir:index 49;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis.rank&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.diagnosis.rank&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Ranking of the diagnosis (for each role type)&quot; ];
@@ -2015,7 +2045,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=RSON].priority&quot; ]
        ]
      ], [
-       fhir:index 49;
+       fhir:index 50;
        fhir:Element.id [ fhir:value &quot;Encounter.account&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.account&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The set of accounts that may be used for billing for this Encounter&quot; ];
@@ -2044,7 +2074,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.pertains.A_Account&quot; ]
        ]
      ], [
-       fhir:index 50;
+       fhir:index 51;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Details about the admission to a healthcare service&quot; ];
@@ -2078,7 +2108,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=COMP].target[classCode=ENC, moodCode=EVN]&quot; ]
        ]
      ], [
-       fhir:index 51;
+       fhir:index 52;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.id&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.id&quot; ];
        fhir:ElementDefinition.representation [
@@ -2106,7 +2136,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 52;
+       fhir:index 53;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.extension&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.extension&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Additional content defined by implementations&quot; ];
@@ -2138,7 +2168,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 53;
+       fhir:index 54;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.modifierExtension&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.modifierExtension&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Extensions that cannot be ignored even if unrecognized&quot; ];
@@ -2175,7 +2205,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;N/A&quot; ]
        ]
      ], [
-       fhir:index 54;
+       fhir:index 55;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.preAdmissionIdentifier&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.preAdmissionIdentifier&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Pre-admission identifier&quot; ];
@@ -2203,7 +2233,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.id&quot; ]
        ]
      ], [
-       fhir:index 55;
+       fhir:index 56;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.origin&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.origin&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The location/organization from which the patient came before admission&quot; ];
@@ -2234,7 +2264,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.participation[typeCode=ORG].role&quot; ]
        ]
      ], [
-       fhir:index 56;
+       fhir:index 57;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.admitSource&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.admitSource&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;From where patient was admitted (physician referral, transfer)&quot; ];
@@ -2272,7 +2302,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.admissionReferralSourceCode&quot; ]
        ]
      ], [
-       fhir:index 57;
+       fhir:index 58;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.reAdmission&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.reAdmission&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The type of hospital re-admission that has occurred (if any). If the value is absent, then this is not identified as a readmission&quot; ];
@@ -2310,7 +2340,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 58;
+       fhir:index 59;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.dietPreference&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.dietPreference&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Diet preferences reported by the patient&quot; ];
@@ -2350,7 +2380,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=COMP].target[classCode=SBADM, moodCode=EVN, code=\&quot;diet\&quot;]&quot; ]
        ]
      ], [
-       fhir:index 59;
+       fhir:index 60;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.specialCourtesy&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.specialCourtesy&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Special courtesies (VIP, board member)&quot; ];
@@ -2388,7 +2418,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.specialCourtesiesCode&quot; ]
        ]
      ], [
-       fhir:index 60;
+       fhir:index 61;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.specialArrangement&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.specialArrangement&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Wheelchair, translator, stretcher, etc.&quot; ];
@@ -2426,7 +2456,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.specialArrangementCode&quot; ]
        ]
      ], [
-       fhir:index 61;
+       fhir:index 62;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.destination&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.destination&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Location/organization to which the patient is discharged&quot; ];
@@ -2461,7 +2491,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.participation[typeCode=DST]&quot; ]
        ]
      ], [
-       fhir:index 62;
+       fhir:index 63;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.dischargeDisposition&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.dischargeDisposition&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Category or kind of location after discharge&quot; ];
@@ -2499,7 +2529,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.dischargeDispositionCode&quot; ]
        ]
      ], [
-       fhir:index 63;
+       fhir:index 64;
        fhir:Element.id [ fhir:value &quot;Encounter.location&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;List of locations where the patient has been&quot; ];
@@ -2533,7 +2563,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.participation[typeCode=LOC]&quot; ]
        ]
      ], [
-       fhir:index 64;
+       fhir:index 65;
        fhir:Element.id [ fhir:value &quot;Encounter.location.id&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.id&quot; ];
        fhir:ElementDefinition.representation [
@@ -2561,7 +2591,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 65;
+       fhir:index 66;
        fhir:Element.id [ fhir:value &quot;Encounter.location.extension&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.extension&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Additional content defined by implementations&quot; ];
@@ -2593,7 +2623,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 66;
+       fhir:index 67;
        fhir:Element.id [ fhir:value &quot;Encounter.location.modifierExtension&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.modifierExtension&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Extensions that cannot be ignored even if unrecognized&quot; ];
@@ -2630,7 +2660,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;N/A&quot; ]
        ]
      ], [
-       fhir:index 67;
+       fhir:index 68;
        fhir:Element.id [ fhir:value &quot;Encounter.location.location&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.location&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Location the encounter takes place&quot; ];
@@ -2670,7 +2700,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.role&quot; ]
        ]
      ], [
-       fhir:index 68;
+       fhir:index 69;
        fhir:Element.id [ fhir:value &quot;Encounter.location.status&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.status&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;planned | active | reserved | completed&quot; ];
@@ -2705,7 +2735,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.role.statusCode&quot; ]
        ]
      ], [
-       fhir:index 69;
+       fhir:index 70;
        fhir:Element.id [ fhir:value &quot;Encounter.location.physicalType&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.physicalType&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The physical type of the location (usually the level in the location hierachy - bed room ward etc.)&quot; ];
@@ -2735,7 +2765,7 @@
          fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/location-physical-type&quot; ]
        ]
      ], [
-       fhir:index 70;
+       fhir:index 71;
        fhir:Element.id [ fhir:value &quot;Encounter.location.period&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.period&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Time period during which the patient was present at the location&quot; ];
@@ -2759,7 +2789,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.time&quot; ]
        ]
      ], [
-       fhir:index 71;
+       fhir:index 72;
        fhir:Element.id [ fhir:value &quot;Encounter.serviceProvider&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.serviceProvider&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The organization (facility) responsible for this encounter&quot; ];
@@ -2795,7 +2825,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.particiaption[typeCode=PFM].role&quot; ]
        ]
      ], [
-       fhir:index 72;
+       fhir:index 73;
        fhir:Element.id [ fhir:value &quot;Encounter.partOf&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.partOf&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Another Encounter this encounter is part of&quot; ];
@@ -2890,8 +2920,8 @@
        fhir:index 2;
        fhir:Element.id [ fhir:value &quot;Encounter.status&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.status&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;planned | arrived | triaged | in-progress | onleave | finished | cancelled +&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;planned | arrived | triaged | in-progress | onleave | finished | cancelled +.&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown&quot; ];
+       fhir:ElementDefinition.definition [ fhir:value &quot;planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown.&quot; ];
        fhir:ElementDefinition.comment [ fhir:value &quot;Note that internal business rules will determine the appropriate transitions that may occur between statuses (and also classes).&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
@@ -2956,8 +2986,8 @@
        fhir:index 4;
        fhir:Element.id [ fhir:value &quot;Encounter.statusHistory.status&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.statusHistory.status&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;planned | arrived | triaged | in-progress | onleave | finished | cancelled +&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;planned | arrived | triaged | in-progress | onleave | finished | cancelled +.&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown&quot; ];
+       fhir:ElementDefinition.definition [ fhir:value &quot;planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.type [
@@ -3258,6 +3288,28 @@
        ]
      ], [
        fhir:index 14;
+       fhir:Element.id [ fhir:value &quot;Encounter.subjectStatus&quot; ];
+       fhir:ElementDefinition.path [ fhir:value &quot;Encounter.subjectStatus&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;The current status of the subject in relation to the Encounter&quot; ];
+       fhir:ElementDefinition.definition [ fhir:value &quot;The subjectStatus value can be used to track the patient's status within the encounter. It details whether the patient has arrived or departed, has been triaged or is currently in a waiting status.&quot; ];
+       fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
+       fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
+       fhir:ElementDefinition.type [
+         fhir:index 0;
+         fhir:ElementDefinition.code [ fhir:value &quot;CodeableConcept&quot; ]
+       ];
+       fhir:ElementDefinition.binding [
+         fhir:Element.extension [
+           fhir:index 0;
+           fhir:Extension.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName&quot; ];
+           fhir:Extension.value [ fhir:value &quot;SubjectStatus&quot; ]
+         ];
+         fhir:ElementDefinition.strength [ fhir:value &quot;extensible&quot; ];
+         fhir:ElementDefinition.description [ fhir:value &quot;Current status of the subject  within the encounter.&quot; ];
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/encounter-subject-status&quot; ]
+       ]
+     ], [
+       fhir:index 15;
        fhir:Element.id [ fhir:value &quot;Encounter.episodeOfCare&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.episodeOfCare&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Episode(s) of care that this encounter should be recorded against&quot; ];
@@ -3291,7 +3343,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 15;
+       fhir:index 16;
        fhir:Element.id [ fhir:value &quot;Encounter.basedOn&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.basedOn&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The ServiceRequest that initiated this encounter&quot; ];
@@ -3320,7 +3372,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.reason.ClinicalDocument&quot; ]
        ]
      ], [
-       fhir:index 16;
+       fhir:index 17;
        fhir:Element.id [ fhir:value &quot;Encounter.participant&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;List of participants involved in the encounter&quot; ];
@@ -3346,7 +3398,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.participation[typeCode=PFM]&quot; ]
        ]
      ], [
-       fhir:index 17;
+       fhir:index 18;
        fhir:Element.id [ fhir:value &quot;Encounter.participant.type&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant.type&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Role of participant in encounter&quot; ];
@@ -3383,7 +3435,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.functionCode&quot; ]
        ]
      ], [
-       fhir:index 18;
+       fhir:index 19;
        fhir:Element.id [ fhir:value &quot;Encounter.participant.period&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant.period&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Period of time during the encounter that the participant participated&quot; ];
@@ -3404,7 +3456,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.time&quot; ]
        ]
      ], [
-       fhir:index 19;
+       fhir:index 20;
        fhir:Element.id [ fhir:value &quot;Encounter.participant.individual&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.participant.individual&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Persons involved in the encounter other than the patient&quot; ];
@@ -3444,7 +3496,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.role&quot; ]
        ]
      ], [
-       fhir:index 20;
+       fhir:index 21;
        fhir:Element.id [ fhir:value &quot;Encounter.appointment&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.appointment&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The appointment that scheduled this encounter&quot; ];
@@ -3474,7 +3526,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=FLFS].target[classCode=ENC, moodCode=APT]&quot; ]
        ]
      ], [
-       fhir:index 21;
+       fhir:index 22;
        fhir:Element.id [ fhir:value &quot;Encounter.period&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.period&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The start and end time of the encounter&quot; ];
@@ -3504,7 +3556,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.effectiveTime (low &amp; high)&quot; ]
        ]
      ], [
-       fhir:index 22;
+       fhir:index 23;
        fhir:Element.id [ fhir:value &quot;Encounter.length&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.length&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Quantity of time the encounter lasted (less time absent)&quot; ];
@@ -3530,7 +3582,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.lengthOfStayQuantity&quot; ]
        ]
      ], [
-       fhir:index 23;
+       fhir:index 24;
        fhir:Element.id [ fhir:value &quot;Encounter.reasonCode&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.reasonCode&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Coded reason the encounter takes place&quot; ];
@@ -3578,7 +3630,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.reasonCode&quot; ]
        ]
      ], [
-       fhir:index 24;
+       fhir:index 25;
        fhir:Element.id [ fhir:value &quot;Encounter.reasonReference&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.reasonReference&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Reason the encounter takes place (reference)&quot; ];
@@ -3629,7 +3681,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.reasonCode&quot; ]
        ]
      ], [
-       fhir:index 25;
+       fhir:index 26;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis&quot; ];
        fhir:Element.extension [
          fhir:index 0;
@@ -3652,7 +3704,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=RSON]&quot; ]
        ]
      ], [
-       fhir:index 26;
+       fhir:index 27;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis.condition&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.diagnosis.condition&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The diagnosis or procedure relevant to the encounter&quot; ];
@@ -3700,7 +3752,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=RSON].target&quot; ]
        ]
      ], [
-       fhir:index 27;
+       fhir:index 28;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis.use&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.diagnosis.use&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Role that this diagnosis has within the encounter (e.g. admission, billing, discharge …)&quot; ];
@@ -3731,7 +3783,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 28;
+       fhir:index 29;
        fhir:Element.id [ fhir:value &quot;Encounter.diagnosis.rank&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.diagnosis.rank&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Ranking of the diagnosis (for each role type)&quot; ];
@@ -3748,7 +3800,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=RSON].priority&quot; ]
        ]
      ], [
-       fhir:index 29;
+       fhir:index 30;
        fhir:Element.id [ fhir:value &quot;Encounter.account&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.account&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The set of accounts that may be used for billing for this Encounter&quot; ];
@@ -3770,7 +3822,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.pertains.A_Account&quot; ]
        ]
      ], [
-       fhir:index 30;
+       fhir:index 31;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Details about the admission to a healthcare service&quot; ];
@@ -3788,7 +3840,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=COMP].target[classCode=ENC, moodCode=EVN]&quot; ]
        ]
      ], [
-       fhir:index 31;
+       fhir:index 32;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.preAdmissionIdentifier&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.preAdmissionIdentifier&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Pre-admission identifier&quot; ];
@@ -3809,7 +3861,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.id&quot; ]
        ]
      ], [
-       fhir:index 32;
+       fhir:index 33;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.origin&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.origin&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The location/organization from which the patient came before admission&quot; ];
@@ -3833,7 +3885,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.participation[typeCode=ORG].role&quot; ]
        ]
      ], [
-       fhir:index 33;
+       fhir:index 34;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.admitSource&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.admitSource&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;From where patient was admitted (physician referral, transfer)&quot; ];
@@ -3864,7 +3916,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.admissionReferralSourceCode&quot; ]
        ]
      ], [
-       fhir:index 34;
+       fhir:index 35;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.reAdmission&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.reAdmission&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The type of hospital re-admission that has occurred (if any). If the value is absent, then this is not identified as a readmission&quot; ];
@@ -3895,7 +3947,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;n/a&quot; ]
        ]
      ], [
-       fhir:index 35;
+       fhir:index 36;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.dietPreference&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.dietPreference&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Diet preferences reported by the patient&quot; ];
@@ -3928,7 +3980,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.outboundRelationship[typeCode=COMP].target[classCode=SBADM, moodCode=EVN, code=\&quot;diet\&quot;]&quot; ]
        ]
      ], [
-       fhir:index 36;
+       fhir:index 37;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.specialCourtesy&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.specialCourtesy&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Special courtesies (VIP, board member)&quot; ];
@@ -3959,7 +4011,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.specialCourtesiesCode&quot; ]
        ]
      ], [
-       fhir:index 37;
+       fhir:index 38;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.specialArrangement&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.specialArrangement&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Wheelchair, translator, stretcher, etc.&quot; ];
@@ -3990,7 +4042,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.specialArrangementCode&quot; ]
        ]
      ], [
-       fhir:index 38;
+       fhir:index 39;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.destination&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.destination&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Location/organization to which the patient is discharged&quot; ];
@@ -4018,7 +4070,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.participation[typeCode=DST]&quot; ]
        ]
      ], [
-       fhir:index 39;
+       fhir:index 40;
        fhir:Element.id [ fhir:value &quot;Encounter.hospitalization.dischargeDisposition&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.hospitalization.dischargeDisposition&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Category or kind of location after discharge&quot; ];
@@ -4049,7 +4101,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.dischargeDispositionCode&quot; ]
        ]
      ], [
-       fhir:index 40;
+       fhir:index 41;
        fhir:Element.id [ fhir:value &quot;Encounter.location&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;List of locations where the patient has been&quot; ];
@@ -4067,7 +4119,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.participation[typeCode=LOC]&quot; ]
        ]
      ], [
-       fhir:index 41;
+       fhir:index 42;
        fhir:Element.id [ fhir:value &quot;Encounter.location.location&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.location&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Location the encounter takes place&quot; ];
@@ -4100,7 +4152,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.role&quot; ]
        ]
      ], [
-       fhir:index 42;
+       fhir:index 43;
        fhir:Element.id [ fhir:value &quot;Encounter.location.status&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.status&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;planned | active | reserved | completed&quot; ];
@@ -4128,7 +4180,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.role.statusCode&quot; ]
        ]
      ], [
-       fhir:index 43;
+       fhir:index 44;
        fhir:Element.id [ fhir:value &quot;Encounter.location.physicalType&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.physicalType&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The physical type of the location (usually the level in the location hierachy - bed room ward etc.)&quot; ];
@@ -4151,7 +4203,7 @@
          fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/location-physical-type&quot; ]
        ]
      ], [
-       fhir:index 44;
+       fhir:index 45;
        fhir:Element.id [ fhir:value &quot;Encounter.location.period&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.location.period&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Time period during which the patient was present at the location&quot; ];
@@ -4168,7 +4220,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.time&quot; ]
        ]
      ], [
-       fhir:index 45;
+       fhir:index 46;
        fhir:Element.id [ fhir:value &quot;Encounter.serviceProvider&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.serviceProvider&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;The organization (facility) responsible for this encounter&quot; ];
@@ -4197,7 +4249,7 @@
          fhir:ElementDefinition.map [ fhir:value &quot;.particiaption[typeCode=PFM].role&quot; ]
        ]
      ], [
-       fhir:index 46;
+       fhir:index 47;
        fhir:Element.id [ fhir:value &quot;Encounter.partOf&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;Encounter.partOf&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Another Encounter this encounter is part of&quot; ];
@@ -4257,13 +4309,14 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-baa72e6471) generated on Tue, Apr 16, 2019 08:56-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        FHIR &reg;© HL7.org 2011+. FHIR CI Build hl7.fhir.core#4.1.0 (GitHub 0931132380) generated on Mon, Jul 29, 2019 11:32-0500. 
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
-               <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
+               <a style="color: #ffffff" href="qa.html">QA Page</a> |
+<!--                <a style="color: #b8dcf9" href="credits.html">Credits</a> | -->
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fencounter.profile.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fencounter.profile.ttl.html">Compare to R3</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
                <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   

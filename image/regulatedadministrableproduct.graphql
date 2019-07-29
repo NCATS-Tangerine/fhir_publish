@@ -1,0 +1,206 @@
+# FHIR GraphQL Schema. Version 4.1.0
+
+# import the types from 'types.graphql'
+
+type RegulatedAdministrableProduct {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: [Identifier]
+  subject: [Reference]
+  administrableDoseForm: CodeableConcept!
+  unitOfPresentation: CodeableConcept
+  ingredient: [Reference]
+  device: [Reference]
+  characteristics: [RegulatedAdministrableProductCharacteristics]
+  routeOfAdministration: [RegulatedAdministrableProductRouteOfAdministration]!
+}
+
+type RegulatedAdministrableProductCharacteristics {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  status: CodeableConcept
+}
+
+type RegulatedAdministrableProductRouteOfAdministration {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  firstDose: Quantity
+  maxSingleDose: Quantity
+  maxDosePerDay: Quantity
+  maxDosePerTreatmentPeriod: Ratio
+  maxTreatmentPeriod: Duration
+  targetSpecies: [RegulatedAdministrableProductRouteOfAdministrationTargetSpecies]
+}
+
+type RegulatedAdministrableProductRouteOfAdministrationTargetSpecies {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  withdrawalPeriod: [RegulatedAdministrableProductRouteOfAdministrationTargetSpeciesWithdrawalPeriod]
+}
+
+type RegulatedAdministrableProductRouteOfAdministrationTargetSpeciesWithdrawalPeriod {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  tissue: CodeableConcept!
+  value: Quantity!
+  supportingInformation: String  _supportingInformation: ElementBase
+}
+
+input RegulatedAdministrableProductInput {
+  id: ID
+  meta: MetaInput
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: NarrativeInput
+  contained: [ResourceInput]
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  identifier: [IdentifierInput]
+  subject: [ReferenceInput]
+  administrableDoseForm: CodeableConceptInput!
+  unitOfPresentation: CodeableConceptInput
+  ingredient: [ReferenceInput]
+  device: [ReferenceInput]
+  characteristics: [RegulatedAdministrableProductCharacteristicsInput]
+  routeOfAdministration: [RegulatedAdministrableProductRouteOfAdministrationInput]!
+}
+
+input RegulatedAdministrableProductCharacteristicsInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: CodeableConceptInput!
+  status: CodeableConceptInput
+}
+
+input RegulatedAdministrableProductRouteOfAdministrationInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: CodeableConceptInput!
+  firstDose: QuantityInput
+  maxSingleDose: QuantityInput
+  maxDosePerDay: QuantityInput
+  maxDosePerTreatmentPeriod: RatioInput
+  maxTreatmentPeriod: DurationInput
+  targetSpecies: [RegulatedAdministrableProductRouteOfAdministrationTargetSpeciesInput]
+}
+
+input RegulatedAdministrableProductRouteOfAdministrationTargetSpeciesInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: CodeableConceptInput!
+  withdrawalPeriod: [RegulatedAdministrableProductRouteOfAdministrationTargetSpeciesWithdrawalPeriodInput]
+}
+
+input RegulatedAdministrableProductRouteOfAdministrationTargetSpeciesWithdrawalPeriodInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  tissue: CodeableConceptInput!
+  value: QuantityInput!
+  supportingInformation: String  _supportingInformation: ElementBase
+}
+
+type RegulatedAdministrableProductReadType {
+  RegulatedAdministrableProduct(id: ID!): RegulatedAdministrableProduct
+}
+
+type RegulatedAdministrableProductListType {
+  RegulatedAdministrableProductList(_filter: String
+    identifier: [token]
+    route: [token]
+    subject: [reference]
+    target_species: [token]
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): [RegulatedAdministrableProduct]
+}
+
+type RegulatedAdministrableProductConnectionType {
+  RegulatedAdministrableProductConection(_filter: String
+    identifier: [token]
+    route: [token]
+    subject: [reference]
+    target_species: [token]
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): RegulatedAdministrableProductConnection
+}
+
+type RegulatedAdministrableProductConnection {
+  count: Int
+  offset: Int
+  pagesize: Int
+  first: ID
+  previous: ID
+  next: ID
+  last: ID
+  edges: [RegulatedAdministrableProductEdge]
+}
+
+type RegulatedAdministrableProductEdge {
+  mode: String
+  score: Float
+  resource: RegulatedAdministrableProduct
+}
+
+type RegulatedAdministrableProductCreateType {
+  RegulatedAdministrableProductCreate(resource: RegulatedAdministrableProductInput): RegulatedAdministrableProductCreation
+}
+
+type RegulatedAdministrableProductCreation {
+  location: String
+  resource: RegulatedAdministrableProduct
+  information: OperationOutcome
+}
+
+type RegulatedAdministrableProductUpdateType {
+  RegulatedAdministrableProductUpdate(id: ID, resource: RegulatedAdministrableProductInput): RegulatedAdministrableProductUpdate
+}
+
+type RegulatedAdministrableProductUpdate {
+  resource: RegulatedAdministrableProduct
+  information: OperationOutcome
+}
+
+type RegulatedAdministrableProductDeleteType {
+  RegulatedAdministrableProductDelete(id: ID): RegulatedAdministrableProductDelete
+}
+
+type RegulatedAdministrableProductDelete {
+  information: OperationOutcome
+}
+

@@ -21,18 +21,65 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:DomainResource.extension @<Extension>*;  # Additional content defined by 
                                             # implementations 
     fhir:DomainResource.modifierExtension @<Extension>*;  # Extensions that cannot be ignored
+    fhir:ObservationDefinition.url @<uri>?;  # Logical canonical URL to reference 
+                                            # this ObservationDefinition 
+                                            # (globally unique) 
+    fhir:ObservationDefinition.identifier @<Identifier>?;  # Business identifier of the 
+                                            # ObservationDefinition 
+    fhir:ObservationDefinition.version @<string>?;  # Business version of the 
+                                            # ObservationDefinition 
+    fhir:ObservationDefinition.title @<string>?;  # Name for this 
+                                            # ObservationDefinition (Human 
+                                            # friendly) 
+    fhir:ObservationDefinition.derivedFromCanonical @<canonical>*;  # Based on FHIR definition of 
+                                            # another observation 
+    fhir:ObservationDefinition.derivedFromUri @<uri>*;  # Based on external definition
+    fhir:ObservationDefinition.status @<code> AND
+    	{fhir:value @fhirvs:publication-status};  # draft | active | retired | unknown
+    fhir:ObservationDefinition.experimental @<boolean>?;  # If for testing purposes, not real 
+                                            # usage 
+    (                                       # Type of subject for the defined 
+                                            # observation 
+        fhir:ObservationDefinition.subjectCodeableConcept @<CodeableConcept>  |
+        fhir:ObservationDefinition.subjectReference @<Reference> 
+    )?;
+    fhir:ObservationDefinition.date @<dateTime>?;  # Date status first applied
+    fhir:ObservationDefinition.publisher @<Reference>?;  # The name of the individual or 
+                                            # organization that published the 
+                                            # ObservationDefinition 
+    fhir:ObservationDefinition.contact @<ContactDetail>*;  # Contact details for the publisher
+    fhir:ObservationDefinition.description @<markdown>?;  # Natural language description of 
+                                            # the ObservationDefinition 
+    fhir:ObservationDefinition.useContext @<UsageContext>*;  # Content intends to support these 
+                                            # contexts 
+    fhir:ObservationDefinition.jurisdiction @<CodeableConcept>*;  # Intended jurisdiction for this 
+                                            # ObservationDefinition (if 
+                                            # applicable) 
+    fhir:ObservationDefinition.purpose @<markdown>?;  # Why this ObservationDefinition is 
+                                            # defined 
+    fhir:ObservationDefinition.copyright @<markdown>?;  # Use and/or publishing restrictions
+    fhir:ObservationDefinition.approvalDate @<date>?;  # When ObservationDefinition was 
+                                            # approved by publisher 
+    fhir:ObservationDefinition.lastReviewDate @<date>?;  # Last review date for the 
+                                            # ObservationDefinition 
+    fhir:ObservationDefinition.effectivePeriod @<Period>?;  # The effective date range for the 
+                                            # ObservationDefinition 
+    fhir:ObservationDefinition.performerType @<CodeableConcept>?;  # Desired kind of performer for such 
+                                            # kind of observation 
     fhir:ObservationDefinition.category @<CodeableConcept>*;  # Category of observation
-    fhir:ObservationDefinition.code @<CodeableConcept>;  # Type of observation (code / type)
-    fhir:ObservationDefinition.identifier @<Identifier>*;  # Business identifier for this 
-                                            # ObservationDefinition instance 
+    fhir:ObservationDefinition.code @<CodeableConcept>;  # Type of observation
     fhir:ObservationDefinition.permittedDataType @<code> AND
     	{fhir:value @fhirvs:permitted-data-type}*;  # Quantity | CodeableConcept | 
                                             # string | boolean | integer | Range 
                                             # | Ratio | SampledData | time | 
                                             # dateTime | Period 
     fhir:ObservationDefinition.multipleResultsAllowed @<boolean>?;  # Multiple results allowed
+    fhir:ObservationDefinition.bodySite @<CodeableConcept>?;  # Body part to be observed
     fhir:ObservationDefinition.method @<CodeableConcept>?;  # Method used to produce the 
                                             # observation 
+    fhir:ObservationDefinition.specimen @<Reference>?;  # Kind of specimen used by this type 
+                                            # of observation 
+    fhir:ObservationDefinition.device @<Reference>?;  # Measurement device
     fhir:ObservationDefinition.preferredReportName @<string>?;  # Preferred report name
     fhir:ObservationDefinition.quantitativeDetails @<ObservationDefinition.quantitativeDetails>?;  # Characteristics of quantitative 
                                             # results 
@@ -50,6 +97,10 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:ObservationDefinition.criticalCodedValueSet @<Reference>?;  # Value set of critical coded values 
                                             # for the observations conforming to 
                                             # this ObservationDefinition 
+    fhir:ObservationDefinition.hasMember @<Reference>*;  # Definitions of related resources 
+                                            # belonging to this kind of 
+                                            # observation group 
+    fhir:ObservationDefinition.component @<ObservationDefinition.component>*;  # Component results
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -95,7 +146,44 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# Component results
+<ObservationDefinition.component> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ObservationDefinition.component.code @<CodeableConcept>;  # Type of observation
+    fhir:ObservationDefinition.component.permittedDataType @<code> AND
+    	{fhir:value @fhirvs:permitted-data-type}*;  # Quantity | CodeableConcept | 
+                                            # string | boolean | integer | Range 
+                                            # | Ratio | SampledData | time | 
+                                            # dateTime | Period 
+    fhir:ObservationDefinition.component.quantitativeDetails @<ObservationDefinition.quantitativeDetails>?;  # Quantitative details
+    fhir:ObservationDefinition.component.qualifiedInterval @<ObservationDefinition.qualifiedInterval>*;  # Qualified interval
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 #---------------------- Data Types -------------------
+
+# Primitive Type dateTime
+<dateTime> CLOSED {
+    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:value xsd:gYear OR xsd:gYearMonth OR xsd:date OR xsd:dateTime?;  # Primitive value for dateTime
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Primitive Type date
+<date> CLOSED {
+    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:value xsd:gYear OR xsd:gYearMonth OR xsd:date?;  # Primitive value for date
+    fhir:index xsd:integer?                 # Relative position in a list
+}
 
 # Metadata about a resource
 <Meta> CLOSED {
@@ -159,6 +247,28 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
                                             # content was created 
     fhir:Resource.language @<code>?;        # Language of the resource content
     fhir:index xsd:integer?
+}
+
+# Time range defined by start and end date/time
+<Period> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:Period.start @<dateTime>?;         # Starting time with inclusive 
+                                            # boundary 
+    fhir:Period.end @<dateTime>?;           # End time with inclusive boundary, 
+                                            # if not ongoing 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Primitive Type canonical
+<canonical> CLOSED {
+    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:value xsd:string?;                 # Primitive value for canonical
+    fhir:index xsd:integer?                 # Relative position in a list
 }
 
 # Primitive Type integer
@@ -249,6 +359,18 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# Contact information
+<ContactDetail> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:ContactDetail.name @<string>?;     # Name of an individual to contact
+    fhir:ContactDetail.telecom @<ContactPoint>*;  # Contact details for individual or 
+                                            # organization 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # An identifier intended for computation
 <Identifier> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -291,6 +413,31 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
+# Describes the context of use for a conformance or knowledge resource
+<UsageContext> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:UsageContext.code @<Coding>;       # Type of context being specified
+    (                                       # Value that defines the context
+        fhir:UsageContext.valueCodeableConcept @<CodeableConcept>  |
+        fhir:UsageContext.valueQuantity @<Quantity>  |
+        fhir:UsageContext.valueRange @<Range>  |
+        fhir:UsageContext.valueReference @<Reference> 
+    );
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Primitive Type markdown
+<markdown> CLOSED {
+    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:value xsd:string?;                 # Primitive value for markdown
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
 # Primitive Type id
 <id> CLOSED {
     fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
@@ -320,15 +467,6 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
                                             # system 
     fhir:CodeableConcept.text @<string>?;   # Plain text representation of the 
                                             # concept 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Primitive Type date
-<date> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:value xsd:gYear OR xsd:gYearMonth OR xsd:date?;  # Primitive value for date
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -533,19 +671,6 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Time range defined by start and end date/time
-<Period> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:Period.start @<dateTime>?;         # Starting time with inclusive 
-                                            # boundary 
-    fhir:Period.end @<dateTime>?;           # End time with inclusive boundary, 
-                                            # if not ongoing 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # A length of time
 <Duration> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -560,15 +685,6 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:Quantity.unit @<string>?;          # Unit representation
     fhir:Quantity.system @<uri>?;           # System that defines coded unit form
     fhir:Quantity.code @<code>?;            # Coded form of the unit
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Primitive Type canonical
-<canonical> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:value xsd:string?;                 # Primitive value for canonical
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -600,22 +716,6 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:value xsd:base64Binary?;           # Primitive value for base64Binary
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Describes the context of use for a conformance or knowledge resource
-<UsageContext> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:UsageContext.code @<Coding>;       # Type of context being specified
-    (                                       # Value that defines the context
-        fhir:UsageContext.valueCodeableConcept @<CodeableConcept>  |
-        fhir:UsageContext.valueQuantity @<Quantity>  |
-        fhir:UsageContext.valueRange @<Range>  |
-        fhir:UsageContext.valueReference @<Reference> 
-    );
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -652,15 +752,6 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     	{fhir:value @fhirvs:all-types};  # What type of value
     fhir:ParameterDefinition.profile @<canonical>?;  # What profile the value is expected 
                                             # to be 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Primitive Type dateTime
-<dateTime> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:value xsd:gYear OR xsd:gYearMonth OR xsd:date OR xsd:dateTime?;  # Primitive value for dateTime
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -747,15 +838,6 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
                                             # precision) 
     fhir:Money.currency @<code> AND
     	{fhir:value @fhirvs:currencies}?;  # ISO 4217 Currency Code
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Primitive Type markdown
-<markdown> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:value xsd:string?;                 # Primitive value for markdown
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -870,18 +952,6 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Contact information
-<ContactDetail> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:ContactDetail.name @<string>?;     # Name of an individual to contact
-    fhir:ContactDetail.telecom @<ContactPoint>*;  # Contact details for individual or 
-                                            # organization 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # An expression that can be used to generate a value
 <Expression> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -939,19 +1009,6 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Order of the results
-<DataRequirement.sort> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
-                                            # perform the sort 
-    fhir:DataRequirement.sort.direction @<code> AND
-    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # When the event is to occur
 <Timing.repeat> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -989,6 +1046,34 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     	{fhir:value @fhirvs:event-timing}*;  # Code for time period of occurrence
     fhir:Timing.repeat.offset @<unsignedInt>?;  # Minutes from event (before or 
                                             # after) 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# What codes are expected
+<DataRequirement.codeFilter> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
+                                            # on 
+    fhir:DataRequirement.codeFilter.searchParam @<string>?;  # A coded (token) parameter to 
+                                            # search on 
+    fhir:DataRequirement.codeFilter.valueSet @<canonical>?;  # Valueset for the filter
+    fhir:DataRequirement.codeFilter.code @<Coding>*;  # What code is expected
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Order of the results
+<DataRequirement.sort> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
+                                            # perform the sort 
+    fhir:DataRequirement.sort.direction @<code> AND
+    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1032,78 +1117,15 @@ start=@<ObservationDefinition> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What codes are expected
-<DataRequirement.codeFilter> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
-                                            # on 
-    fhir:DataRequirement.codeFilter.searchParam @<string>?;  # A coded (token) parameter to 
-                                            # search on 
-    fhir:DataRequirement.codeFilter.valueSet @<canonical>?;  # Valueset for the filter
-    fhir:DataRequirement.codeFilter.code @<Coding>*;  # What code is expected
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 #---------------------- Reference Types -------------------
 
 #---------------------- Value Sets ------------------------
 
-# The status of a resource narrative.
-fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
-
-# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
-fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceDefinition" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
-
-# The type of contributor.
-fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
-
-# The use of an address.
-fhirvs:address-use ["home" "work" "temp" "old" "billing"]
-
-# The type of an address (physical / postal).
-fhirvs:address-type ["postal" "physical" "both"]
-
-# Real world event relating to the schedule.
-fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
-
-# How the Quantity should be understood and represented.
-fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
-
-# Telecommunications form for contact point.
-fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
-
-# The days of the week.
-fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
-
-# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
-fhirvs:mimetypes EXTERNAL
-
-# The type of relationship to the related artifact.
-fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
-
-# The use of a human name.
-fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
-
-# Identifies the purpose for this identifier, if known .
-fhirvs:identifier-use ["usual" "official" "temp" "secondary" "old"]
-
-# Whether an operation parameter is an input or an output parameter.
-fhirvs:operation-parameter-use ["in" "out"]
-
 # A unit of time (units from UCUM).
 fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
 
-# Use of contact point.
-fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
-
 # The possible sort directions, ascending or descending.
 fhirvs:sort-direction ["ascending" "descending"]
-
-# Codes identifying the category of observation range.
-fhirvs:observation-range-category ["reference" "critical" "absolute"]
 
 # Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)
 fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "BAM" "BBD" "BDT" "BGN" "BHD" "BIF" "BMD" "BND" "BOB" "BOV" "BRL" "BSD" "BTN" "BWP" "BYN" "BZD" "CAD" "CDF" "CHE" "CHF" "CHW" "CLF" "CLP" "CNY" "COP" "COU" "CRC" "CUC" "CUP" "CVE" "CZK" "DJF" "DKK" "DOP" "DZD" "EGP" "ERN" "ETB" "EUR" "FJD" "FKP" "GBP" "GEL" "GGP" "GHS" "GIP" "GMD" "GNF" "GTQ" "GYD" "HKD" "HNL" "HRK" "HTG" "HUF" "IDR" "ILS" "IMP" "INR" "IQD" "IRR" "ISK" "JEP" "JMD" "JOD" "JPY" "KES" "KGS" "KHR" "KMF" "KPW" "KRW" "KWD" "KYD" "KZT" "LAK" "LBP" "LKR" "LRD" "LSL" "LYD" "MAD" "MDL" "MGA" "MKD" "MMK" "MNT" "MOP" "MRU" "MUR" "MVR" "MWK" "MXN" "MXV" "MYR" "MZN" "NAD" "NGN" "NIO" "NOK" "NPR" "NZD" "OMR" "PAB" "PEN" "PGK" "PHP" "PKR" "PLN" "PYG" "QAR" "RON" "RSD" "RUB" "RWF" "SAR" "SBD" "SCR" "SDG" "SEK" "SGD" "SHP" "SLL" "SOS" "SRD" "SSP" "STN" "SVC" "SYP" "SZL" "THB" "TJS" "TMT" "TND" "TOP" "TRY" "TTD" "TVD" "TWD" "TZS" "UAH" "UGX" "USD" "USN" "UYI" "UYU" "UZS" "VEF" "VND" "VUV" "WST" "XAF" "XAG" "XAU" "XBA" "XBB" "XBC" "XBD" "XCD" "XDR" "XOF" "XPD" "XPF" "XPT" "XSU" "XTS" "XUA" "XXX" "YER" "ZAR" "ZMW" "ZWL"]
@@ -1111,8 +1133,59 @@ fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "
 # The type of trigger.
 fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
 
-# Permitted data type for observation value.
-fhirvs:permitted-data-type ["Quantity" "CodeableConcept" "string" "boolean" "integer" "Range" "Ratio" "SampledData" "time" "dateTime" "Period"]
+# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
+fhirvs:mimetypes EXTERNAL
+
+# Codes identifying the category of observation range.
+fhirvs:observation-range-category ["reference" "critical" "absolute"]
+
+# Identifies the purpose for this identifier, if known .
+fhirvs:identifier-use ["usual" "official" "temp" "secondary" "old"]
+
+# The use of an address.
+fhirvs:address-use ["home" "work" "temp" "old" "billing"]
+
+# How the Quantity should be understood and represented.
+fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
+
+# The type of an address (physical / postal).
+fhirvs:address-type ["postal" "physical" "both"]
+
+# The days of the week.
+fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
+
+# The lifecycle status of an artifact.
+fhirvs:publication-status ["draft" "active" "retired" "unknown"]
 
 # The gender of a person used for administrative purposes.
 fhirvs:administrative-gender ["male" "female" "other" "unknown"]
+
+# Use of contact point.
+fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
+
+# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
+fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdministrableProductDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CapabilityStatement2" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "ClinicalUseIssue" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "ConditionDefinition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "Ingredient" "InsurancePlan" "Invoice" "Library" "Linkage" "List" "Location" "ManufacturedItemDefinition" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationUsage" "MedicinalProductDefinition" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "PackagedProductDefinition" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RegulatedAdministrableProduct" "RegulatedAuthorization" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "Statistic" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceDefinition" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
+
+# The type of contributor.
+fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
+
+# Telecommunications form for contact point.
+fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
+
+# The status of a resource narrative.
+fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
+
+# Real world event relating to the schedule.
+fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
+
+# The use of a human name.
+fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
+
+# The type of relationship to the related artifact.
+fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
+
+# Permitted data type for observation value.
+fhirvs:permitted-data-type ["Quantity" "CodeableConcept" "string" "boolean" "integer" "Range" "Ratio" "SampledData" "time" "dateTime" "Period"]
+
+# Whether an operation parameter is an input or an output parameter.
+fhirvs:operation-parameter-use ["in" "out"]

@@ -4,53 +4,12 @@
   "contained" : [{
     "resourceType" : "ValueSet",
     "id" : "vs2",
-    "name" : "Type options for MedicationRequest.reported[x]",
-    "status" : "active",
-    "description" : "Type options for MedicationRequest.reported[x]",
-    "expansion" : {
-      "identifier" : "urn:uuid:fa5c2d0b-57a4-4b3d-b8e0-5934b98372cf",
-      "timestamp" : "2019-04-16T08:57:39-05:00",
-      "contains" : [{
-        "system" : "http://hl7.org/fhir/data-types",
-        "code" : "boolean",
-        "display" : "boolean"
-      },
-      {
-        "system" : "http://hl7.org/fhir/resource-types",
-        "code" : "Patient",
-        "display" : "Patient"
-      },
-      {
-        "system" : "http://hl7.org/fhir/resource-types",
-        "code" : "Practitioner",
-        "display" : "Practitioner"
-      },
-      {
-        "system" : "http://hl7.org/fhir/resource-types",
-        "code" : "PractitionerRole",
-        "display" : "PractitionerRole"
-      },
-      {
-        "system" : "http://hl7.org/fhir/resource-types",
-        "code" : "RelatedPerson",
-        "display" : "RelatedPerson"
-      },
-      {
-        "system" : "http://hl7.org/fhir/resource-types",
-        "code" : "Organization",
-        "display" : "Organization"
-      }]
-    }
-  },
-  {
-    "resourceType" : "ValueSet",
-    "id" : "vs3",
     "name" : "Type options for MedicationRequest.medication[x]",
     "status" : "active",
     "description" : "Type options for MedicationRequest.medication[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:a2cf105e-b926-4096-a285-c750160b16fa",
-      "timestamp" : "2019-04-16T08:57:39-05:00",
+      "identifier" : "urn:uuid:2e9e813e-8798-4996-8360-b41794025152",
+      "timestamp" : "2019-07-29T11:33:31-05:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "CodeableConcept",
@@ -65,13 +24,13 @@
   },
   {
     "resourceType" : "ValueSet",
-    "id" : "vs4",
+    "id" : "vs3",
     "name" : "Type options for MedicationRequest.substitution.allowed[x]",
     "status" : "active",
     "description" : "Type options for MedicationRequest.substitution.allowed[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:beff0973-b805-41b0-9a21-f397ae82d96b",
-      "timestamp" : "2019-04-16T08:57:39-05:00",
+      "identifier" : "urn:uuid:367270c0-31f0-443d-87c8-212a097a9145",
+      "timestamp" : "2019-07-29T11:33:31-05:00",
       "contains" : [{
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "boolean",
@@ -89,7 +48,7 @@
   }],
   "version" : "4.1.0",
   "status" : "draft",
-  "date" : "2019-04-16T08:42:31-05:00",
+  "date" : "2019-07-29T11:29:14-05:00",
   "publisher" : "Health Level Seven International (Pharmacy)",
   "item" : [{
     "linkId" : "MedicationRequest",
@@ -502,7 +461,7 @@
         "valueString" : "CodeableConcept"
       }],
       "linkId" : "MedicationRequest.category",
-      "text" : "Type of medication usage",
+      "text" : "Grouping or category of medication request",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -517,7 +476,7 @@
             }]
           }
         }],
-        "text" : "Indicates the type of medication request (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)). The category can be used to include where the medication is expected to be consumed or other types of requests.",
+        "text" : "Indicates the grouping or category of medication request (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)). The category can be used to include where the medication is expected to be consumed or other types of requests.",
         "type" : "display"
       },
       {
@@ -609,9 +568,12 @@
       "extension" : [{
         "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
         "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "boolean"
       }],
-      "linkId" : "MedicationRequest.reported[x]",
-      "text" : "Reported rather than primary record",
+      "linkId" : "MedicationRequest.reported",
       "type" : "group",
       "required" : false,
       "repeats" : true,
@@ -630,48 +592,54 @@
         "type" : "display"
       },
       {
-        "linkId" : "MedicationRequest.reported[x]._type",
-        "text" : "type",
-        "type" : "choice",
+        "linkId" : "MedicationRequest.reported.value",
+        "text" : "Reported rather than primary record",
+        "type" : "boolean",
         "required" : false,
-        "repeats" : false,
-        "answerValueSet" : "#vs2",
-        "item" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "boolean"
-          }],
-          "linkId" : "MedicationRequest.reported[x]._null",
-          "type" : "group",
-          "item" : [{
-            "linkId" : "MedicationRequest.reported[x]._null.value",
-            "type" : "boolean",
-            "required" : false,
-            "repeats" : false
-          }]
+        "repeats" : false
+      }]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "Reference"
+      }],
+      "linkId" : "MedicationRequest.informationSource",
+      "type" : "group",
+      "required" : false,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "The person or organization who provided the information about this request, if the source is someone other than the requestor.  This is often used when the MedicationRequest is reported by another person.",
+        "type" : "display"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
+          "valueCode" : "Patient, Practitioner, PractitionerRole, RelatedPerson, Organization"
         },
         {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-            "valueString" : "Reference"
-          }],
-          "linkId" : "MedicationRequest.reported[x]._null",
-          "type" : "group",
-          "item" : [{
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-              "valueCode" : "Patient, Practitioner, PractitionerRole, RelatedPerson, Organization"
-            },
-            {
-              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
-              "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
-            }],
-            "linkId" : "MedicationRequest.reported[x]._null.value",
-            "type" : "reference",
-            "required" : false,
-            "repeats" : false
-          }]
-        }]
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
+          "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
+        }],
+        "linkId" : "MedicationRequest.informationSource.value",
+        "text" : "The person or organization who provided the information about this request, if the source is someone other than the requestor",
+        "type" : "reference",
+        "required" : false,
+        "repeats" : false
       }]
     },
     {
@@ -708,7 +676,7 @@
         "type" : "choice",
         "required" : false,
         "repeats" : false,
-        "answerValueSet" : "#vs3",
+        "answerValueSet" : "#vs2",
         "item" : [{
           "extension" : [{
             "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
@@ -865,7 +833,7 @@
             }]
           }
         }],
-        "text" : "Include additional information (for example, patient height and weight, a medicationStatement for the patient) that supports the ordering of the medication. This attribute can be used to reference a MedicationStatement about the patients' medication use.",
+        "text" : "Include additional information (for example, patient height and weight, a MedicationUsage for the patient) that supports the ordering of the medication. This attribute can be used to reference a MedicationUsage about the patients' medication use.",
         "type" : "display"
       },
       {
@@ -992,7 +960,7 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "Practitioner, PractitionerRole, Organization, Patient, Device, RelatedPerson, CareTeam"
+          "valueCode" : "Practitioner, PractitionerRole, Organization, Patient, Device, RelatedPerson, CareTeam, HealthcareService"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
@@ -1150,7 +1118,7 @@
             }]
           }
         }],
-        "text" : "Condition or observation that supports why the medication was ordered. This is a reference to a condition or observation that is the reason for the medication order.  If only a code exists, use reasonCode.",
+        "text" : "Condition or observation that supports why the medication was ordered. This is a reference to a condition or observation that is the reason for the medication request.  It is not intended to be used to reference a goal.  If only a code exists, use reasonCode.",
         "type" : "display"
       },
       {
@@ -2236,7 +2204,7 @@
           "type" : "choice",
           "required" : false,
           "repeats" : false,
-          "answerValueSet" : "#vs4",
+          "answerValueSet" : "#vs3",
           "item" : [{
             "extension" : [{
               "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",

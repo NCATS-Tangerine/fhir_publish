@@ -1,0 +1,98 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://hl7.org/fhir/RegulatedAuthorization/example> a fhir:RegulatedAuthorization;
+  fhir:nodeRole fhir:treeRoot;
+  fhir:Resource.id [ fhir:value "example"];
+  fhir:DomainResource.text [
+     fhir:Narrative.status [ fhir:value "generated" ];
+     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: example</p><p><b>identifier</b>: EU/1/11/999/001</p><p><b>region</b>: EU <span>(Details : {http://ema.europa.eu/example/country code 'EU' = 'EU)</span></p><p><b>status</b>: active <span>(Details : {http://ema.europa.eu/example/authorisationstatus code 'active' = 'active)</span></p><p><b>statusDate</b>: Jan 14, 2015</p><p><b>validityPeriod</b>: Aug 16, 2015 --&gt; May 20, 2020</p><p><b>jurisdictionalAuthorization</b>: <a>RegulatedAuthorization/Jurusdictional1</a></p><p><b>holder</b>: <a>Organization/example</a></p><p><b>regulator</b>: <a>Organization/example</a></p><blockquote><p><b>case</b></p><p><b>identifier</b>: EMEA/H/C/009999/IA/0099/G</p><p><b>type</b>: VariationTypeIA <span>(Details : {http://ema.europa.eu/example/marketingAuthorisationProcedureType code 'VariationTypeIA' = 'VariationTypeIA)</span></p><p><b>date</b>: Aug 2, 2015 --&gt; Aug 21, 2015</p><h3>Applications</h3><table><tr><td>-</td></tr><tr><td>*</td></tr></table></blockquote></div>"
+  ];
+  fhir:RegulatedAuthorization.identifier [
+     fhir:index 0;
+     fhir:Identifier.system [ fhir:value "http://ema.europa.eu/example/marketingAuthorisationNumber" ];
+     fhir:Identifier.value [ fhir:value "EU/1/11/999/001" ]
+  ];
+  fhir:RegulatedAuthorization.region [
+     fhir:index 0;
+     fhir:CodeableConcept.coding [
+       fhir:index 0;
+       fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/country" ];
+       fhir:Coding.code [ fhir:value "EU" ]
+     ]
+  ];
+  fhir:RegulatedAuthorization.status [
+     fhir:CodeableConcept.coding [
+       fhir:index 0;
+       fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/authorisationstatus" ];
+       fhir:Coding.code [ fhir:value "active" ]
+     ]
+  ];
+  fhir:RegulatedAuthorization.statusDate [ fhir:value "2015-01-14"^^xsd:date];
+  fhir:RegulatedAuthorization.validityPeriod [
+     fhir:Period.start [ fhir:value "2015-08-16"^^xsd:date ];
+     fhir:Period.end [ fhir:value "2020-05-20"^^xsd:date ]
+  ];
+  fhir:RegulatedAuthorization.jurisdictionalAuthorization [
+     fhir:index 0;
+     fhir:link <http://hl7.org/fhir/RegulatedAuthorization/Jurusdictional1>;
+     fhir:Element.id [ fhir:value "1" ];
+     fhir:Reference.reference [ fhir:value "RegulatedAuthorization/Jurusdictional1" ]
+  ];
+  fhir:RegulatedAuthorization.holder [
+     fhir:link <http://hl7.org/fhir/Organization/example>;
+     fhir:Reference.reference [ fhir:value "Organization/example" ]
+  ];
+  fhir:RegulatedAuthorization.regulator [
+     fhir:link <http://hl7.org/fhir/Organization/example>;
+     fhir:Reference.reference [ fhir:value "Organization/example" ]
+  ];
+  fhir:RegulatedAuthorization.case [
+     fhir:RegulatedAuthorization.case.identifier [
+       fhir:Identifier.system [ fhir:value "http://ema.europa.eu/example/procedureidentifier-number" ];
+       fhir:Identifier.value [ fhir:value "EMEA/H/C/009999/IA/0099/G" ]
+     ];
+     fhir:RegulatedAuthorization.case.type [
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/marketingAuthorisationProcedureType" ];
+         fhir:Coding.code [ fhir:value "VariationTypeIA" ]
+       ]
+     ];
+     fhir:RegulatedAuthorization.case.datePeriod [
+       fhir:Period.start [ fhir:value "2015-08-02"^^xsd:date ];
+       fhir:Period.end [ fhir:value "2015-08-21"^^xsd:date ]
+     ];
+     fhir:RegulatedAuthorization.case.application [
+       fhir:index 0;
+       fhir:RegulatedAuthorization.case.identifier [
+         fhir:Identifier.system [ fhir:value "http://ema.europa.eu/example/applicationidentifier-number" ];
+         fhir:Identifier.value [ fhir:value "IA38G" ]
+       ];
+       fhir:RegulatedAuthorization.case.type [
+         fhir:CodeableConcept.coding [
+           fhir:index 0;
+           fhir:Coding.system [ fhir:value "http://ema.europa.eu/example/marketingAuthorisationApplicationType" ];
+           fhir:Coding.code [ fhir:value "GroupTypeIAVariationNotification" ]
+         ]
+       ];
+       fhir:RegulatedAuthorization.case.dateDateTime [ fhir:value "2015-08-01"^^xsd:date ]
+     ]
+  ] .
+
+<http://hl7.org/fhir/RegulatedAuthorization/Jurusdictional1> a fhir:RegulatedAuthorization .
+
+<http://hl7.org/fhir/Organization/example> a fhir:Organization .
+
+# - ontology header ------------------------------------------------------------
+
+<http://hl7.org/fhir/RegulatedAuthorization/example.ttl> a owl:Ontology;
+  owl:imports fhir:fhir.ttl;
+  owl:versionIRI <http://build.fhir.org/RegulatedAuthorization/example.ttl> .
+
+# -------------------------------------------------------------------------------------
+

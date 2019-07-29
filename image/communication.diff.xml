@@ -17,9 +17,17 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/request-priority|4.1.0"
                       strength="required"/>
       </element>
+      <element path="Communication.recipient">
+         <removed-type name="Reference(Device | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson | Group | CareTeam | HealthcareService)"/>
+         <added-type name="Reference(CareTeam | Device | Group | HealthcareService | Location | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson)"/>
+      </element>
       <element path="Communication.reasonReference">
          <removed-type name="Reference(Condition | Observation | DiagnosticReport | DocumentReference)"/>
          <added-type name="Reference(Resource)"/>
+      </element>
+      <element path="Communication.payload.content[x]">
+         <removed-type name="string"/>
+         <added-type name="CodeableConcept"/>
       </element>
    </type>
 </difference>

@@ -1,0 +1,276 @@
+# FHIR GraphQL Schema. Version 4.1.0
+
+# import the types from 'types.graphql'
+
+type RegulatedMedicinalProduct {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: [Identifier]
+  type: CodeableConcept
+  domain: Coding
+  combinedPharmaceuticalDoseForm: CodeableConcept
+  indication: String  _indication: ElementBase
+  legalStatusOfSupply: CodeableConcept
+  additionalMonitoringIndicator: CodeableConcept
+  specialMeasures: String  _specialMeasures: [ElementBase]
+  paediatricUseIndicator: CodeableConcept
+  productClassification: [CodeableConcept]
+  marketingStatus: [MarketingStatus]
+  pharmaceuticalProduct: [Reference]
+  packagedRegulatedMedicinalProduct: [Reference]
+  attachedDocument: [Reference]
+  masterFile: [Reference]
+  contact: [RegulatedMedicinalProductContact]
+  clinicalTrial: [Reference]
+  name: [RegulatedMedicinalProductName]!
+  crossReference: [Identifier]
+  manufacturingBusinessOperation: [RegulatedMedicinalProductManufacturingBusinessOperation]
+  specialDesignation: [RegulatedMedicinalProductSpecialDesignation]
+}
+
+type RegulatedMedicinalProductContact {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  type: CodeableConcept
+  contact: Reference!
+}
+
+type RegulatedMedicinalProductName {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  productName: String  _productName: ElementBase
+  type: Coding
+  namePart: [RegulatedMedicinalProductNameNamePart]
+  countryLanguage: [RegulatedMedicinalProductNameCountryLanguage]
+}
+
+type RegulatedMedicinalProductNameNamePart {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  part: String  _part: ElementBase
+  type: Coding!
+}
+
+type RegulatedMedicinalProductNameCountryLanguage {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  country: CodeableConcept!
+  jurisdiction: CodeableConcept
+  language: CodeableConcept!
+}
+
+type RegulatedMedicinalProductManufacturingBusinessOperation {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  operationType: CodeableConcept
+  authorisationReferenceNumber: Identifier
+  effectiveDate: dateTime  _effectiveDate: ElementBase
+  confidentialityIndicator: CodeableConcept
+  manufacturer: [Reference]
+  regulator: Reference
+}
+
+type RegulatedMedicinalProductSpecialDesignation {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: [Identifier]
+  type: CodeableConcept
+  intendedUse: CodeableConcept
+  indicationCodeableConcept: CodeableConcept
+  indicationReference: Reference
+  status: CodeableConcept
+  date: dateTime  _date: ElementBase
+  species: CodeableConcept
+}
+
+input RegulatedMedicinalProductInput {
+  id: ID
+  meta: MetaInput
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: NarrativeInput
+  contained: [ResourceInput]
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  identifier: [IdentifierInput]
+  type: CodeableConceptInput
+  domain: CodingInput
+  combinedPharmaceuticalDoseForm: CodeableConceptInput
+  indication: String  _indication: ElementBase
+  legalStatusOfSupply: CodeableConceptInput
+  additionalMonitoringIndicator: CodeableConceptInput
+  specialMeasures: String  _specialMeasures: [ElementBase]
+  paediatricUseIndicator: CodeableConceptInput
+  productClassification: [CodeableConceptInput]
+  marketingStatus: [MarketingStatusInput]
+  pharmaceuticalProduct: [ReferenceInput]
+  packagedRegulatedMedicinalProduct: [ReferenceInput]
+  attachedDocument: [ReferenceInput]
+  masterFile: [ReferenceInput]
+  contact: [RegulatedMedicinalProductContactInput]
+  clinicalTrial: [ReferenceInput]
+  name: [RegulatedMedicinalProductNameInput]!
+  crossReference: [IdentifierInput]
+  manufacturingBusinessOperation: [RegulatedMedicinalProductManufacturingBusinessOperationInput]
+  specialDesignation: [RegulatedMedicinalProductSpecialDesignationInput]
+}
+
+input RegulatedMedicinalProductContactInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  type: CodeableConceptInput
+  contact: ReferenceInput!
+}
+
+input RegulatedMedicinalProductNameInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  productName: String  _productName: ElementBase
+  type: CodingInput
+  namePart: [RegulatedMedicinalProductNameNamePartInput]
+  countryLanguage: [RegulatedMedicinalProductNameCountryLanguageInput]
+}
+
+input RegulatedMedicinalProductNameNamePartInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  part: String  _part: ElementBase
+  type: CodingInput!
+}
+
+input RegulatedMedicinalProductNameCountryLanguageInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  country: CodeableConceptInput!
+  jurisdiction: CodeableConceptInput
+  language: CodeableConceptInput!
+}
+
+input RegulatedMedicinalProductManufacturingBusinessOperationInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  operationType: CodeableConceptInput
+  authorisationReferenceNumber: IdentifierInput
+  effectiveDate: dateTime  _effectiveDate: ElementBase
+  confidentialityIndicator: CodeableConceptInput
+  manufacturer: [ReferenceInput]
+  regulator: ReferenceInput
+}
+
+input RegulatedMedicinalProductSpecialDesignationInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  identifier: [IdentifierInput]
+  type: CodeableConceptInput
+  intendedUse: CodeableConceptInput
+  indicationCodeableConcept: CodeableConceptInput
+  indicationReference: ReferenceInput
+  status: CodeableConceptInput
+  date: dateTime  _date: ElementBase
+  species: CodeableConceptInput
+}
+
+type RegulatedMedicinalProductReadType {
+  RegulatedMedicinalProduct(id: ID!): RegulatedMedicinalProduct
+}
+
+type RegulatedMedicinalProductListType {
+  RegulatedMedicinalProductList(_filter: String
+    identifier: [token]
+    name: [String]
+    name_language: [token]
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): [RegulatedMedicinalProduct]
+}
+
+type RegulatedMedicinalProductConnectionType {
+  RegulatedMedicinalProductConection(_filter: String
+    identifier: [token]
+    name: [String]
+    name_language: [token]
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): RegulatedMedicinalProductConnection
+}
+
+type RegulatedMedicinalProductConnection {
+  count: Int
+  offset: Int
+  pagesize: Int
+  first: ID
+  previous: ID
+  next: ID
+  last: ID
+  edges: [RegulatedMedicinalProductEdge]
+}
+
+type RegulatedMedicinalProductEdge {
+  mode: String
+  score: Float
+  resource: RegulatedMedicinalProduct
+}
+
+type RegulatedMedicinalProductCreateType {
+  RegulatedMedicinalProductCreate(resource: RegulatedMedicinalProductInput): RegulatedMedicinalProductCreation
+}
+
+type RegulatedMedicinalProductCreation {
+  location: String
+  resource: RegulatedMedicinalProduct
+  information: OperationOutcome
+}
+
+type RegulatedMedicinalProductUpdateType {
+  RegulatedMedicinalProductUpdate(id: ID, resource: RegulatedMedicinalProductInput): RegulatedMedicinalProductUpdate
+}
+
+type RegulatedMedicinalProductUpdate {
+  resource: RegulatedMedicinalProduct
+  information: OperationOutcome
+}
+
+type RegulatedMedicinalProductDeleteType {
+  RegulatedMedicinalProductDelete(id: ID): RegulatedMedicinalProductDelete
+}
+
+type RegulatedMedicinalProductDelete {
+  information: OperationOutcome
+}
+

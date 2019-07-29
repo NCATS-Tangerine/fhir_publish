@@ -6,7 +6,7 @@
   }],
   "version" : "4.1.0",
   "status" : "draft",
-  "date" : "2019-04-16T08:42:31-05:00",
+  "date" : "2019-07-29T11:29:14-05:00",
   "publisher" : "Health Level Seven International (Patient Administration)",
   "item" : [{
     "linkId" : "Encounter",
@@ -320,7 +320,7 @@
             }]
           }
         }],
-        "text" : "planned | arrived | triaged | in-progress | onleave | finished | cancelled +. Note that internal business rules will determine the appropriate transitions that may occur between statuses (and also classes).",
+        "text" : "planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown. Note that internal business rules will determine the appropriate transitions that may occur between statuses (and also classes).",
         "type" : "display"
       },
       {
@@ -460,7 +460,7 @@
               }]
             }
           }],
-          "text" : "planned | arrived | triaged | in-progress | onleave | finished | cancelled +.",
+          "text" : "planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown.",
           "type" : "display"
         },
         {
@@ -906,6 +906,49 @@
         "linkId" : "Encounter.subject.value",
         "text" : "The patient or group present at the encounter",
         "type" : "reference",
+        "required" : false,
+        "repeats" : false
+      }]
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+        "valueInteger" : 1
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+        "valueString" : "CodeableConcept"
+      }],
+      "linkId" : "Encounter.subjectStatus",
+      "text" : "The current status of the subject in relation to the Encounter",
+      "type" : "group",
+      "required" : false,
+      "repeats" : true,
+      "item" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/questionnaire-item-control",
+              "code" : "flyover",
+              "display" : "Fly-over"
+            }]
+          }
+        }],
+        "text" : "The subjectStatus value can be used to track the patient's status within the encounter. It details whether the patient has arrived or departed, has been triaged or is currently in a waiting status.",
+        "type" : "display"
+      },
+      {
+        "linkId" : "Encounter.subjectStatus.coding",
+        "text" : "code:",
+        "type" : "open-choice",
+        "required" : false,
+        "repeats" : false
+      },
+      {
+        "linkId" : "Encounter.subjectStatus.text",
+        "text" : "text:",
+        "type" : "string",
         "required" : false,
         "repeats" : false
       }]

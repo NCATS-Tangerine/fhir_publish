@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type CommunicationRequest {
   id: ID
   meta: Meta
@@ -28,7 +30,7 @@ type CommunicationRequest {
   authoredOn: dateTime  _authoredOn: ElementBase
   requester: Reference
   recipient: [Reference]
-  sender: Reference
+  informationProvider: Reference
   reasonCode: [CodeableConcept]
   reasonReference: [Reference]
   note: [Annotation]
@@ -38,9 +40,9 @@ type CommunicationRequestPayload {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  contentString: String  _contentString: ElementBase
   contentAttachment: Attachment
   contentReference: Reference
+  contentCodeableConcept: CodeableConcept
 }
 
 input CommunicationRequestInput {
@@ -71,7 +73,7 @@ input CommunicationRequestInput {
   authoredOn: dateTime  _authoredOn: ElementBase
   requester: ReferenceInput
   recipient: [ReferenceInput]
-  sender: ReferenceInput
+  informationProvider: ReferenceInput
   reasonCode: [CodeableConceptInput]
   reasonReference: [ReferenceInput]
   note: [AnnotationInput]
@@ -81,9 +83,9 @@ input CommunicationRequestPayloadInput {
   id: String
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
-  contentString: String  _contentString: ElementBase
   contentAttachment: AttachmentInput
   contentReference: ReferenceInput
+  contentCodeableConcept: CodeableConceptInput
 }
 
 type CommunicationRequestReadType {
@@ -98,6 +100,7 @@ type CommunicationRequestListType {
     encounter: [reference]
     group_identifier: [token]
     identifier: [token]
+    information_provider: [reference]
     medium: [token]
     occurrence: [date]
     patient: [reference]
@@ -105,7 +108,6 @@ type CommunicationRequestListType {
     recipient: [reference]
     replaces: [reference]
     requester: [reference]
-    sender: [reference]
     status: [token]
     subject: [reference]
     _text: [String]
@@ -130,6 +132,7 @@ type CommunicationRequestConnectionType {
     encounter: [reference]
     group_identifier: [token]
     identifier: [token]
+    information_provider: [reference]
     medium: [token]
     occurrence: [date]
     patient: [reference]
@@ -137,7 +140,6 @@ type CommunicationRequestConnectionType {
     recipient: [reference]
     replaces: [reference]
     requester: [reference]
-    sender: [reference]
     status: [token]
     subject: [reference]
     _text: [String]

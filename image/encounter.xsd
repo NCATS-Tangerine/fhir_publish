@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Tue, Apr 16, 2019 08:42-0500 for FHIR v4.1.0 
+  Generated on Mon, Jul 29, 2019 12:28-0500 for FHIR v4.1.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -56,7 +56,7 @@
           </xs:element>
           <xs:element name="status" minOccurs="1" maxOccurs="1" type="EncounterStatus">
             <xs:annotation>
-              <xs:documentation xml:lang="en">planned | arrived | triaged | in-progress | onleave | finished | cancelled +.</xs:documentation>
+              <xs:documentation xml:lang="en">planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="statusHistory" type="Encounter.StatusHistory" minOccurs="0" maxOccurs="unbounded">
@@ -92,6 +92,11 @@
           <xs:element name="subject" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">The patient or group present at the encounter.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="subjectStatus" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The subjectStatus value can be used to track the patient's status within the encounter. It details whether the patient has arrived or departed, has been triaged or is currently in a waiting status.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="episodeOfCare" minOccurs="0" maxOccurs="unbounded" type="Reference">
@@ -177,7 +182,7 @@
         <xs:sequence>
           <xs:element name="status" minOccurs="1" maxOccurs="1" type="EncounterStatus">
             <xs:annotation>
-              <xs:documentation xml:lang="en">planned | arrived | triaged | in-progress | onleave | finished | cancelled +.</xs:documentation>
+              <xs:documentation xml:lang="en">planned | in-progress | onhold | completed | cancelled | entered-in-error | unknown.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="period" minOccurs="1" maxOccurs="1" type="Period">
@@ -391,29 +396,19 @@
           <xs:documentation xml:lang="en">Planned</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="arrived">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Arrived</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="triaged">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Triaged</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value="in-progress">
         <xs:annotation>
           <xs:documentation xml:lang="en">In Progress</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="onleave">
+      <xs:enumeration value="onhold">
         <xs:annotation>
-          <xs:documentation xml:lang="en">On Leave</xs:documentation>
+          <xs:documentation xml:lang="en">On Hold</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="finished">
+      <xs:enumeration value="completed">
         <xs:annotation>
-          <xs:documentation xml:lang="en">Finished</xs:documentation>
+          <xs:documentation xml:lang="en">Completed</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="cancelled">

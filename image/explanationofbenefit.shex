@@ -77,40 +77,6 @@ start=@<ExplanationOfBenefit> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Payment Details
-<ExplanationOfBenefit.payment> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:ExplanationOfBenefit.payment.type @<CodeableConcept>?;  # Partial or complete payment
-    fhir:ExplanationOfBenefit.payment.adjustment @<Money>?;  # Payment adjustment for non-claim 
-                                            # issues 
-    fhir:ExplanationOfBenefit.payment.adjustmentReason @<CodeableConcept>?;  # Explanation for the variance
-    fhir:ExplanationOfBenefit.payment.date @<date>?;  # Expected date of payment
-    fhir:ExplanationOfBenefit.payment.amount @<Money>?;  # Payable amount after adjustment
-    fhir:ExplanationOfBenefit.payment.identifier @<Identifier>?;  # Business identifier for the payment
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Patient insurance information
-<ExplanationOfBenefit.insurance> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:ExplanationOfBenefit.insurance.focal @<boolean>;  # Coverage to be used for 
-                                            # adjudication 
-    fhir:ExplanationOfBenefit.insurance.coverage @<Reference>;  # Insurance information
-    fhir:ExplanationOfBenefit.insurance.preAuthRef @<string>*;  # Prior authorization reference 
-                                            # number 
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
 # Care Team members
 <ExplanationOfBenefit.careTeam> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
@@ -174,43 +140,41 @@ start=@<ExplanationOfBenefit> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Insurer added line items
-<ExplanationOfBenefit.addItem> CLOSED {
+# Balance by Benefit Category
+<ExplanationOfBenefit.benefitBalance> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
                                             # even if unrecognized 
-    fhir:ExplanationOfBenefit.addItem.itemSequence @<positiveInt>*;  # Item sequence number
-    fhir:ExplanationOfBenefit.addItem.detailSequence @<positiveInt>*;  # Detail sequence number
-    fhir:ExplanationOfBenefit.addItem.subDetailSequence @<positiveInt>*;  # Subdetail sequence number
-    fhir:ExplanationOfBenefit.addItem.provider @<Reference>*;  # Authorized providers
-    fhir:ExplanationOfBenefit.addItem.productOrService @<CodeableConcept>;  # Billing, service, product, or drug 
-                                            # code 
-    fhir:ExplanationOfBenefit.addItem.modifier @<CodeableConcept>*;  # Service/Product billing modifiers
-    fhir:ExplanationOfBenefit.addItem.programCode @<CodeableConcept>*;  # Program the product or service is 
-                                            # provided under 
-    (                                       # Date or dates of service or 
-                                            # product delivery 
-        fhir:ExplanationOfBenefit.addItem.servicedDate @<date>  |
-        fhir:ExplanationOfBenefit.addItem.servicedPeriod @<Period> 
-    )?;
-    (                                       # Place of service or where product 
-                                            # was supplied 
-        fhir:ExplanationOfBenefit.addItem.locationCodeableConcept @<CodeableConcept>  |
-        fhir:ExplanationOfBenefit.addItem.locationAddress @<Address>  |
-        fhir:ExplanationOfBenefit.addItem.locationReference @<Reference> 
-    )?;
-    fhir:ExplanationOfBenefit.addItem.quantity @<SimpleQuantity>?;  # Count of products or services
-    fhir:ExplanationOfBenefit.addItem.unitPrice @<Money>?;  # Fee, charge or cost per item
-    fhir:ExplanationOfBenefit.addItem.factor @<decimal>?;  # Price scaling factor
-    fhir:ExplanationOfBenefit.addItem.net @<Money>?;  # Total item cost
-    fhir:ExplanationOfBenefit.addItem.bodySite @<CodeableConcept>?;  # Anatomical location
-    fhir:ExplanationOfBenefit.addItem.subSite @<CodeableConcept>*;  # Anatomical sub-location
-    fhir:ExplanationOfBenefit.addItem.noteNumber @<positiveInt>*;  # Applicable note numbers
-    fhir:ExplanationOfBenefit.addItem.adjudication @<ExplanationOfBenefit.item.adjudication>*;  # Added items adjudication
-    fhir:ExplanationOfBenefit.addItem.detail @<ExplanationOfBenefit.addItem.detail>*;  # Insurer added line items
+    fhir:ExplanationOfBenefit.benefitBalance.category @<CodeableConcept>;  # Benefit classification
+    fhir:ExplanationOfBenefit.benefitBalance.excluded @<boolean>?;  # Excluded from the plan
+    fhir:ExplanationOfBenefit.benefitBalance.name @<string>?;  # Short name for the benefit
+    fhir:ExplanationOfBenefit.benefitBalance.description @<string>?;  # Description of the benefit or 
+                                            # services covered 
+    fhir:ExplanationOfBenefit.benefitBalance.network @<CodeableConcept>?;  # In or out of network
+    fhir:ExplanationOfBenefit.benefitBalance.unit @<CodeableConcept>?;  # Individual or family
+    fhir:ExplanationOfBenefit.benefitBalance.term @<CodeableConcept>?;  # Annual or lifetime
+    fhir:ExplanationOfBenefit.benefitBalance.financial @<ExplanationOfBenefit.benefitBalance.financial>*;  # Benefit Summary
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Payment Details
+<ExplanationOfBenefit.payment> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ExplanationOfBenefit.payment.type @<CodeableConcept>?;  # Partial or complete payment
+    fhir:ExplanationOfBenefit.payment.adjustment @<Money>?;  # Payment adjustment for non-claim 
+                                            # issues 
+    fhir:ExplanationOfBenefit.payment.adjustmentReason @<CodeableConcept>?;  # Explanation for the variance
+    fhir:ExplanationOfBenefit.payment.date @<date>?;  # Expected date of payment
+    fhir:ExplanationOfBenefit.payment.amount @<Money>?;  # Payable amount after adjustment
+    fhir:ExplanationOfBenefit.payment.identifier @<Identifier>?;  # Business identifier for the payment
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -275,16 +239,22 @@ start=@<ExplanationOfBenefit> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Adjudication totals
-<ExplanationOfBenefit.total> CLOSED {
+# Pertinent diagnosis information
+<ExplanationOfBenefit.diagnosis> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
                                             # even if unrecognized 
-    fhir:ExplanationOfBenefit.total.category @<CodeableConcept>;  # Type of adjudication information
-    fhir:ExplanationOfBenefit.total.amount @<Money>;  # Financial total for the category
+    fhir:ExplanationOfBenefit.diagnosis.sequence @<positiveInt>;  # Diagnosis instance identifier
+    (                                       # Nature of illness or problem
+        fhir:ExplanationOfBenefit.diagnosis.diagnosisCodeableConcept @<CodeableConcept>  |
+        fhir:ExplanationOfBenefit.diagnosis.diagnosisReference @<Reference> 
+    );
+    fhir:ExplanationOfBenefit.diagnosis.type @<CodeableConcept>*;  # Timing or nature of the diagnosis
+    fhir:ExplanationOfBenefit.diagnosis.onAdmission @<CodeableConcept>?;  # Present on admission
+    fhir:ExplanationOfBenefit.diagnosis.packageCode @<CodeableConcept>?;  # Package billing code
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -305,17 +275,16 @@ start=@<ExplanationOfBenefit> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Prior or corollary claims
-<ExplanationOfBenefit.related> CLOSED {
+# Adjudication totals
+<ExplanationOfBenefit.total> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
                                             # even if unrecognized 
-    fhir:ExplanationOfBenefit.related.claim @<Reference>?;  # Reference to the related claim
-    fhir:ExplanationOfBenefit.related.relationship @<CodeableConcept>?;  # How the reference claim is related
-    fhir:ExplanationOfBenefit.related.reference @<Identifier>?;  # File or case reference
+    fhir:ExplanationOfBenefit.total.category @<CodeableConcept>;  # Type of adjudication information
+    fhir:ExplanationOfBenefit.total.amount @<Money>;  # Financial total for the category
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -335,42 +304,109 @@ start=@<ExplanationOfBenefit> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Balance by Benefit Category
-<ExplanationOfBenefit.benefitBalance> CLOSED {
+# Insurer added line items
+<ExplanationOfBenefit.addItem> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
                                             # even if unrecognized 
-    fhir:ExplanationOfBenefit.benefitBalance.category @<CodeableConcept>;  # Benefit classification
-    fhir:ExplanationOfBenefit.benefitBalance.excluded @<boolean>?;  # Excluded from the plan
-    fhir:ExplanationOfBenefit.benefitBalance.name @<string>?;  # Short name for the benefit
-    fhir:ExplanationOfBenefit.benefitBalance.description @<string>?;  # Description of the benefit or 
-                                            # services covered 
-    fhir:ExplanationOfBenefit.benefitBalance.network @<CodeableConcept>?;  # In or out of network
-    fhir:ExplanationOfBenefit.benefitBalance.unit @<CodeableConcept>?;  # Individual or family
-    fhir:ExplanationOfBenefit.benefitBalance.term @<CodeableConcept>?;  # Annual or lifetime
-    fhir:ExplanationOfBenefit.benefitBalance.financial @<ExplanationOfBenefit.benefitBalance.financial>*;  # Benefit Summary
+    fhir:ExplanationOfBenefit.addItem.itemSequence @<positiveInt>*;  # Item sequence number
+    fhir:ExplanationOfBenefit.addItem.detailSequence @<positiveInt>*;  # Detail sequence number
+    fhir:ExplanationOfBenefit.addItem.subDetailSequence @<positiveInt>*;  # Subdetail sequence number
+    fhir:ExplanationOfBenefit.addItem.provider @<Reference>*;  # Authorized providers
+    fhir:ExplanationOfBenefit.addItem.productOrService @<CodeableConcept>;  # Billing, service, product, or drug 
+                                            # code 
+    fhir:ExplanationOfBenefit.addItem.modifier @<CodeableConcept>*;  # Service/Product billing modifiers
+    fhir:ExplanationOfBenefit.addItem.programCode @<CodeableConcept>*;  # Program the product or service is 
+                                            # provided under 
+    (                                       # Date or dates of service or 
+                                            # product delivery 
+        fhir:ExplanationOfBenefit.addItem.servicedDate @<date>  |
+        fhir:ExplanationOfBenefit.addItem.servicedPeriod @<Period> 
+    )?;
+    (                                       # Place of service or where product 
+                                            # was supplied 
+        fhir:ExplanationOfBenefit.addItem.locationCodeableConcept @<CodeableConcept>  |
+        fhir:ExplanationOfBenefit.addItem.locationAddress @<Address>  |
+        fhir:ExplanationOfBenefit.addItem.locationReference @<Reference> 
+    )?;
+    fhir:ExplanationOfBenefit.addItem.quantity @<SimpleQuantity>?;  # Count of products or services
+    fhir:ExplanationOfBenefit.addItem.unitPrice @<Money>?;  # Fee, charge or cost per item
+    fhir:ExplanationOfBenefit.addItem.factor @<decimal>?;  # Price scaling factor
+    fhir:ExplanationOfBenefit.addItem.net @<Money>?;  # Total item cost
+    fhir:ExplanationOfBenefit.addItem.bodySite @<CodeableConcept>?;  # Anatomical location
+    fhir:ExplanationOfBenefit.addItem.subSite @<CodeableConcept>*;  # Anatomical sub-location
+    fhir:ExplanationOfBenefit.addItem.noteNumber @<positiveInt>*;  # Applicable note numbers
+    fhir:ExplanationOfBenefit.addItem.adjudication @<ExplanationOfBenefit.item.adjudication>*;  # Added items adjudication
+    fhir:ExplanationOfBenefit.addItem.detail @<ExplanationOfBenefit.addItem.detail>*;  # Insurer added line items
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# Pertinent diagnosis information
-<ExplanationOfBenefit.diagnosis> CLOSED {
+# Prior or corollary claims
+<ExplanationOfBenefit.related> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
     fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
                                             # even if unrecognized 
-    fhir:ExplanationOfBenefit.diagnosis.sequence @<positiveInt>;  # Diagnosis instance identifier
-    (                                       # Nature of illness or problem
-        fhir:ExplanationOfBenefit.diagnosis.diagnosisCodeableConcept @<CodeableConcept>  |
-        fhir:ExplanationOfBenefit.diagnosis.diagnosisReference @<Reference> 
-    );
-    fhir:ExplanationOfBenefit.diagnosis.type @<CodeableConcept>*;  # Timing or nature of the diagnosis
-    fhir:ExplanationOfBenefit.diagnosis.onAdmission @<CodeableConcept>?;  # Present on admission
-    fhir:ExplanationOfBenefit.diagnosis.packageCode @<CodeableConcept>?;  # Package billing code
+    fhir:ExplanationOfBenefit.related.claim @<Reference>?;  # Reference to the related claim
+    fhir:ExplanationOfBenefit.related.relationship @<CodeableConcept>?;  # How the reference claim is related
+    fhir:ExplanationOfBenefit.related.reference @<Identifier>?;  # File or case reference
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Patient insurance information
+<ExplanationOfBenefit.insurance> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ExplanationOfBenefit.insurance.focal @<boolean>;  # Coverage to be used for 
+                                            # adjudication 
+    fhir:ExplanationOfBenefit.insurance.coverage @<Reference>;  # Insurance information
+    fhir:ExplanationOfBenefit.insurance.preAuthRef @<string>*;  # Prior authorization reference 
+                                            # number 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Adjudication details
+<ExplanationOfBenefit.item.adjudication> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ExplanationOfBenefit.item.adjudication.category @<CodeableConcept>;  # Type of adjudication information
+    fhir:ExplanationOfBenefit.item.adjudication.reason @<CodeableConcept>?;  # Explanation of adjudication outcome
+    fhir:ExplanationOfBenefit.item.adjudication.amount @<Money>?;  # Monetary amount
+    fhir:ExplanationOfBenefit.item.adjudication.value @<decimal>?;  # Non-monitary value
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# Benefit Summary
+<ExplanationOfBenefit.benefitBalance.financial> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
+                                            # even if unrecognized 
+    fhir:ExplanationOfBenefit.benefitBalance.financial.type @<CodeableConcept>;  # Benefit classification
+    (                                       # Benefits allowed
+        fhir:ExplanationOfBenefit.benefitBalance.financial.allowedUnsignedInt @<unsignedInt>  |
+        fhir:ExplanationOfBenefit.benefitBalance.financial.allowedString @<string>  |
+        fhir:ExplanationOfBenefit.benefitBalance.financial.allowedMoney @<Money> 
+    )?;
+    (                                       # Benefits used
+        fhir:ExplanationOfBenefit.benefitBalance.financial.usedUnsignedInt @<unsignedInt>  |
+        fhir:ExplanationOfBenefit.benefitBalance.financial.usedMoney @<Money> 
+    )?;
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -419,42 +455,6 @@ start=@<ExplanationOfBenefit> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:ExplanationOfBenefit.item.detail.noteNumber @<positiveInt>*;  # Applicable note numbers
     fhir:ExplanationOfBenefit.item.detail.adjudication @<ExplanationOfBenefit.item.adjudication>*;  # Detail level adjudication details
     fhir:ExplanationOfBenefit.item.detail.subDetail @<ExplanationOfBenefit.item.detail.subDetail>*;  # Additional items
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Adjudication details
-<ExplanationOfBenefit.item.adjudication> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:ExplanationOfBenefit.item.adjudication.category @<CodeableConcept>;  # Type of adjudication information
-    fhir:ExplanationOfBenefit.item.adjudication.reason @<CodeableConcept>?;  # Explanation of adjudication outcome
-    fhir:ExplanationOfBenefit.item.adjudication.amount @<Money>?;  # Monetary amount
-    fhir:ExplanationOfBenefit.item.adjudication.value @<decimal>?;  # Non-monitary value
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Benefit Summary
-<ExplanationOfBenefit.benefitBalance.financial> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:BackboneElement.modifierExtension @<Extension>*;  # Extensions that cannot be ignored 
-                                            # even if unrecognized 
-    fhir:ExplanationOfBenefit.benefitBalance.financial.type @<CodeableConcept>;  # Benefit classification
-    (                                       # Benefits allowed
-        fhir:ExplanationOfBenefit.benefitBalance.financial.allowedUnsignedInt @<unsignedInt>  |
-        fhir:ExplanationOfBenefit.benefitBalance.financial.allowedString @<string>  |
-        fhir:ExplanationOfBenefit.benefitBalance.financial.allowedMoney @<Money> 
-    )?;
-    (                                       # Benefits used
-        fhir:ExplanationOfBenefit.benefitBalance.financial.usedUnsignedInt @<unsignedInt>  |
-        fhir:ExplanationOfBenefit.benefitBalance.financial.usedMoney @<Money> 
-    )?;
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1349,31 +1349,23 @@ start=@<ExplanationOfBenefit> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What codes are expected
-<DataRequirement.codeFilter> CLOSED {
+# What dates/date ranges are expected
+<DataRequirement.dateFilter> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
-    fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
+    fhir:DataRequirement.dateFilter.path @<string>?;  # A date-valued attribute to filter 
                                             # on 
-    fhir:DataRequirement.codeFilter.searchParam @<string>?;  # A coded (token) parameter to 
-                                            # search on 
-    fhir:DataRequirement.codeFilter.valueSet @<canonical>?;  # Valueset for the filter
-    fhir:DataRequirement.codeFilter.code @<Coding>*;  # What code is expected
-    fhir:index xsd:integer?                 # Relative position in a list
-}
-
-# Order of the results
-<DataRequirement.sort> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
-    fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
-                                            # perform the sort 
-    fhir:DataRequirement.sort.direction @<code> AND
-    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
+    fhir:DataRequirement.dateFilter.searchParam @<string>?;  # A date valued parameter to search 
+                                            # on 
+    (                                       # The value of the filter, as a 
+                                            # Period, DateTime, or Duration 
+                                            # value 
+        fhir:DataRequirement.dateFilter.valueDateTime @<dateTime>  |
+        fhir:DataRequirement.dateFilter.valuePeriod @<Period>  |
+        fhir:DataRequirement.dateFilter.valueDuration @<Duration> 
+    )?;
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1417,23 +1409,31 @@ start=@<ExplanationOfBenefit> AND {fhir:nodeRole [fhir:treeRoot]}
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-# What dates/date ranges are expected
-<DataRequirement.dateFilter> CLOSED {
+# Order of the results
+<DataRequirement.sort> CLOSED {
     fhir:Element.id @<string>?;             # Unique id for inter-element 
                                             # referencing 
     fhir:Element.extension @<Extension>*;   # Additional content defined by 
                                             # implementations 
-    fhir:DataRequirement.dateFilter.path @<string>?;  # A date-valued attribute to filter 
+    fhir:DataRequirement.sort.path @<string>;  # The name of the attribute to 
+                                            # perform the sort 
+    fhir:DataRequirement.sort.direction @<code> AND
+    	{fhir:value @fhirvs:sort-direction};  # ascending | descending
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+# What codes are expected
+<DataRequirement.codeFilter> CLOSED {
+    fhir:Element.id @<string>?;             # Unique id for inter-element 
+                                            # referencing 
+    fhir:Element.extension @<Extension>*;   # Additional content defined by 
+                                            # implementations 
+    fhir:DataRequirement.codeFilter.path @<string>?;  # A code-valued attribute to filter 
                                             # on 
-    fhir:DataRequirement.dateFilter.searchParam @<string>?;  # A date valued parameter to search 
-                                            # on 
-    (                                       # The value of the filter, as a 
-                                            # Period, DateTime, or Duration 
-                                            # value 
-        fhir:DataRequirement.dateFilter.valueDateTime @<dateTime>  |
-        fhir:DataRequirement.dateFilter.valuePeriod @<Period>  |
-        fhir:DataRequirement.dateFilter.valueDuration @<Duration> 
-    )?;
+    fhir:DataRequirement.codeFilter.searchParam @<string>?;  # A coded (token) parameter to 
+                                            # search on 
+    fhir:DataRequirement.codeFilter.valueSet @<canonical>?;  # Valueset for the filter
+    fhir:DataRequirement.codeFilter.code @<Coding>*;  # What code is expected
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -1461,62 +1461,8 @@ start=@<ExplanationOfBenefit> AND {fhir:nodeRole [fhir:treeRoot]}
 
 #---------------------- Value Sets ------------------------
 
-# The status of a resource narrative.
-fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
-
-# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
-fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "InsurancePlan" "Invoice" "Library" "Linkage" "List" "Location" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationStatement" "MedicinalProduct" "MedicinalProductAuthorization" "MedicinalProductContraindication" "MedicinalProductIndication" "MedicinalProductIngredient" "MedicinalProductInteraction" "MedicinalProductManufactured" "MedicinalProductPackaged" "MedicinalProductPharmaceutical" "MedicinalProductUndesirableEffect" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceDefinition" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
-
-# The type of contributor.
-fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
-
-# The purpose of the Claim: predetermination, preauthorization, claim.
-fhirvs:claim-use ["claim" "preauthorization" "predetermination"]
-
-# The use of an address.
-fhirvs:address-use ["home" "work" "temp" "old" "billing"]
-
-# The type of an address (physical / postal).
-fhirvs:address-type ["postal" "physical" "both"]
-
-# Real world event relating to the schedule.
-fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
-
-# How the Quantity should be understood and represented.
-fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
-
-# A code specifying the state of the resource instance.
-fhirvs:explanationofbenefit-status ["active" "cancelled" "draft" "entered-in-error"]
-
-# Telecommunications form for contact point.
-fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
-
-# The days of the week.
-fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
-
-# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
-fhirvs:mimetypes EXTERNAL
-
-# The type of relationship to the related artifact.
-fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
-
-# The use of a human name.
-fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
-
-# Identifies the purpose for this identifier, if known .
-fhirvs:identifier-use ["usual" "official" "temp" "secondary" "old"]
-
-# The presentation types of notes.
-fhirvs:note-type ["display" "print" "printoper"]
-
-# Whether an operation parameter is an input or an output parameter.
-fhirvs:operation-parameter-use ["in" "out"]
-
 # A unit of time (units from UCUM).
 fhirvs:units-of-time ["s" "min" "h" "d" "wk" "mo" "a"]
-
-# Use of contact point.
-fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
 
 # The possible sort directions, ascending or descending.
 fhirvs:sort-direction ["ascending" "descending"]
@@ -1527,5 +1473,59 @@ fhirvs:currencies ["AED" "AFN" "ALL" "AMD" "ANG" "AOA" "ARS" "AUD" "AWG" "AZN" "
 # The type of trigger.
 fhirvs:trigger-type ["named-event" "periodic" "data-changed" "data-added" "data-modified" "data-removed" "data-accessed" "data-access-ended"]
 
+# This value set includes all possible codes from BCP-13 (http://tools.ietf.org/html/bcp13)
+fhirvs:mimetypes EXTERNAL
+
+# Identifies the purpose for this identifier, if known .
+fhirvs:identifier-use ["usual" "official" "temp" "secondary" "old"]
+
+# The use of an address.
+fhirvs:address-use ["home" "work" "temp" "old" "billing"]
+
+# How the Quantity should be understood and represented.
+fhirvs:quantity-comparator ["<" "<=" ">=" ">"]
+
+# The type of an address (physical / postal).
+fhirvs:address-type ["postal" "physical" "both"]
+
 # This value set includes Claim Processing Outcome codes.
 fhirvs:remittance-outcome ["queued" "complete" "error" "partial"]
+
+# The days of the week.
+fhirvs:days-of-week ["mon" "tue" "wed" "thu" "fri" "sat" "sun"]
+
+# Use of contact point.
+fhirvs:contact-point-use ["home" "work" "temp" "old" "mobile"]
+
+# The presentation types of notes.
+fhirvs:note-type ["display" "print" "printoper"]
+
+# A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
+fhirvs:all-types ["Address" "Age" "Annotation" "Attachment" "BackboneElement" "CodeableConcept" "Coding" "ContactDetail" "ContactPoint" "Contributor" "Count" "DataRequirement" "Distance" "Dosage" "Duration" "Element" "ElementDefinition" "Expression" "Extension" "HumanName" "Identifier" "MarketingStatus" "Meta" "Money" "MoneyQuantity" "Narrative" "ParameterDefinition" "Period" "Population" "ProdCharacteristic" "ProductShelfLife" "Quantity" "Range" "Ratio" "Reference" "RelatedArtifact" "SampledData" "Signature" "SimpleQuantity" "SubstanceAmount" "Timing" "TriggerDefinition" "UsageContext" "base64Binary" "boolean" "canonical" "code" "date" "dateTime" "decimal" "id" "instant" "integer" "markdown" "oid" "positiveInt" "string" "time" "unsignedInt" "uri" "url" "uuid" "xhtml" "Account" "ActivityDefinition" "AdministrableProductDefinition" "AdverseEvent" "AllergyIntolerance" "Appointment" "AppointmentResponse" "AuditEvent" "Basic" "Binary" "BiologicallyDerivedProduct" "BodyStructure" "Bundle" "CapabilityStatement" "CapabilityStatement2" "CarePlan" "CareTeam" "CatalogEntry" "ChargeItem" "ChargeItemDefinition" "Claim" "ClaimResponse" "ClinicalImpression" "ClinicalProfile" "ClinicalUseIssue" "CodeSystem" "Communication" "CommunicationRequest" "CompartmentDefinition" "Composition" "ConceptMap" "Condition" "ConditionDefinition" "Consent" "Contract" "Coverage" "CoverageEligibilityRequest" "CoverageEligibilityResponse" "DetectedIssue" "Device" "DeviceDefinition" "DeviceMetric" "DeviceRequest" "DeviceUseStatement" "DiagnosticReport" "DocumentManifest" "DocumentReference" "DomainResource" "EffectEvidenceSynthesis" "Encounter" "Endpoint" "EnrollmentRequest" "EnrollmentResponse" "EpisodeOfCare" "EventDefinition" "Evidence" "EvidenceVariable" "ExampleScenario" "ExplanationOfBenefit" "FamilyMemberHistory" "Flag" "Goal" "GraphDefinition" "Group" "GuidanceResponse" "HealthcareService" "ImagingStudy" "Immunization" "ImmunizationEvaluation" "ImmunizationRecommendation" "ImplementationGuide" "Ingredient" "InsurancePlan" "Invoice" "Library" "Linkage" "List" "Location" "ManufacturedItemDefinition" "Measure" "MeasureReport" "Media" "Medication" "MedicationAdministration" "MedicationDispense" "MedicationKnowledge" "MedicationRequest" "MedicationUsage" "MedicinalProductDefinition" "MessageDefinition" "MessageHeader" "MolecularSequence" "NamingSystem" "NutritionOrder" "Observation" "ObservationDefinition" "OperationDefinition" "OperationOutcome" "Organization" "OrganizationAffiliation" "PackagedProductDefinition" "Parameters" "Patient" "PaymentNotice" "PaymentReconciliation" "Person" "PlanDefinition" "Practitioner" "PractitionerRole" "Procedure" "Provenance" "Questionnaire" "QuestionnaireResponse" "RegulatedAdministrableProduct" "RegulatedAuthorization" "RelatedPerson" "RequestGroup" "ResearchDefinition" "ResearchElementDefinition" "ResearchStudy" "ResearchSubject" "Resource" "RiskAssessment" "RiskEvidenceSynthesis" "Schedule" "SearchParameter" "ServiceRequest" "Slot" "Specimen" "SpecimenDefinition" "Statistic" "StructureDefinition" "StructureMap" "Subscription" "Substance" "SubstanceDefinition" "SubstanceNucleicAcid" "SubstancePolymer" "SubstanceProtein" "SubstanceReferenceInformation" "SubstanceSourceMaterial" "SupplyDelivery" "SupplyRequest" "Task" "TerminologyCapabilities" "TestReport" "TestScript" "ValueSet" "VerificationResult" "VisionPrescription" "Type" "Any"]
+
+# The type of contributor.
+fhirvs:contributor-type ["author" "editor" "reviewer" "endorser"]
+
+# Telecommunications form for contact point.
+fhirvs:contact-point-system ["phone" "fax" "email" "pager" "url" "sms" "other"]
+
+# The status of a resource narrative.
+fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
+
+# Real world event relating to the schedule.
+fhirvs:event-timing ["MORN" "MORN.early" "MORN.late" "NOON" "AFT" "AFT.early" "AFT.late" "EVE" "EVE.early" "EVE.late" "NIGHT" "PHS" "HS" "WAKE" "C" "CM" "CD" "CV" "AC" "ACM" "ACD" "ACV" "PC" "PCM" "PCD" "PCV"]
+
+# The use of a human name.
+fhirvs:name-use ["usual" "official" "temp" "nickname" "anonymous" "old" "maiden"]
+
+# The type of relationship to the related artifact.
+fhirvs:related-artifact-type ["documentation" "justification" "citation" "predecessor" "successor" "derived-from" "depends-on" "composed-of"]
+
+# The purpose of the Claim: predetermination, preauthorization, claim.
+fhirvs:claim-use ["claim" "preauthorization" "predetermination"]
+
+# A code specifying the state of the resource instance.
+fhirvs:explanationofbenefit-status ["active" "cancelled" "draft" "entered-in-error"]
+
+# Whether an operation parameter is an input or an output parameter.
+fhirvs:operation-parameter-use ["in" "out"]

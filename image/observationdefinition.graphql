@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type ObservationDefinition {
   id: ID
   meta: Meta
@@ -9,12 +11,36 @@ type ObservationDefinition {
   contained: [Resource]
   extension: [Extension]
   modifierExtension: [Extension]
+  url: uri  _url: ElementBase
+  identifier: Identifier
+  version: String  _version: ElementBase
+  title: String  _title: ElementBase
+  derivedFromCanonical: canonical  _derivedFromCanonical: [ElementBase]
+  derivedFromUri: uri  _derivedFromUri: [ElementBase]
+  status: code  _status: ElementBase
+  experimental: Boolean  _experimental: ElementBase
+  subjectCodeableConcept: CodeableConcept
+  subjectReference: Reference
+  date: dateTime  _date: ElementBase
+  publisher: Reference
+  contact: [ContactDetail]
+  description: markdown  _description: ElementBase
+  useContext: [UsageContext]
+  jurisdiction: [CodeableConcept]
+  purpose: markdown  _purpose: ElementBase
+  copyright: markdown  _copyright: ElementBase
+  approvalDate: date  _approvalDate: ElementBase
+  lastReviewDate: date  _lastReviewDate: ElementBase
+  effectivePeriod: Period
+  performerType: CodeableConcept
   category: [CodeableConcept]
   code: CodeableConcept!
-  identifier: [Identifier]
   permittedDataType: code  _permittedDataType: [ElementBase]
   multipleResultsAllowed: Boolean  _multipleResultsAllowed: ElementBase
+  bodySite: CodeableConcept
   method: CodeableConcept
+  specimen: Reference
+  device: Reference
   preferredReportName: String  _preferredReportName: ElementBase
   quantitativeDetails: ObservationDefinitionQuantitativeDetails
   qualifiedInterval: [ObservationDefinitionQualifiedInterval]
@@ -22,6 +48,8 @@ type ObservationDefinition {
   normalCodedValueSet: Reference
   abnormalCodedValueSet: Reference
   criticalCodedValueSet: Reference
+  hasMember: [Reference]
+  component: [ObservationDefinitionComponent]
 }
 
 type ObservationDefinitionQuantitativeDetails {
@@ -48,6 +76,16 @@ type ObservationDefinitionQualifiedInterval {
   condition: String  _condition: ElementBase
 }
 
+type ObservationDefinitionComponent {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  code: CodeableConcept!
+  permittedDataType: code  _permittedDataType: [ElementBase]
+  quantitativeDetails: ObservationDefinitionQuantitativeDetails
+  qualifiedInterval: [ObservationDefinitionQualifiedInterval]
+}
+
 input ObservationDefinitionInput {
   id: ID
   meta: MetaInput
@@ -57,12 +95,36 @@ input ObservationDefinitionInput {
   contained: [ResourceInput]
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
+  url: uri  _url: ElementBase
+  identifier: IdentifierInput
+  version: String  _version: ElementBase
+  title: String  _title: ElementBase
+  derivedFromCanonical: canonical  _derivedFromCanonical: [ElementBase]
+  derivedFromUri: uri  _derivedFromUri: [ElementBase]
+  status: code  _status: ElementBase
+  experimental: Boolean  _experimental: ElementBase
+  subjectCodeableConcept: CodeableConceptInput
+  subjectReference: ReferenceInput
+  date: dateTime  _date: ElementBase
+  publisher: ReferenceInput
+  contact: [ContactDetailInput]
+  description: markdown  _description: ElementBase
+  useContext: [UsageContextInput]
+  jurisdiction: [CodeableConceptInput]
+  purpose: markdown  _purpose: ElementBase
+  copyright: markdown  _copyright: ElementBase
+  approvalDate: date  _approvalDate: ElementBase
+  lastReviewDate: date  _lastReviewDate: ElementBase
+  effectivePeriod: PeriodInput
+  performerType: CodeableConceptInput
   category: [CodeableConceptInput]
   code: CodeableConceptInput!
-  identifier: [IdentifierInput]
   permittedDataType: code  _permittedDataType: [ElementBase]
   multipleResultsAllowed: Boolean  _multipleResultsAllowed: ElementBase
+  bodySite: CodeableConceptInput
   method: CodeableConceptInput
+  specimen: ReferenceInput
+  device: ReferenceInput
   preferredReportName: String  _preferredReportName: ElementBase
   quantitativeDetails: ObservationDefinitionQuantitativeDetailsInput
   qualifiedInterval: [ObservationDefinitionQualifiedIntervalInput]
@@ -70,6 +132,8 @@ input ObservationDefinitionInput {
   normalCodedValueSet: ReferenceInput
   abnormalCodedValueSet: ReferenceInput
   criticalCodedValueSet: ReferenceInput
+  hasMember: [ReferenceInput]
+  component: [ObservationDefinitionComponentInput]
 }
 
 input ObservationDefinitionQuantitativeDetailsInput {
@@ -96,12 +160,29 @@ input ObservationDefinitionQualifiedIntervalInput {
   condition: String  _condition: ElementBase
 }
 
+input ObservationDefinitionComponentInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  code: CodeableConceptInput!
+  permittedDataType: code  _permittedDataType: [ElementBase]
+  quantitativeDetails: ObservationDefinitionQuantitativeDetails
+  qualifiedInterval: [ObservationDefinitionQualifiedInterval]
+}
+
 type ObservationDefinitionReadType {
   ObservationDefinition(id: ID!): ObservationDefinition
 }
 
 type ObservationDefinitionListType {
   ObservationDefinitionList(_filter: String
+    category: [token]
+    code: [token]
+    experimental: [token]
+    identifier: [token]
+    method: [token]
+    status: [token]
+    title: [String]
     _text: [String]
     _content: [String]
     _id: [token]
@@ -118,6 +199,13 @@ type ObservationDefinitionListType {
 
 type ObservationDefinitionConnectionType {
   ObservationDefinitionConection(_filter: String
+    category: [token]
+    code: [token]
+    experimental: [token]
+    identifier: [token]
+    method: [token]
+    status: [token]
+    title: [String]
     _text: [String]
     _content: [String]
     _id: [token]

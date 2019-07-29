@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Tue, Apr 16, 2019 08:42-0500 for FHIR v4.1.0 
+  Generated on Mon, Jul 29, 2019 12:28-0500 for FHIR v4.1.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -54,14 +54,14 @@
               <xs:documentation xml:lang="en">Identifier by which this substance is known.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="type" minOccurs="0" maxOccurs="1" type="CodeableConcept">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">High level categorization, e.g. polymer or nucleic acid.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
           <xs:element name="status" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>
               <xs:documentation xml:lang="en">Status of substance within the catalogue e.g. approved.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="category" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">High level categorization, e.g. polymer or nucleic acid, or food, chemical, biological.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="domain" minOccurs="0" maxOccurs="1" type="CodeableConcept">
@@ -192,6 +192,11 @@
             <xs:element name="amountQuantity" type="Quantity"/>
             <xs:element name="amountString" type="string"/>
           </xs:choice>
+          <xs:element name="amountType" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The measurement type of the quantitative value.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -232,6 +237,16 @@
             <xs:element name="amountQuantity" type="Quantity"/>
             <xs:element name="amountString" type="string"/>
           </xs:choice>
+          <xs:element name="referenceRange" minOccurs="0" maxOccurs="1" type="Range">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Range of typical values.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
+          <xs:element name="source" minOccurs="0" maxOccurs="unbounded" type="Reference">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Supporting literature.</xs:documentation>
+           </xs:annotation>
+          </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -514,8 +529,8 @@
             <xs:annotation>
               <xs:documentation xml:lang="en">A pointer to another substance, as a resource or just a representational code.</xs:documentation>
             </xs:annotation>
-            <xs:element name="substanceReference" type="Reference"/>
-            <xs:element name="substanceCodeableConcept" type="CodeableConcept"/>
+            <xs:element name="substanceDefinitionReference" type="Reference"/>
+            <xs:element name="substanceDefinitionCodeableConcept" type="CodeableConcept"/>
           </xs:choice>
           <xs:element name="relationship" minOccurs="0" maxOccurs="1" type="CodeableConcept">
             <xs:annotation>

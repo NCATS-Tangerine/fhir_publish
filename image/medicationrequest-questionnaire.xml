@@ -5,54 +5,12 @@
   <contained>
     <ValueSet>
       <id value="vs2"/>
-      <name value="Type options for MedicationRequest.reported[x]"/>
-      <status value="active"/>
-      <description value="Type options for MedicationRequest.reported[x]"/>
-      <expansion>
-        <identifier value="urn:uuid:fa5c2d0b-57a4-4b3d-b8e0-5934b98372cf"/>
-        <timestamp value="2019-04-16T08:57:39-05:00"/>
-        <contains>
-          <system value="http://hl7.org/fhir/data-types"/>
-          <code value="boolean"/>
-          <display value="boolean"/>
-        </contains>
-        <contains>
-          <system value="http://hl7.org/fhir/resource-types"/>
-          <code value="Patient"/>
-          <display value="Patient"/>
-        </contains>
-        <contains>
-          <system value="http://hl7.org/fhir/resource-types"/>
-          <code value="Practitioner"/>
-          <display value="Practitioner"/>
-        </contains>
-        <contains>
-          <system value="http://hl7.org/fhir/resource-types"/>
-          <code value="PractitionerRole"/>
-          <display value="PractitionerRole"/>
-        </contains>
-        <contains>
-          <system value="http://hl7.org/fhir/resource-types"/>
-          <code value="RelatedPerson"/>
-          <display value="RelatedPerson"/>
-        </contains>
-        <contains>
-          <system value="http://hl7.org/fhir/resource-types"/>
-          <code value="Organization"/>
-          <display value="Organization"/>
-        </contains>
-      </expansion>
-    </ValueSet>
-  </contained>
-  <contained>
-    <ValueSet>
-      <id value="vs3"/>
       <name value="Type options for MedicationRequest.medication[x]"/>
       <status value="active"/>
       <description value="Type options for MedicationRequest.medication[x]"/>
       <expansion>
-        <identifier value="urn:uuid:a2cf105e-b926-4096-a285-c750160b16fa"/>
-        <timestamp value="2019-04-16T08:57:39-05:00"/>
+        <identifier value="urn:uuid:2e9e813e-8798-4996-8360-b41794025152"/>
+        <timestamp value="2019-07-29T11:33:31-05:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="CodeableConcept"/>
@@ -68,13 +26,13 @@
   </contained>
   <contained>
     <ValueSet>
-      <id value="vs4"/>
+      <id value="vs3"/>
       <name value="Type options for MedicationRequest.substitution.allowed[x]"/>
       <status value="active"/>
       <description value="Type options for MedicationRequest.substitution.allowed[x]"/>
       <expansion>
-        <identifier value="urn:uuid:beff0973-b805-41b0-9a21-f397ae82d96b"/>
-        <timestamp value="2019-04-16T08:57:39-05:00"/>
+        <identifier value="urn:uuid:367270c0-31f0-443d-87c8-212a097a9145"/>
+        <timestamp value="2019-07-29T11:33:31-05:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="boolean"/>
@@ -93,7 +51,7 @@
   </identifier>
   <version value="4.1.0"/>
   <status value="draft"/>
-  <date value="2019-04-16T08:42:31-05:00"/>
+  <date value="2019-07-29T11:29:14-05:00"/>
   <publisher value="Health Level Seven International (Pharmacy)"/>
   <item>
     <linkId value="MedicationRequest"/>
@@ -475,7 +433,7 @@
         <valueString value="CodeableConcept"/>
       </extension>
       <linkId value="MedicationRequest.category"/>
-      <text value="Type of medication usage"/>
+      <text value="Grouping or category of medication request"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -489,7 +447,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Indicates the type of medication request (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)). The category can be used to include where the medication is expected to be consumed or other types of requests."/>
+        <text value="Indicates the grouping or category of medication request (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)). The category can be used to include where the medication is expected to be consumed or other types of requests."/>
         <type value="display"/>
       </item>
       <item>
@@ -575,8 +533,10 @@
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
         <valueInteger value="1"/>
       </extension>
-      <linkId value="MedicationRequest.reported[x]"/>
-      <text value="Reported rather than primary record"/>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="boolean"/>
+      </extension>
+      <linkId value="MedicationRequest.reported"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -594,44 +554,49 @@
         <type value="display"/>
       </item>
       <item>
-        <linkId value="MedicationRequest.reported[x]._type"/>
-        <text value="type"/>
-        <type value="choice"/>
+        <linkId value="MedicationRequest.reported.value"/>
+        <text value="Reported rather than primary record"/>
+        <type value="boolean"/>
         <required value="false"/>
         <repeats value="false"/>
-        <answerValueSet value="#vs2"/>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="boolean"/>
-          </extension>
-          <linkId value="MedicationRequest.reported[x]._null"/>
-          <type value="group"/>
-          <item>
-            <linkId value="MedicationRequest.reported[x]._null.value"/>
-            <type value="boolean"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
-        <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="Reference"/>
-          </extension>
-          <linkId value="MedicationRequest.reported[x]._null"/>
-          <type value="group"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-              <valueCode value="Patient, Practitioner, PractitionerRole, RelatedPerson, Organization"/>
-            </extension>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-              <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-            </extension>
-            <linkId value="MedicationRequest.reported[x]._null.value"/>
-            <type value="reference"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-        </item>
+      </item>
+    </item>
+    <item>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+        <valueInteger value="1"/>
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+        <valueString value="Reference"/>
+      </extension>
+      <linkId value="MedicationRequest.informationSource"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="The person or organization who provided the information about this request, if the source is someone other than the requestor.  This is often used when the MedicationRequest is reported by another person."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+          <valueCode value="Patient, Practitioner, PractitionerRole, RelatedPerson, Organization"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+        </extension>
+        <linkId value="MedicationRequest.informationSource.value"/>
+        <text value="The person or organization who provided the information about this request, if the source is someone other than the requestor"/>
+        <type value="reference"/>
+        <required value="false"/>
+        <repeats value="false"/>
       </item>
     </item>
     <item>
@@ -665,7 +630,7 @@
         <type value="choice"/>
         <required value="false"/>
         <repeats value="false"/>
-        <answerValueSet value="#vs3"/>
+        <answerValueSet value="#vs2"/>
         <item>
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
             <valueString value="CodeableConcept"/>
@@ -805,7 +770,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Include additional information (for example, patient height and weight, a medicationStatement for the patient) that supports the ordering of the medication. This attribute can be used to reference a MedicationStatement about the patients&#39; medication use."/>
+        <text value="Include additional information (for example, patient height and weight, a MedicationUsage for the patient) that supports the ordering of the medication. This attribute can be used to reference a MedicationUsage about the patients&#39; medication use."/>
         <type value="display"/>
       </item>
       <item>
@@ -918,7 +883,7 @@
       </item>
       <item>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-          <valueCode value="Practitioner, PractitionerRole, Organization, Patient, Device, RelatedPerson, CareTeam"/>
+          <valueCode value="Practitioner, PractitionerRole, Organization, Patient, Device, RelatedPerson, CareTeam, HealthcareService"/>
         </extension>
         <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
           <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
@@ -1063,7 +1028,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="Condition or observation that supports why the medication was ordered. This is a reference to a condition or observation that is the reason for the medication order.  If only a code exists, use reasonCode."/>
+        <text value="Condition or observation that supports why the medication was ordered. This is a reference to a condition or observation that is the reason for the medication request.  It is not intended to be used to reference a goal.  If only a code exists, use reasonCode."/>
         <type value="display"/>
       </item>
       <item>
@@ -2076,7 +2041,7 @@
           <type value="choice"/>
           <required value="false"/>
           <repeats value="false"/>
-          <answerValueSet value="#vs4"/>
+          <answerValueSet value="#vs3"/>
           <item>
             <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
               <valueString value="boolean"/>

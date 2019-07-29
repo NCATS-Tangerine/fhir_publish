@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type Encounter {
   id: ID
   meta: Meta
@@ -18,6 +20,7 @@ type Encounter {
   serviceType: CodeableConcept
   priority: CodeableConcept
   subject: Reference
+  subjectStatus: CodeableConcept
   episodeOfCare: [Reference]
   basedOn: [Reference]
   participant: [EncounterParticipant]
@@ -111,6 +114,7 @@ input EncounterInput {
   serviceType: CodeableConceptInput
   priority: CodeableConceptInput
   subject: ReferenceInput
+  subjectStatus: CodeableConceptInput
   episodeOfCare: [ReferenceInput]
   basedOn: [ReferenceInput]
   participant: [EncounterParticipantInput]
@@ -214,6 +218,7 @@ type EncounterListType {
     special_arrangement: [token]
     status: [token]
     subject: [reference]
+    subject_status: [token]
     type: [token]
     _text: [String]
     _content: [String]
@@ -253,6 +258,7 @@ type EncounterConnectionType {
     special_arrangement: [token]
     status: [token]
     subject: [reference]
+    subject_status: [token]
     type: [token]
     _text: [String]
     _content: [String]

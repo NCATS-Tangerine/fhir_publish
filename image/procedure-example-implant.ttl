@@ -11,7 +11,27 @@
   fhir:Resource.id [ fhir:value "example-implant"];
   fhir:DomainResource.text [
      fhir:Narrative.status [ fhir:value "generated" ];
-     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: example-implant</p><p><b>status</b>: completed</p><p><b>code</b>: Implant Pacemaker <span>(Details : {SNOMED CT code '25267002' = 'Insertion of intracardiac pacemaker', given as 'Insertion of intracardiac pacemaker (procedure)'})</span></p><p><b>subject</b>: <a>Patient/example</a></p><p><b>occurrence</b>: Apr 5, 2015</p><h3>Performers</h3><table><tr><td>-</td><td><b>Actor</b></td></tr><tr><td>*</td><td><a>Dr Cecil Surgeon</a></td></tr></table><p><b>reasonCode</b>: Bradycardia <span>(Details )</span></p><p><b>followUp</b>: ROS 5 days  - 2013-04-10 <span>(Details )</span></p><p><b>note</b>: Routine Appendectomy. Appendix was inflamed and in retro-caecal position</p><h3>FocalDevices</h3><table><tr><td>-</td><td><b>Action</b></td><td><b>Manipulated</b></td></tr><tr><td>*</td><td>Implanted <span>(Details : {http://hl7.org/fhir/device-action code 'implanted' = 'Implanted)</span></td><td><a>Device/example-pacemaker</a></td></tr></table></div>"
+     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: example-implant</p><p><b>contained</b>: </p><p><b>status</b>: completed</p><p><b>code</b>: Implant Pacemaker <span>(Details : {SNOMED CT code '25267002' = 'Insertion of intracardiac pacemaker', given as 'Insertion of intracardiac pacemaker (procedure)'})</span></p><p><b>subject</b>: <a>Patient/example</a></p><p><b>occurrence</b>: Apr 5, 2015</p><h3>Performers</h3><table><tr><td>-</td><td><b>Actor</b></td></tr><tr><td>*</td><td><a>Dr Cecil Surgeon</a></td></tr></table><p><b>reasonCode</b>: Bradycardia <span>(Details )</span></p><p><b>followUp</b>: ROS 5 days  - 2013-04-10 <span>(Details )</span></p><p><b>note</b>: Routine Appendectomy. Appendix was inflamed and in retro-caecal position</p><h3>FocalDevices</h3><table><tr><td>-</td><td><b>Action</b></td><td><b>Manipulated</b></td></tr><tr><td>*</td><td>Implanted <span>(Details : {http://hl7.org/fhir/device-action code 'implanted' = 'Implanted)</span></td><td>id: example-pacemaker; manufacturer: Acme Devices, Inc; lotNumber: 1234-5678; Cardiac pacemaker implant <span>(Details : {SNOMED CT code '14106009' = 'Cardiac pacemaker', given as 'Cardiac pacemaker implant'})</span></td></tr></table></div>"
+  ];
+  fhir:DomainResource.contained [
+     a fhir:Device;
+     fhir:index 0;
+     fhir:Resource.id [ fhir:value "example-pacemaker" ];
+     fhir:Device.manufacturer [ fhir:value "Acme Devices, Inc" ];
+     fhir:Device.lotNumber [ fhir:value "1234-5678" ];
+     fhir:Device.type [
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         a sct:14106009;
+         fhir:Coding.system [ fhir:value "http://snomed.info/sct" ];
+         fhir:Coding.code [ fhir:value "14106009" ];
+         fhir:Coding.display [ fhir:value "Cardiac pacemaker implant" ]
+       ]
+     ];
+     fhir:Device.patient [
+       fhir:link <http://hl7.org/fhir/Patient/example>;
+       fhir:Reference.reference [ fhir:value "Patient/example" ]
+     ]
   ];
   fhir:Procedure.status [ fhir:value "completed"];
   fhir:Procedure.code [
@@ -59,16 +79,13 @@
        ]
      ];
      fhir:Procedure.focalDevice.manipulated [
-       fhir:link <http://hl7.org/fhir/Device/example-pacemaker>;
-       fhir:Reference.reference [ fhir:value "Device/example-pacemaker" ]
+       fhir:Reference.reference [ fhir:value "#example-pacemaker" ]
      ]
   ] .
 
 <http://hl7.org/fhir/Patient/example> a fhir:Patient .
 
 <http://hl7.org/fhir/Practitioner/example> a fhir:Practitioner .
-
-<http://hl7.org/fhir/Device/example-pacemaker> a fhir:Device .
 
 # - ontology header ------------------------------------------------------------
 

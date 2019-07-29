@@ -22,7 +22,7 @@
   "name" : "Family member history for genetics analysis",
   "status" : "draft",
   "experimental" : false,
-  "date" : "2013-10-02",
+  "date" : "2019-05-29",
   "publisher" : "Health Level Seven International (Clinical Genomics)",
   "contact" : [{
     "telecom" : [{
@@ -327,7 +327,7 @@
       "isSummary" : false
     },
     {
-      "id" : "FamilyMemberHistory.extension:Parent",
+      "id" : "FamilyMemberHistory.extension:parent",
       "extension" : [{
         "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
         "valueCode" : "normative"
@@ -337,7 +337,7 @@
         "valueCode" : "4.0.0"
       }],
       "path" : "FamilyMemberHistory.extension",
-      "sliceName" : "Parent",
+      "sliceName" : "parent",
       "short" : "Mother(s) & Father(s) - genetic & other",
       "definition" : "Identifies a parent of the relative.",
       "comment" : "Some individuals may have more than two parents (e.g. genetic vs. adoptive parents).  Even non-genetic relationships can be relevant in terms of genetic exposure.",
@@ -377,7 +377,7 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.extension:Sibling",
+      "id" : "FamilyMemberHistory.extension:sibling",
       "extension" : [{
         "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
         "valueCode" : "normative"
@@ -387,7 +387,7 @@
         "valueCode" : "4.0.0"
       }],
       "path" : "FamilyMemberHistory.extension",
-      "sliceName" : "Sibling",
+      "sliceName" : "sibling",
       "short" : "natural brother(s) & natural sister(s) - genetic & other",
       "definition" : "Identifies a sibling of the relative.",
       "comment" : "Some cases may have complex inner-pedigree-tree relationship. For instance, double cousin relationship need two extra link with In pedigree tree itself. This can't be revealed by relationship to subject.",
@@ -423,7 +423,7 @@
       "isModifier" : false
     },
     {
-      "id" : "FamilyMemberHistory.extension:Observation",
+      "id" : "FamilyMemberHistory.extension:observations",
       "extension" : [{
         "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
         "valueCode" : "normative"
@@ -433,7 +433,7 @@
         "valueCode" : "4.0.0"
       }],
       "path" : "FamilyMemberHistory.extension",
-      "sliceName" : "Observation",
+      "sliceName" : "observations",
       "short" : "Genetic markers, ethnicity, etc.",
       "definition" : "Allows capturing risk-relevant observations about the relative that aren't themselves a specific health condition; e.g. Certain ethnic ancestries that are disease-relevant, presence of particular genetic markers, etc.",
       "comment" : "This may be extended with additional genomics-specific resources when they are ready.",
@@ -663,6 +663,7 @@
       "path" : "FamilyMemberHistory.patient",
       "short" : "Patient history is about",
       "definition" : "The person who this history concerns.",
+      "comment" : "This is not the family member.",
       "alias" : ["Proband"],
       "min" : 1,
       "max" : "1",
@@ -746,9 +747,8 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.relationship:Relationship",
+      "id" : "FamilyMemberHistory.relationship",
       "path" : "FamilyMemberHistory.relationship",
-      "sliceName" : "Relationship",
       "short" : "Relationship to the subject",
       "definition" : "The type of relationship this person has to the patient (father, mother, brother etc.).",
       "min" : 1,
@@ -779,9 +779,8 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.sex:Sex",
+      "id" : "FamilyMemberHistory.sex",
       "path" : "FamilyMemberHistory.sex",
-      "sliceName" : "Sex",
       "short" : "male | female | other | unknown",
       "definition" : "The birth sex of the family member.",
       "comment" : "This element should ideally reflect whether the individual is genetically male or female.  However, as reported information based on the knowledge of the patient or reporting friend/relative, there may be situations where the reported sex might not be totally accurate.  E.g. 'Aunt Sue' might be XY rather than XX.  Questions soliciting this information should be phrased to encourage capture of genetic sex where known.  However, systems performing analysis should also allow for the possibility of imprecision with this element.",
@@ -810,9 +809,8 @@
       }
     },
     {
-      "id" : "FamilyMemberHistory.born[x]:BornAge",
+      "id" : "FamilyMemberHistory.born[x]",
       "path" : "FamilyMemberHistory.born[x]",
-      "sliceName" : "BornAge",
       "short" : "(approximate) date of birth",
       "definition" : "The actual or approximate date of birth of the relative.",
       "requirements" : "Allows calculation of the relative's age.",
@@ -842,9 +840,8 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.age[x]:Age",
+      "id" : "FamilyMemberHistory.age[x]",
       "path" : "FamilyMemberHistory.age[x]",
-      "sliceName" : "Age",
       "short" : "(approximate) age",
       "definition" : "The age of the relative at the time the family member history is recorded.",
       "comment" : "use estimatedAge to indicate whether the age is actual or not.",
@@ -897,9 +894,8 @@
       "isSummary" : true
     },
     {
-      "id" : "FamilyMemberHistory.deceased[x]:DeceasedAge",
+      "id" : "FamilyMemberHistory.deceased[x]",
       "path" : "FamilyMemberHistory.deceased[x]",
-      "sliceName" : "DeceasedAge",
       "short" : "Dead? How old/when?",
       "definition" : "Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.",
       "min" : 0,
@@ -1035,9 +1031,8 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition",
+      "id" : "FamilyMemberHistory.condition",
       "path" : "FamilyMemberHistory.condition",
-      "sliceName" : "Condition",
       "short" : "Condition that the related person had",
       "definition" : "The significant Conditions (or condition) that the family member had. This is a repeating section to allow a system to represent more than one condition per resource, though there is nothing stopping multiple resources - one per condition.",
       "min" : 0,
@@ -1067,7 +1062,7 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.id",
+      "id" : "FamilyMemberHistory.condition.id",
       "path" : "FamilyMemberHistory.condition.id",
       "representation" : ["xmlAttr"],
       "short" : "Unique id for inter-element referencing",
@@ -1090,7 +1085,7 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.extension",
+      "id" : "FamilyMemberHistory.condition.extension",
       "path" : "FamilyMemberHistory.condition.extension",
       "short" : "Additional content defined by implementations",
       "definition" : "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
@@ -1115,7 +1110,7 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.modifierExtension",
+      "id" : "FamilyMemberHistory.condition.modifierExtension",
       "path" : "FamilyMemberHistory.condition.modifierExtension",
       "short" : "Extensions that cannot be ignored even if unrecognized",
       "definition" : "May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.\n\nModifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).",
@@ -1143,7 +1138,7 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.code",
+      "id" : "FamilyMemberHistory.condition.code",
       "path" : "FamilyMemberHistory.condition.code",
       "short" : "Condition suffered by relation",
       "definition" : "The actual condition specified. Could be a coded condition (like MI or Diabetes) or a less specific string like 'cancer' depending on how much is known about the condition and the capabilities of the creating system.",
@@ -1175,7 +1170,7 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.outcome",
+      "id" : "FamilyMemberHistory.condition.outcome",
       "path" : "FamilyMemberHistory.condition.outcome",
       "short" : "deceased | permanent disability | etc.",
       "definition" : "Indicates what happened following the condition.  If the condition resulted in death, deceased date is captured on the relation.",
@@ -1207,7 +1202,7 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.contributedToDeath",
+      "id" : "FamilyMemberHistory.condition.contributedToDeath",
       "path" : "FamilyMemberHistory.condition.contributedToDeath",
       "short" : "Whether the condition contributed to the cause of death",
       "definition" : "This condition contributed to the cause of death of the related person. If contributedToDeath is not populated, then it is unknown.",
@@ -1225,7 +1220,7 @@
       "isSummary" : false
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.onset[x]",
+      "id" : "FamilyMemberHistory.condition.onset[x]",
       "path" : "FamilyMemberHistory.condition.onset[x]",
       "short" : "When condition first manifested",
       "definition" : "Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.",
@@ -1258,12 +1253,12 @@
       }]
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.note",
+      "id" : "FamilyMemberHistory.condition.note",
       "path" : "FamilyMemberHistory.condition.note",
       "short" : "Extra information about condition",
       "definition" : "An area where general notes can be placed about this specific condition.",
       "min" : 0,
-      "max" : "1",
+      "max" : "*",
       "base" : {
         "path" : "FamilyMemberHistory.condition.note",
         "min" : 0,
@@ -1510,11 +1505,9 @@
       "max" : "*"
     },
     {
-      "id" : "FamilyMemberHistory.extension:Parent",
+      "id" : "FamilyMemberHistory.extension:parent",
       "path" : "FamilyMemberHistory.extension",
-      "sliceName" : "Parent",
-      "min" : 0,
-      "max" : "*",
+      "sliceName" : "parent",
       "type" : [{
         "code" : "Extension",
         "profile" : ["http://hl7.org/fhir/StructureDefinition/family-member-history-genetics-parent"]
@@ -1522,11 +1515,9 @@
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.extension:Sibling",
+      "id" : "FamilyMemberHistory.extension:sibling",
       "path" : "FamilyMemberHistory.extension",
-      "sliceName" : "Sibling",
-      "min" : 0,
-      "max" : "*",
+      "sliceName" : "sibling",
       "type" : [{
         "code" : "Extension",
         "profile" : ["http://hl7.org/fhir/StructureDefinition/family-member-history-genetics-sibling"]
@@ -1534,11 +1525,9 @@
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.extension:Observation",
+      "id" : "FamilyMemberHistory.extension:observations",
       "path" : "FamilyMemberHistory.extension",
-      "sliceName" : "Observation",
-      "min" : 0,
-      "max" : "*",
+      "sliceName" : "observations",
       "type" : [{
         "code" : "Extension",
         "profile" : ["http://hl7.org/fhir/StructureDefinition/family-member-history-genetics-observation"]
@@ -1546,139 +1535,53 @@
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.relationship:Relationship",
+      "id" : "FamilyMemberHistory.relationship",
       "path" : "FamilyMemberHistory.relationship",
-      "sliceName" : "Relationship",
-      "min" : 1,
-      "max" : "1",
-      "type" : [{
-        "code" : "CodeableConcept"
-      }],
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.sex:Sex",
+      "id" : "FamilyMemberHistory.sex",
       "path" : "FamilyMemberHistory.sex",
-      "sliceName" : "Sex",
-      "min" : 0,
-      "max" : "1",
-      "type" : [{
-        "code" : "CodeableConcept"
-      }],
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.born[x]:BornAge",
+      "id" : "FamilyMemberHistory.born[x]",
       "path" : "FamilyMemberHistory.born[x]",
-      "sliceName" : "BornAge",
-      "min" : 0,
-      "max" : "1",
-      "type" : [{
-        "code" : "Period"
-      },
-      {
-        "code" : "date"
-      },
-      {
-        "code" : "string"
-      }],
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.age[x]:Age",
+      "id" : "FamilyMemberHistory.age[x]",
       "path" : "FamilyMemberHistory.age[x]",
-      "sliceName" : "Age",
-      "min" : 0,
-      "max" : "1",
-      "type" : [{
-        "code" : "Age"
-      },
-      {
-        "code" : "Range"
-      },
-      {
-        "code" : "string"
-      }],
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.deceased[x]:DeceasedAge",
+      "id" : "FamilyMemberHistory.deceased[x]",
       "path" : "FamilyMemberHistory.deceased[x]",
-      "sliceName" : "DeceasedAge",
-      "min" : 0,
-      "max" : "1",
-      "type" : [{
-        "code" : "boolean"
-      },
-      {
-        "code" : "Age"
-      },
-      {
-        "code" : "Range"
-      },
-      {
-        "code" : "date"
-      },
-      {
-        "code" : "string"
-      }],
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition",
+      "id" : "FamilyMemberHistory.condition",
       "path" : "FamilyMemberHistory.condition",
-      "sliceName" : "Condition",
-      "min" : 0,
-      "max" : "*",
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.code",
+      "id" : "FamilyMemberHistory.condition.code",
       "path" : "FamilyMemberHistory.condition.code",
-      "min" : 1,
-      "max" : "1",
-      "type" : [{
-        "code" : "CodeableConcept"
-      }],
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.outcome",
+      "id" : "FamilyMemberHistory.condition.outcome",
       "path" : "FamilyMemberHistory.condition.outcome",
-      "min" : 0,
-      "max" : "1",
-      "type" : [{
-        "code" : "CodeableConcept"
-      }],
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.onset[x]",
+      "id" : "FamilyMemberHistory.condition.onset[x]",
       "path" : "FamilyMemberHistory.condition.onset[x]",
-      "min" : 0,
-      "max" : "1",
-      "type" : [{
-        "code" : "Age"
-      },
-      {
-        "code" : "Range"
-      },
-      {
-        "code" : "Period"
-      },
-      {
-        "code" : "string"
-      }],
       "mustSupport" : true
     },
     {
-      "id" : "FamilyMemberHistory.condition:Condition.note",
-      "path" : "FamilyMemberHistory.condition.note",
-      "min" : 0,
-      "max" : "1",
-      "type" : [{
-        "code" : "Annotation"
-      }]
+      "id" : "FamilyMemberHistory.condition.note",
+      "path" : "FamilyMemberHistory.condition.note"
     }]
   }
 }

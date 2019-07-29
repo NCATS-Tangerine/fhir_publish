@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type Communication {
   id: ID
   meta: Meta
@@ -38,9 +40,9 @@ type CommunicationPayload {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  contentString: String  _contentString: ElementBase
   contentAttachment: Attachment
   contentReference: Reference
+  contentCodeableConcept: CodeableConcept
 }
 
 input CommunicationInput {
@@ -81,9 +83,9 @@ input CommunicationPayloadInput {
   id: String
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
-  contentString: String  _contentString: ElementBase
   contentAttachment: AttachmentInput
   contentReference: ReferenceInput
+  contentCodeableConcept: CodeableConceptInput
 }
 
 type CommunicationReadType {
@@ -107,6 +109,7 @@ type CommunicationListType {
     sent: [date]
     status: [token]
     subject: [reference]
+    topic: [token]
     _text: [String]
     _content: [String]
     _id: [token]
@@ -138,6 +141,7 @@ type CommunicationConnectionType {
     sent: [date]
     status: [token]
     subject: [reference]
+    topic: [token]
     _text: [String]
     _content: [String]
     _id: [token]

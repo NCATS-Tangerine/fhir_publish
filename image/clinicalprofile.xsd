@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Tue, Apr 16, 2019 08:42-0500 for FHIR v4.1.0 
+  Generated on Mon, Jul 29, 2019 12:28-0500 for FHIR v4.1.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -367,7 +367,7 @@
               <xs:documentation xml:lang="en">Number of medications cutoff (e.g. top 10).</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="deviation" minOccurs="0" maxOccurs="1" type="decimal">
+          <xs:element name="abscorrelation" minOccurs="0" maxOccurs="1" type="decimal">
             <xs:annotation>
               <xs:documentation xml:lang="en">Deviation cutoff.</xs:documentation>
            </xs:annotation>
@@ -388,23 +388,34 @@
     <xs:complexContent>
       <xs:extension base="BackboneElement">
         <xs:sequence>
-          <xs:element name="category" minOccurs="0" maxOccurs="1" type="CodeableConcept">
-            <xs:annotation>
-              <xs:documentation xml:lang="en">Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)).</xs:documentation>
-           </xs:annotation>
-          </xs:element>
-          <xs:choice minOccurs="1" maxOccurs="1" >
+          <xs:element name="meds" type="ClinicalProfile.Meds" minOccurs="1" maxOccurs="unbounded">
             <xs:annotation>
               <xs:documentation xml:lang="en">Medication code(s).</xs:documentation>
-            </xs:annotation>
-            <xs:element name="labCodeableConcept" type="CodeableConcept"/>
-            <xs:element name="labReference" type="Reference"/>
-          </xs:choice>
+           </xs:annotation>
+          </xs:element>
           <xs:element name="coefficient" minOccurs="1" maxOccurs="1" type="decimal">
             <xs:annotation>
               <xs:documentation xml:lang="en">Correlation coefficient.</xs:documentation>
            </xs:annotation>
           </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClinicalProfile.Meds">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Clinical Profiles summarize and demonstrate the features of a population.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="BackboneElement">
+        <xs:sequence>
+          <xs:choice minOccurs="1" maxOccurs="1" >
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Indicates the type of medication dispense (for example, where the medication is expected to be consumed or administered (i.e. inpatient or outpatient)).</xs:documentation>
+            </xs:annotation>
+            <xs:element name="medicationCodeableConcept" type="CodeableConcept"/>
+            <xs:element name="medicationReference" type="Reference"/>
+          </xs:choice>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

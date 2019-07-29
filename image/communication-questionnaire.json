@@ -8,14 +8,9 @@
     "status" : "active",
     "description" : "Type options for Communication.payload.content[x]",
     "expansion" : {
-      "identifier" : "urn:uuid:7a6bfc1d-da05-48cb-bb83-026b31c7e5cd",
-      "timestamp" : "2019-04-16T08:53:21-05:00",
+      "identifier" : "urn:uuid:fd17ed7e-8d4b-4366-aee5-4bade5e17a2f",
+      "timestamp" : "2019-07-29T11:32:19-05:00",
       "contains" : [{
-        "system" : "http://hl7.org/fhir/data-types",
-        "code" : "string",
-        "display" : "string"
-      },
-      {
         "system" : "http://hl7.org/fhir/data-types",
         "code" : "Attachment",
         "display" : "Attachment"
@@ -24,6 +19,11 @@
         "system" : "http://hl7.org/fhir/resource-types",
         "code" : "Resource",
         "display" : "Resource"
+      },
+      {
+        "system" : "http://hl7.org/fhir/data-types",
+        "code" : "CodeableConcept",
+        "display" : "CodeableConcept"
       }]
     }
   }],
@@ -32,7 +32,7 @@
   }],
   "version" : "4.1.0",
   "status" : "draft",
-  "date" : "2019-04-16T08:42:31-05:00",
+  "date" : "2019-07-29T11:29:14-05:00",
   "publisher" : "Health Level Seven International (Patient Care)",
   "item" : [{
     "linkId" : "Communication",
@@ -51,7 +51,7 @@
           }]
         }
       }],
-      "text" : "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency that was notified about a reportable condition.",
+      "text" : "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency communication to a provider/reporter in response to a case report for a reportable condition.",
       "type" : "display"
     },
     {
@@ -950,20 +950,20 @@
             }]
           }
         }],
-        "text" : "The entity (e.g. person, organization, clinical information system, care team or device) which was the target of the communication. If receipts need to be tracked by an individual, a separate resource instance will need to be created for each recipient.  Multiple recipient communications are intended where either receipts are not tracked (e.g. a mass mail-out) or a receipt is captured in aggregate (all emails confirmed received by a particular time).",
+        "text" : "The entity (e.g. person, organization, clinical information system, care team or device) which is the target of the communication. If receipts need to be tracked by an individual, a separate resource instance will need to be created for each recipient.  Multiple recipient communications are intended where either receipts are not tracked (e.g. a mass mail-out) or a receipt is captured in aggregate (all emails confirmed received by a particular time).",
         "type" : "display"
       },
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource",
-          "valueCode" : "Device, Organization, Patient, Practitioner, PractitionerRole, RelatedPerson, Group, CareTeam, HealthcareService"
+          "valueCode" : "CareTeam, Device, Group, HealthcareService, Location, Organization, Patient, Practitioner, PractitionerRole, RelatedPerson"
         },
         {
           "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter",
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
         "linkId" : "Communication.recipient.value",
-        "text" : "Message recipient",
+        "text" : "Who the information is shared with",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -993,7 +993,7 @@
             }]
           }
         }],
-        "text" : "The entity (e.g. person, organization, clinical information system, or device) which was the source of the communication.",
+        "text" : "The entity (e.g. person, organization, clinical information system, or device) which is the source of the communication.",
         "type" : "display"
       },
       {
@@ -1006,7 +1006,7 @@
           "valueString" : "subject=$subj&patient=$subj&encounter=$encounter"
         }],
         "linkId" : "Communication.sender.value",
-        "text" : "Message sender",
+        "text" : "Who shares the information",
         "type" : "reference",
         "required" : false,
         "repeats" : false
@@ -1212,7 +1212,7 @@
               }]
             }
           }],
-          "text" : "A communicated content (or for multi-part communications, one portion of the communication).",
+          "text" : "A communicated content (or for multi-part communications, one portion of the communication). When using contentCodeableConcept, the CodeableConcept is what is being communicated and is not a categorization of the content.  If no code is available, contentCodeableConcept.text can be used for non-codified content.",
           "type" : "display"
         },
         {
@@ -1223,20 +1223,6 @@
           "repeats" : false,
           "answerValueSet" : "#vs2",
           "item" : [{
-            "extension" : [{
-              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
-              "valueString" : "string"
-            }],
-            "linkId" : "Communication.payload.content[x]._null",
-            "type" : "group",
-            "item" : [{
-              "linkId" : "Communication.payload.content[x]._null.value",
-              "type" : "string",
-              "required" : false,
-              "repeats" : false
-            }]
-          },
-          {
             "extension" : [{
               "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
               "valueString" : "Attachment"
@@ -1262,6 +1248,28 @@
               }],
               "linkId" : "Communication.payload.content[x]._null.value",
               "type" : "reference",
+              "required" : false,
+              "repeats" : false
+            }]
+          },
+          {
+            "extension" : [{
+              "url" : "http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType",
+              "valueString" : "CodeableConcept"
+            }],
+            "linkId" : "Communication.payload.content[x]._null",
+            "type" : "group",
+            "item" : [{
+              "linkId" : "Communication.payload.content[x]._null.coding",
+              "text" : "code:",
+              "type" : "open-choice",
+              "required" : false,
+              "repeats" : false
+            },
+            {
+              "linkId" : "Communication.payload.content[x]._null.text",
+              "text" : "text:",
+              "type" : "string",
               "required" : false,
               "repeats" : false
             }]

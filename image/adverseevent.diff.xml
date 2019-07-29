@@ -10,6 +10,7 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/adverse-event-actuality|4.1.0"
                       strength="required"/>
       </element>
+      <element path="AdverseEvent.code" status="new"/>
       <element binding-status="changed"
                binding-valueset-changed="true"
                path="AdverseEvent.severity">
@@ -28,6 +29,24 @@
       </element>
       <element path="AdverseEvent.detector" status="new"/>
       <element path="AdverseEvent.suspectEntity.instance[x]" status="new"/>
+      <element path="AdverseEvent.suspectEntity.causality.assessmentMethod"
+               status="new"/>
+      <element path="AdverseEvent.suspectEntity.causality.entityRelatedness"
+               status="new"/>
+      <element path="AdverseEvent.suspectEntity.causality.author">
+         <removed-type name="Reference(Practitioner | PractitionerRole)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Patient | RelatedPerson)"/>
+      </element>
+      <element path="AdverseEvent.supportingInfo" status="new"/>
+      <element path="AdverseEvent.supportingInfo.item" status="new"/>
+      <element path="AdverseEvent.supportingInfo.contributingFactor" status="new"/>
+      <element path="AdverseEvent.event" status="deleted"/>
       <element path="AdverseEvent.suspectEntity.instance" status="deleted"/>
+      <element path="AdverseEvent.suspectEntity.causality.assessment" status="deleted"/>
+      <element path="AdverseEvent.suspectEntity.causality.productRelatedness"
+               status="deleted"/>
+      <element path="AdverseEvent.suspectEntity.causality.method" status="deleted"/>
+      <element path="AdverseEvent.subjectMedicalHistory" status="deleted"/>
+      <element path="AdverseEvent.referenceDocument" status="deleted"/>
    </type>
 </difference>

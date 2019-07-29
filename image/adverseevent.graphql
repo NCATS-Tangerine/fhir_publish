@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type AdverseEvent {
   id: ID
   meta: Meta
@@ -12,7 +14,7 @@ type AdverseEvent {
   identifier: [Identifier]
   actuality: code  _actuality: ElementBase
   category: [CodeableConcept]
-  event: CodeableConcept
+  code: CodeableConcept
   subject: Reference!
   encounter: Reference
   date: dateTime  _date: ElementBase
@@ -27,8 +29,7 @@ type AdverseEvent {
   contributor: [Reference]
   detector: [Reference]
   suspectEntity: [AdverseEventSuspectEntity]
-  subjectMedicalHistory: [Reference]
-  referenceDocument: [Reference]
+  supportingInfo: [AdverseEventSupportingInfo]
   study: [Reference]
 }
 
@@ -45,10 +46,17 @@ type AdverseEventSuspectEntityCausality {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  assessment: CodeableConcept
-  productRelatedness: String  _productRelatedness: ElementBase
+  assessmentMethod: CodeableConcept
+  entityRelatedness: CodeableConcept
   author: Reference
-  method: CodeableConcept
+}
+
+type AdverseEventSupportingInfo {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  item: Reference!
+  contributingFactor: Boolean  _contributingFactor: ElementBase
 }
 
 input AdverseEventInput {
@@ -63,7 +71,7 @@ input AdverseEventInput {
   identifier: [IdentifierInput]
   actuality: code  _actuality: ElementBase
   category: [CodeableConceptInput]
-  event: CodeableConceptInput
+  code: CodeableConceptInput
   subject: ReferenceInput!
   encounter: ReferenceInput
   date: dateTime  _date: ElementBase
@@ -78,8 +86,7 @@ input AdverseEventInput {
   contributor: [ReferenceInput]
   detector: [ReferenceInput]
   suspectEntity: [AdverseEventSuspectEntityInput]
-  subjectMedicalHistory: [ReferenceInput]
-  referenceDocument: [ReferenceInput]
+  supportingInfo: [AdverseEventSupportingInfoInput]
   study: [ReferenceInput]
 }
 
@@ -96,10 +103,17 @@ input AdverseEventSuspectEntityCausalityInput {
   id: String
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
-  assessment: CodeableConceptInput
-  productRelatedness: String  _productRelatedness: ElementBase
+  assessmentMethod: CodeableConceptInput
+  entityRelatedness: CodeableConceptInput
   author: ReferenceInput
-  method: CodeableConceptInput
+}
+
+input AdverseEventSupportingInfoInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  item: ReferenceInput!
+  contributingFactor: Boolean  _contributingFactor: ElementBase
 }
 
 type AdverseEventReadType {
@@ -110,9 +124,11 @@ type AdverseEventListType {
   AdverseEventList(_filter: String
     actuality: [token]
     category: [token]
+    code: [token]
     date: [date]
-    event: [token]
+    identifier: [token]
     location: [reference]
+    patient: [reference]
     recorder: [reference]
     resultingcondition: [reference]
     seriousness: [token]
@@ -138,9 +154,11 @@ type AdverseEventConnectionType {
   AdverseEventConection(_filter: String
     actuality: [token]
     category: [token]
+    code: [token]
     date: [date]
-    event: [token]
+    identifier: [token]
     location: [reference]
+    patient: [reference]
     recorder: [reference]
     resultingcondition: [reference]
     seriousness: [token]

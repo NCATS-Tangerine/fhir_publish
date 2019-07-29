@@ -36,21 +36,21 @@
 
 </head>
 <body>
-	<div id="segment-header" class="segment"><!-- segment-header -->	
-		<div class="container"><!-- container -->
-			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
-			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
-			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
-        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
-			<div id="hl7-nav">
-				 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
-					<img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
-				</a> 
-			</div>       	
-			<div id="hl7-nav"><a id="hl7-logo" no-external="true" href="http://hl7.org/fhir/search.cfm"><img alt="Search FHIR" src="./assets/images/search.png"/></a></div> 
-		</div>
-		<div class="container"><!-- container -->
-	</div></div><!-- /segment-header -->	
+	<div id="segment-header" class="segment"><!-- segment-header -->
+               <div class="container"><!-- container -->
+                        <a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
+                        <a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
+                        <b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+                        <a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
+                        <div id="hl7-nav">
+                                 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
+                                        <img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
+                                </a>
+                        </div>
+                        <div id="hl7-nav"><a id="hl7-logo" no-external="true" href="http://hl7.org/fhir/search.cfm"><img alt="Search FHIR" src="./assets/images/search.png"/></a></div>
+                </div>
+                <div class="container"><!-- container -->
+        </div></div><!-- /segment-header -->
 
 
 	<div id="segment-navbar" class="segment"><!-- segment-navbar -->
@@ -71,7 +71,8 @@
               <li><a href="./index.html">Home</a></li>
               <li><a href="./modules.html">Getting Started</a></li>
               <li><a href="./documentation.html">Documentation</a></li>
-              <li><a href="./resourcelist.html">Resources</a></li>
+              <li><a href="./patterns.html">Patterns</a></li>
+              <li><a href="./resourcelist.html"><span style="color: yellow">Resource Types</span></a></li>
               <li><a href="./profilelist.html">Profiles</a></li>
               <li><a href="./extensibility-registry.html">Extensions</a></li>
               <li><a href="./operationslist.html">Operations</a></li>
@@ -119,7 +120,7 @@
   &quot;resourceType&quot; : &quot;StructureDefinition&quot;,
   &quot;id&quot; : &quot;MedicationAdministration&quot;,
   &quot;meta&quot; : {
-    &quot;lastUpdated&quot; : &quot;2019-04-16T08:42:31.781-05:00&quot;
+    &quot;lastUpdated&quot; : &quot;2019-07-29T11:29:14.002-05:00&quot;
   },
   &quot;text&quot; : {
     &quot;status&quot; : &quot;generated&quot;,
@@ -149,7 +150,7 @@
   &quot;version&quot; : &quot;4.1.0&quot;,
   &quot;name&quot; : &quot;MedicationAdministration&quot;,
   &quot;status&quot; : &quot;draft&quot;,
-  &quot;date&quot; : &quot;2019-04-16T08:42:31-05:00&quot;,
+  &quot;date&quot; : &quot;2019-07-29T11:29:14-05:00&quot;,
   &quot;publisher&quot; : &quot;Health Level Seven International (Pharmacy)&quot;,
   &quot;contact&quot; : [{
     &quot;telecom&quot; : [{
@@ -501,19 +502,21 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;MedicationAdministration.instantiates&quot;,
-      &quot;path&quot; : &quot;MedicationAdministration.instantiates&quot;,
+      &quot;id&quot; : &quot;MedicationAdministration.instantiatesCanonical&quot;,
+      &quot;path&quot; : &quot;MedicationAdministration.instantiatesCanonical&quot;,
       &quot;short&quot; : &quot;Instantiates protocol or definition&quot;,
       &quot;definition&quot; : &quot;A protocol, guideline, orderset, or other definition that was adhered to in whole or in part by this event.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;base&quot; : {
-        &quot;path&quot; : &quot;MedicationAdministration.instantiates&quot;,
+        &quot;path&quot; : &quot;MedicationAdministration.instantiatesCanonical&quot;,
         &quot;min&quot; : 0,
         &quot;max&quot; : &quot;*&quot;
       },
       &quot;type&quot; : [{
-        &quot;code&quot; : &quot;uri&quot;
+        &quot;code&quot; : &quot;canonical&quot;,
+        &quot;targetProfile&quot; : [&quot;http://hl7.org/fhir/StructureDefinition/PlanDefinition&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/ActivityDefinition&quot;]
       }],
       &quot;isModifier&quot; : false,
       &quot;isSummary&quot; : true,
@@ -525,6 +528,24 @@
         &quot;identity&quot; : &quot;rim&quot;,
         &quot;map&quot; : &quot;.outboundRelationship[typeCode=DEFN].target[classCode=unspecified]&quot;
       }]
+    },
+    {
+      &quot;id&quot; : &quot;MedicationAdministration.instantiatesUri&quot;,
+      &quot;path&quot; : &quot;MedicationAdministration.instantiatesUri&quot;,
+      &quot;short&quot; : &quot;Instantiates external protocol or definition&quot;,
+      &quot;definition&quot; : &quot;The URL pointing to an externally maintained protocol, guideline, orderset or other definition that is adhered to in whole or in part by this MedicationAdministration.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;MedicationAdministration.instantiatesUri&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;*&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;uri&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : true
     },
     {
       &quot;id&quot; : &quot;MedicationAdministration.partOf&quot;,
@@ -820,14 +841,14 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;MedicationAdministration.effective[x]&quot;,
-      &quot;path&quot; : &quot;MedicationAdministration.effective[x]&quot;,
+      &quot;id&quot; : &quot;MedicationAdministration.occurence[x]&quot;,
+      &quot;path&quot; : &quot;MedicationAdministration.occurence[x]&quot;,
       &quot;short&quot; : &quot;Start and end time of administration&quot;,
-      &quot;definition&quot; : &quot;A specific date/time or interval of time during which the administration took place (or did not take place, when the 'notGiven' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.&quot;,
+      &quot;definition&quot; : &quot;A specific date/time or interval of time during which the administration took place (or did not take place). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.&quot;,
       &quot;min&quot; : 1,
       &quot;max&quot; : &quot;1&quot;,
       &quot;base&quot; : {
-        &quot;path&quot; : &quot;MedicationAdministration.effective[x]&quot;,
+        &quot;path&quot; : &quot;MedicationAdministration.occurence[x]&quot;,
         &quot;min&quot; : 1,
         &quot;max&quot; : &quot;1&quot;
       },
@@ -854,6 +875,28 @@
       {
         &quot;identity&quot; : &quot;rim&quot;,
         &quot;map&quot; : &quot;.effectiveTime&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;MedicationAdministration.recorded&quot;,
+      &quot;path&quot; : &quot;MedicationAdministration.recorded&quot;,
+      &quot;short&quot; : &quot;When the MedicationAdministration was first captured in the subject's record&quot;,
+      &quot;definition&quot; : &quot;The date the occurrence of the  MedicationAdministration was first captured in the record - potentially significantly after the occurrence of the event.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;base&quot; : {
+        &quot;path&quot; : &quot;MedicationAdministration.recorded&quot;,
+        &quot;min&quot; : 0,
+        &quot;max&quot; : &quot;1&quot;
+      },
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;dateTime&quot;
+      }],
+      &quot;isModifier&quot; : false,
+      &quot;isSummary&quot; : true,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;w5&quot;,
+        &quot;map&quot; : &quot;FiveWs.recorded&quot;
       }]
     },
     {
@@ -1570,14 +1613,16 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;MedicationAdministration.instantiates&quot;,
-      &quot;path&quot; : &quot;MedicationAdministration.instantiates&quot;,
+      &quot;id&quot; : &quot;MedicationAdministration.instantiatesCanonical&quot;,
+      &quot;path&quot; : &quot;MedicationAdministration.instantiatesCanonical&quot;,
       &quot;short&quot; : &quot;Instantiates protocol or definition&quot;,
       &quot;definition&quot; : &quot;A protocol, guideline, orderset, or other definition that was adhered to in whole or in part by this event.&quot;,
       &quot;min&quot; : 0,
       &quot;max&quot; : &quot;*&quot;,
       &quot;type&quot; : [{
-        &quot;code&quot; : &quot;uri&quot;
+        &quot;code&quot; : &quot;canonical&quot;,
+        &quot;targetProfile&quot; : [&quot;http://hl7.org/fhir/StructureDefinition/PlanDefinition&quot;,
+        &quot;http://hl7.org/fhir/StructureDefinition/ActivityDefinition&quot;]
       }],
       &quot;isSummary&quot; : true,
       &quot;mapping&quot; : [{
@@ -1588,6 +1633,18 @@
         &quot;identity&quot; : &quot;rim&quot;,
         &quot;map&quot; : &quot;.outboundRelationship[typeCode=DEFN].target[classCode=unspecified]&quot;
       }]
+    },
+    {
+      &quot;id&quot; : &quot;MedicationAdministration.instantiatesUri&quot;,
+      &quot;path&quot; : &quot;MedicationAdministration.instantiatesUri&quot;,
+      &quot;short&quot; : &quot;Instantiates external protocol or definition&quot;,
+      &quot;definition&quot; : &quot;The URL pointing to an externally maintained protocol, guideline, orderset or other definition that is adhered to in whole or in part by this MedicationAdministration.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;*&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;uri&quot;
+      }],
+      &quot;isSummary&quot; : true
     },
     {
       &quot;id&quot; : &quot;MedicationAdministration.partOf&quot;,
@@ -1832,10 +1889,10 @@
       }]
     },
     {
-      &quot;id&quot; : &quot;MedicationAdministration.effective[x]&quot;,
-      &quot;path&quot; : &quot;MedicationAdministration.effective[x]&quot;,
+      &quot;id&quot; : &quot;MedicationAdministration.occurence[x]&quot;,
+      &quot;path&quot; : &quot;MedicationAdministration.occurence[x]&quot;,
       &quot;short&quot; : &quot;Start and end time of administration&quot;,
-      &quot;definition&quot; : &quot;A specific date/time or interval of time during which the administration took place (or did not take place, when the 'notGiven' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.&quot;,
+      &quot;definition&quot; : &quot;A specific date/time or interval of time during which the administration took place (or did not take place). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.&quot;,
       &quot;min&quot; : 1,
       &quot;max&quot; : &quot;1&quot;,
       &quot;type&quot; : [{
@@ -1860,6 +1917,22 @@
       {
         &quot;identity&quot; : &quot;rim&quot;,
         &quot;map&quot; : &quot;.effectiveTime&quot;
+      }]
+    },
+    {
+      &quot;id&quot; : &quot;MedicationAdministration.recorded&quot;,
+      &quot;path&quot; : &quot;MedicationAdministration.recorded&quot;,
+      &quot;short&quot; : &quot;When the MedicationAdministration was first captured in the subject's record&quot;,
+      &quot;definition&quot; : &quot;The date the occurrence of the  MedicationAdministration was first captured in the record - potentially significantly after the occurrence of the event.&quot;,
+      &quot;min&quot; : 0,
+      &quot;max&quot; : &quot;1&quot;,
+      &quot;type&quot; : [{
+        &quot;code&quot; : &quot;dateTime&quot;
+      }],
+      &quot;isSummary&quot; : true,
+      &quot;mapping&quot; : [{
+        &quot;identity&quot; : &quot;w5&quot;,
+        &quot;map&quot; : &quot;FiveWs.recorded&quot;
       }]
     },
     {
@@ -2281,13 +2354,14 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-baa72e6471) generated on Tue, Apr 16, 2019 08:57-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        FHIR &reg;© HL7.org 2011+. FHIR CI Build hl7.fhir.core#4.1.0 (GitHub 0931132380) generated on Mon, Jul 29, 2019 11:33-0500. 
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
-               <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
+               <a style="color: #ffffff" href="qa.html">QA Page</a> |
+<!--                <a style="color: #b8dcf9" href="credits.html">Credits</a> | -->
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fmedicationadministration.profile.json.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fmedicationadministration.profile.json.html">Compare to R3</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
                <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   

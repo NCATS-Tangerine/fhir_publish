@@ -20,7 +20,7 @@
   <name value="Family member history for genetics analysis"/>
   <status value="draft"/>
   <experimental value="false"/>
-  <date value="2013-10-02"/>
+  <date value="2019-05-29"/>
   <publisher value="Health Level Seven International (Clinical Genomics)"/>
   <contact>
     <telecom>
@@ -310,7 +310,7 @@
       <isModifier value="false"/>
       <isSummary value="false"/>
     </element>
-    <element id="FamilyMemberHistory.extension:Parent">
+    <element id="FamilyMemberHistory.extension:parent">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative"/>
       </extension>
@@ -318,7 +318,7 @@
         <valueCode value="4.0.0"/>
       </extension>
       <path value="FamilyMemberHistory.extension"/>
-      <sliceName value="Parent"/>
+      <sliceName value="parent"/>
       <short value="Mother(s) &amp; Father(s) - genetic &amp; other"/>
       <definition value="Identifies a parent of the relative."/>
       <comment value="Some individuals may have more than two parents (e.g. genetic vs. adoptive parents).  Even non-genetic relationships can be relevant in terms of genetic exposure."/>
@@ -357,7 +357,7 @@
         <map value="player[classCode&lt;LIV, determinerCode=INSTANCE].scopesRole"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.extension:Sibling">
+    <element id="FamilyMemberHistory.extension:sibling">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative"/>
       </extension>
@@ -365,7 +365,7 @@
         <valueCode value="4.0.0"/>
       </extension>
       <path value="FamilyMemberHistory.extension"/>
-      <sliceName value="Sibling"/>
+      <sliceName value="sibling"/>
       <short value="natural brother(s) &amp; natural sister(s) - genetic &amp; other"/>
       <definition value="Identifies a sibling of the relative."/>
       <comment value="Some cases may have complex inner-pedigree-tree relationship. For instance, double cousin relationship need two extra link with In pedigree tree itself. This can&#39;t be revealed by relationship to subject."/>
@@ -400,7 +400,7 @@
       <mustSupport value="true"/>
       <isModifier value="false"/>
     </element>
-    <element id="FamilyMemberHistory.extension:Observation">
+    <element id="FamilyMemberHistory.extension:observations">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative"/>
       </extension>
@@ -408,7 +408,7 @@
         <valueCode value="4.0.0"/>
       </extension>
       <path value="FamilyMemberHistory.extension"/>
-      <sliceName value="Observation"/>
+      <sliceName value="observations"/>
       <short value="Genetic markers, ethnicity, etc."/>
       <definition value="Allows capturing risk-relevant observations about the relative that aren&#39;t themselves a specific health condition; e.g. Certain ethnic ancestries that are disease-relevant, presence of particular genetic markers, etc."/>
       <comment value="This may be extended with additional genomics-specific resources when they are ready."/>
@@ -629,6 +629,7 @@
       <path value="FamilyMemberHistory.patient"/>
       <short value="Patient history is about"/>
       <definition value="The person who this history concerns."/>
+      <comment value="This is not the family member."/>
       <alias value="Proband"/>
       <min value="1"/>
       <max value="1"/>
@@ -709,9 +710,8 @@
         <map value="name"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.relationship:Relationship">
+    <element id="FamilyMemberHistory.relationship">
       <path value="FamilyMemberHistory.relationship"/>
-      <sliceName value="Relationship"/>
       <short value="Relationship to the subject"/>
       <definition value="The type of relationship this person has to the patient (father, mother, brother etc.)."/>
       <min value="1"/>
@@ -740,9 +740,8 @@
         <map value="code"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.sex:Sex">
+    <element id="FamilyMemberHistory.sex">
       <path value="FamilyMemberHistory.sex"/>
-      <sliceName value="Sex"/>
       <short value="male | female | other | unknown"/>
       <definition value="The birth sex of the family member."/>
       <comment value="This element should ideally reflect whether the individual is genetically male or female.  However, as reported information based on the knowledge of the patient or reporting friend/relative, there may be situations where the reported sex might not be totally accurate.  E.g. &#39;Aunt Sue&#39; might be XY rather than XX.  Questions soliciting this information should be phrased to encourage capture of genetic sex where known.  However, systems performing analysis should also allow for the possibility of imprecision with this element."/>
@@ -769,9 +768,8 @@
         <valueSet value="http://hl7.org/fhir/ValueSet/administrative-gender"/>
       </binding>
     </element>
-    <element id="FamilyMemberHistory.born[x]:BornAge">
+    <element id="FamilyMemberHistory.born[x]">
       <path value="FamilyMemberHistory.born[x]"/>
-      <sliceName value="BornAge"/>
       <short value="(approximate) date of birth"/>
       <definition value="The actual or approximate date of birth of the relative."/>
       <requirements value="Allows calculation of the relative&#39;s age."/>
@@ -800,9 +798,8 @@
         <map value="player[classCode=LIV, determinerCode=INSTANCE]. birthDate (could be URG)"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.age[x]:Age">
+    <element id="FamilyMemberHistory.age[x]">
       <path value="FamilyMemberHistory.age[x]"/>
-      <sliceName value="Age"/>
       <short value="(approximate) age"/>
       <definition value="The age of the relative at the time the family member history is recorded."/>
       <comment value="use estimatedAge to indicate whether the age is actual or not."/>
@@ -853,9 +850,8 @@
       <isModifier value="false"/>
       <isSummary value="true"/>
     </element>
-    <element id="FamilyMemberHistory.deceased[x]:DeceasedAge">
+    <element id="FamilyMemberHistory.deceased[x]">
       <path value="FamilyMemberHistory.deceased[x]"/>
-      <sliceName value="DeceasedAge"/>
       <short value="Dead? How old/when?"/>
       <definition value="Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record."/>
       <min value="0"/>
@@ -986,9 +982,8 @@
         <map value="inboundRelationship[typeCode=SUBJ].source[classCode=OBS, moodCode=EVN, code=ActCode#ANNGEN].value"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition">
+    <element id="FamilyMemberHistory.condition">
       <path value="FamilyMemberHistory.condition"/>
-      <sliceName value="Condition"/>
       <short value="Condition that the related person had"/>
       <definition value="The significant Conditions (or condition) that the family member had. This is a repeating section to allow a system to represent more than one condition per resource, though there is nothing stopping multiple resources - one per condition."/>
       <min value="0"/>
@@ -1017,7 +1012,7 @@
         <map value="inboundRelationship[typeCode=SUBJ].source[classCode=OBS, moodCode=EVN, code=ActCode#ASSERTION, value&lt;Diagnosis]"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.id">
+    <element id="FamilyMemberHistory.condition.id">
       <path value="FamilyMemberHistory.condition.id"/>
       <representation value="xmlAttr"/>
       <short value="Unique id for inter-element referencing"/>
@@ -1039,7 +1034,7 @@
         <map value="n/a"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.extension">
+    <element id="FamilyMemberHistory.condition.extension">
       <path value="FamilyMemberHistory.condition.extension"/>
       <short value="Additional content defined by implementations"/>
       <definition value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension."/>
@@ -1063,7 +1058,7 @@
         <map value="n/a"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.modifierExtension">
+    <element id="FamilyMemberHistory.condition.modifierExtension">
       <path value="FamilyMemberHistory.condition.modifierExtension"/>
       <short value="Extensions that cannot be ignored even if unrecognized"/>
       <definition value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself)."/>
@@ -1090,7 +1085,7 @@
         <map value="N/A"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.code">
+    <element id="FamilyMemberHistory.condition.code">
       <path value="FamilyMemberHistory.condition.code"/>
       <short value="Condition suffered by relation"/>
       <definition value="The actual condition specified. Could be a coded condition (like MI or Diabetes) or a less specific string like &#39;cancer&#39; depending on how much is known about the condition and the capabilities of the creating system."/>
@@ -1120,7 +1115,7 @@
         <map value=".value"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.outcome">
+    <element id="FamilyMemberHistory.condition.outcome">
       <path value="FamilyMemberHistory.condition.outcome"/>
       <short value="deceased | permanent disability | etc."/>
       <definition value="Indicates what happened following the condition.  If the condition resulted in death, deceased date is captured on the relation."/>
@@ -1150,7 +1145,7 @@
         <map value="outboundRelationship[typeCode=OUTC)].target[classCode=OBS, moodCode=EVN, code=ActCode#ASSERTION].value"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.contributedToDeath">
+    <element id="FamilyMemberHistory.condition.contributedToDeath">
       <path value="FamilyMemberHistory.condition.contributedToDeath"/>
       <short value="Whether the condition contributed to the cause of death"/>
       <definition value="This condition contributed to the cause of death of the related person. If contributedToDeath is not populated, then it is unknown."/>
@@ -1167,7 +1162,7 @@
       <isModifier value="false"/>
       <isSummary value="false"/>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.onset[x]">
+    <element id="FamilyMemberHistory.condition.onset[x]">
       <path value="FamilyMemberHistory.condition.onset[x]"/>
       <short value="When condition first manifested"/>
       <definition value="Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence."/>
@@ -1199,12 +1194,12 @@
         <map value="inboundRelationship[typeCode=SUBJ].source[classCode=OBS, moodCode=EVN, code=&quot;Subject Age at measurement&quot;, value&lt;Diagnosis].value[@xsi:typeCode=&#39;TS&#39; or &#39;IVL_TS&#39;]  Use originalText for string"/>
       </mapping>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.note">
+    <element id="FamilyMemberHistory.condition.note">
       <path value="FamilyMemberHistory.condition.note"/>
       <short value="Extra information about condition"/>
       <definition value="An area where general notes can be placed about this specific condition."/>
       <min value="0"/>
-      <max value="1"/>
+      <max value="*"/>
       <base>
         <path value="FamilyMemberHistory.condition.note"/>
         <min value="0"/>
@@ -1438,163 +1433,71 @@
       <min value="0"/>
       <max value="*"/>
     </element>
-    <element id="FamilyMemberHistory.extension:Parent">
+    <element id="FamilyMemberHistory.extension:parent">
       <path value="FamilyMemberHistory.extension"/>
-      <sliceName value="Parent"/>
-      <min value="0"/>
-      <max value="*"/>
+      <sliceName value="parent"/>
       <type>
         <code value="Extension"/>
         <profile value="http://hl7.org/fhir/StructureDefinition/family-member-history-genetics-parent"/>
       </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.extension:Sibling">
+    <element id="FamilyMemberHistory.extension:sibling">
       <path value="FamilyMemberHistory.extension"/>
-      <sliceName value="Sibling"/>
-      <min value="0"/>
-      <max value="*"/>
+      <sliceName value="sibling"/>
       <type>
         <code value="Extension"/>
         <profile value="http://hl7.org/fhir/StructureDefinition/family-member-history-genetics-sibling"/>
       </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.extension:Observation">
+    <element id="FamilyMemberHistory.extension:observations">
       <path value="FamilyMemberHistory.extension"/>
-      <sliceName value="Observation"/>
-      <min value="0"/>
-      <max value="*"/>
+      <sliceName value="observations"/>
       <type>
         <code value="Extension"/>
         <profile value="http://hl7.org/fhir/StructureDefinition/family-member-history-genetics-observation"/>
       </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.relationship:Relationship">
+    <element id="FamilyMemberHistory.relationship">
       <path value="FamilyMemberHistory.relationship"/>
-      <sliceName value="Relationship"/>
-      <min value="1"/>
-      <max value="1"/>
-      <type>
-        <code value="CodeableConcept"/>
-      </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.sex:Sex">
+    <element id="FamilyMemberHistory.sex">
       <path value="FamilyMemberHistory.sex"/>
-      <sliceName value="Sex"/>
-      <min value="0"/>
-      <max value="1"/>
-      <type>
-        <code value="CodeableConcept"/>
-      </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.born[x]:BornAge">
+    <element id="FamilyMemberHistory.born[x]">
       <path value="FamilyMemberHistory.born[x]"/>
-      <sliceName value="BornAge"/>
-      <min value="0"/>
-      <max value="1"/>
-      <type>
-        <code value="Period"/>
-      </type>
-      <type>
-        <code value="date"/>
-      </type>
-      <type>
-        <code value="string"/>
-      </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.age[x]:Age">
+    <element id="FamilyMemberHistory.age[x]">
       <path value="FamilyMemberHistory.age[x]"/>
-      <sliceName value="Age"/>
-      <min value="0"/>
-      <max value="1"/>
-      <type>
-        <code value="Age"/>
-      </type>
-      <type>
-        <code value="Range"/>
-      </type>
-      <type>
-        <code value="string"/>
-      </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.deceased[x]:DeceasedAge">
+    <element id="FamilyMemberHistory.deceased[x]">
       <path value="FamilyMemberHistory.deceased[x]"/>
-      <sliceName value="DeceasedAge"/>
-      <min value="0"/>
-      <max value="1"/>
-      <type>
-        <code value="boolean"/>
-      </type>
-      <type>
-        <code value="Age"/>
-      </type>
-      <type>
-        <code value="Range"/>
-      </type>
-      <type>
-        <code value="date"/>
-      </type>
-      <type>
-        <code value="string"/>
-      </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition">
+    <element id="FamilyMemberHistory.condition">
       <path value="FamilyMemberHistory.condition"/>
-      <sliceName value="Condition"/>
-      <min value="0"/>
-      <max value="*"/>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.code">
+    <element id="FamilyMemberHistory.condition.code">
       <path value="FamilyMemberHistory.condition.code"/>
-      <min value="1"/>
-      <max value="1"/>
-      <type>
-        <code value="CodeableConcept"/>
-      </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.outcome">
+    <element id="FamilyMemberHistory.condition.outcome">
       <path value="FamilyMemberHistory.condition.outcome"/>
-      <min value="0"/>
-      <max value="1"/>
-      <type>
-        <code value="CodeableConcept"/>
-      </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.onset[x]">
+    <element id="FamilyMemberHistory.condition.onset[x]">
       <path value="FamilyMemberHistory.condition.onset[x]"/>
-      <min value="0"/>
-      <max value="1"/>
-      <type>
-        <code value="Age"/>
-      </type>
-      <type>
-        <code value="Range"/>
-      </type>
-      <type>
-        <code value="Period"/>
-      </type>
-      <type>
-        <code value="string"/>
-      </type>
       <mustSupport value="true"/>
     </element>
-    <element id="FamilyMemberHistory.condition:Condition.note">
+    <element id="FamilyMemberHistory.condition.note">
       <path value="FamilyMemberHistory.condition.note"/>
-      <min value="0"/>
-      <max value="1"/>
-      <type>
-        <code value="Annotation"/>
-      </type>
     </element>
   </differential>
 </StructureDefinition>

@@ -388,6 +388,7 @@
                       strength="required"/>
       </element>
    </type>
+   <type name="AdministrableProductDefinition" status="new"/>
    <type name="AdverseEvent" status="changed">
       <element new-max="*" old-max="1" path="AdverseEvent.identifier"/>
       <element binding-status="changed"
@@ -398,6 +399,7 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/adverse-event-actuality|4.1.0"
                       strength="required"/>
       </element>
+      <element path="AdverseEvent.code" status="new"/>
       <element binding-status="changed"
                binding-valueset-changed="true"
                path="AdverseEvent.severity">
@@ -416,7 +418,25 @@
       </element>
       <element path="AdverseEvent.detector" status="new"/>
       <element path="AdverseEvent.suspectEntity.instance[x]" status="new"/>
+      <element path="AdverseEvent.suspectEntity.causality.assessmentMethod"
+               status="new"/>
+      <element path="AdverseEvent.suspectEntity.causality.entityRelatedness"
+               status="new"/>
+      <element path="AdverseEvent.suspectEntity.causality.author">
+         <removed-type name="Reference(Practitioner | PractitionerRole)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Patient | RelatedPerson)"/>
+      </element>
+      <element path="AdverseEvent.supportingInfo" status="new"/>
+      <element path="AdverseEvent.supportingInfo.item" status="new"/>
+      <element path="AdverseEvent.supportingInfo.contributingFactor" status="new"/>
+      <element path="AdverseEvent.event" status="deleted"/>
       <element path="AdverseEvent.suspectEntity.instance" status="deleted"/>
+      <element path="AdverseEvent.suspectEntity.causality.assessment" status="deleted"/>
+      <element path="AdverseEvent.suspectEntity.causality.productRelatedness"
+               status="deleted"/>
+      <element path="AdverseEvent.suspectEntity.causality.method" status="deleted"/>
+      <element path="AdverseEvent.subjectMedicalHistory" status="deleted"/>
+      <element path="AdverseEvent.referenceDocument" status="deleted"/>
    </type>
    <type name="AllergyIntolerance" status="changed">
       <element binding-status="changed"
@@ -724,6 +744,7 @@
                       strength="required"/>
       </element>
    </type>
+   <type name="CapabilityStatement2" status="new"/>
    <type name="CarePlan" status="changed">
       <element binding-status="changed"
                binding-valueset-changed="true"
@@ -803,6 +824,7 @@
       <element path="CatalogEntry.relatedEntry.target" status="new"/>
       <element path="CatalogEntry.updatedBy" status="new"/>
       <element path="CatalogEntry.note" status="new"/>
+      <element path="CatalogEntry.estimatedDuration" status="new"/>
       <element path="CatalogEntry.billingCode" status="new"/>
       <element path="CatalogEntry.billingSummary" status="new"/>
       <element path="CatalogEntry.scheduleSummary" status="new"/>
@@ -912,6 +934,7 @@
       <element path="ClinicalImpression.investigation" status="deleted"/>
    </type>
    <type name="ClinicalProfile" status="new"/>
+   <type name="ClinicalUseIssue" status="new"/>
    <type name="CodeSystem" status="changed">
       <element binding-status="changed"
                binding-valueset-changed="true"
@@ -971,9 +994,17 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/request-priority|4.1.0"
                       strength="required"/>
       </element>
+      <element path="Communication.recipient">
+         <removed-type name="Reference(Device | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson | Group | CareTeam | HealthcareService)"/>
+         <added-type name="Reference(CareTeam | Device | Group | HealthcareService | Location | Organization | Patient | Practitioner | PractitionerRole | RelatedPerson)"/>
+      </element>
       <element path="Communication.reasonReference">
          <removed-type name="Reference(Condition | Observation | DiagnosticReport | DocumentReference)"/>
          <added-type name="Reference(Resource)"/>
+      </element>
+      <element path="Communication.payload.content[x]">
+         <removed-type name="string"/>
+         <added-type name="CodeableConcept"/>
       </element>
    </type>
    <type name="CommunicationRequest" status="changed">
@@ -993,10 +1024,16 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/request-priority|4.1.0"
                       strength="required"/>
       </element>
+      <element path="CommunicationRequest.payload.content[x]">
+         <removed-type name="string"/>
+         <added-type name="CodeableConcept"/>
+      </element>
+      <element path="CommunicationRequest.informationProvider" status="new"/>
       <element path="CommunicationRequest.reasonReference">
          <removed-type name="Reference(Condition | Observation | DiagnosticReport | DocumentReference)"/>
          <added-type name="Reference(Resource)"/>
       </element>
+      <element path="CommunicationRequest.sender" status="deleted"/>
    </type>
    <type name="CompartmentDefinition" status="changed">
       <element binding-status="changed"
@@ -1109,7 +1146,12 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/condition-ver-status|4.1.0"
                       strength="required"/>
       </element>
+      <element path="Condition.asserter">
+         <removed-type name="Reference(Practitioner | PractitionerRole | Patient | RelatedPerson)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Patient | RelatedPerson | Device)"/>
+      </element>
    </type>
+   <type name="ConditionDefinition" status="new"/>
    <type name="Consent" status="changed">
       <element binding-status="changed"
                binding-valueset-changed="true"
@@ -1434,6 +1476,7 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/encounter-status|4.1.0"
                       strength="required"/>
       </element>
+      <element path="Encounter.subjectStatus" status="new"/>
       <element binding-status="changed"
                binding-valueset-changed="true"
                path="Encounter.location.status">
@@ -1663,7 +1706,7 @@
       <element path="Goal.continuous" status="new"/>
       <element path="Goal.addresses">
          <removed-type name="Reference(Condition | Observation | MedicationStatement | NutritionOrder | ServiceRequest | RiskAssessment)"/>
-         <added-type name="Reference(Condition | Observation | MedicationStatement | MedicationRequest | NutritionOrder | ServiceRequest | RiskAssessment)"/>
+         <added-type name="Reference(Condition | Observation | MedicationUsage | MedicationRequest | NutritionOrder | ServiceRequest | RiskAssessment)"/>
       </element>
    </type>
    <type name="GraphDefinition" status="changed">
@@ -1765,6 +1808,8 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/immunization-status|4.1.0"
                       strength="required"/>
       </element>
+      <element path="Immunization.informationSource[x]" status="new"/>
+      <element path="Immunization.reportOrigin" status="deleted"/>
    </type>
    <type name="ImmunizationEvaluation" status="changed">
       <element binding-status="changed"
@@ -1776,7 +1821,11 @@
                       strength="required"/>
       </element>
    </type>
-   <type name="ImmunizationRecommendation" status="no-change"/>
+   <type name="ImmunizationRecommendation" status="changed">
+      <element new-max="*"
+               old-max="1"
+               path="ImmunizationRecommendation.recommendation.targetDisease"/>
+   </type>
    <type name="ImplementationGuide" status="changed">
       <element binding-status="changed"
                binding-valueset-changed="true"
@@ -1826,15 +1875,15 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/guide-page-generation|4.1.0"
                       strength="required"/>
       </element>
-      <element binding-status="changed"
-               binding-valueset-changed="true"
+      <element binding-status="removed"
                path="ImplementationGuide.definition.parameter.code">
+         <removed-type name="code"/>
+         <added-type name="string"/>
          <old-binding reference="http://hl7.org/fhir/ValueSet/guide-parameter-code|4.0.0"
-                      strength="required"/>
-         <new-binding reference="http://hl7.org/fhir/ValueSet/guide-parameter-code|4.1.0"
                       strength="required"/>
       </element>
    </type>
+   <type name="Ingredient" status="new"/>
    <type name="InsurancePlan" status="changed">
       <element binding-status="changed"
                binding-valueset-changed="true"
@@ -1935,6 +1984,7 @@
                       strength="required"/>
       </element>
    </type>
+   <type name="ManufacturedItemDefinition" status="new"/>
    <type name="Measure" status="changed">
       <element binding-status="changed"
                binding-valueset-changed="true"
@@ -1998,8 +2048,14 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/medication-status|4.1.0"
                       strength="required"/>
       </element>
+      <element path="Medication.doseForm" status="new"/>
+      <element path="Medication.ingredient.strength[x]" status="new"/>
+      <element path="Medication.form" status="deleted"/>
+      <element path="Medication.ingredient.strength" status="deleted"/>
    </type>
    <type name="MedicationAdministration" status="changed">
+      <element path="MedicationAdministration.instantiatesCanonical" status="new"/>
+      <element path="MedicationAdministration.instantiatesUri" status="new"/>
       <element binding-status="changed"
                binding-valueset-changed="true"
                path="MedicationAdministration.status">
@@ -2010,11 +2066,15 @@
       </element>
       <element new-max="*" old-max="1" path="MedicationAdministration.category"/>
       <element path="MedicationAdministration.encounter" status="new"/>
+      <element path="MedicationAdministration.occurence[x]" status="new"/>
+      <element path="MedicationAdministration.recorded" status="new"/>
       <element path="MedicationAdministration.dosage.rate[x]">
          <removed-type name="Quantity()"/>
          <added-type name="Quantity()"/>
       </element>
+      <element path="MedicationAdministration.instantiates" status="deleted"/>
       <element path="MedicationAdministration.context" status="deleted"/>
+      <element path="MedicationAdministration.effective[x]" status="deleted"/>
    </type>
    <type name="MedicationDispense" status="changed">
       <element binding-status="changed"
@@ -2029,7 +2089,7 @@
       <element path="MedicationDispense.encounter" status="new"/>
       <element path="MedicationDispense.receiver">
          <removed-type name="Reference(Patient | Practitioner)"/>
-         <added-type name="Reference(Patient | Practitioner | RelatedPerson | Location)"/>
+         <added-type name="Reference(Patient | Practitioner | RelatedPerson | Location | PractitionerRole)"/>
       </element>
       <element new-max="1"
                old-max="*"
@@ -2050,10 +2110,20 @@
                       strength="required"/>
       </element>
       <element path="MedicationKnowledge.device" status="new"/>
-      <element path="MedicationKnowledge.administrationGuidelines.patientCharacteristics.characteristic[x]">
-         <removed-type name="Quantity()"/>
-         <added-type name="Quantity()"/>
-      </element>
+      <element path="MedicationKnowledge.administrationGuideline" status="new"/>
+      <element path="MedicationKnowledge.administrationGuideline.dosage" status="new"/>
+      <element path="MedicationKnowledge.administrationGuideline.dosage.type"
+               status="new"/>
+      <element path="MedicationKnowledge.administrationGuideline.dosage.dosage"
+               status="new"/>
+      <element path="MedicationKnowledge.administrationGuideline.indication[x]"
+               status="new"/>
+      <element path="MedicationKnowledge.administrationGuideline.patientCharacteristic"
+               status="new"/>
+      <element path="MedicationKnowledge.administrationGuideline.patientCharacteristic.characteristic[x]"
+               status="new"/>
+      <element path="MedicationKnowledge.administrationGuideline.patientCharacteristic.value"
+               status="new"/>
       <element path="MedicationKnowledge.packaging.device" status="new"/>
       <element path="MedicationKnowledge.packaging.material" status="new"/>
       <element path="MedicationKnowledge.packaging.packaging" status="new"/>
@@ -2061,17 +2131,13 @@
          <removed-type name="Quantity()"/>
          <added-type name="Quantity()"/>
       </element>
-      <element path="MedicationKnowledge.contraindication">
-         <removed-type name="Reference(DetectedIssue)"/>
-         <added-type name="Reference(MedicinalProductContraindication)"/>
-      </element>
-      <element path="MedicationKnowledge.interaction" status="new"/>
-      <element path="MedicationKnowledge.undesirableEffect" status="new"/>
-      <element path="MedicationKnowledge.kinetics.type" status="new"/>
-      <element path="MedicationKnowledge.kinetics.value[x]" status="new"/>
-      <element path="MedicationKnowledge.kinetics.areaUnderCurve" status="deleted"/>
-      <element path="MedicationKnowledge.kinetics.lethalDose50" status="deleted"/>
-      <element path="MedicationKnowledge.kinetics.halfLifePeriod" status="deleted"/>
+      <element path="MedicationKnowledge.clinicalUseIssue" status="new"/>
+      <element path="MedicationKnowledge.kineticCharacteristic" status="new"/>
+      <element path="MedicationKnowledge.kineticCharacteristic.type" status="new"/>
+      <element path="MedicationKnowledge.kineticCharacteristic.value[x]" status="new"/>
+      <element path="MedicationKnowledge.administrationGuidelines" status="deleted"/>
+      <element path="MedicationKnowledge.contraindication" status="deleted"/>
+      <element path="MedicationKnowledge.kinetics" status="deleted"/>
    </type>
    <type name="MedicationRequest" status="changed">
       <element binding-status="changed"
@@ -2098,40 +2164,20 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/request-priority|4.1.0"
                       strength="required"/>
       </element>
-   </type>
-   <type name="MedicationStatement" status="changed">
-      <element binding-status="changed"
-               binding-valueset-changed="true"
-               path="MedicationStatement.status">
-         <old-binding reference="http://hl7.org/fhir/ValueSet/medication-statement-status|4.0.0"
-                      strength="required"/>
-         <new-binding reference="http://hl7.org/fhir/ValueSet/medication-statement-status|4.1.0"
-                      strength="required"/>
+      <element path="MedicationRequest.reported" status="new"/>
+      <element path="MedicationRequest.informationSource" status="new"/>
+      <element path="MedicationRequest.performer">
+         <removed-type name="Reference(Practitioner | PractitionerRole | Organization | Patient | Device | RelatedPerson | CareTeam)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Organization | Patient | Device | RelatedPerson | CareTeam | HealthcareService)"/>
       </element>
-      <element new-max="*" old-max="1" path="MedicationStatement.category"/>
-      <element path="MedicationStatement.encounter" status="new"/>
-      <element path="MedicationStatement.context" status="deleted"/>
-   </type>
-   <type name="MedicinalProduct" status="changed">
-      <element path="MedicinalProduct.indication" status="new"/>
-      <element path="MedicinalProduct.contact">
-         <removed-type name="Reference(Organization | PractitionerRole)"/>
-         <added-type name="BackboneElement"/>
+      <element path="MedicationRequest.instantiatesCanonical">
+         <removed-type name="canonical"/>
+         <added-type name="canonical(PlanDefinition | ActivityDefinition)"/>
       </element>
-      <element path="MedicinalProduct.contact.type" status="new"/>
-      <element path="MedicinalProduct.contact.contact" status="new"/>
+      <element path="MedicationRequest.reported[x]" status="deleted"/>
    </type>
-   <type name="MedicinalProductAuthorization" status="no-change"/>
-   <type name="MedicinalProductContraindication" status="no-change"/>
-   <type name="MedicinalProductIndication" status="no-change"/>
-   <type name="MedicinalProductIngredient" status="no-change"/>
-   <type name="MedicinalProductInteraction" status="no-change"/>
-   <type name="MedicinalProductManufactured" status="no-change"/>
-   <type name="MedicinalProductPackaged" status="no-change"/>
-   <type name="MedicinalProductPharmaceutical" status="changed">
-      <element path="MedicinalProductPharmaceutical.subject" status="new"/>
-   </type>
-   <type name="MedicinalProductUndesirableEffect" status="no-change"/>
+   <type name="MedicationUsage" status="new"/>
+   <type name="MedicinalProductDefinition" status="new"/>
    <type name="MessageDefinition" status="changed">
       <element binding-status="changed"
                binding-valueset-changed="true"
@@ -2283,6 +2329,10 @@
       </element>
    </type>
    <type name="Observation" status="changed">
+      <element path="Observation.partOf">
+         <removed-type name="Reference(MedicationAdministration | MedicationDispense | MedicationStatement | Procedure | Immunization | ImagingStudy)"/>
+         <added-type name="Reference(MedicationAdministration | MedicationDispense | MedicationUsage | Procedure | Immunization | ImagingStudy)"/>
+      </element>
       <element binding-status="changed"
                binding-valueset-changed="true"
                path="Observation.status">
@@ -2293,6 +2343,27 @@
       </element>
    </type>
    <type name="ObservationDefinition" status="changed">
+      <element path="ObservationDefinition.url" status="new"/>
+      <element new-max="1" old-max="*" path="ObservationDefinition.identifier"/>
+      <element path="ObservationDefinition.version" status="new"/>
+      <element path="ObservationDefinition.title" status="new"/>
+      <element path="ObservationDefinition.derivedFromCanonical" status="new"/>
+      <element path="ObservationDefinition.derivedFromUri" status="new"/>
+      <element path="ObservationDefinition.status" status="new"/>
+      <element path="ObservationDefinition.experimental" status="new"/>
+      <element path="ObservationDefinition.subject[x]" status="new"/>
+      <element path="ObservationDefinition.date" status="new"/>
+      <element path="ObservationDefinition.publisher" status="new"/>
+      <element path="ObservationDefinition.contact" status="new"/>
+      <element path="ObservationDefinition.description" status="new"/>
+      <element path="ObservationDefinition.useContext" status="new"/>
+      <element path="ObservationDefinition.jurisdiction" status="new"/>
+      <element path="ObservationDefinition.purpose" status="new"/>
+      <element path="ObservationDefinition.copyright" status="new"/>
+      <element path="ObservationDefinition.approvalDate" status="new"/>
+      <element path="ObservationDefinition.lastReviewDate" status="new"/>
+      <element path="ObservationDefinition.effectivePeriod" status="new"/>
+      <element path="ObservationDefinition.performerType" status="new"/>
       <element binding-status="changed"
                binding-valueset-changed="true"
                path="ObservationDefinition.permittedDataType">
@@ -2301,6 +2372,9 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/permitted-data-type|4.1.0"
                       strength="required"/>
       </element>
+      <element path="ObservationDefinition.bodySite" status="new"/>
+      <element path="ObservationDefinition.specimen" status="new"/>
+      <element path="ObservationDefinition.device" status="new"/>
       <element binding-status="changed"
                binding-valueset-changed="true"
                path="ObservationDefinition.qualifiedInterval.category">
@@ -2317,6 +2391,12 @@
          <new-binding reference="http://hl7.org/fhir/ValueSet/administrative-gender|4.1.0"
                       strength="required"/>
       </element>
+      <element path="ObservationDefinition.hasMember" status="new"/>
+      <element path="ObservationDefinition.component" status="new"/>
+      <element path="ObservationDefinition.component.code" status="new"/>
+      <element path="ObservationDefinition.component.permittedDataType" status="new"/>
+      <element path="ObservationDefinition.component.quantitativeDetails" status="new"/>
+      <element path="ObservationDefinition.component.qualifiedInterval" status="new"/>
    </type>
    <type name="OperationDefinition" status="changed">
       <element binding-status="changed"
@@ -2396,6 +2476,7 @@
    </type>
    <type name="Organization" status="no-change"/>
    <type name="OrganizationAffiliation" status="no-change"/>
+   <type name="PackagedProductDefinition" status="new"/>
    <type name="Parameters" status="no-change"/>
    <type name="Patient" status="changed">
       <element binding-status="changed"
@@ -2592,6 +2673,14 @@
       <element path="Procedure.occurrence[x]" status="new"/>
       <element path="Procedure.recorded" status="new"/>
       <element path="Procedure.reported[x]" status="new"/>
+      <element path="Procedure.performer.actor">
+         <removed-type name="Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson | Device)"/>
+         <added-type name="Reference(Practitioner | PractitionerRole | Organization | Patient | RelatedPerson | Device | CareTeam | HealthcareService)"/>
+      </element>
+      <element path="Procedure.usedReference">
+         <removed-type name="Reference(Device | Medication | Substance)"/>
+         <added-type name="Reference(Device | Medication | Substance | BiologicallyDerivedProduct)"/>
+      </element>
       <element path="Procedure.performed[x]" status="deleted"/>
       <element path="Procedure.asserter" status="deleted"/>
    </type>
@@ -2657,6 +2746,8 @@
                       strength="required"/>
       </element>
    </type>
+   <type name="RegulatedAdministrableProduct" status="new"/>
+   <type name="RegulatedAuthorization" status="new"/>
    <type name="RelatedPerson" status="changed">
       <element binding-status="changed"
                binding-valueset-changed="true"
@@ -2972,6 +3063,25 @@
       </element>
    </type>
    <type name="SpecimenDefinition" status="changed">
+      <element path="SpecimenDefinition.url" status="new"/>
+      <element path="SpecimenDefinition.version" status="new"/>
+      <element path="SpecimenDefinition.title" status="new"/>
+      <element path="SpecimenDefinition.derivedFromCanonical" status="new"/>
+      <element path="SpecimenDefinition.derivedFromUri" status="new"/>
+      <element path="SpecimenDefinition.status" status="new"/>
+      <element path="SpecimenDefinition.experimental" status="new"/>
+      <element path="SpecimenDefinition.subject[x]" status="new"/>
+      <element path="SpecimenDefinition.date" status="new"/>
+      <element path="SpecimenDefinition.publisher" status="new"/>
+      <element path="SpecimenDefinition.contact" status="new"/>
+      <element path="SpecimenDefinition.description" status="new"/>
+      <element path="SpecimenDefinition.useContext" status="new"/>
+      <element path="SpecimenDefinition.jurisdiction" status="new"/>
+      <element path="SpecimenDefinition.purpose" status="new"/>
+      <element path="SpecimenDefinition.copyright" status="new"/>
+      <element path="SpecimenDefinition.approvalDate" status="new"/>
+      <element path="SpecimenDefinition.lastReviewDate" status="new"/>
+      <element path="SpecimenDefinition.effectivePeriod" status="new"/>
       <element binding-status="changed"
                binding-valueset-changed="true"
                path="SpecimenDefinition.typeTested.preference">
@@ -2984,7 +3094,10 @@
          <removed-type name="Quantity()"/>
          <added-type name="Quantity()"/>
       </element>
+      <element path="SpecimenDefinition.typeTested.singleUse" status="new"/>
+      <element path="SpecimenDefinition.typeTested.testingDestination" status="new"/>
    </type>
+   <type name="Statistic" status="new"/>
    <type name="StructureDefinition" status="changed">
       <element binding-status="changed"
                binding-valueset-changed="true"
@@ -3409,5 +3522,16 @@
                       strength="required"/>
       </element>
    </type>
+   <type name="MedicationStatement" status="deleted"/>
+   <type name="MedicinalProduct" status="deleted"/>
+   <type name="MedicinalProductAuthorization" status="deleted"/>
+   <type name="MedicinalProductContraindication" status="deleted"/>
+   <type name="MedicinalProductIndication" status="deleted"/>
+   <type name="MedicinalProductIngredient" status="deleted"/>
+   <type name="MedicinalProductInteraction" status="deleted"/>
+   <type name="MedicinalProductManufactured" status="deleted"/>
+   <type name="MedicinalProductPackaged" status="deleted"/>
+   <type name="MedicinalProductPharmaceutical" status="deleted"/>
+   <type name="MedicinalProductUndesirableEffect" status="deleted"/>
    <type name="SubstanceSpecification" status="deleted"/>
 </difference>

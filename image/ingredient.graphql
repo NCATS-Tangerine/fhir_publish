@@ -1,0 +1,208 @@
+# FHIR GraphQL Schema. Version 4.1.0
+
+# import the types from 'types.graphql'
+
+type Ingredient {
+  id: ID
+  meta: Meta
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: Narrative
+  contained: [Resource]
+  extension: [Extension]
+  modifierExtension: [Extension]
+  identifier: Identifier
+  role: CodeableConcept!
+  allergenicIndicator: Boolean  _allergenicIndicator: ElementBase
+  manufacturer: [Reference]
+  specifiedSubstance: [IngredientSpecifiedSubstance]
+  substance: IngredientSubstance
+}
+
+type IngredientSpecifiedSubstance {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  codeCodeableConcept: CodeableConcept
+  codeReference: Reference
+  group: CodeableConcept!
+  confidentiality: CodeableConcept
+  strength: [IngredientSpecifiedSubstanceStrength]
+}
+
+type IngredientSpecifiedSubstanceStrength {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  presentation: Ratio!
+  presentationLowLimit: Ratio
+  concentration: Ratio
+  concentrationLowLimit: Ratio
+  measurementPoint: String  _measurementPoint: ElementBase
+  country: [CodeableConcept]
+  referenceStrength: [IngredientSpecifiedSubstanceStrengthReferenceStrength]
+}
+
+type IngredientSpecifiedSubstanceStrengthReferenceStrength {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  substanceCodeableConcept: CodeableConcept
+  substanceReference: Reference
+  strength: Ratio!
+  strengthLowLimit: Ratio
+  measurementPoint: String  _measurementPoint: ElementBase
+  country: [CodeableConcept]
+}
+
+type IngredientSubstance {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  codeCodeableConcept: CodeableConcept
+  codeReference: Reference
+  strength: [IngredientSpecifiedSubstanceStrength]
+}
+
+input IngredientInput {
+  id: ID
+  meta: MetaInput
+  implicitRules: uri  _implicitRules: ElementBase
+  language: code  _language: ElementBase
+  text: NarrativeInput
+  contained: [ResourceInput]
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  identifier: IdentifierInput
+  role: CodeableConceptInput!
+  allergenicIndicator: Boolean  _allergenicIndicator: ElementBase
+  manufacturer: [ReferenceInput]
+  specifiedSubstance: [IngredientSpecifiedSubstanceInput]
+  substance: IngredientSubstanceInput
+}
+
+input IngredientSpecifiedSubstanceInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  codeCodeableConcept: CodeableConceptInput
+  codeReference: ReferenceInput
+  group: CodeableConceptInput!
+  confidentiality: CodeableConceptInput
+  strength: [IngredientSpecifiedSubstanceStrengthInput]
+}
+
+input IngredientSpecifiedSubstanceStrengthInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  presentation: RatioInput!
+  presentationLowLimit: RatioInput
+  concentration: RatioInput
+  concentrationLowLimit: RatioInput
+  measurementPoint: String  _measurementPoint: ElementBase
+  country: [CodeableConceptInput]
+  referenceStrength: [IngredientSpecifiedSubstanceStrengthReferenceStrengthInput]
+}
+
+input IngredientSpecifiedSubstanceStrengthReferenceStrengthInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  substanceCodeableConcept: CodeableConceptInput
+  substanceReference: ReferenceInput
+  strength: RatioInput!
+  strengthLowLimit: RatioInput
+  measurementPoint: String  _measurementPoint: ElementBase
+  country: [CodeableConceptInput]
+}
+
+input IngredientSubstanceInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  codeCodeableConcept: CodeableConceptInput
+  codeReference: ReferenceInput
+  strength: [IngredientSpecifiedSubstanceStrength]
+}
+
+type IngredientReadType {
+  Ingredient(id: ID!): Ingredient
+}
+
+type IngredientListType {
+  IngredientList(_filter: String
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): [Ingredient]
+}
+
+type IngredientConnectionType {
+  IngredientConection(_filter: String
+    _text: [String]
+    _content: [String]
+    _id: [token]
+    _lastUpdated: [date]
+    _profile: [reference]
+    _query: [token]
+    _security: [token]
+    _source: [uri]
+    _tag: [token]
+    _sort: String
+    _count: Int
+    _cursor: String): IngredientConnection
+}
+
+type IngredientConnection {
+  count: Int
+  offset: Int
+  pagesize: Int
+  first: ID
+  previous: ID
+  next: ID
+  last: ID
+  edges: [IngredientEdge]
+}
+
+type IngredientEdge {
+  mode: String
+  score: Float
+  resource: Ingredient
+}
+
+type IngredientCreateType {
+  IngredientCreate(resource: IngredientInput): IngredientCreation
+}
+
+type IngredientCreation {
+  location: String
+  resource: Ingredient
+  information: OperationOutcome
+}
+
+type IngredientUpdateType {
+  IngredientUpdate(id: ID, resource: IngredientInput): IngredientUpdate
+}
+
+type IngredientUpdate {
+  resource: Ingredient
+  information: OperationOutcome
+}
+
+type IngredientDeleteType {
+  IngredientDelete(id: ID): IngredientDelete
+}
+
+type IngredientDelete {
+  information: OperationOutcome
+}
+

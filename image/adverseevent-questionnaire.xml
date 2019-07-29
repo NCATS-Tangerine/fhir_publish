@@ -9,8 +9,8 @@
       <status value="active"/>
       <description value="Type options for AdverseEvent.suspectEntity.instance[x]"/>
       <expansion>
-        <identifier value="urn:uuid:3e1d0f7f-7322-4307-9ca5-02950248507b"/>
-        <timestamp value="2019-04-16T08:50:50-05:00"/>
+        <identifier value="urn:uuid:31726029-62e2-4d62-bda5-066ebab4e775"/>
+        <timestamp value="2019-07-29T11:31:52-05:00"/>
         <contains>
           <system value="http://hl7.org/fhir/data-types"/>
           <code value="CodeableConcept"/>
@@ -43,8 +43,8 @@
         </contains>
         <contains>
           <system value="http://hl7.org/fhir/resource-types"/>
-          <code value="MedicationStatement"/>
-          <display value="MedicationStatement"/>
+          <code value="MedicationUsage"/>
+          <display value="MedicationUsage"/>
         </contains>
         <contains>
           <system value="http://hl7.org/fhir/resource-types"/>
@@ -59,7 +59,7 @@
   </identifier>
   <version value="4.1.0"/>
   <status value="draft"/>
-  <date value="2019-04-16T08:42:31-05:00"/>
+  <date value="2019-07-29T11:29:14-05:00"/>
   <publisher value="Health Level Seven International (Patient Care)"/>
   <item>
     <linkId value="AdverseEvent"/>
@@ -77,7 +77,7 @@
           </coding>
         </valueCodeableConcept>
       </extension>
-      <text value="Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death."/>
+      <text value="An event (i.e. any change to current patient status) that may be related to unintended effects on a patient or research subject.  The unintended effects may require additional monitoring, treatment or hospitalization or may result in death.  The AdverseEvent resource also extends to potential or avoided events that could have had such effects."/>
       <type value="display"/>
     </item>
     <item>
@@ -405,8 +405,8 @@
       <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
         <valueString value="CodeableConcept"/>
       </extension>
-      <linkId value="AdverseEvent.event"/>
-      <text value="Type of the event itself in relation to the subject"/>
+      <linkId value="AdverseEvent.code"/>
+      <text value="Event or incident that occurred or was averted"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -420,18 +420,18 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="This element defines the specific type of event that occurred or that was prevented from occurring."/>
+        <text value="Specific event that occurred or that was averted, such as patient fall, wrong organ removed, or wrong blood transfused."/>
         <type value="display"/>
       </item>
       <item>
-        <linkId value="AdverseEvent.event.coding"/>
+        <linkId value="AdverseEvent.code.coding"/>
         <text value="code:"/>
         <type value="open-choice"/>
         <required value="false"/>
         <repeats value="false"/>
       </item>
       <item>
-        <linkId value="AdverseEvent.event.text"/>
+        <linkId value="AdverseEvent.code.text"/>
         <text value="text:"/>
         <type value="string"/>
         <required value="false"/>
@@ -694,7 +694,7 @@
         <valueString value="CodeableConcept"/>
       </extension>
       <linkId value="AdverseEvent.seriousness"/>
-      <text value="Seriousness of the event"/>
+      <text value="Seriousness or gravity of the event"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -774,7 +774,7 @@
         <valueString value="CodeableConcept"/>
       </extension>
       <linkId value="AdverseEvent.outcome"/>
-      <text value="resolved | recovering | ongoing | resolvedWithSequelae | fatal | unknown"/>
+      <text value="resolved | recovering | ongoing | resolved-with-sequelae | fatal | unknown"/>
       <type value="group"/>
       <required value="false"/>
       <repeats value="true"/>
@@ -1066,7 +1066,7 @@
             <type value="group"/>
             <item>
               <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-                <valueCode value="Immunization, Procedure, Substance, Medication, MedicationAdministration, MedicationStatement, Device"/>
+                <valueCode value="Immunization, Procedure, Substance, Medication, MedicationAdministration, MedicationUsage, Device"/>
               </extension>
               <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
                 <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
@@ -1177,8 +1177,8 @@
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
             <valueString value="CodeableConcept"/>
           </extension>
-          <linkId value="AdverseEvent.suspectEntity.causality.assessment"/>
-          <text value="Assessment of if the entity caused the event"/>
+          <linkId value="AdverseEvent.suspectEntity.causality.assessmentMethod"/>
+          <text value="Method of evaluating the relatedness of the suspected entity to the event"/>
           <type value="group"/>
           <required value="false"/>
           <repeats value="true"/>
@@ -1192,18 +1192,18 @@
                 </coding>
               </valueCodeableConcept>
             </extension>
-            <text value="Assessment of if the entity caused the event."/>
+            <text value="The method of evaluating the relatedness of the suspected entity to the event."/>
             <type value="display"/>
           </item>
           <item>
-            <linkId value="AdverseEvent.suspectEntity.causality.assessment.coding"/>
+            <linkId value="AdverseEvent.suspectEntity.causality.assessmentMethod.coding"/>
             <text value="code:"/>
             <type value="open-choice"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
           <item>
-            <linkId value="AdverseEvent.suspectEntity.causality.assessment.text"/>
+            <linkId value="AdverseEvent.suspectEntity.causality.assessmentMethod.text"/>
             <text value="text:"/>
             <type value="string"/>
             <required value="false"/>
@@ -1215,9 +1215,10 @@
             <valueInteger value="1"/>
           </extension>
           <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="string"/>
+            <valueString value="CodeableConcept"/>
           </extension>
-          <linkId value="AdverseEvent.suspectEntity.causality.productRelatedness"/>
+          <linkId value="AdverseEvent.suspectEntity.causality.entityRelatedness"/>
+          <text value="Result of the assessment regarding the relatedness of the suspected entity to the event"/>
           <type value="group"/>
           <required value="false"/>
           <repeats value="true"/>
@@ -1231,12 +1232,19 @@
                 </coding>
               </valueCodeableConcept>
             </extension>
-            <text value="AdverseEvent.suspectEntity.causalityProductRelatedness."/>
+            <text value="The result of the assessment regarding the relatedness of the suspected entity to the event."/>
             <type value="display"/>
           </item>
           <item>
-            <linkId value="AdverseEvent.suspectEntity.causality.productRelatedness.value"/>
-            <text value="AdverseEvent.suspectEntity.causalityProductRelatedness"/>
+            <linkId value="AdverseEvent.suspectEntity.causality.entityRelatedness.coding"/>
+            <text value="code:"/>
+            <type value="open-choice"/>
+            <required value="false"/>
+            <repeats value="false"/>
+          </item>
+          <item>
+            <linkId value="AdverseEvent.suspectEntity.causality.entityRelatedness.text"/>
+            <text value="text:"/>
             <type value="string"/>
             <required value="false"/>
             <repeats value="false"/>
@@ -1263,133 +1271,188 @@
                 </coding>
               </valueCodeableConcept>
             </extension>
-            <text value="AdverseEvent.suspectEntity.causalityAuthor."/>
+            <text value="The author of the information on the possible cause of the event."/>
             <type value="display"/>
           </item>
           <item>
             <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-              <valueCode value="Practitioner, PractitionerRole"/>
+              <valueCode value="Practitioner, PractitionerRole, Patient, RelatedPerson"/>
             </extension>
             <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
               <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
             </extension>
             <linkId value="AdverseEvent.suspectEntity.causality.author.value"/>
-            <text value="AdverseEvent.suspectEntity.causalityAuthor"/>
+            <text value="Author of the information on the possible cause of the event"/>
             <type value="reference"/>
             <required value="false"/>
             <repeats value="false"/>
           </item>
         </item>
+      </item>
+    </item>
+    <item>
+      <linkId value="AdverseEvent.supportingInfo"/>
+      <text value="Supporting information relevant to the event"/>
+      <type value="group"/>
+      <required value="false"/>
+      <repeats value="true"/>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+          <valueCodeableConcept>
+            <coding>
+              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+              <code value="flyover"/>
+              <display value="Fly-over"/>
+            </coding>
+          </valueCodeableConcept>
+        </extension>
+        <text value="Supporting information relevant to the event."/>
+        <type value="display"/>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="string"/>
+        </extension>
+        <linkId value="AdverseEvent.supportingInfo.id"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
         <item>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
-            <valueInteger value="1"/>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
           </extension>
-          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-            <valueString value="CodeableConcept"/>
-          </extension>
-          <linkId value="AdverseEvent.suspectEntity.causality.method"/>
-          <text value="ProbabilityScale | Bayesian | Checklist"/>
-          <type value="group"/>
+          <text value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="AdverseEvent.supportingInfo.id.value"/>
+          <text value="Unique id for inter-element referencing"/>
+          <type value="string"/>
           <required value="false"/>
-          <repeats value="true"/>
-          <item>
-            <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-              <valueCodeableConcept>
-                <coding>
-                  <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-                  <code value="flyover"/>
-                  <display value="Fly-over"/>
-                </coding>
-              </valueCodeableConcept>
-            </extension>
-            <text value="ProbabilityScale | Bayesian | Checklist."/>
-            <type value="display"/>
-          </item>
-          <item>
-            <linkId value="AdverseEvent.suspectEntity.causality.method.coding"/>
-            <text value="code:"/>
-            <type value="open-choice"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
-          <item>
-            <linkId value="AdverseEvent.suspectEntity.causality.method.text"/>
-            <text value="text:"/>
-            <type value="string"/>
-            <required value="false"/>
-            <repeats value="false"/>
-          </item>
+          <repeats value="false"/>
         </item>
       </item>
-    </item>
-    <item>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="Reference"/>
-      </extension>
-      <linkId value="AdverseEvent.subjectMedicalHistory"/>
-      <type value="group"/>
-      <required value="false"/>
-      <repeats value="true"/>
       <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-          <valueCodeableConcept>
-            <coding>
-              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-              <code value="flyover"/>
-              <display value="Fly-over"/>
-            </coding>
-          </valueCodeableConcept>
-        </extension>
-        <text value="AdverseEvent.subjectMedicalHistory."/>
-        <type value="display"/>
-      </item>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-          <valueCode value="Condition, Observation, AllergyIntolerance, FamilyMemberHistory, Immunization, Procedure, Media, DocumentReference"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-        </extension>
-        <linkId value="AdverseEvent.subjectMedicalHistory.value"/>
-        <text value="AdverseEvent.subjectMedicalHistory"/>
-        <type value="reference"/>
+        <linkId value="AdverseEvent.supportingInfo.extension"/>
+        <text value="Additional content defined by implementations"/>
+        <type value="group"/>
         <required value="false"/>
-        <repeats value="false"/>
-      </item>
-    </item>
-    <item>
-      <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
-        <valueString value="Reference"/>
-      </extension>
-      <linkId value="AdverseEvent.referenceDocument"/>
-      <type value="group"/>
-      <required value="false"/>
-      <repeats value="true"/>
-      <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
-          <valueCodeableConcept>
-            <coding>
-              <system value="http://hl7.org/fhir/questionnaire-item-control"/>
-              <code value="flyover"/>
-              <display value="Fly-over"/>
-            </coding>
-          </valueCodeableConcept>
-        </extension>
-        <text value="AdverseEvent.referenceDocument."/>
-        <type value="display"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <type value="display"/>
+        </item>
       </item>
       <item>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
-          <valueCode value="DocumentReference"/>
-        </extension>
-        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
-          <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
-        </extension>
-        <linkId value="AdverseEvent.referenceDocument.value"/>
-        <text value="AdverseEvent.referenceDocument"/>
-        <type value="reference"/>
+        <linkId value="AdverseEvent.supportingInfo.modifierExtension"/>
+        <text value="Extensions that cannot be ignored even if unrecognized"/>
+        <type value="group"/>
         <required value="false"/>
-        <repeats value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element&#39;s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.&#xA;&#xA;Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself). There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone."/>
+          <type value="display"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-minOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="Reference"/>
+        </extension>
+        <linkId value="AdverseEvent.supportingInfo.item"/>
+        <type value="group"/>
+        <required value="true"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="Relevant past history for the subject.  In a clinical care context, an example being a patient had an adverse event following a penciliin administration and the patient had a previously documented penicillin allergy.  In a clinical trials context, an example is a bunion or rash that was present prior to the study.&#xA;Additionally, the supporting item can be a document that is relevant to this instance of the adverse event that is not part of the subject&#39;s medical history.  For example, a clinical note, staff list, or material safety data sheet (MSDS)."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-allowedResource">
+            <valueCode value="Condition, Observation, AllergyIntolerance, FamilyMemberHistory, Immunization, Procedure, Media, DocumentReference"/>
+          </extension>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-referenceFilter">
+            <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
+          </extension>
+          <linkId value="AdverseEvent.supportingInfo.item.value"/>
+          <text value="Subject medical history or document relevant to this adverse event"/>
+          <type value="reference"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
+      </item>
+      <item>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs">
+          <valueInteger value="1"/>
+        </extension>
+        <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-fhirType">
+          <valueString value="boolean"/>
+        </extension>
+        <linkId value="AdverseEvent.supportingInfo.contributingFactor"/>
+        <type value="group"/>
+        <required value="false"/>
+        <repeats value="true"/>
+        <item>
+          <extension url="http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://hl7.org/fhir/questionnaire-item-control"/>
+                <code value="flyover"/>
+                <display value="Fly-over"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+          <text value="If true, the item has been assessed to be a contributing factor of the adverse event."/>
+          <type value="display"/>
+        </item>
+        <item>
+          <linkId value="AdverseEvent.supportingInfo.contributingFactor.value"/>
+          <text value="If true, the item has been assessed to be a contributing factor of the adverse event"/>
+          <type value="boolean"/>
+          <required value="false"/>
+          <repeats value="false"/>
+        </item>
       </item>
     </item>
     <item>
@@ -1410,7 +1473,7 @@
             </coding>
           </valueCodeableConcept>
         </extension>
-        <text value="AdverseEvent.study."/>
+        <text value="The research study that the subject is enrolled in."/>
         <type value="display"/>
       </item>
       <item>
@@ -1421,7 +1484,7 @@
           <valueString value="subject=$subj&amp;patient=$subj&amp;encounter=$encounter"/>
         </extension>
         <linkId value="AdverseEvent.study.value"/>
-        <text value="AdverseEvent.study"/>
+        <text value="Research study that the subject is enrolled in"/>
         <type value="reference"/>
         <required value="false"/>
         <repeats value="false"/>

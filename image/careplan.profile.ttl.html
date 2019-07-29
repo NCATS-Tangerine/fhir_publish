@@ -36,21 +36,21 @@
 
 </head>
 <body>
-	<div id="segment-header" class="segment"><!-- segment-header -->	
-		<div class="container"><!-- container -->
-			<a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
-			<a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
-			<b><font size="+2">Custom NCATS Translator JHU Build</font></b>
-        		<a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
-			<div id="hl7-nav">
-				 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
-					<img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
-				</a> 
-			</div>       	
-			<div id="hl7-nav"><a id="hl7-logo" no-external="true" href="http://hl7.org/fhir/search.cfm"><img alt="Search FHIR" src="./assets/images/search.png"/></a></div> 
-		</div>
-		<div class="container"><!-- container -->
-	</div></div><!-- /segment-header -->	
+	<div id="segment-header" class="segment"><!-- segment-header -->
+               <div class="container"><!-- container -->
+                        <a id="logo" href="http://hl7.org/fhir" no-external="true"><img src="./assets/images/fhir-logo-www.png" alt="logo fhir"/> </a>
+                        <a no-external="true" id="ncats" href="https://ncats.nih.gov"><img src="https://ncats.nih.gov/sites/all/themes/ncats-2014/images/assets/ncats-logo.png" height="30" style="align:top"/></a>
+                        <b><font size="+2">Custom NCATS Translator JHU Build</font></b>
+                        <a no-external="true" id="jhu" href="https://www.hopkinsmedicine.org/"><img src="./assets/images/jhulogo.png" height="100"/></a>
+                        <div id="hl7-nav">
+                                 <a id="hl7-logo" href="http://www.hl7.org" no-external="true">
+                                        <img src="./assets/images/hl7-logo.png" width="42" height="50" alt="visit the hl7 website"/>
+                                </a>
+                        </div>
+                        <div id="hl7-nav"><a id="hl7-logo" no-external="true" href="http://hl7.org/fhir/search.cfm"><img alt="Search FHIR" src="./assets/images/search.png"/></a></div>
+                </div>
+                <div class="container"><!-- container -->
+        </div></div><!-- /segment-header -->
 
 
 	<div id="segment-navbar" class="segment"><!-- segment-navbar -->
@@ -71,7 +71,8 @@
               <li><a href="./index.html">Home</a></li>
               <li><a href="./modules.html">Getting Started</a></li>
               <li><a href="./documentation.html">Documentation</a></li>
-              <li><a href="./resourcelist.html">Resources</a></li>
+              <li><a href="./patterns.html">Patterns</a></li>
+              <li><a href="./resourcelist.html"><span style="color: yellow">Resource Types</span></a></li>
               <li><a href="./profilelist.html">Profiles</a></li>
               <li><a href="./extensibility-registry.html">Extensions</a></li>
               <li><a href="./operationslist.html">Operations</a></li>
@@ -124,7 +125,7 @@
 [] a fhir:StructureDefinition;
   fhir:Resource.id [ fhir:value &quot;CarePlan&quot;];
   fhir:Resource.meta [
-     fhir:Meta.lastUpdated [ fhir:value &quot;2019-04-16T08:42:31.781-05:00&quot; ]
+     fhir:Meta.lastUpdated [ fhir:value &quot;2019-07-29T11:29:14.002-05:00&quot; ]
   ];
   fhir:DomainResource.text [
      fhir:Narrative.status [ fhir:value &quot;generated&quot; ]
@@ -154,7 +155,7 @@
   fhir:StructureDefinition.version [ fhir:value &quot;4.1.0&quot;];
   fhir:StructureDefinition.name [ fhir:value &quot;CarePlan&quot;];
   fhir:StructureDefinition.status [ fhir:value &quot;draft&quot;];
-  fhir:StructureDefinition.date [ fhir:value &quot;2019-04-16T08:42:31-05:00&quot;];
+  fhir:StructureDefinition.date [ fhir:value &quot;2019-07-29T11:29:14-05:00&quot;];
   fhir:StructureDefinition.publisher [ fhir:value &quot;Health Level Seven International (Patient Care)&quot;];
   fhir:StructureDefinition.contact [
      fhir:index 0;
@@ -740,7 +741,7 @@
        fhir:index 15;
        fhir:Element.id [ fhir:value &quot;CarePlan.status&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;CarePlan.status&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;draft | active | suspended | completed | entered-in-error | cancelled | unknown&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;draft | active | on-hold | revoked | completed | entered-in-error | unknown&quot; ];
        fhir:ElementDefinition.definition [ fhir:value &quot;Indicates whether the plan is currently being acted upon, represents future intentions or is now a historical record.&quot; ];
        fhir:ElementDefinition.comment [ fhir:value &quot;The unknown code is not to be used to convey other statuses.  The unknown code should be used when one of the statuses applies, but the authoring system doesn't know the current state of the care plan.\n\nThis element is labeled as a modifier because the status contains the code entered-in-error that marks the plan as not currently valid.&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;Allows clinicians to determine whether the plan is actionable or not.&quot; ];
@@ -789,9 +790,9 @@
        fhir:index 16;
        fhir:Element.id [ fhir:value &quot;CarePlan.intent&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;CarePlan.intent&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;proposal | plan | order | option&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;proposal | plan | order | option | directive&quot; ];
        fhir:ElementDefinition.definition [ fhir:value &quot;Indicates the level of authority/intentionality associated with the care plan and where the care plan fits into the workflow chain.&quot; ];
-       fhir:ElementDefinition.comment [ fhir:value &quot;This element is labeled as a modifier because the intent alters when and how the resource is actually applicable.&quot; ];
+       fhir:ElementDefinition.comment [ fhir:value &quot;This element is labeled as a modifier because the intent alters when and how the resource is actually applicable.\nThis element is expected to be immutable. E.g. A \&quot;proposal\&quot; instance should never change to be a \&quot;plan\&quot; instance or \&quot;order\&quot; instance. Instead, a new instance 'basedOn' the prior instance should be created with the new 'intent' value.&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;Proposals/recommendations, plans and orders all use the same structure and can exist in the same fulfillment chain.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
@@ -1219,6 +1220,16 @@
        ];
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
        fhir:ElementDefinition.isSummary [ fhir:value &quot;true&quot; ];
+       fhir:ElementDefinition.binding [
+         fhir:Element.extension [
+           fhir:index 0;
+           fhir:Extension.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName&quot; ];
+           fhir:Extension.value [ fhir:value &quot;CarePlanAddresses&quot; ]
+         ];
+         fhir:ElementDefinition.strength [ fhir:value &quot;example&quot; ];
+         fhir:ElementDefinition.description [ fhir:value &quot;Codes that describe the health issues this plan addresses.&quot; ];
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/clinical-findings&quot; ]
+       ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
          fhir:ElementDefinition.identity [ fhir:value &quot;workflow&quot; ];
@@ -1284,7 +1295,7 @@
        fhir:ElementDefinition.path [ fhir:value &quot;CarePlan.supportingInfo&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Information considered as part of plan&quot; ];
        fhir:ElementDefinition.definition [ fhir:value &quot;Identifies portions of the patient's record that specifically influenced the formation of the plan.  These might include comorbidities, recent procedures, limitations, recent assessments, etc.&quot; ];
-       fhir:ElementDefinition.comment [ fhir:value &quot;Use \&quot;concern\&quot; to identify specific conditions addressed by the care plan.&quot; ];
+       fhir:ElementDefinition.comment [ fhir:value &quot;Use \&quot;concern\&quot; to identify specific conditions addressed by the care plan.  supportingInfo can be used to convey one or more Advance Directives or Medical Treatment Consent Directives by referencing Consent or any other request resource with intent = directive.&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;Identifies barriers and other considerations associated with the care plan.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;*&quot; ];
@@ -1346,8 +1357,8 @@
        fhir:index 31;
        fhir:Element.id [ fhir:value &quot;CarePlan.activity&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;CarePlan.activity&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Action to occur as part of plan&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;Identifies a planned action to occur as part of the plan.  For example, a medication to be used, lab tests to perform, self-monitoring, education, etc.&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;Action to occur or has occurred as part of plan&quot; ];
+       fhir:ElementDefinition.definition [ fhir:value &quot;Identifies an action that has occurred or is a planned action to occur as part of the plan. For example, a medication to be used, lab tests to perform, self-monitoring that has occurred, education etc.&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;Allows systems to prompt for performance of planned activities, and validate plans against best practice.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;*&quot; ];
@@ -1782,7 +1793,7 @@
        fhir:index 43;
        fhir:Element.id [ fhir:value &quot;CarePlan.activity.detail.kind&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;CarePlan.activity.detail.kind&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Kind of resource&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;Appointment | CommunicationRequest | DeviceRequest | MedicationRequest | NutritionOrder | Task | ServiceRequest | VisionPrescription&quot; ];
        fhir:ElementDefinition.definition [ fhir:value &quot;A description of the kind of resource the in-line definition of a care plan activity is representing.  The CarePlan.activity.detail is an in-line definition when a resource is not referenced using CarePlan.activity.reference.  For example, a MedicationRequest, a ServiceRequest, or a CommunicationRequest.&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;May determine what types of extensions are permitted.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
@@ -2099,6 +2110,16 @@
        ];
        fhir:ElementDefinition.isModifier [ fhir:value &quot;false&quot; ];
        fhir:ElementDefinition.isSummary [ fhir:value &quot;false&quot; ];
+       fhir:ElementDefinition.binding [
+         fhir:Element.extension [
+           fhir:index 0;
+           fhir:Extension.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName&quot; ];
+           fhir:Extension.value [ fhir:value &quot;CarePlanActivityStatusReason&quot; ]
+         ];
+         fhir:ElementDefinition.strength [ fhir:value &quot;example&quot; ];
+         fhir:ElementDefinition.description [ fhir:value &quot;Codes that describe the reason why the activity isn't yet started, is on hold, was cancelled, etc.&quot; ];
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/care-plan-activity-status-reason&quot; ]
+       ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
          fhir:ElementDefinition.identity [ fhir:value &quot;workflow&quot; ];
@@ -2711,7 +2732,7 @@
        fhir:index 7;
        fhir:Element.id [ fhir:value &quot;CarePlan.status&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;CarePlan.status&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;draft | active | suspended | completed | entered-in-error | cancelled | unknown&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;draft | active | on-hold | revoked | completed | entered-in-error | unknown&quot; ];
        fhir:ElementDefinition.definition [ fhir:value &quot;Indicates whether the plan is currently being acted upon, represents future intentions or is now a historical record.&quot; ];
        fhir:ElementDefinition.comment [ fhir:value &quot;The unknown code is not to be used to convey other statuses.  The unknown code should be used when one of the statuses applies, but the authoring system doesn't know the current state of the care plan.\n\nThis element is labeled as a modifier because the status contains the code entered-in-error that marks the plan as not currently valid.&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;Allows clinicians to determine whether the plan is actionable or not.&quot; ];
@@ -2755,9 +2776,9 @@
        fhir:index 8;
        fhir:Element.id [ fhir:value &quot;CarePlan.intent&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;CarePlan.intent&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;proposal | plan | order | option&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;proposal | plan | order | option | directive&quot; ];
        fhir:ElementDefinition.definition [ fhir:value &quot;Indicates the level of authority/intentionality associated with the care plan and where the care plan fits into the workflow chain.&quot; ];
-       fhir:ElementDefinition.comment [ fhir:value &quot;This element is labeled as a modifier because the intent alters when and how the resource is actually applicable.&quot; ];
+       fhir:ElementDefinition.comment [ fhir:value &quot;This element is labeled as a modifier because the intent alters when and how the resource is actually applicable.\nThis element is expected to be immutable. E.g. A \&quot;proposal\&quot; instance should never change to be a \&quot;plan\&quot; instance or \&quot;order\&quot; instance. Instead, a new instance 'basedOn' the prior instance should be created with the new 'intent' value.&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;Proposals/recommendations, plans and orders all use the same structure and can exist in the same fulfillment chain.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;1&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;1&quot; ];
@@ -3112,6 +3133,16 @@
          fhir:ElementDefinition.code [ fhir:value &quot;CodeableConcept&quot; ]
        ];
        fhir:ElementDefinition.isSummary [ fhir:value &quot;true&quot; ];
+       fhir:ElementDefinition.binding [
+         fhir:Element.extension [
+           fhir:index 0;
+           fhir:Extension.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName&quot; ];
+           fhir:Extension.value [ fhir:value &quot;CarePlanAddresses&quot; ]
+         ];
+         fhir:ElementDefinition.strength [ fhir:value &quot;example&quot; ];
+         fhir:ElementDefinition.description [ fhir:value &quot;Codes that describe the health issues this plan addresses.&quot; ];
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/clinical-findings&quot; ]
+       ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
          fhir:ElementDefinition.identity [ fhir:value &quot;workflow&quot; ];
@@ -3171,7 +3202,7 @@
        fhir:ElementDefinition.path [ fhir:value &quot;CarePlan.supportingInfo&quot; ];
        fhir:ElementDefinition.short [ fhir:value &quot;Information considered as part of plan&quot; ];
        fhir:ElementDefinition.definition [ fhir:value &quot;Identifies portions of the patient's record that specifically influenced the formation of the plan.  These might include comorbidities, recent procedures, limitations, recent assessments, etc.&quot; ];
-       fhir:ElementDefinition.comment [ fhir:value &quot;Use \&quot;concern\&quot; to identify specific conditions addressed by the care plan.&quot; ];
+       fhir:ElementDefinition.comment [ fhir:value &quot;Use \&quot;concern\&quot; to identify specific conditions addressed by the care plan.  supportingInfo can be used to convey one or more Advance Directives or Medical Treatment Consent Directives by referencing Consent or any other request resource with intent = directive.&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;Identifies barriers and other considerations associated with the care plan.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;*&quot; ];
@@ -3219,8 +3250,8 @@
        fhir:index 23;
        fhir:Element.id [ fhir:value &quot;CarePlan.activity&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;CarePlan.activity&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Action to occur as part of plan&quot; ];
-       fhir:ElementDefinition.definition [ fhir:value &quot;Identifies a planned action to occur as part of the plan.  For example, a medication to be used, lab tests to perform, self-monitoring, education, etc.&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;Action to occur or has occurred as part of plan&quot; ];
+       fhir:ElementDefinition.definition [ fhir:value &quot;Identifies an action that has occurred or is a planned action to occur as part of the plan. For example, a medication to be used, lab tests to perform, self-monitoring that has occurred, education etc.&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;Allows systems to prompt for performance of planned activities, and validate plans against best practice.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
        fhir:ElementDefinition.max [ fhir:value &quot;*&quot; ];
@@ -3402,7 +3433,7 @@
        fhir:index 29;
        fhir:Element.id [ fhir:value &quot;CarePlan.activity.detail.kind&quot; ];
        fhir:ElementDefinition.path [ fhir:value &quot;CarePlan.activity.detail.kind&quot; ];
-       fhir:ElementDefinition.short [ fhir:value &quot;Kind of resource&quot; ];
+       fhir:ElementDefinition.short [ fhir:value &quot;Appointment | CommunicationRequest | DeviceRequest | MedicationRequest | NutritionOrder | Task | ServiceRequest | VisionPrescription&quot; ];
        fhir:ElementDefinition.definition [ fhir:value &quot;A description of the kind of resource the in-line definition of a care plan activity is representing.  The CarePlan.activity.detail is an in-line definition when a resource is not referenced using CarePlan.activity.reference.  For example, a MedicationRequest, a ServiceRequest, or a CommunicationRequest.&quot; ];
        fhir:ElementDefinition.requirements [ fhir:value &quot;May determine what types of extensions are permitted.&quot; ];
        fhir:ElementDefinition.min [ fhir:value &quot;0&quot; ];
@@ -3656,6 +3687,16 @@
        fhir:ElementDefinition.type [
          fhir:index 0;
          fhir:ElementDefinition.code [ fhir:value &quot;CodeableConcept&quot; ]
+       ];
+       fhir:ElementDefinition.binding [
+         fhir:Element.extension [
+           fhir:index 0;
+           fhir:Extension.url [ fhir:value &quot;http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName&quot; ];
+           fhir:Extension.value [ fhir:value &quot;CarePlanActivityStatusReason&quot; ]
+         ];
+         fhir:ElementDefinition.strength [ fhir:value &quot;example&quot; ];
+         fhir:ElementDefinition.description [ fhir:value &quot;Codes that describe the reason why the activity isn't yet started, is on hold, was cancelled, etc.&quot; ];
+         fhir:ElementDefinition.valueSet [ fhir:value &quot;http://hl7.org/fhir/ValueSet/care-plan-activity-status-reason&quot; ]
        ];
        fhir:ElementDefinition.mapping [
          fhir:index 0;
@@ -4021,13 +4062,14 @@ of the specification.
 		<div class="container"><!-- container -->
 			<div class="inner-wrapper">
 				<p>
-        &reg;© HL7.org 2011+. FHIR Release 4 Candidate (v4.1.0-baa72e6471) generated on Tue, Apr 16, 2019 08:52-0500. <a  style="color: #ffffff" href="qa.html">QA Page</a>
+        FHIR &reg;© HL7.org 2011+. FHIR CI Build hl7.fhir.core#4.1.0 (GitHub 0931132380) generated on Mon, Jul 29, 2019 11:32-0500. 
         <br/>
         <span style="color: #FFFF77">
         Links: <a style="color: #b8dcf9" href="http://hl7.org/fhir/search.cfm">Search</a> | 
                <a style="color: #b8dcf9" href="history.html">Version History</a> | 
                <a style="color: #b8dcf9" href="toc.html">Table of Contents</a> | 
-               <a style="color: #b8dcf9" href="credits.html">Credits</a> | 
+               <a style="color: #ffffff" href="qa.html">QA Page</a> |
+<!--                <a style="color: #b8dcf9" href="credits.html">Credits</a> | -->
                <a style="color: #b8dcf9" href="http://services.w3.org/htmldiff?doc1=http%3A%2F%2Fhl7.org%2Ffhir%2FSTU3%2Fcareplan.profile.ttl.html&amp;doc2=http%3A%2F%2Fbuild.fhir.org%2Fcareplan.profile.ttl.html">Compare to R3</a> |                
                <a style="color: #b8dcf9" rel="license" href="license.html"><img src="cc0.png" style="border-style: none;" alt="CC0"/></a> | 
                <a style="color: #b8dcf9" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>   

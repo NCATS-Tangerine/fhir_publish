@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type SpecimenDefinition {
   id: ID
   meta: Meta
@@ -9,7 +11,27 @@ type SpecimenDefinition {
   contained: [Resource]
   extension: [Extension]
   modifierExtension: [Extension]
+  url: uri  _url: ElementBase
   identifier: Identifier
+  version: String  _version: ElementBase
+  title: String  _title: ElementBase
+  derivedFromCanonical: canonical  _derivedFromCanonical: [ElementBase]
+  derivedFromUri: uri  _derivedFromUri: [ElementBase]
+  status: code  _status: ElementBase
+  experimental: Boolean  _experimental: ElementBase
+  subjectCodeableConcept: CodeableConcept
+  subjectReference: Reference
+  date: dateTime  _date: ElementBase
+  publisher: Reference
+  contact: [ContactDetail]
+  description: markdown  _description: ElementBase
+  useContext: [UsageContext]
+  jurisdiction: [CodeableConcept]
+  purpose: markdown  _purpose: ElementBase
+  copyright: markdown  _copyright: ElementBase
+  approvalDate: date  _approvalDate: ElementBase
+  lastReviewDate: date  _lastReviewDate: ElementBase
+  effectivePeriod: Period
   typeCollected: CodeableConcept
   patientPreparation: [CodeableConcept]
   timeAspect: String  _timeAspect: ElementBase
@@ -27,8 +49,10 @@ type SpecimenDefinitionTypeTested {
   container: SpecimenDefinitionTypeTestedContainer
   requirement: String  _requirement: ElementBase
   retentionTime: Duration
+  singleUse: Boolean  _singleUse: ElementBase
   rejectionCriterion: [CodeableConcept]
   handling: [SpecimenDefinitionTypeTestedHandling]
+  testingDestination: [CodeableConcept]
 }
 
 type SpecimenDefinitionTypeTestedContainer {
@@ -73,7 +97,27 @@ input SpecimenDefinitionInput {
   contained: [ResourceInput]
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
+  url: uri  _url: ElementBase
   identifier: IdentifierInput
+  version: String  _version: ElementBase
+  title: String  _title: ElementBase
+  derivedFromCanonical: canonical  _derivedFromCanonical: [ElementBase]
+  derivedFromUri: uri  _derivedFromUri: [ElementBase]
+  status: code  _status: ElementBase
+  experimental: Boolean  _experimental: ElementBase
+  subjectCodeableConcept: CodeableConceptInput
+  subjectReference: ReferenceInput
+  date: dateTime  _date: ElementBase
+  publisher: ReferenceInput
+  contact: [ContactDetailInput]
+  description: markdown  _description: ElementBase
+  useContext: [UsageContextInput]
+  jurisdiction: [CodeableConceptInput]
+  purpose: markdown  _purpose: ElementBase
+  copyright: markdown  _copyright: ElementBase
+  approvalDate: date  _approvalDate: ElementBase
+  lastReviewDate: date  _lastReviewDate: ElementBase
+  effectivePeriod: PeriodInput
   typeCollected: CodeableConceptInput
   patientPreparation: [CodeableConceptInput]
   timeAspect: String  _timeAspect: ElementBase
@@ -91,8 +135,10 @@ input SpecimenDefinitionTypeTestedInput {
   container: SpecimenDefinitionTypeTestedContainerInput
   requirement: String  _requirement: ElementBase
   retentionTime: DurationInput
+  singleUse: Boolean  _singleUse: ElementBase
   rejectionCriterion: [CodeableConceptInput]
   handling: [SpecimenDefinitionTypeTestedHandlingInput]
+  testingDestination: [CodeableConceptInput]
 }
 
 input SpecimenDefinitionTypeTestedContainerInput {
@@ -135,8 +181,13 @@ type SpecimenDefinitionReadType {
 type SpecimenDefinitionListType {
   SpecimenDefinitionList(_filter: String
     container: [token]
+    experimental: [token]
     identifier: [token]
+    is_derived: [token]
+    status: [token]
+    title: [String]
     type: [token]
+    type_tested: [token]
     _text: [String]
     _content: [String]
     _id: [token]
@@ -154,8 +205,13 @@ type SpecimenDefinitionListType {
 type SpecimenDefinitionConnectionType {
   SpecimenDefinitionConection(_filter: String
     container: [token]
+    experimental: [token]
     identifier: [token]
+    is_derived: [token]
+    status: [token]
+    title: [String]
     type: [token]
+    type_tested: [token]
     _text: [String]
     _content: [String]
     _id: [token]

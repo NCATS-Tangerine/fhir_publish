@@ -1,5 +1,7 @@
 # FHIR GraphQL Schema. Version 4.1.0
 
+# import the types from 'types.graphql'
+
 type ClinicalProfile {
   id: ID
   meta: Meta
@@ -103,7 +105,7 @@ type ClinicalProfileLabScalarDistributionCorrelatedMedications {
   extension: [Extension]
   modifierExtension: [Extension]
   topn: Int  _topn: ElementBase
-  deviation: decimal  _deviation: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
   entry: [ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntry]
 }
 
@@ -111,10 +113,16 @@ type ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntry {
   id: String
   extension: [Extension]
   modifierExtension: [Extension]
-  category: CodeableConcept
-  labCodeableConcept: CodeableConcept
-  labReference: Reference
+  meds: [ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntryMeds]!
   coefficient: decimal  _coefficient: ElementBase
+}
+
+type ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntryMeds {
+  id: String
+  extension: [Extension]
+  modifierExtension: [Extension]
+  medicationCodeableConcept: CodeableConcept
+  medicationReference: Reference
 }
 
 type ClinicalProfileLabScalarDistributionCorrelatedProcedures {
@@ -328,7 +336,7 @@ input ClinicalProfileLabScalarDistributionCorrelatedMedicationsInput {
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
   topn: Int  _topn: ElementBase
-  deviation: decimal  _deviation: ElementBase
+  abscorrelation: decimal  _abscorrelation: ElementBase
   entry: [ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntryInput]
 }
 
@@ -336,10 +344,16 @@ input ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntryInput {
   id: String
   extension: [ExtensionInput]
   modifierExtension: [ExtensionInput]
-  category: CodeableConceptInput
-  labCodeableConcept: CodeableConceptInput
-  labReference: ReferenceInput
+  meds: [ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntryMedsInput]!
   coefficient: decimal  _coefficient: ElementBase
+}
+
+input ClinicalProfileLabScalarDistributionCorrelatedMedicationsEntryMedsInput {
+  id: String
+  extension: [ExtensionInput]
+  modifierExtension: [ExtensionInput]
+  medicationCodeableConcept: CodeableConceptInput
+  medicationReference: ReferenceInput
 }
 
 input ClinicalProfileLabScalarDistributionCorrelatedProceduresInput {

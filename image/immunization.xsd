@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE.
   
 
-  Generated on Tue, Apr 16, 2019 08:42-0500 for FHIR v4.1.0 
+  Generated on Mon, Jul 29, 2019 12:28-0500 for FHIR v4.1.0 
 
   Note: the schemas &amp; schematrons do not contain all of the rules about what makes resources
   valid. Implementers will still need to be familiar with the content of the specification and with
@@ -93,14 +93,16 @@
           </xs:element>
           <xs:element name="primarySource" minOccurs="0" maxOccurs="1" type="boolean">
             <xs:annotation>
-              <xs:documentation xml:lang="en">An indication that the content of the record is based on information from the person who administered the vaccine. This reflects the context under which the data was originally recorded.</xs:documentation>
+              <xs:documentation xml:lang="en">Indicates if this record was captured as a secondary 'reported' record rather than as an original primary source-of-truth record.</xs:documentation>
            </xs:annotation>
           </xs:element>
-          <xs:element name="reportOrigin" minOccurs="0" maxOccurs="1" type="CodeableConcept">
+          <xs:choice minOccurs="0" maxOccurs="1" >
             <xs:annotation>
-              <xs:documentation xml:lang="en">The source of the data when the report of the immunization event is not based on information from the person who administered the vaccine.</xs:documentation>
-           </xs:annotation>
-          </xs:element>
+              <xs:documentation xml:lang="en">Typically the source of the data when the report of the immunization event is not based on information from the person who administered the vaccine.</xs:documentation>
+            </xs:annotation>
+            <xs:element name="informationSourceCodeableConcept" type="CodeableConcept"/>
+            <xs:element name="informationSourceReference" type="Reference"/>
+          </xs:choice>
           <xs:element name="location" minOccurs="0" maxOccurs="1" type="Reference">
             <xs:annotation>
               <xs:documentation xml:lang="en">The service delivery location where the vaccine administration occurred.</xs:documentation>
@@ -148,12 +150,12 @@
           </xs:element>
           <xs:element name="reasonCode" minOccurs="0" maxOccurs="unbounded" type="CodeableConcept">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Reasons why the vaccine was administered.</xs:documentation>
+              <xs:documentation xml:lang="en">Describes why the immunization occurred in coded or textual form.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="reasonReference" minOccurs="0" maxOccurs="unbounded" type="Reference">
             <xs:annotation>
-              <xs:documentation xml:lang="en">Condition, Observation or DiagnosticReport that supports why the immunization was administered.</xs:documentation>
+              <xs:documentation xml:lang="en">Indicates another resource (Condition, Observation or DiagnosticReport) whose existence justifies this immunization.</xs:documentation>
            </xs:annotation>
           </xs:element>
           <xs:element name="isSubpotent" minOccurs="0" maxOccurs="1" type="boolean">
